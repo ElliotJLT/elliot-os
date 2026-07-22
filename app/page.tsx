@@ -1,12 +1,36 @@
 import Link from "next/link";
 import { getSpend, getWeekActivity } from "@/lib/telemetry";
-import { getLog } from "@/lib/gitlog";
-import FitConsole from "./components/FitConsole";
+import { getLog, getFirstCommit } from "@/lib/gitlog";
+import { getRoadmap } from "@/lib/content";
+import { getRepos, FEATURED } from "@/lib/github";
+import FitConsole, { type ConsoleData } from "./components/FitConsole";
 import Sparkline from "./components/Sparkline";
 
 export default async function Home() {
-  const [week, spend, log] = [await getWeekActivity(), getSpend(), getLog(1)];
+  const [week, spend, log, repos] = [
+    await getWeekActivity(),
+    getSpend(),
+    getLog(6),
+    await getRepos(),
+  ];
   const built = new Date().toISOString().slice(0, 16).replace("T", " ");
+
+  const byName = new Map(repos.map((r) => [r.name, r]));
+  const consoleData: ConsoleData = {
+    spend: spend.totals,
+    week: { commits: week.commits, repos: week.repos },
+    repos: FEATURED.map((name) => ({
+      name,
+      stars: byName.get(name)?.stargazers_count ?? 0,
+    })),
+    log: log.map((e) => ({
+      hash: e.hash,
+      subject: e.subject,
+      agent: e.author.includes("agent"),
+    })),
+    roadmap: getRoadmap(),
+    firstCommit: getFirstCommit(),
+  };
 
   return (
     <main>
@@ -59,7 +83,7 @@ export default async function Home() {
         </p>
 
         <h2>fit engine</h2>
-        <FitConsole />
+        <FitConsole data={consoleData} />
 
         <h2>the report</h2>
         <div className="grid">

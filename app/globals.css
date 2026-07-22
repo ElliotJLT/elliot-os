@@ -430,6 +430,46 @@ li {
   overflow-y: auto;
 }
 
+/* boot sequence */
+.boot {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.boot:empty {
+  display: none;
+}
+
+.boot .prompt {
+  color: var(--green);
+}
+
+.caret {
+  display: inline-block;
+  margin-left: 1px;
+  color: var(--amber);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* command output inside an agent bubble */
+.shellout {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--ink);
+}
+
 .msg {
   display: flex;
   flex-direction: column;
