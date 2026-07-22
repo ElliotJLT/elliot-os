@@ -1033,6 +1033,55 @@ li {
   margin-top: 2px;
 }
 
+/* --------------------------------------------------------- track record */
+.record {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.record li {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+  margin: 0;
+}
+
+.rhead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.rorg {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.rorg a {
+  text-decoration: none;
+}
+
+.rmeta {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--faint);
+  white-space: nowrap;
+}
+
+.rout {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 62ch;
+}
+
 /* --------------------------------------------------------------- funnel */
 .funnel {
   display: flex;

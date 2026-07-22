@@ -1,0 +1,34 @@
+{
+  "linkedin": "https://www.linkedin.com/in/hireelliot/",
+  "note": "Roles and dates are pulled from boulot; outcomes are the verified facts from llms.txt. Each row renders whatever fields are filled — dates and titles are optional.",
+  "roles": [
+    {
+      "org": "Zero Gravity",
+      "url": "https://www.zerogravity.co.uk/tutor",
+      "role": "",
+      "dates": "",
+      "outcome": "Built and deployed a production multi-agent AI STEM tutor — first commit to App Store in 45 days; marking accuracy raised from a ~67% baseline to over 99% against official mark schemes; won a DSIT government tender for AI tutoring in disadvantaged state schools, ahead of major US labs and the largest UK content incumbent."
+    },
+    {
+      "org": "Flash Pack",
+      "url": "",
+      "role": "",
+      "dates": "",
+      "outcome": "Founding-team product work; helped take the company from pre-seed to Series A."
+    },
+    {
+      "org": "MealsForTheNHS",
+      "url": "",
+      "role": "Co-founder",
+      "dates": "",
+      "outcome": "Co-founded a pandemic-response effort that raised £1.8m and delivered 303,000 meals to NHS staff."
+    },
+    {
+      "org": "Farewill",
+      "url": "",
+      "role": "",
+      "dates": "",
+      "outcome": "Product work in an SRA/FCA-regulated environment."
+    }
+  ]
+}

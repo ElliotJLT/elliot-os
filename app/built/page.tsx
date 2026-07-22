@@ -1,5 +1,6 @@
 import { getRepos, FEATURED } from "@/lib/github";
 import { getPosts } from "@/lib/writing";
+import { getRoles } from "@/lib/roles";
 
 export const metadata = { title: "Built · Elliot Little" };
 
@@ -48,6 +49,7 @@ const BLURBS: Record<string, { title: string; blurb: string }> = {
 
 export default async function Built() {
   const [repos, posts] = [await getRepos(), await getPosts()];
+  const record = getRoles();
   const byName = new Map(repos.map((r) => [r.name, r]));
   const rest = repos.filter((r) => !FEATURED.includes(r.name));
 
@@ -59,6 +61,29 @@ export default async function Built() {
           The repo list below is fetched from GitHub when this site builds. If
           I ship something, it shows up here without me touching this page.
         </p>
+
+        <h2>track record</h2>
+        <p className="muted" style={{ marginTop: 0, fontSize: 15 }}>
+          Roles and the outcome that mattered in each. Full history, titles,
+          and references on <a href={record.linkedin}>LinkedIn</a>.
+        </p>
+        <ul className="record">
+          {record.roles.map((r) => (
+            <li key={r.org}>
+              <div className="rhead">
+                <span className="rorg">
+                  {r.url ? <a href={r.url}>{r.org}</a> : r.org}
+                </span>
+                {(r.role || r.dates) && (
+                  <span className="rmeta">
+                    {[r.role, r.dates].filter(Boolean).join(" · ")}
+                  </span>
+                )}
+              </div>
+              <p className="rout">{r.outcome}</p>
+            </li>
+          ))}
+        </ul>
 
         <h2>in production</h2>
         <div className="card">
