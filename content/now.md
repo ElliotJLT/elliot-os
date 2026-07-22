@@ -1,10 +1,19 @@
-*Week of 20 July 2026*
+<!-- agent:begin -->
+*The shipping log below is owned by a scheduled agent. It runs in GitHub
+Actions, derives everything from the public GitHub events API, and commits
+under its own name. First automated run pending: check the
+[changelog](/changelog) for commits by "elliot-os agent".*
+<!-- agent:end -->
+
+## by hand
+
+*The section above is the agent's. This one is mine.*
 
 - Looking for my next senior product or AI role. Between roles and using
-  every day of the gap to ship. If you are hiring, the fit engine on the
-  homepage will exist soon; until then, email works.
-- Built and launched v1 of this site today. The point of it is on the
-  [next](/next) page.
+  every day of the gap to ship. Email works:
+  [elliotjlittle@gmail.com](mailto:elliotjlittle@gmail.com).
+- Built this site over two days in public. v1 was a portfolio; v2 is what
+  the [next](/next) page says it should be.
 - Running argus daily: a private fleet of agents that reads the AI news
   each morning and writes me a brief before I sit down.
 - [boulot](https://github.com/ElliotJLT/boulot-os), my open-source
