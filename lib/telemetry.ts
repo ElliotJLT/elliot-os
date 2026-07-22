@@ -23,6 +23,20 @@ export function getSpend(): Spend {
   );
 }
 
+export type Funnel = {
+  published: boolean;
+  updated: string | null;
+  window: string;
+  note: string;
+  stages: { name: string; count: number }[];
+};
+
+export function getFunnel(): Funnel {
+  return JSON.parse(
+    readFileSync(join(process.cwd(), "data", "funnel.json"), "utf-8"),
+  );
+}
+
 export type WeekActivity = {
   commits: number;
   repos: number;

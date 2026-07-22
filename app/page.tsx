@@ -5,6 +5,12 @@ import { getRoadmap } from "@/lib/content";
 import { getRepos, FEATURED } from "@/lib/github";
 import FitConsole, { type ConsoleData } from "./components/FitConsole";
 import Sparkline from "./components/Sparkline";
+import Reveal from "./components/Reveal";
+
+function uptime(iso: string): string {
+  const d = Math.max(0, Math.floor((Date.now() - new Date(iso).getTime()) / 86400000));
+  return `${d}d`;
+}
 
 export default async function Home() {
   const [week, spend, log, repos] = [
@@ -14,6 +20,8 @@ export default async function Home() {
     await getRepos(),
   ];
   const built = new Date().toISOString().slice(0, 16).replace("T", " ");
+  const first = getFirstCommit();
+  const tokens = spend.totals.input_tokens + spend.totals.output_tokens;
 
   const byName = new Map(repos.map((r) => [r.name, r]));
   const consoleData: ConsoleData = {
@@ -29,95 +37,129 @@ export default async function Home() {
       agent: e.author.includes("agent"),
     })),
     roadmap: getRoadmap(),
-    firstCommit: getFirstCommit(),
+    firstCommit: first,
   };
+
+  const cards: [string, string, string][] = [
+    [
+      "/built",
+      "built",
+      "A production AI tutor that beat major US labs to a government tender, plus agent tools and MCP servers. The repo list is pulled live from GitHub at every deploy.",
+    ],
+    [
+      "/now",
+      "now",
+      "This week's shipping log, derived from real commits by a scheduled agent — plus one hand-written section for the things git can't see.",
+    ],
+    [
+      "/next",
+      "next",
+      "The public roadmap. Bets marked exploring, building, or shipped. Items graduate in the open; missed promises stay visible.",
+    ],
+    [
+      "/funnel",
+      "funnel",
+      "The job search as a live dashboard: applications, response rate, interview conversion. Rates and counts only — no company names.",
+    ],
+    [
+      "/changelog",
+      "changelog",
+      "Every change is a commit, badged by who made it: me or the agent. The receipt trail for every number above.",
+    ],
+  ];
 
   return (
     <main>
       <div className="wrap">
-        <p>
+        <div className="hero">
           <span className="status">
             <span className="dot" />
             operational · interviewing
           </span>
-        </p>
-        <h1 style={{ marginTop: 16 }}>
-          Every PM says they&apos;re data-driven. This site has a P&amp;L.
-        </h1>
-        <p className="lede">
-          I&apos;m Elliot: builder-operator in London, 4x founding hire, most
-          recently shipped a production multi-agent AI tutor. The AI discourse
-          is full of productivity claims with no denominator. This site is the
-          opposite bet: everything on it is derived from real activity, an
-          agent maintains parts of it under its own git identity, and its
-          inference costs are published in the footer.
-        </p>
-
-        <h2>telemetry</h2>
-        <div className="statgrid">
-          <div className="stat">
-            <span className="label">commits · 7d</span>
-            <span className="value">{week.commits}</span>
-            <Sparkline days={week.days} />
-          </div>
-          <div className="stat">
-            <span className="label">repos touched · 7d</span>
-            <span className="value">{week.repos}</span>
-          </div>
-          <div className="stat">
-            <span className="label">agent runs · all time</span>
-            <span className="value">{spend.totals.runs}</span>
-          </div>
-          <div className="stat">
-            <span className="label">agent spend · all time</span>
-            <span className="value">
-              <small>$</small>
-              {spend.totals.cost_usd.toFixed(4)}
+          <h1>
+            I build AI products.
+            <br />
+            This site is one of them.
+          </h1>
+          <p className="lede">
+            I&apos;m Elliot — a builder-operator in London and 4x founding
+            hire. Most recently I shipped a production multi-agent AI tutor
+            that took marking accuracy from a <strong>67% baseline to 99%+</strong>{" "}
+            and won a UK government tender against major US labs. This page is
+            instrumented like my products: the numbers are computed from real
+            activity, an agent maintains parts of it under its own git
+            identity, and every token it spends is on the record.
+          </p>
+          <div className="systemline">
+            <span>
+              uptime <b>{uptime(first.iso)}</b>
+            </span>
+            <span>
+              agent identity <b>verified</b>
+            </span>
+            <span>
+              cookies <b>0</b>
+            </span>
+            <span>
+              analytics <b>0</b>
+            </span>
+            <span>
+              agent spend <b>${spend.totals.cost_usd.toFixed(4)}</b>
             </span>
           </div>
         </div>
-        <p className="faint mono receipts">
-          computed at build time from the GitHub API, data/spend.json, and git
-          history. rebuilt {built} UTC{log[0] ? ` @ ${log[0].hash}` : ""}. no
-          analytics, no cookies, nothing hand-typed.
-        </p>
 
-        <h2>fit engine</h2>
-        <FitConsole data={consoleData} />
+        <Reveal>
+          <h2>telemetry</h2>
+          <div className="statgrid">
+            <div className="stat">
+              <span className="label">commits · 7d</span>
+              <span className="value">{week.commits}</span>
+              <Sparkline days={week.days} />
+            </div>
+            <div className="stat">
+              <span className="label">repos touched · 7d</span>
+              <span className="value">{week.repos}</span>
+              <span className="foot">public repos</span>
+            </div>
+            <div className="stat">
+              <span className="label">agent runs · all time</span>
+              <span className="value">{spend.totals.runs}</span>
+              <span className="foot">scheduled + on-demand</span>
+            </div>
+            <div className="stat">
+              <span className="label">agent spend · all time</span>
+              <span className="value">
+                <small>$</small>
+                {spend.totals.cost_usd.toFixed(4)}
+              </span>
+              <span className="foot">{tokens.toLocaleString()} tokens</span>
+            </div>
+          </div>
+          <p className="faint mono receipts">
+            computed at build time from the GitHub API, data/spend.json, and
+            git history. rebuilt {built} UTC{log[0] ? ` @ ${log[0].hash}` : ""}.
+            no analytics, no cookies, nothing hand-typed.
+          </p>
+        </Reveal>
 
-        <h2>the report</h2>
-        <div className="grid">
-          <Link href="/built" className="card">
-            <h3>built</h3>
-            <p>
-              A production AI tutor that beat major US labs to a government
-              tender, plus agent tools and MCP servers. Repo list pulled live
-              from GitHub at every deploy.
-            </p>
-          </Link>
-          <Link href="/now" className="card">
-            <h3>now</h3>
-            <p>
-              This week&apos;s shipping log, derived from real commits by a
-              scheduled agent. One hand-written section for the things git
-              can&apos;t see.
-            </p>
-          </Link>
-          <Link href="/next" className="card">
-            <h3>next</h3>
-            <p>
-              The public roadmap. Bets marked exploring, building, or shipped.
-              Items graduate in the open; missed promises stay visible.
-            </p>
-          </Link>
-          <Link href="/changelog" className="card">
-            <h3>changelog</h3>
-            <p>
-              Every change is a commit, badged by who made it: me or the
-              agent. The receipt trail for every claim above.
-            </p>
-          </Link>
-        </div>
+        <Reveal>
+          <h2>fit engine</h2>
+          <FitConsole data={consoleData} />
+        </Reveal>
+
+        <Reveal>
+          <h2>the report</h2>
+          <div className="grid">
+            {cards.map(([href, title, body], i) => (
+              <Link href={href} key={href} className="card">
+                <span className="idx">{String(i + 1).padStart(2, "0")}</span>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </Link>
+            ))}
+          </div>
+        </Reveal>
       </div>
     </main>
   );
