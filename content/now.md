@@ -1,8 +1,9 @@
 <!-- agent:begin -->
-*The shipping log below is owned by a scheduled agent. It runs in GitHub
-Actions, derives everything from the public GitHub events API, and commits
-under its own name. First automated run pending: check the
-[changelog](/changelog) for commits by "elliot-os agent".*
+*Shipping log for the 7 days to 2026-07-22, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 9 commits across 3 repos. Nothing below is written by hand.*
+
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 4 commits. "Restore agent markers in now.md lost to a pre-commit reset" (86176c5), "v2: publish the denominator" (d10c054), "Fix subpage 404s on Pages: trailing slashes in export" (26e06b3) and 1 more
+- **[ElliotJLT](https://github.com/ElliotJLT/ElliotJLT)**: 3 commits. "Reframe Agent tools intro around the agent stack" (9e77ead), "Rename clearbook -> homebuyer-mcp; fix stale decision-trail link (now crux)" (163a2e2), "Add Boulot to Agent tools" (10cf44b)
+- **[boulot-os](https://github.com/ElliotJLT/boulot-os)**: 2 commits. "CV PDF: zero-install rendering; enable Pages; portfolio framing" (e1d7c92), "Accessibility pass for new users handed the repo cold" (5bcc4e7)
 <!-- agent:end -->
 
 ## by hand

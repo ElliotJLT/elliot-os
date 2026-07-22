@@ -1,7 +1,15 @@
 {
-  "runs": [],
+  "runs": [
+    {
+      "date": "2026-07-22",
+      "model": null,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "cost_usd": 0
+    }
+  ],
   "totals": {
-    "runs": 0,
+    "runs": 1,
     "input_tokens": 0,
     "output_tokens": 0,
     "cost_usd": 0
