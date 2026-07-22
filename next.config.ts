@@ -4,6 +4,7 @@ import type { NextConfig } from "next";
 // site). Unset locally and after a custom domain lands.
 const nextConfig: NextConfig = {
   output: "export",
+  trailingSlash: true, // GitHub Pages serves folder/index.html, not folder.html
   basePath: process.env.BASE_PATH || "",
   images: { unoptimized: true },
 };
