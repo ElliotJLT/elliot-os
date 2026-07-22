@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Newsreader } from "next/font/google";
+import { Newsreader, Archivo } from "next/font/google";
 import { getSpend } from "@/lib/telemetry";
 import NavLinks from "./components/NavLinks";
 import ThemeToggle from "./components/ThemeToggle";
@@ -8,14 +8,23 @@ import "./globals.css";
 
 const basePath = process.env.BASE_PATH || "";
 
-// Editorial display face — self-hosted at build, no runtime third-party
-// request, consistent with the site's no-external-anything rule.
+// Both self-hosted at build — no runtime third-party request, consistent
+// with the site's no-external-anything rule. Newsreader is the editorial
+// display serif; Archivo is a neutral Akzidenz-lineage grotesque for
+// running text and UI (a free stand-in for Söhne's Swiss warmth).
 const newsreader = Newsreader({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   display: "swap",
   variable: "--font-serif",
+});
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
@@ -38,7 +47,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const spend = getSpend();
   return (
-    <html lang="en" className={newsreader.variable} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${newsreader.variable} ${archivo.variable}`}
+      suppressHydrationWarning
+    >
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         <header className="masthead">

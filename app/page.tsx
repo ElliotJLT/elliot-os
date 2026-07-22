@@ -57,9 +57,9 @@ export default async function Home() {
       "The public roadmap. Bets marked exploring, building, or shipped. Items graduate in the open; missed promises stay visible.",
     ],
     [
-      "/funnel",
-      "funnel",
-      "The job search as a live dashboard: applications, response rate, interview conversion. Rates and counts only — no company names.",
+      "/loops",
+      "loops",
+      "The agent loops that maintain this site: cadence, cost, the human approval gate, and the stopping rule on each.",
     ],
     [
       "/changelog",
