@@ -7,6 +7,20 @@ export type LogEntry = {
   subject: string;
 };
 
+/** ISO date of the repo's first commit — the site's "epoch". */
+export function getFirstCommit(): { hash: string; iso: string } {
+  try {
+    const out = execSync(`git log --reverse --pretty=format:%h%x09%aI`, {
+      cwd: process.cwd(),
+      encoding: "utf-8",
+    });
+    const [hash, iso] = out.split("\n")[0].split("\t");
+    return { hash, iso };
+  } catch {
+    return { hash: "", iso: new Date().toISOString() };
+  }
+}
+
 export function getLog(limit = 100): LogEntry[] {
   try {
     const out = execSync(

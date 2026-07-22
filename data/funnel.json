@@ -1,0 +1,13 @@
+{
+  "published": false,
+  "updated": null,
+  "window": "current search",
+  "note": "Counts and rates only. No company names while conversations are open. Set published to true and fill counts to take this live.",
+  "stages": [
+    { "name": "Applications", "count": 0 },
+    { "name": "Recruiter / first call", "count": 0 },
+    { "name": "Hiring-manager round", "count": 0 },
+    { "name": "Onsite / panel", "count": 0 },
+    { "name": "Offer", "count": 0 }
+  ]
+}

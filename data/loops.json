@@ -1,0 +1,66 @@
+{
+  "updated": "2026-07-22",
+  "loops": [
+    {
+      "id": "now-refresh",
+      "name": "shipping-log loop",
+      "surface": "/now",
+      "layer": "inner",
+      "cadence": "weekly · Mon 06:00 UTC",
+      "gate": "deterministic · auto-commit",
+      "status": "running",
+      "stop_rule": "quiet week posts \"quiet week\" — never fabricates activity",
+      "last_run": "2026-07-22",
+      "runs": 1,
+      "spend_usd": 0,
+      "note": "Derives the shipping log from the public GitHub events API and records its own inference spend. Runs with or without an API key.",
+      "proposals": []
+    },
+    {
+      "id": "self-improve",
+      "name": "improvement loop",
+      "surface": "PR → human review",
+      "layer": "outer",
+      "cadence": "weekly · Thu 06:00 UTC (armed; manual until enabled)",
+      "gate": "human approval · PR, never auto-merged",
+      "status": "armed",
+      "stop_rule": "proposes at most one change per run, and nothing when nothing is worth doing",
+      "last_run": "2026-07-22",
+      "runs": 1,
+      "spend_usd": 0,
+      "note": "Reads Elliot's real GitHub activity, Medium writing, and the site's current state, scores its own proposal against a rubric, and only then proposes one employer-facing change as a PR. Its first run's proposal is below — accepted and shipped.",
+      "proposals": [
+        {
+          "date": "2026-07-22",
+          "status": "accepted",
+          "shipped": "Live writing feed added to /built, pulled from the Medium feed at build.",
+          "source": "medium",
+          "title": "Link new writing: The Loop Was Never the Hard Part",
+          "rationale": "Post \"The Loop Was Never the Hard Part\" (Mon, 13 Jul 2026) isn't linked anywhere on the site. https://medium.com/@elliotJL/the-loop-was-never-the-hard-part-5bdd4352acab",
+          "files": [],
+          "change": "Review and, if employer-relevant, surface this on the site.",
+          "eval": {
+            "score": 1,
+            "verdict": "pass",
+            "checks": [
+              {
+                "name": "grounded in a real source",
+                "pass": true
+              },
+              {
+                "name": "not cosmetic-only",
+                "pass": true
+              },
+              {
+                "name": "has a substantive rationale",
+                "pass": true
+              }
+            ],
+            "critique": null,
+            "by": "deterministic"
+          }
+        }
+      ]
+    }
+  ]
+}

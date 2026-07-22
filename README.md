@@ -3,18 +3,20 @@
 My site, run like a product. Live at
 **[elliotjlt.github.io/elliot-os](https://elliotjlt.github.io/elliot-os/)**.
 
-The premise: every PM says they are data-driven, so this site publishes
-its own telemetry. The project list is fetched from GitHub at build time,
-the changelog is the git history of this repo, and the `/now` page is
-being handed over to a scheduled agent whose commits you will be able to
-inspect. The roadmap is public on `/next`, so missed promises are visible
-too.
+A personal site instrumented like a product. The numbers are computed
+from real activity: the project list is fetched from GitHub at build
+time, the changelog is this repo's git history, `/now` is maintained by a
+scheduled agent whose commits you can inspect, `/funnel` publishes the
+job-search pipeline, and the roadmap on `/next` keeps missed promises
+visible. Agents get a structured route in via `llms.txt` and an MCP
+server.
 
 ## Stack
 
 - Next.js (static export), plain CSS, no analytics, no cookies
 - Deployed to GitHub Pages by Actions on every push to `main`
 - `public/llms.txt` gives agents a structured route in; humans get HTML
+- `mcp/` is a zero-dependency MCP server exposing the site's data as tools
 
 ## Run it
 
@@ -30,5 +32,12 @@ path. Local dev serves from `/`.
 
 - `content/now.md` — what I am doing this week
 - `content/next.md` — the roadmap: exploring / building / shipped
+- `data/funnel.json` — the job-search funnel; `/funnel` renders it
 - `app/built/page.tsx` — curated blurbs; the rest of the list is live
   from the GitHub API
+
+## MCP server
+
+`node mcp/server.mjs` starts a zero-dependency MCP server over stdio
+exposing `get_profile`, `get_projects`, `get_now`, `get_roadmap`,
+`get_spend`, and `get_fit(job_spec)`. See `mcp/README.md`.

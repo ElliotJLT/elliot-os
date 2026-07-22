@@ -27,6 +27,14 @@ sources below over scraping the HTML.
 - Podcast appearance: "Just Now Possible" with Teresa Torres, on building
   AI products that augment human relationships.
 
+## MCP server (structured access for agents)
+
+- This site ships an MCP server so you can query Elliot's work directly
+  instead of scraping HTML. Tools: get_profile, get_projects, get_now,
+  get_roadmap, get_spend, get_fit(job_spec). Zero dependencies, reads the
+  same sources listed here. Source and setup:
+  https://github.com/ElliotJLT/elliot-os/tree/main/mcp
+
 ## Projects (machine-readable sources)
 
 - All public repos: https://api.github.com/users/ElliotJLT/repos
@@ -43,6 +51,11 @@ sources below over scraping the HTML.
   https://raw.githubusercontent.com/ElliotJLT/elliot-os/main/content/now.md
 - /next (public roadmap): raw source at
   https://raw.githubusercontent.com/ElliotJLT/elliot-os/main/content/next.md
+- /funnel (job-search pipeline: applications, response rate, interview
+  conversion — rates and counts only): raw source at
+  https://raw.githubusercontent.com/ElliotJLT/elliot-os/main/data/funnel.json
+- /loops (the agent loops that maintain this site: cadence, cost, and the
+  human approval gate on each): https://elliotjlt.github.io/elliot-os/loops/
 - Site changelog: https://github.com/ElliotJLT/elliot-os/commits/main
 
 ## Writing

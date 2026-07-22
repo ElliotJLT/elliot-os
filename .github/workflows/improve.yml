@@ -1,0 +1,68 @@
+name: Agent — improvement loop (outer)
+
+# The outer loop. Reads Elliot's real GitHub + Medium activity and the site's
+# current state, then proposes ONE employer-facing improvement as a pull
+# request for human review. It never merges itself.
+#
+# Ships DORMANT: the weekly schedule below is commented out, so nothing runs
+# until Elliot enables it. Runs $0 without ANTHROPIC_API_KEY (deterministic
+# scan of real sources); with the key, Claude adds the positioning pass and
+# the token cost lands on the public ledger.
+
+on:
+  workflow_dispatch:
+  # Uncomment to make it weekly once you're comfortable with what it proposes:
+  # schedule:
+  #   - cron: "0 6 * * 4" # Thursdays 06:00 UTC
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Run the improvement loop
+        id: loop
+        run: node scripts/agent-improve.mjs | tee /tmp/proposal.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+      - name: Open a pull request if a proposal was made
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if grep -q "^NO_PROPOSAL" /tmp/proposal.txt; then
+            echo "Clean pass — nothing to propose. Stopping rule at work."
+            exit 0
+          fi
+          SLUG=$(grep "^PROPOSAL_SLUG=" /tmp/proposal.txt | head -1 | cut -d= -f2-)
+          TITLE=$(grep "^PROPOSAL_TITLE=" /tmp/proposal.txt | head -1 | cut -d= -f2-)
+          BRANCH="agent/improve-$(date +%Y%m%d)-${SLUG:-proposal}"
+          # The proposal brief is everything after the '--- proposal ---' marker.
+          sed -n '/^--- proposal ---/,$p' /tmp/proposal.txt | tail -n +2 > /tmp/body.md
+          {
+            echo ""
+            echo "---"
+            echo "_Proposed by the outer loop. Merging this PR accepts the change; closing it rejects it. Either way it lands in the changelog. See [/loops](https://elliotjlt.github.io/elliot-os/loops/)._"
+          } >> /tmp/body.md
+
+          git config user.name "elliot-os agent"
+          git config user.email "agent@elliot-os.invalid"
+          git checkout -b "$BRANCH"
+          git add data/loops.json data/spend.json
+          git commit -m "agent: propose — ${TITLE:-site improvement}"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --title "agent: ${TITLE:-site improvement}" \
+            --body-file /tmp/body.md \
+            --base main --head "$BRANCH"
