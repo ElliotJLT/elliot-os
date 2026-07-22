@@ -68,12 +68,16 @@ export default async function Built() {
           </h3>
           <p>
             AI tutor for A-Level students, in production across four STEM
-            subjects on every major UK exam board. Multi-agent architecture:
-            coaching, practice, marking and assignments each run as their own
-            agent with their own pedagogy and evaluator. Socratic from the
-            prompt up. Every coaching session is graded against the Socratic
-            spec by an always-on evaluator. I built and deployed it at Zero
-            Gravity.
+            subjects on every major UK exam board. First commit to live on the
+            App Store in 45 days. Multi-agent architecture: coaching,
+            practice, marking and assignments each run as their own agent with
+            their own pedagogy and evaluator, graded against the Socratic spec
+            by an always-on evaluator. The eval infrastructure tested against
+            real past papers and official mark schemes, taking marking
+            accuracy from a ~67% bare-model baseline to over 99%. It won a
+            DSIT tender to bring AI tutoring into disadvantaged state schools,
+            scoring ahead of major US labs and the largest UK content
+            incumbent. I built and deployed it at Zero Gravity.
           </p>
         </div>
 

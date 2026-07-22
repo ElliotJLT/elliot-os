@@ -9,10 +9,12 @@ export default function Changelog() {
       <div className="wrap">
         <h1>Changelog</h1>
         <p className="muted">
-          Every change to this site is a commit, whether a human or an agent
-          made it. Rendered from git history at build time; the full trail is{" "}
+          Every change to this site is a commit, badged by author. Agent
+          commits come from the scheduled workflow; the badge is derived from
+          the real git author field, so it can&apos;t be faked without showing
+          up in the{" "}
           <a href="https://github.com/ElliotJLT/elliot-os/commits/main">
-            on GitHub
+            history on GitHub
           </a>
           .
         </p>
@@ -21,6 +23,13 @@ export default function Changelog() {
             <li key={e.hash}>
               <span className="hash">{e.hash}</span>
               <span className="date">{e.date}</span>
+              <span
+                className={
+                  "badge " + (e.author.includes("agent") ? "agent" : "human")
+                }
+              >
+                {e.author.includes("agent") ? "agent" : "human"}
+              </span>
               <span>{e.subject}</span>
             </li>
           ))}

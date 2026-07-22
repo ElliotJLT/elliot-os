@@ -1,0 +1,42 @@
+name: Agent — refresh /now
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # Mondays 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: node scripts/agent-now.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Optional. Without it the agent writes the deterministic log only
+          # and records $0. With it, a Claude summary is added and the real
+          # token cost lands in data/spend.json.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - name: Commit as the agent
+        run: |
+          git config user.name "elliot-os agent"
+          git config user.email "agent@elliot-os.invalid"
+          if git diff --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git add content/now.md data/spend.json
+          git commit -m "agent: refresh /now shipping log + spend telemetry"
+          git push
+          gh workflow run "Deploy to GitHub Pages"
+        env:
+          GH_TOKEN: ${{ github.token }}

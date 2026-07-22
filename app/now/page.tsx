@@ -8,9 +8,11 @@ export default function Now() {
     <main>
       <div className="wrap">
         <h1>Now</h1>
-        <p className="mono dim">
-          Written by Elliot, by hand. An agent inherits this page soon: when it
-          does, this byline changes and the commits will prove it.
+        <p className="mono faint">
+          Two authors on this page. The shipping log is written by a scheduled
+          agent from the public GitHub events API and committed under its own
+          name. The section below it is written by me, for the things git
+          can&apos;t see.
         </p>
         <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />
       </div>
