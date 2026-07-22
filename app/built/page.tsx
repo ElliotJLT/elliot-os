@@ -54,7 +54,7 @@ export default async function Built() {
     <main>
       <div className="wrap">
         <h1>Built</h1>
-        <p className="muted">
+        <p className="lede">
           The repo list below is fetched from GitHub when this site builds. If
           I ship something, it shows up here without me touching this page.
         </p>

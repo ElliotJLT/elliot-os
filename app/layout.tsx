@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getSpend } from "@/lib/telemetry";
+import NavLinks from "./components/NavLinks";
+import ThemeToggle from "./components/ThemeToggle";
 import "./globals.css";
 
 const basePath = process.env.BASE_PATH || "";
@@ -11,23 +13,25 @@ export const metadata: Metadata = {
     "Builder-operator in London. This site runs like a product: live telemetry, a public roadmap, a changelog, and pages maintained by an agent that accounts for every token it spends.",
 };
 
+// Runs before paint so the stored theme never flashes.
+const themeInit = `(function(){try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){}})()`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const spend = getSpend();
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         <nav>
           <div className="wrap">
             <Link href="/" className="brand">
               Elliot Little<span className="tag">operating report</span>
             </Link>
             <div className="links">
-              <Link href="/built">built</Link>
-              <Link href="/now">now</Link>
-              <Link href="/next">next</Link>
-              <Link href="/changelog">changelog</Link>
+              <NavLinks />
+              <ThemeToggle />
             </div>
           </div>
         </nav>

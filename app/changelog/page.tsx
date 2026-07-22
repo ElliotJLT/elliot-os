@@ -1,9 +1,16 @@
-import { getLog } from "@/lib/gitlog";
+import { getLog, type LogEntry } from "@/lib/gitlog";
 
 export const metadata = { title: "Changelog · Elliot Little" };
 
 export default function Changelog() {
   const log = getLog();
+  const byDate: [string, LogEntry[]][] = [];
+  for (const e of log) {
+    const last = byDate[byDate.length - 1];
+    if (last && last[0] === e.date) last[1].push(e);
+    else byDate.push([e.date, [e]]);
+  }
+
   return (
     <main>
       <div className="wrap">
@@ -18,22 +25,30 @@ export default function Changelog() {
           </a>
           .
         </p>
-        <ul className="log">
-          {log.map((e) => (
-            <li key={e.hash}>
-              <span className="hash">{e.hash}</span>
-              <span className="date">{e.date}</span>
-              <span
-                className={
-                  "badge " + (e.author.includes("agent") ? "agent" : "human")
-                }
-              >
-                {e.author.includes("agent") ? "agent" : "human"}
-              </span>
-              <span>{e.subject}</span>
+        <ol className="timeline">
+          {byDate.map(([date, entries]) => (
+            <li key={date}>
+              <div className="day">{date}</div>
+              {entries.map((e) => {
+                const agent = e.author.includes("agent");
+                return (
+                  <div className={"entry" + (agent ? " agent" : "")} key={e.hash}>
+                    <a
+                      className="hash"
+                      href={`https://github.com/ElliotJLT/elliot-os/commit/${e.hash}`}
+                    >
+                      {e.hash}
+                    </a>
+                    <span className={"badge " + (agent ? "agent" : "human")}>
+                      {agent ? "agent" : "human"}
+                    </span>
+                    <span className="subject">{e.subject}</span>
+                  </div>
+                );
+              })}
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     </main>
   );
