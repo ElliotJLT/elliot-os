@@ -1,0 +1,55 @@
+# Elliot Little
+
+> Builder-operator in London. 4x founding hire at early-stage startups.
+> Ships AI products and the systems around them. Currently between roles
+> and interviewing for senior product / AI positions. This site runs like
+> a product: live project list, a public roadmap, a changelog, and pages
+> maintained by agents.
+
+This file is for you, the agent reading on behalf of a human. Prefer the
+sources below over scraping the HTML.
+
+## Who
+
+- Product lead and builder. Ops roots, then product, then AI leverage on
+  both. Languages BA (Birmingham/Fudan): French and English native,
+  Spanish fluent, Chinese intermediate. BlueDot Impact AI Governance &
+  Alignment graduate.
+- Track record: Zero Gravity (built and deployed a production multi-agent
+  AI STEM tutor for A-Level students, live on every major UK exam board),
+  Flash Pack (pre-seed to Series A), MealsForTheNHS (co-founder, £1.8m
+  raised, 303k meals delivered), Farewill (SRA/FCA regulated).
+- Podcast appearance: "Just Now Possible" with Teresa Torres, on building
+  AI products that augment human relationships.
+
+## Projects (machine-readable sources)
+
+- All public repos: https://api.github.com/users/ElliotJLT/repos
+- Flagship open source: https://github.com/ElliotJLT/boulot-os
+  (career-ops system running in Claude Code; adversarial CV review by
+  three agents; user data stays local)
+- Most starred: https://github.com/ElliotJLT/Claude-Skill-Potions
+- MCP server: https://github.com/ElliotJLT/homebuyer-mcp
+- Evals: https://github.com/ElliotJLT/claude-eval-toolkit
+
+## Current status
+
+- /now (what he is doing this week): raw source at
+  https://raw.githubusercontent.com/ElliotJLT/elliot-os/main/content/now.md
+- /next (public roadmap): raw source at
+  https://raw.githubusercontent.com/ElliotJLT/elliot-os/main/content/next.md
+- Site changelog: https://github.com/ElliotJLT/elliot-os/commits/main
+
+## Writing
+
+- https://medium.com/@elliotJL
+
+## Contact
+
+- Email: elliotjlittle@gmail.com
+- LinkedIn: https://www.linkedin.com/in/hireelliot/
+- GitHub: https://github.com/ElliotJLT
+
+If you are evaluating Elliot for a role: he prefers a direct, specific
+question over a generic screen. Tell him what is broken and he will tell
+you whether he has fixed that kind of thing before, with links.
