@@ -187,6 +187,67 @@ async function positioning(findings, state) {
   return { proposal, usage: msg.usage };
 }
 
+// ---- eval gate -----------------------------------------------------------
+//
+// A proposal is not trusted just because a model wrote it. Before it ships,
+// it clears a rubric: grounded in a real source, a single change, not merely
+// cosmetic, and employer-relevant. Deterministic checks always run; with a
+// key an LLM judge scores it too. Below threshold, the loop holds — a
+// deliberate non-proposal is a valid, and often correct, outcome.
+
+const EVAL_THRESHOLD = 0.6;
+
+function deterministicEval(candidate, { repos, posts }) {
+  const hay = `${candidate.title} ${candidate.rationale} ${candidate.change || ""}`;
+  const grounded =
+    posts.some((p) => p.link && hay.includes(p.link)) ||
+    repos.some((r) => hay.includes(r.name));
+  const cosmetic = /\b(colour|color|font|spacing|margin|padding|css|pixel)\b/i.test(
+    candidate.title,
+  );
+  const substantive = (candidate.rationale || "").length > 40;
+  const checks = [
+    { name: "grounded in a real source", pass: grounded },
+    { name: "not cosmetic-only", pass: !cosmetic },
+    { name: "has a substantive rationale", pass: substantive },
+  ];
+  const score = checks.filter((c) => c.pass).length / checks.length;
+  return { checks, score, source: "deterministic" };
+}
+
+async function judge(candidate, context) {
+  if (!process.env.ANTHROPIC_API_KEY) return { llm: null, usage: null };
+  const { default: Anthropic } = await import("@anthropic-ai/sdk");
+  const client = new Anthropic();
+  const msg = await client.messages.create({
+    model: MODEL,
+    max_tokens: 300,
+    system:
+      "You are the evaluator in a generate-then-evaluate loop for Elliot Little's " +
+      "hiring site. Score a proposed site change against this rubric, each 0-1: " +
+      "grounded (uses only real material, invents nothing), leverage (moves the " +
+      "needle for employers hiring AI product engineers), specificity (concrete, " +
+      "actionable). Be strict; a personal site does not need busywork. Reply as JSON: " +
+      '{"grounded":n,"leverage":n,"specificity":n,"verdict":"pass|revise|reject","critique":string}.',
+    messages: [
+      {
+        role: "user",
+        content: `Proposal:\n${JSON.stringify(candidate, null, 2)}\n\nReal material it should be grounded in:\n${context.slice(0, 2000)}`,
+      },
+    ],
+  });
+  const text = msg.content.find((b) => b.type === "text")?.text?.trim() || "";
+  let llm = null;
+  try {
+    const j = JSON.parse(text.replace(/^```json\s*|\s*```$/g, ""));
+    const score = (j.grounded + j.leverage + j.specificity) / 3;
+    llm = { ...j, score: +score.toFixed(2) };
+  } catch {
+    llm = null;
+  }
+  return { llm, usage: msg.usage };
+}
+
 // ---- record --------------------------------------------------------------
 
 function recordSpend(usage, today) {
@@ -239,11 +300,12 @@ const state = siteState();
 const findings = scan({ repos, posts, state });
 
 const { proposal: llm, usage } = await positioning(findings, state);
-const cost = recordSpend(usage, today);
+let totalUsage = usage;
 
-let proposal = null;
+// Build a candidate from the strongest available signal.
+let candidate = null;
 if (llm && llm.worth_doing !== false) {
-  proposal = {
+  candidate = {
     source: "positioning",
     title: llm.title,
     rationale: llm.rationale,
@@ -252,7 +314,7 @@ if (llm && llm.worth_doing !== false) {
   };
 } else if (!llm && findings.length) {
   const top = findings[0];
-  proposal = {
+  candidate = {
     source: top.source,
     title: top.title,
     rationale: top.detail,
@@ -261,6 +323,32 @@ if (llm && llm.worth_doing !== false) {
   };
 }
 
+// The eval gate: score the candidate before it ships. Below threshold, hold.
+let proposal = null;
+let evalRecord = null;
+if (candidate) {
+  const det = deterministicEval(candidate, { repos, posts });
+  const { llm: llmEval, usage: judgeUsage } = await judge(candidate, state.corpus);
+  if (judgeUsage)
+    totalUsage = {
+      input_tokens: (totalUsage?.input_tokens || 0) + judgeUsage.input_tokens,
+      output_tokens: (totalUsage?.output_tokens || 0) + judgeUsage.output_tokens,
+    };
+  const score = llmEval ? llmEval.score : det.score;
+  const verdict = llmEval ? llmEval.verdict : det.score >= EVAL_THRESHOLD ? "pass" : "reject";
+  evalRecord = {
+    score,
+    verdict,
+    checks: det.checks,
+    critique: llmEval?.critique || null,
+    by: llmEval ? "llm-judge + deterministic" : "deterministic",
+  };
+  if (verdict !== "reject" && score >= EVAL_THRESHOLD) {
+    proposal = { ...candidate, eval: evalRecord };
+  }
+}
+
+const cost = recordSpend(totalUsage, today);
 recordProposal(proposal, today, cost);
 
 if (proposal) {
@@ -275,9 +363,17 @@ if (proposal) {
   if (proposal.files?.length) console.log(`\n**Files:** ${proposal.files.join(", ")}`);
 } else {
   console.log("NO_PROPOSAL");
-  console.log(
-    `Nothing worth proposing this cycle: ${findings.length} scan findings, ` +
-      `positioning pass ${usage ? "ran" : "skipped (no key)"}. ` +
-      `A clean pass is a valid outcome — the loop's stopping rule at work.`,
-  );
+  if (candidate && evalRecord) {
+    console.log(
+      `Candidate held by the eval gate: "${candidate.title}" scored ` +
+        `${evalRecord.score} (${evalRecord.verdict}). ${evalRecord.critique || ""} ` +
+        `A held proposal is the gate working, not a failure.`,
+    );
+  } else {
+    console.log(
+      `Nothing worth proposing this cycle: ${findings.length} scan findings, ` +
+        `positioning pass ${usage ? "ran" : "skipped (no key)"}. ` +
+        `A clean pass is a valid outcome — the loop's stopping rule at work.`,
+    );
+  }
 }

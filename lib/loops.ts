@@ -1,6 +1,14 @@
 import { readFileSync } from "fs";
 import { join } from "path";
 
+export type EvalRecord = {
+  score: number;
+  verdict: string;
+  checks: { name: string; pass: boolean }[];
+  critique: string | null;
+  by: string;
+};
+
 export type Proposal = {
   date: string;
   status: string;
@@ -10,6 +18,8 @@ export type Proposal = {
   files?: string[];
   change?: string;
   pr_url?: string;
+  shipped?: string;
+  eval?: EvalRecord;
 };
 
 export type Loop = {

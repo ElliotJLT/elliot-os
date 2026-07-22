@@ -80,6 +80,28 @@ export default function Loops() {
                         {p.pr_url ? <a href={p.pr_url}>{p.title}</a> : p.title}
                       </div>
                       <p className="prat">{p.rationale}</p>
+                      {p.eval && (
+                        <div className="peval">
+                          <span className={"verdict " + p.eval.verdict}>
+                            eval: {p.eval.verdict} · {p.eval.score.toFixed(2)}
+                          </span>
+                          {p.eval.checks.map((c) => (
+                            <span
+                              key={c.name}
+                              className={"echeck " + (c.pass ? "ok" : "no")}
+                            >
+                              {c.pass ? "✓" : "✕"} {c.name}
+                            </span>
+                          ))}
+                          <span className="eby">{p.eval.by}</span>
+                        </div>
+                      )}
+                      {p.eval?.critique && (
+                        <p className="ecrit">“{p.eval.critique}”</p>
+                      )}
+                      {p.shipped && (
+                        <p className="pshipped">→ shipped: {p.shipped}</p>
+                      )}
                     </div>
                   ))}
                 </div>
