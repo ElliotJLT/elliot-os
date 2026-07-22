@@ -14,6 +14,12 @@
 
 ## shipped
 
+- **The improvement loop** — 22 July 2026. The site's outer loop: a
+  scheduled agent reads real GitHub activity, Medium writing, and the
+  site's current state, then proposes one employer-facing improvement as
+  a pull request for review. Inner loop runs the work; human stays on the
+  outer rail. Control panel on [/loops](/loops); ships dormant until a key
+  is set and the schedule enabled.
 - **An MCP server for this site** — 22 July 2026. `get_profile`,
   `get_projects`, `get_now`, `get_roadmap`, `get_spend`, and
   `get_fit(job_spec)`, so your agent can interrogate my work directly

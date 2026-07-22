@@ -8,6 +8,7 @@ const LINKS = [
   ["/now", "now"],
   ["/next", "next"],
   ["/funnel", "funnel"],
+  ["/loops", "loops"],
   ["/changelog", "changelog"],
 ] as const;
 

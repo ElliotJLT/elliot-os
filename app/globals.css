@@ -1229,6 +1229,227 @@ li {
   background: var(--inset);
 }
 
+/* ------------------------------------------------------------------- loops */
+.looplist {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.loopcard {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.loophead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.loophead h3 {
+  margin: 0;
+  flex: 1;
+}
+
+.layer {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 5px;
+  border: 1px solid var(--line-2);
+  color: var(--muted);
+}
+
+.layer.inner {
+  color: var(--green);
+  border-color: var(--green-line);
+  background: var(--green-bg);
+}
+
+.layer.outer {
+  color: var(--accent);
+  border-color: var(--amber-line);
+  background: var(--amber-bg);
+}
+
+.lstatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.lstatus .dot {
+  width: 7px;
+  height: 7px;
+}
+
+.lstatus.running .dot {
+  background: var(--green);
+}
+
+.lstatus.armed .dot {
+  background: var(--accent);
+  animation: none;
+}
+
+.lstatus.armed .dot::after,
+.lstatus.paused .dot::after {
+  display: none;
+}
+
+.lstatus.paused .dot {
+  background: var(--faint);
+}
+
+.loopnote {
+  color: var(--muted);
+  font-size: 14.5px;
+  margin: 12px 0 14px;
+}
+
+.loopmeta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px 18px;
+  margin: 0 0 14px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+@media (max-width: 560px) {
+  .loopmeta {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.loopmeta div {
+  min-width: 0;
+}
+
+.loopmeta dt {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 3px;
+}
+
+.loopmeta dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--ink);
+}
+
+.stoprule {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.stoprule span {
+  color: var(--faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 10px;
+  margin-right: 8px;
+}
+
+.proposals {
+  margin-top: 16px;
+  border-top: 1px dashed var(--line-2);
+  padding-top: 14px;
+}
+
+.ptitle {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 10px;
+}
+
+.proposal {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.proposal:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.phead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.psrc {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid var(--line-2);
+  color: var(--muted);
+}
+
+.psrc.medium,
+.psrc.github,
+.psrc.positioning {
+  color: var(--accent);
+  border-color: var(--amber-line);
+  background: var(--amber-bg);
+}
+
+.pdate {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+}
+
+.pstatus {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pname {
+  font-weight: 650;
+  font-size: 15px;
+  margin-bottom: 3px;
+}
+
+.prat {
+  color: var(--muted);
+  font-size: 13.5px;
+  margin: 0;
+  line-height: 1.55;
+  word-break: break-word;
+}
+
 /* --------------------------------------------------- prose from markdown */
 .prose li {
   color: var(--ink);
