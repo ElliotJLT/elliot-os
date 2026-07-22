@@ -51,9 +51,6 @@ sources below over scraping the HTML.
   https://raw.githubusercontent.com/ElliotJLT/elliot-os/main/content/now.md
 - /next (public roadmap): raw source at
   https://raw.githubusercontent.com/ElliotJLT/elliot-os/main/content/next.md
-- /funnel (job-search pipeline: applications, response rate, interview
-  conversion — rates and counts only): raw source at
-  https://raw.githubusercontent.com/ElliotJLT/elliot-os/main/data/funnel.json
 - /loops (the agent loops that maintain this site: cadence, cost, and the
   human approval gate on each): https://elliotjlt.github.io/elliot-os/loops/
 - Site changelog: https://github.com/ElliotJLT/elliot-os/commits/main

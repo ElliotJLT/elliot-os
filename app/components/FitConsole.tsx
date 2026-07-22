@@ -317,15 +317,10 @@ export default function FitConsole({ data }: { data: ConsoleData }) {
   return (
     <div className="console">
       <div className="console-title">
-        <span className="lights" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-        </span>
-        <span className="name">elliot@os: ~/fit-engine — tty</span>
+        <span className="name">Fit Engine — Interactive</span>
         <span className="badge-live">
           <span className="dot" aria-hidden="true" />
-          in-browser
+          runs in your browser
         </span>
       </div>
 

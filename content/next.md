@@ -25,11 +25,6 @@
   `get_fit(job_spec)`, so your agent can interrogate my work directly
   instead of scraping HTML. Zero dependencies, reads the same sources the
   site does. Code in [`mcp/`](https://github.com/ElliotJLT/elliot-os/tree/main/mcp).
-- **The job-search funnel** — 22 July 2026. Applications, response rate,
-  and interview conversion as a live dashboard on [/funnel](/funnel).
-  Rates and counts only, no company names while conversations are open.
-  It renders from a versioned data file and stays dark until there's a
-  cohort worth publishing.
 - **The fit engine console** — 22 July 2026. The homepage prompt block
   became an interactive shell: paste a job spec for a briefing, or query
   the site's live data with slash-commands.
