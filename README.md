@@ -6,10 +6,10 @@ My site, run like a product. Live at
 A personal site instrumented like a product. The numbers are computed
 from real activity: the project list is fetched from GitHub at build
 time, the changelog is this repo's git history, `/now` is maintained by a
-scheduled agent whose commits you can inspect, `/funnel` publishes the
-job-search pipeline, and the roadmap on `/next` keeps missed promises
-visible. Agents get a structured route in via `llms.txt` and an MCP
-server.
+scheduled agent whose commits you can inspect, `/loops` is the control
+panel for the agents that maintain the site, and the roadmap on `/next`
+keeps missed promises visible. Agents get a structured route in via
+`llms.txt` and an MCP server.
 
 ## Stack
 
@@ -32,7 +32,8 @@ path. Local dev serves from `/`.
 
 - `content/now.md` — what I am doing this week
 - `content/next.md` — the roadmap: exploring / building / shipped
-- `data/funnel.json` — the job-search funnel; `/funnel` renders it
+- `data/spend.json` — the agent's inference ledger; the footer counter
+  and `/loops` render it
 - `app/built/page.tsx` — curated blurbs; the rest of the list is live
   from the GitHub API
 
