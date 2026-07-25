@@ -256,9 +256,12 @@ main {
 h1 {
   font-family: var(--serif);
   font-size: clamp(38px, 6.4vw, 62px);
-  line-height: 1.02;
+  /* 1.02 let descenders on a two-line headline crowd the line beneath, and
+     18px under a 62px display size is about a quarter of its height, which
+     reads as the lede being shoved up against it. */
+  line-height: 1.06;
   letter-spacing: -0.018em;
-  margin: 16px 0 18px;
+  margin: 16px 0 28px;
   font-weight: 500;
   text-wrap: balance;
 }
@@ -324,10 +327,12 @@ p {
 .lede {
   font-family: var(--serif);
   font-size: 21px;
-  line-height: 1.5;
+  /* Longer lines need more leading. 54ch of this serif renders around 70
+     characters, and 1.5 packs those lines tight enough to read as squashed. */
+  line-height: 1.6;
   color: var(--ink-2);
   font-weight: 400;
-  max-width: 54ch;
+  max-width: 52ch;
 }
 
 .muted,
