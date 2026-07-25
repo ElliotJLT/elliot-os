@@ -16,14 +16,14 @@ export default async function Writing() {
         <h1>Writing</h1>
         <p className="lede">
           Essays about shipping AI to people who can&apos;t absorb a wrong
-          answer, and about the judgement calls that survive after the demo
+          answer, and about the judgment calls that survive after the demo
           works.
         </p>
         <p className="muted">
-          Pulled live from the{" "}
-          <a href="https://medium.com/@elliotJL">Medium feed</a> when this site
-          builds, newest first. If I publish something, it appears here without
-          me touching this page.
+          Read from the{" "}
+          <a href="https://medium.com/@elliotJL">Medium feed</a> at build time,
+          newest first, and the site rebuilds weekly. If I publish something it
+          arrives here on its own, though it can be a few days behind the feed.
         </p>
 
         <h2>on AI, product and trust</h2>
@@ -67,10 +67,10 @@ export default async function Writing() {
                   <a href={media.podcast.url}>{media.podcast.title}</a>
                 </h3>
                 <p className="muted">
-                  On <i>Just Now Possible</i> with Teresa Torres, on building AI
-                  that closes the gap between knowing what to do and actually
-                  doing it, for students without the network that usually
-                  supplies the answer.
+                  I went on <i>Just Now Possible</i>, hosted by Teresa Torres,
+                  to talk about building AI that closes the gap between knowing
+                  what to do and actually doing it, for students without the
+                  network that usually supplies the answer.
                 </p>
               </div>
             </div>

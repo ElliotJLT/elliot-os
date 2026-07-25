@@ -27,7 +27,7 @@ const NOTES: [string, string][] = [
   ],
   [
     "Bad Advice",
-    "Shipping AI to A-Level students and first-time buyers: what changes when your users can't absorb a wrong answer.",
+    "Deploying to first-generation university applicants, people lost in visa paperwork, job seekers in a brutal market. What changes when a hallucination closes a door permanently, read against the EU AI Code of Practice and a run of real failures.",
   ],
   [
     "Trust Gap",
