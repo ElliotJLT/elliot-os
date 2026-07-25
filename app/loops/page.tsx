@@ -148,7 +148,7 @@ export default function Loops() {
         <p className="muted">
           Every cycle it reads real material (Elliot&apos;s public GitHub
           activity, his Medium writing, and the site&apos;s own current state)
-          and proposes the single highest-leverage change to make the site more
+          and proposes the single most useful change to make the site more
           compelling to employers hiring AI product engineers. It never invents
           activity; it surfaces what he actually did and how to frame it. The
           proposal arrives as a pull request. Merging it is the accept; closing

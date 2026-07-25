@@ -9,7 +9,7 @@
       "cadence": "weekly · Mon 06:00 UTC",
       "gate": "deterministic · auto-commit",
       "status": "running",
-      "stop_rule": "quiet week posts \"quiet week\" — never fabricates activity",
+      "stop_rule": "quiet week posts \"quiet week\"; it never fabricates activity",
       "last_run": "2026-07-22",
       "runs": 1,
       "spend_usd": 0,
@@ -28,7 +28,7 @@
       "last_run": "2026-07-22",
       "runs": 1,
       "spend_usd": 0,
-      "note": "Reads Elliot's real GitHub activity, Medium writing, and the site's current state, scores its own proposal against a rubric, and only then proposes one employer-facing change as a PR. Its first run's proposal is below — accepted and shipped.",
+      "note": "Reads Elliot's real GitHub activity, Medium writing, and the site's current state, scores its own proposal against a rubric, and only then proposes one employer-facing change as a PR. Its first run's proposal is below, accepted and shipped.",
       "proposals": [
         {
           "date": "2026-07-22",
