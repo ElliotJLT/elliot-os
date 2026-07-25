@@ -11,6 +11,40 @@ const FALLBACK: Post[] = [
   },
 ];
 
+// Why a given piece is worth someone's time. Keyed by a distinctive substring
+// of the title so a renamed post degrades to "no note" rather than a wrong one.
+const NOTES: [string, string][] = [
+  [
+    "Loop Was Never",
+    "The agent loop is the easy part; knowing when to stop it is the work. The thinking underneath this site's /loops page.",
+  ],
+  [
+    "Same Mistakes",
+    "Models have infinite knowledge and no habits. On writing the fixes down so a correction survives the session.",
+  ],
+  [
+    "Bad Advice",
+    "Shipping AI to A-Level students and first-time buyers: what changes when your users can't absorb a wrong answer.",
+  ],
+  [
+    "Trust Gap",
+    "Capability is not adoption. What has to be true before someone lets a model act on their behalf.",
+  ],
+  [
+    "Amsterdam",
+    "A city did everything the responsible-AI playbook asks for and the system still failed. Where governance-by-checklist breaks.",
+  ],
+  [
+    "100+ AI Leaders",
+    "Field notes from a week with the people actually deploying this, and the gap between the conference talk and the rollout.",
+  ],
+];
+
+export function noteFor(title: string): string | null {
+  const hit = NOTES.find(([k]) => title.includes(k));
+  return hit ? hit[1] : null;
+}
+
 export async function getPosts(limit = 4): Promise<Post[]> {
   try {
     const res = await fetch("https://medium.com/@elliotJL/feed");

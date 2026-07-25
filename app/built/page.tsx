@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getRepos, FEATURED } from "@/lib/github";
 import { getPosts } from "@/lib/writing";
 import { getRoles } from "@/lib/roles";
@@ -144,12 +145,13 @@ export default async function Built() {
 
         <h2>writing</h2>
         <p className="muted" style={{ fontSize: 15, marginTop: 0 }}>
-          Recent posts, pulled live from the Medium feed at build. Surfaced
+          Latest posts, pulled live from the Medium feed at build. Surfaced
           here by the site&apos;s own improvement loop, not by hand:{" "}
-          <a href="/loops">/loops</a>.
+          <Link href="/loops">/loops</Link>. The full set, with notes on why
+          each one exists, is on <Link href="/writing">/writing</Link>.
         </p>
         <ul className="repolist">
-          {posts.map((p) => (
+          {posts.slice(0, 3).map((p) => (
             <li key={p.link}>
               <a href={p.link}>{p.title}</a>
               {p.date && <span className="mono dim"> · {p.date}</span>}

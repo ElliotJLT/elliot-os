@@ -57,7 +57,14 @@ sources below over scraping the HTML.
 
 ## Writing
 
-- https://medium.com/@elliotJL
+Essays on shipping AI to users who cannot absorb a wrong answer, on trust
+and adoption, and on where responsible-AI-by-checklist breaks. Annotated
+index (why each piece exists):
+https://elliotjlt.github.io/elliot-os/writing/
+
+- Full feed: https://medium.com/@elliotJL
+- Podcast: "Just Now Possible" with Teresa Torres —
+  https://open.spotify.com/episode/3D8quBCXrMNgIF87czhux3
 
 ## Contact
 

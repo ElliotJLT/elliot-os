@@ -3,9 +3,9 @@
 - **The hosted fit engine.** Today the fit console composes a critical
   briefing and hands it to an agent you already trust. The hosted version
   runs the inference itself and answers in place — which needs a backend
-  and an API budget that ticks in public, on the ledger this site exists
-  to publish. Building it deliberately: the client-side path works now, at
-  $0.0000 a query.
+  and a token budget that ticks in public, on the same ledger as
+  everything else here. Building it deliberately: the client-side path
+  already works, and spends nothing.
 
 ## exploring
 
@@ -28,9 +28,11 @@
 - **The fit engine console** — 22 July 2026. The homepage prompt block
   became an interactive shell: paste a job spec for a briefing, or query
   the site's live data with slash-commands.
-- **Agent-owned /now with a real cost counter** — 22 July 2026. A
-  scheduled workflow derives the shipping log from the GitHub events API,
-  commits as "elliot-os agent", and logs every inference token it spends
-  to `data/spend.json`. The footer number is measured, not estimated.
+- **Agent-owned /now, metered** — 22 July 2026. A scheduled workflow
+  derives the shipping log from the GitHub events API, commits as
+  "elliot-os agent", and meters every token it spends into
+  `data/spend.json`. The counter reads zero today because the loop runs
+  deterministically until a key is set: the instrument is real, it just
+  has not been asked to spend anything yet.
 - **v1 of this site** — 22 July 2026. Three sections, live repo list,
   changelog from git history, llms.txt for the machines.

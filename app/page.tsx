@@ -104,7 +104,7 @@ export default async function Home() {
               analytics <b>0</b>
             </span>
             <span>
-              agent spend <b>${spend.totals.cost_usd.toFixed(4)}</b>
+              agent tokens <b>{tokens.toLocaleString()}</b>
             </span>
           </div>
         </div>
@@ -128,12 +128,13 @@ export default async function Home() {
               <span className="foot">scheduled + on-demand</span>
             </div>
             <div className="stat">
-              <span className="label">agent spend · all time</span>
-              <span className="value">
-                <small>$</small>
-                {spend.totals.cost_usd.toFixed(4)}
+              <span className="label">agent tokens · all time</span>
+              <span className="value">{tokens.toLocaleString()}</span>
+              <span className="foot">
+                {tokens === 0
+                  ? "deterministic runs only — no model calls yet"
+                  : `${spend.totals.runs} runs metered`}
               </span>
-              <span className="foot">{tokens.toLocaleString()} tokens</span>
             </div>
           </div>
           <p className="faint mono receipts">

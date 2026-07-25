@@ -77,11 +77,13 @@ export default function RootLayout({
         <footer>
           <div className="wrap">
             <span>
-              agent inference spend, all time: $
-              {spend.totals.cost_usd.toFixed(4)} across {spend.totals.runs}{" "}
-              run{spend.totals.runs === 1 ? "" : "s"} (
-              {spend.totals.input_tokens + spend.totals.output_tokens} tokens).
-              Measured, not estimated: <Link href="/changelog">receipts</Link>.
+              agent activity, all time: {spend.totals.runs} run
+              {spend.totals.runs === 1 ? "" : "s"},{" "}
+              {(
+                spend.totals.input_tokens + spend.totals.output_tokens
+              ).toLocaleString()}{" "}
+              tokens metered. Measured, not estimated:{" "}
+              <Link href="/changelog">receipts</Link>.
             </span>
             <span>
               <a href="https://github.com/ElliotJLT/elliot-os">source</a>
