@@ -75,14 +75,9 @@ export default async function Built() {
         </p>
         <p className="muted">
           It applies to the model and to the person equally. You read what the
-          loop made, and you can defend what carries your name. That standard
-          is the spine of the{" "}
-          <a href="https://htmlpreview.github.io/?https://gist.githubusercontent.com/ElliotJLT/2737dd5f02e68f405b151c002e7b9db0/raw/product-engineering-os.html">
-            operating document
-          </a>{" "}
-          I wrote for the engineering team I worked in, and{" "}
+          loop made, and you can defend what carries your name.{" "}
           <a href="https://elliotjlt.github.io/crux/research.html">crux</a> is
-          the instrument I built to find out whether it actually holds.
+          the instrument I built to find out whether that actually holds.
         </p>
         <ul className="record">
           <li>
@@ -200,7 +195,7 @@ export default async function Built() {
           </p>
         </div>
 
-        <h2>research and position</h2>
+        <h2>research</h2>
         <div className="card">
           <h3>
             <a href="https://elliotjlt.github.io/crux/research.html">crux</a>
@@ -231,28 +226,6 @@ export default async function Built() {
           </div>
         </div>
 
-        <div className="card">
-          <h3>
-            <a href="https://htmlpreview.github.io/?https://gist.githubusercontent.com/ElliotJLT/2737dd5f02e68f405b151c002e7b9db0/raw/product-engineering-os.html">
-              The Product Engineering OS
-            </a>
-          </h3>
-          <p>
-            The operating document I wrote for the team that took an AI tutor
-            from zero to schools in 82 days: how the work is owned, what a
-            product engineer is accountable for once agents write most of the
-            code, and the failure modes with their counters. Every claim is
-            cited, including against our own GitHub and Linear numbers rather
-            than a story about them. It names the risks honestly, among them
-            the METR trial where experienced developers were 19% slower while
-            believing they were 20% faster, the review queue that agent fleets
-            move rather than remove, and learning erosion. It was written as a
-            proposal to be argued with, not a rulebook.
-          </p>
-          <div className="meta">
-            written July 2026 at Zero Gravity
-          </div>
-        </div>
 
         <h2>agent tools</h2>
         {FEATURED.map((name) => {

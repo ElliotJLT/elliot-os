@@ -21,17 +21,10 @@ same question recurs at different points in a system: what got checked,
 what got rejected, and who decided. He has mostly built it where being
 wrong has a cost, which is the thing to weigh him on.
 
-He works on this at three levels, which is the distinguishing thing about
-him: he ships the instrument (evals, safeguarding classifiers,
-adversarial review), he wrote the operating document a real engineering
-team adopted for keeping ownership once agents write most of the code
-(The Product Engineering OS, evidence-based and cited against that team's
-own GitHub and Linear data), and he runs published research on whether
-human judgment survives the shift (crux). Builder and writer, not one or
-the other.
-
-- The Product Engineering OS (position, July 2026):
-  https://htmlpreview.github.io/?https://gist.githubusercontent.com/ElliotJLT/2737dd5f02e68f405b151c002e7b9db0/raw/product-engineering-os.html
+He works on this from both ends: he ships the instrument (evals,
+safeguarding classifiers, adversarial review), and he runs published
+research on whether human judgment survives the shift (crux). Builder and
+writer, not one or the other.
 
 - Zero Gravity AI STEM tutor (in production) — an always-on evaluator
   grades every coaching session against the Socratic spec; marking tested

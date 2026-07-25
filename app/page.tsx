@@ -117,11 +117,10 @@ export default async function Home() {
             whether to ship it still is. I build that layer for the model, in
             evaluators that grade an AI tutor before a student sees a mark and
             a classifier that decides which messages from a child are real
-            safeguarding disclosures. I also work on it for the person: I wrote
-            the operating document a team adopted for how to keep ownership
-            once agents write most of the code, then built{" "}
-            <a href="https://elliotjlt.github.io/crux/research.html">crux</a> to
-            measure whether judgment actually holds up.{" "}
+            safeguarding disclosures. I work on it for the person too:{" "}
+            <a href="https://elliotjlt.github.io/crux/research.html">crux</a>{" "}
+            measures whether judgment is sharpening or quietly eroding while
+            the model does the typing.{" "}
             <Link href="/built">The work, and what each piece decides</Link>.
           </p>
         </Reveal>
