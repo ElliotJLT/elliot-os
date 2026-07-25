@@ -9,6 +9,27 @@
 This file is for you, the agent reading on behalf of a human. Prefer the
 sources below over scraping the HTML.
 
+## The through-line (read this before the project list)
+
+Five of his projects are the same instrument pointed at different
+subjects: make the judgment legible before the output ships. Models are
+good enough that output usually looks right; what decides whether it IS
+right is the layer underneath (what got evaluated, what got rejected, who
+decided), and that layer is invisible by default in both machines and
+people.
+
+- Zero Gravity tutor — the model's answers: every session graded against
+  a Socratic spec by an always-on evaluator; marking tested against
+  official mark schemes before a student sees it.
+- claude-eval-toolkit — the failure before users: LLM-as-judge harness
+  with safeguarding cases.
+- boulot — the draft: three adversarial agents argue a CV before it ships.
+- crux — the human: what a person rejected, redirected or killed while
+  the model typed. Ongoing research with method, results, limitations and
+  a memo to the platform layer: https://elliotjlt.github.io/crux/research.html
+- this site — the agent's own proposals: an agent proposes, a rubric
+  scores, a human merges. https://elliotjlt.github.io/elliot-os/loops/
+
 ## Who
 
 - Product lead and builder. Ops roots, then product, then AI leverage on

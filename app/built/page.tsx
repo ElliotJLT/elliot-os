@@ -59,9 +59,73 @@ export default async function Built() {
       <div className="wrap">
         <h1>Built</h1>
         <p className="lede">
-          The repo list below is fetched from GitHub when this site builds. If
-          I ship something, it shows up here without me touching this page.
+          Five of the things below are the same instrument pointed at
+          different subjects: make the judgment legible before the output
+          ships.
         </p>
+
+        <h2>the through-line</h2>
+        <p className="muted" style={{ marginTop: 0 }}>
+          Models are now good enough that the output usually looks right.
+          What decides whether it <em>is</em> right sits underneath: what got
+          evaluated, what got rejected, and who decided. That layer is
+          invisible by default, in machines and in people. Everything I build
+          ends up trying to expose it.
+        </p>
+        <ul className="record">
+          <li>
+            <div className="rhead">
+              <span className="rorg">Zero Gravity tutor</span>
+              <span className="rmeta">the model&apos;s answers</span>
+            </div>
+            <p className="rout">
+              Every coaching session graded against the Socratic spec by an
+              always-on evaluator, and marking tested against official mark
+              schemes before a student ever sees it.
+            </p>
+          </li>
+          <li>
+            <div className="rhead">
+              <span className="rorg">claude-eval-toolkit</span>
+              <span className="rmeta">the failure, before users</span>
+            </div>
+            <p className="rout">
+              An LLM-as-judge harness with safeguarding cases, so a regression
+              shows up in a test rather than in production.
+            </p>
+          </li>
+          <li>
+            <div className="rhead">
+              <span className="rorg">boulot</span>
+              <span className="rmeta">the draft</span>
+            </div>
+            <p className="rout">
+              Three adversarial agents argue over a CV, on purpose, before it
+              is allowed to be sent anywhere.
+            </p>
+          </li>
+          <li>
+            <div className="rhead">
+              <span className="rorg">crux</span>
+              <span className="rmeta">the human</span>
+            </div>
+            <p className="rout">
+              What a person rejected, redirected, or killed while the model
+              did the typing. The half no commit log records.
+            </p>
+          </li>
+          <li>
+            <div className="rhead">
+              <span className="rorg">this site</span>
+              <span className="rmeta">the agent&apos;s own proposals</span>
+            </div>
+            <p className="rout">
+              An agent proposes one change, a rubric scores it, and a human
+              merges it or does not. Cadence and stopping rules on{" "}
+              <Link href="/loops">/loops</Link>.
+            </p>
+          </li>
+        </ul>
 
         <h2>track record</h2>
         <p className="muted" style={{ marginTop: 0, fontSize: 15 }}>
@@ -106,6 +170,31 @@ export default async function Built() {
             scoring ahead of major US labs and the largest UK content
             incumbent. I built and deployed it at Zero Gravity.
           </p>
+        </div>
+
+        <h2>research</h2>
+        <div className="card">
+          <h3>
+            <a href="https://elliotjlt.github.io/crux/research.html">crux</a>
+          </h3>
+          <p>
+            Ongoing research, not a product. Your commit log shows what got
+            shipped. It does not show what you rejected, redirected, or
+            killed, which is the part of the work that is still yours. A
+            Claude Code hook reads each session and extracts those decisions,
+            so you can see whether your judgment is sharpening or quietly
+            eroding while the model does the typing. The research document
+            carries the method, results run on myself, the honest objections,
+            the limitations, and a memo to the platform layer about the half
+            of AI fluency that nothing currently measures.
+          </p>
+          <div className="meta">
+            <a href="https://elliotjlt.github.io/crux/research.html">
+              read the research
+            </a>{" "}
+            ·{" "}
+            <a href="https://github.com/ElliotJLT/crux">repo</a>
+          </div>
         </div>
 
         <h2>agent tools</h2>

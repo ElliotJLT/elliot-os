@@ -7,9 +7,13 @@ import FitConsole, { type ConsoleData } from "./components/FitConsole";
 import Sparkline from "./components/Sparkline";
 import Reveal from "./components/Reveal";
 
-function uptime(iso: string): string {
-  const d = Math.max(0, Math.floor((Date.now() - new Date(iso).getTime()) / 86400000));
-  return `${d}d`;
+// The repo's first commit, as a date rather than a day count: "0d" on launch
+// day reads like a broken gauge, and the age of the site is not a boast.
+function liveSince(iso: string): string {
+  return new Date(iso).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+  });
 }
 
 export default async function Home() {
@@ -45,6 +49,11 @@ export default async function Home() {
       "/built",
       "built",
       "A production AI tutor that beat major US labs to a government tender, plus agent tools and MCP servers. The repo list is pulled live from GitHub at every deploy.",
+    ],
+    [
+      "/writing",
+      "writing",
+      "Essays on shipping AI to users who can't absorb a wrong answer, on trust and adoption, and on where responsible-AI-by-checklist breaks.",
     ],
     [
       "/now",
@@ -92,7 +101,7 @@ export default async function Home() {
           </p>
           <div className="systemline">
             <span>
-              uptime <b>{uptime(first.iso)}</b>
+              live since <b>{liveSince(first.iso)}</b>
             </span>
             <span>
               agent identity <b>verified</b>
@@ -108,6 +117,17 @@ export default async function Home() {
             </span>
           </div>
         </div>
+
+        <Reveal>
+          <h2>the through-line</h2>
+          <p className="muted">
+            Five things I have built are the same instrument pointed at
+            different subjects: make the judgment legible before the output
+            ships. The model&apos;s answers, the failure before users see it,
+            the draft, the human, and this site&apos;s own agent.{" "}
+            <Link href="/built">What each one audits</Link>.
+          </p>
+        </Reveal>
 
         <Reveal>
           <h2>telemetry</h2>
@@ -140,7 +160,10 @@ export default async function Home() {
           <p className="faint mono receipts">
             computed at build time from the GitHub API, data/spend.json, and
             git history. rebuilt {built} UTC{log[0] ? ` @ ${log[0].hash}` : ""}.
-            no analytics, no cookies, nothing hand-typed.
+            no analytics, no cookies, nothing hand-typed. the count on{" "}
+            <Link href="/now">/now</Link> is lower: that one is a snapshot
+            frozen at the agent&apos;s last weekly run, this one recomputes on
+            every deploy.
           </p>
         </Reveal>
 

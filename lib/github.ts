@@ -15,11 +15,14 @@ export const FEATURED = [
   "dabble",
   "homebuyer-mcp",
   "claude-eval-toolkit",
-  "crux",
   "hooksmith",
 ];
 
-const EXCLUDE = ["ElliotJLT", "zg-product-engineer-task"];
+// crux gets its own section on /built (it is research, not tooling), so it is
+// neither a FEATURED tool card nor part of the "everything else" tail.
+export const RESEARCH = ["crux"];
+
+const EXCLUDE = ["ElliotJLT", "zg-product-engineer-task", ...RESEARCH];
 
 export async function getRepos(): Promise<Repo[]> {
   const headers: Record<string, string> = {
