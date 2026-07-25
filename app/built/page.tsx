@@ -121,8 +121,8 @@ export default async function Built() {
             <p className="rout">
               Three agents with opposing briefs, a hiring manager, a reviewer
               and a strategist, argue over a CV before it is allowed out. I ran
-              my own search through it. My partner and my sister use it too,
-              which is more validation than most of my ideas earn.
+              my own search through it, then open-sourced it. My partner and my
+              sister use it too.
             </p>
           </li>
           <li>

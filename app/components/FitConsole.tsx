@@ -348,8 +348,8 @@ export default function FitConsole({ data }: { data: ConsoleData }) {
                 <span className="who">elliot-os agent</span>
                 <div className="bubble">
                   <p>
-                    Evaluating Elliot for a role? Don&apos;t take my word for it
-                    — I&apos;m his agent. Paste the job spec and I&apos;ll
+                    Evaluating Elliot for a role? Don&apos;t take my word for
+                    it, I am his agent. Paste the job spec and I&apos;ll
                     compose a critical briefing for an agent you already trust.
                     Or interrogate the site directly: it&apos;s all mounted.
                   </p>
@@ -372,7 +372,7 @@ export default function FitConsole({ data }: { data: ConsoleData }) {
                 <p>
                   Briefing composed. It routes through{" "}
                   <a href={`${SITE}/llms.txt`}>llms.txt</a> and the raw sources
-                  behind every claim on this site — commits, repos, spend. Hand
+                  behind every claim on this site: commits, repos, spend. Hand
                   it to your agent:
                 </p>
                 <Handoff briefing={m.briefing} />

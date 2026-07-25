@@ -315,7 +315,7 @@ h3 {
 }
 
 p {
-  margin: 0 0 15px;
+  margin: 0 0 19px;
 }
 
 /* Reading measure: 45–75 characters is the comfortable range. The lede sat
@@ -471,6 +471,7 @@ li {
   text-transform: uppercase;
   color: var(--muted);
   line-height: 1.4;
+  min-height: 2.8em;
 }
 
 .stat .value {
@@ -507,7 +508,7 @@ li {
 }
 
 .receipts {
-  margin-top: 12px;
+  margin-top: 20px;
   line-height: 1.6;
 }
 
@@ -1071,9 +1072,13 @@ li {
 }
 
 .record li {
-  padding: 15px 0;
+  padding: 17px 0;
   border-bottom: 1px solid var(--line);
   margin: 0;
+}
+
+.record li:last-child {
+  border-bottom: none;
 }
 
 .rhead {
