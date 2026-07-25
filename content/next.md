@@ -2,7 +2,7 @@
 
 - **The hosted fit engine.** Today the fit console composes a critical
   briefing and hands it to an agent you already trust. The hosted version
-  runs the inference itself and answers in place — which needs a backend
+  runs the inference itself and answers in place, which needs a backend
   and a token budget that ticks in public, on the same ledger as
   everything else here. Building it deliberately: the client-side path
   already works, and spends nothing.

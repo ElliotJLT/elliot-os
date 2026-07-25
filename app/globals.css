@@ -315,13 +315,37 @@ p {
   margin: 0 0 15px;
 }
 
+/* Reading measure: 45–75 characters is the comfortable range. The lede sat
+   at 40ch, which reads cramped beside a headline running the full column and
+   forced tight rags ("and 4x / founding hire"). Full-width body copy ran the
+   other way, to roughly 88 characters at the 760px wrap. Both are pulled into
+   range below; elements inside cards are already narrower, so the cap only
+   bites on paragraphs that would otherwise span the whole column. */
 .lede {
   font-family: var(--serif);
   font-size: 21px;
   line-height: 1.5;
   color: var(--ink-2);
   font-weight: 400;
-  max-width: 40ch;
+  max-width: 54ch;
+}
+
+.muted,
+.receipts,
+.card p,
+.loopnote,
+.prose p,
+.prose li {
+  max-width: 66ch;
+}
+
+/* Avoid single-word last lines on the paragraphs a reader actually reads. */
+.lede,
+.muted,
+.card p,
+.prose p,
+.rout {
+  text-wrap: pretty;
 }
 
 .lede strong {

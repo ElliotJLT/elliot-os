@@ -27,7 +27,7 @@ export default function Loops() {
           keeps a surface fresh; the <b>outer</b> loop steps back and proposes
           what to change next. The agent runs the inner work; a human stays on
           the outer rail, approving every change. This page is the control
-          panel — cadence, cost, and the stopping rule for each one.
+          panel: cadence, cost, and the stopping rule for each one.
         </p>
 
         <h2>running loops</h2>
@@ -146,8 +146,8 @@ export default function Loops() {
 
         <h2>how the outer loop works</h2>
         <p className="muted">
-          Every cycle it reads real material — Elliot&apos;s public GitHub
-          activity, his Medium writing, and the site&apos;s own current state —
+          Every cycle it reads real material (Elliot&apos;s public GitHub
+          activity, his Medium writing, and the site&apos;s own current state)
           and proposes the single highest-leverage change to make the site more
           compelling to employers hiring AI product engineers. It never invents
           activity; it surfaces what he actually did and how to frame it. The

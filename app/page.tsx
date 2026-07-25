@@ -82,7 +82,7 @@ export default async function Home() {
             This site is one of them.
           </h1>
           <p className="lede">
-            I&apos;m Elliot — a builder-operator in London and 4x founding
+            I&apos;m Elliot, a builder-operator in London and 4x founding
             hire. Most recently I shipped a production multi-agent AI tutor
             that took marking accuracy from a <strong>67% baseline to 99%+</strong>{" "}
             and won a UK government tender against major US labs. This page is
@@ -151,7 +151,7 @@ export default async function Home() {
               <span className="value">{tokens.toLocaleString()}</span>
               <span className="foot">
                 {tokens === 0
-                  ? "deterministic runs only — no model calls yet"
+                  ? "deterministic runs only, no model calls yet"
                   : `${spend.totals.runs} runs metered`}
               </span>
             </div>
