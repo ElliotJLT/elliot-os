@@ -1,9 +1,12 @@
-import { getPosts, noteFor } from "@/lib/writing";
+import { getPosts, noteFor, getMedia } from "@/lib/writing";
 
 export const metadata = { title: "Writing · Elliot Little" };
 
+const basePath = process.env.BASE_PATH || "";
+
 export default async function Writing() {
   const posts = await getPosts(20);
+  const media = getMedia();
   const annotated = posts.filter((p) => noteFor(p.title));
   const rest = posts.filter((p) => !noteFor(p.title));
 
@@ -24,19 +27,55 @@ export default async function Writing() {
         </p>
 
         <h2>on AI, product and trust</h2>
-        <ul className="record">
-          {annotated.map((p) => (
-            <li key={p.link}>
-              <div className="rhead">
-                <span className="rorg">
-                  <a href={p.link}>{p.title}</a>
-                </span>
-                <span className="rmeta">{p.date}</span>
-              </div>
-              <p className="rout">{noteFor(p.title)}</p>
-            </li>
-          ))}
+        <ul className="postlist">
+          {annotated.map((p) => {
+            const img = media.posts[p.link];
+            return (
+              <li key={p.link}>
+                {img && (
+                  <a href={p.link} className="thumb" aria-hidden="true" tabIndex={-1}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={`${basePath}/${img}`} alt="" loading="lazy" />
+                  </a>
+                )}
+                <div className="postbody">
+                  <div className="rhead">
+                    <span className="rorg">
+                      <a href={p.link}>{p.title}</a>
+                    </span>
+                    <span className="rmeta">{p.date}</span>
+                  </div>
+                  <p className="rout">{noteFor(p.title)}</p>
+                </div>
+              </li>
+            );
+          })}
         </ul>
+
+        {media.podcast && (
+          <>
+            <h2>podcast</h2>
+            <div className="podcard">
+              {media.podcast.image && (
+                <a href={media.podcast.url} className="podart" aria-hidden="true" tabIndex={-1}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={`${basePath}/${media.podcast.image}`} alt="" loading="lazy" />
+                </a>
+              )}
+              <div>
+                <h3>
+                  <a href={media.podcast.url}>{media.podcast.title}</a>
+                </h3>
+                <p className="muted">
+                  On <i>Just Now Possible</i> with Teresa Torres, on building AI
+                  that closes the gap between knowing what to do and actually
+                  doing it, for students without the network that usually
+                  supplies the answer.
+                </p>
+              </div>
+            </div>
+          </>
+        )}
 
         {rest.length > 0 && (
           <>
@@ -54,12 +93,7 @@ export default async function Writing() {
 
         <h2>elsewhere</h2>
         <p className="muted">
-          I talked about building AI products that augment human relationships
-          rather than replace them on{" "}
-          <a href="https://open.spotify.com/episode/3D8quBCXrMNgIF87czhux3">
-            Just Now Possible with Teresa Torres
-          </a>
-          . I studied AI governance and alignment with{" "}
+          I studied AI governance and alignment with{" "}
           <a href="https://www.bluedot.org/">BlueDot Impact</a>.
         </p>
       </div>

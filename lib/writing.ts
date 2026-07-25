@@ -1,3 +1,6 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+
 // Recent writing, derived from the Medium feed at build time. Falls back to a
 // curated list if the feed is unreachable, so a build never breaks on it.
 
@@ -68,5 +71,23 @@ export async function getPosts(limit = 4): Promise<Post[]> {
     return posts.length ? posts : FALLBACK;
   } catch {
     return FALLBACK;
+  }
+}
+
+export type Media = {
+  posts: Record<string, string>;
+  podcast: { title: string; url: string; image: string | null } | null;
+};
+
+/**
+ * Images downloaded by scripts/fetch-media.mjs (npm prebuild) and served from
+ * public/media. Absent until that has run, so callers must tolerate nulls.
+ */
+export function getMedia(): Media {
+  try {
+    const raw = readFileSync(join(process.cwd(), "data", "media.json"), "utf-8");
+    return JSON.parse(raw) as Media;
+  } catch {
+    return { posts: {}, podcast: null };
   }
 }

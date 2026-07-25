@@ -5,3 +5,7 @@ next-env.d.ts
 *.tsbuildinfo
 .DS_Store
 .env*
+
+# Regenerated at build by scripts/fetch-media.mjs (npm prebuild)
+public/media/
+data/media.json
