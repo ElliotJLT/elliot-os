@@ -1659,94 +1659,6 @@ footer a {
   }
 }
 
-/* ------------------------------------------------- /loops title lemniscate */
-/* The "oo" of Loops, drawn at the same optical weight as the serif around it
-   and traced continuously. sized in em so it tracks the clamped h1. */
-.loopstitle {
-  display: flex;
-  align-items: baseline;
-  gap: 0.02em;
-}
-
-.lemni {
-  display: inline-block;
-  /* Wider lobes than a figure-of-eight: the shape should read as two ovals
-     lying down, closer to the "oo" it replaces. */
-  width: 1.72em;
-  /* Sits on the x-height rather than the baseline, where the round "oo" of
-     this serif would sit. */
-  height: 0.62em;
-  margin: 0 0.02em;
-  color: var(--accent);
-  translate: 0 -0.04em;
-}
-
-.lemni svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-
-.lemni path {
-  /* Path length is ~236 units; a dash slightly shorter than the whole figure
-     leaves a travelling gap that reads as one continuous trace. */
-  stroke-dasharray: 66 198;
-  animation: trace 3.4s linear infinite;
-}
-
-@keyframes trace {
-  from {
-    stroke-dashoffset: 264;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .lemni path {
-    stroke-dasharray: none;
-    animation: none;
-  }
-}
-
-/* ------------------------------------------------------------- reference */
-.reference {
-  margin: 0;
-  padding: 22px 24px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-left: 2px solid var(--accent);
-  border-radius: var(--r);
-}
-
-.reference blockquote {
-  margin: 0 0 14px;
-  font-family: var(--serif);
-  font-size: 20px;
-  line-height: 1.45;
-  color: var(--ink);
-  max-width: 46ch;
-}
-
-.reference p {
-  color: var(--muted);
-  font-size: 15px;
-  max-width: 66ch;
-}
-
-.reference p:last-of-type {
-  margin-bottom: 16px;
-}
-
-.reference figcaption {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 4px 12px;
-  padding-top: 13px;
-  border-top: 1px solid var(--line);
-}
 
 .refname {
   font-weight: 650;
@@ -1918,7 +1830,14 @@ html:not(.js) .reader:first-child {
   border-bottom: 1px solid var(--line);
 }
 
+.toolrow > * {
+  grid-column: 2;
+  min-width: 0;
+}
+
 .toolrow::before {
+  grid-column: 1;
+  grid-row: 1;
   counter-increment: tool;
   content: counter(tool, decimal-leading-zero);
   font-family: var(--mono);
@@ -1964,4 +1883,116 @@ html:not(.js) .reader:first-child {
     var(--bg-2) 0%,
     var(--paper) 38%
   );
+}
+
+/* ------------------------------------------------ /loops title lemniscate */
+/* The "oo" of Loops as an infinity, proportioned to the x-height of the
+   serif beside it rather than drawn flat and wide. The figure occupies the
+   middle two thirds of the viewBox, so the box is taller than the mark. */
+.lemni {
+  display: inline-block;
+  width: 1.38em;
+  aspect-ratio: 100 / 60;
+  margin: 0 0.04em;
+  translate: 0 0.02em;
+}
+
+.lemni svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 7;
+  vector-effect: non-scaling-stroke;
+}
+
+/* The whole figure is always visible; only the highlight travels. Drawing
+   just a dash made it read as a squiggle rather than a loop. */
+.lemni-track {
+  stroke: var(--line-2);
+}
+
+.lemni-trace {
+  stroke: var(--accent);
+  /* pathLength=100 on the element, so these are percentages of the figure. */
+  stroke-dasharray: 22 78;
+  animation: trace 3.6s linear infinite;
+}
+
+@keyframes trace {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lemni-trace {
+    animation: none;
+    stroke-dasharray: none;
+  }
+}
+
+/* --------------------------------------------------- reference as a quote */
+/* Was a bordered panel like everything else on the page. Now set as pulled
+   testimony: hanging quote mark, serif throughout, rules instead of a box. */
+.reference {
+  margin: 0;
+  padding: 0 0 0 46px;
+  position: relative;
+  background: none;
+  border: none;
+  border-radius: 0;
+}
+
+.reference::before {
+  content: "\201C";
+  position: absolute;
+  left: 0;
+  top: -0.16em;
+  font-family: var(--serif);
+  font-size: 76px;
+  line-height: 1;
+  color: var(--line-2);
+}
+
+.reference blockquote {
+  margin: 0 0 16px;
+  font-family: var(--serif);
+  font-size: 23px;
+  line-height: 1.4;
+  color: var(--ink);
+  max-width: 44ch;
+}
+
+.reference p {
+  font-family: var(--serif);
+  color: var(--ink-2);
+  font-size: 17px;
+  line-height: 1.55;
+  max-width: 58ch;
+}
+
+.reference figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  padding-top: 14px;
+  margin-top: 4px;
+  border-top: 1px solid var(--line);
+  max-width: 58ch;
+}
+
+@media (max-width: 560px) {
+  .reference {
+    padding-left: 30px;
+  }
+
+  .reference::before {
+    font-size: 54px;
+  }
 }
