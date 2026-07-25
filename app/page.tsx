@@ -18,12 +18,6 @@ function liveSince(iso: string): string {
   });
 }
 
-function daysOld(iso: string): number {
-  return Math.max(
-    1,
-    Math.round((Date.now() - new Date(iso).getTime()) / 86400000),
-  );
-}
 
 export default async function Home() {
   const [week, spend, log, repos] = [
@@ -88,7 +82,7 @@ export default async function Home() {
           <h1>
             Shipping got easy.
             <br />
-            <em>Judgment didn&apos;t.</em>
+            <em>Judgement didn&apos;t.</em>
           </h1>
           <div className="herorow">
             <p className="lede">
@@ -132,15 +126,18 @@ export default async function Home() {
         <Reveal>
           <h2>the through-line</h2>
           <p className="muted">
-            <b>Understanding is a shipping requirement, not a casualty.</b>{" "}
-            Producing plausible output is no longer the hard part; knowing
-            whether to ship it still is. I build that layer for the model, in
-            evaluators that grade an AI tutor before a student sees a mark and
-            a classifier that decides which messages from a child are real
-            safeguarding disclosures. I work on it for the person too:{" "}
+            Models write plausible things now. Checking them didn&apos;t get
+            easier, and that is where most of my work has gone. At Zero Gravity
+            an evaluator graded every tutoring session before a student saw the
+            mark. <a href="https://github.com/ElliotJLT/ward">ward</a>{" "}
+            separates a real safeguarding disclosure from a child having a bad
+            day, which is the distinction keyword filters get wrong.{" "}
             <a href="https://elliotjlt.github.io/crux/research.html">crux</a>{" "}
-            measures whether judgment is sharpening or quietly eroding while
-            the model does the typing.{" "}
+            turns the same question on me: it logs what I rejected in my own
+            sessions, so I can tell whether I am still thinking or just
+            approving.
+          </p>
+          <p className="muted">
             <Link href="/built">The work, and what each piece decides</Link>.
           </p>
         </Reveal>
@@ -175,9 +172,7 @@ export default async function Home() {
               <span className="label">agent tokens · all time</span>
               <span className="value">{tokens.toLocaleString()}</span>
               <span className="foot">
-                {tokens === 0
-                  ? "deterministic runs only, no model calls yet"
-                  : `${spend.totals.runs} runs metered`}
+                {spend.totals.runs} runs metered
               </span>
             </div>
           </div>
@@ -186,9 +181,6 @@ export default async function Home() {
             UTC{log[0] ? ` @ ${log[0].hash}` : ""}. the count on{" "}
             <Link href="/loops">/loops</Link> is lower because it is frozen at
             the agent&apos;s last run.
-          </p>
-          <p className="muted standing">
-            {`Read the token count honestly: this site is ${daysOld(first.iso)} days old and the loops have run ${spend.totals.runs} ${spend.totals.runs === 1 ? "time" : "times"} between them${tokens === 0 ? ", spending nothing so far" : ""}. The metering is wired and the agent commits under its own name, but a daily loop on a site this new has a handful of cycles, not a history. The number moves on its own, and I would rather show it low than round it up.`}
           </p>
         </Reveal>
 

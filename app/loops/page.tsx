@@ -27,9 +27,9 @@ export default function Loops() {
         <h1 className="loopstitle">
           L
           <span className="lemni" role="img" aria-label="oo">
-            <svg viewBox="0 0 100 46" aria-hidden="true" focusable="false">
+            <svg viewBox="0 0 124 44" aria-hidden="true" focusable="false">
               <path
-                d="M50 23 C50 6 74 6 82 14 C90 22 90 24 82 32 C74 40 50 40 50 23 C50 6 26 6 18 14 C10 22 10 24 18 32 C26 40 50 40 50 23 Z"
+                d="M62 22 C62 3 96 3 108 12 C118 20 118 24 108 32 C96 41 62 41 62 22 C62 3 28 3 16 12 C6 20 6 24 16 32 C28 41 62 41 62 22 Z"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="7"

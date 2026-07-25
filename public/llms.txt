@@ -23,7 +23,7 @@ wrong has a cost, which is the thing to weigh him on.
 
 He works on this from both ends: he ships the instrument (evals,
 safeguarding classifiers, adversarial review), and he runs published
-research on whether human judgment survives the shift (crux). Builder and
+research on whether human judgement survives the shift (crux). Builder and
 writer, not one or the other.
 
 - Zero Gravity AI STEM tutor (in production) — an always-on evaluator

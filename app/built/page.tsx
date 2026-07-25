@@ -60,9 +60,9 @@ export default async function Built() {
       <div className="wrap">
         <h1>Built</h1>
         <p className="lede">
-          Understanding is a shipping requirement, not a casualty. I build the
-          part that decides whether output is good enough to ship, and I have
-          mostly built it where being wrong has a cost.
+          I build the part that decides whether output is good enough to ship.
+          Usually somewhere a wrong answer costs a student a grade, or misses
+          what a child was trying to tell someone.
         </p>
 
         <h2>the through-line</h2>
@@ -157,7 +157,7 @@ export default async function Built() {
           Roles and the outcome that mattered in each. Full history, titles,
           and references on <a href={record.linkedin}>LinkedIn</a>.
         </p>
-        <ul className="record">
+        <ol className="career">
           {record.roles.map((r) => (
             <li key={r.org}>
               <div className="rhead">
@@ -173,7 +173,7 @@ export default async function Built() {
               <p className="rout">{r.outcome}</p>
             </li>
           ))}
-        </ul>
+        </ol>
 
         <h2>reference</h2>
         <figure className="reference">
@@ -189,7 +189,7 @@ export default async function Built() {
         </figure>
 
         <h2>in production</h2>
-        <div className="card">
+        <div className="card flagship">
           <h3>
             <a href="https://www.zerogravity.co.uk/tutor">
               Zero Gravity AI STEM tutor
@@ -245,11 +245,12 @@ export default async function Built() {
 
 
         <h2>agent tools</h2>
+        <div className="toollist">
         {FEATURED.map((name) => {
           const meta = BLURBS[name];
           const repo = byName.get(name);
           return (
-            <div className="card" key={name}>
+            <div className="toolrow" key={name}>
               <h3>
                 <a href={repo?.html_url || `https://github.com/ElliotJLT/${name}`}>
                   {meta.title}
@@ -265,6 +266,7 @@ export default async function Built() {
             </div>
           );
         })}
+        </div>
 
         <h2>everything else</h2>
         <ul className="repolist">

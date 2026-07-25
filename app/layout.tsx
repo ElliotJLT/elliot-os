@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     apple: [{ url: `${basePath}/icon-180.png`, sizes: "180x180" }],
   },
   description:
-    "Builder-operator in London who ships AI products and the systems around them. One idea built five times: make the judgment legible before the output ships. This site is instrumented like the products, with live telemetry, a changelog, and surfaces maintained by an agent that meters every token it spends.",
+    "Builder-operator in London who ships AI products and the systems around them. One idea built five times: make the judgement legible before the output ships. This site is instrumented like the products, with live telemetry, a changelog, and surfaces maintained by an agent that meters every token it spends.",
 };
 
 // Runs before paint so the stored theme never flashes.

@@ -1670,10 +1670,12 @@ footer a {
 
 .lemni {
   display: inline-block;
-  width: 1.42em;
+  /* Wider lobes than a figure-of-eight: the shape should read as two ovals
+     lying down, closer to the "oo" it replaces. */
+  width: 1.72em;
   /* Sits on the x-height rather than the baseline, where the round "oo" of
      this serif would sit. */
-  height: 0.66em;
+  height: 0.62em;
   margin: 0 0.02em;
   color: var(--accent);
   translate: 0 -0.04em;
@@ -1688,13 +1690,13 @@ footer a {
 .lemni path {
   /* Path length is ~236 units; a dash slightly shorter than the whole figure
      leaves a travelling gap that reads as one continuous trace. */
-  stroke-dasharray: 60 176;
+  stroke-dasharray: 66 198;
   animation: trace 3.4s linear infinite;
 }
 
 @keyframes trace {
   from {
-    stroke-dashoffset: 236;
+    stroke-dashoffset: 264;
   }
   to {
     stroke-dashoffset: 0;
@@ -1840,4 +1842,126 @@ footer a {
 html:not(.js) .reader:first-child {
   opacity: 1;
   visibility: visible;
+}
+
+/* ============================================================ distinction
+   Everything had settled into the same bordered rectangle, so sections read
+   as one texture. Three different shapes now, by what the content is:
+   the career is a timeline on a rail, tools are rule-separated entries with
+   a hanging index, and only true containers (loops, reference) keep a box. */
+
+/* ------------------------------------------------------------ career rail */
+.career {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0 0 0 26px;
+  position: relative;
+  counter-reset: role;
+}
+
+/* The rail stops at the last node instead of running into white space. */
+.career::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 10px;
+  bottom: 22px;
+  width: 1px;
+  background: var(--line-2);
+}
+
+.career li {
+  position: relative;
+  padding: 0 0 26px;
+  margin: 0;
+}
+
+.career li:last-child {
+  padding-bottom: 0;
+}
+
+.career li::before {
+  content: "";
+  position: absolute;
+  left: -26px;
+  top: 8px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--line-2);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* Most recent role is the live one. */
+.career li:first-child::before {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.career .rorg {
+  font-family: var(--serif);
+  font-size: 19px;
+}
+
+/* -------------------------------------------------- tools as an index list */
+.toollist {
+  counter-reset: tool;
+  border-top: 1px solid var(--line);
+}
+
+.toolrow {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  gap: 0 14px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.toolrow::before {
+  counter-increment: tool;
+  content: counter(tool, decimal-leading-zero);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+  padding-top: 5px;
+}
+
+.toolrow h3 {
+  margin: 0 0 3px;
+}
+
+.toolrow p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 64ch;
+}
+
+.toolrow .meta {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--faint);
+  margin-top: 8px;
+}
+
+@media (max-width: 560px) {
+  .toolrow {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .toolrow::before {
+    padding-top: 0;
+  }
+}
+
+/* --------------------------------------------- flagship gets more weight */
+.flagship {
+  border-left: 2px solid var(--accent-2);
+  background: linear-gradient(
+    to right,
+    var(--bg-2) 0%,
+    var(--paper) 38%
+  );
 }

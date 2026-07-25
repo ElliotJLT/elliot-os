@@ -19,7 +19,7 @@ export default async function Writing() {
         <h1>Writing</h1>
         <p className="lede">
           Essays about shipping AI to people who can&apos;t absorb a wrong
-          answer, and about the judgment calls that survive after the demo
+          answer, and about the judgement calls that survive after the demo
           works.
         </p>
         <p className="muted">
