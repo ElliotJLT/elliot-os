@@ -112,11 +112,14 @@ export default async function Home() {
         <Reveal>
           <h2>the through-line</h2>
           <p className="muted">
-            Five things I have built are the same instrument pointed at
-            different subjects: make the judgment legible before the output
-            ships. The model&apos;s answers, the failure before users see it,
-            the draft, the human, and this site&apos;s own agent.{" "}
-            <Link href="/built">What each one audits</Link>.
+            Producing plausible output is no longer the hard part. Knowing
+            whether to ship it still is, and that gap is where most of my work
+            has gone: an evaluator that grades an AI tutor before a student
+            sees a mark, a classifier that decides which messages from a child
+            are real safeguarding disclosures, adversarial review that argues
+            over an application before it goes out, and a rubric that gates
+            what an agent may change on this site.{" "}
+            <Link href="/built">The five, and what each one decides</Link>.
           </p>
         </Reveal>
 

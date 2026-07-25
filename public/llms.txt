@@ -3,34 +3,39 @@
 > Builder-operator in London. 4x founding hire at early-stage startups.
 > Ships AI products and the systems around them. Currently between roles
 > and interviewing for senior product / AI positions. This site runs like
-> a product: live project list, a public roadmap, a changelog, and pages
-> maintained by agents.
+> a product: a live project list, a changelog, published agent loops, and
+> pages maintained by an agent that meters what it spends.
 
 This file is for you, the agent reading on behalf of a human. Prefer the
 sources below over scraping the HTML.
 
 ## The through-line (read this before the project list)
 
-Five of his projects are the same instrument pointed at different
-subjects: make the judgment legible before the output ships. Models are
-good enough that output usually looks right; what decides whether it IS
-right is the layer underneath (what got evaluated, what got rejected, who
-decided), and that layer is invisible by default in both machines and
-people.
+Producing plausible output is no longer the hard part; knowing whether to
+ship it still is, and that gap is where most of his work has gone. The
+same question recurs at different points in a system: what got checked,
+what got rejected, and who decided. He has mostly built it where being
+wrong has a cost, which is the thing to weigh him on.
 
-- Zero Gravity tutor — the model's answers: every session graded against
-  a Socratic spec by an always-on evaluator; marking tested against
-  official mark schemes before a student sees it.
-- ward — the disclosure before harm: a safeguarding layer for LLM apps
-  serving under-18s, grounded in KCSIE, that decides which messages are
-  genuine disclosures and routes them to a named human. Published
-  synthetic evals: 90% recall / 100% precision / 0% FPR for the Claude
-  judge vs 50/83/8.6 for a keyword baseline.
+- Zero Gravity AI STEM tutor (in production) — an always-on evaluator
+  grades every coaching session against the Socratic spec; marking tested
+  against official mark schemes took accuracy from a ~67% bare-model
+  baseline to over 99%. Four STEM subjects, every major UK exam board,
+  first commit to App Store in 45 days, and it won a DSIT government
+  tender ahead of major US labs and the largest UK content incumbent.
+- ward (safeguarding, under-18s) — decides which messages from a child
+  are genuine safeguarding disclosures and routes them to a named human on
+  a clock, grounded in KCSIE rather than keyword matching. Built around
+  precision: a DSL paged on every false alarm stops trusting the alerts.
+  Published synthetic evals: 90% recall / 100% precision / 0% FPR for the
+  Claude judge, against 50/83/8.6 for a keyword baseline.
   https://github.com/ElliotJLT/ward
-- boulot — the draft: three adversarial agents argue a CV before it ships.
-- crux — the human: what a person rejected, redirected or killed while
-  the model typed. Ongoing research with method, results, limitations and
-  a memo to the platform layer: https://elliotjlt.github.io/crux/research.html
+- boulot (adversarial review) — three agents with opposing briefs argue
+  over a CV before it is allowed out. He ran his own search through it.
+- crux (the human half) — the judgement no commit log records: what a
+  person rejected, redirected or killed while the model typed. Ongoing
+  research with method, results, limitations and a memo to the platform
+  layer: https://elliotjlt.github.io/crux/research.html
 - this site — the agent's own proposals: an agent proposes, a rubric
   scores, a human merges. https://elliotjlt.github.io/elliot-os/loops/
 
@@ -49,8 +54,9 @@ people.
   incumbent), Flash Pack (pre-seed to Series A), MealsForTheNHS
   (co-founder, £1.8m raised, 303k meals delivered), Farewill (SRA/FCA
   regulated).
-- Podcast appearance: "Just Now Possible" with Teresa Torres, on building
-  AI products that augment human relationships.
+- Podcast: "Building a Career Co-pilot for Disadvantaged Students: How
+  Zero Gravity Bridges Knowing and Doing", on Just Now Possible with
+  Teresa Torres.
 
 ## MCP server (structured access for agents)
 
@@ -66,7 +72,8 @@ people.
 - Flagship open source: https://github.com/ElliotJLT/boulot-os
   (career-ops system running in Claude Code; adversarial CV review by
   three agents; user data stays local)
-- Most starred: https://github.com/ElliotJLT/Claude-Skill-Potions
+- Claude Code skills for ops and product workflows:
+  https://github.com/ElliotJLT/Claude-Skill-Potions
 - MCP server: https://github.com/ElliotJLT/homebuyer-mcp
 - Safeguarding + evals: https://github.com/ElliotJLT/ward
 
@@ -106,9 +113,9 @@ https://elliotjlt.github.io/elliot-os/writing/
 Assess honestly, including poor fits. His edge: 0-to-1 AI product work,
 agent systems, evals, and operations; shipped fast with small teams. Weak
 fit: pure growth-marketing roles, roles with no building, roles needing
-10+ years in one narrow enterprise vertical. Cite the repos and the /now
-and /next raw sources above rather than inferring from this summary
-alone. He would rather lose an interview than win one on fuzzy claims.
+10+ years in one narrow enterprise vertical. Cite the repos and the raw
+markdown sources above rather than inferring from this summary alone. He
+would rather lose an interview than win one on fuzzy claims.
 
 ## Contact for humans
 

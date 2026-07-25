@@ -59,71 +59,92 @@ export default async function Built() {
       <div className="wrap">
         <h1>Built</h1>
         <p className="lede">
-          Five of the things below are the same instrument pointed at
-          different subjects: make the judgment legible before the output
-          ships.
+          I build the part that decides whether a model&apos;s output is good
+          enough to ship, mostly in places where being wrong has a cost.
         </p>
 
         <h2>the through-line</h2>
         <p className="muted" style={{ marginTop: 0 }}>
-          Models are now good enough that the output usually looks right.
-          What decides whether it <em>is</em> right sits underneath: what got
-          evaluated, what got rejected, and who decided. That layer is
-          invisible by default, in machines and in people. Everything I build
-          ends up trying to expose it.
+          Producing plausible output is no longer the hard part. Knowing
+          whether to ship it still is, and that gap is where most of my work
+          has gone. The same question keeps surfacing at different points in a
+          system: what got checked, what got rejected, and who decided. Before
+          a student sees a mark. Before a child&apos;s disclosure gets missed.
+          Before an application goes out. Before an agent changes this page.
+        </p>
+        <p className="muted">
+          Answering it is unglamorous, and it is usually what separates a demo
+          from something you can put in front of people who cannot absorb a
+          wrong answer. A wrong mark costs a student a grade. A missed
+          disclosure costs considerably more than that.
         </p>
         <ul className="record">
           <li>
             <div className="rhead">
-              <span className="rorg">Zero Gravity tutor</span>
-              <span className="rmeta">the model&apos;s answers</span>
+              <span className="rorg">Zero Gravity AI STEM tutor</span>
+              <span className="rmeta">in production</span>
             </div>
             <p className="rout">
-              Every coaching session graded against the Socratic spec by an
-              always-on evaluator, and marking tested against official mark
-              schemes before a student ever sees it.
+              An always-on evaluator grades every coaching session against the
+              Socratic spec, and marking is tested against official mark
+              schemes before a student sees a grade. That eval infrastructure
+              took marking accuracy from a ~67% bare-model baseline to over
+              99%. Live across four STEM subjects on every major UK exam board,
+              first commit to App Store in 45 days, and it won a DSIT
+              government tender ahead of major US labs and the largest UK
+              content incumbent.
             </p>
           </li>
           <li>
             <div className="rhead">
               <span className="rorg">ward</span>
-              <span className="rmeta">the disclosure, before harm</span>
+              <span className="rmeta">safeguarding, for under-18s</span>
             </div>
             <p className="rout">
-              A safeguarding layer for LLM apps serving under-18s: it decides
-              which messages are genuine disclosures and hands those to a named
-              human, instead of leaving the judgement to a keyword filter.
+              Decides which messages from a child are genuine safeguarding
+              disclosures and routes those to a named human on a clock,
+              grounded in KCSIE rather than keyword matching. Built around
+              precision, because a Designated Safeguarding Lead who gets paged
+              on every false alarm learns to ignore the alerts, which is worse
+              than having none. On its published synthetic sets the Claude
+              judge reaches 90% recall at 100% precision, against 50/83 for a
+              keyword baseline.
             </p>
           </li>
           <li>
             <div className="rhead">
               <span className="rorg">boulot</span>
-              <span className="rmeta">the draft</span>
+              <span className="rmeta">adversarial review</span>
             </div>
             <p className="rout">
-              Three adversarial agents argue over a CV, on purpose, before it
-              is allowed to be sent anywhere.
+              Three agents with opposing briefs, a hiring manager, a reviewer
+              and a strategist, argue over a CV before it is allowed out. I ran
+              my own search through it. My partner and my sister use it too,
+              which is more validation than most of my ideas earn.
             </p>
           </li>
           <li>
             <div className="rhead">
               <span className="rorg">crux</span>
-              <span className="rmeta">the human</span>
+              <span className="rmeta">the human half</span>
             </div>
             <p className="rout">
-              What a person rejected, redirected, or killed while the model
-              did the typing. The half no commit log records.
+              The judgement no commit log records: what a person rejected,
+              redirected, or killed while the model did the typing. Ongoing
+              research, with the method, the results run on myself, the honest
+              objections and the limitations all published.
             </p>
           </li>
           <li>
             <div className="rhead">
               <span className="rorg">this site</span>
-              <span className="rmeta">the agent&apos;s own proposals</span>
+              <span className="rmeta">the agent&apos;s own work</span>
             </div>
             <p className="rout">
-              An agent proposes one change, a rubric scores it, and a human
-              merges it or does not. Cadence and stopping rules on{" "}
-              <Link href="/loops">/loops</Link>.
+              An agent proposes one change, a rubric scores it against explicit
+              criteria, and a human merges it or does not. Every cadence, gate
+              and stopping rule is published on <Link href="/loops">/loops</Link>
+              , and the spend is metered.
             </p>
           </li>
         </ul>
