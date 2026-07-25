@@ -22,8 +22,8 @@ export default async function Writing() {
         <p className="muted">
           Read from the{" "}
           <a href="https://medium.com/@elliotJL">Medium feed</a> at build time,
-          newest first, and the site rebuilds weekly. If I publish something it
-          arrives here on its own, though it can be a few days behind the feed.
+          newest first, and the site rebuilds daily. If I publish something it
+          arrives here on its own, usually within a day.
         </p>
 
         <h2>on AI, product and trust</h2>

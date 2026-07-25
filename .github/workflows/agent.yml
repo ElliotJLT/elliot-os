@@ -2,7 +2,11 @@ name: Agent — refresh /now
 
 on:
   schedule:
-    - cron: "0 6 * * 1" # Mondays 06:00 UTC
+    # Daily. A weekly cadence left the shipping log up to six days behind a
+    # heavy day of shipping, which is the opposite of the point. The run is
+    # deterministic unless ANTHROPIC_API_KEY is set, so daily costs nothing,
+    # and it exits without committing when there is nothing new to say.
+    - cron: "0 6 * * *" # 06:00 UTC daily
   workflow_dispatch:
 
 permissions:

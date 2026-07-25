@@ -173,16 +173,11 @@ export default async function Home() {
             git history. rebuilt {built} UTC{log[0] ? ` @ ${log[0].hash}` : ""}.
             no analytics, no cookies, nothing hand-typed. the shipping log on{" "}
             <Link href="/loops">/loops</Link> shows a lower count: that one is
-            frozen at the agent&apos;s last weekly run, this one recomputes on
+            frozen at the agent&apos;s last daily run, this one recomputes on
             every deploy.
           </p>
           <p className="muted standing">
-            Read the token count honestly: this site is {daysOld(first.iso)}{" "}
-            days old, the loops have run once between them, and they have spent
-            nothing so far. The metering is wired and the agent commits under
-            its own name, but a weekly loop on a site this new has had one
-            cycle, not a history. That number will move on its own, and I would
-            rather show it at zero than round it up.
+            {`Read the token count honestly: this site is ${daysOld(first.iso)} days old and the loops have run ${spend.totals.runs} ${spend.totals.runs === 1 ? "time" : "times"} between them${tokens === 0 ? ", spending nothing so far" : ""}. The metering is wired and the agent commits under its own name, but a daily loop on a site this new has a handful of cycles, not a history. The number moves on its own, and I would rather show it low than round it up.`}
           </p>
         </Reveal>
 

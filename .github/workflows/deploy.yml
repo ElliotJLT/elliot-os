@@ -3,10 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  # Weekly rebuild so the Medium feed, the repo list and the telemetry on the
-  # site refresh without a commit. /writing tells the reader it works this way.
+  # Daily rebuild so the Medium feed, the repo list and the telemetry refresh
+  # even on days the agent has nothing to commit. /writing says it works so.
   schedule:
-    - cron: "30 6 * * 1"
+    - cron: "30 6 * * *"
   workflow_dispatch:
 
 permissions:
