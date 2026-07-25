@@ -112,14 +112,17 @@ export default async function Home() {
         <Reveal>
           <h2>the through-line</h2>
           <p className="muted">
-            Producing plausible output is no longer the hard part. Knowing
-            whether to ship it still is, and that gap is where most of my work
-            has gone: an evaluator that grades an AI tutor before a student
-            sees a mark, a classifier that decides which messages from a child
-            are real safeguarding disclosures, adversarial review that argues
-            over an application before it goes out, and a rubric that gates
-            what an agent may change on this site.{" "}
-            <Link href="/built">The five, and what each one decides</Link>.
+            <b>Understanding is a shipping requirement, not a casualty.</b>{" "}
+            Producing plausible output is no longer the hard part; knowing
+            whether to ship it still is. I build that layer for the model, in
+            evaluators that grade an AI tutor before a student sees a mark and
+            a classifier that decides which messages from a child are real
+            safeguarding disclosures. I also work on it for the person: I wrote
+            the operating document a team adopted for how to keep ownership
+            once agents write most of the code, then built{" "}
+            <a href="https://elliotjlt.github.io/crux/research.html">crux</a> to
+            measure whether judgment actually holds up.{" "}
+            <Link href="/built">The work, and what each piece decides</Link>.
           </p>
         </Reveal>
 

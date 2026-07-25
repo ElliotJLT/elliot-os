@@ -59,8 +59,9 @@ export default async function Built() {
       <div className="wrap">
         <h1>Built</h1>
         <p className="lede">
-          I build the part that decides whether a model&apos;s output is good
-          enough to ship, mostly in places where being wrong has a cost.
+          Understanding is a shipping requirement, not a casualty. I build the
+          part that decides whether output is good enough to ship, and I have
+          mostly built it where being wrong has a cost.
         </p>
 
         <h2>the through-line</h2>
@@ -73,10 +74,15 @@ export default async function Built() {
           Before an application goes out. Before an agent changes this page.
         </p>
         <p className="muted">
-          Answering it is unglamorous, and it is usually what separates a demo
-          from something you can put in front of people who cannot absorb a
-          wrong answer. A wrong mark costs a student a grade. A missed
-          disclosure costs considerably more than that.
+          It applies to the model and to the person equally. You read what the
+          loop made, and you can defend what carries your name. That standard
+          is the spine of the{" "}
+          <a href="https://htmlpreview.github.io/?https://gist.githubusercontent.com/ElliotJLT/2737dd5f02e68f405b151c002e7b9db0/raw/product-engineering-os.html">
+            operating document
+          </a>{" "}
+          I wrote for the engineering team I worked in, and{" "}
+          <a href="https://elliotjlt.github.io/crux/research.html">crux</a> is
+          the instrument I built to find out whether it actually holds.
         </p>
         <ul className="record">
           <li>
@@ -194,28 +200,57 @@ export default async function Built() {
           </p>
         </div>
 
-        <h2>research</h2>
+        <h2>research and position</h2>
         <div className="card">
           <h3>
             <a href="https://elliotjlt.github.io/crux/research.html">crux</a>
           </h3>
           <p>
-            Ongoing research, not a product. Your commit log shows what got
-            shipped. It does not show what you rejected, redirected, or
-            killed, which is the part of the work that is still yours. A
-            Claude Code hook reads each session and extracts those decisions,
-            so you can see whether your judgment is sharpening or quietly
-            eroding while the model does the typing. The research document
-            carries the method, results run on myself, the honest objections,
-            the limitations, and a memo to the platform layer about the half
-            of AI fluency that nothing currently measures.
+            You are shipping faster than ever. Are you getting sharper, or
+            just getting carried? Nothing currently measures that. Output has
+            never been higher and no instrument tells you whether the person
+            behind it is improving, plateauing or quietly atrophying. Fluency
+            frameworks answer the baseline and everyone will pass them; the
+            layer above is where the difference sits, in trust calibration,
+            resistance to output that looks polished, and knowing what to
+            kill.
+          </p>
+          <p>
+            crux measures it. A Claude Code hook reads each session and
+            extracts what the human actually decided: what got rejected,
+            redirected or killed while the model did the typing. Ongoing
+            research rather than a product, published with the method, the
+            results run on myself, the honest objections, the limitations, and
+            a memo to the platform layer about the half that nothing measures.
           </p>
           <div className="meta">
             <a href="https://elliotjlt.github.io/crux/research.html">
               read the research
             </a>{" "}
-            ·{" "}
-            <a href="https://github.com/ElliotJLT/crux">repo</a>
+            · <a href="https://github.com/ElliotJLT/crux">repo</a>
+          </div>
+        </div>
+
+        <div className="card">
+          <h3>
+            <a href="https://htmlpreview.github.io/?https://gist.githubusercontent.com/ElliotJLT/2737dd5f02e68f405b151c002e7b9db0/raw/product-engineering-os.html">
+              The Product Engineering OS
+            </a>
+          </h3>
+          <p>
+            The operating document I wrote for the team that took an AI tutor
+            from zero to schools in 82 days: how the work is owned, what a
+            product engineer is accountable for once agents write most of the
+            code, and the failure modes with their counters. Every claim is
+            cited, including against our own GitHub and Linear numbers rather
+            than a story about them. It names the risks honestly, among them
+            the METR trial where experienced developers were 19% slower while
+            believing they were 20% faster, the review queue that agent fleets
+            move rather than remove, and learning erosion. It was written as a
+            proposal to be argued with, not a rulebook.
+          </p>
+          <div className="meta">
+            written July 2026 at Zero Gravity
           </div>
         </div>
 
