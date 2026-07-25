@@ -21,8 +21,12 @@ people.
 - Zero Gravity tutor — the model's answers: every session graded against
   a Socratic spec by an always-on evaluator; marking tested against
   official mark schemes before a student sees it.
-- claude-eval-toolkit — the failure before users: LLM-as-judge harness
-  with safeguarding cases.
+- ward — the disclosure before harm: a safeguarding layer for LLM apps
+  serving under-18s, grounded in KCSIE, that decides which messages are
+  genuine disclosures and routes them to a named human. Published
+  synthetic evals: 90% recall / 100% precision / 0% FPR for the Claude
+  judge vs 50/83/8.6 for a keyword baseline.
+  https://github.com/ElliotJLT/ward
 - boulot — the draft: three adversarial agents argue a CV before it ships.
 - crux — the human: what a person rejected, redirected or killed while
   the model typed. Ongoing research with method, results, limitations and
@@ -64,7 +68,7 @@ people.
   three agents; user data stays local)
 - Most starred: https://github.com/ElliotJLT/Claude-Skill-Potions
 - MCP server: https://github.com/ElliotJLT/homebuyer-mcp
-- Evals: https://github.com/ElliotJLT/claude-eval-toolkit
+- Safeguarding + evals: https://github.com/ElliotJLT/ward
 
 ## Current status
 

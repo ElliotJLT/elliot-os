@@ -13,8 +13,8 @@ export const FEATURED = [
   "Claude-Skill-Potions",
   "vox",
   "dabble",
+  "ward",
   "homebuyer-mcp",
-  "claude-eval-toolkit",
   "hooksmith",
 ];
 
@@ -31,6 +31,13 @@ export async function getRepos(): Promise<Repo[]> {
   const token = process.env.GITHUB_TOKEN;
   if (token) headers.Authorization = `Bearer ${token}`;
 
+  // Freshness note: `output: "export"` fetches everything at build time, and
+  // Next persists fetch results in .next/cache. CI checks out clean and never
+  // restores that directory, so every deploy really does re-fetch. Locally,
+  // `rm -rf .next` before building or you can render repos that no longer
+  // exist (a deleted repo kept rendering here with a 404 link until 2026-07-25).
+  // `cache: "no-store"` is not an option: it forces dynamic rendering, which a
+  // static export rejects.
   const res = await fetch(
     "https://api.github.com/users/ElliotJLT/repos?per_page=100&sort=pushed",
     { headers },

@@ -31,10 +31,10 @@ const BLURBS: Record<string, { title: string; blurb: string }> = {
     blurb:
       "UK home-buying MCP server. Conveyancers and mortgage brokers from live SRA, FCA and Companies House registers, plus stamp duty, lease checks, survey explainers and title register analysis. Eleven tools.",
   },
-  "claude-eval-toolkit": {
-    title: "claude-eval-toolkit",
+  ward: {
+    title: "ward",
     blurb:
-      "Evaluation framework for Claude-powered apps. 69 test cases, LLM-as-judge grading, UK education safeguarding baked in. Test your AI before it reaches users.",
+      "A safeguarding layer for LLM apps that serve under-18s. It screens each message for a genuine disclosure, separates that from ordinary bad conduct, and routes the real ones to a named human on a clock. Grounded in KCSIE rather than generic content moderation. Built around the precision problem: page a Designated Safeguarding Lead on every false alarm and they stop trusting the alerts, which is worse than having none. On its published synthetic eval sets, the Claude judge reaches 90% recall at 100% precision and a 0% false-positive rate, against a keyword baseline at 50/83/8.6.",
   },
   crux: {
     title: "crux",
@@ -86,12 +86,13 @@ export default async function Built() {
           </li>
           <li>
             <div className="rhead">
-              <span className="rorg">claude-eval-toolkit</span>
-              <span className="rmeta">the failure, before users</span>
+              <span className="rorg">ward</span>
+              <span className="rmeta">the disclosure, before harm</span>
             </div>
             <p className="rout">
-              An LLM-as-judge harness with safeguarding cases, so a regression
-              shows up in a test rather than in production.
+              A safeguarding layer for LLM apps serving under-18s: it decides
+              which messages are genuine disclosures and hands those to a named
+              human, instead of leaving the judgement to a keyword filter.
             </p>
           </li>
           <li>
