@@ -1,5 +1,5 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-07-25, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 76 commits across 5 repos. Nothing below is written by hand.*
+*Shipping log for the 7 days to 2026-07-25, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 76 commits across 5 repos.*
 
 - **[boulot-os](https://github.com/ElliotJLT/boulot-os)**: 30 commits. "Merge pull request #2 from ElliotJLT/feat/app-scaffold" (8227972), "Never track a user's filled-in career files (#1)" (a20ecca), "Consolidation: the record reads your applications and updates itself" (cb53e46) and 27 more
 - **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 29 commits. "Cut the self-deprecation, and give the page room to breathe" (c9086c1), "Fix /writing after an audit: a wrong note, a false claim, a missing schedule" (ca734cf), "Correct the DfE-DSIT claim: a grant programme, not a tender, and nobody was beaten" (a4eab8a) and 26 more

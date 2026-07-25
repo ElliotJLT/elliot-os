@@ -89,7 +89,7 @@ function renderLog({ byRepo, commitCount }, today) {
   lines.push(
     `*Shipping log for the ${WINDOW_DAYS} days to ${today}, derived from the ` +
       `[public GitHub events API](https://api.github.com/users/${GITHUB_USER}/events/public). ` +
-      `${commitCount} commits across ${sorted.length} repos. Nothing below is written by hand.*`,
+      `${commitCount} commits across ${sorted.length} repos.*`,
   );
   lines.push("");
   for (const [repo, info] of sorted) {

@@ -58,7 +58,7 @@ export default async function Home() {
     [
       "/built",
       "built",
-      "A production AI tutor the UK government selected for its national programme on safe AI tutoring, plus agent tools and MCP servers. The repo list is pulled live from GitHub at every deploy.",
+      "A production AI tutor the UK government selected for its national programme on safe AI tutoring, a safeguarding layer for apps serving under-18s, and the agent tooling underneath both.",
     ],
     [
       "/writing",
@@ -182,12 +182,10 @@ export default async function Home() {
             </div>
           </div>
           <p className="faint mono receipts">
-            computed at build time from the GitHub API, data/spend.json, and
-            git history. rebuilt {built} UTC{log[0] ? ` @ ${log[0].hash}` : ""}.
-            no analytics, no cookies, nothing hand-typed. the shipping log on{" "}
-            <Link href="/loops">/loops</Link> shows a lower count: that one is
-            frozen at the agent&apos;s last daily run, this one recomputes on
-            every deploy.
+            sources: GitHub API, data/spend.json, git history. rebuilt {built}{" "}
+            UTC{log[0] ? ` @ ${log[0].hash}` : ""}. the count on{" "}
+            <Link href="/loops">/loops</Link> is lower because it is frozen at
+            the agent&apos;s last run.
           </p>
           <p className="muted standing">
             {`Read the token count honestly: this site is ${daysOld(first.iso)} days old and the loops have run ${spend.totals.runs} ${spend.totals.runs === 1 ? "time" : "times"} between them${tokens === 0 ? ", spending nothing so far" : ""}. The metering is wired and the agent commits under its own name, but a daily loop on a site this new has a handful of cycles, not a history. The number moves on its own, and I would rather show it low than round it up.`}

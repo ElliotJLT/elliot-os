@@ -23,10 +23,7 @@ export default async function Writing() {
           works.
         </p>
         <p className="muted">
-          Read from the{" "}
-          <a href="https://medium.com/@elliotJL">Medium feed</a> at build time,
-          newest first, and the site rebuilds daily. If I publish something it
-          arrives here on its own, usually within a day.
+          Newest first, from <a href="https://medium.com/@elliotJL">Medium</a>.
         </p>
 
         <h2>what readers said</h2>
