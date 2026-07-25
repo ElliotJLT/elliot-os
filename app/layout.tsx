@@ -29,6 +29,16 @@ const archivo = Archivo({
 
 export const metadata: Metadata = {
   title: "Elliot Little",
+  // Explicit paths rather than app/icon.png: a static export under a basePath
+  // does not rewrite metadata icon URLs, so they are prefixed here.
+  icons: {
+    icon: [
+      { url: `${basePath}/icon-32.png`, sizes: "32x32", type: "image/png" },
+      { url: `${basePath}/icon-192.png`, sizes: "192x192", type: "image/png" },
+      { url: `${basePath}/favicon.ico`, sizes: "any" },
+    ],
+    apple: [{ url: `${basePath}/icon-180.png`, sizes: "180x180" }],
+  },
   description:
     "Builder-operator in London who ships AI products and the systems around them. One idea built five times: make the judgment legible before the output ships. This site is instrumented like the products, with live telemetry, a changelog, and surfaces maintained by an agent that meters every token it spends.",
 };
