@@ -21,7 +21,24 @@ export default function Loops() {
   return (
     <main>
       <div className="wrap">
-        <h1>Loops</h1>
+        {/* The "oo" is drawn as a lemniscate on the same baseline as the
+            serif, traced continuously so the title performs what the page
+            describes. Falls back to plain "Loops" without CSS or motion. */}
+        <h1 className="loopstitle">
+          L
+          <span className="lemni" role="img" aria-label="oo">
+            <svg viewBox="0 0 100 46" aria-hidden="true" focusable="false">
+              <path
+                d="M50 23 C50 6 74 6 82 14 C90 22 90 24 82 32 C74 40 50 40 50 23 C50 6 26 6 18 14 C10 22 10 24 18 32 C26 40 50 40 50 23 Z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="7"
+                strokeLinecap="round"
+              />
+            </svg>
+          </span>
+          ps
+        </h1>
         <p className="lede">
           The site runs on loops, not one-off scripts. An <b>inner</b> loop
           keeps a surface fresh; the <b>outer</b> loop steps back and proposes

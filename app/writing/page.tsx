@@ -1,4 +1,6 @@
 import { getPosts, noteFor, getMedia } from "@/lib/writing";
+import { getQuotes } from "@/lib/quotes";
+import Readers from "../components/Readers";
 
 export const metadata = { title: "Writing · Elliot Little" };
 
@@ -7,6 +9,7 @@ const basePath = process.env.BASE_PATH || "";
 export default async function Writing() {
   const posts = await getPosts(20);
   const media = getMedia();
+  const { readers } = getQuotes();
   const annotated = posts.filter((p) => noteFor(p.title));
   const rest = posts.filter((p) => !noteFor(p.title));
 
@@ -25,6 +28,9 @@ export default async function Writing() {
           newest first, and the site rebuilds daily. If I publish something it
           arrives here on its own, usually within a day.
         </p>
+
+        <h2>what readers said</h2>
+        <Readers items={readers} />
 
         <h2>on AI, product and trust</h2>
         <ul className="postlist">

@@ -86,16 +86,18 @@ export default async function Home() {
             operational · interviewing
           </span>
           <h1>
-            I build AI products.
+            Shipping got easy.
             <br />
-            This site is one of them.
+            <em>Judgment didn&apos;t.</em>
           </h1>
           <div className="herorow">
             <p className="lede">
-              Builder-operator in London, 4x founding hire. I shipped a
-              production AI tutor the UK government selected for its national
-              programme on safe AI tutoring. Every number on this page is
-              computed from real activity, not claimed.
+              I&apos;m Elliot. Builder-operator in London, 4x founding hire. I
+              shipped a production AI tutor the UK government selected for its
+              national programme on safe AI tutoring, and I build the layer
+              that decides whether output is good enough to ship. This site is
+              one of those products: every number on it is computed from real
+              activity, not claimed.
             </p>
             {/* Sits in the whitespace the lede's 52ch measure already leaves,
                 so it costs the text no width. */}

@@ -1,0 +1,31 @@
+{
+  "reference": {
+    "name": "Joe Seddon",
+    "role": "Founder and CEO, Zero Gravity",
+    "note": "managed Elliot directly · July 2026",
+    "url": "https://www.linkedin.com/in/hireelliot/",
+    "pull": "If I were starting another business tomorrow, Elliot would be one of the first people I'd try to hire.",
+    "body": [
+      "He doesn't just understand what AI makes possible; he builds with it, experiments rapidly and ships. He now contributes as many PRs as some of our senior engineers, while bringing the customer insight and commercial judgement you would expect from a strong product leader.",
+      "Elliot drove the development of Zero Gravity Tutor, taking it from an idea to a product that has unlocked an exciting new opportunity for Zero Gravity."
+    ]
+  },
+  "readers": [
+    {
+      "quote": "Such a sharp, clear-eyed analysis of the challenges we're all grappling with.",
+      "who": "Subscriber"
+    },
+    {
+      "quote": "This is a sensational write-up",
+      "who": "Australian Institute for Machine Learning"
+    },
+    {
+      "quote": "Perfect if you're currently navigating the messy, magical reality of AI implementation",
+      "who": "AI Summit London"
+    },
+    {
+      "quote": "One of the few AI articles that I felt was worth reading in recent times.",
+      "who": "Uplevyl"
+    }
+  ]
+}

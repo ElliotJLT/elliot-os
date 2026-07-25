@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getRepos, FEATURED } from "@/lib/github";
-import { getPosts } from "@/lib/writing";
 import { getRoles } from "@/lib/roles";
+import { getQuotes } from "@/lib/quotes";
 
 export const metadata = { title: "Built · Elliot Little" };
 
@@ -49,8 +49,9 @@ const BLURBS: Record<string, { title: string; blurb: string }> = {
 };
 
 export default async function Built() {
-  const [repos, posts] = [await getRepos(), await getPosts()];
+  const repos = await getRepos();
   const record = getRoles();
+  const { reference: ref } = getQuotes();
   const byName = new Map(repos.map((r) => [r.name, r]));
   const rest = repos.filter((r) => !FEATURED.includes(r.name));
 
@@ -174,6 +175,19 @@ export default async function Built() {
           ))}
         </ul>
 
+        <h2>reference</h2>
+        <figure className="reference">
+          <blockquote>{ref.pull}</blockquote>
+          {ref.body.map((para) => (
+            <p key={para.slice(0, 24)}>{para}</p>
+          ))}
+          <figcaption>
+            <span className="refname">{ref.name}</span>
+            <span className="refrole">{ref.role}</span>
+            <span className="refnote">{ref.note}</span>
+          </figcaption>
+        </figure>
+
         <h2>in production</h2>
         <div className="card">
           <h3>
@@ -261,22 +275,6 @@ export default async function Built() {
                 <span className="mono dim"> ★{r.stargazers_count}</span>
               )}
               <div className="desc">{r.description}</div>
-            </li>
-          ))}
-        </ul>
-
-        <h2>writing</h2>
-        <p className="muted" style={{ fontSize: 15, marginTop: 0 }}>
-          Latest posts, pulled live from the Medium feed at build. Surfaced
-          here by the site&apos;s own improvement loop, not by hand:{" "}
-          <Link href="/loops">/loops</Link>. The full set, with notes on why
-          each one exists, is on <Link href="/writing">/writing</Link>.
-        </p>
-        <ul className="repolist">
-          {posts.slice(0, 3).map((p) => (
-            <li key={p.link}>
-              <a href={p.link}>{p.title}</a>
-              {p.date && <span className="mono dim"> · {p.date}</span>}
             </li>
           ))}
         </ul>
