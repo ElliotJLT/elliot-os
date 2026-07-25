@@ -1625,3 +1625,36 @@ footer a {
   background: var(--bg-2);
   font-size: 15px;
 }
+
+/* ------------------------------------------------------- hero portrait */
+/* The lede is capped at 52ch, so on a wide column there is already unused
+   space to its right. The portrait sits in that gap rather than taking width
+   from the text: no float, no shape-outside, nothing to squeeze the measure. */
+.herorow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.portrait {
+  flex: none;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  margin-top: 4px;
+}
+
+@media (max-width: 700px) {
+  .herorow {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .portrait {
+    width: 92px;
+    height: 92px;
+  }
+}

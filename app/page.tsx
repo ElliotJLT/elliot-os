@@ -7,6 +7,8 @@ import FitConsole, { type ConsoleData } from "./components/FitConsole";
 import Sparkline from "./components/Sparkline";
 import Reveal from "./components/Reveal";
 
+const basePath = process.env.BASE_PATH || "";
+
 // The repo's first commit, as a date rather than a day count: "0d" on launch
 // day reads like a broken gauge, and the age of the site is not a boast.
 function liveSince(iso: string): string {
@@ -88,15 +90,24 @@ export default async function Home() {
             <br />
             This site is one of them.
           </h1>
-          <p className="lede">
-            I&apos;m Elliot, a builder-operator in London and 4x founding
-            hire. Most recently I shipped a production multi-agent AI tutor
-            that took marking accuracy from a <strong>67% baseline to 99%+</strong>{" "}
-            and which the UK government selected for its national programme on safe AI tutoring. This page is
-            instrumented like my products: the numbers are computed from real
-            activity, an agent maintains parts of it under its own git
-            identity, and every token it spends is on the record.
-          </p>
+          <div className="herorow">
+            <p className="lede">
+              Builder-operator in London, 4x founding hire. I shipped a
+              production AI tutor the UK government selected for its national
+              programme on safe AI tutoring. Every number on this page is
+              computed from real activity, not claimed.
+            </p>
+            {/* Sits in the whitespace the lede's 52ch measure already leaves,
+                so it costs the text no width. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="portrait"
+              src={`${basePath}/icon-512.png`}
+              alt="Elliot Little"
+              width={128}
+              height={128}
+            />
+          </div>
           <div className="systemline">
             <span>
               live since <b>{liveSince(first.iso)}</b>
