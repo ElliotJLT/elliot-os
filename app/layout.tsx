@@ -30,7 +30,7 @@ const archivo = Archivo({
 export const metadata: Metadata = {
   title: "Elliot Little",
   description:
-    "Builder-operator in London. This site runs like a product: live telemetry, a public roadmap, a changelog, and pages maintained by an agent that accounts for every token it spends.",
+    "Builder-operator in London who ships AI products and the systems around them. One idea built five times: make the judgment legible before the output ships. This site is instrumented like the products, with live telemetry, a changelog, and surfaces maintained by an agent that meters every token it spends.",
 };
 
 // Runs before paint so the stored theme never flashes.

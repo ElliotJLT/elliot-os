@@ -72,13 +72,17 @@ people.
 
 ## Current status
 
-- /now (what he is doing this week): raw source at
+- /loops is the control panel for the agents that maintain this site:
+  cadence, cost, the human approval gate and stopping rule on each, the
+  shipping log the inner loop last wrote, and the open commitments:
+  https://elliotjlt.github.io/elliot-os/loops/
+- What he is shipping this week (raw markdown, the agent's own output):
   https://raw.githubusercontent.com/ElliotJLT/elliot-os/main/content/now.md
-- /next (public roadmap): raw source at
+- Open commitments (raw markdown):
   https://raw.githubusercontent.com/ElliotJLT/elliot-os/main/content/next.md
-- /loops (the agent loops that maintain this site: cadence, cost, and the
-  human approval gate on each): https://elliotjlt.github.io/elliot-os/loops/
 - Site changelog: https://github.com/ElliotJLT/elliot-os/commits/main
+- Note: /now and /next were folded into /loops on 2026-07-25 and now
+  redirect there. The markdown sources above are unchanged.
 
 ## Writing
 

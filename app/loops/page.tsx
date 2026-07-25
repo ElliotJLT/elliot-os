@@ -1,4 +1,5 @@
 import { getLoops } from "@/lib/loops";
+import { getAgentLog, getRoadmap } from "@/lib/content";
 
 export const metadata = { title: "Loops · Elliot Little" };
 
@@ -10,6 +11,12 @@ const STATUS_LABEL: Record<string, string> = {
 
 export default function Loops() {
   const { loops } = getLoops();
+  const agentLog = getAgentLog();
+  const roadmap = getRoadmap();
+  const open = [
+    ...(roadmap["building"] || []).map((t) => ["building", t] as const),
+    ...(roadmap["exploring"] || []).map((t) => ["exploring", t] as const),
+  ];
 
   return (
     <main>
@@ -66,6 +73,16 @@ export default function Loops() {
                 <span>stopping rule</span> {l.stop_rule}
               </p>
 
+              {l.id === "now-refresh" && agentLog && (
+                <div className="proposals">
+                  <div className="ptitle">latest output</div>
+                  <div
+                    className="prose agentlog"
+                    dangerouslySetInnerHTML={{ __html: agentLog }}
+                  />
+                </div>
+              )}
+
               {l.proposals.length > 0 && (
                 <div className="proposals">
                   <div className="ptitle">proposals</div>
@@ -109,6 +126,23 @@ export default function Loops() {
             </div>
           ))}
         </div>
+
+        <h2>open commitments</h2>
+        <p className="muted" style={{ marginTop: 0 }}>
+          What the loops have not done yet. Kept short on purpose: shipped work
+          belongs in the <a href="/changelog">changelog</a>, where it comes with
+          a commit rather than a promise.
+        </p>
+        <ul className="record">
+          {open.map(([state, title]) => (
+            <li key={title}>
+              <div className="rhead">
+                <span className="rorg">{title}</span>
+                <span className="rmeta">{state}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
 
         <h2>how the outer loop works</h2>
         <p className="muted">

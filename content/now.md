@@ -13,8 +13,8 @@
 - Looking for my next senior product or AI role. Between roles and using
   every day of the gap to ship. Email works:
   [elliotjlittle@gmail.com](mailto:elliotjlittle@gmail.com).
-- Built this site over two days in public. v1 was a portfolio; v2 is what
-  the [next](/next) page says it should be.
+- Built this site over two days in public. v1 was a portfolio; what it is
+  now, and the agents that keep it current, are on [/loops](/loops).
 - Running argus daily: a private fleet of agents that reads the AI news
   each morning and writes me a brief before I sit down.
 - [boulot](https://github.com/ElliotJLT/boulot-os), my open-source

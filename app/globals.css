@@ -1462,3 +1462,27 @@ footer .wrap {
 footer a {
   color: var(--muted);
 }
+
+/* the inner loop's own output, shown under the loop that wrote it */
+.agentlog {
+  font-size: 14.5px;
+  color: var(--muted);
+}
+
+.agentlog em {
+  color: var(--faint);
+  font-style: italic;
+}
+
+.agentlog ul {
+  margin-bottom: 0;
+}
+
+/* the hand-written half of now.md, on the home page */
+.byhand ul {
+  padding-left: 18px;
+}
+
+.byhand li {
+  color: var(--ink-2);
+}

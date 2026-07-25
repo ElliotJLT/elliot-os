@@ -54,9 +54,9 @@ function runCommand(cmd: string, data: ConsoleData): string {
         "commands, all $0.0000 marginal cost:",
         "  /whoami   who is elliot",
         "  /spend    the agent's inference ledger",
-        "  /now      this week's shipping activity",
+        "  /now      this week's shipping activity (also on /loops)",
         "  /built    featured repos, live star counts",
-        "  /next     the public roadmap",
+        "  /next     open commitments (also on /loops)",
         "  /uptime   time since first commit",
         "",
         "or paste a job spec and I'll brief your agent.",
@@ -93,7 +93,7 @@ function runCommand(cmd: string, data: ConsoleData): string {
         "recent commits to this site:",
         ...lines,
         "",
-        "full log: /now page · every hash links to github.",
+        "full log: /loops · every hash links to github.",
       ].join("\n");
     }
     case "/built": {
@@ -121,7 +121,7 @@ function runCommand(cmd: string, data: ConsoleData): string {
       return [
         `up ${uptimeString(data.firstCommit.iso)} since first commit ${data.firstCommit.hash}.`,
         "no downtime to report: it's a static site. the interesting",
-        "uptime metric is whether the roadmap keeps its promises — /next.",
+        "uptime metric is whether the loops keep their promises — /loops.",
       ].join("\n");
     default:
       return "";
@@ -176,7 +176,7 @@ const UNKNOWN =
 
 const BOOT_LINES = [
   "elliot-os v2 · fit-engine tty",
-  "mounting /built /now /next /changelog … ok",
+  "mounting /built /writing /loops /changelog … ok",
   "telemetry linked · spend ledger open · $0.0000/query",
   "type /help, or paste a job spec",
 ];
@@ -424,7 +424,7 @@ export default function FitConsole({ data }: { data: ConsoleData }) {
       <div className="console-foot">
         static site, zero backend: nothing you type leaves your browser. the
         composed briefing only travels to the agent you choose. hosted
-        inference is on the <Link href="/next">roadmap</Link>.
+        inference is on the <Link href="/loops">roadmap</Link>.
       </div>
     </div>
   );

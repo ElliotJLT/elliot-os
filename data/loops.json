@@ -4,7 +4,7 @@
     {
       "id": "now-refresh",
       "name": "shipping-log loop",
-      "surface": "/now",
+      "surface": "/loops · latest output",
       "layer": "inner",
       "cadence": "weekly · Mon 06:00 UTC",
       "gate": "deterministic · auto-commit",

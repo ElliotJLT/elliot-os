@@ -5,11 +5,16 @@ My site, run like a product. Live at
 
 A personal site instrumented like a product. The numbers are computed
 from real activity: the project list is fetched from GitHub at build
-time, the changelog is this repo's git history, `/now` is maintained by a
-scheduled agent whose commits you can inspect, `/loops` is the control
-panel for the agents that maintain the site, and the roadmap on `/next`
-keeps missed promises visible. Agents get a structured route in via
-`llms.txt` and an MCP server.
+time, the changelog is this repo's git history, and `/loops` is the
+control panel for the agents that maintain the site: cadence, gate and
+stopping rule per loop, the shipping log the inner loop last wrote, and
+the open commitments. Agents get a structured route in via `llms.txt` and
+an MCP server.
+
+Four routes: `/built`, `/writing`, `/loops`, `/changelog`. `/now` and
+`/next` were folded into `/loops` on 2026-07-25 and redirect there; their
+markdown sources are unchanged, since the agent scripts and the MCP
+server read the files rather than the pages.
 
 ## Stack
 
@@ -30,8 +35,11 @@ path. Local dev serves from `/`.
 
 ## Content
 
-- `content/now.md` — what I am doing this week
-- `content/next.md` — the roadmap: exploring / building / shipped
+- `content/now.md` — two authors: the agent's shipping log between the
+  `agent:begin/end` markers (rendered under its loop on `/loops`), and the
+  hand-written half below it (rendered on the home page)
+- `content/next.md` — open commitments; the `building` and `exploring`
+  sections render on `/loops`
 - `data/spend.json` — the agent's inference ledger; the footer counter
   and `/loops` render it
 - `app/built/page.tsx` — curated blurbs; the rest of the list is live

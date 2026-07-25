@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getSpend, getWeekActivity } from "@/lib/telemetry";
 import { getLog, getFirstCommit } from "@/lib/gitlog";
-import { getRoadmap } from "@/lib/content";
+import { getRoadmap, getByHand } from "@/lib/content";
 import { getRepos, FEATURED } from "@/lib/github";
 import FitConsole, { type ConsoleData } from "./components/FitConsole";
 import Sparkline from "./components/Sparkline";
@@ -24,6 +24,7 @@ export default async function Home() {
     await getRepos(),
   ];
   const built = new Date().toISOString().slice(0, 16).replace("T", " ");
+  const byHand = getByHand();
   const first = getFirstCommit();
   const tokens = spend.totals.input_tokens + spend.totals.output_tokens;
 
@@ -56,19 +57,9 @@ export default async function Home() {
       "Essays on shipping AI to users who can't absorb a wrong answer, on trust and adoption, and on where responsible-AI-by-checklist breaks.",
     ],
     [
-      "/now",
-      "now",
-      "This week's shipping log, derived from real commits by a scheduled agent — plus one hand-written section for the things git can't see.",
-    ],
-    [
-      "/next",
-      "next",
-      "The public roadmap. Bets marked exploring, building, or shipped. Items graduate in the open; missed promises stay visible.",
-    ],
-    [
       "/loops",
       "loops",
-      "The agent loops that maintain this site: cadence, cost, the human approval gate, and the stopping rule on each.",
+      "The agents that maintain this site: cadence, cost, the human approval gate, the stopping rule on each, and the shipping log the inner loop last wrote.",
     ],
     [
       "/changelog",
@@ -130,6 +121,14 @@ export default async function Home() {
         </Reveal>
 
         <Reveal>
+          <h2>what I am doing now</h2>
+          <div
+            className="prose byhand"
+            dangerouslySetInnerHTML={{ __html: byHand }}
+          />
+        </Reveal>
+
+        <Reveal>
           <h2>telemetry</h2>
           <div className="statgrid">
             <div className="stat">
@@ -160,8 +159,8 @@ export default async function Home() {
           <p className="faint mono receipts">
             computed at build time from the GitHub API, data/spend.json, and
             git history. rebuilt {built} UTC{log[0] ? ` @ ${log[0].hash}` : ""}.
-            no analytics, no cookies, nothing hand-typed. the count on{" "}
-            <Link href="/now">/now</Link> is lower: that one is a snapshot
+            no analytics, no cookies, nothing hand-typed. the shipping log on{" "}
+            <Link href="/loops">/loops</Link> shows a lower count: that one is
             frozen at the agent&apos;s last weekly run, this one recomputes on
             every deploy.
           </p>
