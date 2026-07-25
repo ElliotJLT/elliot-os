@@ -30,8 +30,11 @@ writer, not one or the other.
   grades every coaching session against the Socratic spec; marking tested
   against official mark schemes took accuracy from a ~67% bare-model
   baseline to over 99%. Four STEM subjects, every major UK exam board,
-  first commit to App Store in 45 days, and it won a DSIT government
-  tender ahead of major US labs and the largest UK content incumbent.
+  first commit to App Store in 45 days, and it was selected as one of
+  eight companies nationally for the DfE and DSIT AI Tutoring Tools
+  Pioneers Programme (safe AI tutoring for disadvantaged pupils, which
+  requires meeting the government's Generative AI Product Safety
+  Standards).
 - ward (safeguarding, under-18s) — decides which messages from a child
   are genuine safeguarding disclosures and routes them to a named human on
   a clock, grounded in KCSIE rather than keyword matching. Built around
@@ -58,9 +61,9 @@ writer, not one or the other.
   AI STEM tutor for A-Level students, live on every major UK exam board;
   first commit to App Store in 45 days; marking accuracy raised from a
   ~67% bare-model baseline to over 99% via evals against official mark
-  schemes; won a DSIT government tender for AI tutoring in disadvantaged
-  state schools ahead of major US labs and the largest UK content
-  incumbent), Flash Pack (pre-seed to Series A), MealsForTheNHS
+  schemes; selected as one of eight companies nationally for the DfE and
+  DSIT AI Tutoring Tools Pioneers Programme, safe AI tutoring for
+  disadvantaged pupils), Flash Pack (pre-seed to Series A), MealsForTheNHS
   (co-founder, £1.8m raised, 303k meals delivered), Farewill (SRA/FCA
   regulated).
 - Podcast: "Building a Career Co-pilot for Disadvantaged Students: How

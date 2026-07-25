@@ -56,7 +56,7 @@ export default async function Home() {
     [
       "/built",
       "built",
-      "A production AI tutor that beat major US labs to a government tender, plus agent tools and MCP servers. The repo list is pulled live from GitHub at every deploy.",
+      "A production AI tutor the UK government selected for its national programme on safe AI tutoring, plus agent tools and MCP servers. The repo list is pulled live from GitHub at every deploy.",
     ],
     [
       "/writing",
@@ -92,7 +92,7 @@ export default async function Home() {
             I&apos;m Elliot, a builder-operator in London and 4x founding
             hire. Most recently I shipped a production multi-agent AI tutor
             that took marking accuracy from a <strong>67% baseline to 99%+</strong>{" "}
-            and won a UK government tender against major US labs. This page is
+            and which the UK government selected for its national programme on safe AI tutoring. This page is
             instrumented like my products: the numbers are computed from real
             activity, an agent maintains parts of it under its own git
             identity, and every token it spends is on the record.

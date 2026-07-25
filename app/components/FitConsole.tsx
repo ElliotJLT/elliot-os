@@ -65,8 +65,8 @@ function runCommand(cmd: string, data: ConsoleData): string {
       return [
         "elliot little — builder-operator, london. 4x founding hire.",
         "most recently: shipped a production multi-agent AI tutor",
-        "(marking accuracy 67% baseline → 99%+; won a DSIT tender",
-        "ahead of major US labs). currently: interviewing.",
+        "(marking accuracy 67% baseline → 99%+; selected for the",
+        "DfE-DSIT AI Tutoring Tools Pioneers Programme). interviewing.",
         "",
         "the difference between him and this bio: every line above",
         "has a receipt somewhere on this site.",

@@ -91,9 +91,10 @@ export default async function Built() {
               schemes before a student sees a grade. That eval infrastructure
               took marking accuracy from a ~67% bare-model baseline to over
               99%. Live across four STEM subjects on every major UK exam board,
-              first commit to App Store in 45 days, and it won a DSIT
-              government tender ahead of major US labs and the largest UK
-              content incumbent.
+              first commit to App Store in 45 days, and it was selected as
+              one of eight companies nationally for the DfE and DSIT AI Tutoring Tools Pioneers Programme, which requires
+              meeting the government's Generative AI Product Safety
+              Standards.
             </p>
           </li>
           <li>
@@ -188,10 +189,12 @@ export default async function Built() {
             their own pedagogy and evaluator, graded against the Socratic spec
             by an always-on evaluator. The eval infrastructure tested against
             real past papers and official mark schemes, taking marking
-            accuracy from a ~67% bare-model baseline to over 99%. It won a
-            DSIT tender to bring AI tutoring into disadvantaged state schools,
-            scoring ahead of major US labs and the largest UK content
-            incumbent. I built and deployed it at Zero Gravity.
+            accuracy from a ~67% bare-model baseline to over 99%. It was
+            selected as one of eight companies nationally for the DfE and DSIT
+            AI Tutoring Tools Pioneers Programme, which puts safe AI tutoring
+            in front of disadvantaged pupils and requires meeting the
+            government&apos;s Generative AI Product Safety Standards. I built
+            and deployed it at Zero Gravity.
           </p>
         </div>
 
