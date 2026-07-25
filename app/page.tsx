@@ -16,6 +16,13 @@ function liveSince(iso: string): string {
   });
 }
 
+function daysOld(iso: string): number {
+  return Math.max(
+    1,
+    Math.round((Date.now() - new Date(iso).getTime()) / 86400000),
+  );
+}
+
 export default async function Home() {
   const [week, spend, log, repos] = [
     await getWeekActivity(),
@@ -104,7 +111,7 @@ export default async function Home() {
               analytics <b>0</b>
             </span>
             <span>
-              agent tokens <b>{tokens.toLocaleString()}</b>
+              source <b>public</b>
             </span>
           </div>
         </div>
@@ -168,6 +175,14 @@ export default async function Home() {
             <Link href="/loops">/loops</Link> shows a lower count: that one is
             frozen at the agent&apos;s last weekly run, this one recomputes on
             every deploy.
+          </p>
+          <p className="muted standing">
+            Read the token count honestly: this site is {daysOld(first.iso)}{" "}
+            days old, the loops have run once between them, and they have spent
+            nothing so far. The metering is wired and the agent commits under
+            its own name, but a weekly loop on a site this new has had one
+            cycle, not a history. That number will move on its own, and I would
+            rather show it at zero than round it up.
           </p>
         </Reveal>
 

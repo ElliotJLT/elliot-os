@@ -1610,3 +1610,13 @@ footer a {
     width: 100%;
   }
 }
+
+/* The standing note under telemetry: says plainly how new the numbers are.
+   Set apart from the receipts line so it reads as a statement, not a caption. */
+.standing {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-left: 2px solid var(--accent);
+  background: var(--bg-2);
+  font-size: 15px;
+}
