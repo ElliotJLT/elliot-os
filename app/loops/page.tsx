@@ -27,15 +27,15 @@ export default function Loops() {
         <h1 className="loopstitle">
           L
           <span className="lemni" role="img" aria-label="oo">
-            <svg viewBox="0 0 100 48" aria-hidden="true" focusable="false">
+            <svg viewBox="0 0 84 48" aria-hidden="true" focusable="false">
               <path
                 className="lemni-track"
-                d="M50 24 C50 12 62 10 74 14 C86 18 88 30 74 34 C62 38 50 36 50 24 C50 12 38 10 26 14 C14 18 12 30 26 34 C38 38 50 36 50 24 Z"
+                d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
                 pathLength={100}
               />
               <path
                 className="lemni-trace"
-                d="M50 24 C50 12 62 10 74 14 C86 18 88 30 74 34 C62 38 50 36 50 24 C50 12 38 10 26 14 C14 18 12 30 26 34 C38 38 50 36 50 24 Z"
+                d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
                 pathLength={100}
               />
             </svg>

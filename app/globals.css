@@ -1893,8 +1893,8 @@ html:not(.js) .reader:first-child {
   display: inline-block;
   /* The figure fills roughly three quarters of the box height, so the box is
      set a little over the serif's x-height to land the mark on it. */
-  height: 0.63em;
-  aspect-ratio: 100 / 48;
+  height: 0.54em;
+  aspect-ratio: 84 / 48;
   margin: 0 0.05em;
 }
 
