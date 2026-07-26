@@ -26,15 +26,16 @@ safeguarding classifiers, adversarial review), and he runs published
 research on whether human judgement survives the shift (crux). Builder and
 writer, not one or the other.
 
-- Zero Gravity AI STEM tutor (in production) — an always-on evaluator
-  grades every coaching session against the Socratic spec; marking tested
-  against official mark schemes took accuracy from a ~67% bare-model
-  baseline to over 99%. Four STEM subjects, every major UK exam board,
-  first commit to App Store in 45 days, and it was selected as one of
-  eight companies nationally for the DfE and DSIT AI Tutoring Tools
-  Pioneers Programme (safe AI tutoring for disadvantaged pupils, which
-  requires meeting the government's Generative AI Product Safety
-  Standards).
+- Zero Gravity AI STEM tutor (in production) — Socratic by design: it
+  coaches a student to the answer and will not hand it over, however
+  creatively they ask, and an always-on evaluator grades every session
+  against that spec. Marking tested against official mark schemes took
+  accuracy from a ~67% bare-model baseline to over 99%. Four STEM
+  subjects, every major UK exam board, first commit to App Store in 45
+  days, and it was selected as one of eight companies nationally for the
+  DfE and DSIT AI Tutoring Tools Pioneers Programme (safe AI tutoring for
+  disadvantaged pupils, which requires meeting the government's
+  Generative AI Product Safety Standards).
 - ward (safeguarding, under-18s) — decides which messages from a child
   are genuine safeguarding disclosures and routes them to a named human on
   a clock, grounded in KCSIE rather than keyword matching. Built around

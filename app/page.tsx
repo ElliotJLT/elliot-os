@@ -128,8 +128,9 @@ export default async function Home() {
           <p className="muted">
             Models write plausible things now. Checking them didn&apos;t get
             easier, and that is where most of my work has gone. At Zero Gravity
-            an evaluator graded every tutoring session before a student saw the
-            mark. <a href="https://github.com/ElliotJLT/ward">ward</a>{" "}
+            I built a tutor that coaches a student to the answer and will not
+            hand it over, with an evaluator grading every session before a
+            student saw the mark. <a href="https://github.com/ElliotJLT/ward">ward</a>{" "}
             separates a real safeguarding disclosure from a child having a bad
             day, which is the distinction keyword filters get wrong.{" "}
             <a href="https://elliotjlt.github.io/crux/research.html">crux</a>{" "}

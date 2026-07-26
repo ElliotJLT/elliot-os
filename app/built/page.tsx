@@ -196,17 +196,17 @@ export default async function Built() {
             </a>
           </h3>
           <p>
-            AI tutor for A-Level students, in production across four STEM
-            subjects on every major UK exam board. First commit to live on the
-            App Store in 45 days. Multi-agent architecture: coaching,
-            practice, marking and assignments each run as their own agent with
-            their own pedagogy and evaluator, graded against the Socratic spec
-            by an always-on evaluator. The eval infrastructure tested against
-            real past papers and official mark schemes, taking marking
-            accuracy from a ~67% bare-model baseline to over 99%. It was
-            selected as one of eight companies nationally for the DfE and DSIT
-            AI Tutoring Tools Pioneers Programme, which puts safe AI tutoring
-            in front of disadvantaged pupils and requires meeting the
+            A private tutor at the shoulder of students whose families could
+            not pay for one: live across four STEM subjects on every major UK
+            exam board, first commit to the App Store in 45 days. Socratic by
+            design, it coaches a student to the answer and will not hand it
+            over, however creatively they ask, and an always-on evaluator
+            grades every session against that spec. Coaching, practice,
+            marking and assignments each run as their own agent with their own
+            pedagogy and guardrails, and marking is tested against real past
+            papers and official mark schemes: a ~67% bare-model baseline to
+            over 99%. Selected as one of eight companies nationally for the
+            DfE and DSIT AI Tutoring Tools Pioneers Programme, built to the
             government&apos;s Generative AI Product Safety Standards. I built
             and deployed it at Zero Gravity.
           </p>
@@ -219,7 +219,9 @@ export default async function Built() {
           </h3>
           <p>
             You are shipping faster than ever. Are you getting sharper, or
-            just getting carried? Nothing currently measures that. Output has
+            just getting carried? Nothing currently measures that. I noticed
+            it in myself at Zero Gravity: shipping faster than I ever had, and
+            slower to say what I would have done differently. Output has
             never been higher and no instrument tells you whether the person
             behind it is improving, plateauing or quietly atrophying. Fluency
             frameworks answer the baseline and everyone will pass them; the
