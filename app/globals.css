@@ -1891,10 +1891,11 @@ html:not(.js) .reader:first-child {
    middle two thirds of the viewBox, so the box is taller than the mark. */
 .lemni {
   display: inline-block;
-  width: 1.38em;
-  aspect-ratio: 100 / 60;
-  margin: 0 0.04em;
-  translate: 0 0.02em;
+  /* The figure fills roughly three quarters of the box height, so the box is
+     set a little over the serif's x-height to land the mark on it. */
+  height: 0.63em;
+  aspect-ratio: 100 / 48;
+  margin: 0 0.05em;
 }
 
 .lemni svg {
@@ -1903,20 +1904,22 @@ html:not(.js) .reader:first-child {
   overflow: visible;
   fill: none;
   stroke-linecap: round;
+  /* Scales with the type rather than staying a fixed pixel width, which was
+     making the mark far heavier than the letterforms beside it. */
   stroke-width: 7;
-  vector-effect: non-scaling-stroke;
 }
 
 /* The whole figure is always visible; only the highlight travels. Drawing
    just a dash made it read as a squiggle rather than a loop. */
 .lemni-track {
-  stroke: var(--line-2);
+  stroke: var(--accent);
+  opacity: 0.34;
 }
 
 .lemni-trace {
   stroke: var(--accent);
   /* pathLength=100 on the element, so these are percentages of the figure. */
-  stroke-dasharray: 22 78;
+  stroke-dasharray: 26 74;
   animation: trace 3.6s linear infinite;
 }
 
