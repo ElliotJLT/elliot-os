@@ -3,6 +3,13 @@ import { getAgentLog, getRoadmap } from "@/lib/content";
 
 export const metadata = { title: "Loops · Elliot Little" };
 
+const LEMNISCATE =
+  "M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 " +
+  "C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z";
+
+// Head first, then five segments trailing it.
+const TAIL = [0, 1, 2, 3, 4, 5];
+
 const STATUS_LABEL: Record<string, string> = {
   running: "running",
   armed: "armed",
@@ -28,11 +35,19 @@ export default function Loops() {
           L
           <span className="lemni" role="img" aria-label="oo">
             <svg viewBox="0 0 84 48" aria-hidden="true" focusable="false">
-              <path
-                className="lemni-trace"
-                d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
-                pathLength={100}
-              />
+              {/* A stroke gradient cannot follow a curve, so the tail is built
+                  from short segments running the same loop a beat apart, each
+                  fainter than the one ahead of it. Index drives both the lag
+                  and the fade. */}
+              {TAIL.map((i) => (
+                <path
+                  key={i}
+                  className="lemni-trace"
+                  style={{ "--i": i } as React.CSSProperties}
+                  d={LEMNISCATE}
+                  pathLength={100}
+                />
+              ))}
             </svg>
           </span>
           ps

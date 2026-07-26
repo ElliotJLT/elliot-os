@@ -1911,14 +1911,19 @@ html:not(.js) .reader:first-child {
 
 /* The whole figure is always visible; only the highlight travels. Drawing
    just a dash made it read as a squiggle rather than a loop. */
-/* Only the travelling segment is drawn. There is no outline underneath: the
-   figure is described by the movement, the way a hand draws it. A long enough
-   dash keeps the shape legible while it goes round. */
+/* Only the travelling mark is drawn, with no outline underneath: the figure
+   is described by the movement. Each layer is the same short dash on the same
+   4s loop, held back by --i beats and dimmed by --i steps, which together read
+   as one head with a fading tail. pathLength=100 on the element makes the dash
+   a percentage of the figure, so nothing depends on measuring the curve. */
 .lemni-trace {
   stroke: var(--accent);
-  /* pathLength=100 on the element, so these are percentages of the figure. */
-  stroke-dasharray: 42 58;
+  stroke-dasharray: 8 92;
+  opacity: calc(1 - var(--i) * 0.16);
   animation: trace 4s linear infinite;
+  /* A whole cycle of negative delay is a no-op, so subtracting from it lags
+     each layer without the pause a positive delay would cause on first paint. */
+  animation-delay: calc(var(--i) * 0.3s - 4s);
 }
 
 @keyframes trace {
@@ -1931,9 +1936,17 @@ html:not(.js) .reader:first-child {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* Six stacked layers with nothing moving would just compound into a heavy
+     blob, so the tail is dropped and the head draws the whole figure once. */
   .lemni-trace {
+    display: none;
+  }
+
+  .lemni-trace:first-child {
+    display: inline;
     animation: none;
     stroke-dasharray: none;
+    opacity: 1;
   }
 }
 
