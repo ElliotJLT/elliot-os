@@ -29,11 +29,6 @@ export default function Loops() {
           <span className="lemni" role="img" aria-label="oo">
             <svg viewBox="0 0 84 48" aria-hidden="true" focusable="false">
               <path
-                className="lemni-track"
-                d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
-                pathLength={100}
-              />
-              <path
                 className="lemni-trace"
                 d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
                 pathLength={100}
