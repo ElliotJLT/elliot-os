@@ -1913,13 +1913,16 @@ html:not(.js) .reader:first-child {
    just a dash made it read as a squiggle rather than a loop. */
 .lemni-track {
   stroke: var(--accent);
-  opacity: 0.34;
 }
 
+/* Same hue and opacity as the figure beneath it: a faint base path read as a
+   drop shadow. The travelling segment is only slightly heavier, so what moves
+   is a thickening rather than a second colour. */
 .lemni-trace {
   stroke: var(--accent);
+  stroke-width: 10;
   /* pathLength=100 on the element, so these are percentages of the figure. */
-  stroke-dasharray: 26 74;
+  stroke-dasharray: 18 82;
   animation: trace 3.6s linear infinite;
 }
 
