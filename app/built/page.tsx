@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getRepos, FEATURED } from "@/lib/github";
 import { getRoles } from "@/lib/roles";
 import { getQuotes } from "@/lib/quotes";
+import ArgusFlow from "../components/ArgusFlow";
 
 export const metadata = { title: "Built · Elliot Little" };
 
@@ -208,6 +209,21 @@ export default async function Built() {
             <span className="refnote">{ref.note}</span>
           </figcaption>
         </figure>
+
+        <h2>argus</h2>
+        <p className="muted" style={{ marginTop: 0 }}>
+          A private fleet that reads a few hundred sources a day and briefs me
+          before I sit down. Named for the watchman with a hundred eyes. It has
+          not missed a morning. The corpus stays private; the shape does not
+          need to.
+        </p>
+        <p className="muted">
+          Most agent systems summarise and forget. This one has one rule that
+          decides everything else: ingest is immutable and the corpus only ever
+          appends, so a note gets thicker rather than getting replaced by
+          whatever the model read most recently.
+        </p>
+        <ArgusFlow />
 
         <h2>research</h2>
         <div className="card">

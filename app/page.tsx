@@ -33,6 +33,62 @@ const INDEX: [string, string, string][] = [
   ],
 ];
 
+/**
+ * The work itself, on the front page. It used to live behind a link that said
+ * "go and look at /built", so anyone scanning the homepage learned a headline,
+ * a paragraph and four nav items. Specifics scan; a promise of specifics does
+ * not. Ordered by what carries the most weight, not by recency.
+ */
+const WORK: {
+  name: string;
+  href: string;
+  meta: string;
+  claim: string;
+}[] = [
+  {
+    name: "Zero Gravity AI STEM tutor",
+    href: "https://www.zerogravity.co.uk/tutor",
+    meta: "in production · App Store",
+    claim:
+      "Coaches a student to the answer and refuses to hand it over. Marking tested against official mark schemes took accuracy from a ~67% bare-model baseline to over 99%. Four STEM subjects, every major UK exam board, first commit to store in 45 days.",
+  },
+  {
+    name: "ward",
+    href: "https://github.com/ElliotJLT/ward",
+    meta: "published evals",
+    claim:
+      "Separates a real safeguarding disclosure from a child having a bad day, grounded in KCSIE rather than keyword matching. 90% recall at 100% precision, against 50/83 for a keyword baseline.",
+  },
+  {
+    name: "argus",
+    href: "/built",
+    meta: "private fleet · daily",
+    claim:
+      "Five agents that read a few hundred sources a day and brief me before I sit down. Ingest is immutable and the corpus only appends, so notes thicken instead of being overwritten. When I disagree with one, my correction is written back as the position.",
+  },
+  {
+    name: "crux",
+    href: "https://elliotjlt.github.io/crux/research.html",
+    meta: "ongoing research",
+    claim:
+      "Logs what a human rejected, redirected or killed while the model did the typing. Method, results run on myself, objections and limitations all published.",
+  },
+  {
+    name: "boulot",
+    href: "https://github.com/ElliotJLT/boulot-os",
+    meta: "open source",
+    claim:
+      "Three agents with opposing briefs argue over a CV before it is allowed out. I ran my own search through it, then open-sourced it.",
+  },
+  {
+    name: "homebuyer-mcp",
+    href: "https://github.com/ElliotJLT/homebuyer-mcp",
+    meta: "MCP server · 11 tools",
+    claim:
+      "Conveyancers and mortgage brokers vetted against live SRA, FCA and Companies House registers, plus stamp duty, lease checks and title register analysis.",
+  },
+];
+
 export default async function Home() {
   const contrib = await getContributions();
   const log = getLog(1);
@@ -105,9 +161,6 @@ export default async function Home() {
         <div className="thread">
         <Reveal>
           <h2>the through-line</h2>
-          {/* The one paragraph the whole site rests on, so it gets the spread
-              rather than sitting in the same column as everything else. */}
-          <div className="panel">
           <p className="statement">
             Models write plausible things now. Checking them didn&apos;t get
             easier, and that is where most of my work has gone. At Zero Gravity
@@ -122,10 +175,29 @@ export default async function Home() {
             sessions, so I can tell whether I am still thinking or just
             approving.
           </p>
-          <p className="muted">
-            <Link href="/built">The work, and what each piece decides</Link>.
+        </Reveal>
+
+        <Reveal>
+          <h2>the work</h2>
+          <ul className="work">
+            {WORK.map((w) => (
+              <li key={w.name}>
+                <div className="wtop">
+                  <a className="wname" href={w.href}>
+                    {w.name}
+                  </a>
+                  <span className="wmeta">{w.meta}</span>
+                </div>
+                <p className="wclaim">{w.claim}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="muted wmore">
+            <Link href="/built">
+              All of it, with what each piece decides and refuses to do
+            </Link>
+            .
           </p>
-          </div>
         </Reveal>
 
         <Reveal>

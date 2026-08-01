@@ -2005,84 +2005,224 @@ dd {
   max-width: 66ch;
 }
 
-/* ================================================================ panel */
-/* The thesis gets an inverted spread. --ink and --paper already swap between
-   themes, so one rule gives a dark block on a light page and a light block on
-   a dark one: 17:1 in light, 14:1 in dark, no second palette. It bleeds left
-   out of the measure so the page has one edge that is not a straight column.
-   The orange is graphic only; at 4.1:1 on ink it can carry display text and
-   an underline, never body copy. */
-.panel {
-  background: var(--ink);
-  color: var(--paper);
-  /* .thread::before is absolutely positioned, so without a stacking context
-     here it paints over the panel and draws a scratch down the block. The
-     spread is meant to interrupt the thread, not be scored by it. */
-  position: relative;
-  z-index: 1;
-  padding: 38px 30px 30px;
-  /* Bleeds left only. A right bleed of the same size overshot the container's
-     26px padding by 8px and put a horizontal scrollbar on the page at 600px,
-     and the asymmetry reads better anyway. */
-  margin: 10px 0 16px;
-}
-
-.panel .statement {
-  color: var(--paper);
-  font-family: var(--serif);
-  font-size: clamp(20px, 2.5vw, 27px);
-  line-height: 1.45;
-  letter-spacing: -0.008em;
-  max-width: none;
-  margin-bottom: 22px;
-}
-
-.panel p:last-child {
-  margin-bottom: 0;
-}
-
-.panel .muted {
-  color: var(--paper);
-  opacity: 0.72;
-  font-size: 15px;
-  max-width: none;
-}
-
-.panel a {
-  color: var(--paper);
-  text-decoration-color: var(--accent);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-}
-
-.panel a:hover {
-  text-decoration-color: var(--paper);
-}
-
-@media (max-width: 420px) {
-  .panel {
-    margin-left: 0;
-    margin-right: 0;
-    padding: 28px 24px 22px;
-  }
-}
-
-/* Bleeds across the rail so the block starts where the headline does. */
-@media (min-width: 1040px) {
-  /* Aligned to the same left edge as the masthead, the headline and the body.
-     It used to bleed 132px further left, which gave the page two left edges
-     and read as a misalignment rather than as a device. The inversion is
-     enough emphasis on its own. */
-  .panel {
-    margin-left: 0;
-    margin-right: 0;
-    padding: 38px 40px 32px;
-  }
-}
-
 /* Section numbers were 11px and the same size as their label. They are the
    only place the accent appears in running text, so they get to be seen. */
 h2::before {
   font-size: 14px;
   font-weight: 600;
+}
+
+/* ================================================================= work */
+/* The front page shows the work rather than promising it. Dense rows, name
+   and status on one line so the eye can run down the left edge, claim
+   underneath at reading size. No boxes: the rules do the separating, which
+   is the job borders are actually for. */
+.work {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  max-width: 66ch;
+}
+
+.work li {
+  padding: 15px 0 17px;
+  border-bottom: 1px solid var(--line);
+}
+
+.wtop {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.wname {
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  text-decoration: none;
+  /* 27px of text plus 7px either side clears the 40px pointer target. */
+  padding: 7px 0;
+  margin: -7px 0;
+  transition: color 0.18s ease-out;
+}
+
+.wname:hover {
+  color: var(--accent-ink);
+}
+
+/* The status is a fact, not a badge: mono, small, no pill around it. */
+.wmeta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--faint);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.wclaim {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 15.5px;
+  line-height: 1.55;
+}
+
+.wmore {
+  margin-top: 18px;
+  font-size: 15px;
+}
+
+/* ================================================================= flow */
+/* argus as a diagram. Nodes are text on a spine, not boxes: a filled node
+   adds a border, a radius and a fill to say "this is a step", which the
+   position on the line already says. The spine is a hairline; the one edge
+   that runs back up the page is the only thing in colour, because it is the
+   only place a human enters the system. */
+.flow {
+  position: relative;
+  margin: 22px 0 0;
+  /* Narrower than the body measure so the return edge has a margin of its own
+     to live in, rather than being drawn on top of the text. */
+  max-width: 58ch;
+}
+
+.flowlist {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 26px;
+  /* the spine */
+  border-left: 1px solid var(--line-2);
+}
+
+.flowlist > li {
+  position: relative;
+  padding: 0 0 30px;
+}
+
+.flowlist > li:last-child {
+  padding-bottom: 4px;
+}
+
+/* The node. A ring on the spine, filled once the human is reached. */
+.flowlist > li::before {
+  content: "";
+  position: absolute;
+  left: -32px;
+  top: 7px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid var(--line-2);
+  background: var(--bg);
+}
+
+.flowlist > li.fyou::before {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.fhead {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.fname {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.fmeta,
+.fby {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Which agent does the work of getting here. Sits under the node it feeds. */
+.fby {
+  display: block;
+  margin-top: 4px;
+  color: var(--accent-ink);
+}
+
+.fnote {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* The return edge, drawn to the right of the spine and spanning the corpus
+   node down to the human. Hidden on narrow screens, where there is no room
+   for it to read as anything but a stray curve; the copy still says it. */
+.freturn,
+.freturn-label {
+  display: none;
+}
+
+@media (min-width: 860px) {
+  .freturn {
+    display: block;
+    position: absolute;
+    right: -78px;
+    top: 30%;
+    height: 58%;
+    width: 60px;
+    overflow: visible;
+  }
+
+  .freturn path {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1.5;
+  }
+
+  .freturn .fhead-arrow {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Sits above the arrowhead, next to the node the edge lands on, instead of
+     halfway down the curve where it was printing straight through the line. */
+  .freturn-label {
+    display: block;
+    position: absolute;
+    right: -108px;
+    top: 21%;
+    width: 104px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+}
+
+.fconductor {
+  margin: 26px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 66ch;
+}
+
+.fconductor span {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--ink);
 }
