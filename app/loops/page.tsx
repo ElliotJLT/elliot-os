@@ -1,5 +1,5 @@
 import { getLoops } from "@/lib/loops";
-import { getAgentLog, getRoadmap } from "@/lib/content";
+import { getAgentLog } from "@/lib/content";
 
 export const metadata = { title: "Loops · Elliot Little" };
 
@@ -9,14 +9,61 @@ const STATUS_LABEL: Record<string, string> = {
   paused: "paused",
 };
 
+/**
+ * The four-level stack from LangChain's "The Art of Loop Engineering", with an
+ * honest mark against each. Published because the alternative is letting the
+ * word "loop" do work the code has not earned: two of these rungs are not
+ * attempted here, and saying so is cheaper than being caught.
+ */
+const LADDER: {
+  level: number;
+  name: string;
+  needs: string;
+  reality: string;
+  verdict: string;
+  state: "yes" | "partial" | "no";
+}[] = [
+  {
+    level: 1,
+    name: "agent loop",
+    needs: "A model calling tools until the task is done.",
+    reality:
+      "Not this. The daily job is a deterministic script that reads the GitHub events API and writes a file, with one optional summarisation call at the end. Nothing iterates and no tool gets chosen.",
+    verdict: "not reached",
+    state: "no",
+  },
+  {
+    level: 2,
+    name: "verification loop",
+    needs: "Output scored against a rubric and retried with the feedback when it fails.",
+    reality:
+      "Half. The improvement loop does score its own proposal before raising it, but the three checks are booleans that have never once failed, and a failure would stop the run rather than feed back into it.",
+    verdict: "partial",
+    state: "partial",
+  },
+  {
+    level: 3,
+    name: "event-driven loop",
+    needs: "A schedule or a webhook fires the agent without anyone asking.",
+    reality:
+      "Yes. The shipping-log agent has run on its cron every morning, commits under its own identity, and posts \"quiet day\" rather than inventing activity when there is none.",
+    verdict: "running",
+    state: "yes",
+  },
+  {
+    level: 4,
+    name: "hill-climbing loop",
+    needs: "Traces from past runs feed an analysis that rewrites the harness.",
+    reality:
+      "Not built. Nothing here reads its own history, so neither agent has ever got better at its job. This is the rung that actually compounds and it is the one I have not started.",
+    verdict: "not built",
+    state: "no",
+  },
+];
+
 export default function Loops() {
   const { loops } = getLoops();
   const agentLog = getAgentLog();
-  const roadmap = getRoadmap();
-  const open = [
-    ...(roadmap["building"] || []).map((t) => ["building", t] as const),
-    ...(roadmap["exploring"] || []).map((t) => ["exploring", t] as const),
-  ];
 
   return (
     <main>
@@ -38,11 +85,41 @@ export default function Loops() {
           ps
         </h1>
         <p className="lede">
-          The site runs on loops, not one-off scripts. An <b>inner</b> loop
-          keeps a surface fresh; the <b>outer</b> loop steps back and proposes
-          what to change next. The agent runs the inner work; a human stays on
-          the outer rail, approving every change. This page is the control
-          panel: cadence, cost, and the stopping rule for each one.
+          Two agents keep this site current. One runs on a schedule and
+          rewrites the shipping log. The other reads what I have actually been
+          doing and proposes a single change as a pull request I can close.
+          Below is what each costs, what stops it, and where they sit on the
+          ladder, including the rungs neither has reached.
+        </p>
+
+        <h2>where these actually sit</h2>
+        <p className="muted" style={{ marginTop: 0 }}>
+          Stacking loops is a known ladder, set out in LangChain&apos;s{" "}
+          <a href="https://blog.langchain.com/the-art-of-loop-engineering/">
+            The Art of Loop Engineering
+          </a>{" "}
+          and in swyx&apos;s loopcraft before it. A cron job dressed up in the
+          vocabulary of agents takes an afternoon and proves nothing, so here
+          is which rungs this site is actually on.
+        </p>
+        <ol className="ladder">
+          {LADDER.map((l) => (
+            <li key={l.level} data-state={l.state}>
+              <div className="rhead">
+                <span className="rorg">{l.name}</span>
+                <span className="rmeta">{l.verdict}</span>
+              </div>
+              <p className="rout">
+                <b>{l.needs}</b> {l.reality}
+              </p>
+            </li>
+          ))}
+        </ol>
+        <p className="muted">
+          One rung solidly, half of another, and two I have not attempted.
+          Nothing here takes a failed check and feeds it back into the next
+          attempt, so the daily job is really a schedule. Fixing that is the
+          next build, and it is a bigger job than this page makes it look.
         </p>
 
         <h2>running loops</h2>
@@ -141,23 +218,6 @@ export default function Loops() {
             </div>
           ))}
         </div>
-
-        <h2>open commitments</h2>
-        <p className="muted" style={{ marginTop: 0 }}>
-          What the loops have not done yet. Kept short on purpose: shipped work
-          belongs in the <a href="/changelog">changelog</a>, where it comes with
-          a commit rather than a promise.
-        </p>
-        <ul className="record">
-          {open.map(([state, title]) => (
-            <li key={title}>
-              <div className="rhead">
-                <span className="rorg">{title}</span>
-                <span className="rmeta">{state}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
 
         <h2>how the outer loop works</h2>
         <p className="muted">

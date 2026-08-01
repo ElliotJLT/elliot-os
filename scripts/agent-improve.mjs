@@ -100,7 +100,6 @@ function siteState() {
   const corpus = [
     "app/built/page.tsx",
     "content/now.md",
-    "content/next.md",
     "public/llms.txt",
   ]
     .map((p) => safeSync(() => readFileSync(join(ROOT, p), "utf-8"), ""))

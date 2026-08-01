@@ -5,7 +5,7 @@ evaluating him can query the sources directly instead of scraping HTML.
 
 Zero dependencies: it speaks JSON-RPC 2.0 over the MCP stdio transport,
 implemented by hand. It reads the same files the site reads (`public/llms.txt`,
-`content/now.md`, `content/next.md`, `data/spend.json`), so it never drifts from
+`content/now.md`, `data/spend.json`), so it never drifts from
 what's published.
 
 ## Tools
@@ -15,7 +15,6 @@ what's published.
 | `get_profile` | the canonical machine-readable summary (`llms.txt`) |
 | `get_projects` | featured repos + a best-effort live GitHub repo list |
 | `get_now` | this week's shipping log |
-| `get_roadmap` | the public roadmap |
 | `get_spend` | the agent inference ledger |
 | `get_fit` | compose a critical hiring briefing for a pasted `job_spec` |
 

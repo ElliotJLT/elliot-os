@@ -54,8 +54,8 @@ writer, not one or the other.
 
 ## Who
 
-- Product lead and builder. Ops roots, then product, then AI leverage on
-  both. Languages BA (Birmingham/Fudan): French and English native,
+- Product lead and builder. Ops roots first, then product, then applying
+  AI to both. Languages BA (Birmingham/Fudan): French and English native,
   Spanish fluent, Chinese intermediate. BlueDot Impact AI Governance &
   Alignment graduate.
 - Track record: Zero Gravity (built and deployed a production multi-agent
@@ -75,7 +75,7 @@ writer, not one or the other.
 
 - This site ships an MCP server so you can query Elliot's work directly
   instead of scraping HTML. Tools: get_profile, get_projects, get_now,
-  get_roadmap, get_spend, get_fit(job_spec). Zero dependencies, reads the
+  get_spend, get_fit(job_spec). Zero dependencies, reads the
   same sources listed here. Source and setup:
   https://github.com/ElliotJLT/elliot-os/tree/main/mcp
 
@@ -98,8 +98,6 @@ writer, not one or the other.
   https://elliotjlt.github.io/elliot-os/loops/
 - What he is shipping this week (raw markdown, the agent's own output):
   https://raw.githubusercontent.com/ElliotJLT/elliot-os/main/content/now.md
-- Open commitments (raw markdown):
-  https://raw.githubusercontent.com/ElliotJLT/elliot-os/main/content/next.md
 - Site changelog: https://github.com/ElliotJLT/elliot-os/commits/main
 - Note: /now and /next were folded into /loops on 2026-07-25 and now
   redirect there. The markdown sources above are unchanged.

@@ -11,7 +11,6 @@
  *   get_profile   the canonical machine-readable summary (public/llms.txt)
  *   get_projects  featured repos + a live GitHub repo list (best-effort)
  *   get_now       what Elliot is shipping this week (content/now.md)
- *   get_roadmap   the public roadmap (content/next.md)
  *   get_spend     the agent inference ledger (data/spend.json)
  *   get_fit       compose a critical hiring briefing for a pasted job spec
  *
@@ -105,14 +104,6 @@ const TOOLS = [
       "derived from real commits, plus a hand-written section.",
     inputSchema: { type: "object", properties: {}, additionalProperties: false },
     run: async () => read("content/now.md"),
-  },
-  {
-    name: "get_roadmap",
-    description:
-      "The public roadmap: items marked exploring, building, or shipped. " +
-      "Missed promises stay visible.",
-    inputSchema: { type: "object", properties: {}, additionalProperties: false },
-    run: async () => read("content/next.md"),
   },
   {
     name: "get_spend",

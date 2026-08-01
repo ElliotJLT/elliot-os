@@ -1895,3 +1895,62 @@ dd {
     margin: 0;
   }
 }
+
+/* ---------------------------------------------------------------- ladder */
+/* The four rungs of loop engineering with an honest mark against each. The
+   ring carries the state so no badge has to: solid where the rung is
+   reached, dashed where it is half done, faded where it was never attempted.
+   Colour is not the only channel, since the border style differs too. */
+.ladder {
+  list-style: none;
+  counter-reset: rung;
+  margin: 20px 0 0;
+  padding: 0;
+}
+
+.ladder li {
+  position: relative;
+  padding: 16px 0 18px 48px;
+  border-top: 1px solid var(--line);
+}
+
+.ladder li::before {
+  counter-increment: rung;
+  content: counter(rung);
+  position: absolute;
+  left: 0;
+  top: 15px;
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  color: var(--muted);
+}
+
+.ladder li[data-state="yes"]::before {
+  border-color: var(--accent-2);
+  color: var(--accent-2);
+}
+
+.ladder li[data-state="partial"]::before {
+  border-style: dashed;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.ladder li[data-state="no"]::before {
+  opacity: 0.45;
+}
+
+.ladder li[data-state="no"] .rorg {
+  color: var(--muted);
+}
+
+.ladder .rout {
+  margin: 7px 0 0;
+  max-width: 66ch;
+}
