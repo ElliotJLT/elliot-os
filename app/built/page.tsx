@@ -53,7 +53,6 @@ export default async function Built() {
   const record = getRoles();
   const { reference: ref } = getQuotes();
   const byName = new Map(repos.map((r) => [r.name, r]));
-  const rest = repos.filter((r) => !FEATURED.includes(r.name));
 
   return (
     <main>
@@ -64,6 +63,45 @@ export default async function Built() {
           Usually somewhere a wrong answer costs a student a grade, or misses
           what a child was trying to tell someone.
         </p>
+
+        {/* The tutor used to be the first bullet in the through-line list,
+            level with a research repo and this website. It is four years of
+            work in production on the App Store, so it gets the top of the
+            page and a block of its own. */}
+        <h2>in production</h2>
+        <section className="flagship">
+          <h3>Zero Gravity AI STEM tutor</h3>
+          <p className="fclaim">
+            A private tutor at the shoulder of students whose families could
+            never pay for one.
+          </p>
+          <p>
+            Socratic by design: it coaches a student to the answer and will not
+            hand it over, however creatively they ask. Coaching, practice,
+            marking and assignments each run as their own agent with their own
+            pedagogy and guardrails, and an always-on evaluator grades every
+            session against that spec before anything reaches a student.
+          </p>
+          <p>
+            Marking is tested against real past papers and official mark
+            schemes. That eval work took accuracy from a ~67% bare-model
+            baseline to over 99%. Live across four STEM subjects on every major
+            UK exam board, first commit to the App Store in 45 days, and
+            selected as one of eight companies nationally for the DfE and DSIT
+            AI Tutoring Tools Pioneers Programme, built to the government&apos;s
+            Generative AI Product Safety Standards. I built and deployed it at
+            Zero Gravity.
+          </p>
+          <div className="flinks">
+            <a href="https://www.zerogravity.co.uk/tutor">the product</a>
+            <a href="https://apps.apple.com/gb/app/zero-gravity-tutor/id6760364095">
+              App Store
+            </a>
+            <a href="https://open.spotify.com/episode/3D8quBCXrMNgIF87czhux3">
+              the podcast episode
+            </a>
+          </div>
+        </section>
 
         <h2>the through-line</h2>
         <p className="muted" style={{ marginTop: 0 }}>
@@ -81,23 +119,6 @@ export default async function Built() {
           the instrument I built to find out whether that actually holds.
         </p>
         <ul className="record">
-          <li>
-            <div className="rhead">
-              <span className="rorg">Zero Gravity AI STEM tutor</span>
-              <span className="rmeta">in production</span>
-            </div>
-            <p className="rout">
-              An always-on evaluator grades every coaching session against the
-              Socratic spec, and marking is tested against official mark
-              schemes before a student sees a grade. That eval infrastructure
-              took marking accuracy from a ~67% bare-model baseline to over
-              99%. Live across four STEM subjects on every major UK exam board,
-              first commit to App Store in 45 days, and it was selected as
-              one of eight companies nationally for the DfE and DSIT AI Tutoring Tools Pioneers Programme, which requires
-              meeting the government's Generative AI Product Safety
-              Standards.
-            </p>
-          </li>
           <li>
             <div className="rhead">
               <span className="rorg">ward</span>
@@ -188,30 +209,6 @@ export default async function Built() {
           </figcaption>
         </figure>
 
-        <h2>in production</h2>
-        <div className="card flagship">
-          <h3>
-            <a href="https://www.zerogravity.co.uk/tutor">
-              Zero Gravity AI STEM tutor
-            </a>
-          </h3>
-          <p>
-            A private tutor at the shoulder of students whose families could
-            not pay for one: live across four STEM subjects on every major UK
-            exam board, first commit to the App Store in 45 days. Socratic by
-            design, it coaches a student to the answer and will not hand it
-            over, however creatively they ask, and an always-on evaluator
-            grades every session against that spec. Coaching, practice,
-            marking and assignments each run as their own agent with their own
-            pedagogy and guardrails, and marking is tested against real past
-            papers and official mark schemes: a ~67% bare-model baseline to
-            over 99%. Selected as one of eight companies nationally for the
-            DfE and DSIT AI Tutoring Tools Pioneers Programme, built to the
-            government&apos;s Generative AI Product Safety Standards. I built
-            and deployed it at Zero Gravity.
-          </p>
-        </div>
-
         <h2>research</h2>
         <div className="card">
           <h3>
@@ -269,19 +266,6 @@ export default async function Built() {
           );
         })}
         </div>
-
-        <h2>everything else</h2>
-        <ul className="repolist">
-          {rest.map((r) => (
-            <li key={r.name}>
-              <a href={r.html_url}>{r.name}</a>
-              {r.stargazers_count > 0 && (
-                <span className="mono dim"> ★{r.stargazers_count}</span>
-              )}
-              <div className="desc">{r.description}</div>
-            </li>
-          ))}
-        </ul>
 
         <h2>ideas or feedback?</h2>
         <p className="muted">
