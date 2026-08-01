@@ -2,6 +2,8 @@ import Link from "next/link";
 import { getWeekActivity } from "@/lib/telemetry";
 import { getLog, getFirstCommit } from "@/lib/gitlog";
 import { getByHand } from "@/lib/content";
+import { getContributions } from "@/lib/contributions";
+import Calendar from "./components/Calendar";
 import Reveal from "./components/Reveal";
 
 const basePath = process.env.BASE_PATH || "";
@@ -34,6 +36,7 @@ const INDEX: [string, string, string][] = [
 
 export default async function Home() {
   const week = await getWeekActivity();
+  const contrib = await getContributions();
   const log = getLog(1);
   const byHand = getByHand();
   const first = getFirstCommit();
@@ -115,6 +118,26 @@ export default async function Home() {
             dangerouslySetInnerHTML={{ __html: byHand }}
           />
         </Reveal>
+
+        {contrib && (
+          <Reveal>
+            <h2>the year</h2>
+            <Calendar data={contrib} />
+            <p className="muted calnote">
+              {contrib.total.toLocaleString()} contributions in the twelve
+              months to {contrib.to}, and{" "}
+              <b>
+                {Math.round((contrib.last90 / contrib.total) * 100)}% of them
+                fall in the last ninety days
+              </b>
+              . That is the stretch since I left Zero Gravity: ward, crux,
+              boulot and this site were all built inside it. The longest
+              unbroken run is {contrib.longestStreak} days. Pulled from the
+              public GitHub calendar at build, so it is checkable rather than
+              claimed.
+            </p>
+          </Reveal>
+        )}
 
         <Reveal>
           <h2>where to look</h2>

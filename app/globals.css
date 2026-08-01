@@ -1723,3 +1723,52 @@ dd {
     margin-top: 46px;
   }
 }
+
+/* ------------------------------------------------------- contribution year */
+/* One ink at four opacities rather than a second palette, so dark mode needs
+   no extra colours and the graph reads as part of the page instead of as a
+   GitHub screenshot dropped into it. */
+.cal {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 66ch;
+  margin: 4px 0 18px;
+  overflow: visible;
+}
+
+.cal rect {
+  fill: var(--chart);
+  shape-rendering: geometricPrecision;
+}
+
+.cal rect.lv0 {
+  fill: var(--line);
+}
+
+.cal rect.lv1 {
+  fill-opacity: 0.4;
+}
+
+.cal rect.lv2 {
+  fill-opacity: 0.64;
+}
+
+.cal rect.lv3 {
+  fill-opacity: 0.84;
+}
+
+.cal rect.lv4 {
+  fill-opacity: 1;
+}
+
+.calmonth {
+  fill: var(--faint);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+}
+
+.calnote {
+  font-size: 15px;
+}
