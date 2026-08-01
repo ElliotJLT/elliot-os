@@ -10,13 +10,12 @@ const STATUS_LABEL: Record<string, string> = {
 };
 
 /**
- * The four-level stack from LangChain's "The Art of Loop Engineering", with an
- * honest mark against each. Published because the alternative is letting the
- * word "loop" do work the code has not earned: two of these rungs are not
- * attempted here, and saying so is cheaper than being caught.
+ * The ladder from "The Loop Was Never the Hard Part", marked against the site
+ * that publishes it. Each rung hands the machine one more piece of the job:
+ * the check, the stop condition, the trigger, the prompt. Two of these are not
+ * where the article's argument would predict, which is the point of showing it.
  */
 const LADDER: {
-  level: number;
   name: string;
   needs: string;
   reality: string;
@@ -24,40 +23,36 @@ const LADDER: {
   state: "yes" | "partial" | "no";
 }[] = [
   {
-    level: 1,
-    name: "agent loop",
-    needs: "A model calling tools until the task is done.",
+    name: "the check",
+    needs: "What correct looks like is written down, so the loop can verify its own work instead of you eyeballing it.",
     reality:
-      "Not this. The daily job is a deterministic script that reads the GitHub events API and writes a file, with one optional summarisation call at the end. Nothing iterates and no tool gets chosen.",
-    verdict: "not reached",
-    state: "no",
-  },
-  {
-    level: 2,
-    name: "verification loop",
-    needs: "Output scored against a rubric and retried with the feedback when it fails.",
-    reality:
-      "Half. The improvement loop does score its own proposal before raising it, but the three checks are booleans that have never once failed, and a failure would stop the run rather than feed back into it.",
+      "Half. The improvement loop scores its proposal before raising it, but the three checks are booleans that have never once failed. A test that cannot fail is not a check, it is decoration.",
     verdict: "partial",
     state: "partial",
   },
   {
-    level: 3,
-    name: "event-driven loop",
-    needs: "A schedule or a webhook fires the agent without anyone asking.",
+    name: "the stop condition",
+    needs: "Done is defined, and a second model judges every attempt against it until it passes or runs out of tries.",
     reality:
-      "Yes. The shipping-log agent has run on its cron every morning, commits under its own identity, and posts \"quiet day\" rather than inventing activity when there is none.",
+      "Missing. Nothing here judges an attempt or retries one. Both agents run once and hand in whatever they produced, which makes them scripts on a timer.",
+    verdict: "not reached",
+    state: "no",
+  },
+  {
+    name: "the trigger",
+    needs: "It runs on a schedule or watches for events, laptop open or not.",
+    reality:
+      "Yes. The shipping-log agent has fired on its cron every morning, commits under its own identity, and posts \"quiet day\" rather than inventing activity when there is none.",
     verdict: "running",
     state: "yes",
   },
   {
-    level: 4,
-    name: "hill-climbing loop",
-    needs: "Traces from past runs feed an analysis that rewrites the harness.",
+    name: "the prompt",
+    needs: "The loop watches your work, decides what needs doing, does it, and something reviews it before you see it. Your job is the merge.",
     reality:
-      "Not built. Nothing here reads its own history, so neither agent has ever got better at its job. This is the rung that actually compounds and it is the one I have not started.",
-    verdict: "not built",
-    state: "no",
+      "Built, switched off. The improvement loop reads real activity and raises one change as a pull request, which is this rung by design. It has run once, by hand, and has never been put on its schedule.",
+    verdict: "dormant",
+    state: "partial",
   },
 ];
 
@@ -94,17 +89,17 @@ export default function Loops() {
 
         <h2>where these actually sit</h2>
         <p className="muted" style={{ marginTop: 0 }}>
-          Stacking loops is a known ladder, set out in LangChain&apos;s{" "}
-          <a href="https://blog.langchain.com/the-art-of-loop-engineering/">
-            The Art of Loop Engineering
-          </a>{" "}
-          and in swyx&apos;s loopcraft before it. A cron job dressed up in the
-          vocabulary of agents takes an afternoon and proves nothing, so here
-          is which rungs this site is actually on.
+          A loop is an agent repeating cycles of work until a stop condition is
+          met. The ladder is what you hand over at each rung: the check, the
+          stop condition, the trigger, the prompt. I set that out in{" "}
+          <a href="https://medium.com/@elliotJL/the-loop-was-never-the-hard-part-5bdd4352acab">
+            The Loop Was Never the Hard Part
+          </a>
+          , so it would be cheap not to mark my own site against it.
         </p>
         <ol className="ladder">
           {LADDER.map((l) => (
-            <li key={l.level} data-state={l.state}>
+            <li key={l.name} data-state={l.state}>
               <div className="rhead">
                 <span className="rorg">{l.name}</span>
                 <span className="rmeta">{l.verdict}</span>
@@ -116,10 +111,24 @@ export default function Loops() {
           ))}
         </ol>
         <p className="muted">
-          One rung solidly, half of another, and two I have not attempted.
-          Nothing here takes a failed check and feeds it back into the next
-          attempt, so the daily job is really a schedule. Fixing that is the
-          next build, and it is a bigger job than this page makes it look.
+          The miss is rung two, and its shape is worse than a gap. The trigger
+          is running and the top rung is built, with nothing judging attempts
+          in between, which is the arrangement I warned about in that piece:
+          a loop with no stop condition is an outage with a subscription. The
+          only reason this one is not is that it costs nothing and can do no
+          harm.
+        </p>
+        <p className="muted">
+          There is a sharper version of the same fault on rung one. In{" "}
+          <a href="https://medium.com/@elliotJL/the-product-engineer-and-the-end-of-the-handoff-93181f170779">
+            The Product Engineer and the End of the Handoff
+          </a>{" "}
+          I argued that a rubric gets uncovered by reading real failures, never
+          invented in advance. The three checks on the improvement loop were
+          invented in advance, which is exactly why they have never failed.
+          Writing a stop condition that can genuinely reject something is the
+          next build here, and by my own argument I cannot write a good one
+          until the loop has failed in public a few times first.
         </p>
 
         <h2>running loops</h2>
