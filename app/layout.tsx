@@ -60,16 +60,16 @@ export default function RootLayout({
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         <header className="masthead">
-          <div className="wrap">
-            <div className="mast-top">
-              <Link href="/" className="brand">
-                Elliot Little
-              </Link>
-              <ThemeToggle />
-            </div>
+          {/* One row, one rule. It used to spend two rows and two horizontal
+              rules on a wordmark and four links. */}
+          <div className="wrap mast-row">
+            <Link href="/" className="brand">
+              Elliot Little
+            </Link>
             <nav className="mast-nav">
               <NavLinks />
             </nav>
+            <ThemeToggle />
           </div>
         </header>
         {children}
