@@ -1830,21 +1830,14 @@ dd {
   overflow: visible;
 }
 
+/* Drawn whole, not traced. A partial dash reads as a loop while it is moving
+   and as a stray squiggle in any screenshot, and this thing gets screenshotted
+   a lot more than it gets watched. */
 .railmark path {
   fill: none;
   stroke: var(--accent);
   stroke-width: 2.6;
   stroke-linecap: round;
-  stroke-dasharray: 60 40;
-  animation: trace 7s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .railmark path {
-    animation: none;
-    stroke-dasharray: none;
-    stroke-opacity: 0.5;
-  }
 }
 
 @media (min-width: 1040px) {

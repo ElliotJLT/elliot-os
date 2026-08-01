@@ -14,9 +14,31 @@ const FALLBACK: Post[] = [
   },
 ];
 
+/**
+ * Pieces deliberately pushed below the fold, keyed by a distinctive substring
+ * of the title.
+ *
+ * This used to be decided the other way round: anything without a hand-written
+ * note fell into "earlier". That made burying a piece the default and
+ * promoting it the manual step, so every new article landed at the bottom of
+ * the page until somebody noticed. "The Product Engineer and the End of the
+ * Handoff" sat under six older pieces for two days because of it.
+ *
+ * Now new writing surfaces on its own and demotion is the deliberate act.
+ */
+const DEMOTED = ["Learning Anxiety", "Walled Garden", "Finding Nemo"];
+
+export function isDemoted(title: string): boolean {
+  return DEMOTED.some((k) => title.includes(k));
+}
+
 // Why a given piece is worth someone's time. Keyed by a distinctive substring
 // of the title so a renamed post degrades to "no note" rather than a wrong one.
 const NOTES: [string, string][] = [
+  [
+    "Product Engineer",
+    "When building gets cheap, the handoff becomes the expensive part. On the job that appears when one person carries a problem from prototype to production, and why a rubric has to be uncovered from real failures instead of written up front.",
+  ],
   [
     "Loop Was Never",
     "The agent loop is the easy part; knowing when to stop it is the work. The thinking underneath this site's /loops page.",

@@ -1,4 +1,4 @@
-import { getPosts, noteFor, getMedia } from "@/lib/writing";
+import { getPosts, noteFor, isDemoted, getMedia } from "@/lib/writing";
 import { getQuotes } from "@/lib/quotes";
 import Readers from "../components/Readers";
 
@@ -10,8 +10,8 @@ export default async function Writing() {
   const posts = await getPosts(20);
   const media = getMedia();
   const { readers } = getQuotes();
-  const annotated = posts.filter((p) => noteFor(p.title));
-  const rest = posts.filter((p) => !noteFor(p.title));
+  const annotated = posts.filter((p) => !isDemoted(p.title));
+  const rest = posts.filter((p) => isDemoted(p.title));
 
   return (
     <main>
