@@ -1589,8 +1589,8 @@ dd {
    in the rail is load-bearing.
    ==================================================================== */
 .railpage {
-  --rail: 132px;
-  --gutter: 36px;
+  --rail: 104px;
+  --gutter: 28px;
   /* Same measure as every other page until the rail can be afforded. */
   max-width: 760px;
   margin: 0 auto;
@@ -1631,7 +1631,7 @@ dd {
   color: var(--faint);
 }
 
-@media (min-width: 1140px) {
+@media (min-width: 1040px) {
   .railpage {
     display: grid;
     grid-template-columns: var(--rail) minmax(0, 1fr);
@@ -1801,7 +1801,7 @@ dd {
   }
 }
 
-@media (min-width: 1140px) {
+@media (min-width: 1040px) {
   .railmark {
     margin-left: auto;
   }
@@ -1824,40 +1824,74 @@ dd {
   scale: 0.96;
 }
 
-/* -------------------------------------------------------------- the spine */
-/* The straight rule is gone. The page argues that the work runs on a loop,
-   so the loop is the spine: one lemniscate at the height of the whole
-   argument, crossing itself once at the middle. It sits behind the text and
-   is decorative, so it is hidden from assistive tech and never intercepts a
-   pointer. */
-@media (min-width: 1140px) {
-  .thread::before {
-    display: none;
-  }
 
-  /* Sits wholly inside the rail with clearance from the gutter. Straddling
-     the gutter put the lobes 14px into the measure, so the curve crossed the
-     body text. Marginalia must stay in the margin. */
-  .spine {
-    position: absolute;
-    left: calc((var(--rail) + var(--gutter)) * -1 + 8px);
-    top: 4px;
-    height: calc(100% - 8px);
-    width: calc(var(--rail) - 12px);
-    pointer-events: none;
-    z-index: -1;
-  }
+/* ==================================================================
+   Structure that survives a narrow window
+   The rail, the marginalia and the hanging numbers used to live behind a
+   single 1140px breakpoint, so on any normal laptop window the page fell
+   back to a plain centred column and looked untouched. The hanging numeral
+   is the signature, so it now runs at every width: the sections indent and
+   the numbers hang in the space that opens up. The rail is an enhancement
+   on top of that, not the only place the design exists.
+   ================================================================ */
+.thread {
+  padding-left: 34px;
+}
 
-  .spine path {
-    fill: none;
-    stroke: var(--line-2);
-    stroke-width: 1;
-  }
+.thread h2 {
+  position: relative;
+}
 
-  /* The numbers stay on the gutter centre, which is where the curve crosses
-     itself and where it returns at top and bottom, so they read as points on
-     the loop rather than as labels beside it. */
+.thread h2::before {
+  position: absolute;
+  left: -34px;
+}
+
+@media (max-width: 420px) {
+  .thread {
+    padding-left: 26px;
+  }
   .thread h2::before {
-    z-index: 1;
+    left: -26px;
+  }
+}
+
+/* The rail supersedes the indent: it has its own margin to hang into. */
+@media (min-width: 1040px) {
+  .thread {
+    padding-left: 0;
+  }
+  .thread h2::before {
+    left: calc(var(--gutter) / -2);
+  }
+}
+
+/* Scale and texture contrast. Every section was 16.5px sans, so the page had
+   one voice and one size the whole way down. The through-line is the
+   argument, so it is set as a statement in the serif; what follows it is a
+   list, and reads as one. */
+.statement {
+  font-family: var(--serif);
+  font-size: 19.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 58ch;
+}
+
+/* Below the rail there is no margin to sit in, so the note becomes a strip
+   above the lede instead of a column beside it, which was cutting the
+   measure roughly in half at 900px. */
+@media (max-width: 1039px) {
+  .herorow {
+    flex-wrap: wrap;
+  }
+  .railnote {
+    flex: 0 0 100%;
+    order: -1;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .railmark {
+    margin: 0;
   }
 }

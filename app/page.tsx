@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { getWeekActivity } from "@/lib/telemetry";
 import { getLog, getFirstCommit } from "@/lib/gitlog";
 import { getByHand } from "@/lib/content";
 import { getContributions } from "@/lib/contributions";
@@ -35,7 +34,6 @@ const INDEX: [string, string, string][] = [
 ];
 
 export default async function Home() {
-  const week = await getWeekActivity();
   const contrib = await getContributions();
   const log = getLog(1);
   const byHand = getByHand();
@@ -105,26 +103,9 @@ export default async function Home() {
             numbers sitting on it. The page is called the through-line, so it
             has one. */}
         <div className="thread">
-          {/* The spine is the mark at page scale: one lemniscate stretched
-              over the full height of the argument, crossing itself once in
-              the middle. preserveAspectRatio="none" lets it take whatever
-              height the content ends up being, and non-scaling-stroke keeps
-              the line a hairline instead of stretching with it. */}
-          <svg
-            className="spine"
-            viewBox="0 0 100 1000"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path
-              d="M50 500 C18 500 2 380 10 220 C18 60 82 60 90 220 C98 380 82 500 50 500 C18 500 2 620 10 780 C18 940 82 940 90 780 C98 620 82 500 50 500 Z"
-              vectorEffect="non-scaling-stroke"
-            />
-          </svg>
         <Reveal>
           <h2>the through-line</h2>
-          <p className="muted">
+          <p className="muted statement">
             Models write plausible things now. Checking them didn&apos;t get
             easier, and that is where most of my work has gone. At Zero Gravity
             I built a tutor that coaches a student to the answer and will not
@@ -184,11 +165,22 @@ export default async function Home() {
         </Reveal>
         </div>
 
+        {/* The seven-day figure used to come from a second, unauthenticated
+            call to the events API. That endpoint rate-limits at 60 requests
+            an hour, and when it did the page rendered a confident "0 commits
+            in the last seven days" directly under a graph showing the
+            opposite. It is now derived from the calendar already fetched
+            above: one source, no second failure mode, and the two numbers
+            cannot disagree. */}
         <p className="receipts faint mono">
-          Live since {since}. <b>{week.commits}</b> commits across{" "}
-          <b>{week.repos}</b> public repos in the last seven days, read from the
-          GitHub API at build. Rebuilt {rebuilt} UTC
-          {log[0] ? ` at ${log[0].hash}` : ""}.
+          Live since {since}.
+          {contrib
+            ? ` ${contrib.days
+                .slice(-7)
+                .reduce((s, d) => s + d.count, 0)
+                .toLocaleString()} contributions in the last seven days.`
+            : ""}{" "}
+          Rebuilt {rebuilt} UTC{log[0] ? ` at ${log[0].hash}` : ""}.
         </p>
       </div>
     </main>
