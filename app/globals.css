@@ -1456,6 +1456,9 @@ h1 .lead {
   margin: 22px 0 0;
   padding: 0;
   border-top: 1px solid var(--line);
+  /* Match the body measure so the right edge of the page stays honest;
+     without this the index runs wider than the paragraphs above it. */
+  max-width: 66ch;
 }
 
 .index li {
@@ -1573,4 +1576,150 @@ dd {
   content: "";
   position: absolute;
   inset: -13px 0;
+}
+
+/* ======================================================================
+   Homepage v3: the rail and the thread
+   The page argues that there is a through-line, so it draws one. On a wide
+   screen the layout splits into a narrow rail and the reading measure, with
+   a continuous hairline running down the gutter between them and the section
+   numbers sitting on it. The headline breaks across both tracks and the body
+   indents off it, which is where the asymmetry comes from. Below 1020px it
+   collapses to one column and the rail's contents fall back inline: nothing
+   in the rail is load-bearing.
+   ==================================================================== */
+.railpage {
+  --rail: 132px;
+  --gutter: 36px;
+  /* Same measure as every other page until the rail can be afforded. */
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 26px;
+}
+
+/* Display type. 62px was a headline; this is the visual event of the page,
+   and at 88px the tracking has to come in or the words drift apart. */
+/* Capped at 86px: between 760px and the 1140px rail breakpoint the headline
+   is still confined to the measure, and "Judgement didn't." overflows it
+   above that size. */
+.railpage h1 {
+  font-size: clamp(42px, 7.4vw, 86px);
+  line-height: 0.97;
+  letter-spacing: -0.032em;
+  margin: 8px 0 34px;
+}
+
+/* Split entrance, ~110ms apart, so the headline lands before the paragraph
+   under it. One-shot on load, so a keyframe is the right tool. */
+.rise {
+  animation: rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.rise-2 {
+  animation-delay: 0.11s;
+}
+
+/* ---------------------------------------------------------- margin notes */
+.railnote {
+  display: flex;
+  gap: 14px;
+  margin: 0 0 18px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+@media (min-width: 1140px) {
+  .railpage {
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    column-gap: var(--gutter);
+    align-items: start;
+    /* The rail hangs into the left margin instead of pushing the measure
+       across: column 2 lands exactly where a plain 760px .wrap would, so the
+       masthead, the footer and every other page still line up with the body
+       text. Without this the nav sits ~80px right of the headline. */
+    margin-left: calc(50% - 380px - var(--rail) - var(--gutter));
+    margin-right: 0;
+    max-width: calc(760px + var(--rail) + var(--gutter));
+  }
+
+  /* Everything sits in the measure unless it says otherwise. */
+  .railpage > * {
+    grid-column: 2;
+    min-width: 0;
+  }
+
+  /* The headline and the hero row span both tracks; the hero row then sets
+     up its own rail internally so the lede still starts on the measure. */
+  .railpage > h1,
+  .railpage > .herorow {
+    grid-column: 1 / -1;
+  }
+
+  .herorow {
+    display: grid;
+    grid-template-columns: var(--rail) minmax(0, 1fr) auto;
+    column-gap: var(--gutter);
+    align-items: start;
+  }
+
+  /* Right-aligned against the thread, stacked, so it reads as annotation
+     rather than as a row of chips. */
+  .railnote {
+    flex-direction: column;
+    gap: 5px;
+    text-align: right;
+    margin: 12px 0 0;
+  }
+
+  /* ------------------------------------------------------------ thread */
+  .thread {
+    position: relative;
+  }
+
+  .thread::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--gutter) / -2);
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    /* Fades at both ends so it reads as a thread running through the page
+       rather than a border box that stops abruptly. */
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--line-2) 4%,
+      var(--line-2) 96%,
+      transparent
+    );
+  }
+
+  /* The section rule is gone: the thread carries the structure now, and a
+     2px ink rule on top of it was two separators doing one job. */
+  .thread h2 {
+    position: relative;
+    border-top: none;
+    padding-top: 0;
+    margin: 68px 0 20px;
+  }
+
+  /* The number leaves the flow and sits centred on the thread, masked by the
+     page colour, so the sections read as beads on a line. Out of flow means
+     the flex gap reserves nothing and the label starts on the measure. */
+  .thread h2::before {
+    position: absolute;
+    left: calc(var(--gutter) / -2);
+    transform: translateX(-50%);
+    background: var(--bg);
+    padding: 5px 0;
+    line-height: 1;
+  }
+
+  .receipts {
+    margin-top: 46px;
+  }
 }

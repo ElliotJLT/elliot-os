@@ -46,34 +46,47 @@ export default async function Home() {
 
   return (
     <main>
-      <div className="wrap">
-        <div className="hero">
-          <h1>
-            <span className="lead">Shipping got easy.</span>
-            Judgement didn&apos;t.
-          </h1>
-          <div className="herorow">
-            <p className="lede">
-              I&apos;m Elliot. Builder-operator in London, four times a founding
-              hire. I spent four years on an AI tutor that coaches a student to
-              the answer and refuses to hand it over, and most of my work since
-              has been the same problem in different clothes: deciding whether
-              what a model produced is good enough to put in front of someone
-              who cannot absorb a wrong answer.
-            </p>
-            {/* Sits in the whitespace the lede's 52ch measure already leaves,
-                so it costs the text no width. */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className="portrait"
-              src={`${basePath}/icon-512.png`}
-              alt="Elliot Little"
-              width={128}
-              height={128}
-            />
-          </div>
+      {/* Two tracks on a wide screen: a rail carrying section marks and
+          margin notes, and the reading measure. The headline breaks across
+          both; the body indents off it. Below 1020px it is one column and
+          the rail's contents fall back inline. */}
+      <div className="railpage">
+        <h1 className="rise">
+          <span className="lead">Shipping got easy.</span>
+          Judgement didn&apos;t.
+        </h1>
+
+        <div className="herorow rise rise-2">
+          {/* The status the pill used to carry, demoted to marginalia:
+              the information was useful, the badge was the problem. */}
+          <aside className="railnote">
+            <span>London</span>
+            <span>Available now</span>
+          </aside>
+          <p className="lede">
+            I&apos;m Elliot. Builder-operator in London, four times a founding
+            hire. I spent four years on an AI tutor that coaches a student to
+            the answer and refuses to hand it over, and most of my work since
+            has been the same problem in different clothes: deciding whether
+            what a model produced is good enough to put in front of someone who
+            cannot absorb a wrong answer.
+          </p>
+          {/* Sits in the whitespace the lede's 52ch measure already leaves,
+              so it costs the text no width. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="portrait"
+            src={`${basePath}/icon-512.png`}
+            alt="Elliot Little"
+            width={128}
+            height={128}
+          />
         </div>
 
+        {/* The thread: one continuous line down the gutter with the section
+            numbers sitting on it. The page is called the through-line, so it
+            has one. */}
+        <div className="thread">
         <Reveal>
           <h2>the through-line</h2>
           <p className="muted">
@@ -114,6 +127,7 @@ export default async function Home() {
             ))}
           </ul>
         </Reveal>
+        </div>
 
         <p className="receipts faint mono">
           Live since {since}. <b>{week.commits}</b> commits across{" "}
