@@ -26,7 +26,7 @@ const LADDER: {
     name: "the check",
     needs: "What correct looks like is written down, so the loop can verify its own work instead of you eyeballing it.",
     reality:
-      "Half. The improvement loop scores its proposal before raising it, but the three checks are booleans that have never once failed. A test that cannot fail is not a check, it is decoration.",
+      "Half. The improvement loop scores its proposal before raising it, but the three checks are booleans and not one of them has ever failed.",
     verdict: "partial",
     state: "partial",
   },
@@ -34,7 +34,7 @@ const LADDER: {
     name: "the stop condition",
     needs: "Done is defined, and a second model judges every attempt against it until it passes or runs out of tries.",
     reality:
-      "Missing. Nothing here judges an attempt or retries one. Both agents run once and hand in whatever they produced, which makes them scripts on a timer.",
+      "Missing. Nothing judges an attempt or retries one. Both agents run once and hand in whatever came out.",
     verdict: "not reached",
     state: "no",
   },
@@ -83,8 +83,8 @@ export default function Loops() {
           Two agents keep this site current. One runs on a schedule and
           rewrites the shipping log. The other reads what I have actually been
           doing and proposes a single change as a pull request I can close.
-          Below is what each costs, what stops it, and where they sit on the
-          ladder, including the rungs neither has reached.
+          What each one costs and what stops it is below. So are the rungs
+          neither of them has reached.
         </p>
 
         <h2>where these actually sit</h2>
@@ -95,7 +95,7 @@ export default function Loops() {
           <a href="https://medium.com/@elliotJL/the-loop-was-never-the-hard-part-5bdd4352acab">
             The Loop Was Never the Hard Part
           </a>
-          , so it would be cheap not to mark my own site against it.
+          . So here is where this site actually sits.
         </p>
         <ol className="ladder">
           {LADDER.map((l) => (
@@ -111,24 +111,22 @@ export default function Loops() {
           ))}
         </ol>
         <p className="muted">
-          The miss is rung two, and its shape is worse than a gap. The trigger
-          is running and the top rung is built, with nothing judging attempts
-          in between, which is the arrangement I warned about in that piece:
-          a loop with no stop condition is an outage with a subscription. The
-          only reason this one is not is that it costs nothing and can do no
-          harm.
+          The gap is rung two. The trigger runs daily and the top rung is
+          built, and there is nothing judging attempts in between. That is the
+          setup I called an outage with a subscription. This one is not, only
+          because it costs nothing and cannot break anything.
         </p>
         <p className="muted">
-          There is a sharper version of the same fault on rung one. In{" "}
+          Rung one has a worse version of the same problem. In{" "}
           <a href="https://medium.com/@elliotJL/the-product-engineer-and-the-end-of-the-handoff-93181f170779">
             The Product Engineer and the End of the Handoff
           </a>{" "}
-          I argued that a rubric gets uncovered by reading real failures, never
-          invented in advance. The three checks on the improvement loop were
-          invented in advance, which is exactly why they have never failed.
-          Writing a stop condition that can genuinely reject something is the
-          next build here, and by my own argument I cannot write a good one
-          until the loop has failed in public a few times first.
+          I argued that you uncover a rubric by reading real failures rather
+          than inventing one up front. I invented these up front. That is why
+          they pass every time. Writing a stop condition that can actually
+          reject something is the next job, and I probably cannot write a good
+          one until this thing has failed a few times where people can see
+          it.
         </p>
 
         <h2>running loops</h2>

@@ -146,8 +146,7 @@ export default async function Home() {
               . That is the stretch since I left Zero Gravity: ward, crux,
               boulot and this site were all built inside it. The longest
               unbroken run is {contrib.longestStreak} days. Pulled from the
-              public GitHub calendar at build, so it is checkable rather than
-              claimed.
+              public GitHub calendar at build, so you can check it.
             </p>
           </Reveal>
         )}
