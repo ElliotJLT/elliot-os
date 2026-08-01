@@ -105,7 +105,10 @@ export default async function Home() {
         <div className="thread">
         <Reveal>
           <h2>the through-line</h2>
-          <p className="muted statement">
+          {/* The one paragraph the whole site rests on, so it gets the spread
+              rather than sitting in the same column as everything else. */}
+          <div className="panel">
+          <p className="statement">
             Models write plausible things now. Checking them didn&apos;t get
             easier, and that is where most of my work has gone. At Zero Gravity
             I built a tutor that coaches a student to the answer and will not
@@ -122,6 +125,7 @@ export default async function Home() {
           <p className="muted">
             <Link href="/built">The work, and what each piece decides</Link>.
           </p>
+          </div>
         </Reveal>
 
         <Reveal>

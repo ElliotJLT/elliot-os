@@ -21,7 +21,8 @@
   --line: #ddd6c6;
   --line-2: #c9c1ae;
   --rule: #1b1811;
-  --accent: #8a5a12;
+  --accent: #cc5600;
+  --accent-ink: #a84600;
   --accent-2: #3f6b47;
   --chart: #3f6b47;
   --flag: #f0ead9;
@@ -46,7 +47,8 @@
   --line: #2c281f;
   --line-2: #3d3729;
   --rule: #4a4433;
-  --accent: #cf9a49;
+  --accent: #e8641a;
+  --accent-ink: #f0782e;
   --accent-2: #7bb389;
   --chart: #6ba877;
   --flag: #211d15;
@@ -256,7 +258,7 @@ h2::before {
   counter-increment: sec;
   content: counter(sec, decimal-leading-zero);
   font-family: var(--mono);
-  color: var(--accent);
+  color: var(--accent-ink);
   font-weight: 500;
   letter-spacing: 0;
 }
@@ -435,7 +437,7 @@ li {
 }
 
 .entry .hash {
-  color: var(--accent);
+  color: var(--accent-ink);
   text-decoration: none;
 }
 
@@ -460,7 +462,7 @@ li {
 }
 
 .badge.agent {
-  color: var(--accent);
+  color: var(--accent-ink);
   border-color: var(--line-2);
 }
 
@@ -656,7 +658,7 @@ li {
 }
 
 .layer.outer {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .lstatus {
@@ -782,7 +784,7 @@ li {
   padding: 1px 7px;
   border-radius: var(--r);
   border: 1px solid var(--line-2);
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .pdate {
@@ -843,7 +845,7 @@ li {
 }
 
 .peval .verdict.revise {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .peval .verdict.reject {
@@ -1362,7 +1364,7 @@ html:not(.js) .reader:first-child {
 }
 
 .flinks a:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
   border-bottom-color: var(--accent);
 }
 
@@ -1541,7 +1543,7 @@ h1 .lead {
 }
 
 .index li > a:hover {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 /* Transitions, not keyframes: the arrow retargets mid-flight if the pointer
@@ -1561,7 +1563,7 @@ h1 .lead {
 .index li > a:focus-visible::after {
   opacity: 1;
   transform: none;
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .index li p {
@@ -1978,7 +1980,7 @@ dd {
 .ladder li[data-state="partial"]::before {
   border-style: dashed;
   border-color: var(--accent);
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .ladder li[data-state="no"]::before {
@@ -1992,4 +1994,82 @@ dd {
 .ladder .rout {
   margin: 7px 0 0;
   max-width: 66ch;
+}
+
+/* ================================================================ panel */
+/* The thesis gets an inverted spread. --ink and --paper already swap between
+   themes, so one rule gives a dark block on a light page and a light block on
+   a dark one: 17:1 in light, 14:1 in dark, no second palette. It bleeds left
+   out of the measure so the page has one edge that is not a straight column.
+   The orange is graphic only; at 4.1:1 on ink it can carry display text and
+   an underline, never body copy. */
+.panel {
+  background: var(--ink);
+  color: var(--paper);
+  /* .thread::before is absolutely positioned, so without a stacking context
+     here it paints over the panel and draws a scratch down the block. The
+     spread is meant to interrupt the thread, not be scored by it. */
+  position: relative;
+  z-index: 1;
+  padding: 38px 30px 30px;
+  /* Bleeds left only. A right bleed of the same size overshot the container's
+     26px padding by 8px and put a horizontal scrollbar on the page at 600px,
+     and the asymmetry reads better anyway. */
+  margin: 10px 0 16px -34px;
+}
+
+.panel .statement {
+  color: var(--paper);
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.5vw, 27px);
+  line-height: 1.45;
+  letter-spacing: -0.008em;
+  max-width: none;
+  margin-bottom: 22px;
+}
+
+.panel p:last-child {
+  margin-bottom: 0;
+}
+
+.panel .muted {
+  color: var(--paper);
+  opacity: 0.72;
+  font-size: 15px;
+  max-width: none;
+}
+
+.panel a {
+  color: var(--paper);
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.panel a:hover {
+  text-decoration-color: var(--paper);
+}
+
+@media (max-width: 420px) {
+  .panel {
+    margin-left: -26px;
+    margin-right: 0;
+    padding: 30px 24px 24px;
+  }
+}
+
+/* Bleeds across the rail so the block starts where the headline does. */
+@media (min-width: 1040px) {
+  .panel {
+    margin-left: calc((var(--rail) + var(--gutter)) * -1);
+    margin-right: 0;
+    padding: 44px 40px 36px calc(var(--rail) + var(--gutter));
+  }
+}
+
+/* Section numbers were 11px and the same size as their label. They are the
+   only place the accent appears in running text, so they get to be seen. */
+h2::before {
+  font-size: 14px;
+  font-weight: 600;
 }
