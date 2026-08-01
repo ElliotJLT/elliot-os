@@ -158,6 +158,25 @@ function recordSpend(usage, today) {
   return run;
 }
 
+// The inner loop was logging its spend but never its own run, so /loops —
+// the page whose whole claim is "measured, not estimated" — reported one run
+// and a stale last_run while spend.json recorded three. The control panel has
+// to be right about the thing it controls.
+function recordLoopRun(id, today, run) {
+  const path = join(ROOT, "data", "loops.json");
+  const loops = JSON.parse(readFileSync(path, "utf-8"));
+  const loop = loops.loops.find((l) => l.id === id);
+  if (!loop) throw new Error(`loop "${id}" missing from loops.json`);
+
+  // Re-running on a day already counted is a retry, not a second run.
+  if (loop.last_run !== today) loop.runs += 1;
+  loop.last_run = today;
+  loop.spend_usd = +(loop.spend_usd + run.cost_usd).toFixed(6);
+  loops.updated = today;
+
+  writeFileSync(path, JSON.stringify(loops, null, 2) + "\n");
+}
+
 const today = new Date().toISOString().slice(0, 10);
 const events = await fetchEvents();
 const d = await digest(events);
@@ -179,6 +198,7 @@ const section = [
 
 writeFileSync(nowPath, now.slice(0, start) + section + now.slice(end + END.length));
 const run = recordSpend(usage, today);
+recordLoopRun("now-refresh", today, run);
 console.log(
   `now.md rewritten. ${d.commitCount} commits digested. ` +
     (usage

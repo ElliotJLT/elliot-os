@@ -1772,3 +1772,92 @@ dd {
 .calnote {
   font-size: 15px;
 }
+
+/* ------------------------------------------------------------ hero mark */
+/* The lemniscate was stranded on /loops. It is the site's mark, so it opens
+   the page: traced slowly in the rail, at the size of a printer's device. */
+.railmark {
+  display: block;
+  width: 54px;
+  height: 31px;
+  margin: 0 0 12px;
+  overflow: visible;
+}
+
+.railmark path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-dasharray: 60 40;
+  animation: trace 7s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .railmark path {
+    animation: none;
+    stroke-dasharray: none;
+    stroke-opacity: 0.5;
+  }
+}
+
+@media (min-width: 1140px) {
+  .railmark {
+    margin-left: auto;
+  }
+}
+
+/* ----------------------------------------------------------- tactility */
+/* A press should register. 0.96 is the smallest scale that reads as a
+   press rather than a glitch; anything under 0.95 feels exaggerated. */
+.index li > a,
+.mast-nav a,
+.theme-toggle {
+  transition-property: color, border-color, scale;
+  transition-duration: 0.18s;
+  transition-timing-function: ease-out;
+}
+
+.index li > a:active,
+.mast-nav a:active,
+.theme-toggle:active {
+  scale: 0.96;
+}
+
+/* -------------------------------------------------------------- the spine */
+/* The straight rule is gone. The page argues that the work runs on a loop,
+   so the loop is the spine: one lemniscate at the height of the whole
+   argument, crossing itself once at the middle. It sits behind the text and
+   is decorative, so it is hidden from assistive tech and never intercepts a
+   pointer. */
+@media (min-width: 1140px) {
+  .thread::before {
+    display: none;
+  }
+
+  /* Sits wholly inside the rail with clearance from the gutter. Straddling
+     the gutter put the lobes 14px into the measure, so the curve crossed the
+     body text. Marginalia must stay in the margin. */
+  .spine {
+    position: absolute;
+    left: calc((var(--rail) + var(--gutter)) * -1 + 8px);
+    top: 4px;
+    height: calc(100% - 8px);
+    width: calc(var(--rail) - 12px);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .spine path {
+    fill: none;
+    stroke: var(--line-2);
+    stroke-width: 1;
+  }
+
+  /* The numbers stay on the gutter centre, which is where the curve crosses
+     itself and where it returns at top and bottom, so they read as points on
+     the loop rather than as labels beside it. */
+  .thread h2::before {
+    z-index: 1;
+  }
+}

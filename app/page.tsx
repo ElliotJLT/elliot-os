@@ -63,6 +63,21 @@ export default async function Home() {
           {/* The status the pill used to carry, demoted to marginalia:
               the information was useful, the badge was the problem. */}
           <aside className="railnote">
+            {/* The site's mark, traced. It was stranded on /loops; the page
+                is about a loop, so the loop opens it. pathLength normalises
+                the dash to the path so the animation does not depend on the
+                curve's measured length. */}
+            <svg
+              className="railmark"
+              viewBox="0 0 84 48"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
+                pathLength={100}
+              />
+            </svg>
             <span>London</span>
             <span>Available now</span>
           </aside>
@@ -90,6 +105,23 @@ export default async function Home() {
             numbers sitting on it. The page is called the through-line, so it
             has one. */}
         <div className="thread">
+          {/* The spine is the mark at page scale: one lemniscate stretched
+              over the full height of the argument, crossing itself once in
+              the middle. preserveAspectRatio="none" lets it take whatever
+              height the content ends up being, and non-scaling-stroke keeps
+              the line a hairline instead of stretching with it. */}
+          <svg
+            className="spine"
+            viewBox="0 0 100 1000"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M50 500 C18 500 2 380 10 220 C18 60 82 60 90 220 C98 380 82 500 50 500 C18 500 2 620 10 780 C18 940 82 940 90 780 C98 620 82 500 50 500 Z"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>
         <Reveal>
           <h2>the through-line</h2>
           <p className="muted">
