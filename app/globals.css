@@ -1,9 +1,13 @@
 /* ===========================================================================
-   elliot-os — The Operating Report
-   Set like a printed broadsheet, not a SaaS dashboard: an editorial serif for
-   what's said, a grotesque for the running text, monospace reserved strictly
-   for what's measured. Ink on warm paper, hairline rules instead of shadows,
-   restraint instead of gloss. Light is default; dark is its own set of steps.
+   elliot-os
+   Set like a printed page, not a SaaS dashboard: an editorial serif for what's
+   said, a grotesque for the running text, monospace reserved strictly for what's
+   measured. Ink on warm paper, hairline rules instead of shadows, restraint
+   instead of gloss. Light is default; dark is its own set of steps.
+
+   Nothing here is boxed unless the box means something. No status pills, no
+   equal-weight stat tiles, no italic-serif emphasis: those read as decoration
+   standing in for hierarchy, and the writing is meant to carry the hierarchy.
    ======================================================================== */
 
 :root {
@@ -58,6 +62,10 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
+  /* macOS renders text heavier than intended; smoothing belongs at the root
+     so every element gets the same weight rather than a per-element mix. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -142,24 +150,6 @@ a:hover {
   color: var(--ink);
 }
 
-.mast-rule {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 4px 0 10px;
-  font-family: var(--sans);
-  font-size: 10.5px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.mast-issue {
-  color: var(--faint);
-  white-space: nowrap;
-}
-
 .mast-nav {
   display: flex;
   gap: 22px;
@@ -233,26 +223,6 @@ main {
   }
 }
 
-/* editorial kicker (replaces the SaaS status pill) */
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-2);
-}
-
-.dot {
-  width: 6px;
-  height: 6px;
-  background: var(--accent-2);
-  border-radius: 50%;
-  flex: none;
-}
-
 h1 {
   font-family: var(--serif);
   font-size: clamp(38px, 6.4vw, 62px);
@@ -264,10 +234,6 @@ h1 {
   margin: 16px 0 28px;
   font-weight: 500;
   text-wrap: balance;
-}
-
-h1 em {
-  font-style: italic;
 }
 
 /* numbered section headers, set like a report's section rules */
@@ -381,31 +347,6 @@ li {
   margin-bottom: 8px;
 }
 
-/* system colophon under the hero */
-.systemline {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 22px;
-  margin: 26px 0 0;
-  padding: 13px 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--faint);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.systemline b {
-  color: var(--ink-2);
-  font-weight: 500;
-}
-
-.systemline span {
-  white-space: nowrap;
-}
-
 /* reveal-on-scroll (progressive enhancement; visible without JS) */
 .js .reveal {
   opacity: 0;
@@ -426,522 +367,9 @@ li {
   }
 }
 
-/* ------------------------------------------------ key figures (ledger) */
-.statgrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border: 1px solid var(--rule);
-  background: var(--paper);
-}
-
-@media (max-width: 640px) {
-  .statgrid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.stat {
-  padding: 15px 16px 14px;
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-width: 0;
-}
-
-.stat:nth-child(4n),
-.stat:last-child {
-  border-right: none;
-}
-
-@media (max-width: 640px) {
-  .stat:nth-child(2n) {
-    border-right: none;
-  }
-  .stat:nth-child(3n) {
-    border-right: 1px solid var(--line);
-  }
-}
-
-.stat .label {
-  font-family: var(--sans);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  line-height: 1.4;
-  min-height: 2.8em;
-}
-
-.stat .value {
-  font-family: var(--mono);
-  font-size: 28px;
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  font-variant-numeric: tabular-nums;
-  color: var(--ink);
-}
-
-.stat .value small {
-  font-size: 15px;
-  font-weight: 400;
-  color: var(--muted);
-}
-
-.stat .foot {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--faint);
-  margin-top: auto;
-  padding-top: 6px;
-}
-
-.stat .spark {
-  margin-top: 8px;
-  display: block;
-}
-
-.spark rect {
-  fill: var(--chart);
-}
-
 .receipts {
   margin-top: 20px;
   line-height: 1.6;
-}
-
-/* -------------------------------------------- fit engine (transcript) */
-.console {
-  border: 1px solid var(--rule);
-  border-radius: var(--r);
-  margin-top: 6px;
-  background: var(--paper);
-  box-shadow: var(--shadow);
-}
-
-.console-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 11px 18px;
-  border-bottom: 1px solid var(--rule);
-  background: var(--flag);
-}
-
-.console-title .name {
-  font-family: var(--sans);
-  font-size: 10.5px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-  font-weight: 600;
-}
-
-.console-title .badge-live {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-family: var(--sans);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--faint);
-}
-
-.console-title .badge-live .dot {
-  width: 5px;
-  height: 5px;
-  background: var(--accent-2);
-}
-
-.thread {
-  padding: 20px 18px 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  max-height: 480px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-}
-
-.boot {
-  font-family: var(--mono);
-  font-size: 12px;
-  line-height: 1.75;
-  color: var(--muted);
-}
-
-.boot:empty {
-  display: none;
-}
-
-.boot .prompt {
-  color: var(--accent-2);
-}
-
-.caret {
-  display: inline-block;
-  margin-left: 1px;
-  color: var(--accent);
-  animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
-
-/* transcript rows: a speaker label, then indented text off a left rule */
-.msg {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  max-width: 100%;
-  animation: msg-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes msg-in {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.msg .who {
-  font-family: var(--sans);
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--faint);
-  font-weight: 600;
-}
-
-.msg.agent .who {
-  color: var(--accent);
-}
-
-.msg .bubble {
-  border-left: 2px solid var(--line-2);
-  padding: 0 0 0 14px;
-  font-size: 15px;
-  line-height: 1.55;
-  color: var(--ink);
-}
-
-.msg.agent .bubble {
-  border-left-color: var(--accent);
-}
-
-.msg.user .bubble {
-  border-left-color: var(--accent-2);
-  white-space: pre-wrap;
-  word-break: break-word;
-  font-style: italic;
-  color: var(--ink-2);
-}
-
-.msg .bubble p {
-  margin: 0 0 8px;
-}
-
-.msg .bubble p:last-child {
-  margin-bottom: 0;
-}
-
-.shellout {
-  font-family: var(--mono);
-  font-size: 12px;
-  line-height: 1.65;
-  margin: 0;
-  white-space: pre-wrap;
-  word-break: break-word;
-  color: var(--ink);
-}
-
-.clamp {
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.thinking {
-  display: inline-flex;
-  gap: 4px;
-  padding: 4px 0;
-}
-
-.thinking i {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--faint);
-  animation: think 1s ease-in-out infinite;
-}
-
-.thinking i:nth-child(2) {
-  animation-delay: 0.15s;
-}
-.thinking i:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-@keyframes think {
-  0%,
-  100% {
-    opacity: 0.3;
-  }
-  40% {
-    opacity: 1;
-  }
-}
-
-.handoff {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.handoff a,
-.handoff button {
-  appearance: none;
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  line-height: 1;
-  text-decoration: none;
-  color: var(--ink);
-  background: transparent;
-  border: 1px solid var(--line-2);
-  border-radius: var(--r);
-  padding: 9px 14px;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: border-color 0.15s, background 0.15s;
-}
-
-.handoff a:hover,
-.handoff button:hover {
-  border-color: var(--accent);
-}
-
-.handoff .primary {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-
-.briefing {
-  margin-top: 12px;
-}
-
-.briefing summary {
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  cursor: pointer;
-  user-select: none;
-  list-style: none;
-}
-
-.briefing summary::-webkit-details-marker {
-  display: none;
-}
-
-.briefing summary::before {
-  content: "＋ ";
-  color: var(--accent);
-}
-
-.briefing[open] summary::before {
-  content: "－ ";
-}
-
-.briefing summary:hover {
-  color: var(--ink);
-}
-
-.briefing pre {
-  background: var(--bg-2);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  font-family: var(--mono);
-  font-size: 12px;
-  line-height: 1.55;
-  padding: 13px;
-  white-space: pre-wrap;
-  word-break: break-word;
-  margin: 8px 0 0;
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 2px 18px 14px;
-}
-
-.chips button {
-  appearance: none;
-  font-family: var(--mono);
-  font-size: 11.5px;
-  color: var(--muted);
-  background: transparent;
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  padding: 6px 11px;
-  cursor: pointer;
-  transition: color 0.15s, border-color 0.15s;
-}
-
-.chips button:hover {
-  color: var(--ink);
-  border-color: var(--accent);
-}
-
-.composer {
-  display: flex;
-  align-items: flex-end;
-  gap: 10px;
-  padding: 14px 18px 16px;
-  border-top: 1px solid var(--rule);
-}
-
-.composer textarea {
-  flex: 1;
-  resize: none;
-  border: 1px solid var(--line-2);
-  border-radius: var(--r);
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--sans);
-  font-size: 15px;
-  line-height: 1.5;
-  padding: 11px 12px;
-  min-height: 46px;
-  max-height: 180px;
-  transition: border-color 0.15s;
-}
-
-.composer textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-}
-
-.composer textarea::placeholder {
-  color: var(--faint);
-}
-
-.composer button {
-  appearance: none;
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--paper);
-  background: var(--ink);
-  border: 1px solid var(--ink);
-  border-radius: var(--r);
-  padding: 13px 18px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: opacity 0.15s;
-}
-
-.composer button:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
-.console-foot {
-  padding: 12px 18px 14px;
-  border-top: 1px solid var(--line);
-  background: var(--flag);
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--faint);
-  line-height: 1.6;
-}
-
-.console-foot a {
-  color: var(--muted);
-}
-
-/* --------------------------------------------------------------- index */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
-  margin-top: 22px;
-}
-
-@media (max-width: 560px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.grid a.card {
-  display: block;
-  text-decoration: none;
-  position: relative;
-  padding: 20px 22px;
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  background: transparent;
-  transition: background 0.18s;
-}
-
-.grid a.card .idx {
-  display: block;
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--accent);
-  margin-bottom: 10px;
-}
-
-.grid a.card::after {
-  content: "→";
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-family: var(--mono);
-  color: var(--faint);
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity 0.18s, transform 0.18s;
-}
-
-.grid a.card:hover {
-  background: var(--paper);
-}
-
-.grid a.card:hover::after {
-  opacity: 1;
-  transform: none;
-  color: var(--accent);
-}
-
-.grid a.card h3 {
-  font-family: var(--serif);
-  font-size: 22px;
-  font-weight: 500;
 }
 
 .card p {
@@ -1642,8 +1070,15 @@ footer a {
   width: 128px;
   height: 128px;
   border-radius: 50%;
-  border: 1px solid var(--line);
+  /* A tinted border picks up the paper colour and reads as dirt on the image
+     edge. Pure black at 10% in light, pure white at 10% in dark. */
+  outline: 1px solid oklch(0 0 0 / 0.1);
+  outline-offset: -1px;
   margin-top: 4px;
+}
+
+:root[data-theme="dark"] .portrait {
+  outline-color: oklch(1 0 0 / 0.1);
 }
 
 @media (max-width: 700px) {
@@ -1996,4 +1431,146 @@ html:not(.js) .reader:first-child {
   .reference::before {
     font-size: 54px;
   }
+}
+
+/* ======================================================================
+   Homepage: one narrative spine
+   The hero used to open with a status pill, an italic-serif emphasis span,
+   and a five-item colophon before the reader learned anything. Those are
+   removed. What remains is a headline, a paragraph, and an index.
+   ==================================================================== */
+
+/* The setup line is quieted with colour, not set in italic serif. Italic
+   serif emphasis is one of the most legible AI-design tells, and colour
+   carries the same "this is the quiet half" meaning without the costume. */
+h1 .lead {
+  display: block;
+  color: var(--muted);
+}
+
+/* ---------------------------------------------------------------- index */
+/* Not cards. A printed index: hairline rules, a hanging label, and the
+   description doing the work. Nothing is boxed, so nothing competes. */
+.index {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.index li {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 0 24px;
+  align-items: baseline;
+  padding: 17px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+@media (max-width: 560px) {
+  .index li {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+}
+
+.index li > a {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  /* 26px of text plus 8px either side clears the 40px minimum hit area for
+     a dense desktop target; the negative margin keeps the row rhythm. */
+  padding: 8px 0;
+  margin: -8px 0;
+  transition: color 0.18s ease-out;
+}
+
+.index li > a:hover {
+  color: var(--accent);
+}
+
+/* Transitions, not keyframes: the arrow retargets mid-flight if the pointer
+   crosses rows quickly, instead of restarting. */
+.index li > a::after {
+  content: "→";
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--faint);
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: opacity 0.18s ease-out, transform 0.18s ease-out,
+    color 0.18s ease-out;
+}
+
+.index li:hover > a::after,
+.index li > a:focus-visible::after {
+  opacity: 1;
+  transform: none;
+  color: var(--accent);
+}
+
+.index li p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* ------------------------------------------------------ rendering details */
+/* balance evens out short headings; pretty stops a lone word stranded on the
+   last line of body copy. Long-form prose gets neither: the browser default
+   is fine and the balancing pass is not free. */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p,
+li,
+figcaption,
+blockquote,
+dd {
+  text-wrap: pretty;
+}
+
+/* Any figure that changes between builds gets equal-width digits so the line
+   above it does not reflow when the number does. */
+.mono,
+.receipts,
+.receipts b,
+.loopmeta dd,
+.rmeta {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------ hit areas */
+/* The moon glyph is ~22px square and the nav labels are 11px: both are well
+   under the 40px minimum for a pointer target. Extend the pressable area with
+   a pseudo-element so the visual size is unchanged. The nav extends only
+   vertically, because a horizontal extension would overlap its neighbour at
+   the 22px gap. */
+.theme-toggle {
+  position: relative;
+}
+
+.theme-toggle::after {
+  content: "";
+  position: absolute;
+  inset: -11px;
+}
+
+.mast-nav a {
+  position: relative;
+}
+
+.mast-nav a::after {
+  content: "";
+  position: absolute;
+  inset: -13px 0;
 }

@@ -46,16 +46,11 @@ export const metadata: Metadata = {
 // Runs before paint so the stored theme never flashes.
 const themeInit = `(function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}e.dataset.theme=t}catch(_){}})()`;
 
-const issue = new Date().toLocaleDateString("en-GB", {
-  day: "2-digit",
-  month: "short",
-  year: "numeric",
-});
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const spend = getSpend();
+  const tokens = spend.totals.input_tokens + spend.totals.output_tokens;
   return (
     <html
       lang="en"
@@ -72,12 +67,6 @@ export default function RootLayout({
               </Link>
               <ThemeToggle />
             </div>
-            <div className="mast-rule">
-              <span className="mast-line">
-                Operating Report · London · Est. MMXXVI
-              </span>
-              <span className="mast-issue">{issue.toUpperCase()}</span>
-            </div>
             <nav className="mast-nav">
               <NavLinks />
             </nav>
@@ -88,11 +77,11 @@ export default function RootLayout({
           <div className="wrap">
             <span>
               agent activity, all time: {spend.totals.runs} run
-              {spend.totals.runs === 1 ? "" : "s"},{" "}
-              {(
-                spend.totals.input_tokens + spend.totals.output_tokens
-              ).toLocaleString()}{" "}
-              tokens metered. Measured, not estimated:{" "}
+              {spend.totals.runs === 1 ? "" : "s"}
+              {/* Only claim a token figure when one was actually metered:
+                  a hardcoded "0 tokens" reads as a broken gauge. */}
+              {tokens > 0 ? `, ${tokens.toLocaleString()} tokens metered` : ""}.
+              Measured, not estimated:{" "}
               <Link href="/changelog">receipts</Link>.
             </span>
             <span>
