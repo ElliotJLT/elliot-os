@@ -2,36 +2,11 @@ import Link from "next/link";
 import { getLog, getFirstCommit } from "@/lib/gitlog";
 import { getByHand } from "@/lib/content";
 import { getContributions } from "@/lib/contributions";
+import { getPosts, noteFor, isDemoted } from "@/lib/writing";
 import Calendar from "./components/Calendar";
 import Reveal from "./components/Reveal";
 
 const basePath = process.env.BASE_PATH || "";
-
-// Four sections, one voice. The numbers live in a sentence at the bottom
-// rather than in tiles at the top: they are evidence for the claim, not the
-// claim itself.
-const INDEX: [string, string, string][] = [
-  [
-    "/built",
-    "built",
-    "A production AI tutor, a safeguarding layer for apps serving under-18s, and the agent tooling underneath both. What each piece decides, and what it refuses to do.",
-  ],
-  [
-    "/writing",
-    "writing",
-    "Essays on shipping AI to people who cannot absorb a wrong answer, on trust and adoption, and on where responsible-AI-by-checklist breaks.",
-  ],
-  [
-    "/loops",
-    "loops",
-    "The agents that maintain this site: their cadence, their cost, the human gate on each, and the rule that stops them.",
-  ],
-  [
-    "/changelog",
-    "changelog",
-    "Every change is a commit, badged by whether a human or an agent made it. The receipt trail for anything claimed above.",
-  ],
-];
 
 /**
  * The work itself, on the front page. It used to live behind a link that said
@@ -91,6 +66,9 @@ const WORK: {
 
 export default async function Home() {
   const contrib = await getContributions();
+  const posts = (await getPosts(20))
+    .filter((x) => !isDemoted(x.title))
+    .slice(0, 4);
   const log = getLog(1);
   const byHand = getByHand();
   const first = getFirstCommit();
@@ -109,39 +87,18 @@ export default async function Home() {
           the rail's contents fall back inline. */}
       <div className="railpage">
         <h1 className="rise">
-          <span className="lead">Shipping got easy.</span>
-          Judgement didn&apos;t.
+          <span className="lead">The hard part was never the AI.</span>
+          It was the operating system around it.
         </h1>
 
         <div className="herorow rise rise-2">
-          {/* The status the pill used to carry, demoted to marginalia:
-              the information was useful, the badge was the problem. */}
-          <aside className="railnote">
-            {/* The site's mark, traced. It was stranded on /loops; the page
-                is about a loop, so the loop opens it. pathLength normalises
-                the dash to the path so the animation does not depend on the
-                curve's measured length. */}
-            <svg
-              className="railmark"
-              viewBox="0 0 84 48"
-              aria-hidden="true"
-              focusable="false"
-            >
-              <path
-                d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
-                pathLength={100}
-              />
-            </svg>
-            <span>London</span>
-            <span>Available now</span>
-          </aside>
           <p className="lede">
-            I&apos;m Elliot. Builder-operator in London, four times a founding
-            hire. I spent four years on an AI tutor that coaches a student to
-            the answer and refuses to hand it over, and most of my work since
-            has been the same problem in different clothes: deciding whether
-            what a model produced is good enough to put in front of someone who
-            cannot absorb a wrong answer.
+            I&apos;m Elliot, a product builder in London and four times a
+            founding hire. I spent four years on an A-Level AI tutor the UK
+            government picked for its national programme on safe AI tutoring. I
+            write about what actually breaks when you ship AI to people who
+            cannot absorb a wrong answer, and every morning a fleet of agents I
+            built reads a few hundred sources and briefs me before I sit down.
           </p>
           {/* Sits in the whitespace the lede's 52ch measure already leaves,
               so it costs the text no width. */}
@@ -228,15 +185,29 @@ export default async function Home() {
         )}
 
         <Reveal>
-          <h2>where to look</h2>
-          <ul className="index">
-            {INDEX.map(([href, label, body]) => (
-              <li key={href}>
-                <Link href={href}>{label}</Link>
-                <p>{body}</p>
+          <h2>what I write about</h2>
+          <p className="muted" style={{ marginTop: 0 }}>
+            Shipping AI to people who cannot absorb a wrong answer, and what
+            the loop talk leaves out.
+          </p>
+          <ul className="work">
+            {posts.map((w) => (
+              <li key={w.link}>
+                <div className="wtop">
+                  <a className="wname" href={w.link}>
+                    {w.title}
+                  </a>
+                  <span className="wmeta">{w.date}</span>
+                </div>
+                {noteFor(w.title) && (
+                  <p className="wclaim">{noteFor(w.title)}</p>
+                )}
               </li>
             ))}
           </ul>
+          <p className="muted wmore">
+            <Link href="/writing">Everything, with why each piece exists</Link>.
+          </p>
         </Reveal>
         </div>
 

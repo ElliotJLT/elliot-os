@@ -1712,13 +1712,19 @@ dd {
 
   /* The headline and the hero row span both tracks; the hero row then sets
      up its own rail internally so the lede still starts on the measure. */
+  /* The hero row used to span the rail because the margin note lived in it.
+     With the note gone it belongs in the measure like everything else, or
+     the lede starts 130px left of the headline above it. */
   .railpage > .herorow {
-    grid-column: 1 / -1;
+    grid-column: 2;
   }
 
+  /* Two children now that the margin note is gone. Leaving the old rail
+     column in place put the lede into a 104px track and made the homepage
+     1,100px taller at 1440 than it was at 900. */
   .herorow {
     display: grid;
-    grid-template-columns: var(--rail) minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     column-gap: var(--gutter);
     align-items: start;
   }
@@ -2225,4 +2231,54 @@ h2::before {
   font-family: var(--serif);
   font-size: 17px;
   color: var(--ink);
+}
+
+/* ================================================================= case */
+/* A project as a case study: what the problem was, what got decided, where
+   the work actually went, what happened. Labels hang in the margin on a wide
+   screen and sit above their beat on a narrow one, so the four questions can
+   be read down the left edge without reading the prose. */
+.case {
+  margin: 26px 0 0;
+  max-width: 68ch;
+}
+
+.case dt {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 6px;
+}
+
+.case dd {
+  margin: 0 0 26px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.case dd:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 880px) {
+  .case {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    column-gap: 32px;
+  }
+
+  .case dt {
+    grid-column: 1;
+    text-align: right;
+    /* optically aligns the small caps label with the first line of its beat */
+    margin-top: 5px;
+  }
+
+  .case dd {
+    grid-column: 2;
+    margin-bottom: 24px;
+  }
 }

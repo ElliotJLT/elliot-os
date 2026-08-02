@@ -76,23 +76,49 @@ export default async function Built() {
             A private tutor at the shoulder of students whose families could
             never pay for one.
           </p>
-          <p>
-            Socratic by design: it coaches a student to the answer and will not
-            hand it over, however creatively they ask. Coaching, practice,
-            marking and assignments each run as their own agent with their own
-            pedagogy and guardrails, and an always-on evaluator grades every
-            session against that spec before anything reaches a student.
-          </p>
-          <p>
-            Marking is tested against real past papers and official mark
-            schemes. That eval work took accuracy from a ~67% bare-model
-            baseline to over 99%. Live across four STEM subjects on every major
-            UK exam board, first commit to the App Store in 45 days, and
-            selected as one of eight companies nationally for the DfE and DSIT
-            AI Tutoring Tools Pioneers Programme, built to the government&apos;s
-            Generative AI Product Safety Standards. I built and deployed it at
-            Zero Gravity.
-          </p>
+          {/* Set as a case study rather than a description. A list of
+              features says what exists; the beats below say what was decided
+              and what it cost, which is the thing a reader is actually
+              trying to work out. */}
+          <dl className="case">
+            <dt>the problem</dt>
+            <dd>
+              A-Level students whose families cannot buy an hour of a tutor&apos;s
+              time. The obvious build is a chatbot that answers homework, which
+              raises a grade once and teaches nothing. The useful build refuses.
+            </dd>
+
+            <dt>the call</dt>
+            <dd>
+              Socratic from the prompt up, and hold it under pressure: students
+              get inventive about extracting the answer, so refusing had to
+              survive adversarial asking rather than a polite first no. Coaching,
+              practice, marking and assignments run as separate agents with their
+              own pedagogy and evaluator, because one prompt doing four jobs
+              degrades all four.
+            </dd>
+
+            <dt>where the work actually went</dt>
+            <dd>
+              Not the model. Correctness evaluation: marking tested against real
+              past papers and official mark schemes, an always-on evaluator
+              grading every coaching session against the Socratic spec, and
+              safety telemetry on every interaction. Shipping daily while the
+              safeguards only got tighter was the discipline problem, and it was
+              harder than the AI.
+            </dd>
+
+            <dt>what happened</dt>
+            <dd>
+              Marking accuracy from a ~67% bare-model baseline to over 99%. Live
+              across four STEM subjects on every major UK exam board, direct to
+              students and through a school hub for teachers. First commit to
+              the App Store in 45 days. Selected as one of eight companies
+              nationally for the DfE and DSIT AI Tutoring Tools Pioneers
+              Programme, held to the government&apos;s Generative AI Product
+              Safety Standards.
+            </dd>
+          </dl>
           <div className="flinks">
             <a href="https://www.zerogravity.co.uk/tutor">the product</a>
             <a href="https://apps.apple.com/gb/app/zero-gravity-tutor/id6760364095">
