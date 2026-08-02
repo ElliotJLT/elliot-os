@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { getLog, getFirstCommit } from "@/lib/gitlog";
-import { getByHand } from "@/lib/content";
 import { getContributions } from "@/lib/contributions";
 import { getPosts, noteFor, isDemoted } from "@/lib/writing";
 import Calendar from "./components/Calendar";
@@ -70,7 +69,6 @@ export default async function Home() {
     .filter((x) => !isDemoted(x.title))
     .slice(0, 4);
   const log = getLog(1);
-  const byHand = getByHand();
   const first = getFirstCommit();
 
   const rebuilt = new Date().toISOString().slice(0, 16).replace("T", " ");
@@ -90,12 +88,9 @@ export default async function Home() {
 
         <div className="herorow rise">
           <p className="lede opener">
-            I&apos;m Elliot, a product builder in London and four times a
-            founding hire. I spent four years on an A-Level AI tutor the UK
-            government picked for its national programme on safe AI tutoring. I
-            write about what actually breaks when you ship AI to people who
-            cannot absorb a wrong answer, and every morning a fleet of agents I
-            built reads a few hundred sources and briefs me before I sit down.
+            I&apos;m Elliot, a product builder in London. Four times a founding
+            hire. Four years on an AI tutor the UK government picked for its
+            national programme on safe AI tutoring.
           </p>
           {/* Sits in the whitespace the lede's 52ch measure already leaves,
               so it costs the text no width. */}
@@ -152,14 +147,6 @@ export default async function Home() {
             </Link>
             .
           </p>
-        </Reveal>
-
-        <Reveal>
-          <h2>what I am doing now</h2>
-          <div
-            className="prose byhand"
-            dangerouslySetInnerHTML={{ __html: byHand }}
-          />
         </Reveal>
 
         {contrib && (
