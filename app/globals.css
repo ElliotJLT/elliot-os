@@ -249,23 +249,29 @@ h1 {
   text-wrap: balance;
 }
 
-/* Section headers as written notes. The old treatment was 11px uppercase at
-   0.18em tracking over a 2px ink rule with a leading numeral: a document
-   pretending to be a report. These are annotations instead, set in the
-   display italic at reading size, lowercase, with a hairline above for
-   separation rather than a bar for authority. */
+/* numbered section headers, set like a report's section rules */
 h2 {
-  font-family: var(--display);
-  font-style: italic;
-  font-size: 27px;
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.15;
-  text-transform: none;
-  color: var(--ink);
-  margin: 62px 0 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 58px 0 20px;
+  padding-top: 12px;
+  border-top: 2px solid var(--rule);
+}
+
+h2::before {
+  counter-increment: sec;
+  content: counter(sec, decimal-leading-zero);
+  font-family: var(--mono);
+  color: var(--accent-ink);
+  font-weight: 500;
+  letter-spacing: 0;
 }
 
 .prose h2 {
