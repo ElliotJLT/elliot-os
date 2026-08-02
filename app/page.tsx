@@ -86,13 +86,10 @@ export default async function Home() {
           both; the body indents off it. Below 1020px it is one column and
           the rail's contents fall back inline. */}
       <div className="railpage">
-        <h1 className="rise">
-          <span className="lead">The hard part was never the AI.</span>
-          It was the operating system around it.
-        </h1>
+        <h1 className="vh">Elliot Little</h1>
 
-        <div className="herorow rise rise-2">
-          <p className="lede">
+        <div className="herorow rise">
+          <p className="lede opener">
             I&apos;m Elliot, a product builder in London and four times a
             founding hire. I spent four years on an A-Level AI tutor the UK
             government picked for its national programme on safe AI tutoring. I

@@ -11,16 +11,16 @@
    ======================================================================== */
 
 :root {
-  --bg: #f7f4ed;
-  --bg-2: #efeadf;
-  --paper: #fdfbf6;
-  --ink: #1b1811;
-  --ink-2: #423c30;
-  --muted: #6a6456;
-  --faint: #9a9384;
-  --line: #ddd6c6;
-  --line-2: #c9c1ae;
-  --rule: #1b1811;
+  --bg: #fbfaf8;
+  --bg-2: #f2f0eb;
+  --paper: #ffffff;
+  --ink: #0f0e0c;
+  --ink-2: #3a3733;
+  --muted: #605d57;
+  --faint: #918e87;
+  --line: #e5e2db;
+  --line-2: #cecabf;
+  --rule: #0f0e0c;
   --accent: #cc5600;
   --accent-ink: #a84600;
   --accent-2: #3f6b47;
@@ -32,21 +32,22 @@
   --sans: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
   --serif: var(--font-serif), "Iowan Old Style", "Georgia", serif;
+  --display: var(--font-display), "Instrument Serif", "Times New Roman", serif;
   --r: 2px;
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  --bg: #14120d;
-  --bg-2: #1a1711;
-  --paper: #1b1811;
-  --ink: #ece6d8;
-  --ink-2: #cfc8b8;
-  --muted: #a09985;
-  --faint: #6f6858;
-  --line: #2c281f;
-  --line-2: #3d3729;
-  --rule: #4a4433;
+  --bg: #0d0c0b;
+  --bg-2: #141310;
+  --paper: #151412;
+  --ink: #f4f1eb;
+  --ink-2: #d6d2ca;
+  --muted: #9b978e;
+  --faint: #6d6a63;
+  --line: #242220;
+  --line-2: #37342f;
+  --rule: #3a3733;
   --accent: #e8641a;
   --accent-ink: #f0782e;
   --accent-2: #7bb389;
@@ -236,7 +237,7 @@ main {
 }
 
 h1 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: clamp(38px, 6.4vw, 62px);
   /* 1.02 let descenders on a two-line headline crowd the line beneath, and
      18px under a 62px display size is about a quarter of its height, which
@@ -248,29 +249,23 @@ h1 {
   text-wrap: balance;
 }
 
-/* numbered section headers, set like a report's section rules */
+/* Section headers as written notes. The old treatment was 11px uppercase at
+   0.18em tracking over a 2px ink rule with a leading numeral: a document
+   pretending to be a report. These are annotations instead, set in the
+   display italic at reading size, lowercase, with a hairline above for
+   separation rather than a bar for authority. */
 h2 {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin: 58px 0 20px;
-  padding-top: 12px;
-  border-top: 2px solid var(--rule);
-}
-
-h2::before {
-  counter-increment: sec;
-  content: counter(sec, decimal-leading-zero);
-  font-family: var(--mono);
-  color: var(--accent-ink);
-  font-weight: 500;
-  letter-spacing: 0;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 27px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  text-transform: none;
+  color: var(--ink);
+  margin: 62px 0 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
 }
 
 .prose h2 {
@@ -1334,7 +1329,7 @@ html:not(.js) .reader:first-child {
 }
 
 .flagship h3 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: clamp(26px, 3.4vw, 34px);
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -1536,7 +1531,7 @@ h1 .lead {
 }
 
 .index li > a {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 22px;
   font-weight: 500;
   line-height: 1.2;
@@ -2045,7 +2040,7 @@ h2::before {
 }
 
 .wname {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 21px;
   font-weight: 500;
   letter-spacing: -0.012em;
@@ -2141,7 +2136,7 @@ h2::before {
 }
 
 .fname {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-size: 20px;
   font-weight: 500;
   letter-spacing: -0.01em;
@@ -2280,5 +2275,36 @@ h2::before {
   .case dd {
     grid-column: 2;
     margin-bottom: 24px;
+  }
+}
+
+/* Visually hidden, still read by machines and screen readers. */
+.vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* The opener. With no strapline above it this paragraph is the first thing
+   read, so it is set at display scale rather than as a caption under a slogan
+   that was doing the work it should have been doing itself. */
+.opener {
+  font-size: clamp(21px, 2.5vw, 27px);
+  line-height: 1.45;
+  color: var(--ink);
+  /* 30ch ran this paragraph to eleven lines. At 27px the comfortable measure
+     is wider, and the portrait already takes the right of the row. */
+  max-width: 34ch;
+  margin-top: 6px;
+}
+
+@media (min-width: 700px) {
+  .opener {
+    max-width: 46ch;
   }
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Newsreader, Archivo } from "next/font/google";
+import { Newsreader, Archivo, Instrument_Serif } from "next/font/google";
 import { getSpend } from "@/lib/telemetry";
 import NavLinks from "./components/NavLinks";
 import ThemeToggle from "./components/ThemeToggle";
@@ -18,6 +18,17 @@ const newsreader = Newsreader({
   style: ["normal", "italic"],
   display: "swap",
   variable: "--font-serif",
+});
+
+// A display face with real stroke contrast. Newsreader is a soft old-style
+// built for long reading; at 74px it reads gentle, which is the single
+// biggest reason this page kept coming back as "tasteful and boring".
+const instrument = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-display",
 });
 
 const archivo = Archivo({
@@ -54,7 +65,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${archivo.variable}`}
+      className={`${newsreader.variable} ${archivo.variable} ${instrument.variable}`}
       suppressHydrationWarning
     >
       <body>
