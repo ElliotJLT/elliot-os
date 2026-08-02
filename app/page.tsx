@@ -63,6 +63,32 @@ const WORK: {
   },
 ];
 
+/**
+ * The builds that predate the models. Without these the page reads as though
+ * a career began when the API did, and four of these were founding-team jobs
+ * with outcomes that have nothing to do with AI.
+ */
+const PRIOR: { name: string; meta: string; claim: string }[] = [
+  {
+    name: "MealsForTheNHS",
+    meta: "co-founder · 2020",
+    claim:
+      "A marketplace built in ten days to get restaurant meals to NHS staff through the first lockdown. £1.8m raised, 303,000 meals delivered, 146 hospitals.",
+  },
+  {
+    name: "Farewill",
+    meta: "wills and probate",
+    claim:
+      "Product in an SRA and FCA regulated environment, where a bad flow is a legal problem rather than a support ticket. Turned probate into steps a grieving family could follow without paying a solicitor.",
+  },
+  {
+    name: "Flash Pack",
+    meta: "founding team",
+    claim:
+      "Founding-team product work through the stretch that took the company from pre-seed to Series A.",
+  },
+];
+
 export default async function Home() {
   const contrib = await getContributions();
   const posts = (await getPosts(20))
@@ -87,10 +113,13 @@ export default async function Home() {
         <h1 className="vh">Elliot Little</h1>
 
         <div className="herorow rise">
+          {/* The refusal first, because it is the product decision nobody else
+              made, then the two facts that prove it was not a prototype. */}
           <p className="lede opener">
             I&apos;m Elliot, a product builder in London. Four times a founding
-            hire. Four years on an AI tutor the UK government picked for its
-            national programme on safe AI tutoring.
+            hire. My last build was an A-Level tutor that refuses to hand
+            students the answer. App Store in 45 days, one of eight picked
+            nationally for safe AI tutoring.
           </p>
           {/* Sits in the whitespace the lede's 52ch measure already leaves,
               so it costs the text no width. */}
@@ -167,6 +196,24 @@ export default async function Home() {
             </p>
           </Reveal>
         )}
+
+        <Reveal>
+          <h2>before the models</h2>
+          <p className="muted" style={{ marginTop: 0 }}>
+            I did not start building when the API did.
+          </p>
+          <ul className="work">
+            {PRIOR.map((w) => (
+              <li key={w.name}>
+                <div className="wtop">
+                  <span className="wname">{w.name}</span>
+                  <span className="wmeta">{w.meta}</span>
+                </div>
+                <p className="wclaim">{w.claim}</p>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
 
         <Reveal>
           <h2>what I write about</h2>
