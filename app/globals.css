@@ -500,6 +500,25 @@ li {
   border-color: var(--line);
 }
 
+/* Two paragraphs used to run single-column at a 66ch cap, leaving the
+   entire right half of a 1120px page empty. On a wide screen they run
+   side by side instead — the same fix as the research-card passage. */
+.through-line {
+  margin-bottom: 8px;
+}
+
+@media (min-width: 900px) {
+  .through-line {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 48px;
+  }
+
+  .through-line p {
+    max-width: none;
+  }
+}
+
 /* ------------------------------------------------------- the through-line */
 /* Was a running list split by hairlines, the same treatment as everything
    else on the old page. Each repo is its own card now, same language as
@@ -1065,46 +1084,6 @@ footer a {
     animation: none;
     stroke-dasharray: none;
   }
-}
-
-/* --------------------------------------------------- reference as a card */
-/* The fuller version of the homepage's .vouch: same card and quote-mark
-   badge, with room for the supporting paragraphs the homepage pull-quote
-   doesn't carry. */
-.reference-card {
-  margin: 0 0 40px;
-  padding: 40px 40px 36px;
-  background: var(--bg-2);
-  border-radius: 20px;
-  max-width: 720px;
-}
-
-.reference-card blockquote {
-  margin: 0 0 20px;
-  font-family: var(--serif);
-  font-size: clamp(19px, 2.2vw, 23px);
-  line-height: 1.4;
-  color: var(--ink);
-  max-width: 44ch;
-}
-
-.reference-card p {
-  font-family: var(--serif);
-  color: var(--ink-2);
-  font-size: 16px;
-  line-height: 1.55;
-  max-width: 58ch;
-}
-
-.reference-card figcaption {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 4px 12px;
-  padding-top: 18px;
-  margin-top: 8px;
-  border-top: 1px solid var(--line);
-  max-width: 58ch;
 }
 
 /* ------------------------------------------------------ rendering details */
@@ -2369,6 +2348,10 @@ main:has(> .band) {
     grid-row: 1 / -1;
     align-self: center;
     margin-bottom: 0;
+    /* .mai-sub's own 56ch cap is for the centred hero context — here the
+       grid column is already the right measure, and the ch cap on top of
+       it just left the column's own width unused. */
+    max-width: none;
   }
 }
 

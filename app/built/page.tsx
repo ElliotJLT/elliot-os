@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { getRepos, FEATURED } from "@/lib/github";
 import { getRoles } from "@/lib/roles";
-import { getQuotes } from "@/lib/quotes";
 import ArgusFlow from "../components/ArgusFlow";
 import Reveal from "../components/Reveal";
 import { CareerCards } from "../components/Career";
@@ -56,7 +55,6 @@ const BLURBS: Record<string, { title: string; blurb: string }> = {
 export default async function Built() {
   const repos = await getRepos();
   const record = getRoles();
-  const { reference: ref } = getQuotes();
   const byName = new Map(repos.map((r) => [r.name, r]));
 
   return (
@@ -151,24 +149,26 @@ export default async function Built() {
           <h2 className="mai-kick rv-settle">the through-line</h2>
         </Reveal>
         <Reveal>
-          <p className="muted rv-settle" style={{ marginTop: 0 }}>
-            Producing plausible output is no longer the hard part. Knowing
-            whether to ship it still is, and that gap is where most of my
-            work has gone. The same question keeps surfacing at different
-            points in a system: what got checked, what got rejected, and who
-            decided. Before a student sees a mark. Before a child&apos;s
-            disclosure gets missed. Before an application goes out. Before an
-            agent changes this page.
-          </p>
-        </Reveal>
-        <Reveal>
-          <p className="muted rv-settle">
-            It applies to the model and to the person equally. You read what
-            the loop made, and you can defend what carries your name.{" "}
-            <a href="https://elliotjlt.github.io/crux/research.html">crux</a>{" "}
-            is the instrument I built to find out whether that actually
-            holds.
-          </p>
+          <div className="through-line rv-settle">
+            <p className="muted" style={{ marginTop: 0 }}>
+              Producing plausible output is no longer the hard part. Knowing
+              whether to ship it still is, and that gap is where most of my
+              work has gone. The same question keeps surfacing at different
+              points in a system: what got checked, what got rejected, and
+              who decided. Before a student sees a mark. Before a
+              child&apos;s disclosure gets missed. Before an application
+              goes out. Before an agent changes this page.
+            </p>
+            <p className="muted">
+              It applies to the model and to the person equally. You read
+              what the loop made, and you can defend what carries your name.{" "}
+              <a href="https://elliotjlt.github.io/crux/research.html">
+                crux
+              </a>{" "}
+              is the instrument I built to find out whether that actually
+              holds.
+            </p>
+          </div>
         </Reveal>
         <Reveal>
           <div className="record-grid rv-settle">
@@ -240,28 +240,6 @@ export default async function Built() {
           <div className="rv-settle">
             <CareerCards roles={record.roles} />
           </div>
-        </Reveal>
-
-        <Reveal>
-          <h2 className="mai-kick rv-settle">reference</h2>
-        </Reveal>
-        <Reveal>
-          <figure className="reference-card rv-settle">
-            <div className="vouch-mark" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 8c-2.2 0-4 1.8-4 4v6h6v-6H7c0-1.1.9-2 2-2V8H8zm10 0c-2.2 0-4 1.8-4 4v6h6v-6h-3c0-1.1.9-2 2-2V8h-1z" />
-              </svg>
-            </div>
-            <blockquote>{ref.pull}</blockquote>
-            {ref.body.map((para) => (
-              <p key={para.slice(0, 24)}>{para}</p>
-            ))}
-            <figcaption>
-              <span className="vname">{ref.name}</span>
-              <span className="vrole">{ref.role}</span>
-              <span className="refnote">{ref.note}</span>
-            </figcaption>
-          </figure>
         </Reveal>
 
         <Reveal>
