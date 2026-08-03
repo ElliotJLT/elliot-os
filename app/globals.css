@@ -1379,49 +1379,37 @@ h2::before {
    the work actually went, what happened. Labels hang in the margin on a wide
    screen and sit above their beat on a narrow one, so the four questions can
    be read down the left edge without reading the prose. */
+/* The label used to sit in a fixed 11rem right-aligned column beside its
+   answer once the viewport crossed 880px — cramped and prone to wrapping
+   badly at exactly the widths where it kicked in. A small chip above the
+   answer, always stacked, gives the answer the full card width at any
+   size instead of fighting a rigid column for it. */
 .case {
   margin: 26px 0 0;
   max-width: 68ch;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
 .case dt {
+  display: inline-block;
   font-family: var(--mono);
   font-size: 10.5px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
-  margin-bottom: 6px;
+  background: var(--paper);
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin-bottom: 8px;
 }
 
 .case dd {
-  margin: 0 0 26px;
+  margin: 0;
   color: var(--muted);
   font-size: 16px;
   line-height: 1.6;
-}
-
-.case dd:last-child {
-  margin-bottom: 0;
-}
-
-@media (min-width: 880px) {
-  .case {
-    display: grid;
-    grid-template-columns: 11rem 1fr;
-    column-gap: 32px;
-  }
-
-  .case dt {
-    grid-column: 1;
-    text-align: right;
-    /* optically aligns the small caps label with the first line of its beat */
-    margin-top: 5px;
-  }
-
-  .case dd {
-    grid-column: 2;
-    margin-bottom: 24px;
-  }
 }
 
 /* ==================================================================== footer */
