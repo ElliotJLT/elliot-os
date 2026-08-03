@@ -53,22 +53,6 @@ export default function Values({
         ))}
       </ul>
 
-      {/* The site's own mark: the same continuously-traced lemniscate used on
-          /loops, rather than a bespoke scroll-drawn squiggle for this section
-          alone. One mark, used everywhere it appears. */}
-      <svg
-        className="vals-mark"
-        viewBox="0 0 84 48"
-        aria-hidden="true"
-        focusable="false"
-      >
-        <path
-          className="vals-mark-trace"
-          d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
-          pathLength={100}
-        />
-      </svg>
-
       <div className="vals-said">
         {items.map((v, n) => (
           <p key={v.name} data-on={n === i || undefined}>
