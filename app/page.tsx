@@ -3,7 +3,6 @@ import { getPosts, noteFor, isDemoted } from "@/lib/writing";
 import { getQuotes } from "@/lib/quotes";
 import { getMedia } from "@/lib/writing";
 import { getRoles } from "@/lib/roles";
-import { CareerCards } from "./components/Career";
 import Reveal, { Words } from "./components/Reveal";
 import { WorkIcon, Pill, Slot } from "./components/Frame";
 import Values from "./components/Values";
@@ -80,10 +79,16 @@ function Row({
   );
 }
 
-const CAPS = [
-  { h: "Build", items: ["Multi-agent systems", "Evals and judges", "MCP servers", "0-to-1 product"] },
-  { h: "Decide", items: ["Verification specs", "Safeguarding layers", "Adversarial review", "Error analysis"] },
-  { h: "Operate", items: ["Agent fleets", "Scheduled loops", "Cost metering", "Shipping cadence"] },
+const STACK = [
+  "Claude",
+  "Claude Code",
+  "Next.js",
+  "Rails",
+  "Hotwire Native",
+  "pgvector",
+  "RAG",
+  "MCP",
+  "Multi-agent systems",
 ];
 
 export default async function Home() {
@@ -129,15 +134,20 @@ export default async function Home() {
             </div>
           </div>
         </Reveal>
+        <a href="#principles" className="band-scroll" aria-label="Scroll to the next section">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </a>
       </section>
 
     <div className="mai">
       <Values
         items={[
           { name: "Refusal", said: "My tutor coaches a student to the answer and refuses to hand it over. A build that just answers the homework raises a grade once and teaches nothing." },
-          { name: "Verification", said: "I built the eval that gated every release: marking graded against real past papers, a ~67% baseline to over 99%. That's what decided whether it shipped, not a gut call." },
-          { name: "Judgement", said: "I ran the safeguarding detector deliberately over-sensitive for ten weeks and reviewed every false alarm myself. That's the call a diff never shows." },
-          { name: "Receipts", said: "The token spend, the agent runs, the commit history: every number on this site is computed from something you can go and check yourself." },
+          { name: "Verification", said: "ward's published eval sets score 90% recall at 100% precision against a keyword baseline of 50/83. Verification means a number anyone can rerun, not a claim." },
+          { name: "Judgement", said: "A diff never records what I rejected, redirected or killed while the model did the typing. I built crux to capture that judgement instead of losing it." },
+          { name: "Receipts", said: "Farewill's 69% drop in agent errors. Flash Pack's 400% growth. This site's own metered spend. Every number I put in front of you, you can go check." },
         ]}
       />
 
@@ -161,37 +171,41 @@ export default async function Home() {
         <h2 className="mai-kick rv-settle">Career</h2>
       </Reveal>
       <Reveal>
-        <div className="rv-settle">
-          <CareerCards roles={roles} />
+        <div className="career-split rv-settle">
+          <ol className="career-timeline">
+            {roles.map((r) => (
+              <li key={r.org}>
+                <h3>{r.url ? <a href={r.url}>{r.org}</a> : r.org}</h3>
+                {(r.role || r.dates) && (
+                  <span className="career-meta">
+                    {[r.role, r.dates].filter(Boolean).join(" · ")}
+                  </span>
+                )}
+                <p>{r.outcome}</p>
+              </li>
+            ))}
+          </ol>
+          <figure className="vouch">
+            <div className="vouch-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 8c-2.2 0-4 1.8-4 4v6h6v-6H7c0-1.1.9-2 2-2V8H8zm10 0c-2.2 0-4 1.8-4 4v6h6v-6h-3c0-1.1.9-2 2-2V8h-1z" />
+              </svg>
+            </div>
+            <blockquote>{ref.pull}</blockquote>
+            <figcaption>
+              <span className="vname">{ref.name}</span>
+              <span className="vrole">{ref.role}</span>
+            </figcaption>
+          </figure>
         </div>
       </Reveal>
 
       <Reveal>
-        <figure className="vouch rv-settle">
-          <div className="vouch-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M8 8c-2.2 0-4 1.8-4 4v6h6v-6H7c0-1.1.9-2 2-2V8H8zm10 0c-2.2 0-4 1.8-4 4v6h6v-6h-3c0-1.1.9-2 2-2V8h-1z" />
-            </svg>
-          </div>
-          <blockquote>{ref.pull}</blockquote>
-          <figcaption>
-            <span className="vname">{ref.name}</span>
-            <span className="vrole">{ref.role}</span>
-          </figcaption>
-        </figure>
-      </Reveal>
-
-      <Reveal>
-        <div className="mai-caps">
-          {CAPS.map((c) => (
-            <div className="mai-cap rv-settle" key={c.h}>
-              <h3>{c.h}</h3>
-              <ul>
-                {c.items.map((i) => (
-                  <li key={i}>{i}</li>
-                ))}
-              </ul>
-            </div>
+        <div className="stack-row rv-settle">
+          {STACK.map((s) => (
+            <span className="stack-chip" key={s}>
+              {s}
+            </span>
           ))}
         </div>
       </Reveal>

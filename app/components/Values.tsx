@@ -58,6 +58,7 @@ export default function Values({
   return (
     <div
       className="vals-wrap"
+      id="principles"
       ref={ref}
       style={{ "--vals-n": items.length } as React.CSSProperties}
     >
