@@ -5,7 +5,7 @@ import { getSpend } from "@/lib/telemetry";
 import NavLinks from "./components/NavLinks";
 import ThemeToggle from "./components/ThemeToggle";
 import { IconLink } from "./components/Icons";
-import { PaintedDefs } from "./components/Frame";
+import { Pill } from "./components/Frame";
 import "./globals.css";
 
 const basePath = process.env.BASE_PATH || "";
@@ -72,7 +72,6 @@ export default function RootLayout({
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
-        <PaintedDefs />
         {/* Floating pill masthead, inset from the top the way MAI's is,
             rather than a full-bleed bar welded to the viewport edge. */}
         <header className="mai-nav">
@@ -84,9 +83,9 @@ export default function RootLayout({
               <NavLinks />
             </nav>
             <ThemeToggle />
-            <a className="pill pill-solid" href="mailto:elliotjlittle@gmail.com">
+            <Pill href="mailto:elliotjlittle@gmail.com" tone="solid">
               Get in touch
-            </a>
+            </Pill>
           </div>
         </header>
         {children}
@@ -100,12 +99,12 @@ export default function RootLayout({
                 One closing block. */}
             <div className="foot-cta">
               <div className="band-cta">
-                <a className="pill pill-solid" href="mailto:elliotjlittle@gmail.com">
-                  Get in touch <span className="pill-arrow" aria-hidden="true">→</span>
-                </a>
-                <Link className="pill pill-soft" href="/built">
+                <Pill href="mailto:elliotjlittle@gmail.com" tone="solid" arrow>
+                  Get in touch
+                </Pill>
+                <Pill href="/built" tone="soft">
                   See the work
-                </Link>
+                </Pill>
               </div>
             </div>
             <div className="foot-cols">

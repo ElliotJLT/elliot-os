@@ -1,50 +1,82 @@
-import Link from "next/link";
-import { getContributions } from "@/lib/contributions";
-
 const basePath = process.env.BASE_PATH || "";
 import { getPosts, noteFor, isDemoted } from "@/lib/writing";
 import { getQuotes } from "@/lib/quotes";
 import { getMedia } from "@/lib/writing";
 import Reveal, { Words } from "./components/Reveal";
-import { Slot, Pill } from "./components/Frame";
+import { WorkIcon, Pill, Slot } from "./components/Frame";
 import Values from "./components/Values";
 
-/** Each build gets a row: an image, a name, and what it does. */
-const WORK = [
+/** Each build gets a row: an icon, a name, and what it does. */
+const WORK: {
+  name: string;
+  href: string;
+  label: string;
+  icon: "tutor" | "ward" | "argus" | "crux";
+  body: string;
+}[] = [
   {
     name: "Zero Gravity AI STEM tutor",
     href: "https://www.zerogravity.co.uk/tutor",
     label: "In production",
-    slot: "Tutor screenshot",
+    icon: "tutor",
     body: "An A-Level tutor that coaches a student to the answer and refuses to hand it over. Marking tested against official mark schemes took accuracy from a ~67% bare-model baseline to over 99%. Four subjects, every major UK exam board.",
   },
   {
     name: "ward",
     href: "https://github.com/ElliotJLT/ward",
     label: "Published evals",
-    slot: "Eval results",
+    icon: "ward",
     body: "Separates a real safeguarding disclosure from a child having a bad day, grounded in KCSIE rather than keyword matching. 90% recall at 100% precision, against 50/83 for a keyword baseline.",
   },
   {
     name: "argus",
     href: "/built",
     label: "Private fleet, daily",
-    slot: "Brief screenshot",
+    icon: "argus",
     body: "Five agents that read a few hundred sources a day and brief me before I sit down. Ingest is immutable and the corpus only appends. When I disagree with an artefact, my correction is written back as the position.",
   },
   {
     name: "crux",
     href: "https://elliotjlt.github.io/crux/research.html",
     label: "Ongoing research",
-    slot: "Research chart",
+    icon: "crux",
     body: "Logs what a human rejected, redirected or killed while the model did the typing. Method, results run on myself, objections and limitations all published.",
   },
 ];
 
-/** The principles, one lit and the rest waiting, as MAI stacks them. */
-const VALS = [
-  ["Refusal", "The useful build says no. A tutor that answers homework raises a grade once and teaches nothing."],
-];
+/** One row shape for a project and a piece of writing alike: an image, a
+ *  label, a name, a CTA, and a line of body copy. */
+function Row({
+  image,
+  label,
+  name,
+  href,
+  cta,
+  body,
+  card = false,
+}: {
+  image: React.ReactNode;
+  label: string;
+  name: string;
+  href: string;
+  cta: string;
+  body: string | null;
+  card?: boolean;
+}) {
+  return (
+    <article className={"mai-row" + (card ? " work-row" : "")}>
+      <div className="rv-develop">{image}</div>
+      <div className="rv-settle">
+        <span className="mai-rowlabel">{label}</span>
+        <a className="mai-rowname" href={href}>
+          {name}
+        </a>
+        <Pill href={href}>{cta}</Pill>
+      </div>
+      <p className="mai-rowbody rv-settle">{body}</p>
+    </article>
+  );
+}
 
 const CAPS = [
   { h: "Build", items: ["Multi-agent systems", "Evals and judges", "MCP servers", "0-to-1 product"] },
@@ -53,7 +85,6 @@ const CAPS = [
 ];
 
 export default async function Home() {
-  const contrib = await getContributions();
   const { reference: ref } = getQuotes();
   const media = getMedia();
   const posts = (await getPosts(20)).filter((x) => !isDemoted(x.title)).slice(0, 3);
@@ -68,7 +99,7 @@ export default async function Home() {
           <div className="band-in">
             <span className="band-kick rv-settle">Hi, I&apos;m Elliot</span>
             <h1 className="band-h">
-              <Words text="I build AI that knows when to say no." />
+              <Words text="I build AI for the people a wrong answer actually hurts." />
             </h1>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -114,19 +145,15 @@ export default async function Home() {
       </Reveal>
       {WORK.map((w) => (
         <Reveal key={w.name}>
-          <article className="mai-row">
-            <div className="rv-develop">
-              <Slot label={w.slot} ratio="4 / 3" painted />
-            </div>
-            <div className="rv-settle">
-              <span className="mai-rowlabel">{w.label}</span>
-              <a className="mai-rowname" href={w.href}>
-                {w.name}
-              </a>
-              <Pill href={w.href}>Learn more</Pill>
-            </div>
-            <p className="mai-rowbody rv-settle">{w.body}</p>
-          </article>
+          <Row
+            card
+            image={<WorkIcon name={w.icon} />}
+            label={w.label}
+            name={w.name}
+            href={w.href}
+            cta="Learn more"
+            body={w.body}
+          />
         </Reveal>
       ))}
 
@@ -161,9 +188,10 @@ export default async function Home() {
       <Reveal>
         <h2 className="mai-kick rv-settle">Writing</h2>
         {posts.map((p) => (
-          <article className="mai-row" key={p.link}>
-            <div className="rv-develop">
-              {media.posts[p.link] ? (
+          <Row
+            key={p.link}
+            image={
+              media.posts[p.link] ? (
                 /* eslint-disable-next-line @next/next/no-img-element */
                 <img
                   className="painted artimg"
@@ -172,17 +200,14 @@ export default async function Home() {
                 />
               ) : (
                 <Slot label="Article image" ratio="4 / 3" painted />
-              )}
-            </div>
-            <div className="rv-settle">
-              <span className="mai-rowlabel">{p.date}</span>
-              <a className="mai-rowname" href={p.link}>
-                {p.title}
-              </a>
-              <Pill href={p.link}>Read it</Pill>
-            </div>
-            <p className="mai-rowbody rv-settle">{noteFor(p.title)}</p>
-          </article>
+              )
+            }
+            label={p.date}
+            name={p.title}
+            href={p.link}
+            cta="Read it"
+            body={noteFor(p.title)}
+          />
         ))}
       </Reveal>
 
