@@ -1,6 +1,7 @@
 import { getPosts, noteFor, isDemoted, getMedia } from "@/lib/writing";
 import { getQuotes } from "@/lib/quotes";
 import Reveal from "../components/Reveal";
+import HoverLabel from "../components/HoverLabel";
 
 export const metadata = { title: "Writing · Elliot Little" };
 
@@ -69,31 +70,32 @@ export default async function Writing() {
         <Reveal>
           <div className="wr-grid">
             {posts.map((p, idx) => (
-              <a
-                className="wr-card rv-settle"
-                href={p.link}
-                key={p.link}
-                style={{ "--rv-delay": `${idx * 90}ms` } as React.CSSProperties}
-              >
-                <div className="wr-shot rv-develop">
-                  {media.posts[p.link] ? (
-                    /* eslint-disable-next-line @next/next/no-img-element */
-                    <img src={`${basePath}/${media.posts[p.link]}`} alt="" />
-                  ) : (
-                    <span className="wr-noshot">No image</span>
-                  )}
-                </div>
-                <div className="wr-meta">
-                  <span className="wr-date">{p.date}</span>
-                  <h2 className="wr-h">{p.title}</h2>
-                  {noteFor(p.title) && (
-                    <p className="wr-note">{noteFor(p.title)}</p>
-                  )}
-                  <span className="wr-go">
-                    Read it <span aria-hidden="true">→</span>
-                  </span>
-                </div>
-              </a>
+              <HoverLabel label="Read it →" key={p.link}>
+                <a
+                  className="wr-card rv-settle"
+                  href={p.link}
+                  style={{ "--rv-delay": `${idx * 90}ms` } as React.CSSProperties}
+                >
+                  <div className="wr-shot rv-develop">
+                    {media.posts[p.link] ? (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img src={`${basePath}/${media.posts[p.link]}`} alt="" />
+                    ) : (
+                      <span className="wr-noshot">No image</span>
+                    )}
+                  </div>
+                  <div className="wr-meta">
+                    <span className="wr-date">{p.date}</span>
+                    <h2 className="wr-h">{p.title}</h2>
+                    {noteFor(p.title) && (
+                      <p className="wr-note">{noteFor(p.title)}</p>
+                    )}
+                    <span className="wr-go">
+                      Read it <span aria-hidden="true">→</span>
+                    </span>
+                  </div>
+                </a>
+              </HoverLabel>
             ))}
           </div>
         </Reveal>
