@@ -51,7 +51,7 @@ export default function Calendar({ data }: { data: Contributions }) {
 
   return (
     <svg
-      className="cal"
+      className="cal rv-develop"
       viewBox={`0 0 ${w} ${h + LABEL_H}`}
       role="img"
       aria-label={`${data.total.toLocaleString()} contributions between ${data.from} and ${data.to}`}

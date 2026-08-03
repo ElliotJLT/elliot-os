@@ -3,7 +3,7 @@ import { getLog, getFirstCommit } from "@/lib/gitlog";
 import { getContributions } from "@/lib/contributions";
 import { getPosts, noteFor, isDemoted } from "@/lib/writing";
 import Calendar from "./components/Calendar";
-import Reveal from "./components/Reveal";
+import Reveal, { Words } from "./components/Reveal";
 
 const basePath = process.env.BASE_PATH || "";
 
@@ -112,26 +112,31 @@ export default async function Home() {
       <div className="railpage">
         <h1 className="vh">Elliot Little</h1>
 
-        <div className="herorow rise">
+        <Reveal immediate>
+        <div className="herorow">
           {/* The refusal first, because it is the product decision nobody else
               made, then the two facts that prove it was not a prototype. */}
           <p className="lede opener">
-            I&apos;m Elliot, a product builder in London. Four times a founding
-            hire. My last build was an A-Level tutor that refuses to hand
-            students the answer, and one of eight picked nationally for safe
-            AI tutoring.
+            <Words
+              text={
+                "I'm Elliot, a product builder in London. Four times a founding hire. " +
+                "My last build was an A-Level tutor that refuses to hand students the " +
+                "answer, and one of eight picked nationally for safe AI tutoring."
+              }
+            />
           </p>
           {/* Sits in the whitespace the lede's 52ch measure already leaves,
               so it costs the text no width. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            className="portrait"
+            className="portrait rv-develop"
             src={`${basePath}/icon-512.png`}
             alt="Elliot Little"
             width={128}
             height={128}
           />
         </div>
+        </Reveal>
 
         {/* The thread: one continuous line down the gutter with the section
             numbers sitting on it. The page is called the through-line, so it
@@ -139,7 +144,7 @@ export default async function Home() {
         <div className="thread">
         <Reveal>
           <h2>the through-line</h2>
-          <p className="statement">
+          <p className="statement rv-settle">
             Models write plausible things now. Checking them didn&apos;t get
             easier, and that is where most of my work has gone. At Zero Gravity
             I built a tutor that coaches a student to the answer and will not
@@ -157,7 +162,7 @@ export default async function Home() {
 
         <Reveal>
           <h2>the work</h2>
-          <ul className="work">
+          <ul className="work rv-settle">
             {WORK.map((w) => (
               <li key={w.name}>
                 <div className="wtop">
@@ -170,7 +175,7 @@ export default async function Home() {
               </li>
             ))}
           </ul>
-          <p className="muted wmore">
+          <p className="muted wmore rv-settle">
             <Link href="/built">
               All of it, with what each piece decides and refuses to do
             </Link>
@@ -182,7 +187,7 @@ export default async function Home() {
           <Reveal>
             <h2>the year</h2>
             <Calendar data={contrib} />
-            <p className="muted calnote">
+            <p className="muted calnote rv-settle">
               {contrib.total.toLocaleString()} contributions in the twelve
               months to {contrib.to}, and{" "}
               <b>
@@ -199,10 +204,10 @@ export default async function Home() {
 
         <Reveal>
           <h2>before the models</h2>
-          <p className="muted" style={{ marginTop: 0 }}>
+          <p className="muted rv-settle" style={{ marginTop: 0 }}>
             I did not start building when the API did.
           </p>
-          <ul className="work">
+          <ul className="work rv-settle">
             {PRIOR.map((w) => (
               <li key={w.name}>
                 <div className="wtop">
@@ -217,11 +222,11 @@ export default async function Home() {
 
         <Reveal>
           <h2>what I write about</h2>
-          <p className="muted" style={{ marginTop: 0 }}>
+          <p className="muted rv-settle" style={{ marginTop: 0 }}>
             Shipping AI to people who cannot absorb a wrong answer, and what
             the loop talk leaves out.
           </p>
-          <ul className="work">
+          <ul className="work rv-settle">
             {posts.map((w) => (
               <li key={w.link}>
                 <div className="wtop">
@@ -236,7 +241,7 @@ export default async function Home() {
               </li>
             ))}
           </ul>
-          <p className="muted wmore">
+          <p className="muted wmore rv-settle">
             <Link href="/writing">Everything, with why each piece exists</Link>.
           </p>
         </Reveal>
