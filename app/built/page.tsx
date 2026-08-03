@@ -62,11 +62,13 @@ export default async function Built() {
       <div className="mai">
         <Reveal immediate>
           <header className="wr-head">
-            <span className="mai-kick rv-settle">Built</span>
-            <h1 className="wr-title rv-settle">
-              I build the part that decides whether output is good enough to
-              ship.
-            </h1>
+            <div className="wr-head-main">
+              <span className="mai-kick rv-settle">Built</span>
+              <h1 className="wr-title rv-settle">
+                I build the part that decides whether output is good enough
+                to ship.
+              </h1>
+            </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
               Usually somewhere a wrong answer costs a student a grade, or
               misses what a child was trying to tell someone.

@@ -17,7 +17,9 @@ export default function Changelog() {
       <div className="mai">
         <Reveal immediate>
           <header className="wr-head">
-            <h1 className="wr-title rv-settle">Changelog</h1>
+            <div className="wr-head-main">
+              <h1 className="wr-title rv-settle">Changelog</h1>
+            </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
               Every change to this site is a commit, badged by author. Agent
               commits come from the scheduled workflow; the badge is derived
