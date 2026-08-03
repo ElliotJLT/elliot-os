@@ -81,33 +81,65 @@ export default function RootLayout({
               <NavLinks />
             </nav>
             <ThemeToggle />
+            {/* The site had no call to action anywhere. Someone who reads the
+                whole thing and wants to talk had to go looking. */}
+            <a className="mast-cta" href="mailto:elliotjlittle@gmail.com">
+              Get in touch
+            </a>
           </div>
         </header>
         {children}
+        {/* The footer used to be two lines of small print. It is the last
+            thing anyone reads and the place they decide whether to write, so
+            it carries the name, what he does, and every way to reach him. */}
         <footer>
           <div className="wrap">
-            <span>
-              agent activity, all time: {spend.totals.runs} run
-              {spend.totals.runs === 1 ? "" : "s"}
-              {/* Only claim a token figure when one was actually metered:
-                  a hardcoded "0 tokens" reads as a broken gauge. */}
-              {tokens > 0 ? `, ${tokens.toLocaleString()} tokens metered` : ""}.
-              Measured, not estimated:{" "}
-              <Link href="/changelog">receipts</Link>.
-            </span>
-            <span>
-              <a href="https://github.com/ElliotJLT/elliot-os">source</a>
-              {" · "}
-              <a href="https://github.com/ElliotJLT">github</a>
-              {" · "}
-              <a href="https://www.linkedin.com/in/hireelliot/">linkedin</a>
-              {" · "}
-              <a href="https://medium.com/@elliotJL">medium</a>
-              {" · "}
-              <a href="mailto:elliotjlittle@gmail.com">email</a>
-              {" · "}
-              <a href={`${basePath}/llms.txt`}>llms.txt</a>
-            </span>
+            <div className="foot-name">Elliot Little</div>
+            <div className="foot-cols">
+              <p className="foot-bio">
+                A product builder in London. Four times a founding hire, most
+                recently on an A-Level AI tutor the UK government picked for
+                its national programme. Currently looking for the next one.
+              </p>
+              <nav className="foot-col">
+                <span className="foot-h">Sections</span>
+                <Link href="/built">Built</Link>
+                <Link href="/writing">Writing</Link>
+                <Link href="/loops">Loops</Link>
+                <Link href="/changelog">Changelog</Link>
+              </nav>
+              <div className="foot-col">
+                <span className="foot-h">The desk</span>
+                <span>London, UK</span>
+                <span>Available now</span>
+                <a href="mailto:elliotjlittle@gmail.com">
+                  elliotjlittle@gmail.com
+                </a>
+              </div>
+              <nav className="foot-col">
+                <span className="foot-h">Elsewhere</span>
+                <a href="https://github.com/ElliotJLT">GitHub</a>
+                <a href="https://www.linkedin.com/in/hireelliot/">LinkedIn</a>
+                <a href="https://medium.com/@elliotJL">Medium</a>
+                <a href={`${basePath}/llms.txt`}>llms.txt</a>
+              </nav>
+            </div>
+            <div className="foot-base">
+              <span>
+                {spend.totals.runs} agent run
+                {spend.totals.runs === 1 ? "" : "s"}
+                {/* Only claim a token figure when one was actually metered:
+                    a hardcoded "0 tokens" reads as a broken gauge. */}
+                {tokens > 0
+                  ? `, ${tokens.toLocaleString()} tokens metered`
+                  : ""}
+                . Measured, not estimated:{" "}
+                <Link href="/changelog">receipts</Link>.
+              </span>
+              <a href="https://github.com/ElliotJLT/elliot-os">
+                source for this site
+              </a>
+            </div>
           </div>
         </footer>
       </body>

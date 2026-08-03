@@ -11,16 +11,16 @@
    ======================================================================== */
 
 :root {
-  --bg: #fbfaf8;
-  --bg-2: #f2f0eb;
-  --paper: #ffffff;
-  --ink: #0f0e0c;
-  --ink-2: #3a3733;
-  --muted: #605d57;
-  --faint: #918e87;
-  --line: #e5e2db;
-  --line-2: #cecabf;
-  --rule: #0f0e0c;
+  --bg: #fef9ed;
+  --bg-2: #faf3e2;
+  --paper: #fffcf4;
+  --ink: #342e29;
+  --ink-2: #4a423b;
+  --muted: #5d524b;
+  --faint: #8b8177;
+  --line: #e9e0ca;
+  --line-2: #d8cdb4;
+  --rule: #342e29;
   --accent: #cc5600;
   --accent-ink: #a84600;
   --accent-2: #3f6b47;
@@ -991,23 +991,14 @@ li {
 
 /* --------------------------------------------------------------- footer */
 footer {
-  border-top: 2px solid var(--rule);
-  background: var(--bg);
-  padding: 24px 0 52px;
-  margin-top: 48px;
-}
-
-footer .wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  font-family: var(--mono);
-  font-size: 11.5px;
-  color: var(--muted);
+  border-top: 1px solid var(--line-2);
+  background: var(--bg-2);
+  padding: 44px 0 40px;
+  margin-top: 84px;
 }
 
 footer a {
-  color: var(--muted);
+  color: inherit;
 }
 
 /* the inner loop's own output, shown under the loop that wrote it */
@@ -2385,4 +2376,118 @@ h2::before {
   .opener {
     max-width: 46ch;
   }
+}
+
+/* ================================================================ header CTA */
+/* A solid block against a page of hairlines: the one thing on the masthead
+   that is meant to be pressed. */
+.mast-cta {
+  flex: none;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 9px 14px;
+  white-space: nowrap;
+  transition: background-color 0.18s ease-out, color 0.18s ease-out;
+}
+
+.mast-cta:hover {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.mast-cta:active {
+  scale: 0.96;
+}
+
+@media (max-width: 640px) {
+  .mast-cta {
+    display: none;
+  }
+}
+
+/* ==================================================================== footer */
+.foot-name {
+  font-family: var(--display);
+  font-size: clamp(38px, 6vw, 62px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-align: center;
+  padding: 8px 0 26px;
+}
+
+.foot-cols {
+  display: grid;
+  gap: 30px 34px;
+  grid-template-columns: 1fr;
+  padding: 26px 0 30px;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 700px) {
+  .foot-cols {
+    grid-template-columns: 1.6fr 1fr 1.2fr 1fr;
+  }
+}
+
+.foot-bio {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.55;
+  max-width: 34ch;
+}
+
+.foot-col {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  align-items: flex-start;
+}
+
+.foot-h {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 3px;
+}
+
+.foot-col a,
+.foot-col span:not(.foot-h) {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: color 0.18s ease-out;
+}
+
+.foot-col a:hover {
+  color: var(--accent-ink);
+}
+
+.foot-base {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 26px;
+  justify-content: space-between;
+  padding: 16px 0 4px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.foot-base a {
+  color: var(--faint);
 }
