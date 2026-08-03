@@ -248,19 +248,7 @@ p {
    other way, to roughly 88 characters at the 760px wrap. Both are pulled into
    range below; elements inside cards are already narrower, so the cap only
    bites on paragraphs that would otherwise span the whole column. */
-.lede {
-  font-family: var(--serif);
-  font-size: 21px;
-  /* Longer lines need more leading. 54ch of this serif renders around 70
-     characters, and 1.5 packs those lines tight enough to read as squashed. */
-  line-height: 1.6;
-  color: var(--ink-2);
-  font-weight: 400;
-  max-width: 52ch;
-}
-
 .muted,
-.card p,
 .loopnote,
 .prose p,
 .prose li {
@@ -268,17 +256,10 @@ p {
 }
 
 /* Avoid single-word last lines on the paragraphs a reader actually reads. */
-.lede,
 .muted,
-.card p,
 .prose p,
 .rout {
   text-wrap: pretty;
-}
-
-.lede strong {
-  font-weight: 600;
-  color: var(--ink);
 }
 
 .muted {
@@ -383,55 +364,61 @@ li {
   }
 }
 
-.card p {
-  margin: 6px 0 0;
-  color: var(--muted);
-  font-size: 15px;
+/* --------------------------------------------------------- research card */
+.research-card {
+  padding: 32px 36px;
+  background: var(--bg-2);
+  border-radius: 20px;
+  margin-bottom: 40px;
 }
 
-/* stand-alone cards (built, etc.) */
-.card {
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  padding: 20px 22px;
-  margin-bottom: 12px;
-  background: var(--paper);
-}
-
-.card > h3 a,
-.card > h3 {
+.research-card > h3 a,
+.research-card > h3 {
   font-family: var(--serif);
   font-size: 20px;
   font-weight: 500;
 }
 
-.card .meta {
+.research-card p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 66ch;
+}
+
+.research-card .meta {
   font-family: var(--mono);
   font-size: 11.5px;
   color: var(--faint);
-  margin-top: 10px;
+  margin-top: 14px;
 }
 
 /* --------------------------------------------------------------- ledger */
+/* Each day is its own card rather than a hairline header over a flat run
+   of rows — the same instinct as everything else on the v5 pages: a
+   background does the grouping a rule used to. */
 .timeline {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.timeline > li {
+  background: var(--bg-2);
+  border-radius: 18px;
+  padding: 20px 22px;
 }
 
 .timeline .day {
-  font-family: var(--sans);
+  font-family: var(--mono);
   font-size: 10.5px;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
-  margin: 28px 0 4px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--line);
-}
-
-.timeline .day:first-child {
-  margin-top: 8px;
+  margin: 0 0 12px;
 }
 
 .entry {
@@ -439,10 +426,20 @@ li {
   gap: 12px;
   align-items: baseline;
   flex-wrap: wrap;
-  padding: 9px 0;
-  border-bottom: 1px solid var(--line);
+  padding: 8px 10px;
+  margin: 0 -10px;
+  border-radius: 10px;
   font-family: var(--mono);
   font-size: 12.5px;
+  transition: background-color 0.18s ease-out;
+}
+
+.entry:not(:last-child) {
+  border-bottom: 1px solid var(--line);
+}
+
+.entry:hover {
+  background: var(--paper);
 }
 
 .entry .hash {
@@ -480,22 +477,27 @@ li {
   border-color: var(--line);
 }
 
-/* --------------------------------------------------------- track record */
-.record {
-  list-style: none;
-  padding: 0;
-  margin: 4px 0 0;
-  border-top: 1px solid var(--line);
+/* ------------------------------------------------------- the through-line */
+/* Was a running list split by hairlines, the same treatment as everything
+   else on the old page. Each repo is its own card now, same language as
+   the homepage's work list and career snapshot. */
+.record-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 16px 0 40px;
 }
 
-.record li {
-  padding: 17px 0;
-  border-bottom: 1px solid var(--line);
-  margin: 0;
+@media (min-width: 700px) {
+  .record-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-.record li:last-child {
-  border-bottom: none;
+.record-card {
+  padding: 24px 26px;
+  background: var(--bg-2);
+  border-radius: 16px;
 }
 
 .rhead {
@@ -541,10 +543,9 @@ li {
 }
 
 .loopcard {
-  border: 1px solid var(--rule);
-  border-radius: var(--r);
-  padding: 20px 22px;
-  background: var(--paper);
+  border-radius: 20px;
+  padding: 32px 36px;
+  background: var(--bg-2);
 }
 
 .loophead {
@@ -615,20 +616,26 @@ li {
   margin: 12px 0 15px;
 }
 
+/* Each stat as its own chip against the card's paper rather than a bare
+   grid split by hairlines — same instinct as the ladder's numbered chips:
+   a value should look like a distinct fact, not a row in a spreadsheet. */
 .loopmeta {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 13px 18px;
-  margin: 0 0 14px;
-  padding: 15px 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  gap: 10px;
+  margin: 20px 0;
 }
 
 @media (max-width: 560px) {
   .loopmeta {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.loopmeta > div {
+  background: var(--paper);
+  border-radius: 10px;
+  padding: 10px 13px;
 }
 
 .loopmeta dt {
@@ -665,9 +672,10 @@ li {
 }
 
 .proposals {
-  margin-top: 16px;
-  border-top: 1px solid var(--line);
-  padding-top: 14px;
+  margin-top: 20px;
+  background: var(--paper);
+  border-radius: 14px;
+  padding: 18px 20px;
 }
 
 .ptitle {
@@ -853,16 +861,6 @@ footer a {
   margin-bottom: 0;
 }
 
-.refname {
-  font-weight: 650;
-  font-size: 15px;
-}
-
-.refrole {
-  font-size: 14px;
-  color: var(--muted);
-}
-
 .refnote {
   font-family: var(--mono);
   font-size: 11px;
@@ -871,65 +869,14 @@ footer a {
 
 /* ============================================================ distinction
    Everything had settled into the same bordered rectangle, so sections read
-   as one texture. Three different shapes now, by what the content is:
-   the career is a timeline on a rail, tools are rule-separated entries with
-   a hanging index, and only true containers (loops, reference) keep a box. */
-
-/* ------------------------------------------------------------ career rail */
-.career {
-  list-style: none;
-  margin: 4px 0 0;
-  padding: 0 0 0 26px;
-  position: relative;
-  counter-reset: role;
-}
-
-/* The rail stops at the last node instead of running into white space. */
-.career::before {
-  content: "";
-  position: absolute;
-  left: 4px;
-  top: 10px;
-  bottom: 22px;
-  width: 1px;
-  background: var(--line-2);
-}
-
-.career li {
-  position: relative;
-  padding: 0 0 26px;
-  margin: 0;
-}
-
-.career li:last-child {
-  padding-bottom: 0;
-}
-
-.career li::before {
-  content: "";
-  position: absolute;
-  left: -26px;
-  top: 8px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--bg);
-  border: 1px solid var(--line-2);
-  transition: background-color 0.2s, border-color 0.2s;
-}
-
-/* Most recent role is the live one. */
-.career li:first-child::before {
-  background: var(--accent);
-  border-color: var(--accent);
-}
-
-.career .rorg {
-  font-family: var(--serif);
-  font-size: 19px;
-}
+   as one texture. Tools are rule-separated entries with a hanging index,
+   and only true containers (loops, reference) keep a box. Career moved to
+   the same card grid the homepage snapshot uses — see .career-snap. */
 
 /* -------------------------------------------------- tools as an index list */
+/* Whole row is the link now, and it lights up on hover the way MAI's model
+   list does — a soft fill behind the row rather than only the title
+   changing colour, so hovering anywhere on the row reads as one target. */
 .toollist {
   counter-reset: tool;
   border-top: 1px solid var(--line);
@@ -939,8 +886,17 @@ footer a {
   display: grid;
   grid-template-columns: 2.4rem 1fr;
   gap: 0 14px;
-  padding: 18px 0;
+  padding: 18px 14px;
+  margin: 0 -14px;
   border-bottom: 1px solid var(--line);
+  border-radius: 14px;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.18s ease-out;
+}
+
+.toolrow:hover {
+  background: var(--bg-2);
 }
 
 .toolrow > * {
@@ -948,19 +904,23 @@ footer a {
   min-width: 0;
 }
 
-.toolrow::before {
+.toolrow-no {
   grid-column: 1;
   grid-row: 1;
   counter-increment: tool;
-  content: counter(tool, decimal-leading-zero);
   font-family: var(--mono);
   font-size: 11px;
   color: var(--faint);
   padding-top: 5px;
 }
 
+.toolrow-no::before {
+  content: counter(tool, decimal-leading-zero);
+}
+
 .toolrow h3 {
   margin: 0 0 3px;
+  color: var(--ink);
 }
 
 .toolrow p {
@@ -983,20 +943,21 @@ footer a {
     gap: 6px;
   }
 
-  .toolrow::before {
+  .toolrow-no {
     padding-top: 0;
   }
 }
 
 /* --------------------------------------------- flagship gets more weight */
-/* Weight from scale and air, not from a coloured side-tab and a gradient.
-   This is the one thing on the site that is in production and has been for
-   years, so it gets a headline at display size, a claim at lede size, and
-   room to breathe before the supporting work starts. */
+/* A card, not a bottom-border section: this is the one thing on the site
+   that is in production and has been for years, so it gets the same
+   background-card weight as everything else on the page rather than a
+   plain rule underneath it. */
 .flagship {
-  margin: 0 0 10px;
-  padding: 2px 0 32px;
-  border-bottom: 1px solid var(--line);
+  margin: 0 0 40px;
+  padding: 36px 40px 40px;
+  background: var(--bg-2);
+  border-radius: 20px;
 }
 
 .flagship h3 {
@@ -1023,25 +984,12 @@ footer a {
   color: var(--muted);
 }
 
+/* Now wraps Pill components rather than plain underlined links. */
 .flinks {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 24px;
-  margin-top: 4px;
-  font-family: var(--sans);
-  font-size: 13.5px;
-}
-
-.flinks a {
-  text-decoration: none;
-  border-bottom: 1px solid var(--line-2);
-  padding-bottom: 2px;
-  transition: color 0.18s ease-out, border-color 0.18s ease-out;
-}
-
-.flinks a:hover {
-  color: var(--accent-ink);
-  border-bottom-color: var(--accent);
+  gap: 10px 12px;
+  margin-top: 8px;
 }
 
 /* ------------------------------------------------ /loops title lemniscate */
@@ -1096,65 +1044,44 @@ footer a {
   }
 }
 
-/* --------------------------------------------------- reference as a quote */
-/* Was a bordered panel like everything else on the page. Now set as pulled
-   testimony: hanging quote mark, serif throughout, rules instead of a box. */
-.reference {
-  margin: 0;
-  padding: 0 0 0 46px;
-  position: relative;
-  background: none;
-  border: none;
-  border-radius: 0;
+/* --------------------------------------------------- reference as a card */
+/* The fuller version of the homepage's .vouch: same card and quote-mark
+   badge, with room for the supporting paragraphs the homepage pull-quote
+   doesn't carry. */
+.reference-card {
+  margin: 0 0 40px;
+  padding: 40px 40px 36px;
+  background: var(--bg-2);
+  border-radius: 20px;
+  max-width: 720px;
 }
 
-.reference::before {
-  content: "\201C";
-  position: absolute;
-  left: 0;
-  top: -0.16em;
+.reference-card blockquote {
+  margin: 0 0 20px;
   font-family: var(--serif);
-  font-size: 76px;
-  line-height: 1;
-  color: var(--line-2);
-}
-
-.reference blockquote {
-  margin: 0 0 16px;
-  font-family: var(--serif);
-  font-size: 23px;
+  font-size: clamp(19px, 2.2vw, 23px);
   line-height: 1.4;
   color: var(--ink);
   max-width: 44ch;
 }
 
-.reference p {
+.reference-card p {
   font-family: var(--serif);
   color: var(--ink-2);
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.55;
   max-width: 58ch;
 }
 
-.reference figcaption {
+.reference-card figcaption {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 4px 12px;
-  padding-top: 14px;
-  margin-top: 4px;
+  padding-top: 18px;
+  margin-top: 8px;
   border-top: 1px solid var(--line);
   max-width: 58ch;
-}
-
-@media (max-width: 560px) {
-  .reference {
-    padding-left: 30px;
-  }
-
-  .reference::before {
-    font-size: 54px;
-  }
 }
 
 /* ------------------------------------------------------ rendering details */
@@ -1605,6 +1532,64 @@ h2::before {
 
 .ico:active {
   scale: 0.96;
+}
+
+/* ============================================================== snapshot */
+/* Career facts belong in their own section, not folded into either the
+   work list above or the reference below — the snapshot is the resume
+   claim, the quote is someone else vouching for it, and the two shouldn't
+   read as one block. */
+.career-snap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-bottom: 54px;
+}
+
+@media (min-width: 700px) {
+  .career-snap {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.career-card {
+  padding: 26px 28px;
+  background: var(--bg-2);
+  border-radius: 18px;
+}
+
+.career-co {
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+
+.career-co a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.career-co a:hover {
+  color: var(--accent-ink);
+}
+
+.career-meta {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  color: var(--faint);
+  margin-bottom: 12px;
+}
+
+.career-note {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
 }
 
 /* ================================================================= proof */
@@ -2279,7 +2264,17 @@ main:has(> .band) {
 }
 
 .wr-meta {
-  padding: 16px 2px 0;
+  padding: 14px 14px 16px;
+  margin: 0 -14px;
+  border-radius: 14px;
+  transition: background-color 0.25s ease-out;
+}
+
+/* The card already lifts and the shot already focuses; a soft fill behind
+   the text on hover is the same "this one is active" cue MAI's model list
+   uses, so the metadata gets the same treatment the image gets. */
+.wr-card:hover .wr-meta {
+  background: var(--bg-2);
 }
 
 .wr-date {
