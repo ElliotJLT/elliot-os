@@ -1323,20 +1323,28 @@ h2::before {
 }
 
 @media (min-width: 860px) {
+  /* Measured against the rendered node dots (headless-browser check, not
+     eyeballed): canon's dot sits at 34.8% of .flow's height, you's at
+     71.1%. top/height solve for the path's own y=4/y=96 endpoints landing
+     exactly there, so the arrow starts at you and terminates on canon
+     regardless of how the percentages read on their own. */
   .freturn {
     display: block;
     position: absolute;
     right: -78px;
-    top: 30%;
-    height: 58%;
+    top: 33.3%;
+    height: 39.4%;
     width: 60px;
     overflow: visible;
   }
 
+  /* The strongest mark in the graphic, not a hairline at the margin — this
+     line is the whole thesis (the correction becomes the position), so it
+     should read before the prose does. */
   .freturn path {
     fill: none;
     stroke: var(--accent);
-    stroke-width: 1.5;
+    stroke-width: 3;
   }
 
   .freturn .fhead-arrow {
@@ -1344,13 +1352,13 @@ h2::before {
     stroke-linejoin: round;
   }
 
-  /* Sits above the arrowhead, next to the node the edge lands on, instead of
-     halfway down the curve where it was printing straight through the line. */
+  /* Sits just above the arrowhead, next to canon — the node the edge
+     actually lands on. */
   .freturn-label {
     display: block;
     position: absolute;
     right: -108px;
-    top: 21%;
+    top: 29.8%;
     width: 104px;
     font-family: var(--mono);
     font-size: 9.5px;

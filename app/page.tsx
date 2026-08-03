@@ -41,7 +41,7 @@ const WORK: {
     href: "https://elliotjlt.github.io/crux/research.html",
     label: "Ongoing research",
     icon: "crux",
-    body: "Logs what a human rejected, redirected or killed while the model did the typing. Method, results run on myself, objections and limitations all published.",
+    body: "Every team moving its code-writing to agents is about to ask what the humans still do. Crux measures it: what a human rejected, redirected or killed while the model did the typing. Method, results run on myself, objections and limitations all published.",
   },
 ];
 
