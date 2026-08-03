@@ -107,7 +107,7 @@ export default async function Home() {
           <div className="band-in">
             <span className="band-kick rv-settle">Hi, I&apos;m Elliot</span>
             <h1 className="band-h">
-              <Words text="I build production AI. I lead the teams that ship it." />
+              <Words text="I build production AI and lead the teams that ship it." />
             </h1>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -185,28 +185,27 @@ export default async function Home() {
               </li>
             ))}
           </ol>
-          <figure className="vouch">
-            <div className="vouch-mark" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 8c-2.2 0-4 1.8-4 4v6h6v-6H7c0-1.1.9-2 2-2V8H8zm10 0c-2.2 0-4 1.8-4 4v6h6v-6h-3c0-1.1.9-2 2-2V8h-1z" />
-              </svg>
+          <div className="vouch-col">
+            <figure className="vouch">
+              <div className="vouch-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 8c-2.2 0-4 1.8-4 4v6h6v-6H7c0-1.1.9-2 2-2V8H8zm10 0c-2.2 0-4 1.8-4 4v6h6v-6h-3c0-1.1.9-2 2-2V8h-1z" />
+                </svg>
+              </div>
+              <blockquote>{ref.pull}</blockquote>
+              <figcaption>
+                <span className="vname">{ref.name}</span>
+                <span className="vrole">{ref.role}</span>
+              </figcaption>
+            </figure>
+            <div className="stack-row">
+              {STACK.map((s) => (
+                <span className="stack-chip" key={s}>
+                  {s}
+                </span>
+              ))}
             </div>
-            <blockquote>{ref.pull}</blockquote>
-            <figcaption>
-              <span className="vname">{ref.name}</span>
-              <span className="vrole">{ref.role}</span>
-            </figcaption>
-          </figure>
-        </div>
-      </Reveal>
-
-      <Reveal>
-        <div className="stack-row rv-settle">
-          {STACK.map((s) => (
-            <span className="stack-chip" key={s}>
-              {s}
-            </span>
-          ))}
+          </div>
         </div>
       </Reveal>
 

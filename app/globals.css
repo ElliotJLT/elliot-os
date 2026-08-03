@@ -2015,11 +2015,16 @@ a.mai-rowname:hover {
 }
 
 /* ------------------------------------------------------- skills and stack */
+.vouch-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .stack-row {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 8px 0 54px;
 }
 
 .stack-chip {
