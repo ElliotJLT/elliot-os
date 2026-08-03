@@ -1,104 +1,99 @@
 import { getPosts, noteFor, isDemoted, getMedia } from "@/lib/writing";
 import { getQuotes } from "@/lib/quotes";
-import Readers from "../components/Readers";
+import Reveal from "../components/Reveal";
 
 export const metadata = { title: "Writing · Elliot Little" };
 
 const basePath = process.env.BASE_PATH || "";
 
 export default async function Writing() {
-  const posts = await getPosts(20);
+  const all = await getPosts(20);
+  const posts = all.filter((p) => !isDemoted(p.title));
   const media = getMedia();
   const { readers } = getQuotes();
-  const annotated = posts.filter((p) => !isDemoted(p.title));
-  const rest = posts.filter((p) => isDemoted(p.title));
 
   return (
     <main>
-      <div className="wrap">
-        <h1>Writing</h1>
-        <p className="lede">
-          Essays about shipping AI to people who can&apos;t absorb a wrong
-          answer, and about the judgement calls that survive after the demo
-          works.
-        </p>
-        <p className="muted">
-          Newest first, from <a href="https://medium.com/@elliotJL">Medium</a>.
-        </p>
+      <div className="mai">
+        <Reveal immediate>
+          <header className="wr-head">
+            <span className="mai-kick rv-settle">Writing</span>
+            <h1 className="wr-title rv-settle">
+              Shipping AI to people who cannot absorb a wrong answer.
+            </h1>
+            <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
+              On trust and adoption, on where responsible-AI-by-checklist
+              breaks, and on what the loop talk leaves out. Newest first, from
+              Medium.
+            </p>
+          </header>
+        </Reveal>
 
-        <h2>what readers said</h2>
-        <Readers items={readers} />
-
-        <h2>on AI, product and trust</h2>
-        <ul className="postlist">
-          {annotated.map((p) => {
-            const img = media.posts[p.link];
-            return (
-              <li key={p.link}>
-                {img && (
-                  <a href={p.link} className="thumb" aria-hidden="true" tabIndex={-1}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={`${basePath}/${img}`} alt="" loading="lazy" />
-                  </a>
-                )}
-                <div className="postbody">
-                  <div className="rhead">
-                    <span className="rorg">
-                      <a href={p.link}>{p.title}</a>
-                    </span>
-                    <span className="rmeta">{p.date}</span>
-                  </div>
-                  <p className="rout">{noteFor(p.title)}</p>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-
-        {media.podcast && (
-          <>
-            <h2>podcast</h2>
-            <div className="podcard">
-              {media.podcast.image && (
-                <a href={media.podcast.url} className="podart" aria-hidden="true" tabIndex={-1}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={`${basePath}/${media.podcast.image}`} alt="" loading="lazy" />
-                </a>
-              )}
-              <div>
-                <h3>
-                  <a href={media.podcast.url}>{media.podcast.title}</a>
-                </h3>
-                <p className="muted">
-                  I went on <i>Just Now Possible</i>, hosted by Teresa Torres,
-                  to talk about building AI that closes the gap between knowing
-                  what to do and actually doing it, for students without the
-                  network that usually supplies the answer.
-                </p>
-              </div>
-            </div>
-          </>
-        )}
-
-        {rest.length > 0 && (
-          <>
-            <h2>earlier</h2>
-            <ul className="repolist">
-              {rest.map((p) => (
-                <li key={p.link}>
-                  <a href={p.link}>{p.title}</a>
-                  <span className="mono dim"> · {p.date}</span>
+        {readers?.length > 0 && (
+          <Reveal>
+            <ul className="said-grid rv-settle">
+              {readers.map((r) => (
+                <li key={r.who}>
+                  <p>{r.quote}</p>
+                  <span>{r.who}</span>
                 </li>
               ))}
             </ul>
-          </>
+          </Reveal>
         )}
 
-        <h2>elsewhere</h2>
-        <p className="muted">
-          I studied AI governance and alignment with{" "}
-          <a href="https://www.bluedot.org/">BlueDot Impact</a>.
-        </p>
+        {media.podcast && (
+          <Reveal>
+            <a className="pod rv-settle" href={media.podcast.url}>
+              {media.podcast.image && (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img src={`${basePath}/${media.podcast.image}`} alt="" />
+              )}
+              <div>
+                <span className="wr-date">Podcast · Just Now Possible</span>
+                <h2 className="wr-h">{media.podcast.title}</h2>
+                <p className="wr-note">
+                  With Teresa Torres, on building AI that closes the gap
+                  between knowing what to do and actually doing it, for
+                  students without the network that usually supplies the
+                  answer.
+                </p>
+                <span className="wr-go">
+                  Listen <span aria-hidden="true">→</span>
+                </span>
+              </div>
+            </a>
+          </Reveal>
+        )}
+
+        <Reveal>
+          <div className="wr-grid">
+            {posts.map((p) => (
+              <a className="wr-card rv-settle" href={p.link} key={p.link}>
+                <div className="wr-shot">
+                  {media.posts[p.link] ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img src={`${basePath}/${media.posts[p.link]}`} alt="" />
+                  ) : (
+                    <span className="wr-noshot">No image</span>
+                  )}
+                </div>
+                <div className="wr-meta">
+                  <span className="wr-date">{p.date}</span>
+                  <h2 className="wr-h">{p.title}</h2>
+                  {noteFor(p.title) && (
+                    <p className="wr-note">{noteFor(p.title)}</p>
+                  )}
+                  <span className="wr-go">
+                    Read it <span aria-hidden="true">→</span>
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </Reveal>
+
+
       </div>
     </main>
   );

@@ -269,8 +269,11 @@ h2::after {
   content: "";
   position: absolute;
   inset: 0 0 auto 0;
-  height: 2px;
-  background: var(--rule);
+  /* A 2px ink bar was left over from the near-black palette. Against the
+     ivory it reads as a scar; a hairline in the line colour separates just
+     as well and lets the type carry the section. */
+  height: 1px;
+  background: var(--line-2);
 }
 
 h2::before {
@@ -991,10 +994,10 @@ li {
 
 /* --------------------------------------------------------------- footer */
 footer {
-  border-top: 1px solid var(--line-2);
-  background: var(--bg-2);
-  padding: 44px 0 40px;
-  margin-top: 84px;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+  padding: 72px 0 44px;
+  margin-top: 0;
 }
 
 footer a {
@@ -2428,8 +2431,7 @@ h2::before {
   display: grid;
   gap: 30px 34px;
   grid-template-columns: 1fr;
-  padding: 26px 0 30px;
-  border-top: 1px solid var(--line);
+  padding: 0 0 34px;
 }
 
 @media (min-width: 700px) {
@@ -2442,7 +2444,7 @@ h2::before {
   margin: 0;
   color: var(--muted);
   font-family: var(--serif);
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.55;
   max-width: 34ch;
 }
@@ -2466,7 +2468,8 @@ h2::before {
 
 .foot-col a,
 .foot-col span:not(.foot-h) {
-  font-family: var(--serif);
+  font-family: var(--mono);
+  font-size: 13px;
   font-size: 16px;
   color: var(--ink-2);
   text-decoration: none;
@@ -2599,4 +2602,974 @@ h2::before {
 
 .ico:active {
   scale: 0.96;
+}
+
+/* ============================================================ hero, v4 */
+/* Structured the way a landing page is, rather than the way an essay is: a
+   kicker to say who is talking, a claim naming who it is for and what
+   changes for them, then the detail, then proof. */
+.kicker {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 16px;
+}
+
+.claim {
+  font-family: var(--display);
+  font-size: clamp(30px, 4.4vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 22px;
+  max-width: 19ch;
+  text-wrap: balance;
+}
+
+.herorow > div:first-child {
+  min-width: 0;
+}
+
+/* The opener is support now, not the headline, so it drops back to body. */
+.opener {
+  font-size: clamp(17px, 1.9vw, 19px);
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 46ch;
+  margin: 0;
+}
+
+/* ================================================================= proof */
+/* One named reference, then three short lines from readers. Proof sits
+   directly under the claim because that is the moment it is doubted. */
+.vouch {
+  margin: 46px 0 0;
+  padding-left: 22px;
+  border-left: 3px solid var(--accent);
+  max-width: 52ch;
+}
+
+.vouch blockquote {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(18px, 2.1vw, 22px);
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.vouch figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-top: 12px;
+  font-family: var(--sans);
+  font-size: 12.5px;
+}
+
+.vname {
+  font-weight: 650;
+  color: var(--ink-2);
+}
+
+.vrole {
+  color: var(--faint);
+}
+
+.saidrow {
+  list-style: none;
+  display: grid;
+  gap: 20px 28px;
+  grid-template-columns: 1fr;
+  margin: 30px 0 0;
+  padding: 22px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 760px) {
+  .saidrow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.saidrow p {
+  margin: 0 0 7px;
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.saidrow span {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* ======================================================================
+   v5 — the MAI layer
+   Floating pill masthead, centred display hero, three-column project rows,
+   a principles stack, capability columns. Warm ivory throughout, taupe type,
+   generous air. Everything below is additive: no existing rule is replaced.
+   ==================================================================== */
+
+/* -------------------------------------------------------- floating nav */
+/* Out of flow entirely. Sticky kept the nav in the document, so main's 40px
+   top padding rendered as a strip of page background above the colour band
+   no matter how far the band was pulled up. */
+.mai-nav {
+  position: fixed;
+  top: 14px;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  margin: 0 auto;
+  max-width: 1180px;
+  padding: 0 20px;
+}
+
+.mai-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 11px 12px 11px 22px;
+  box-shadow: 0 1px 2px rgba(52, 46, 41, 0.04),
+    0 8px 24px rgba(52, 46, 41, 0.05);
+}
+
+.mai-brand {
+  font-family: var(--display);
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  color: var(--ink);
+  margin-right: auto;
+}
+
+.mai-links {
+  display: flex;
+  gap: 22px;
+}
+
+.mai-links a {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 2px;
+  transition: color 0.18s ease-out;
+}
+
+.mai-links a:hover,
+.mai-links a[data-active] {
+  color: var(--ink);
+}
+
+@media (max-width: 720px) {
+  .mai-links {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------- pills */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 999px;
+  padding: 13px 22px;
+  font-family: var(--mono);
+  font-size: 13px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition-property: background-color, color, border-color;
+  transition-duration: 0.18s;
+  transition-timing-function: ease-out;
+}
+
+.pill-soft {
+  background: var(--bg-2);
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.pill-soft:hover {
+  background: var(--line);
+}
+
+.pill-solid {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.pill-solid:hover {
+  background: var(--accent);
+}
+
+.pill:active {
+  scale: 0.97;
+}
+
+.pill-arrow {
+  transition: transform 0.18s ease-out;
+}
+
+.pill:hover .pill-arrow {
+  transform: translateX(3px);
+}
+
+/* ---------------------------------------------------------- image slot */
+/* Honest placeholder: real ratio, real space, says what belongs there. */
+.slot {
+  width: 100%;
+  border: 1px dashed var(--line-2);
+  border-radius: 10px;
+  background: var(--bg-2);
+  display: grid;
+  place-items: center;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 12px;
+}
+
+/* ----------------------------------------------------------- mai page */
+.mai {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 26px;
+}
+
+.mai-hero {
+  text-align: center;
+  padding: 72px 0 84px;
+}
+
+.mai-hero h1 {
+  font-family: var(--display);
+  font-size: clamp(42px, 6.6vw, 82px);
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+  margin: 0 auto 30px;
+  max-width: 15ch;
+  text-wrap: balance;
+}
+
+.mai-kick {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 22px;
+}
+
+.mai-hero .slot {
+  max-width: 440px;
+  margin: 0 auto 30px;
+}
+
+.mai-sub {
+  font-family: var(--serif);
+  font-size: clamp(17px, 1.9vw, 20px);
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 56ch;
+  margin: 0 auto 32px;
+}
+
+/* --------------------------------------------------- three-column rows */
+.mai-row {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+  align-items: center;
+  padding: 54px 0;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 900px) {
+  .mai-row {
+    grid-template-columns: 0.85fr 1.15fr 1fr;
+    gap: 44px;
+  }
+}
+
+.mai-row .slot,
+.mai-row .artimg,
+.mai-row .painted {
+  max-width: none;
+  width: 100%;
+}
+
+.mai-rowlabel {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--faint);
+  margin-bottom: 12px;
+}
+
+.mai-rowname {
+  font-family: var(--display);
+  font-size: clamp(26px, 3.2vw, 40px);
+  line-height: 1.08;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  margin: 0 0 20px;
+  text-decoration: none;
+  display: block;
+}
+
+a.mai-rowname:hover {
+  color: var(--accent-ink);
+}
+
+.mai-rowbody {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ------------------------------------------------------ principles list */
+.mai-vals {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 1fr;
+  padding: 80px 0;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .mai-vals {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+}
+
+.mai-valist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mai-valist li {
+  font-family: var(--display);
+  font-size: clamp(28px, 3.6vw, 46px);
+  line-height: 1.18;
+  letter-spacing: -0.018em;
+  color: var(--line-2);
+  transition: color 0.25s ease-out;
+}
+
+.mai-valist li[data-on] {
+  color: var(--ink);
+}
+
+.mai-valsaid {
+  font-family: var(--serif);
+  font-size: clamp(19px, 2.3vw, 27px);
+  line-height: 1.42;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* --------------------------------------------------- capability columns */
+.mai-caps {
+  display: grid;
+  gap: 26px 40px;
+  grid-template-columns: 1fr;
+  padding: 12px 0 78px;
+}
+
+@media (min-width: 780px) {
+  .mai-caps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.mai-cap h3 {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  margin: 0 0 14px;
+  text-transform: none;
+}
+
+.mai-cap ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mai-cap li {
+  font-family: var(--mono);
+  font-size: 13.5px;
+  color: var(--muted);
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--line-2);
+}
+
+/* ------------------------------------------------------------ closing */
+.mai-end {
+  text-align: center;
+  padding: 78px 0 88px;
+  border-top: 1px solid var(--line);
+}
+
+.mai-end h2 {
+  display: block;
+  font-family: var(--display);
+  font-size: clamp(32px, 5vw, 60px);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-transform: none;
+  border: none;
+  padding: 0;
+  margin: 0 auto 26px;
+  max-width: 18ch;
+}
+
+.mai-end h2::after,
+.mai-end h2::before {
+  content: none;
+}
+
+/* The old numbered-section h2 rules still applied to the new kicker
+   headings, so "Selected work" rendered as "01SELECTED WORK" with a rule
+   above it. Kickers are labels, not numbered sections. */
+h2.mai-kick {
+  display: block;
+  border: none;
+  padding: 0;
+  margin: 56px 0 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+h2.mai-kick::before,
+h2.mai-kick::after {
+  content: none;
+}
+
+/* ==================================================================== band */
+/* The hero as a full-bleed colour field. Deepened past MAI's coral so cream
+   type clears contrast: 5.42:1, which carries the subline as well as the
+   headline. The rest of the page stays ivory; this is a band, not a theme. */
+.band {
+  background: linear-gradient(150deg, #a04a2f 0%, #b3543a 46%, #97442c 100%);
+  padding: 96px 26px 88px;
+  text-align: center;
+}
+
+.band-in {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.band-kick {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #f4d9c9;
+  margin-bottom: 26px;
+}
+
+.band-h {
+  font-family: var(--display);
+  font-size: clamp(40px, 6.4vw, 84px);
+  line-height: 1.04;
+  letter-spacing: -0.022em;
+  color: #faf3e8;
+  margin: 0 auto 34px;
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+.band-face {
+  width: 136px;
+  height: 136px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* A ring rather than an outline: against a saturated band the photo needs
+     separating from the colour, and white does it without a shadow. */
+  border: 4px solid #faf3e8;
+  margin: 0 auto 30px;
+  display: block;
+}
+
+.band-sub {
+  font-family: var(--serif);
+  font-size: clamp(17px, 1.9vw, 20px);
+  line-height: 1.55;
+  color: #f6e6da;
+  max-width: 54ch;
+  margin: 0 auto 34px;
+}
+
+.band-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.pill-cream {
+  background: #faf3e8;
+  color: #8a3c26;
+}
+
+.pill-cream:hover {
+  background: #fff;
+}
+
+.pill-ghost {
+  background: transparent;
+  color: #faf3e8;
+  border-color: rgba(250, 243, 232, 0.45);
+}
+
+.pill-ghost:hover {
+  border-color: #faf3e8;
+}
+
+/* The band runs to the viewport edge and clears the fixed nav with padding. */
+/* The nav is fixed, so every page without a colour band must reserve room
+   for it or its headline renders underneath. Measured: nav bottom sits at
+   87px, and the h1 was landing at 56. */
+main {
+  padding-top: 116px;
+}
+
+main:has(> .band) {
+  padding-top: 0;
+}
+
+.band {
+  padding-top: 168px;
+}
+
+/* ============================================================== values */
+/* Scroll lights each principle in turn and swaps the statement beside it.
+   Every statement is in the markup and only visibility changes, so the copy
+   is complete to a crawler and without JS. */
+.vals {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 96px 0;
+  position: relative;
+}
+
+@media (min-width: 900px) {
+  .vals {
+    grid-template-columns: 1fr 220px 1fr;
+    gap: 0 20px;
+  }
+}
+
+.vals-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.vals-list li {
+  font-family: var(--display);
+  font-size: clamp(30px, 4vw, 54px);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  color: var(--line-2);
+  transition: color 0.45s ease-out;
+}
+
+.vals-list li[data-on] {
+  color: var(--ink);
+}
+
+.vals-loop {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .vals-loop {
+    display: block;
+    width: 200px;
+    height: 150px;
+    overflow: visible;
+  }
+}
+
+.vals-loop path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  /* No transition: the draw is bound to scroll position, so easing it would
+     make it lag the reader rather than follow them. */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vals-loop path {
+    stroke-dashoffset: 0 !important;
+  }
+}
+
+.vals-said {
+  position: relative;
+  min-height: 8.5em;
+}
+
+.vals-said p {
+  margin: 0;
+  position: absolute;
+  inset: 0;
+  font-family: var(--serif);
+  font-size: clamp(19px, 2.2vw, 26px);
+  line-height: 1.42;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.45s ease-out, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.vals-said p[data-on] {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vals-squiggle path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .vals-said p {
+    transition: none;
+  }
+}
+
+
+/* ============================================================== painted */
+/* Screenshots masked with a turbulence-displaced rectangle, so the edge is
+   ragged and the image dissolves into the page rather than ending on a
+   rectangle. The mask is defined once in the layout and referenced here. */
+.defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* The turbulence mask shredded the right edge into spikes and stretched the
+   crop. Removed rather than tuned: a clean rounded crop is worth more than a
+   painterly edge that mangles the art. */
+.painted {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* The placeholder wears the same edge, so the layout does not shift when a
+   real image replaces it. */
+.slot.painted {
+  border-radius: 8px;
+}
+
+@supports not (mask: url(#painted)) {
+  .painted {
+    border-radius: 10px;
+  }
+}
+
+.artimg {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+
+
+.foot-cta {
+  text-align: center;
+  padding: 0 0 56px;
+  margin-bottom: 44px;
+  border-bottom: 1px solid var(--line);
+}
+
+.foot-ask {
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 46px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 auto 24px;
+  max-width: 18ch;
+}
+
+/* ================================================================ writing */
+/* Tall rounded cards in a grid, after microsoft.ai/blog: the image carries
+   the card, the metadata sits under it, and the whole tile lifts on hover
+   rather than only the link changing colour. */
+.wr-head {
+  padding: 12px 0 44px;
+  max-width: 62ch;
+}
+
+.wr-title {
+  font-family: var(--display);
+  font-size: clamp(34px, 5vw, 62px);
+  line-height: 1.06;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+  margin: 12px 0 22px;
+  text-wrap: balance;
+}
+
+.wr-grid {
+  display: grid;
+  gap: 34px 28px;
+  grid-template-columns: 1fr;
+  padding-bottom: 20px;
+}
+
+@media (min-width: 680px) {
+  .wr-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .wr-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.wr-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wr-card:hover {
+  transform: translateY(-6px);
+}
+
+.wr-shot {
+  /* the blog's own card ratio */
+  aspect-ratio: 1052 / 1117;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--bg-2);
+  display: grid;
+  place-items: center;
+}
+
+.wr-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wr-card:hover .wr-shot img {
+  transform: scale(1.04);
+}
+
+.wr-noshot {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.wr-meta {
+  padding: 16px 2px 0;
+}
+
+.wr-date {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.wr-h {
+  display: block;
+  font-family: var(--display);
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.014em;
+  color: var(--ink);
+  text-transform: none;
+  border: none;
+  padding: 0;
+  margin: 8px 0 8px;
+}
+
+.wr-h::before,
+.wr-h::after {
+  content: none;
+}
+
+.wr-note {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+
+.wr-go {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent-ink);
+}
+
+.wr-card:hover .wr-go {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.wr-earlier {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  max-width: 70ch;
+}
+
+.wr-earlier li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.wr-earlier a {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.wr-earlier a:hover {
+  color: var(--accent-ink);
+}
+
+.wr-earlier span {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* -------------------------------------------------- reader quotes, v5 */
+.said-grid {
+  list-style: none;
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 1fr;
+  margin: 0 0 46px;
+  padding: 0;
+}
+
+@media (min-width: 760px) {
+  .said-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.said-grid li {
+  background: var(--bg-2);
+  border-radius: 14px;
+  padding: 20px 20px 18px;
+}
+
+.said-grid p {
+  margin: 0 0 12px;
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.said-grid span {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+/* ---------------------------------------------------------- podcast */
+.pod {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  background: var(--bg-2);
+  border-radius: 16px;
+  padding: 22px;
+  margin: 0 0 46px;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 760px) {
+  .pod {
+    grid-template-columns: 190px 1fr;
+    gap: 28px;
+  }
+}
+
+.pod:hover {
+  transform: translateY(-4px);
+}
+
+.pod img {
+  width: 100%;
+  border-radius: 10px;
+  display: block;
+}
+
+.pod .wr-h {
+  margin-top: 6px;
 }

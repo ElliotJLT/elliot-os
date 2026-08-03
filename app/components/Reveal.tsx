@@ -1,6 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+
+/**
+ * Routes whose reveals have already played this session. Coming back to a
+ * page you have read should not re-hide everything below the fold and make
+ * you scroll through the animation a second time; an entrance is for an
+ * entrance. Module scope, so it survives remounts and resets on reload.
+ */
+const seen = new Set<string>();
 
 /**
  * Marks a block as revealed once it scrolls into view, and lets the elements
@@ -26,15 +35,25 @@ export default function Reveal({
   as?: "div" | "section";
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
-    if (immediate) {
-      const r = requestAnimationFrame(() => setShown(true));
-      return () => cancelAnimationFrame(r);
+    if (immediate || seen.has(pathname)) {
+      setShown(true);
+      seen.add(pathname);
+      return;
     }
     const el = ref.current;
     if (!el || typeof IntersectionObserver === "undefined") {
+      setShown(true);
+      return;
+    }
+    // Returning to this page client-side remounts with state reset. If the
+    // block is already on screen there is nothing to scroll into, so reveal
+    // it now rather than waiting for an intersection change that never comes.
+    const box = el.getBoundingClientRect();
+    if (box.top < window.innerHeight && box.bottom > 0) {
       setShown(true);
       return;
     }
@@ -42,6 +61,7 @@ export default function Reveal({
       (entries) => {
         if (entries[0].isIntersecting) {
           setShown(true);
+          seen.add(pathname);
           io.disconnect();
         }
       },
@@ -54,7 +74,7 @@ export default function Reveal({
       io.disconnect();
       clearTimeout(t);
     };
-  }, [immediate]);
+  }, [immediate, pathname]);
 
   return (
     <Tag

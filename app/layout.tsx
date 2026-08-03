@@ -5,6 +5,7 @@ import { getSpend } from "@/lib/telemetry";
 import NavLinks from "./components/NavLinks";
 import ThemeToggle from "./components/ThemeToggle";
 import { IconLink } from "./components/Icons";
+import { PaintedDefs } from "./components/Frame";
 import "./globals.css";
 
 const basePath = process.env.BASE_PATH || "";
@@ -71,20 +72,19 @@ export default function RootLayout({
     >
       <body>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
-        <header className="masthead">
-          {/* One row, one rule. It used to spend two rows and two horizontal
-              rules on a wordmark and four links. */}
-          <div className="wrap mast-row">
-            <Link href="/" className="brand">
+        <PaintedDefs />
+        {/* Floating pill masthead, inset from the top the way MAI's is,
+            rather than a full-bleed bar welded to the viewport edge. */}
+        <header className="mai-nav">
+          <div className="mai-nav-inner">
+            <Link href="/" className="mai-brand">
               Elliot Little
             </Link>
-            <nav className="mast-nav">
+            <nav className="mai-links">
               <NavLinks />
             </nav>
             <ThemeToggle />
-            {/* The site had no call to action anywhere. Someone who reads the
-                whole thing and wants to talk had to go looking. */}
-            <a className="mast-cta" href="mailto:elliotjlittle@gmail.com">
+            <a className="pill pill-solid" href="mailto:elliotjlittle@gmail.com">
               Get in touch
             </a>
           </div>
@@ -95,12 +95,24 @@ export default function RootLayout({
             it carries the name, what he does, and every way to reach him. */}
         <footer>
           <div className="wrap">
-            <div className="foot-name">Elliot Little</div>
+            {/* The homepage used to close with its own call to action and
+                contribution count, then the footer said the same thing again.
+                One closing block. */}
+            <div className="foot-cta">
+              <div className="band-cta">
+                <a className="pill pill-solid" href="mailto:elliotjlittle@gmail.com">
+                  Get in touch <span className="pill-arrow" aria-hidden="true">→</span>
+                </a>
+                <Link className="pill pill-soft" href="/built">
+                  See the work
+                </Link>
+              </div>
+            </div>
             <div className="foot-cols">
               <p className="foot-bio">
                 A product builder in London. Four times a founding hire, most
                 recently on an A-Level AI tutor the UK government picked for
-                its national programme. Currently looking for the next one.
+                its national programme.
               </p>
               <nav className="foot-col">
                 <span className="foot-h">Sections</span>
@@ -112,7 +124,6 @@ export default function RootLayout({
               <div className="foot-col">
                 <span className="foot-h">The desk</span>
                 <span>London, UK</span>
-                <span>Available now</span>
                 <a href="mailto:elliotjlittle@gmail.com">
                   elliotjlittle@gmail.com
                 </a>
