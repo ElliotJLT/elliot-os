@@ -158,15 +158,18 @@ export default async function Home() {
       ))}
 
       <Reveal>
-        <section className="mai-row" style={{ gridTemplateColumns: "1fr" }}>
-          <figure className="vouch rv-settle" style={{ margin: 0 }}>
-            <blockquote>{ref.pull}</blockquote>
-            <figcaption>
-              <span className="vname">{ref.name}</span>
-              <span className="vrole">{ref.role}</span>
-            </figcaption>
-          </figure>
-        </section>
+        <figure className="vouch rv-settle">
+          <div className="vouch-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 8c-2.2 0-4 1.8-4 4v6h6v-6H7c0-1.1.9-2 2-2V8H8zm10 0c-2.2 0-4 1.8-4 4v6h6v-6h-3c0-1.1.9-2 2-2V8h-1z" />
+            </svg>
+          </div>
+          <blockquote>{ref.pull}</blockquote>
+          <figcaption>
+            <span className="vname">{ref.name}</span>
+            <span className="vrole">{ref.role}</span>
+          </figcaption>
+        </figure>
       </Reveal>
 
       <Reveal>

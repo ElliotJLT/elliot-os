@@ -1201,57 +1201,92 @@ dd {
    ring carries the state so no badge has to: solid where the rung is
    reached, dashed where it is half done, faded where it was never attempted.
    Colour is not the only channel, since the border style differs too. */
+/* A numbered chip and a name chip on one row, an italic requirement line,
+   then the verdict as ordinary prose — after how MAI's careers page lays
+   out a numbered benefit list, rather than the small ring-and-paragraph
+   treatment every other numbered thing on this site already uses. */
 .ladder {
   list-style: none;
   counter-reset: rung;
-  margin: 20px 0 0;
+  margin: 8px 0 0;
   padding: 0;
 }
 
 .ladder li {
-  position: relative;
-  padding: 16px 0 18px 48px;
+  counter-increment: rung;
+  padding: 28px 0;
   border-top: 1px solid var(--line);
 }
 
-.ladder li::before {
-  counter-increment: rung;
-  content: counter(rung);
-  position: absolute;
-  left: 0;
-  top: 15px;
-  width: 27px;
-  height: 27px;
-  display: grid;
-  place-items: center;
+.ladder li:first-child {
+  padding-top: 6px;
+  border-top: none;
+}
+
+.rung-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.rung-no {
   font-family: var(--mono);
-  font-size: 11px;
-  border: 1px solid var(--line-2);
-  border-radius: 50%;
+  font-size: 12px;
+  color: var(--faint);
+  background: var(--bg-2);
+  border-radius: 8px;
+  padding: 7px 11px;
+}
+
+.rung-no::before {
+  content: counter(rung, decimal-leading-zero);
+}
+
+.rung-name {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--bg-2);
+  border-radius: 8px;
+  padding: 7px 16px;
+}
+
+.ladder li[data-state="no"] .rung-name {
   color: var(--muted);
 }
 
-.ladder li[data-state="yes"]::before {
-  border-color: var(--accent-2);
+.rung-verdict {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.ladder li[data-state="yes"] .rung-verdict {
   color: var(--accent-2);
 }
 
-.ladder li[data-state="partial"]::before {
-  border-style: dashed;
-  border-color: var(--accent);
+.ladder li[data-state="partial"] .rung-verdict {
   color: var(--accent-ink);
 }
 
-.ladder li[data-state="no"]::before {
-  opacity: 0.45;
-}
-
-.ladder li[data-state="no"] .rorg {
+.rung-needs {
+  font-family: var(--serif);
+  font-style: italic;
   color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 60ch;
+  margin: 0 0 10px;
 }
 
 .ladder .rout {
-  margin: 7px 0 0;
+  margin: 0;
   max-width: 66ch;
 }
 
@@ -1573,17 +1608,37 @@ h2::before {
 }
 
 /* ================================================================= proof */
-/* One named reference, then three short lines from readers. Proof sits
-   directly under the claim because that is the moment it is doubted. */
+/* Used to be a bare left-rule blockquote, which read as an afterthought
+   dropped between two properly designed sections. A card with its own
+   background gives the one named reference the same weight as everything
+   around it, closer to how a testimonial actually gets shown elsewhere. */
 .vouch {
-  margin: 46px 0 0;
-  padding-left: 22px;
-  border-left: 3px solid var(--accent);
-  max-width: 52ch;
+  margin: 16px 0 54px;
+  padding: 40px 40px 36px;
+  background: var(--bg-2);
+  border-radius: 20px;
+  max-width: 640px;
+}
+
+.vouch-mark {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--accent-ink);
+  margin-bottom: 22px;
+}
+
+.vouch-mark svg {
+  width: 20px;
+  height: 20px;
 }
 
 .vouch blockquote {
-  margin: 0;
+  margin: 0 0 22px;
   font-family: var(--serif);
   font-size: clamp(18px, 2.1vw, 22px);
   line-height: 1.45;
@@ -1592,19 +1647,21 @@ h2::before {
 
 .vouch figcaption {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px 10px;
-  margin-top: 12px;
-  font-family: var(--sans);
-  font-size: 12.5px;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .vname {
-  font-weight: 650;
-  color: var(--ink-2);
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 19px;
+  color: var(--ink);
 }
 
 .vrole {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
   color: var(--faint);
 }
 
@@ -1643,13 +1700,14 @@ h2::before {
 }
 
 .mai-brand {
-  /* Instrument Serif only ships weight 400, so it can't carry real heft at
-     this size — Newsreader has a 600 cut, which reads as a wordmark rather
-     than a caption next to the nav links. */
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 23px;
-  letter-spacing: -0.015em;
+  /* Instrument Serif only ships weight 400, so borrowing Newsreader's 600
+     for more heft read as a different brand's wordmark next to the display
+     face used everywhere else on the page. Italic carries presence without
+     needing a bolder cut — the same face, just more confident. */
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 25px;
+  letter-spacing: -0.005em;
   text-decoration: none;
   color: var(--ink);
   margin-right: auto;
@@ -2037,8 +2095,8 @@ main:has(> .band) {
 
 @media (min-width: 900px) {
   .vals {
-    grid-template-columns: 1fr 220px 1fr;
-    gap: 0 20px;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 60px;
   }
 }
 
@@ -2059,39 +2117,6 @@ main:has(> .band) {
 
 .vals-list li[data-on] {
   color: var(--ink);
-}
-
-/* The site's own mark (same lemniscate as /loops) rather than a one-off
-   scroll-driven squiggle: simpler, and it says what the site already says
-   its mark is, instead of inventing a second one for this section alone. */
-.vals-mark {
-  display: none;
-}
-
-@media (min-width: 900px) {
-  .vals-mark {
-    display: block;
-    width: 140px;
-    height: 80px;
-    margin: 0 auto;
-    overflow: visible;
-    fill: none;
-    stroke-linecap: round;
-    stroke-width: 2.2;
-  }
-}
-
-.vals-mark-trace {
-  stroke: var(--accent);
-  stroke-dasharray: 42 58;
-  animation: trace 4s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .vals-mark-trace {
-    animation: none;
-    stroke-dasharray: none;
-  }
 }
 
 .vals-said {

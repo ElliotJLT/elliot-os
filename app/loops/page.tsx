@@ -110,13 +110,13 @@ export default function Loops() {
           <ol className="ladder rv-settle">
             {LADDER.map((l) => (
               <li key={l.name} data-state={l.state}>
-                <div className="rhead">
-                  <span className="rorg">{l.name}</span>
-                  <span className="rmeta">{l.verdict}</span>
+                <div className="rung-head">
+                  <span className="rung-no" />
+                  <span className="rung-name">{l.name}</span>
+                  <span className="rung-verdict">{l.verdict}</span>
                 </div>
-                <p className="rout">
-                  <b>{l.needs}</b> {l.reality}
-                </p>
+                <p className="rung-needs">{l.needs}</p>
+                <p className="rout">{l.reality}</p>
               </li>
             ))}
           </ol>
