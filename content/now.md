@@ -12,9 +12,10 @@
 
 *The section above is the agent's. This one is mine.*
 
-- Looking for my next senior product or AI role. Between roles and using
-  every day of the gap to ship. Email works:
-  [elliotjlittle@gmail.com](mailto:elliotjlittle@gmail.com).
+- Looking for my next role: senior product, or founding product engineer
+  at a company where agents do the typing and small teams own the
+  outcome. Between roles and using every day of the gap to ship. Email
+  works: [elliotjlittle@gmail.com](mailto:elliotjlittle@gmail.com).
 - Built this site over two days in public. v1 was a portfolio; what it is
   now, and the agents that keep it current, are on [/loops](/loops).
 - Running argus daily: a private fleet of agents that reads the AI news

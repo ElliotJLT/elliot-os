@@ -24,28 +24,28 @@ const STAGES: Stage[] = [
     name: "sources",
     meta: "a few hundred a day",
     by: null,
-    note: "Newsletters, papers, podcasts, long interviews nobody has transcribed yet.",
+    note: "Newsletters, papers, podcasts nobody has transcribed.",
   },
   {
     id: "raw",
     name: "raw/",
     meta: "immutable",
-    by: "Scout · Librarian",
-    note: "Scout pulls the daily ingest; Librarian takes books and PDFs when they land. Nothing here is ever rewritten, so a claim can always be traced back to what was actually said.",
+    by: "Scout",
+    note: "Nothing is ever rewritten, so any claim traces back to what was said.",
   },
   {
     id: "canon",
     name: "canon/",
     meta: "living artefacts",
     by: "Synthesist",
-    note: "The core engine. It weaves new ingest into standing notes additively: only a one-paragraph current state may be rewritten, everything else appends. The corpus compounds instead of churning.",
+    note: "Append-only. Only a one-paragraph current state may be rewritten.",
   },
   {
     id: "brief",
     name: "the brief",
     meta: "06:00, daily",
     by: "Brief",
-    note: "A debrief on what moved overnight, footed with what got woven into the corpus and what did not. Delivered to Telegram, with a generated audio version for the commute.",
+    note: "What moved overnight, and what got woven in.",
   },
 ];
 
@@ -70,14 +70,11 @@ export default function ArgusFlow() {
         <li className="fyou">
           <div className="fhead">
             <span className="fname">you</span>
-            <span className="fmeta">the only human in it</span>
+            <span className="fmeta">the only human</span>
           </div>
+          <span className="fby">Strategist</span>
           <p className="fnote">
-            Read the brief. Reach for an artefact when you need the framework.
-            And when you disagree with an artefact&apos;s current state, correct
-            it. That correction does not get filed as feedback: it is written
-            back into the artefact as your position, so the corpus carries what
-            you actually think rather than what it read.
+            Your correction is written back as the artefact&apos;s position.
           </p>
         </li>
       </ol>
