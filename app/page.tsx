@@ -2,6 +2,8 @@ const basePath = process.env.BASE_PATH || "";
 import { getPosts, noteFor, isDemoted } from "@/lib/writing";
 import { getQuotes } from "@/lib/quotes";
 import { getMedia } from "@/lib/writing";
+import { getRoles } from "@/lib/roles";
+import { CareerCards } from "./components/Career";
 import Reveal, { Words } from "./components/Reveal";
 import { WorkIcon, Pill, Slot } from "./components/Frame";
 import Values from "./components/Values";
@@ -86,6 +88,7 @@ const CAPS = [
 
 export default async function Home() {
   const { reference: ref } = getQuotes();
+  const { roles } = getRoles();
   const media = getMedia();
   const posts = (await getPosts(20)).filter((x) => !isDemoted(x.title)).slice(0, 3);
 
@@ -99,7 +102,7 @@ export default async function Home() {
           <div className="band-in">
             <span className="band-kick rv-settle">Hi, I&apos;m Elliot</span>
             <h1 className="band-h">
-              <Words text="I build AI for the people a wrong answer actually hurts." />
+              <Words text="I build production AI. I lead the teams that ship it." />
             </h1>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -156,6 +159,15 @@ export default async function Home() {
           />
         </Reveal>
       ))}
+
+      <Reveal>
+        <h2 className="mai-kick rv-settle">Career</h2>
+      </Reveal>
+      <Reveal>
+        <div className="rv-settle">
+          <CareerCards roles={roles} />
+        </div>
+      </Reveal>
 
       <Reveal>
         <figure className="vouch rv-settle">

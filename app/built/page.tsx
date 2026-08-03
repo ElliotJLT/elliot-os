@@ -3,6 +3,9 @@ import { getRepos, FEATURED } from "@/lib/github";
 import { getRoles } from "@/lib/roles";
 import { getQuotes } from "@/lib/quotes";
 import ArgusFlow from "../components/ArgusFlow";
+import Reveal from "../components/Reveal";
+import { CareerCards } from "../components/Career";
+import { Pill } from "../components/Frame";
 
 export const metadata = { title: "Built · Elliot Little" };
 
@@ -57,265 +60,321 @@ export default async function Built() {
 
   return (
     <main>
-      <div className="wrap">
-        <h1>Built</h1>
-        <p className="lede">
-          I build the part that decides whether output is good enough to ship.
-          Usually somewhere a wrong answer costs a student a grade, or misses
-          what a child was trying to tell someone.
-        </p>
+      <div className="mai">
+        <Reveal immediate>
+          <header className="wr-head">
+            <span className="mai-kick rv-settle">Built</span>
+            <h1 className="wr-title rv-settle">
+              I build the part that decides whether output is good enough to
+              ship.
+            </h1>
+            <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
+              Usually somewhere a wrong answer costs a student a grade, or
+              misses what a child was trying to tell someone.
+            </p>
+          </header>
+        </Reveal>
 
-        {/* The tutor used to be the first bullet in the through-line list,
-            level with a research repo and this website. It is four years of
-            work in production on the App Store, so it gets the top of the
-            page and a block of its own. */}
-        <h2>in production</h2>
-        <section className="flagship">
-          <h3>Zero Gravity AI STEM tutor</h3>
-          <p className="fclaim">
-            A private tutor at the shoulder of students whose families could
-            never pay for one.
+        {/* The tutor is four years of work in production on the App Store,
+            so it gets a card of its own rather than levelling with a
+            research repo and this website. */}
+        <Reveal>
+          <h2 className="mai-kick rv-settle">in production</h2>
+        </Reveal>
+        <Reveal>
+          <section className="flagship rv-settle">
+            <h3>Zero Gravity AI STEM tutor</h3>
+            <p className="fclaim">
+              A private tutor at the shoulder of students whose families could
+              never pay for one.
+            </p>
+            {/* Set as a case study rather than a description. A list of
+                features says what exists; the beats below say what was
+                decided and what it cost, which is the thing a reader is
+                actually trying to work out. */}
+            <dl className="case">
+              <dt>the problem</dt>
+              <dd>
+                A-Level students whose families cannot buy an hour of a
+                tutor&apos;s time. The obvious build is a chatbot that answers
+                homework, which raises a grade once and teaches nothing. The
+                useful build refuses.
+              </dd>
+
+              <dt>the call</dt>
+              <dd>
+                Socratic from the prompt up, and hold it under pressure:
+                students get inventive about extracting the answer, so
+                refusing had to survive adversarial asking rather than a
+                polite first no. Coaching, practice, marking and assignments
+                run as separate agents with their own pedagogy and evaluator,
+                because one prompt doing four jobs degrades all four.
+              </dd>
+
+              <dt>where the work actually went</dt>
+              <dd>
+                Not the model. Correctness evaluation: marking tested against
+                real past papers and official mark schemes, an always-on
+                evaluator grading every coaching session against the Socratic
+                spec, and safety telemetry on every interaction. Shipping
+                daily while the safeguards only got tighter was the
+                discipline problem, and it was harder than the AI.
+              </dd>
+
+              <dt>what happened</dt>
+              <dd>
+                Marking accuracy from a ~67% bare-model baseline to over 99%.
+                Live across four STEM subjects on every major UK exam board,
+                direct to students and through a school hub for teachers.
+                First commit to the App Store in 45 days. Selected as one of
+                eight companies nationally for the DfE and DSIT AI Tutoring
+                Tools Pioneers Programme, held to the government&apos;s
+                Generative AI Product Safety Standards.
+              </dd>
+            </dl>
+            <div className="flinks">
+              <Pill href="https://www.zerogravity.co.uk/tutor">
+                the product
+              </Pill>
+              <Pill href="https://apps.apple.com/gb/app/zero-gravity-tutor/id6760364095">
+                App Store
+              </Pill>
+              <Pill href="https://open.spotify.com/episode/3D8quBCXrMNgIF87czhux3">
+                the podcast episode
+              </Pill>
+            </div>
+          </section>
+        </Reveal>
+
+        <Reveal>
+          <h2 className="mai-kick rv-settle">the through-line</h2>
+        </Reveal>
+        <Reveal>
+          <p className="muted rv-settle" style={{ marginTop: 0 }}>
+            Producing plausible output is no longer the hard part. Knowing
+            whether to ship it still is, and that gap is where most of my
+            work has gone. The same question keeps surfacing at different
+            points in a system: what got checked, what got rejected, and who
+            decided. Before a student sees a mark. Before a child&apos;s
+            disclosure gets missed. Before an application goes out. Before an
+            agent changes this page.
           </p>
-          {/* Set as a case study rather than a description. A list of
-              features says what exists; the beats below say what was decided
-              and what it cost, which is the thing a reader is actually
-              trying to work out. */}
-          <dl className="case">
-            <dt>the problem</dt>
-            <dd>
-              A-Level students whose families cannot buy an hour of a tutor&apos;s
-              time. The obvious build is a chatbot that answers homework, which
-              raises a grade once and teaches nothing. The useful build refuses.
-            </dd>
-
-            <dt>the call</dt>
-            <dd>
-              Socratic from the prompt up, and hold it under pressure: students
-              get inventive about extracting the answer, so refusing had to
-              survive adversarial asking rather than a polite first no. Coaching,
-              practice, marking and assignments run as separate agents with their
-              own pedagogy and evaluator, because one prompt doing four jobs
-              degrades all four.
-            </dd>
-
-            <dt>where the work actually went</dt>
-            <dd>
-              Not the model. Correctness evaluation: marking tested against real
-              past papers and official mark schemes, an always-on evaluator
-              grading every coaching session against the Socratic spec, and
-              safety telemetry on every interaction. Shipping daily while the
-              safeguards only got tighter was the discipline problem, and it was
-              harder than the AI.
-            </dd>
-
-            <dt>what happened</dt>
-            <dd>
-              Marking accuracy from a ~67% bare-model baseline to over 99%. Live
-              across four STEM subjects on every major UK exam board, direct to
-              students and through a school hub for teachers. First commit to
-              the App Store in 45 days. Selected as one of eight companies
-              nationally for the DfE and DSIT AI Tutoring Tools Pioneers
-              Programme, held to the government&apos;s Generative AI Product
-              Safety Standards.
-            </dd>
-          </dl>
-          <div className="flinks">
-            <a href="https://www.zerogravity.co.uk/tutor">the product</a>
-            <a href="https://apps.apple.com/gb/app/zero-gravity-tutor/id6760364095">
-              App Store
-            </a>
-            <a href="https://open.spotify.com/episode/3D8quBCXrMNgIF87czhux3">
-              the podcast episode
-            </a>
-          </div>
-        </section>
-
-        <h2>the through-line</h2>
-        <p className="muted" style={{ marginTop: 0 }}>
-          Producing plausible output is no longer the hard part. Knowing
-          whether to ship it still is, and that gap is where most of my work
-          has gone. The same question keeps surfacing at different points in a
-          system: what got checked, what got rejected, and who decided. Before
-          a student sees a mark. Before a child&apos;s disclosure gets missed.
-          Before an application goes out. Before an agent changes this page.
-        </p>
-        <p className="muted">
-          It applies to the model and to the person equally. You read what the
-          loop made, and you can defend what carries your name.{" "}
-          <a href="https://elliotjlt.github.io/crux/research.html">crux</a> is
-          the instrument I built to find out whether that actually holds.
-        </p>
-        <ul className="record">
-          <li>
-            <div className="rhead">
-              <span className="rorg">ward</span>
-              <span className="rmeta">safeguarding, for under-18s</span>
-            </div>
-            <p className="rout">
-              Decides which messages from a child are genuine safeguarding
-              disclosures and routes those to a named human on a clock,
-              grounded in KCSIE rather than keyword matching. Built around
-              precision, because a Designated Safeguarding Lead who gets paged
-              on every false alarm learns to ignore the alerts, which is worse
-              than having none. On its published synthetic sets the Claude
-              judge reaches 90% recall at 100% precision, against 50/83 for a
-              keyword baseline.
-            </p>
-          </li>
-          <li>
-            <div className="rhead">
-              <span className="rorg">boulot</span>
-              <span className="rmeta">adversarial review</span>
-            </div>
-            <p className="rout">
-              Three agents with opposing briefs, a hiring manager, a reviewer
-              and a strategist, argue over a CV before it is allowed out. I ran
-              my own search through it, then open-sourced it. My partner and my
-              sister use it too.
-            </p>
-          </li>
-          <li>
-            <div className="rhead">
-              <span className="rorg">crux</span>
-              <span className="rmeta">the human half</span>
-            </div>
-            <p className="rout">
-              The judgement no commit log records: what a person rejected,
-              redirected, or killed while the model did the typing. Ongoing
-              research, with the method, the results run on myself, the honest
-              objections and the limitations all published.
-            </p>
-          </li>
-          <li>
-            <div className="rhead">
-              <span className="rorg">this site</span>
-              <span className="rmeta">the agent&apos;s own work</span>
-            </div>
-            <p className="rout">
-              An agent proposes one change, a rubric scores it against explicit
-              criteria, and a human merges it or does not. Every cadence, gate
-              and stopping rule is published on <Link href="/loops">/loops</Link>
-              , and the spend is metered.
-            </p>
-          </li>
-        </ul>
-
-        <h2>track record</h2>
-        <p className="muted" style={{ marginTop: 0, fontSize: 15 }}>
-          Roles and the outcome that mattered in each. Full history, titles,
-          and references on <a href={record.linkedin}>LinkedIn</a>.
-        </p>
-        <ol className="career">
-          {record.roles.map((r) => (
-            <li key={r.org}>
+        </Reveal>
+        <Reveal>
+          <p className="muted rv-settle">
+            It applies to the model and to the person equally. You read what
+            the loop made, and you can defend what carries your name.{" "}
+            <a href="https://elliotjlt.github.io/crux/research.html">crux</a>{" "}
+            is the instrument I built to find out whether that actually
+            holds.
+          </p>
+        </Reveal>
+        <Reveal>
+          <div className="record-grid rv-settle">
+            <div className="record-card">
               <div className="rhead">
-                <span className="rorg">
-                  {r.url ? <a href={r.url}>{r.org}</a> : r.org}
-                </span>
-                {(r.role || r.dates) && (
-                  <span className="rmeta">
-                    {[r.role, r.dates].filter(Boolean).join(" · ")}
-                  </span>
-                )}
+                <span className="rorg">ward</span>
+                <span className="rmeta">safeguarding, for under-18s</span>
               </div>
-              <p className="rout">{r.outcome}</p>
-            </li>
-          ))}
-        </ol>
-
-        <h2>reference</h2>
-        <figure className="reference">
-          <blockquote>{ref.pull}</blockquote>
-          {ref.body.map((para) => (
-            <p key={para.slice(0, 24)}>{para}</p>
-          ))}
-          <figcaption>
-            <span className="refname">{ref.name}</span>
-            <span className="refrole">{ref.role}</span>
-            <span className="refnote">{ref.note}</span>
-          </figcaption>
-        </figure>
-
-        <h2>argus</h2>
-        <p className="muted" style={{ marginTop: 0 }}>
-          A private fleet that reads a few hundred sources a day and briefs me
-          before I sit down. Named for the watchman with a hundred eyes. It has
-          not missed a morning. The corpus stays private; the shape does not
-          need to.
-        </p>
-        <p className="muted">
-          Most agent systems summarise and forget. This one has one rule that
-          decides everything else: ingest is immutable and the corpus only ever
-          appends, so a note gets thicker rather than getting replaced by
-          whatever the model read most recently.
-        </p>
-        <ArgusFlow />
-
-        <h2>research</h2>
-        <div className="card">
-          <h3>
-            <a href="https://elliotjlt.github.io/crux/research.html">crux</a>
-          </h3>
-          <p>
-            You are shipping faster than ever. Are you getting sharper, or
-            just getting carried? Nothing currently measures that. I noticed
-            it in myself at Zero Gravity: shipping faster than I ever had, and
-            slower to say what I would have done differently. Output has
-            never been higher and no instrument tells you whether the person
-            behind it is improving, plateauing or quietly atrophying. Fluency
-            frameworks answer the baseline and everyone will pass them; the
-            layer above is where the difference sits, in trust calibration,
-            resistance to output that looks polished, and knowing what to
-            kill.
-          </p>
-          <p>
-            crux measures it. A Claude Code hook reads each session and
-            extracts what the human actually decided: what got rejected,
-            redirected or killed while the model did the typing. Ongoing
-            research rather than a product, published with the method, the
-            results run on myself, the honest objections, the limitations, and
-            a memo to the platform layer about the half that nothing measures.
-          </p>
-          <div className="meta">
-            <a href="https://elliotjlt.github.io/crux/research.html">
-              read the research
-            </a>{" "}
-            · <a href="https://github.com/ElliotJLT/crux">repo</a>
-          </div>
-        </div>
-
-
-        <h2>agent tools</h2>
-        <div className="toollist">
-        {FEATURED.map((name) => {
-          const meta = BLURBS[name];
-          const repo = byName.get(name);
-          return (
-            <div className="toolrow" key={name}>
-              <h3>
-                <a href={repo?.html_url || `https://github.com/ElliotJLT/${name}`}>
-                  {meta.title}
-                </a>
-              </h3>
-              <p>{meta.blurb}</p>
-              {repo && (
-                <div className="meta">
-                  {repo.stargazers_count > 0 && `★ ${repo.stargazers_count} · `}
-                  last pushed {repo.pushed_at.slice(0, 10)}
-                </div>
-              )}
+              <p className="rout">
+                Decides which messages from a child are genuine safeguarding
+                disclosures and routes those to a named human on a clock,
+                grounded in KCSIE rather than keyword matching. Built around
+                precision, because a Designated Safeguarding Lead who gets
+                paged on every false alarm learns to ignore the alerts, which
+                is worse than having none. On its published synthetic sets
+                the Claude judge reaches 90% recall at 100% precision,
+                against 50/83 for a keyword baseline.
+              </p>
             </div>
-          );
-        })}
-        </div>
+            <div className="record-card">
+              <div className="rhead">
+                <span className="rorg">boulot</span>
+                <span className="rmeta">adversarial review</span>
+              </div>
+              <p className="rout">
+                Three agents with opposing briefs, a hiring manager, a
+                reviewer and a strategist, argue over a CV before it is
+                allowed out. I ran my own search through it, then
+                open-sourced it. My partner and my sister use it too.
+              </p>
+            </div>
+            <div className="record-card">
+              <div className="rhead">
+                <span className="rorg">crux</span>
+                <span className="rmeta">the human half</span>
+              </div>
+              <p className="rout">
+                The judgement no commit log records: what a person rejected,
+                redirected, or killed while the model did the typing. Ongoing
+                research, with the method, the results run on myself, the
+                honest objections and the limitations all published.
+              </p>
+            </div>
+            <div className="record-card">
+              <div className="rhead">
+                <span className="rorg">this site</span>
+                <span className="rmeta">the agent&apos;s own work</span>
+              </div>
+              <p className="rout">
+                An agent proposes one change, a rubric scores it against
+                explicit criteria, and a human merges it or does not. Every
+                cadence, gate and stopping rule is published on{" "}
+                <Link href="/loops">/loops</Link>, and the spend is metered.
+              </p>
+            </div>
+          </div>
+        </Reveal>
 
-        <h2>ideas or feedback?</h2>
-        <p className="muted">
-          Two systems here are real but private: argus, an agent fleet that
-          reads the AI news every morning and writes me a brief, and LifeOS,
-          the front door that routes my whole setup. Ask me about either:{" "}
-          <a href="mailto:elliotjlittle@gmail.com">elliotjlittle@gmail.com</a>.
-        </p>
+        <Reveal>
+          <h2 className="mai-kick rv-settle">track record</h2>
+        </Reveal>
+        <Reveal>
+          <p className="muted rv-settle" style={{ marginTop: 0, fontSize: 15 }}>
+            Roles and the outcome that mattered in each. Full history,
+            titles, and references on <a href={record.linkedin}>LinkedIn</a>.
+          </p>
+        </Reveal>
+        <Reveal>
+          <div className="rv-settle">
+            <CareerCards roles={record.roles} />
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <h2 className="mai-kick rv-settle">reference</h2>
+        </Reveal>
+        <Reveal>
+          <figure className="reference-card rv-settle">
+            <div className="vouch-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 8c-2.2 0-4 1.8-4 4v6h6v-6H7c0-1.1.9-2 2-2V8H8zm10 0c-2.2 0-4 1.8-4 4v6h6v-6h-3c0-1.1.9-2 2-2V8h-1z" />
+              </svg>
+            </div>
+            <blockquote>{ref.pull}</blockquote>
+            {ref.body.map((para) => (
+              <p key={para.slice(0, 24)}>{para}</p>
+            ))}
+            <figcaption>
+              <span className="vname">{ref.name}</span>
+              <span className="vrole">{ref.role}</span>
+              <span className="refnote">{ref.note}</span>
+            </figcaption>
+          </figure>
+        </Reveal>
+
+        <Reveal>
+          <h2 className="mai-kick rv-settle">argus</h2>
+        </Reveal>
+        <Reveal>
+          <p className="muted rv-settle" style={{ marginTop: 0 }}>
+            A private fleet that reads a few hundred sources a day and
+            briefs me before I sit down. Named for the watchman with a
+            hundred eyes. It has not missed a morning. The corpus stays
+            private; the shape does not need to.
+          </p>
+        </Reveal>
+        <Reveal>
+          <p className="muted rv-settle">
+            Most agent systems summarise and forget. This one has one rule
+            that decides everything else: ingest is immutable and the corpus
+            only ever appends, so a note gets thicker rather than getting
+            replaced by whatever the model read most recently.
+          </p>
+        </Reveal>
+        <Reveal>
+          <div className="rv-settle">
+            <ArgusFlow />
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <h2 className="mai-kick rv-settle">research</h2>
+        </Reveal>
+        <Reveal>
+          <div className="research-card rv-settle">
+            <h3>
+              <a href="https://elliotjlt.github.io/crux/research.html">
+                crux
+              </a>
+            </h3>
+            <p>
+              You are shipping faster than ever. Are you getting sharper, or
+              just getting carried? Nothing currently measures that. I
+              noticed it in myself at Zero Gravity: shipping faster than I
+              ever had, and slower to say what I would have done differently.
+              Output has never been higher and no instrument tells you
+              whether the person behind it is improving, plateauing or
+              quietly atrophying. Fluency frameworks answer the baseline and
+              everyone will pass them; the layer above is where the
+              difference sits, in trust calibration, resistance to output
+              that looks polished, and knowing what to kill.
+            </p>
+            <p>
+              crux measures it. A Claude Code hook reads each session and
+              extracts what the human actually decided: what got rejected,
+              redirected or killed while the model did the typing. Ongoing
+              research rather than a product, published with the method, the
+              results run on myself, the honest objections, the limitations,
+              and a memo to the platform layer about the half that nothing
+              measures.
+            </p>
+            <div className="meta">
+              <a href="https://elliotjlt.github.io/crux/research.html">
+                read the research
+              </a>{" "}
+              · <a href="https://github.com/ElliotJLT/crux">repo</a>
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <h2 className="mai-kick rv-settle">agent tools</h2>
+        </Reveal>
+        <Reveal>
+          <div className="toollist rv-settle">
+            {FEATURED.map((name) => {
+              const meta = BLURBS[name];
+              const repo = byName.get(name);
+              return (
+                <a
+                  className="toolrow"
+                  href={repo?.html_url || `https://github.com/ElliotJLT/${name}`}
+                  key={name}
+                >
+                  <span className="toolrow-no" aria-hidden="true" />
+                  <div>
+                    <h3>{meta.title}</h3>
+                    <p>{meta.blurb}</p>
+                    {repo && (
+                      <div className="meta">
+                        {repo.stargazers_count > 0 &&
+                          `★ ${repo.stargazers_count} · `}
+                        last pushed {repo.pushed_at.slice(0, 10)}
+                      </div>
+                    )}
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <h2 className="mai-kick rv-settle">ideas or feedback?</h2>
+        </Reveal>
+        <Reveal>
+          <p className="muted rv-settle">
+            Two systems here are real but private: argus, an agent fleet that
+            reads the AI news every morning and writes me a brief, and
+            LifeOS, the front door that routes my whole setup. Ask me about
+            either:{" "}
+            <a href="mailto:elliotjlittle@gmail.com">
+              elliotjlittle@gmail.com
+            </a>
+            .
+          </p>
+        </Reveal>
       </div>
     </main>
   );

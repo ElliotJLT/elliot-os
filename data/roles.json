@@ -1,34 +1,34 @@
 {
   "linkedin": "https://www.linkedin.com/in/hireelliot/",
-  "note": "Roles and dates are pulled from boulot; outcomes are the verified facts from llms.txt. Each row renders whatever fields are filled — dates and titles are optional.",
+  "note": "Roles, dates and outcomes are pulled from the CV. Each row renders whatever fields are filled — dates and titles are optional.",
   "roles": [
     {
       "org": "Zero Gravity",
       "url": "https://www.zerogravity.co.uk/tutor",
-      "role": "",
-      "dates": "",
-      "outcome": "Built and deployed a production multi-agent AI STEM tutor. First commit to App Store in 45 days; marking accuracy raised from a ~67% baseline to over 99% against official mark schemes; selected as one of eight companies nationally for the DfE and DSIT AI Tutoring Tools Pioneers Programme, safe AI tutoring for disadvantaged pupils."
+      "role": "Head of Product — Founding Hire #4",
+      "dates": "Feb 2022 – Jul 2026",
+      "outcome": "Led the end-to-end build of a production AI STEM tutor on Claude, first commit to App Store in 45 days, writing 28% of merged commits while leading six engineers and a designer. Marking accuracy raised from a ~67% baseline to over 99% against official mark schemes. Selected as one of eight companies nationally for the DfE and DSIT AI Tutoring Tools Pioneers Programme, reaching up to 450,000 disadvantaged pupils."
     },
     {
       "org": "Farewill",
       "url": "",
-      "role": "",
-      "dates": "",
-      "outcome": "Product work in an SRA/FCA-regulated environment."
+      "role": "Product & Operations Lead",
+      "dates": "Jan 2021 – Jan 2022",
+      "outcome": "Shipped internal tooling and API integrations (HMCTS, HMRC, banking) in an SRA/FCA-regulated environment that cut agent errors 69% and case-handling from two weeks to four days, plus a vulnerable-user framework adopted company-wide."
     },
     {
       "org": "MealsForTheNHS",
       "url": "",
-      "role": "Co-founder",
-      "dates": "",
-      "outcome": "Co-founded a pandemic-response effort that raised £1.8m and delivered 303,000 meals to NHS staff."
+      "role": "Co-Founder",
+      "dates": "2020 – 2021",
+      "outcome": "Built a four-sided marketplace in 10 days across 146 hospitals and 223 restaurants — day 1 was a WhatsApp group, day 10 was production. £1.8m raised, 303,000 meals delivered in 100 days."
     },
     {
       "org": "Flash Pack",
       "url": "",
-      "role": "",
-      "dates": "",
-      "outcome": "Founding-team product work; helped take the company from pre-seed to Series A."
+      "role": "Founding Operator — Employee #10",
+      "dates": "Oct 2018 – Dec 2020",
+      "outcome": "Built the systems behind 400% YoY growth, scaling the team from 10 to 160 across 30+ markets."
     }
   ]
 }
