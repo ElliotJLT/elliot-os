@@ -2391,7 +2391,9 @@ h2::before {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 9px 14px;
+  /* 11px either side of 11px type clears the 40px pointer target; at 9px it
+     measured 36. */
+  padding: 12px 16px;
   white-space: nowrap;
   transition: background-color 0.18s ease-out, color 0.18s ease-out;
 }
@@ -2490,4 +2492,111 @@ h2::before {
 
 .foot-base a {
   color: var(--faint);
+}
+
+/* ============================================================== standfirst */
+/* A second statement set on a rule, the way a standfirst sits under a
+   headline. Not a blockquote: nobody is being quoted, so it takes a rule and
+   the serif rather than quotation marks. */
+.standfirst {
+  margin: 26px 0 0;
+  padding-left: 20px;
+  border-left: 3px solid var(--accent);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(17px, 1.9vw, 21px);
+  line-height: 1.45;
+  color: var(--ink-2);
+  max-width: 40ch;
+}
+
+/* ================================================================= buttons */
+.herocta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  /* 15px of type plus 14px either side clears the 44px touch target. */
+  padding: 14px 20px;
+  transition-property: background-color, color, border-color;
+  transition-duration: 0.18s;
+  transition-timing-function: ease-out;
+}
+
+.btn:active {
+  scale: 0.96;
+}
+
+.btn-solid {
+  background: var(--ink);
+  color: var(--bg);
+  border: 1px solid var(--ink);
+}
+
+.btn-solid:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--paper);
+}
+
+.btn-line {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line-2);
+}
+
+.btn-line:hover {
+  border-color: var(--ink);
+}
+
+/* ============================================================== icon links */
+/* Bordered squares at 40px, which is the minimum pointer target. The glyph
+   is 18px inside it, so the box is hit area rather than decoration. One SVG
+   per mark, recoloured by CSS, never a second asset for the hover state. */
+.icorow {
+  display: flex;
+  gap: 8px;
+  margin: 2px 0 4px;
+}
+
+.ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line-2);
+  color: var(--muted);
+  text-decoration: none;
+  transition-property: color, border-color, background-color;
+  transition-duration: 0.18s;
+  transition-timing-function: ease-out;
+}
+
+.ico svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.ico:hover {
+  color: var(--paper);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.ico:active {
+  scale: 0.96;
 }

@@ -136,6 +136,24 @@ export default async function Home() {
             height={128}
           />
         </div>
+
+        {/* Standfirst: the thesis in two sentences, set apart on a rule so it
+            reads as a second voice rather than a third paragraph. */}
+        <p className="standfirst rv-settle">
+          Producing plausible output stopped being the hard part. Knowing
+          whether to ship it did not.
+        </p>
+
+        {/* The hero had no call to action at all. One solid, one outlined:
+            read the work, or skip to writing to me. */}
+        <div className="herocta rv-settle">
+          <Link className="btn btn-solid" href="/built">
+            Read the work <span aria-hidden="true">→</span>
+          </Link>
+          <a className="btn btn-line" href="mailto:elliotjlittle@gmail.com">
+            Get in touch
+          </a>
+        </div>
         </Reveal>
 
         {/* The thread: one continuous line down the gutter with the section

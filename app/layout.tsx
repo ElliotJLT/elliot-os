@@ -4,6 +4,7 @@ import { Newsreader, Archivo, Instrument_Serif } from "next/font/google";
 import { getSpend } from "@/lib/telemetry";
 import NavLinks from "./components/NavLinks";
 import ThemeToggle from "./components/ThemeToggle";
+import { IconLink } from "./components/Icons";
 import "./globals.css";
 
 const basePath = process.env.BASE_PATH || "";
@@ -118,9 +119,14 @@ export default function RootLayout({
               </div>
               <nav className="foot-col">
                 <span className="foot-h">Elsewhere</span>
-                <a href="https://github.com/ElliotJLT">GitHub</a>
-                <a href="https://www.linkedin.com/in/hireelliot/">LinkedIn</a>
-                <a href="https://medium.com/@elliotJL">Medium</a>
+                <div className="icorow">
+                  <IconLink name="GitHub" href="https://github.com/ElliotJLT" />
+                  <IconLink
+                    name="LinkedIn"
+                    href="https://www.linkedin.com/in/hireelliot/"
+                  />
+                  <IconLink name="Medium" href="https://medium.com/@elliotJL" />
+                </div>
                 <a href={`${basePath}/llms.txt`}>llms.txt</a>
               </nav>
             </div>
