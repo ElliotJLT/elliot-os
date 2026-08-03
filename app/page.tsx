@@ -118,8 +118,8 @@ export default async function Home() {
           <p className="lede opener">
             I&apos;m Elliot, a product builder in London. Four times a founding
             hire. My last build was an A-Level tutor that refuses to hand
-            students the answer. App Store in 45 days, one of eight picked
-            nationally for safe AI tutoring.
+            students the answer, and one of eight picked nationally for safe
+            AI tutoring.
           </p>
           {/* Sits in the whitespace the lede's 52ch measure already leaves,
               so it costs the text no width. */}
