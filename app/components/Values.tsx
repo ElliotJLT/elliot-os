@@ -17,7 +17,6 @@ export default function Values({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [i, setI] = useState(0);
-  const [p, setP] = useState(0);
 
   useEffect(() => {
     const el = ref.current;
@@ -33,7 +32,6 @@ export default function Values({
         const p = Math.min(Math.max((window.innerHeight - r.top) / span, 0), 1);
         // Bias to the middle so the first and last do not flash past.
         const prog = Math.min(Math.max((p - 0.08) / 0.84, 0), 1);
-        setP(prog);
         setI(Math.min(items.length - 1, Math.floor(prog * items.length * 0.999)));
       });
     };
@@ -55,20 +53,19 @@ export default function Values({
         ))}
       </ul>
 
-      {/* The site's own mark, drawn in proportion to how far the section has
-          been scrolled. One continuous line rather than four presets snapping
-          between each other: it advances as you read and stops when you do.
-          pathLength normalises the dash so the draw is even along the curve. */}
+      {/* The site's own mark: the same continuously-traced lemniscate used on
+          /loops, rather than a bespoke scroll-drawn squiggle for this section
+          alone. One mark, used everywhere it appears. */}
       <svg
-        className="vals-loop"
-        viewBox="0 0 200 150"
+        className="vals-mark"
+        viewBox="0 0 84 48"
         aria-hidden="true"
         focusable="false"
       >
         <path
-          d="M14 75 C14 34 52 16 90 34 C126 51 118 104 82 118 C46 132 20 108 30 78 C42 42 96 20 136 32 C176 44 192 92 168 116"
+          className="vals-mark-trace"
+          d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
           pathLength={100}
-          style={{ strokeDashoffset: 100 - p * 100 }}
         />
       </svg>
 

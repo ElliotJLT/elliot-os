@@ -68,9 +68,14 @@ export default async function Writing() {
 
         <Reveal>
           <div className="wr-grid">
-            {posts.map((p) => (
-              <a className="wr-card rv-settle" href={p.link} key={p.link}>
-                <div className="wr-shot">
+            {posts.map((p, idx) => (
+              <a
+                className="wr-card rv-settle"
+                href={p.link}
+                key={p.link}
+                style={{ "--rv-delay": `${idx * 90}ms` } as React.CSSProperties}
+              >
+                <div className="wr-shot rv-develop">
                   {media.posts[p.link] ? (
                     /* eslint-disable-next-line @next/next/no-img-element */
                     <img src={`${basePath}/${media.posts[p.link]}`} alt="" />

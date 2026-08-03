@@ -48,8 +48,13 @@
   --line: #1b2523;
   --line-2: #2b3735;
   --rule: #2e3a38;
-  --accent: #e8641a;
-  --accent-ink: #f0782e;
+  /* Amber rather than the light-mode coral carried over: the dark palette
+     already leans sage-green (--accent-2 below), and amber pairs with that
+     instead of fighting it. Also clears contrast better against the dark
+     bg (8.56:1 / 10.50:1 vs 5.74:1 for the coral it replaces). The hero
+     band stays coral regardless — its colours are hardcoded, not themed. */
+  --accent: #d9a441;
+  --accent-ink: #e6b95c;
   --accent-2: #7bb389;
   --chart: #6ba877;
   --flag: #211d15;
@@ -134,70 +139,6 @@ a:hover {
   navigation: auto;
 }
 
-/* -------------------------------------------------------------- masthead */
-.masthead {
-  /* One hairline. A 2px ink rule under a second 1px rule was two separators
-     doing one job, and the heavier of them fought the headline below it. */
-  border-bottom: 1px solid var(--line-2);
-  background: var(--bg);
-  position: sticky;
-  top: 0;
-  z-index: 20;
-}
-
-.mast-row {
-  display: flex;
-  align-items: center;
-  gap: 26px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
-.brand {
-  font-family: var(--serif);
-  font-weight: 500;
-  /* A wordmark, not a headline. At 25px it competed with the h1 below it. */
-  font-size: 19px;
-  letter-spacing: -0.01em;
-  text-decoration: none;
-  color: var(--ink);
-  margin-right: auto;
-  white-space: nowrap;
-}
-
-.mast-nav {
-  display: flex;
-  gap: 22px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.mast-nav::-webkit-scrollbar {
-  display: none;
-}
-
-.mast-nav a {
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-  white-space: nowrap;
-  padding-bottom: 1px;
-  border-bottom: 1px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
-}
-
-.mast-nav a:hover {
-  color: var(--ink);
-}
-
-.mast-nav a[data-active] {
-  color: var(--ink);
-  border-bottom-color: var(--accent);
-}
-
 .theme-toggle {
   appearance: none;
   border: none;
@@ -207,7 +148,7 @@ a:hover {
   line-height: 1;
   cursor: pointer;
   padding: 4px;
-  transition: color 0.2s, transform 0.3s;
+  transition: color 0.2s, transform 0.3s, scale 0.18s ease-out;
 }
 
 .theme-toggle:hover {
@@ -215,25 +156,14 @@ a:hover {
   transform: rotate(-18deg);
 }
 
+.theme-toggle:active {
+  scale: 0.96;
+}
+
 /* --------------------------------------------------------------- general */
 main {
   padding: 40px 0 96px;
   counter-reset: sec;
-}
-
-.hero {
-  animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes rise {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
 }
 
 h1 {
@@ -330,7 +260,6 @@ p {
 }
 
 .muted,
-.receipts,
 .card p,
 .loopnote,
 .prose p,
@@ -356,8 +285,7 @@ p {
   color: var(--muted);
 }
 
-.faint,
-.dim {
+.faint {
   color: var(--faint);
 }
 
@@ -453,11 +381,6 @@ li {
     transform: none;
     transition: none;
   }
-}
-
-.receipts {
-  margin-top: 20px;
-  line-height: 1.6;
 }
 
 .card p {
@@ -557,28 +480,6 @@ li {
   border-color: var(--line);
 }
 
-/* --------------------------------------------------------------- lists */
-.repolist {
-  list-style: none;
-  padding: 0;
-}
-
-.repolist li {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.repolist li a {
-  font-family: var(--serif);
-  font-size: 18px;
-}
-
-.repolist .desc {
-  color: var(--muted);
-  font-size: 14px;
-  margin-top: 2px;
-}
-
 /* --------------------------------------------------------- track record */
 .record {
   list-style: none;
@@ -630,73 +531,6 @@ li {
   font-size: 15px;
   line-height: 1.55;
   max-width: 62ch;
-}
-
-/* --------------------------------------------------------------- funnel */
-.funnel {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin: 6px 0 8px;
-}
-
-.funnel .bar {
-  position: relative;
-  height: 46px;
-  background: var(--bg-2);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  overflow: hidden;
-}
-
-.funnel .fill {
-  position: absolute;
-  inset: 0 auto 0 0;
-  background: color-mix(in srgb, var(--chart) 24%, transparent);
-  box-shadow: inset 3px 0 0 var(--chart);
-  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.funnel .row {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 14px;
-  font-family: var(--mono);
-  font-size: 12.5px;
-}
-
-.funnel .row .name {
-  color: var(--ink);
-  font-weight: 600;
-  z-index: 1;
-}
-
-.funnel .row .num {
-  color: var(--ink);
-  z-index: 1;
-  font-variant-numeric: tabular-nums;
-  font-weight: 600;
-}
-
-.funnel .conv {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  color: var(--faint);
-  padding-left: 14px;
-}
-
-.emptyfunnel {
-  border: 1px solid var(--line-2);
-  border-radius: var(--r);
-  padding: 22px;
-  font-family: var(--mono);
-  font-size: 12.5px;
-  color: var(--muted);
-  line-height: 1.6;
-  background: var(--flag);
 }
 
 /* --------------------------------------------------------------- loops */
@@ -1019,161 +853,6 @@ footer a {
   margin-bottom: 0;
 }
 
-/* the hand-written half of now.md, on the home page */
-.byhand ul {
-  padding-left: 18px;
-}
-
-.byhand li {
-  color: var(--ink-2);
-}
-
-/* ------------------------------------------------- writing: thumbnails */
-/* Images are downloaded at build (scripts/fetch-media.mjs) and served from
-   this origin, so a reader's browser never talks to Medium or Spotify. */
-.postlist {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.postlist li {
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 0;
-}
-
-.postlist li:last-child {
-  border-bottom: none;
-}
-
-.thumb {
-  flex: none;
-  width: 132px;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  background: var(--bg-2);
-  text-decoration: none;
-}
-
-.thumb img,
-.podart img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  /* Medium headers are a mix of stock photography and screenshots; a light
-     desaturation keeps them from fighting the ink-on-paper palette. */
-  filter: saturate(0.72) contrast(0.96);
-  transition: filter 0.2s;
-}
-
-.postlist li:hover .thumb img,
-.podcard:hover .podart img {
-  filter: none;
-}
-
-.postbody {
-  min-width: 0;
-}
-
-.postbody .rout {
-  margin-top: 4px;
-}
-
-/* --------------------------------------------------- writing: podcast */
-.podcard {
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  padding: 18px 20px;
-}
-
-.podart {
-  flex: none;
-  width: 96px;
-  height: 96px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  text-decoration: none;
-}
-
-.podcard h3 {
-  line-height: 1.3;
-}
-
-@media (max-width: 560px) {
-  .postlist li,
-  .podcard {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .thumb {
-    width: 100%;
-  }
-}
-
-/* The standing note under telemetry: says plainly how new the numbers are.
-   Set apart from the receipts line so it reads as a statement, not a caption. */
-.standing {
-  margin-top: 16px;
-  padding: 14px 16px;
-  border-left: 2px solid var(--accent);
-  background: var(--bg-2);
-  font-size: 15px;
-}
-
-/* ------------------------------------------------------- hero portrait */
-/* The lede is capped at 52ch, so on a wide column there is already unused
-   space to its right. The portrait sits in that gap rather than taking width
-   from the text: no float, no shape-outside, nothing to squeeze the measure. */
-.herorow {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 28px;
-}
-
-.portrait {
-  flex: none;
-  width: 128px;
-  height: 128px;
-  border-radius: 50%;
-  /* A tinted border picks up the paper colour and reads as dirt on the image
-     edge. Pure black at 10% in light, pure white at 10% in dark. */
-  outline: 1px solid oklch(0 0 0 / 0.1);
-  outline-offset: -1px;
-  margin-top: 4px;
-}
-
-:root[data-theme="dark"] .portrait {
-  outline-color: oklch(1 0 0 / 0.1);
-}
-
-@media (max-width: 700px) {
-  .herorow {
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    gap: 20px;
-  }
-
-  .portrait {
-    width: 92px;
-    height: 92px;
-  }
-}
-
-
 .refname {
   font-weight: 650;
   font-size: 15px;
@@ -1188,86 +867,6 @@ footer a {
   font-family: var(--mono);
   font-size: 11px;
   color: var(--faint);
-}
-
-/* --------------------------------------------------------- reader quotes */
-.readers {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  padding: 6px 0 12px;
-}
-
-/* Every quote is in the markup; the stack keeps the box the height of the
-   tallest so rotation does not shift the page. */
-.readerstack {
-  display: grid;
-}
-
-.reader {
-  grid-area: 1 / 1;
-  margin: 0;
-  padding: 16px 0 10px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease;
-}
-
-.reader[data-on] {
-  opacity: 1;
-  visibility: visible;
-}
-
-.reader blockquote {
-  margin: 0 0 8px;
-  font-family: var(--serif);
-  font-size: 19px;
-  line-height: 1.45;
-  color: var(--ink-2);
-  max-width: 54ch;
-}
-
-.reader blockquote::before {
-  content: "\201C";
-}
-
-.reader blockquote::after {
-  content: "\201D";
-}
-
-.reader figcaption {
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--faint);
-}
-
-.readerdots {
-  display: flex;
-  gap: 7px;
-}
-
-.readerdots button {
-  appearance: none;
-  border: 1px solid var(--line-2);
-  background: transparent;
-  width: 7px;
-  height: 7px;
-  padding: 0;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s;
-}
-
-.readerdots button[data-on] {
-  background: var(--accent);
-  border-color: var(--accent);
-}
-
-/* No JS: show the first quote rather than an empty box. */
-html:not(.js) .reader:first-child {
-  opacity: 1;
-  visibility: visible;
 }
 
 /* ============================================================ distinction
@@ -1558,97 +1157,6 @@ html:not(.js) .reader:first-child {
   }
 }
 
-/* ======================================================================
-   Homepage: one narrative spine
-   The hero used to open with a status pill, an italic-serif emphasis span,
-   and a five-item colophon before the reader learned anything. Those are
-   removed. What remains is a headline, a paragraph, and an index.
-   ==================================================================== */
-
-/* The setup line is quieted with colour, not set in italic serif. Italic
-   serif emphasis is one of the most legible AI-design tells, and colour
-   carries the same "this is the quiet half" meaning without the costume. */
-h1 .lead {
-  display: block;
-  color: var(--muted);
-}
-
-/* ---------------------------------------------------------------- index */
-/* Not cards. A printed index: hairline rules, a hanging label, and the
-   description doing the work. Nothing is boxed, so nothing competes. */
-.index {
-  list-style: none;
-  margin: 22px 0 0;
-  padding: 0;
-  border-top: 1px solid var(--line);
-  /* Match the body measure so the right edge of the page stays honest;
-     without this the index runs wider than the paragraphs above it. */
-  max-width: 66ch;
-}
-
-.index li {
-  display: grid;
-  grid-template-columns: 8.5rem 1fr;
-  gap: 0 24px;
-  align-items: baseline;
-  padding: 17px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-@media (max-width: 560px) {
-  .index li {
-    grid-template-columns: 1fr;
-    gap: 5px;
-  }
-}
-
-.index li > a {
-  font-family: var(--display);
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 1.2;
-  text-decoration: none;
-  color: var(--ink);
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
-  /* 26px of text plus 8px either side clears the 40px minimum hit area for
-     a dense desktop target; the negative margin keeps the row rhythm. */
-  padding: 8px 0;
-  margin: -8px 0;
-  transition: color 0.18s ease-out;
-}
-
-.index li > a:hover {
-  color: var(--accent-ink);
-}
-
-/* Transitions, not keyframes: the arrow retargets mid-flight if the pointer
-   crosses rows quickly, instead of restarting. */
-.index li > a::after {
-  content: "→";
-  font-family: var(--mono);
-  font-size: 15px;
-  color: var(--faint);
-  opacity: 0;
-  transform: translateX(-5px);
-  transition: opacity 0.18s ease-out, transform 0.18s ease-out,
-    color 0.18s ease-out;
-}
-
-.index li:hover > a::after,
-.index li > a:focus-visible::after {
-  opacity: 1;
-  transform: none;
-  color: var(--accent-ink);
-}
-
-.index li p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 15px;
-}
-
 /* ------------------------------------------------------ rendering details */
 /* balance evens out short headings; pretty stops a lone word stranded on the
    last line of body copy. Long-form prose gets neither: the browser default
@@ -1670,19 +1178,14 @@ dd {
 /* Any figure that changes between builds gets equal-width digits so the line
    above it does not reflow when the number does. */
 .mono,
-.receipts,
-.receipts b,
 .loopmeta dd,
 .rmeta {
   font-variant-numeric: tabular-nums;
 }
 
 /* ------------------------------------------------------------ hit areas */
-/* The moon glyph is ~22px square and the nav labels are 11px: both are well
-   under the 40px minimum for a pointer target. Extend the pressable area with
-   a pseudo-element so the visual size is unchanged. The nav extends only
-   vertically, because a horizontal extension would overlap its neighbour at
-   the 22px gap. */
+/* The moon glyph is ~22px square: extend the pressable area with a
+   pseudo-element so the visual size is unchanged. */
 .theme-toggle {
   position: relative;
 }
@@ -1691,332 +1194,6 @@ dd {
   content: "";
   position: absolute;
   inset: -11px;
-}
-
-.mast-nav a {
-  position: relative;
-}
-
-.mast-nav a::after {
-  content: "";
-  position: absolute;
-  inset: -13px 0;
-}
-
-/* ======================================================================
-   Homepage v3: the rail and the thread
-   The page argues that there is a through-line, so it draws one. On a wide
-   screen the layout splits into a narrow rail and the reading measure, with
-   a continuous hairline running down the gutter between them and the section
-   numbers sitting on it. The headline breaks across both tracks and the body
-   indents off it, which is where the asymmetry comes from. Below 1020px it
-   collapses to one column and the rail's contents fall back inline: nothing
-   in the rail is load-bearing.
-   ==================================================================== */
-.railpage {
-  --rail: 104px;
-  --gutter: 28px;
-  /* Same measure as every other page until the rail can be afforded. */
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 0 26px;
-}
-
-/* Display type. 62px was a headline; this is the visual event of the page,
-   and at 88px the tracking has to come in or the words drift apart. */
-/* Capped at 86px: between 760px and the 1140px rail breakpoint the headline
-   is still confined to the measure, and "Judgement didn't." overflows it
-   above that size. */
-.railpage h1 {
-  font-size: clamp(40px, 6.6vw, 74px);
-  line-height: 0.97;
-  letter-spacing: -0.032em;
-  margin: 8px 0 34px;
-}
-
-/* Split entrance, ~110ms apart, so the headline lands before the paragraph
-   under it. One-shot on load, so a keyframe is the right tool. */
-.rise {
-  animation: rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.rise-2 {
-  animation-delay: 0.11s;
-}
-
-/* ---------------------------------------------------------- margin notes */
-.railnote {
-  display: flex;
-  gap: 14px;
-  margin: 0 0 18px;
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--faint);
-}
-
-@media (min-width: 1040px) {
-  .railpage {
-    display: grid;
-    grid-template-columns: var(--rail) minmax(0, 1fr);
-    column-gap: var(--gutter);
-    align-items: start;
-    /* The rail hangs into the left margin instead of pushing the measure
-       across: column 2 lands exactly where a plain 760px .wrap would, so the
-       masthead, the footer and every other page still line up with the body
-       text. Without this the nav sits ~80px right of the headline. */
-    margin-left: calc(50% - 380px - var(--rail) - var(--gutter));
-    margin-right: 0;
-    max-width: calc(760px + var(--rail) + var(--gutter));
-  }
-
-  /* Everything sits in the measure unless it says otherwise. */
-  .railpage > * {
-    grid-column: 2;
-    min-width: 0;
-  }
-
-  /* The headline and the hero row span both tracks; the hero row then sets
-     up its own rail internally so the lede still starts on the measure. */
-  /* The hero row used to span the rail because the margin note lived in it.
-     With the note gone it belongs in the measure like everything else, or
-     the lede starts 130px left of the headline above it. */
-  .railpage > .herorow {
-    grid-column: 2;
-  }
-
-  /* Two children now that the margin note is gone. Leaving the old rail
-     column in place put the lede into a 104px track and made the homepage
-     1,100px taller at 1440 than it was at 900. */
-  .herorow {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    column-gap: var(--gutter);
-    align-items: start;
-  }
-
-  /* Right-aligned against the thread, stacked, so it reads as annotation
-     rather than as a row of chips. */
-  .railnote {
-    flex-direction: column;
-    gap: 5px;
-    text-align: right;
-    margin: 12px 0 0;
-  }
-
-  /* ------------------------------------------------------------ thread */
-  .thread {
-    position: relative;
-  }
-
-  .thread::before {
-    content: none;
-    position: absolute;
-    left: calc(var(--gutter) / -2);
-    top: 6px;
-    bottom: 6px;
-    width: 1px;
-    /* Fades at both ends so it reads as a thread running through the page
-       rather than a border box that stops abruptly. */
-    background: linear-gradient(
-      to bottom,
-      transparent,
-      var(--line-2) 4%,
-      var(--line-2) 96%,
-      transparent
-    );
-  }
-
-  /* The section rule is gone: the thread carries the structure now, and a
-     2px ink rule on top of it was two separators doing one job. */
-  .thread h2 {
-    position: relative;
-    border-top: none;
-    padding-top: 0;
-    margin: 68px 0 20px;
-  }
-
-  /* The number leaves the flow and sits centred on the thread, masked by the
-     page colour, so the sections read as beads on a line. Out of flow means
-     the flex gap reserves nothing and the label starts on the measure. */
-  .thread h2::before {
-    position: absolute;
-    left: calc(var(--gutter) / -2);
-    transform: translateX(-50%);
-    background: var(--bg);
-    padding: 5px 0;
-    line-height: 1;
-  }
-
-  .receipts {
-    margin-top: 46px;
-  }
-}
-
-/* ------------------------------------------------------- contribution year */
-/* One ink at four opacities rather than a second palette, so dark mode needs
-   no extra colours and the graph reads as part of the page instead of as a
-   GitHub screenshot dropped into it. */
-.cal {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-width: 66ch;
-  margin: 4px 0 18px;
-  overflow: visible;
-}
-
-.cal rect {
-  fill: var(--chart);
-  shape-rendering: geometricPrecision;
-}
-
-.cal rect.lv0 {
-  fill: var(--line);
-}
-
-.cal rect.lv1 {
-  fill-opacity: 0.4;
-}
-
-.cal rect.lv2 {
-  fill-opacity: 0.64;
-}
-
-.cal rect.lv3 {
-  fill-opacity: 0.84;
-}
-
-.cal rect.lv4 {
-  fill-opacity: 1;
-}
-
-.calmonth {
-  fill: var(--faint);
-  font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.06em;
-}
-
-.calnote {
-  font-size: 15px;
-}
-
-/* ------------------------------------------------------------ hero mark */
-/* The lemniscate was stranded on /loops. It is the site's mark, so it opens
-   the page: traced slowly in the rail, at the size of a printer's device. */
-.railmark {
-  display: block;
-  width: 54px;
-  height: 31px;
-  margin: 0 0 12px;
-  overflow: visible;
-}
-
-/* Drawn whole, not traced. A partial dash reads as a loop while it is moving
-   and as a stray squiggle in any screenshot, and this thing gets screenshotted
-   a lot more than it gets watched. */
-.railmark path {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 2.6;
-  stroke-linecap: round;
-}
-
-@media (min-width: 1040px) {
-  .railmark {
-    margin-left: auto;
-  }
-}
-
-/* ----------------------------------------------------------- tactility */
-/* A press should register. 0.96 is the smallest scale that reads as a
-   press rather than a glitch; anything under 0.95 feels exaggerated. */
-.index li > a,
-.mast-nav a,
-.theme-toggle {
-  transition-property: color, border-color, scale;
-  transition-duration: 0.18s;
-  transition-timing-function: ease-out;
-}
-
-.index li > a:active,
-.mast-nav a:active,
-.theme-toggle:active {
-  scale: 0.96;
-}
-
-
-/* ==================================================================
-   Structure that survives a narrow window
-   The rail, the marginalia and the hanging numbers used to live behind a
-   single 1140px breakpoint, so on any normal laptop window the page fell
-   back to a plain centred column and looked untouched. The hanging numeral
-   is the signature, so it now runs at every width: the sections indent and
-   the numbers hang in the space that opens up. The rail is an enhancement
-   on top of that, not the only place the design exists.
-   ================================================================ */
-.thread {
-  padding-left: 34px;
-}
-
-.thread h2 {
-  position: relative;
-}
-
-.thread h2::before {
-  position: absolute;
-  left: -34px;
-}
-
-@media (max-width: 420px) {
-  .thread {
-    padding-left: 26px;
-  }
-  .thread h2::before {
-    left: -26px;
-  }
-}
-
-/* The rail supersedes the indent: it has its own margin to hang into. */
-@media (min-width: 1040px) {
-  .thread {
-    padding-left: 0;
-  }
-  .thread h2::before {
-    left: calc(var(--gutter) / -2);
-  }
-}
-
-/* Scale and texture contrast. Every section was 16.5px sans, so the page had
-   one voice and one size the whole way down. The through-line is the
-   argument, so it is set as a statement in the serif; what follows it is a
-   list, and reads as one. */
-.statement {
-  font-family: var(--serif);
-  font-size: 19.5px;
-  line-height: 1.6;
-  color: var(--ink-2);
-  max-width: 58ch;
-}
-
-/* Below the rail there is no margin to sit in, so the note becomes a strip
-   above the lede instead of a column beside it, which was cutting the
-   measure roughly in half at 900px. */
-@media (max-width: 1039px) {
-  .herorow {
-    flex-wrap: wrap;
-  }
-  .railnote {
-    flex: 0 0 100%;
-    order: -1;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-  .railmark {
-    margin: 0;
-  }
 }
 
 /* ---------------------------------------------------------------- ladder */
@@ -2085,71 +1262,6 @@ h2::before {
   font-weight: 600;
 }
 
-/* ================================================================= work */
-/* The front page shows the work rather than promising it. Dense rows, name
-   and status on one line so the eye can run down the left edge, claim
-   underneath at reading size. No boxes: the rules do the separating, which
-   is the job borders are actually for. */
-.work {
-  list-style: none;
-  margin: 18px 0 0;
-  padding: 0;
-  border-top: 1px solid var(--line);
-  max-width: 66ch;
-}
-
-.work li {
-  padding: 15px 0 17px;
-  border-bottom: 1px solid var(--line);
-}
-
-.wtop {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.wname {
-  font-family: var(--display);
-  font-size: 21px;
-  font-weight: 500;
-  letter-spacing: -0.012em;
-  color: var(--ink);
-  text-decoration: none;
-  /* 27px of text plus 7px either side clears the 40px pointer target. */
-  padding: 7px 0;
-  margin: -7px 0;
-  transition: color 0.18s ease-out;
-}
-
-.wname:hover {
-  color: var(--accent-ink);
-}
-
-/* The status is a fact, not a badge: mono, small, no pill around it. */
-.wmeta {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--faint);
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-
-.wclaim {
-  margin: 5px 0 0;
-  color: var(--muted);
-  font-size: 15.5px;
-  line-height: 1.55;
-}
-
-.wmore {
-  margin-top: 18px;
-  font-size: 15px;
-}
 
 /* ================================================================= flow */
 /* argus as a diagram. Nodes are text on a spine, not boxes: a filled node
@@ -2350,83 +1462,7 @@ h2::before {
   }
 }
 
-/* Visually hidden, still read by machines and screen readers. */
-.vh {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-/* The opener. With no strapline above it this paragraph is the first thing
-   read, so it is set at display scale rather than as a caption under a slogan
-   that was doing the work it should have been doing itself. */
-.opener {
-  font-size: clamp(21px, 2.5vw, 27px);
-  line-height: 1.45;
-  color: var(--ink);
-  /* 30ch ran this paragraph to eleven lines. At 27px the comfortable measure
-     is wider, and the portrait already takes the right of the row. */
-  max-width: 34ch;
-  margin-top: 6px;
-}
-
-@media (min-width: 700px) {
-  .opener {
-    max-width: 46ch;
-  }
-}
-
-/* ================================================================ header CTA */
-/* A solid block against a page of hairlines: the one thing on the masthead
-   that is meant to be pressed. */
-.mast-cta {
-  flex: none;
-  background: var(--ink);
-  color: var(--bg);
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-decoration: none;
-  /* 11px either side of 11px type clears the 40px pointer target; at 9px it
-     measured 36. */
-  padding: 12px 16px;
-  white-space: nowrap;
-  transition: background-color 0.18s ease-out, color 0.18s ease-out;
-}
-
-.mast-cta:hover {
-  background: var(--accent);
-  color: var(--paper);
-}
-
-.mast-cta:active {
-  scale: 0.96;
-}
-
-@media (max-width: 640px) {
-  .mast-cta {
-    display: none;
-  }
-}
-
 /* ==================================================================== footer */
-.foot-name {
-  font-family: var(--display);
-  font-size: clamp(38px, 6vw, 62px);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  text-align: center;
-  padding: 8px 0 26px;
-}
-
 .foot-cols {
   display: grid;
   gap: 30px 34px;
@@ -2469,7 +1505,6 @@ h2::before {
 .foot-col a,
 .foot-col span:not(.foot-h) {
   font-family: var(--mono);
-  font-size: 13px;
   font-size: 16px;
   color: var(--ink-2);
   text-decoration: none;
@@ -2495,73 +1530,6 @@ h2::before {
 
 .foot-base a {
   color: var(--faint);
-}
-
-/* ============================================================== standfirst */
-/* A second statement set on a rule, the way a standfirst sits under a
-   headline. Not a blockquote: nobody is being quoted, so it takes a rule and
-   the serif rather than quotation marks. */
-.standfirst {
-  margin: 26px 0 0;
-  padding-left: 20px;
-  border-left: 3px solid var(--accent);
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(17px, 1.9vw, 21px);
-  line-height: 1.45;
-  color: var(--ink-2);
-  max-width: 40ch;
-}
-
-/* ================================================================= buttons */
-.herocta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 28px;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-decoration: none;
-  /* 15px of type plus 14px either side clears the 44px touch target. */
-  padding: 14px 20px;
-  transition-property: background-color, color, border-color;
-  transition-duration: 0.18s;
-  transition-timing-function: ease-out;
-}
-
-.btn:active {
-  scale: 0.96;
-}
-
-.btn-solid {
-  background: var(--ink);
-  color: var(--bg);
-  border: 1px solid var(--ink);
-}
-
-.btn-solid:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--paper);
-}
-
-.btn-line {
-  background: transparent;
-  color: var(--ink);
-  border: 1px solid var(--line-2);
-}
-
-.btn-line:hover {
-  border-color: var(--ink);
 }
 
 /* ============================================================== icon links */
@@ -2604,44 +1572,6 @@ h2::before {
   scale: 0.96;
 }
 
-/* ============================================================ hero, v4 */
-/* Structured the way a landing page is, rather than the way an essay is: a
-   kicker to say who is talking, a claim naming who it is for and what
-   changes for them, then the detail, then proof. */
-.kicker {
-  display: block;
-  font-family: var(--mono);
-  font-size: 11.5px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
-  margin-bottom: 16px;
-}
-
-.claim {
-  font-family: var(--display);
-  font-size: clamp(30px, 4.4vw, 52px);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  margin: 0 0 22px;
-  max-width: 19ch;
-  text-wrap: balance;
-}
-
-.herorow > div:first-child {
-  min-width: 0;
-}
-
-/* The opener is support now, not the headline, so it drops back to body. */
-.opener {
-  font-size: clamp(17px, 1.9vw, 19px);
-  line-height: 1.55;
-  color: var(--muted);
-  max-width: 46ch;
-  margin: 0;
-}
-
 /* ================================================================= proof */
 /* One named reference, then three short lines from readers. Proof sits
    directly under the claim because that is the moment it is doubted. */
@@ -2675,38 +1605,6 @@ h2::before {
 }
 
 .vrole {
-  color: var(--faint);
-}
-
-.saidrow {
-  list-style: none;
-  display: grid;
-  gap: 20px 28px;
-  grid-template-columns: 1fr;
-  margin: 30px 0 0;
-  padding: 22px 0 0;
-  border-top: 1px solid var(--line);
-}
-
-@media (min-width: 760px) {
-  .saidrow {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.saidrow p {
-  margin: 0 0 7px;
-  font-family: var(--serif);
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--ink-2);
-}
-
-.saidrow span {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--faint);
 }
 
@@ -2745,9 +1643,13 @@ h2::before {
 }
 
 .mai-brand {
-  font-family: var(--display);
-  font-size: 20px;
-  letter-spacing: -0.01em;
+  /* Instrument Serif only ships weight 400, so it can't carry real heft at
+     this size — Newsreader has a 600 cut, which reads as a wordmark rather
+     than a caption next to the nav links. */
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 23px;
+  letter-spacing: -0.015em;
   text-decoration: none;
   color: var(--ink);
   margin-right: auto;
@@ -2850,22 +1752,6 @@ h2::before {
   padding: 0 26px;
 }
 
-.mai-hero {
-  text-align: center;
-  padding: 72px 0 84px;
-}
-
-.mai-hero h1 {
-  font-family: var(--display);
-  font-size: clamp(42px, 6.6vw, 82px);
-  line-height: 1.04;
-  letter-spacing: -0.022em;
-  color: var(--ink);
-  margin: 0 auto 30px;
-  max-width: 15ch;
-  text-wrap: balance;
-}
-
 .mai-kick {
   display: block;
   font-family: var(--mono);
@@ -2874,11 +1760,6 @@ h2::before {
   text-transform: uppercase;
   color: var(--accent-ink);
   margin-bottom: 22px;
-}
-
-.mai-hero .slot {
-  max-width: 440px;
-  margin: 0 auto 30px;
 }
 
 .mai-sub {
@@ -2914,6 +1795,45 @@ h2::before {
   width: 100%;
 }
 
+/* The work list used to be a running set of rows split by a hairline, the
+   same treatment as everything else on the page. Each build is its own
+   module now — a soft card rather than a divider — closer to how MAI
+   separates one product from the next. */
+.work-row {
+  background: var(--bg-2);
+  border-top: none;
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 16px;
+}
+
+.work-row:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 900px) {
+  .work-row {
+    padding: 36px 40px;
+  }
+}
+
+.work-icon {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--accent-ink);
+}
+
+.work-icon svg {
+  width: 30%;
+  max-width: 60px;
+  height: auto;
+}
+
 .mai-rowlabel {
   display: block;
   font-family: var(--mono);
@@ -2942,49 +1862,6 @@ a.mai-rowname:hover {
   font-size: 17px;
   line-height: 1.55;
   color: var(--muted);
-  margin: 0;
-}
-
-/* ------------------------------------------------------ principles list */
-.mai-vals {
-  display: grid;
-  gap: 30px;
-  grid-template-columns: 1fr;
-  padding: 80px 0;
-  align-items: center;
-}
-
-@media (min-width: 900px) {
-  .mai-vals {
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-  }
-}
-
-.mai-valist {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.mai-valist li {
-  font-family: var(--display);
-  font-size: clamp(28px, 3.6vw, 46px);
-  line-height: 1.18;
-  letter-spacing: -0.018em;
-  color: var(--line-2);
-  transition: color 0.25s ease-out;
-}
-
-.mai-valist li[data-on] {
-  color: var(--ink);
-}
-
-.mai-valsaid {
-  font-family: var(--serif);
-  font-size: clamp(19px, 2.3vw, 27px);
-  line-height: 1.42;
-  color: var(--ink);
   margin: 0;
 }
 
@@ -3024,32 +1901,6 @@ a.mai-rowname:hover {
   color: var(--muted);
   padding: 12px 0;
   border-bottom: 1px dashed var(--line-2);
-}
-
-/* ------------------------------------------------------------ closing */
-.mai-end {
-  text-align: center;
-  padding: 78px 0 88px;
-  border-top: 1px solid var(--line);
-}
-
-.mai-end h2 {
-  display: block;
-  font-family: var(--display);
-  font-size: clamp(32px, 5vw, 60px);
-  line-height: 1.06;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  text-transform: none;
-  border: none;
-  padding: 0;
-  margin: 0 auto 26px;
-  max-width: 18ch;
-}
-
-.mai-end h2::after,
-.mai-end h2::before {
-  content: none;
 }
 
 /* The old numbered-section h2 rules still applied to the new kicker
@@ -3099,12 +1950,12 @@ h2.mai-kick::after {
 
 .band-h {
   font-family: var(--display);
-  font-size: clamp(40px, 6.4vw, 84px);
-  line-height: 1.04;
-  letter-spacing: -0.022em;
+  font-size: clamp(36px, 5.6vw, 76px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
   color: #faf3e8;
   margin: 0 auto 34px;
-  max-width: 16ch;
+  max-width: 19ch;
   text-wrap: balance;
 }
 
@@ -3210,32 +2061,36 @@ main:has(> .band) {
   color: var(--ink);
 }
 
-.vals-loop {
+/* The site's own mark (same lemniscate as /loops) rather than a one-off
+   scroll-driven squiggle: simpler, and it says what the site already says
+   its mark is, instead of inventing a second one for this section alone. */
+.vals-mark {
   display: none;
 }
 
 @media (min-width: 900px) {
-  .vals-loop {
+  .vals-mark {
     display: block;
-    width: 200px;
-    height: 150px;
+    width: 140px;
+    height: 80px;
+    margin: 0 auto;
     overflow: visible;
+    fill: none;
+    stroke-linecap: round;
+    stroke-width: 2.2;
   }
 }
 
-.vals-loop path {
-  fill: none;
+.vals-mark-trace {
   stroke: var(--accent);
-  stroke-width: 1.4;
-  stroke-linecap: round;
-  stroke-dasharray: 100;
-  /* No transition: the draw is bound to scroll position, so easing it would
-     make it lag the reader rather than follow them. */
+  stroke-dasharray: 42 58;
+  animation: trace 4s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .vals-loop path {
-    stroke-dashoffset: 0 !important;
+  .vals-mark-trace {
+    animation: none;
+    stroke-dasharray: none;
   }
 }
 
@@ -3265,10 +2120,6 @@ main:has(> .band) {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .vals-squiggle path {
-    animation: none;
-    stroke-dashoffset: 0;
-  }
   .vals-said p {
     transition: none;
   }
@@ -3276,16 +2127,6 @@ main:has(> .band) {
 
 
 /* ============================================================== painted */
-/* Screenshots masked with a turbulence-displaced rectangle, so the edge is
-   ragged and the image dissolves into the page rather than ending on a
-   rectangle. The mask is defined once in the layout and referenced here. */
-.defs {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
-
 /* The turbulence mask shredded the right edge into spikes and stretched the
    crop. Removed rather than tuned: a clean rounded crop is worth more than a
    painterly edge that mangles the art. */
@@ -3323,16 +2164,6 @@ main:has(> .band) {
   padding: 0 0 56px;
   margin-bottom: 44px;
   border-bottom: 1px solid var(--line);
-}
-
-.foot-ask {
-  font-family: var(--display);
-  font-size: clamp(28px, 4vw, 46px);
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  margin: 0 auto 24px;
-  max-width: 18ch;
 }
 
 /* ================================================================ writing */
@@ -3406,6 +2237,14 @@ main:has(> .band) {
   transform: scale(1.04);
 }
 
+/* The shot resolves into focus rather than just fading in: it starts a touch
+   zoomed and settles back as the blur clears, like a photo finding focus.
+   Reuses .wr-shot img's own hover transition, so no separate timing to keep
+   in sync with it. */
+.js .rv:not(.is-revealed) .wr-shot img {
+  transform: scale(1.08);
+}
+
 .wr-noshot {
   font-family: var(--mono);
   font-size: 11px;
@@ -3462,42 +2301,6 @@ main:has(> .band) {
 .wr-card:hover .wr-go {
   text-decoration: underline;
   text-underline-offset: 3px;
-}
-
-.wr-earlier {
-  list-style: none;
-  margin: 16px 0 0;
-  padding: 0;
-  border-top: 1px solid var(--line);
-  max-width: 70ch;
-}
-
-.wr-earlier li {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 20px;
-  padding: 15px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.wr-earlier a {
-  font-family: var(--serif);
-  font-size: 18px;
-  color: var(--ink);
-  text-decoration: none;
-}
-
-.wr-earlier a:hover {
-  color: var(--accent-ink);
-}
-
-.wr-earlier span {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--faint);
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
 }
 
 /* -------------------------------------------------- reader quotes, v5 */

@@ -49,14 +49,9 @@ export default function Reveal({
       setShown(true);
       return;
     }
-    // Returning to this page client-side remounts with state reset. If the
-    // block is already on screen there is nothing to scroll into, so reveal
-    // it now rather than waiting for an intersection change that never comes.
-    const box = el.getBoundingClientRect();
-    if (box.top < window.innerHeight && box.bottom > 0) {
-      setShown(true);
-      return;
-    }
+    // The observer's own first callback fires immediately with the current
+    // intersection state, so a block already on screen (e.g. a client-side
+    // remount) reveals on that first callback without a separate rect read.
     const io = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {

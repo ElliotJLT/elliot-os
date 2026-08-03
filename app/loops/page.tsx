@@ -1,5 +1,6 @@
 import { getLoops } from "@/lib/loops";
 import { getAgentLog } from "@/lib/content";
+import Reveal from "../components/Reveal";
 
 export const metadata = { title: "Loops · Elliot Little" };
 
@@ -62,75 +63,92 @@ export default function Loops() {
 
   return (
     <main>
-      <div className="wrap">
-        {/* The "oo" is drawn as a lemniscate on the same baseline as the
-            serif, traced continuously so the title performs what the page
-            describes. Falls back to plain "Loops" without CSS or motion. */}
-        <h1 className="loopstitle">
-          L
-          <span className="lemni" role="img" aria-label="oo">
-            <svg viewBox="0 0 84 48" aria-hidden="true" focusable="false">
-              <path
-                className="lemni-trace"
-                d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
-                pathLength={100}
-              />
-            </svg>
-          </span>
-          ps
-        </h1>
-        <p className="lede">
-          Two agents keep this site current. One runs on a schedule and
-          rewrites the shipping log. The other reads what I have actually been
-          doing and proposes a single change as a pull request I can close.
-          What each one costs and what stops it is below. So are the rungs
-          neither of them has reached.
-        </p>
+      <div className="mai">
+        <Reveal immediate>
+          <header className="wr-head">
+            {/* The "oo" is drawn as a lemniscate on the same baseline as the
+                serif, traced continuously so the title performs what the page
+                describes. Falls back to plain "Loops" without CSS or motion. */}
+            <h1 className="wr-title rv-settle">
+              L
+              <span className="lemni" role="img" aria-label="oo">
+                <svg viewBox="0 0 84 48" aria-hidden="true" focusable="false">
+                  <path
+                    className="lemni-trace"
+                    d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
+                    pathLength={100}
+                  />
+                </svg>
+              </span>
+              ps
+            </h1>
+            <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
+              Two agents keep this site current. One runs on a schedule and
+              rewrites the shipping log. The other reads what I have actually
+              been doing and proposes a single change as a pull request I can
+              close. What each one costs and what stops it is below. So are
+              the rungs neither of them has reached.
+            </p>
+          </header>
+        </Reveal>
 
-        <h2>where these actually sit</h2>
-        <p className="muted" style={{ marginTop: 0 }}>
-          A loop is an agent repeating cycles of work until a stop condition is
-          met. The ladder is what you hand over at each rung: the check, the
-          stop condition, the trigger, the prompt. I set that out in{" "}
-          <a href="https://medium.com/@elliotJL/the-loop-was-never-the-hard-part-5bdd4352acab">
-            The Loop Was Never the Hard Part
-          </a>
-          . So here is where this site actually sits.
-        </p>
-        <ol className="ladder">
-          {LADDER.map((l) => (
-            <li key={l.name} data-state={l.state}>
-              <div className="rhead">
-                <span className="rorg">{l.name}</span>
-                <span className="rmeta">{l.verdict}</span>
-              </div>
-              <p className="rout">
-                <b>{l.needs}</b> {l.reality}
-              </p>
-            </li>
-          ))}
-        </ol>
-        <p className="muted">
-          The gap is rung two. The trigger runs daily and the top rung is
-          built, and there is nothing judging attempts in between. That is the
-          setup I called an outage with a subscription. This one is not, only
-          because it costs nothing and cannot break anything.
-        </p>
-        <p className="muted">
-          Rung one has a worse version of the same problem. In{" "}
-          <a href="https://medium.com/@elliotJL/the-product-engineer-and-the-end-of-the-handoff-93181f170779">
-            The Product Engineer and the End of the Handoff
-          </a>{" "}
-          I argued that you uncover a rubric by reading real failures rather
-          than inventing one up front. I invented these up front. That is why
-          they pass every time. Writing a stop condition that can actually
-          reject something is the next job, and I probably cannot write a good
-          one until this thing has failed a few times where people can see
-          it.
-        </p>
+        <Reveal>
+          <h2 className="mai-kick rv-settle">where these actually sit</h2>
+        </Reveal>
+        <Reveal>
+          <p className="muted rv-settle" style={{ marginTop: 0 }}>
+            A loop is an agent repeating cycles of work until a stop condition
+            is met. The ladder is what you hand over at each rung: the check,
+            the stop condition, the trigger, the prompt. I set that out in{" "}
+            <a href="https://medium.com/@elliotJL/the-loop-was-never-the-hard-part-5bdd4352acab">
+              The Loop Was Never the Hard Part
+            </a>
+            . So here is where this site actually sits.
+          </p>
+        </Reveal>
+        <Reveal>
+          <ol className="ladder rv-settle">
+            {LADDER.map((l) => (
+              <li key={l.name} data-state={l.state}>
+                <div className="rhead">
+                  <span className="rorg">{l.name}</span>
+                  <span className="rmeta">{l.verdict}</span>
+                </div>
+                <p className="rout">
+                  <b>{l.needs}</b> {l.reality}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+        <Reveal>
+          <p className="muted rv-settle">
+            The gap is rung two. The trigger runs daily and the top rung is
+            built, and there is nothing judging attempts in between. That is
+            the setup I called an outage with a subscription. This one is
+            not, only because it costs nothing and cannot break anything.
+          </p>
+        </Reveal>
+        <Reveal>
+          <p className="muted rv-settle">
+            Rung one has a worse version of the same problem. In{" "}
+            <a href="https://medium.com/@elliotJL/the-product-engineer-and-the-end-of-the-handoff-93181f170779">
+              The Product Engineer and the End of the Handoff
+            </a>{" "}
+            I argued that you uncover a rubric by reading real failures rather
+            than inventing one up front. I invented these up front. That is
+            why they pass every time. Writing a stop condition that can
+            actually reject something is the next job, and I probably cannot
+            write a good one until this thing has failed a few times where
+            people can see it.
+          </p>
+        </Reveal>
 
-        <h2>running loops</h2>
-        <div className="looplist">
+        <Reveal>
+          <h2 className="mai-kick rv-settle">running loops</h2>
+        </Reveal>
+        <Reveal>
+        <div className="looplist rv-settle">
           {loops.map((l) => (
             <div className="loopcard" key={l.id}>
               <div className="loophead">
@@ -225,26 +243,33 @@ export default function Loops() {
             </div>
           ))}
         </div>
+        </Reveal>
 
-        <h2>how the outer loop works</h2>
-        <p className="muted">
-          Every cycle it reads real material (Elliot&apos;s public GitHub
-          activity, his Medium writing, and the site&apos;s own current state)
-          and proposes the single most useful change to make the site more
-          compelling to employers hiring AI product engineers. It never invents
-          activity; it surfaces what he actually did and how to frame it. The
-          proposal arrives as a pull request. Merging it is the accept; closing
-          it is the reject. Both are visible in the{" "}
-          <a href="/changelog">changelog</a>.
-        </p>
-        <p className="faint mono">
-          runs dormant by default: no schedule, no spend, until an API key is
-          set and the workflow enabled. code:{" "}
-          <a href="https://github.com/ElliotJLT/elliot-os/blob/main/scripts/agent-improve.mjs">
-            scripts/agent-improve.mjs
-          </a>
-          .
-        </p>
+        <Reveal>
+          <h2 className="mai-kick rv-settle">how the outer loop works</h2>
+        </Reveal>
+        <Reveal>
+          <p className="muted rv-settle">
+            Every cycle it reads real material (Elliot&apos;s public GitHub
+            activity, his Medium writing, and the site&apos;s own current
+            state) and proposes the single most useful change to make the
+            site more compelling to employers hiring AI product engineers. It
+            never invents activity; it surfaces what he actually did and how
+            to frame it. The proposal arrives as a pull request. Merging it is
+            the accept; closing it is the reject. Both are visible in the{" "}
+            <a href="/changelog">changelog</a>.
+          </p>
+        </Reveal>
+        <Reveal>
+          <p className="faint mono rv-settle">
+            runs dormant by default: no schedule, no spend, until an API key
+            is set and the workflow enabled. code:{" "}
+            <a href="https://github.com/ElliotJLT/elliot-os/blob/main/scripts/agent-improve.mjs">
+              scripts/agent-improve.mjs
+            </a>
+            .
+          </p>
+        </Reveal>
       </div>
     </main>
   );
