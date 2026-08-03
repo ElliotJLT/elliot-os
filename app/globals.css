@@ -2327,26 +2327,25 @@ main:has(> .band) {
   padding: 12px 0 44px;
 }
 
+/* `grid-row: 1 / -1` on mai-sub used to be how this centred it against the
+   kicker+headline — but negative grid lines resolve against the *explicit*
+   grid, which was never declared row-wise, so the span collapsed to row 1
+   and the standfirst sat pinned to the top instead of centred against the
+   full headline height. A plain wrapper around the kicker+headline sidesteps
+   the whole problem: two grid items, one row, align-items does the rest. */
 @media (min-width: 900px) {
   .wr-head {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     column-gap: 56px;
-  }
-
-  .wr-head > .mai-kick {
-    grid-column: 1;
+    align-items: center;
   }
 
   .wr-head > .wr-title {
-    grid-column: 1;
     margin-bottom: 0;
   }
 
   .wr-head > .mai-sub {
-    grid-column: 2;
-    grid-row: 1 / -1;
-    align-self: center;
     margin-bottom: 0;
     /* .mai-sub's own 56ch cap is for the centred hero context — here the
        grid column is already the right measure, and the ch cap on top of

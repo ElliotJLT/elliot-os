@@ -66,22 +66,25 @@ export default function Loops() {
       <div className="mai">
         <Reveal immediate>
           <header className="wr-head">
-            {/* The "oo" is drawn as a lemniscate on the same baseline as the
-                serif, traced continuously so the title performs what the page
-                describes. Falls back to plain "Loops" without CSS or motion. */}
-            <h1 className="wr-title rv-settle">
-              L
-              <span className="lemni" role="img" aria-label="oo">
-                <svg viewBox="0 0 84 48" aria-hidden="true" focusable="false">
-                  <path
-                    className="lemni-trace"
-                    d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
-                    pathLength={100}
-                  />
-                </svg>
-              </span>
-              ps
-            </h1>
+            <div className="wr-head-main">
+              {/* The "oo" is drawn as a lemniscate on the same baseline as
+                  the serif, traced continuously so the title performs what
+                  the page describes. Falls back to plain "Loops" without
+                  CSS or motion. */}
+              <h1 className="wr-title rv-settle">
+                L
+                <span className="lemni" role="img" aria-label="oo">
+                  <svg viewBox="0 0 84 48" aria-hidden="true" focusable="false">
+                    <path
+                      className="lemni-trace"
+                      d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
+                      pathLength={100}
+                    />
+                  </svg>
+                </span>
+                ps
+              </h1>
+            </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
               Two agents keep this site current. One runs on a schedule and
               rewrites the shipping log. The other reads what I have actually
