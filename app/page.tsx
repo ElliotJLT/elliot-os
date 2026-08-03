@@ -134,31 +134,28 @@ export default async function Home() {
     <div className="mai">
       <Values
         items={[
-          { name: "Refusal", said: "The useful build says no. A tutor that answers the homework raises a grade once and teaches nothing." },
-          { name: "Verification", said: "Producing plausible output stopped being the hard part. Knowing whether to ship it did not." },
-          { name: "Judgement", said: "The call a human made, and why, vanishes from the diff the moment an agent writes the code." },
-          { name: "Receipts", said: "Every number on this site is computed from something you can go and check yourself." },
+          { name: "Refusal", said: "My tutor coaches a student to the answer and refuses to hand it over. A build that just answers the homework raises a grade once and teaches nothing." },
+          { name: "Verification", said: "I built the eval that gated every release: marking graded against real past papers, a ~67% baseline to over 99%. That's what decided whether it shipped, not a gut call." },
+          { name: "Judgement", said: "I ran the safeguarding detector deliberately over-sensitive for ten weeks and reviewed every false alarm myself. That's the call a diff never shows." },
+          { name: "Receipts", said: "The token spend, the agent runs, the commit history: every number on this site is computed from something you can go and check yourself." },
         ]}
       />
 
-      <Reveal>
-        <h2 className="mai-kick rv-settle" style={{ marginBottom: 0 }}>
-          Selected work
-        </h2>
-      </Reveal>
-      {WORK.map((w) => (
-        <Reveal key={w.name}>
-          <Row
-            card
-            image={<WorkIcon name={w.icon} />}
-            label={w.label}
-            name={w.name}
-            href={w.href}
-            cta="Learn more"
-            body={w.body}
-          />
-        </Reveal>
-      ))}
+      <div className="work-list">
+        {WORK.map((w) => (
+          <Reveal key={w.name}>
+            <Row
+              card
+              image={<WorkIcon name={w.icon} />}
+              label={w.label}
+              name={w.name}
+              href={w.href}
+              cta="Learn more"
+              body={w.body}
+            />
+          </Reveal>
+        ))}
+      </div>
 
       <Reveal>
         <h2 className="mai-kick rv-settle">Career</h2>
@@ -185,7 +182,6 @@ export default async function Home() {
       </Reveal>
 
       <Reveal>
-        <h2 className="mai-kick rv-settle">Things I help you build</h2>
         <div className="mai-caps">
           {CAPS.map((c) => (
             <div className="mai-cap rv-settle" key={c.h}>
