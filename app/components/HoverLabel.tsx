@@ -23,6 +23,14 @@ export default function HoverLabel({
     <div
       ref={ref}
       className="hoverlabel-wrap"
+      onMouseEnter={(e) => {
+        // Without this, the pill only appeared on the first mousemove after
+        // entry — a cursor that arrives and holds still (a common way to
+        // just "hover and look") never triggered it at all.
+        const rect = ref.current?.getBoundingClientRect();
+        if (!rect) return;
+        setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+      }}
       onMouseMove={(e) => {
         const rect = ref.current?.getBoundingClientRect();
         if (!rect) return;
