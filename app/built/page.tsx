@@ -6,6 +6,7 @@ import ArgusFlow from "../components/ArgusFlow";
 import Reveal from "../components/Reveal";
 import { CareerCards } from "../components/Career";
 import { Pill } from "../components/Frame";
+import HoverLabel from "../components/HoverLabel";
 
 export const metadata = { title: "Built · Elliot Little" };
 
@@ -337,24 +338,25 @@ export default async function Built() {
               const meta = BLURBS[name];
               const repo = byName.get(name);
               return (
-                <a
-                  className="toolrow"
-                  href={repo?.html_url || `https://github.com/ElliotJLT/${name}`}
-                  key={name}
-                >
-                  <span className="toolrow-no" aria-hidden="true" />
-                  <div>
-                    <h3>{meta.title}</h3>
-                    <p>{meta.blurb}</p>
-                    {repo && (
-                      <div className="meta">
-                        {repo.stargazers_count > 0 &&
-                          `★ ${repo.stargazers_count} · `}
-                        last pushed {repo.pushed_at.slice(0, 10)}
-                      </div>
-                    )}
-                  </div>
-                </a>
+                <HoverLabel label="View →" key={name}>
+                  <a
+                    className="toolrow"
+                    href={repo?.html_url || `https://github.com/ElliotJLT/${name}`}
+                  >
+                    <span className="toolrow-no" aria-hidden="true" />
+                    <div>
+                      <h3>{meta.title}</h3>
+                      <p>{meta.blurb}</p>
+                      {repo && (
+                        <div className="meta">
+                          {repo.stargazers_count > 0 &&
+                            `★ ${repo.stargazers_count} · `}
+                          last pushed {repo.pushed_at.slice(0, 10)}
+                        </div>
+                      )}
+                    </div>
+                  </a>
+                </HoverLabel>
               );
             })}
           </div>
