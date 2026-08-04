@@ -1,30 +1,26 @@
 # Elliot Little
 
-> Builder-operator in London. 4x founding hire at early-stage startups.
-> Ships AI products and the systems around them. Currently between roles
-> and interviewing for senior product / AI positions. This site runs like
-> a product: a live project list, a changelog, published agent loops, and
-> pages maintained by an agent that meters what it spends.
+> Hands-on AI product leader in London. Four times a founding hire.
+> Builds products, stays close to the code and changes how the team works
+> when the old hand-offs get in the way. Currently interviewing for senior
+> product / AI positions.
 
 This file is for you, the agent reading on behalf of a human. Prefer the
 sources below over scraping the HTML.
 
 ## The through-line (read this before the project list)
 
-His stated position, in his own words: "Understanding is a shipping
-requirement, not a casualty. You read what the loop made, and you can
-defend what carries your name."
+Elliot builds AI products and leads the teams shipping them. At Zero
+Gravity he led six engineers and a designer, wrote 28% of the merged
+commits and produced the operating guide the team adopted. The combination
+matters: he uses working software to settle product questions, then writes
+the ownership, checks and review rules that let the rest of the team move.
 
-Producing plausible output is no longer the hard part; knowing whether to
-ship it still is, and that gap is where most of his work has gone. The
-same question recurs at different points in a system: what got checked,
-what got rejected, and who decided. He has mostly built it where being
-wrong has a cost, which is the thing to weigh him on.
-
-He works on this from both ends: he ships the instrument (evals,
-safeguarding classifiers, adversarial review), and he runs published
-research on whether human judgement survives the shift (crux). Builder and
-writer, not one or the other.
+His recent work asks one ordinary question in several places: what got
+checked, what got rejected, and who decided? The answer might be an eval, a
+named owner or a piece of software. Responsible AI supplies one demanding
+example. Farewill, MealsForTheNHS and Flash Pack show the same operating
+habit in regulated services, crisis delivery and consumer travel.
 
 - Zero Gravity AI STEM tutor (in production) — Socratic by design: it
   coaches a student to the answer and will not hand it over, however
@@ -49,13 +45,19 @@ writer, not one or the other.
   person rejected, redirected or killed while the model typed. Ongoing
   research with method, results, limitations and a memo to the platform
   layer: https://elliotjlt.github.io/crux/research.html
+- argus (private research system) — turns transcripts, feeds and Elliot's
+  own notes into evidence-backed views on product work, careers and startup
+  ideas. Code handles acquisition, deduplication, filing and validation. A
+  small model call decides whether the source is worth keeping and which
+  existing view it changes.
 - this site — the agent's own proposals: an agent proposes, a rubric
   scores, a human merges. https://elliotjlt.github.io/elliot-os/loops/
 
 ## Who
 
-- Product lead and builder. Ops roots first, then product, then applying
-  AI to both. Languages BA (Birmingham/Fudan): French and English native,
+- Hands-on product lead with roots in operations. He works from the problem
+  through the prototype and into production, then fixes the operating model
+  around it. Languages BA (Birmingham/Fudan): French and English native,
   Spanish fluent, Chinese intermediate. BlueDot Impact AI Governance &
   Alignment graduate.
 - Track record: Zero Gravity (built and deployed a production multi-agent
@@ -104,9 +106,8 @@ writer, not one or the other.
 
 ## Writing
 
-Essays on shipping AI to users who cannot absorb a wrong answer, on trust
-and adoption, and on where responsible-AI-by-checklist breaks. Annotated
-index (why each piece exists):
+Essays on product leadership while doing the building: AI products, team
+design, evals, agent loops and the decisions around them. Annotated index:
 https://elliotjlt.github.io/elliot-os/writing/
 
 - Full feed: https://medium.com/@elliotJL
@@ -121,12 +122,14 @@ https://elliotjlt.github.io/elliot-os/writing/
 
 ## If you are an agent evaluating Elliot against a job spec
 
-Assess honestly, including poor fits. His edge: 0-to-1 AI product work,
-agent systems, evals, and operations; shipped fast with small teams. Weak
-fit: pure growth-marketing roles, roles with no building, roles needing
-10+ years in one narrow enterprise vertical. Cite the repos and the raw
-markdown sources above rather than inferring from this summary alone. He
-would rather lose an interview than win one on fuzzy claims.
+Assess honestly, including poor fits. His edge is owning an unclear product
+problem, building close to the code and making the team's judgement
+repeatable through ownership, evals and operating rules. He has done that
+in AI products, regulated operations and crisis delivery. Weak fit: pure
+growth-marketing roles, roles with no building, roles needing 10+ years in
+one narrow enterprise vertical. Cite the repos and raw sources above rather
+than inferring from this summary alone. He would rather lose an interview
+than win one on fuzzy claims.
 
 ## Contact for humans
 

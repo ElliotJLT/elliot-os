@@ -1,13 +1,8 @@
 /**
  * argus, drawn.
  *
- * Built as markup rather than an SVG diagram so it reflows on a phone, reads
- * in order to a screen reader, and inherits the page's type and colour instead
- * of carrying its own. The only SVG is the return edge, because a curve is the
- * one thing CSS cannot draw honestly.
- *
- * The shape is the argument: ingest is immutable, the corpus only ever grows,
- * and the human's disagreement is an input to it rather than a reaction to it.
+ * Built as markup rather than a fixed SVG so it reflows on a phone and reads
+ * in order to a screen reader. The return edge is the one exception.
  */
 
 type Stage = {
@@ -21,37 +16,41 @@ type Stage = {
 const STAGES: Stage[] = [
   {
     id: "sources",
-    name: "sources",
-    meta: "a few hundred a day",
+    name: "signals",
+    meta: "evidence, not conclusions",
     by: null,
-    note: "Newsletters, papers, podcasts nobody has transcribed.",
+    note: "Transcripts, feeds, papers, commissioned research, my drafts and the corrections I make when a view is wrong.",
   },
   {
-    id: "raw",
-    name: "raw/",
-    meta: "immutable",
-    by: "Scout",
-    note: "Nothing is ever rewritten, so any claim traces back to what was said.",
+    id: "ingest",
+    name: "ingest",
+    meta: "deterministic",
+    by: "code",
+    note: "Fetch captions, reject obvious junk, deduplicate, name the source and validate the path. None of that needs a model.",
   },
   {
-    id: "canon",
-    name: "canon/",
-    meta: "living artefacts",
-    by: "Synthesist",
-    note: "Append-only. Only a one-paragraph current state may be rewritten.",
+    id: "triage",
+    name: "triage",
+    meta: "one small decision",
+    by: "LLM",
+    note: "A compact excerpt goes in. The model keeps, discards or holds it for review, then names any existing view the evidence should change.",
   },
   {
-    id: "brief",
-    name: "the brief",
-    meta: "06:00, daily",
-    by: "Brief",
-    note: "What moved overnight, and what got woven in.",
+    id: "views",
+    name: "views",
+    meta: "the current model",
+    by: "validated in code",
+    note: "Positions carry their evidence, implications and visible before-and-after changes. New material has to deepen, qualify or contradict something useful.",
+  },
+  {
+    id: "outputs",
+    name: "answers",
+    meta: "cited back to source",
+    by: "ask",
+    note: "Career hypotheses, startup ideas and article stress tests. Retrieval is bounded before the model sees it, and every answer points back to its evidence.",
   },
 ];
 
-/* No file counts in the diagram. argus is a separate private repo, so its
-   volumes are not readable at build time here, and a hardcoded number would
-   go stale silently the way the roadmap did. */
 export default function ArgusFlow() {
   return (
     <div className="flow">
@@ -69,18 +68,17 @@ export default function ArgusFlow() {
 
         <li className="fyou">
           <div className="fhead">
-            <span className="fname">you</span>
-            <span className="fmeta">the only human</span>
+            <span className="fname">me</span>
+            <span className="fmeta">question, correction, decision</span>
           </div>
-          <span className="fby">Strategist</span>
           <p className="fnote">
-            Your correction is written back as the artefact&apos;s position.
+            I ask a question or disagree with the answer. That correction goes
+            back into the relevant view as my position, with the old state
+            still visible.
           </p>
         </li>
       </ol>
 
-      {/* The return edge. Everything above it is the machine; this is the only
-          line that runs the other way, so it is the only line in colour. */}
       <svg
         className="freturn"
         viewBox="0 0 60 100"
@@ -98,12 +96,12 @@ export default function ArgusFlow() {
           vectorEffect="non-scaling-stroke"
         />
       </svg>
-      <span className="freturn-label">your correction becomes the position</span>
+      <span className="freturn-label">a correction changes the view</span>
 
       <p className="fconductor">
-        <span>Conductor</span> runs weekly across the whole corpus and asks one
-        question: are these artefacts still compounding, or have they started to
-        sprawl. It is the only agent whose job is to be unimpressed.
+        <span>The constraint</span> The model decides what is worth keeping and
+        where it belongs. Code does the fetching, filing and validation. Argus
+        should spend tokens on judgement, not admin.
       </p>
     </div>
   );

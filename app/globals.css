@@ -2038,6 +2038,23 @@ h2[id] {
   }
 }
 
+@media (max-width: 560px) {
+  .mai-nav {
+    padding: 0 10px;
+  }
+
+  .mai-nav-inner {
+    gap: 12px;
+    padding: 9px 14px 9px 18px;
+  }
+
+  /* The same action is in the hero. Keeping it here makes the masthead wider
+     than a small phone. */
+  .mai-nav-inner > .pill-solid {
+    display: none;
+  }
+}
+
 /* --------------------------------------------------------------- pills */
 .pill {
   display: inline-flex;
@@ -2580,9 +2597,6 @@ main:has(> .band) {
 }
 
 /* ============================================================== values */
-/* Scroll lights each principle in turn and swaps the statement beside it.
-   Every statement is in the markup and only visibility changes, so the copy
-   is complete to a crawler and without JS. */
 /* A tall scroll track with the real content pinned inside it: scrolling
    through the track lights each principle in turn, and the page only lets
    go once the last one has had its moment on screen. --vals-n is set

@@ -24,18 +24,11 @@ const WORK: {
     body: "An A-Level tutor that coaches a student to the answer and refuses to hand it over. Marking tested against official mark schemes took accuracy from a ~67% bare-model baseline to over 99%. Four subjects, every major UK exam board.",
   },
   {
-    name: "ward",
-    href: "https://github.com/ElliotJLT/ward",
-    label: "Published evals",
-    icon: "ward",
-    body: "Separates a real safeguarding disclosure from a child having a bad day, grounded in KCSIE rather than keyword matching. 90% recall at 100% precision, against 50/83 for a keyword baseline.",
-  },
-  {
     name: "argus",
     href: "/built",
-    label: "Private fleet, daily",
+    label: "Private research system",
     icon: "argus",
-    body: "Five agents that read a few hundred sources a day and brief me before I sit down. Ingest is immutable and the corpus only appends. When I disagree with an artefact, my correction is written back as the position.",
+    body: "Turns transcripts, feeds and my own notes into evidence-backed views on product work, careers and startup ideas. Fetching, deduplication, names and paths are code. I spend model calls on whether a source is worth keeping and which view it changes.",
   },
   {
     name: "crux",
@@ -43,6 +36,13 @@ const WORK: {
     label: "Ongoing research",
     icon: "crux",
     body: "Every team moving its code-writing to agents is about to ask what the humans still do. Crux measures it: what a human rejected, redirected or killed while the model did the typing. Method, results run on myself, objections and limitations all published.",
+  },
+  {
+    name: "ward",
+    href: "https://github.com/ElliotJLT/ward",
+    label: "Published evals",
+    icon: "ward",
+    body: "Separates a safeguarding disclosure from ordinary bad conduct, grounded in KCSIE rather than keyword matching. On its published synthetic core set: 90% recall at 100% precision, against 50/83 for a keyword baseline.",
   },
 ];
 
@@ -109,7 +109,7 @@ export default async function Home() {
           <div className="band-in">
             <span className="band-kick rv-settle">Hi, I&apos;m Elliot</span>
             <h1 className="band-h">
-              <Words text="I build production AI and lead the teams that ship it." />
+              <Words text="I build AI products and lead the teams shipping them." />
             </h1>
             <div className="band-profile">
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -119,14 +119,13 @@ export default async function Home() {
                 alt="Elliot Little"
                 width={148}
                 height={148}
-              />
+                />
               <div className="band-profile-copy">
                 <p className="band-sub rv-settle">
-                  The tutor I built coaches a student to the answer and refuses
-                  to hand it over. The safeguarding layer pages a human only
-                  when it is genuinely a child asking for help. Four times a
-                  founding hire, in London, and my last build was one of eight
-                  picked nationally for safe AI tutoring.
+                  At Zero Gravity I took an AI tutor from first commit to the
+                  App Store in 45 days while leading six engineers and a
+                  designer. I still wrote 28% of the merged commits. Four times
+                  a founding hire, now in London.
                 </p>
                 <div className="band-cta rv-settle">
                   <Pill href="/built" tone="cream" arrow>
@@ -150,10 +149,10 @@ export default async function Home() {
     <div className="mai">
       <Values
         items={[
-          { name: "Refusal", said: "My tutor coaches a student to the answer and refuses to hand it over. A build that just answers the homework raises a grade once and teaches nothing." },
-          { name: "Verification", said: "ward's published eval sets score 90% recall at 100% precision against a keyword baseline of 50/83. Verification means a number anyone can rerun, not a claim." },
-          { name: "Judgement", said: "A diff never records what I rejected, redirected or killed while the model did the typing. I built crux to capture that judgement instead of losing it." },
-          { name: "Receipts", said: "Farewill's 69% drop in agent errors. Flash Pack's 400% growth. This site's own metered spend. Every number I put in front of you, you can go check." },
+          { name: "Own", said: "I led six engineers and a designer at Zero Gravity. The team adopted the operating guide I wrote, including who owned a decision and what had to be true before it shipped." },
+          { name: "Build", said: "I was Head of Product and wrote 28% of the merged commits. Working software settled plenty of arguments that another planning meeting would not." },
+          { name: "Check", said: "The tutor's marking moved from a 67% bare-model baseline to over 99% against real past papers and official mark schemes. Getting there took evals, error analysis and a lot of failed prompts." },
+          { name: "Remember", said: "I got fed up with watching the useful part of an agent session disappear into the commit. Crux records what I rejected, redirected or killed. This site's loops show their checks and spend in public." },
         ]}
       />
 
