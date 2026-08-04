@@ -6,6 +6,7 @@ import { getRoles } from "@/lib/roles";
 import Reveal, { Words } from "./components/Reveal";
 import { WorkIcon, Pill, Slot } from "./components/Frame";
 import Values from "./components/Values";
+import HeroBricks from "./components/HeroBricks";
 
 /** Each build gets a row: an icon, a name, and what it does. */
 const WORK: {
@@ -103,34 +104,39 @@ export default async function Home() {
           against cream, which fails even at display size; this is deepened to
           a rust that clears 5.42 so the subline is readable too. */}
       <section className="band">
+        <HeroBricks />
         <Reveal immediate>
           <div className="band-in">
             <span className="band-kick rv-settle">Hi, I&apos;m Elliot</span>
             <h1 className="band-h">
               <Words text="I build production AI and lead the teams that ship it." />
             </h1>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              className="band-face rv-develop"
-              src={`${basePath}/portrait.jpg`}
-              alt="Elliot Little"
-              width={132}
-              height={132}
-            />
-            <p className="band-sub rv-settle">
-              The tutor I built coaches a student to the answer and refuses to
-              hand it over. The safeguarding layer pages a human only when it
-              is genuinely a child asking for help. Four times a founding hire,
-              in London, and my last build was one of eight picked nationally
-              for safe AI tutoring.
-            </p>
-            <div className="band-cta rv-settle">
-              <Pill href="/built" tone="cream" arrow>
-                Read the work
-              </Pill>
-              <Pill href="mailto:elliotjlittle@gmail.com" tone="ghost">
-                Get in touch
-              </Pill>
+            <div className="band-profile">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className="band-face rv-develop"
+                src={`${basePath}/portrait.jpg`}
+                alt="Elliot Little"
+                width={148}
+                height={148}
+              />
+              <div className="band-profile-copy">
+                <p className="band-sub rv-settle">
+                  The tutor I built coaches a student to the answer and refuses
+                  to hand it over. The safeguarding layer pages a human only
+                  when it is genuinely a child asking for help. Four times a
+                  founding hire, in London, and my last build was one of eight
+                  picked nationally for safe AI tutoring.
+                </p>
+                <div className="band-cta rv-settle">
+                  <Pill href="/built" tone="cream" arrow>
+                    Read the work
+                  </Pill>
+                  <Pill href="mailto:elliotjlittle@gmail.com" tone="ghost">
+                    Get in touch
+                  </Pill>
+                </div>
+              </div>
             </div>
           </div>
         </Reveal>

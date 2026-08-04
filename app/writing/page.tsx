@@ -47,6 +47,7 @@ export default async function Writing() {
 
         {media.podcast && (
           <Reveal>
+            <div id="podcast" className="anchor-target" />
             <a className="pod rv-settle" href={media.podcast.url}>
               {media.podcast.image && (
                 /* eslint-disable-next-line @next/next/no-img-element */
@@ -70,6 +71,7 @@ export default async function Writing() {
         )}
 
         <Reveal>
+          <div id="essays" className="anchor-target" />
           <div className="wr-grid">
             {posts.map((p, idx) => (
               <HoverLabel label="Read it →" key={p.link}>
