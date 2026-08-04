@@ -30,6 +30,18 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Generated into the deploy artifact rather than committed. The daily
+      # Pages rebuild keeps the rolling contribution year current, while a
+      # local checkout can retain the last generated copy as a fallback.
+      - name: Refresh GitHub contribution snake
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ElliotJLT
+          outputs: |
+            public/github-snake.svg?color_snake=#cc5600&color_dots=#e9e0ca,#dce7d7,#b6cdaa,#7fa382,#3f6b47&color_background=#faf3e2&color_dot_border=#00000010
+            public/github-snake-dark.svg?color_snake=#d9a441&color_dots=#1b2523,#193129,#2d4f3a,#4d775d,#7bb389&color_background=#0d1716&color_dot_border=#ffffff10
+      - name: Respect reduced-motion preferences in the generated SVGs
+        run: node scripts/prepare-github-snake.mjs
       - run: npm run build
         env:
           BASE_PATH: /elliot-os

@@ -5,7 +5,8 @@ My site, run like a product. Live at
 
 A personal site instrumented like a product. The numbers are computed
 from real activity: the project list is fetched from GitHub at build
-time, the changelog is this repo's git history, and `/loops` is the
+time, the contribution animation is regenerated from GitHub on every
+deploy, the changelog is this repo's git history, and `/loops` is the
 control panel for the agents that maintain the site: cadence, gate and
 stopping rule per loop, the shipping log the inner loop last wrote, and
 the open commitments. Agents get a structured route in via `llms.txt` and

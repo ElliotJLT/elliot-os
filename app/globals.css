@@ -577,6 +577,80 @@ li {
   max-width: 62ch;
 }
 
+/* ------------------------------------------------ contribution history */
+/* A compact proof strip between the reference and the stack. It shares the
+   warm surface and rounded geometry of both, rather than introducing a
+   dashboard-style chart card into the editorial page. */
+.github-snake {
+  margin: 0;
+}
+
+.github-snake-link {
+  display: block;
+  overflow: hidden;
+  padding: 18px 18px 14px;
+  border-radius: 18px;
+  background: var(--bg-2);
+  color: inherit;
+  text-decoration: none;
+  outline: 1px solid oklch(0 0 0 / 0.1);
+  outline-offset: -1px;
+}
+
+:root[data-theme="dark"] .github-snake-link {
+  outline-color: oklch(1 0 0 / 0.1);
+}
+
+.github-snake-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.github-snake-dark {
+  display: none;
+}
+
+:root[data-theme="dark"] .github-snake-light {
+  display: none;
+}
+
+:root[data-theme="dark"] .github-snake-dark {
+  display: block;
+}
+
+.github-snake figcaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0 0 10px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.3;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.github-snake-label {
+  color: var(--accent-ink);
+  transition: color 0.15s ease-out;
+}
+
+.github-snake-link:hover .github-snake-label {
+  color: var(--accent);
+}
+
+.github-snake-meta {
+  color: var(--faint);
+}
+
+@media (max-width: 680px) {
+  .github-snake-link {
+    padding-inline: 14px;
+  }
+}
+
 /* --------------------------------------------------------------- loops */
 .looplist {
   display: flex;
@@ -1588,7 +1662,7 @@ h2::before {
    background gives the one named reference the same weight as everything
    around it, closer to how a testimonial actually gets shown elsewhere. */
 .vouch {
-  margin: 16px 0 54px;
+  margin: 16px 0 0;
   padding: 40px 40px 36px;
   background: var(--bg-2);
   border-radius: 20px;
