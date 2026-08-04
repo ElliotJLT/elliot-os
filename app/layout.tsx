@@ -89,9 +89,8 @@ export default function RootLayout({
           </div>
         </header>
         {children}
-        {/* The footer used to be two lines of small print. It is the last
-            thing anyone reads and the place they decide whether to write, so
-            it carries the name, what he does, and every way to reach him. */}
+        {/* The footer is the last thing anyone reads and the place they decide
+            whether to write, so it carries every way to reach him. */}
         <footer>
           <div className="wrap">
             {/* The homepage used to close with its own call to action and
@@ -108,11 +107,6 @@ export default function RootLayout({
               </div>
             </div>
             <div className="foot-cols">
-              <p className="foot-bio">
-                A product builder in London. Four times a founding hire, most
-                recently on an A-Level AI tutor the UK government picked for
-                its national programme.
-              </p>
               <nav className="foot-col">
                 <span className="foot-h">Sections</span>
                 <Link href="/built">Built</Link>
