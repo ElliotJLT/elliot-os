@@ -1432,17 +1432,8 @@ h2::before {
 
 @media (min-width: 700px) {
   .foot-cols {
-    grid-template-columns: 1.6fr 1fr 1.2fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
-}
-
-.foot-bio {
-  margin: 0;
-  color: var(--muted);
-  font-family: var(--serif);
-  font-size: 15px;
-  line-height: 1.55;
-  max-width: 34ch;
 }
 
 .foot-col {
@@ -1509,6 +1500,7 @@ h2::before {
   width: 40px;
   height: 40px;
   border: 1px solid var(--line-2);
+  border-radius: 14px;
   color: var(--muted);
   text-decoration: none;
   transition-property: color, border-color, background-color;
