@@ -2,8 +2,8 @@
 //
 // Inner loops (like scripts/agent-now.mjs) keep one surface fresh. This one
 // steps back and asks a different question every week: given what Elliot
-// actually shipped and wrote, and what employers hiring AI product engineers
-// care about right now, what is the single highest-leverage change to this
+// actually shipped and wrote, and what employers hiring hands-on AI product
+// leaders care about right now, what is the single most useful change to this
 // site? It never invents activity — it reads real sources and proposes ONE
 // improvement as a pull request for a human to approve or reject.
 //
@@ -167,9 +167,10 @@ async function positioning(findings, state) {
     max_tokens: 500,
     system:
       "You are the outer-loop agent for Elliot Little's personal site. Elliot is a " +
-      "builder-operator interviewing for senior product / AI roles. Your job: propose " +
-      "the SINGLE highest-leverage change to make the site more compelling to employers " +
-      "hiring AI product engineers in 2026, grounded ONLY in the real material provided. " +
+      "hands-on product leader interviewing for senior product / AI roles. Your job: propose " +
+      "the SINGLE most useful change for an employer hiring someone who can own an unclear " +
+      "problem, build close to the code, and improve how the team ships, grounded ONLY in " +
+      "the real material provided. " +
       "Never invent activity or claims. Prefer surfacing real recent work and sharpening " +
       "framing over cosmetic changes. If nothing is worth doing this cycle, say so plainly. " +
       "British English, no marketing adjectives, no em-dashes. Reply as JSON: " +
@@ -225,7 +226,7 @@ async function judge(candidate, context) {
       "You are the evaluator in a generate-then-evaluate loop for Elliot Little's " +
       "hiring site. Score a proposed site change against this rubric, each 0-1: " +
       "grounded (uses only real material, invents nothing), leverage (moves the " +
-      "needle for employers hiring AI product engineers), specificity (concrete, " +
+      "needle for employers hiring a hands-on AI product leader), specificity (concrete, " +
       "actionable). Be strict; a personal site does not need busywork. Reply as JSON: " +
       '{"grounded":n,"leverage":n,"specificity":n,"verdict":"pass|revise|reject","critique":string}.',
     messages: [

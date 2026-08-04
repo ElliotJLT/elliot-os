@@ -256,10 +256,11 @@ export default function Loops() {
             Every cycle it reads real material (Elliot&apos;s public GitHub
             activity, his Medium writing, and the site&apos;s own current
             state) and proposes the single most useful change to make the
-            site more compelling to employers hiring AI product engineers. It
-            never invents activity; it surfaces what he actually did and how
-            to frame it. The proposal arrives as a pull request. Merging it is
-            the accept; closing it is the reject. Both are visible in the{" "}
+            site useful to someone hiring a hands-on AI product leader. It
+            looks for proof that I can own an unclear problem, build close to
+            the code and improve how the team works. The proposal arrives as a
+            pull request. Merging it is the accept; closing it is the reject.
+            Both are visible in the{" "}
             <a href="/changelog">changelog</a>.
           </p>
         </Reveal>

@@ -14,7 +14,8 @@ import { useEffect, useRef, useState } from "react";
  * of the screen. Pinning removes that failure mode entirely: the statement
  * can't scroll out of view while its item is what's driving the scroll.
  *
- * Falls back to the first item lit and all copy present without JS.
+ * Only the active statement is mounted. Screen readers, copied text and
+ * agents should not get four overlapping paragraphs as one block.
  */
 export default function Values({
   items,
@@ -72,12 +73,10 @@ export default function Values({
             ))}
           </ul>
 
-          <div className="vals-said">
-            {items.map((v, n) => (
-              <p key={v.name} data-on={n === i || undefined}>
-                {v.said}
-              </p>
-            ))}
+          <div className="vals-said" aria-live="polite">
+            <p key={items[i].name} data-on>
+              {items[i].said}
+            </p>
           </div>
         </div>
       </div>
