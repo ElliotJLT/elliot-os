@@ -1,6 +1,7 @@
 # Elliot Little
 
-> Hands-on AI product leader in London. Four times a founding hire.
+> Hands-on AI product leader in London. Four times a founding hire across
+> eight years in startups.
 > Builds products, stays close to the code and changes how the team works
 > when the old hand-offs get in the way. Currently interviewing for senior
 > product / AI positions.
@@ -15,6 +16,11 @@ Gravity he led six engineers and a designer, wrote 28% of the merged
 commits and produced the operating guide the team adopted. The combination
 matters: he uses working software to settle product questions, then writes
 the ownership, checks and review rules that let the rest of the team move.
+
+The AI tutor was one of eight companies selected nationwide for the UK
+government's AI Tutoring Tools Pioneers Programme. The programme is designed
+to test tools with teachers and could support up to 450,000 disadvantaged
+pupils a year.
 
 His recent work asks one ordinary question in several places: what got
 checked, what got rejected, and who decided? The answer might be an eval, a

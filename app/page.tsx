@@ -117,15 +117,21 @@ export default async function Home() {
                 className="band-face rv-develop"
                 src={`${basePath}/portrait.jpg`}
                 alt="Elliot Little"
-                width={148}
-                height={148}
-                />
+                width={176}
+                height={176}
+              />
               <div className="band-profile-copy">
                 <p className="band-sub rv-settle">
-                  At Zero Gravity I took an AI tutor from first commit to the
-                  App Store in 45 days while leading six engineers and a
-                  designer. I still wrote 28% of the merged commits. Four times
-                  a founding hire, now in London.
+                  Four times a founding hire across eight years in startups.
+                  Most recently I led six engineers and a designer to build an
+                  AI tutor from first commit to the App Store in 45 days. Zero
+                  Gravity was one of eight companies selected nationwide for
+                  the{" "}
+                  <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
+                    UK&nbsp;government&apos;s AI Tutoring Tools Pioneers Programme
+                  </a>
+                  , which could support up to 450,000 disadvantaged pupils a
+                  year.
                 </p>
                 <div className="band-cta rv-settle">
                   <Pill href="/built" tone="cream" arrow>
@@ -149,10 +155,10 @@ export default async function Home() {
     <div className="mai">
       <Values
         items={[
-          { name: "Own", said: "I led six engineers and a designer at Zero Gravity. The team adopted the operating guide I wrote, including who owned a decision and what had to be true before it shipped." },
-          { name: "Build", said: "I was Head of Product and wrote 28% of the merged commits. Working software settled plenty of arguments that another planning meeting would not." },
-          { name: "Check", said: "The tutor's marking moved from a 67% bare-model baseline to over 99% against real past papers and official mark schemes. Getting there took evals, error analysis and a lot of failed prompts." },
-          { name: "Remember", said: "I got fed up with watching the useful part of an agent session disappear into the commit. Crux records what I rejected, redirected or killed. This site's loops show their checks and spend in public." },
+          { name: "Own", said: "My first startup job began at employee ten. Another began as a WhatsApp group during lockdown. I have spent eight years taking responsibility before there was much structure to hide behind." },
+          { name: "Build", said: "At MealsForTheNHS, day one was a WhatsApp group and day ten was a marketplace serving 146 hospitals. At Zero Gravity I wrote 28% of the merged commits while leading product." },
+          { name: "Check", said: "At Farewill, agent errors fell 69% and case handling moved from two weeks to four days. At Zero Gravity, tutor marking moved from a 67% baseline to over 99% against real past papers and official mark schemes." },
+          { name: "Remember", said: "At Zero Gravity the team adopted the operating guide I wrote. Now Crux records the calls a commit misses, and Argus carries my corrections into the next answer." },
         ]}
       />
 

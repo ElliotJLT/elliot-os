@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     apple: [{ url: `${basePath}/icon-180.png`, sizes: "180x180" }],
   },
   description:
-    "Elliot Little builds AI products and leads the teams shipping them. Four times a founding hire, with hands-on work across product, operations, evals and agent systems.",
+    "Hands-on AI product leader with eight years in startups. Four times a founding hire; most recently selected for the UK government's eight-company AI tutor programme.",
 };
 
 // Runs before paint so the stored theme never flashes.

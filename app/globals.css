@@ -2434,7 +2434,7 @@ h2.mai-kick::after {
 }
 
 .band-in {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -2455,23 +2455,23 @@ h2.mai-kick::after {
   letter-spacing: -0.02em;
   color: #faf3e8;
   margin: 0 auto 34px;
-  max-width: 19ch;
+  max-width: 26ch;
   text-wrap: balance;
 }
 
 .band-profile {
   display: grid;
-  grid-template-columns: 148px minmax(0, 1fr);
+  grid-template-columns: 176px minmax(0, 1fr);
   align-items: center;
-  gap: 32px;
-  width: min(760px, 100%);
+  gap: 38px;
+  width: min(920px, 100%);
   margin: 0 auto;
   text-align: left;
 }
 
 .band-face {
-  width: 148px;
-  height: 148px;
+  width: 176px;
+  height: 176px;
   border-radius: 50%;
   object-fit: cover;
   /* A ring rather than an outline: against a saturated band the photo needs
@@ -2486,8 +2486,18 @@ h2.mai-kick::after {
   font-size: clamp(17px, 1.55vw, 19px);
   line-height: 1.52;
   color: #fff6ed;
-  max-width: 49ch;
+  max-width: 63ch;
   margin: 0 0 22px;
+  text-wrap: pretty;
+}
+
+.band-sub a {
+  color: inherit;
+  text-decoration-color: rgba(255, 246, 237, 0.5);
+}
+
+.band-sub a:hover {
+  text-decoration-color: #fff6ed;
 }
 
 .band-profile .band-cta {
@@ -2506,8 +2516,8 @@ h2.mai-kick::after {
   }
 
   .band-face {
-    width: 124px;
-    height: 124px;
+    width: 136px;
+    height: 136px;
     margin: 0 auto;
   }
 
