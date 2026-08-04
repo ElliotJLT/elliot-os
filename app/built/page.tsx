@@ -80,7 +80,9 @@ export default async function Built() {
             so it gets a card of its own rather than levelling with a
             research repo and this website. */}
         <Reveal>
-          <h2 className="mai-kick rv-settle">in production</h2>
+          <h2 id="production" className="mai-kick rv-settle">
+            in production
+          </h2>
         </Reveal>
         <Reveal>
           <section className="flagship rv-settle">
@@ -148,7 +150,9 @@ export default async function Built() {
         </Reveal>
 
         <Reveal>
-          <h2 className="mai-kick rv-settle">the through-line</h2>
+          <h2 id="through-line" className="mai-kick rv-settle">
+            the through-line
+          </h2>
         </Reveal>
         <Reveal>
           <div className="through-line rv-settle">
@@ -230,7 +234,9 @@ export default async function Built() {
         </Reveal>
 
         <Reveal>
-          <h2 className="mai-kick rv-settle">track record</h2>
+          <h2 id="track-record" className="mai-kick rv-settle">
+            track record
+          </h2>
         </Reveal>
         <Reveal>
           <p className="muted rv-settle" style={{ marginTop: 0, fontSize: 15 }}>
@@ -245,7 +251,9 @@ export default async function Built() {
         </Reveal>
 
         <Reveal>
-          <h2 className="mai-kick rv-settle">argus</h2>
+          <h2 id="argus" className="mai-kick rv-settle">
+            argus
+          </h2>
         </Reveal>
         <Reveal>
           <p className="muted rv-settle" style={{ marginTop: 0 }}>
@@ -270,7 +278,9 @@ export default async function Built() {
         </Reveal>
 
         <Reveal>
-          <h2 className="mai-kick rv-settle">research</h2>
+          <h2 id="research" className="mai-kick rv-settle">
+            research
+          </h2>
         </Reveal>
         <Reveal>
           <div className="research-card rv-settle">
@@ -310,7 +320,9 @@ export default async function Built() {
         </Reveal>
 
         <Reveal>
-          <h2 className="mai-kick rv-settle">agent tools</h2>
+          <h2 id="agent-tools" className="mai-kick rv-settle">
+            agent tools
+          </h2>
         </Reveal>
         <Reveal>
           <div className="toollist rv-settle">

@@ -26,7 +26,7 @@ const FALLBACK: Post[] = [
  *
  * Now new writing surfaces on its own and demotion is the deliberate act.
  */
-const DEMOTED = ["Learning Anxiety", "Walled Garden", "Finding Nemo"];
+const DEMOTED = ["Finding Nemo"];
 
 export function isDemoted(title: string): boolean {
   return DEMOTED.some((k) => title.includes(k));
@@ -62,6 +62,14 @@ const NOTES: [string, string][] = [
   [
     "100+ AI Leaders",
     "Field notes from a week with the people actually deploying this, and the gap between the conference talk and the rollout.",
+  ],
+  [
+    "Learning Anxiety",
+    "On the creeping pressure to keep pace when every device seems to learn faster than we do, and why not learning can suddenly feel existential.",
+  ],
+  [
+    "Walled Garden",
+    "How Facebook's attempt to connect the next billion people became a lesson in who gets to shape the internet, and who gets left outside it.",
   ],
 ];
 

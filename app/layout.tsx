@@ -80,7 +80,7 @@ export default function RootLayout({
               Elliot Little
             </Link>
             <nav className="mai-links">
-              <NavLinks />
+              <NavLinks basePath={basePath} />
             </nav>
             <ThemeToggle />
             <Pill href="mailto:elliotjlittle@gmail.com" tone="solid">
