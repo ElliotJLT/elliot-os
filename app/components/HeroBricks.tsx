@@ -22,6 +22,58 @@ export default function HeroBricks() {
   useEffect(() => {
     const canvas = canvasRef.current;
     const band = canvas?.parentElement;
+    const scope = band?.parentElement;
+    if (!band || !scope) return;
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reduceMotion) return;
+
+    let frame = 0;
+
+    const updateTone = () => {
+      frame = 0;
+      const values = band.nextElementSibling?.querySelector<HTMLElement>(".vals");
+      if (!values) return;
+
+      const valuesTop = values.getBoundingClientRect().top;
+      const startLine = window.innerHeight * 0.93;
+      const finishLine = window.innerHeight * 0.68;
+      const raw = Math.min(
+        1,
+        Math.max(0, (startLine - valuesTop) / (startLine - finishLine)),
+      );
+      const eased = raw * raw * (3 - 2 * raw);
+      const copyRaw = Math.min(1, Math.max(0, (eased - 0.1) / 0.55));
+      const copyEased = copyRaw * copyRaw * (3 - 2 * copyRaw);
+      scope.style.setProperty("--band-exit-opacity", eased.toFixed(4));
+      scope.style.setProperty(
+        "--band-copy-percent",
+        `${(copyEased * 100).toFixed(2)}%`,
+      );
+    };
+
+    const queueTone = () => {
+      if (!frame) frame = requestAnimationFrame(updateTone);
+    };
+
+    updateTone();
+    window.addEventListener("scroll", queueTone, { passive: true });
+    window.addEventListener("resize", queueTone, { passive: true });
+
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", queueTone);
+      window.removeEventListener("resize", queueTone);
+      scope.style.removeProperty("--band-exit-opacity");
+      scope.style.removeProperty("--band-copy-percent");
+    };
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const band = canvas?.parentElement;
     const context = canvas?.getContext("2d");
     if (!canvas || !band || !context) return;
 
@@ -181,5 +233,10 @@ export default function HeroBricks() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="band-bricks" aria-hidden="true" />;
+  return (
+    <>
+      <span className="band-wash" aria-hidden="true" />
+      <canvas ref={canvasRef} className="band-bricks" aria-hidden="true" />
+    </>
+  );
 }
