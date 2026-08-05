@@ -51,8 +51,7 @@
   /* Amber rather than the light-mode coral carried over: the dark palette
      already leans sage-green (--accent-2 below), and amber pairs with that
      instead of fighting it. Also clears contrast better against the dark
-     bg (8.56:1 / 10.50:1 vs 5.74:1 for the coral it replaces). The hero
-     band stays coral regardless — its colours are hardcoded, not themed. */
+     bg (8.56:1 / 10.50:1 vs 5.74:1 for the coral it replaces). */
   --accent: #d9a441;
   --accent-ink: #e6b95c;
   --accent-2: #7bb389;
@@ -2395,8 +2394,13 @@ h2.mai-kick::after {
 /* Full viewport height, like MAI's own hero — colour is the point, not a
    padded band above the fold. Content stays centred within it, so the CTAs
    are never more than one screen away regardless of how tall the band is. */
+main:has(> .band) {
+  --band-exit-opacity: 0;
+  --band-copy-percent: 0%;
+}
+
 .band {
-  background: linear-gradient(150deg, #a04a2f 0%, #b3543a 46%, #97442c 100%);
+  background: transparent;
   padding: 100px 26px 84px;
   min-height: 100vh;
   display: flex;
@@ -2404,8 +2408,36 @@ h2.mai-kick::after {
   justify-content: center;
   position: relative;
   isolation: isolate;
-  overflow: hidden;
+  overflow: visible;
   text-align: center;
+}
+
+/* The colour field extends behind the opening viewport of Principles, so the
+   hero has no visible bottom edge. As that text enters, the whole shared field
+   fades away to reveal the page background beneath it. Without JS (or with
+   reduced motion) it stays within the hero and falls back to a clean seam. */
+.band-wash {
+  position: absolute;
+  z-index: 0;
+  inset: 0 0 auto;
+  height: 100%;
+  display: block;
+  background: #ad5035;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.js .band-wash {
+  height: calc(100% + 100vh);
+  opacity: calc(1 - var(--band-exit-opacity));
+  transition: opacity 0.32s cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Coral becomes smoky aubergine at night: still warm enough to belong to the
+   same identity, but dark enough that switching themes changes the mood rather
+   than merely recolouring the page around an unchanged hero. */
+:root[data-theme="dark"] .band-wash {
+  background: #2d1d30;
 }
 
 /* A fixed stretcher-bond wall sits almost invisibly in the colour field.
@@ -2427,9 +2459,25 @@ h2.mai-kick::after {
   z-index: 1;
 }
 
+.js .band > .rv {
+  opacity: calc(1 - var(--band-exit-opacity));
+  transition: opacity 0.32s cubic-bezier(0.2, 0, 0, 1);
+}
+
 @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
   .band-bricks {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main:has(> .band) {
+    --band-copy-percent: 100%;
+  }
+
+  .js .band-wash {
+    height: 100%;
+    opacity: 1;
   }
 }
 
@@ -2460,34 +2508,33 @@ h2.mai-kick::after {
 }
 
 .band-profile {
-  display: grid;
-  grid-template-columns: 176px minmax(0, 1fr);
-  align-items: center;
-  gap: 38px;
+  display: flow-root;
   width: min(920px, 100%);
   margin: 0 auto;
   text-align: left;
 }
 
 .band-face {
+  float: left;
   width: 176px;
   height: 176px;
   border-radius: 50%;
   object-fit: cover;
+  shape-outside: circle(50%);
   /* A ring rather than an outline: against a saturated band the photo needs
      separating from the colour, and white does it without a shadow. */
   border: 3px solid #faf3e8;
-  margin: 0;
+  margin: 1px 34px 14px 0;
   display: block;
 }
 
 .band-sub {
   font-family: var(--serif);
-  font-size: clamp(17px, 1.55vw, 19px);
-  line-height: 1.52;
+  font-size: clamp(18px, 1.55vw, 20px);
+  line-height: 1.55;
   color: #fff6ed;
-  max-width: 63ch;
-  margin: 0 0 22px;
+  max-width: none;
+  margin: 0 0 14px;
   text-wrap: pretty;
 }
 
@@ -2501,7 +2548,8 @@ h2.mai-kick::after {
 }
 
 .band-profile .band-cta {
-  justify-content: flex-start;
+  clear: both;
+  justify-content: center;
 }
 
 @media (max-width: 680px) {
@@ -2510,15 +2558,15 @@ h2.mai-kick::after {
   }
 
   .band-profile {
-    grid-template-columns: 1fr;
-    gap: 20px;
     text-align: center;
   }
 
   .band-face {
+    float: none;
+    shape-outside: none;
     width: 136px;
     height: 136px;
-    margin: 0 auto;
+    margin: 0 auto 20px;
   }
 
   .band-sub {
@@ -2526,6 +2574,7 @@ h2.mai-kick::after {
   }
 
   .band-profile .band-cta {
+    clear: none;
     justify-content: center;
   }
 }
@@ -2542,14 +2591,15 @@ h2.mai-kick::after {
   width: 40px;
   height: 40px;
   color: #f4d9c9;
-  opacity: 0.85;
+  opacity: calc(0.85 - var(--band-exit-opacity));
   animation: band-scroll-bob 2.2s ease-in-out infinite;
-  transition: color 0.18s ease-out, opacity 0.18s ease-out;
+  transition: color 0.18s ease-out,
+    opacity 0.32s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .band-scroll:hover {
   color: #faf3e8;
-  opacity: 1;
+  opacity: calc(1 - var(--band-exit-opacity));
 }
 
 .band-scroll svg {
@@ -2658,6 +2708,22 @@ main:has(> .band) {
   color: var(--ink);
 }
 
+.js main:has(> .band) .vals-list li {
+  color: color-mix(
+    in srgb,
+    #faf3e8 calc(100% - var(--band-copy-percent)),
+    var(--line-2)
+  );
+}
+
+.js main:has(> .band) .vals-list li[data-on] {
+  color: color-mix(
+    in srgb,
+    #faf3e8 calc(100% - var(--band-copy-percent)),
+    var(--ink)
+  );
+}
+
 .vals-said {
   position: relative;
   min-height: 8.5em;
@@ -2673,8 +2739,17 @@ main:has(> .band) {
   color: var(--ink);
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity 0.45s ease-out, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: color 0.45s ease-out, opacity 0.45s ease-out,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
+}
+
+.js main:has(> .band) .vals-said p {
+  color: color-mix(
+    in srgb,
+    #faf3e8 calc(100% - var(--band-copy-percent)),
+    var(--ink)
+  );
 }
 
 .vals-said p[data-on] {

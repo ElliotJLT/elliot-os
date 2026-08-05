@@ -120,27 +120,25 @@ export default async function Home() {
                 width={176}
                 height={176}
               />
-              <div className="band-profile-copy">
-                <p className="band-sub rv-settle">
-                  Four times a founding hire across eight years in startups.
-                  Most recently I led six engineers and a designer to build an
-                  AI tutor from first commit to the App Store in 45 days. Zero
-                  Gravity was one of eight companies selected nationwide for
-                  the{" "}
-                  <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
-                    UK&nbsp;government&apos;s AI Tutoring Tools Pioneers Programme
-                  </a>
-                  , which could support up to 450,000 disadvantaged pupils a
-                  year.
-                </p>
-                <div className="band-cta rv-settle">
-                  <Pill href="/built" tone="cream" arrow>
-                    Read the work
-                  </Pill>
-                  <Pill href="mailto:elliotjlittle@gmail.com" tone="ghost">
-                    Get in touch
-                  </Pill>
-                </div>
+              <p className="band-sub rv-settle">
+                Four times a founding hire across eight years in startups.
+                Most recently I led six engineers and a designer to build an
+                AI tutor from first commit to the App Store in 45 days. Zero
+                Gravity was one of eight companies selected nationwide for
+                the{" "}
+                <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
+                  UK&nbsp;government&apos;s AI Tutoring Tools Pioneers Programme
+                </a>
+                , which could support up to 450,000 disadvantaged pupils a
+                year.
+              </p>
+              <div className="band-cta rv-settle">
+                <Pill href="/built" tone="cream" arrow>
+                  Read the work
+                </Pill>
+                <Pill href="mailto:elliotjlittle@gmail.com" tone="ghost">
+                  Get in touch
+                </Pill>
               </div>
             </div>
           </div>
