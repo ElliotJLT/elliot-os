@@ -65,13 +65,14 @@ export default async function Built() {
             <div className="wr-head-main">
               <span className="mai-kick rv-settle">Built</span>
               <h1 className="wr-title rv-settle">
-                I build the part that decides whether output is good enough
-                to ship.
+                I build the product and the way the team ships it.
               </h1>
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              Usually somewhere a wrong answer costs a student a grade, or
-              misses what a child was trying to tell someone.
+              I have usually been the person carrying all three. Some of the
+              work is software. Some is the operating guide, eval or named
+              owner that stops the next release becoming a small
+              organisational crisis.
             </p>
           </header>
         </Reveal>
@@ -157,22 +158,22 @@ export default async function Built() {
         <Reveal>
           <div className="through-line rv-settle">
             <p className="muted" style={{ marginTop: 0 }}>
-              Producing plausible output is no longer the hard part. Knowing
-              whether to ship it still is, and that gap is where most of my
-              work has gone. The same question keeps surfacing at different
-              points in a system: what got checked, what got rejected, and
-              who decided. Before a student sees a mark. Before a
-              child&apos;s disclosure gets missed. Before an application
-              goes out. Before an agent changes this page.
+              The tutor, ward, boulot, crux and this site came from the same
+              habit: turn an uncertain decision into something people can run
+              and inspect. That might be software, an eval or simply a name
+              beside the outcome. At Zero Gravity the team adopted the
+              operating guide and I still wrote 28% of the merged commits. I
+              like the join between those two jobs.
             </p>
             <p className="muted">
-              It applies to the model and to the person equally. You read
-              what the loop made, and you can defend what carries your name.{" "}
+              The question I keep asking is ordinary enough: what got checked,
+              what got rejected, and who decided? It matters before a student
+              sees a mark, before an application goes out and before an agent
+              changes this page.{" "}
               <a href="https://elliotjlt.github.io/crux/research.html">
                 crux
               </a>{" "}
-              is the instrument I built to find out whether that actually
-              holds.
+              is what I built when I realised the diff could not answer it.
             </p>
           </div>
         </Reveal>
@@ -257,18 +258,19 @@ export default async function Built() {
         </Reveal>
         <Reveal>
           <p className="muted rv-settle" style={{ marginTop: 0 }}>
-            A private fleet that reads a few hundred sources a day and
-            briefs me before I sit down. Named for the watchman with a
-            hundred eyes. It has not missed a morning. The corpus stays
-            private; the shape does not need to.
+            My private research system for product work, career questions,
+            startup ideas and LLMs. It takes transcripts, feeds and my own
+            notes, then builds evidence-backed views I can question or
+            correct. Argus measures useful shifts in a view rather than the
+            size of its corpus.
           </p>
         </Reveal>
         <Reveal>
           <p className="muted rv-settle">
-            Most agent systems summarise and forget. This one has one rule
-            that decides everything else: ingest is immutable and the corpus
-            only ever appends, so a note gets thicker rather than getting
-            replaced by whatever the model read most recently.
+            The cheap jobs are code: fetching captions, deduplicating sources,
+            validating paths and rebuilding views. The model gets a compact
+            excerpt and one decision to make. It keeps, discards or holds the
+            source for review, then says which existing view should move.
           </p>
         </Reveal>
         <Reveal>
@@ -360,9 +362,8 @@ export default async function Built() {
         <Reveal>
           <p className="muted rv-settle">
             Two systems here are real but private: argus, an agent fleet that
-            reads the AI news every morning and writes me a brief, and
-            LifeOS, the front door that routes my whole setup. Ask me about
-            either:{" "}
+            turns research into working views, and LifeOS, the front door that
+            routes my whole setup. Ask me about either:{" "}
             <a href="mailto:elliotjlittle@gmail.com">
               elliotjlittle@gmail.com
             </a>

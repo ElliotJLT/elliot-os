@@ -21,13 +21,13 @@ export default async function Writing() {
             <div className="wr-head-main">
               <span className="mai-kick rv-settle">Writing</span>
               <h1 className="wr-title rv-settle">
-                Shipping AI to people who cannot absorb a wrong answer.
+                The bit between the strategy deck and the pull request.
               </h1>
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              On trust and adoption, on where responsible-AI-by-checklist
-              breaks, and on what the loop talk leaves out. Newest first, from
-              Medium.
+              I write about product leadership while doing the building:
+              tutors, evals, agent loops and the team decisions around them.
+              Newest first, from Medium.
             </p>
           </header>
         </Reveal>
