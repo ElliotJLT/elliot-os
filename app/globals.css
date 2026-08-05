@@ -1166,55 +1166,12 @@ footer a {
   margin-top: 8px;
 }
 
-/* ------------------------------------------------ /loops title lemniscate */
-/* The "oo" of Loops as an infinity, proportioned to the x-height of the
-   serif beside it rather than drawn flat and wide. The figure occupies the
-   middle two thirds of the viewBox, so the box is taller than the mark. */
-.lemni {
-  display: inline-block;
-  /* The figure fills roughly three quarters of the box height, so the box is
-     set a little over the serif's x-height to land the mark on it. */
-  height: 0.54em;
-  aspect-ratio: 84 / 48;
-  margin: 0 0.05em;
-}
-
-.lemni svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  fill: none;
-  stroke-linecap: round;
-  /* Scales with the type rather than staying a fixed pixel width, which was
-     making the mark far heavier than the letterforms beside it. */
-  stroke-width: 7;
-}
-
-/* The whole figure is always visible; only the highlight travels. Drawing
-   just a dash made it read as a squiggle rather than a loop. */
-/* Only the travelling segment is drawn. There is no outline underneath: the
-   figure is described by the movement, the way a hand draws it. A long enough
-   dash keeps the shape legible while it goes round. */
-.lemni-trace {
-  stroke: var(--accent);
-  /* pathLength=100 on the element, so these are percentages of the figure. */
-  stroke-dasharray: 42 58;
-  animation: trace 4s linear infinite;
-}
-
 @keyframes trace {
   from {
     stroke-dashoffset: 100;
   }
   to {
     stroke-dashoffset: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .lemni-trace {
-    animation: none;
-    stroke-dasharray: none;
   }
 }
 
@@ -2350,6 +2307,100 @@ h2[id] {
   color: var(--ink);
 }
 
+/* Loops stays a quiet text link until it is deliberately explored. Both
+   labels occupy the same grid cell, so the nav never shifts when the
+   animated wordmark appears. */
+.mai-links .nav-loops-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-loops-label {
+  display: inline-flex;
+  align-items: baseline;
+  line-height: 1;
+}
+
+.nav-loops-core {
+  display: inline-grid;
+  place-items: center;
+}
+
+.nav-loops-plain,
+.nav-loops-mark {
+  grid-area: 1 / 1;
+}
+
+.nav-loops-plain {
+  transition-property: opacity;
+  transition-duration: 140ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.nav-loops-mark {
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent-ink);
+  opacity: 0;
+  scale: 0.25;
+  filter: blur(4px);
+  transition-property: opacity, scale, filter;
+  transition-duration: 180ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.nav-loops-lemni {
+  display: inline-block;
+  height: 0.62em;
+  aspect-ratio: 84 / 48;
+}
+
+.nav-loops-lemni svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.nav-loops-trace {
+  stroke-dasharray: 42 58;
+  stroke-dashoffset: 100;
+}
+
+.nav-loops-link:hover .nav-loops-plain,
+.nav-loops-link:focus-visible .nav-loops-plain {
+  opacity: 0;
+}
+
+.nav-loops-link:hover .nav-loops-mark,
+.nav-loops-link:focus-visible .nav-loops-mark {
+  opacity: 1;
+  scale: 1;
+  filter: blur(0);
+}
+
+.nav-loops-link:hover .nav-loops-trace,
+.nav-loops-link:focus-visible .nav-loops-trace {
+  animation: trace 2.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-loops-plain,
+  .nav-loops-mark {
+    transition: none;
+  }
+
+  .nav-loops-link:hover .nav-loops-trace,
+  .nav-loops-link:focus-visible .nav-loops-trace {
+    animation: none;
+    stroke-dasharray: none;
+  }
+}
+
 @media (max-width: 720px) {
   .mai-brand {
     font-size: 23px;
@@ -2774,6 +2825,15 @@ main:has(> .band) {
   width: 100%;
   height: 100%;
   pointer-events: none;
+}
+
+/* Match the wash's extra viewport of scroll coverage. Previously the canvas
+   stopped at the hero's bottom edge while the coral continued, clipping a
+   lit brick row into a perfectly horizontal line. */
+.js .band-bricks {
+  height: calc(100% + 100vh);
+  opacity: calc(1 - var(--band-exit-opacity));
+  transition: opacity 0.32s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .band > .rv,
@@ -3463,22 +3523,6 @@ main:has(> .band) {
    second, mechanism third, failures before the compact run ledger. */
 .loops-hero {
   padding: 12px 0 34px;
-}
-
-.loops-wordmark {
-  display: inline-flex;
-  align-items: baseline;
-  margin-bottom: 10px;
-  font-family: var(--display);
-  font-size: 28px;
-  line-height: 1;
-  color: var(--accent-ink);
-}
-
-.loops-wordmark .lemni {
-  width: 1.16em;
-  height: 0.56em;
-  margin-inline: 0.04em;
 }
 
 .loops-hero .wr-title {
