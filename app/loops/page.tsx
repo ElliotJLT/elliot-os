@@ -83,19 +83,7 @@ export default function Loops() {
         <Reveal immediate>
           <header className="loops-hero">
             <div>
-              <span className="loops-wordmark rv-settle" aria-label="Loops">
-                L
-                <span className="lemni" aria-hidden="true">
-                  <svg viewBox="0 0 84 48" focusable="false">
-                    <path
-                      className="lemni-trace"
-                      d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
-                      pathLength={100}
-                    />
-                  </svg>
-                </span>
-                ps
-              </span>
+              <span className="mai-kick rv-settle">Loops</span>
               <h1 className="wr-title rv-settle">
                 Where agents act and where they stop.
               </h1>

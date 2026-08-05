@@ -208,7 +208,10 @@ export default function HeroBricks() {
     };
 
     const resize = () => {
-      const rect = band.getBoundingClientRect();
+      // The canvas continues through the same extended scroll field as the
+      // coral wash. Measuring the canvas—not the hero—prevents its backing
+      // bitmap from being stretched and keeps the brick grid proportional.
+      const rect = canvas.getBoundingClientRect();
       const density = Math.min(window.devicePixelRatio || 1, 1.5);
       width = rect.width;
       height = rect.height;
