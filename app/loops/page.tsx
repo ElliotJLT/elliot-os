@@ -98,17 +98,24 @@ export default function Loops() {
         <Reveal>
           <h2 className="mai-kick rv-settle">where these actually sit</h2>
         </Reveal>
-        <Reveal>
-          <p className="muted rv-settle" style={{ marginTop: 0 }}>
-            A loop is an agent repeating cycles of work until a stop condition
-            is met. The ladder is what you hand over at each rung: the check,
-            the stop condition, the trigger, the prompt. I set that out in{" "}
-            <a href="https://medium.com/@elliotJL/the-loop-was-never-the-hard-part-5bdd4352acab">
-              The Loop Was Never the Hard Part
-            </a>
-            . So here is where this site actually sits.
-          </p>
-        </Reveal>
+        <div className="copy-spread">
+          <Reveal>
+            <p className="muted rv-settle" style={{ marginTop: 0 }}>
+              A loop is an agent repeating cycles of work until a stop condition
+              is met. The ladder is what you hand over at each rung: the check,
+              the stop condition, the trigger, the prompt.
+            </p>
+          </Reveal>
+          <Reveal delay={90}>
+            <p className="muted rv-settle" style={{ marginTop: 0 }}>
+              I set that out in{" "}
+              <a href="https://medium.com/@elliotJL/the-loop-was-never-the-hard-part-5bdd4352acab">
+                The Loop Was Never the Hard Part
+              </a>
+              . So here is where this site actually sits.
+            </p>
+          </Reveal>
+        </div>
         <Reveal>
           <ol className="ladder rv-settle">
             {LADDER.map((l) => (
@@ -124,28 +131,30 @@ export default function Loops() {
             ))}
           </ol>
         </Reveal>
-        <Reveal>
-          <p className="muted rv-settle">
-            The gap is rung two. The trigger runs daily and the top rung is
-            built, and there is nothing judging attempts in between. That is
-            the setup I called an outage with a subscription. This one is
-            not, only because it costs nothing and cannot break anything.
-          </p>
-        </Reveal>
-        <Reveal>
-          <p className="muted rv-settle">
-            Rung one has a worse version of the same problem. In{" "}
-            <a href="https://medium.com/@elliotJL/the-product-engineer-and-the-end-of-the-handoff-93181f170779">
-              The Product Engineer and the End of the Handoff
-            </a>{" "}
-            I argued that you uncover a rubric by reading real failures rather
-            than inventing one up front. I invented these up front. That is
-            why they pass every time. Writing a stop condition that can
-            actually reject something is the next job, and I probably cannot
-            write a good one until this thing has failed a few times where
-            people can see it.
-          </p>
-        </Reveal>
+        <div className="copy-spread">
+          <Reveal>
+            <p className="muted rv-settle">
+              The gap is rung two. The trigger runs daily and the top rung is
+              built, and there is nothing judging attempts in between. That is
+              the setup I called an outage with a subscription. This one is
+              not, only because it costs nothing and cannot break anything.
+            </p>
+          </Reveal>
+          <Reveal delay={90}>
+            <p className="muted rv-settle">
+              Rung one has a worse version of the same problem. In{" "}
+              <a href="https://medium.com/@elliotJL/the-product-engineer-and-the-end-of-the-handoff-93181f170779">
+                The Product Engineer and the End of the Handoff
+              </a>{" "}
+              I argued that you uncover a rubric by reading real failures rather
+              than inventing one up front. I invented these up front. That is
+              why they pass every time. Writing a stop condition that can
+              actually reject something is the next job, and I probably cannot
+              write a good one until this thing has failed a few times where
+              people can see it.
+            </p>
+          </Reveal>
+        </div>
 
         <Reveal>
           <h2 className="mai-kick rv-settle">running loops</h2>
@@ -251,29 +260,31 @@ export default function Loops() {
         <Reveal>
           <h2 className="mai-kick rv-settle">how the outer loop works</h2>
         </Reveal>
-        <Reveal>
-          <p className="muted rv-settle">
-            Every cycle it reads real material (Elliot&apos;s public GitHub
-            activity, his Medium writing, and the site&apos;s own current
-            state) and proposes the single most useful change to make the
-            site useful to someone hiring a hands-on AI product leader. It
-            looks for proof that I can own an unclear problem, build close to
-            the code and improve how the team works. The proposal arrives as a
-            pull request. Merging it is the accept; closing it is the reject.
-            Both are visible in the{" "}
-            <a href="/changelog">changelog</a>.
-          </p>
-        </Reveal>
-        <Reveal>
-          <p className="faint mono rv-settle">
-            runs dormant by default: no schedule, no spend, until an API key
-            is set and the workflow enabled. code:{" "}
-            <a href="https://github.com/ElliotJLT/elliot-os/blob/main/scripts/agent-improve.mjs">
-              scripts/agent-improve.mjs
-            </a>
-            .
-          </p>
-        </Reveal>
+        <div className="copy-aside">
+          <Reveal>
+            <p className="muted rv-settle">
+              Every cycle it reads real material (Elliot&apos;s public GitHub
+              activity, his Medium writing, and the site&apos;s own current
+              state) and proposes the single most useful change to make the
+              site useful to someone hiring a hands-on AI product leader. It
+              looks for proof that I can own an unclear problem, build close to
+              the code and improve how the team works. The proposal arrives as a
+              pull request. Merging it is the accept; closing it is the reject.
+              Both are visible in the{" "}
+              <a href="/changelog">changelog</a>.
+            </p>
+          </Reveal>
+          <Reveal delay={90}>
+            <p className="faint mono rv-settle">
+              runs dormant by default: no schedule, no spend, until an API key
+              is set and the workflow enabled. code:{" "}
+              <a href="https://github.com/ElliotJLT/elliot-os/blob/main/scripts/agent-improve.mjs">
+                scripts/agent-improve.mjs
+              </a>
+              .
+            </p>
+          </Reveal>
+        </div>
       </div>
     </main>
   );

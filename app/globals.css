@@ -516,6 +516,40 @@ li {
   .through-line p {
     max-width: none;
   }
+
+  /* The MAI pages now use a wide canvas. Keep a readable line for a lone
+     introduction, but let related paragraphs use the second half of it
+     instead of inheriting the old narrow-page 66ch cap and leaving a void. */
+  .mai > .rv > p.muted {
+    max-width: 78ch;
+  }
+
+  .copy-spread,
+  .copy-aside {
+    display: grid;
+    align-items: start;
+    gap: 0 48px;
+  }
+
+  .copy-spread {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .copy-aside {
+    grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.7fr);
+  }
+
+  .copy-spread p,
+  .copy-aside p {
+    max-width: none;
+    margin-bottom: 0;
+  }
+
+  .copy-aside > :last-child {
+    padding: 18px 20px;
+    border-radius: 14px;
+    background: var(--bg-2);
+  }
 }
 
 /* ------------------------------------------------------- the through-line */
@@ -1046,13 +1080,44 @@ footer a {
   margin-top: 8px;
 }
 
+@media (min-width: 800px) {
+  .toolrow > div {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.42fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: 40px;
+    align-items: start;
+  }
+
+  .toolrow h3 {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .toolrow p {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    max-width: none;
+  }
+
+  .toolrow .meta {
+    grid-column: 1;
+    grid-row: 2;
+  }
+}
+
 @media (max-width: 560px) {
   .toolrow {
     grid-template-columns: 1fr;
-    gap: 6px;
+    gap: 4px;
+  }
+
+  .toolrow > * {
+    grid-column: 1;
   }
 
   .toolrow-no {
+    grid-row: auto;
     padding-top: 0;
   }
 }
@@ -1286,6 +1351,25 @@ dd {
   max-width: 66ch;
 }
 
+@media (min-width: 800px) {
+  .ladder li {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    column-gap: 48px;
+    align-items: start;
+  }
+
+  .rung-head {
+    grid-column: 1 / -1;
+  }
+
+  .rung-needs,
+  .ladder .rout {
+    max-width: none;
+    margin-bottom: 0;
+  }
+}
+
 /* Section numbers were 11px and the same size as their label. They are the
    only place the accent appears in running text, so they get to be seen. */
 h2::before {
@@ -1295,64 +1379,127 @@ h2::before {
 
 
 /* ================================================================= flow */
-/* argus as a diagram. Nodes are text on a spine, not boxes: a filled node
-   adds a border, a radius and a fill to say "this is a step", which the
-   position on the line already says. The spine is a hairline; the one edge
-   that runs back up the page is the only thing in colour, because it is the
-   only place a human enters the system. */
+/* Argus is a system, not a chronology. The diagram therefore keeps a real
+   left-to-right code-pipeline shape. It owns a wide canvas and scrolls on a
+   phone rather than collapsing back into the vertical timeline it replaced. */
 .flow {
-  position: relative;
   margin: 22px 0 0;
-  /* Narrower than the body measure so the return edge has a margin of its own
-     to live in, rather than being drawn on top of the text. */
-  max-width: 58ch;
+  border-radius: 18px;
+  background: var(--bg-2);
+  box-shadow: inset 0 0 0 1px var(--line);
+  overflow: hidden;
+}
+
+.flowbar {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.flowbar::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 12px 0 0 var(--line-2), 24px 0 0 var(--line-2);
+  margin-right: 22px;
+}
+
+.flowbar > :first-child {
+  margin-right: auto;
+}
+
+.flowbar-state {
+  color: var(--accent-2);
+}
+
+.flow-viewport {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-2) transparent;
+}
+
+.flow-viewport:focus-visible {
+  outline-offset: -3px;
+}
+
+.flow-canvas {
+  position: relative;
+  min-width: 980px;
+  padding: 26px 22px 82px;
 }
 
 .flowlist {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
   list-style: none;
   margin: 0;
-  padding: 0 0 0 26px;
-  /* the spine */
-  border-left: 1px solid var(--line-2);
+  padding: 0;
 }
 
 .flowlist > li {
   position: relative;
-  padding: 0 0 30px;
+  min-height: 168px;
+  padding: 17px 16px 16px;
+  border-radius: 11px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--line);
 }
 
-.flowlist > li:last-child {
-  padding-bottom: 4px;
-}
-
-/* The node. A ring on the spine, filled once the human is reached. */
-.flowlist > li::before {
-  content: "";
+.flowlist > li:not(:last-child)::after {
+  content: "→";
   position: absolute;
-  left: -32px;
-  top: 7px;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  border: 1px solid var(--line-2);
-  background: var(--bg);
+  z-index: 2;
+  top: 70px;
+  right: -12px;
+  width: 10px;
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1;
+  color: var(--accent-ink);
+  background: var(--bg-2);
 }
 
-.flowlist > li.fyou::before {
-  border-color: var(--accent);
-  background: var(--accent);
+.flowlist > li.fyou {
+  background: color-mix(in srgb, var(--accent) 8%, var(--paper));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 45%, var(--line));
+}
+
+.findex {
+  display: block;
+  margin-bottom: 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--faint);
 }
 
 .fhead {
   display: flex;
   align-items: baseline;
-  gap: 12px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px;
 }
 
 .fname {
   font-family: var(--display);
-  font-size: 20px;
+  font-size: 22px;
+  line-height: 1;
   font-weight: 500;
   letter-spacing: -0.01em;
 }
@@ -1360,95 +1507,259 @@ h2::before {
 .fmeta,
 .fby {
   font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.05em;
+  font-size: 9px;
+  letter-spacing: 0.045em;
   text-transform: uppercase;
-  color: var(--faint);
   font-variant-numeric: tabular-nums;
 }
 
-/* Which agent does the work of getting here. Sits under the node it feeds. */
-.fby {
+.fmeta {
   display: block;
-  margin-top: 4px;
+  margin-top: 8px;
+  color: var(--faint);
+}
+
+.fby {
   color: var(--accent-ink);
+  white-space: nowrap;
 }
 
 .fnote {
-  margin: 6px 0 0;
+  margin: 12px 0 0;
   color: var(--muted);
-  font-size: 15px;
-  line-height: 1.55;
+  font-size: 12.5px;
+  line-height: 1.45;
+  text-wrap: pretty;
 }
 
-/* The return edge, drawn to the right of the spine and spanning the corpus
-   node down to the human. Hidden on narrow screens, where there is no room
-   for it to read as anything but a stray curve; the copy still says it. */
-.freturn,
+.freturn {
+  position: absolute;
+  inset: auto 22px 15px 22px;
+  width: calc(100% - 44px);
+  height: 72px;
+  overflow: visible;
+}
+
+.freturn path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
 .freturn-label {
-  display: none;
-}
-
-@media (min-width: 860px) {
-  /* Measured against the rendered node dots (headless-browser check, not
-     eyeballed): canon's dot sits at 34.8% of .flow's height, you's at
-     71.1%. top/height solve for the path's own y=4/y=96 endpoints landing
-     exactly there, so the arrow starts at you and terminates on canon
-     regardless of how the percentages read on their own. */
-  .freturn {
-    display: block;
-    position: absolute;
-    right: -78px;
-    top: 33.3%;
-    height: 39.4%;
-    width: 60px;
-    overflow: visible;
-  }
-
-  /* The strongest mark in the graphic, not a hairline at the margin — this
-     line is the whole thesis (the correction becomes the position), so it
-     should read before the prose does. */
-  .freturn path {
-    fill: none;
-    stroke: var(--accent);
-    stroke-width: 3;
-  }
-
-  .freturn .fhead-arrow {
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-
-  /* Sits just above the arrowhead, next to canon — the node the edge
-     actually lands on. */
-  .freturn-label {
-    display: block;
-    position: absolute;
-    right: -108px;
-    top: 29.8%;
-    width: 104px;
-    font-family: var(--mono);
-    font-size: 9.5px;
-    line-height: 1.4;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: var(--accent-ink);
-  }
+  position: absolute;
+  right: 93px;
+  bottom: 31px;
+  padding: 0 7px;
+  background: var(--bg-2);
+  font-family: var(--mono);
+  font-size: 9.5px;
+  line-height: 1.4;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
 }
 
 .fconductor {
-  margin: 26px 0 0;
-  padding-top: 16px;
+  margin: 0;
+  padding: 17px 20px 19px;
   border-top: 1px solid var(--line);
   color: var(--muted);
-  font-size: 15px;
-  max-width: 66ch;
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: none;
 }
 
 .fconductor span {
+  margin-right: 5px;
   font-family: var(--serif);
-  font-size: 17px;
+  font-size: 16px;
   color: var(--ink);
+}
+
+/* ======================================================== stack explorer */
+.stack-explorer {
+  margin-top: 22px;
+}
+
+.stack-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.stack-tab {
+  appearance: none;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 11px;
+  background: var(--bg-2);
+  box-shadow: inset 0 0 0 1px transparent;
+  color: var(--muted);
+  font: 500 12.5px/1.2 var(--sans);
+  text-align: left;
+  cursor: pointer;
+  transition-property: background-color, box-shadow, color, transform;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-out;
+}
+
+.stack-tab:hover {
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+}
+
+.stack-tab[data-selected="true"] {
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.stack-tab:active {
+  transform: scale(0.96);
+}
+
+.stack-mark {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  display: grid;
+  place-items: center;
+  color: var(--faint);
+  transition: color 0.15s ease-out;
+}
+
+.stack-tab:hover .stack-mark,
+.stack-tab[data-selected="true"] .stack-mark {
+  color: var(--accent-ink);
+}
+
+.stack-mark svg {
+  width: 20px;
+  height: 20px;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.stack-panel {
+  min-height: 190px;
+  display: grid;
+  grid-template-columns: minmax(190px, 0.65fr) minmax(280px, 1.35fr);
+  grid-template-rows: 1fr auto;
+  column-gap: 48px;
+  align-items: center;
+  margin-top: 12px;
+  padding: 30px 34px;
+  border-radius: 18px;
+  background: var(--bg-2);
+  animation: stack-panel-in 0.22s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.stack-panel-heading {
+  grid-row: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.stack-mark-large {
+  width: 54px;
+  height: 54px;
+  flex-basis: 54px;
+  border-radius: 14px;
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--accent-ink);
+}
+
+.stack-mark-large svg {
+  width: 28px;
+  height: 28px;
+}
+
+.stack-role {
+  display: block;
+  margin-bottom: 5px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.stack-panel h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1;
+  font-weight: 500;
+}
+
+.stack-panel p {
+  align-self: end;
+  margin: 0 0 14px;
+  max-width: 62ch;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.stack-panel > a {
+  align-self: start;
+  justify-self: start;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent-ink);
+}
+
+@keyframes stack-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 760px) {
+  .stack-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stack-panel {
+    min-height: 0;
+    display: block;
+    padding: 24px;
+  }
+
+  .stack-panel-heading {
+    margin-bottom: 20px;
+  }
+
+  .stack-panel p {
+    margin-bottom: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack-panel {
+    animation: none;
+  }
 }
 
 /* ================================================================= case */
@@ -1463,10 +1774,14 @@ h2::before {
    size instead of fighting a rigid column for it. */
 .case {
   margin: 26px 0 0;
-  max-width: 68ch;
+  max-width: none;
   display: flex;
   flex-direction: column;
   gap: 22px;
+}
+
+.case-beat {
+  min-width: 0;
 }
 
 .case dt {
@@ -1487,6 +1802,14 @@ h2::before {
   color: var(--muted);
   font-size: 16px;
   line-height: 1.6;
+}
+
+@media (min-width: 800px) {
+  .case {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 48px;
+  }
 }
 
 /* ==================================================================== footer */
