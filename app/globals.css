@@ -1895,6 +1895,32 @@ h2::before {
   border-radius: 18px;
 }
 
+.career-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.career-card-head > div {
+  min-width: 0;
+}
+
+.career-logo,
+.career-timeline-logo {
+  flex: 0 0 auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 12px;
+  outline: 1px solid oklch(0 0 0 / 0.1);
+  outline-offset: -1px;
+}
+
+:root[data-theme="dark"] .career-logo,
+:root[data-theme="dark"] .career-timeline-logo {
+  outline-color: oklch(1 0 0 / 0.1);
+}
+
 .career-co {
   font-family: var(--display);
   font-size: 21px;
@@ -1918,7 +1944,7 @@ h2::before {
   font-size: 11px;
   letter-spacing: 0.03em;
   color: var(--faint);
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }
 
 .career-note {
@@ -2644,16 +2670,16 @@ a.mai-rowname:hover {
 .career-timeline {
   list-style: none;
   margin: 0;
-  padding: 0 0 0 26px;
+  padding: 0 0 0 64px;
   position: relative;
 }
 
 .career-timeline::before {
   content: "";
   position: absolute;
-  left: 4px;
-  top: 6px;
-  bottom: 6px;
+  left: 22px;
+  top: 22px;
+  bottom: 22px;
   width: 1px;
   background: var(--line-2);
 }
@@ -2668,21 +2694,16 @@ a.mai-rowname:hover {
 }
 
 .career-timeline li::before {
-  content: "";
-  position: absolute;
-  left: -26px;
-  top: 6px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--bg);
-  border: 1px solid var(--line-2);
+  content: none;
 }
 
-/* Most recent role is the live one. */
-.career-timeline li:first-child::before {
-  background: var(--accent);
-  border-color: var(--accent);
+.career-timeline-logo {
+  position: absolute;
+  z-index: 1;
+  left: -64px;
+  top: 0;
+  width: 44px;
+  height: 44px;
 }
 
 .career-timeline h3 {

@@ -167,12 +167,14 @@ export default async function Built() {
         <Reveal>
           <div className="through-line rv-settle">
             <p className="muted" style={{ marginTop: 0 }}>
-              The tutor, ward, boulot, crux and this site came from the same
-              habit: turn an uncertain decision into something people can run
-              and inspect. That might be software, an eval or simply a name
-              beside the outcome. At Zero Gravity the team adopted the
-              operating guide and I still wrote 28% of the merged commits. I
-              like the join between those two jobs.
+              LLMs make output abundant. I care about products that make
+              judgement and craft more visible, not less. The tutor, ward,
+              boulot, crux and this site came from the same habit: turn an
+              uncertain decision into something people can run and inspect.
+              That might be software, an eval or simply a name beside the
+              outcome. At Zero Gravity the team adopted the operating guide
+              and I still wrote 28% of the merged commits. I like the join
+              between those two jobs.
             </p>
             <p className="muted">
               The question I keep asking is ordinary enough: what got checked,
