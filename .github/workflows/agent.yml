@@ -38,7 +38,10 @@ jobs:
             echo "No changes to commit."
             exit 0
           fi
-          git add content/now.md data/spend.json
+          # agent-now.mjs updates all three. Omitting loops.json here used to
+          # discard the run record while still publishing the digest, leaving
+          # /loops stale even though the workflow had succeeded.
+          git add content/now.md data/spend.json data/loops.json
           git commit -m "agent: refresh /now shipping log + spend telemetry"
           git push
           gh workflow run "Deploy to GitHub Pages"

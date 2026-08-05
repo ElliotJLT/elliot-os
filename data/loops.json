@@ -1,42 +1,40 @@
 {
-  "updated": "2026-08-01",
+  "updated": "2026-08-05",
   "loops": [
     {
       "id": "now-refresh",
-      "name": "shipping-log loop",
-      "surface": "/loops \u00b7 latest output",
-      "layer": "inner",
-      "cadence": "daily \u00b7 06:00 UTC",
-      "gate": "deterministic \u00b7 auto-commit",
-      "status": "running",
-      "stop_rule": "quiet day posts \"quiet day\"; it never fabricates activity",
-      "last_run": "2026-08-01",
-      "runs": 9,
+      "name": "shipping digest",
+      "surface": "/now · automatic publication",
+      "cadence": "daily · 06:00 UTC",
+      "gate": "deterministic extraction · optional grounded summary",
+      "status": "healthy",
+      "stop_rule": "publishes the latest seven-day window; never invents activity",
+      "last_run": "2026-08-04",
+      "runs": 12,
       "spend_usd": 0,
-      "note": "Derives the shipping log from the public GitHub events API and records its own inference spend. Runs with or without an API key.",
+      "note": "Collects public GitHub activity and publishes a seven-day factual digest. It can add a grounded model summary when an API key is present; all twelve recorded runs used deterministic output at $0.",
       "proposals": []
     },
     {
       "id": "self-improve",
-      "name": "improvement loop",
-      "surface": "PR \u2192 human review",
-      "layer": "outer",
-      "cadence": "weekly \u00b7 Thu 06:00 UTC (armed; manual until enabled)",
-      "gate": "human approval \u00b7 PR, never auto-merged",
-      "status": "armed",
-      "stop_rule": "proposes at most one change per run, and nothing when nothing is worth doing",
+      "name": "positioning review",
+      "surface": "recommendation record · no site-write access",
+      "cadence": "manual · no schedule enabled",
+      "gate": "weak deterministic checks · optional model judge · no retry",
+      "status": "dormant",
+      "stop_rule": "records at most one recommendation, or none when no candidate clears the gate",
       "last_run": "2026-07-22",
       "runs": 1,
       "spend_usd": 0,
-      "note": "Reads Elliot's real GitHub activity, Medium writing, and the site's current state, scores its own proposal against a rubric, and only then proposes one employer-facing change as a PR. Its first run's proposal is below, accepted and shipped.",
+      "note": "Reads public work and selected site source, then records a recommendation. Its PR does not contain the proposed site change; Elliot still has to implement, edit or reject it.",
       "proposals": [
         {
           "date": "2026-07-22",
           "status": "accepted",
-          "shipped": "Live writing feed added to /built, pulled from the Medium feed at build.",
+          "shipped": "Elliot implemented the live writing feed separately after accepting the recommendation.",
           "source": "medium",
           "title": "Link new writing: The Loop Was Never the Hard Part",
-          "rationale": "Post \"The Loop Was Never the Hard Part\" (Mon, 13 Jul 2026) isn't linked anywhere on the site. https://medium.com/@elliotJL/the-loop-was-never-the-hard-part-5bdd4352acab",
+          "rationale": "Post \"The Loop Was Never the Hard Part\" (Mon, 13 Jul 2026) was not linked anywhere on the site. https://medium.com/@elliotJL/the-loop-was-never-the-hard-part-5bdd4352acab",
           "files": [],
           "change": "Review and, if employer-relevant, surface this on the site.",
           "eval": {
@@ -61,6 +59,44 @@
           }
         }
       ]
+    }
+  ],
+  "decisions": [
+    {
+      "date": "2026-07-22",
+      "system": "self-improve",
+      "outcome": "accepted",
+      "title": "Surface the latest Medium writing on Built",
+      "human_decision": "I accepted the recommendation, then implemented the live writing feed myself. The agent's pull request recorded the suggestion; it did not make the site change.",
+      "evidence_url": "https://github.com/ElliotJLT/elliot-os/commit/2e412e0"
+    }
+  ],
+  "failures": [
+    {
+      "date": "2026-08-05",
+      "system": "now-refresh",
+      "title": "The digest ran; its own telemetry disappeared",
+      "effect": "The scheduled runs on 2, 3 and 4 August succeeded, but the page still reported 1 August because the workflow committed the digest and spend ledger while silently discarding data/loops.json.",
+      "change": "Commit the run record with the other generated files and backfill the three successful runs. The page now reports 12 successful runs through 4 August.",
+      "status": "repaired",
+      "evidence_url": "https://github.com/ElliotJLT/elliot-os/actions/runs/30893592315"
+    },
+    {
+      "date": "2026-07-22",
+      "system": "self-improve",
+      "title": "A substring check presented itself as a perfect evaluation",
+      "effect": "The first recommendation scored 1.00 because it named a real source, avoided cosmetic words in its title and supplied more than forty characters of rationale. That checks form, not whether the change was good.",
+      "change": "Remove the score from the public evidence and label the gate accurately as weak. It needs real edited and rejected recommendations before its rubric can claim rigour.",
+      "status": "open"
+    },
+    {
+      "date": "2026-07-22",
+      "system": "now-refresh",
+      "title": "The first refresh failed after its write markers were removed",
+      "effect": "The script could no longer identify the agent-owned section of /now and stopped rather than risk overwriting the page.",
+      "change": "Restore the markers and keep the hard failure when either marker is missing. A later run succeeded with the guard intact.",
+      "status": "repaired",
+      "evidence_url": "https://github.com/ElliotJLT/elliot-os/actions/runs/29930905664"
     }
   ]
 }

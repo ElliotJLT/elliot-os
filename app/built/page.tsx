@@ -6,6 +6,7 @@ import Reveal from "../components/Reveal";
 import { CareerCards } from "../components/Career";
 import { Pill } from "../components/Frame";
 import HoverLabel from "../components/HoverLabel";
+import StackExplorer from "../components/StackExplorer";
 
 export const metadata = { title: "Built · Elliot Little" };
 
@@ -97,44 +98,52 @@ export default async function Built() {
                 decided and what it cost, which is the thing a reader is
                 actually trying to work out. */}
             <dl className="case">
-              <dt>the problem</dt>
-              <dd>
-                A-Level students whose families cannot buy an hour of a
-                tutor&apos;s time. The obvious build is a chatbot that answers
-                homework, which raises a grade once and teaches nothing. The
-                useful build refuses.
-              </dd>
+              <div className="case-beat">
+                <dt>the problem</dt>
+                <dd>
+                  A-Level students whose families cannot buy an hour of a
+                  tutor&apos;s time. The obvious build is a chatbot that answers
+                  homework, which raises a grade once and teaches nothing. The
+                  useful build refuses.
+                </dd>
+              </div>
 
-              <dt>the call</dt>
-              <dd>
-                Socratic from the prompt up, and hold it under pressure:
-                students get inventive about extracting the answer, so
-                refusing had to survive adversarial asking rather than a
-                polite first no. Coaching, practice, marking and assignments
-                run as separate agents with their own pedagogy and evaluator,
-                because one prompt doing four jobs degrades all four.
-              </dd>
+              <div className="case-beat">
+                <dt>the call</dt>
+                <dd>
+                  Socratic from the prompt up, and hold it under pressure:
+                  students get inventive about extracting the answer, so
+                  refusing had to survive adversarial asking rather than a
+                  polite first no. Coaching, practice, marking and assignments
+                  run as separate agents with their own pedagogy and evaluator,
+                  because one prompt doing four jobs degrades all four.
+                </dd>
+              </div>
 
-              <dt>where the work actually went</dt>
-              <dd>
-                Not the model. Correctness evaluation: marking tested against
-                real past papers and official mark schemes, an always-on
-                evaluator grading every coaching session against the Socratic
-                spec, and safety telemetry on every interaction. Shipping
-                daily while the safeguards only got tighter was the
-                discipline problem, and it was harder than the AI.
-              </dd>
+              <div className="case-beat">
+                <dt>where the work actually went</dt>
+                <dd>
+                  Not the model. Correctness evaluation: marking tested against
+                  real past papers and official mark schemes, an always-on
+                  evaluator grading every coaching session against the Socratic
+                  spec, and safety telemetry on every interaction. Shipping
+                  daily while the safeguards only got tighter was the
+                  discipline problem, and it was harder than the AI.
+                </dd>
+              </div>
 
-              <dt>what happened</dt>
-              <dd>
-                Marking accuracy from a ~67% bare-model baseline to over 99%.
-                Live across four STEM subjects on every major UK exam board,
-                direct to students and through a school hub for teachers.
-                First commit to the App Store in 45 days. Selected as one of
-                eight companies nationally for the DfE and DSIT AI Tutoring
-                Tools Pioneers Programme, held to the government&apos;s
-                Generative AI Product Safety Standards.
-              </dd>
+              <div className="case-beat">
+                <dt>what happened</dt>
+                <dd>
+                  Marking accuracy from a ~67% bare-model baseline to over 99%.
+                  Live across four STEM subjects on every major UK exam board,
+                  direct to students and through a school hub for teachers.
+                  First commit to the App Store in 45 days. Selected as one of
+                  eight companies nationally for the DfE and DSIT AI Tutoring
+                  Tools Pioneers Programme, held to the government&apos;s
+                  Generative AI Product Safety Standards.
+                </dd>
+              </div>
             </dl>
             <div className="flinks">
               <Pill href="https://www.zerogravity.co.uk/tutor">
@@ -256,26 +265,46 @@ export default async function Built() {
             argus
           </h2>
         </Reveal>
+        <div className="copy-spread">
+          <Reveal>
+            <p className="muted rv-settle" style={{ marginTop: 0 }}>
+              My private research system for product work, career questions,
+              startup ideas and LLMs. It takes transcripts, feeds and my own
+              notes, then builds evidence-backed views I can question or
+              correct. Argus measures useful shifts in a view rather than the
+              size of its corpus.
+            </p>
+          </Reveal>
+          <Reveal delay={90}>
+            <p className="muted rv-settle" style={{ marginTop: 0 }}>
+              The cheap jobs are code: fetching captions, deduplicating sources,
+              validating paths and rebuilding views. The model gets a compact
+              excerpt and one decision to make. It keeps, discards or holds the
+              source for review, then says which existing view should move.
+            </p>
+          </Reveal>
+        </div>
         <Reveal>
-          <p className="muted rv-settle" style={{ marginTop: 0 }}>
-            My private research system for product work, career questions,
-            startup ideas and LLMs. It takes transcripts, feeds and my own
-            notes, then builds evidence-backed views I can question or
-            correct. Argus measures useful shifts in a view rather than the
-            size of its corpus.
-          </p>
+          <div className="rv-settle">
+            <ArgusFlow />
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <h2 id="stack" className="mai-kick rv-settle">
+            my stack
+          </h2>
         </Reveal>
         <Reveal>
-          <p className="muted rv-settle">
-            The cheap jobs are code: fetching captions, deduplicating sources,
-            validating paths and rebuilding views. The model gets a compact
-            excerpt and one decision to make. It keeps, discards or holds the
-            source for review, then says which existing view should move.
+          <p className="muted rv-settle" style={{ marginTop: 0 }}>
+            The small set of tools I reach for repeatedly. Pick one to see the
+            job it does in the system; none earns a place here just for being
+            fashionable.
           </p>
         </Reveal>
         <Reveal>
           <div className="rv-settle">
-            <ArgusFlow />
+            <StackExplorer />
           </div>
         </Reveal>
 

@@ -1,108 +1,110 @@
 /**
- * argus, drawn.
+ * Argus as a left-to-right system diagram.
  *
- * Built as markup rather than a fixed SVG so it reflows on a phone and reads
- * in order to a screen reader. The return edge is the one exception.
+ * The wide canvas is intentional: on a phone it scrolls horizontally rather
+ * than turning back into the vertical timeline this replaces. The ordered
+ * list keeps the pipeline readable without the drawing, and the return edge
+ * is decorative because the correction is repeated in text underneath.
  */
 
 type Stage = {
   id: string;
   name: string;
   meta: string;
-  by: string | null;
+  by: string;
   note: string;
 };
 
 const STAGES: Stage[] = [
   {
-    id: "sources",
+    id: "signals",
     name: "signals",
-    meta: "evidence, not conclusions",
-    by: null,
-    note: "Transcripts, feeds, papers, commissioned research, my drafts and the corrections I make when a view is wrong.",
+    meta: "raw evidence",
+    by: "input",
+    note: "Transcripts, feeds, papers, drafts and my corrections.",
   },
   {
     id: "ingest",
     name: "ingest",
-    meta: "deterministic",
+    meta: "fetch + clean",
     by: "code",
-    note: "Fetch captions, reject obvious junk, deduplicate, name the source and validate the path. None of that needs a model.",
+    note: "Fetch, reject junk, deduplicate and validate every path.",
   },
   {
     id: "triage",
     name: "triage",
-    meta: "one small decision",
+    meta: "one decision",
     by: "LLM",
-    note: "A compact excerpt goes in. The model keeps, discards or holds it for review, then names any existing view the evidence should change.",
+    note: "Keep, discard or hold; then name the view that should move.",
   },
   {
     id: "views",
     name: "views",
-    meta: "the current model",
-    by: "validated in code",
-    note: "Positions carry their evidence, implications and visible before-and-after changes. New material has to deepen, qualify or contradict something useful.",
+    meta: "current model",
+    by: "code + me",
+    note: "Evidence, implications and every before-and-after stay visible.",
   },
   {
-    id: "outputs",
+    id: "answers",
     name: "answers",
-    meta: "cited back to source",
+    meta: "bounded retrieval",
     by: "ask",
-    note: "Career hypotheses, startup ideas and article stress tests. Retrieval is bounded before the model sees it, and every answer points back to its evidence.",
+    note: "A useful answer, cited back to the material that supports it.",
+  },
+  {
+    id: "me",
+    name: "me",
+    meta: "human judgement",
+    by: "decide",
+    note: "Question the answer, correct the position or make the call.",
   },
 ];
 
 export default function ArgusFlow() {
   return (
-    <div className="flow">
-      <ol className="flowlist">
-        {STAGES.map((s) => (
-          <li key={s.id}>
-            <div className="fhead">
-              <span className="fname">{s.name}</span>
-              <span className="fmeta">{s.meta}</span>
-            </div>
-            {s.by && <span className="fby">{s.by}</span>}
-            <p className="fnote">{s.note}</p>
-          </li>
-        ))}
+    <figure className="flow">
+      <div className="flowbar" aria-hidden="true">
+        <span>argus/pipeline</span>
+        <span className="flowbar-state">● live view</span>
+      </div>
 
-        <li className="fyou">
-          <div className="fhead">
-            <span className="fname">me</span>
-            <span className="fmeta">question, correction, decision</span>
-          </div>
-          <p className="fnote">
-            I ask a question or disagree with the answer. That correction goes
-            back into the relevant view as my position, with the old state
-            still visible.
-          </p>
-        </li>
-      </ol>
+      <div className="flow-viewport" tabIndex={0} aria-label="Argus pipeline diagram">
+        <div className="flow-canvas">
+          <ol className="flowlist">
+            {STAGES.map((stage, index) => (
+              <li key={stage.id} className={stage.id === "me" ? "fyou" : undefined}>
+                <span className="findex" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div className="fhead">
+                  <span className="fname">{stage.name}</span>
+                  <span className="fby">[{stage.by}]</span>
+                </div>
+                <span className="fmeta">{stage.meta}</span>
+                <p className="fnote">{stage.note}</p>
+              </li>
+            ))}
+          </ol>
 
-      <svg
-        className="freturn"
-        viewBox="0 0 60 100"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-        focusable="false"
-      >
-        <path
-          d="M4 96 C46 96 56 88 56 60 C56 24 44 6 4 4"
-          vectorEffect="non-scaling-stroke"
-        />
-        <path
-          className="fhead-arrow"
-          d="M10 0.5 L2.5 4 L10 8"
-          vectorEffect="non-scaling-stroke"
-        />
-      </svg>
-      <span className="freturn-label">a correction changes the view</span>
+          <svg
+            className="freturn"
+            viewBox="0 0 1000 72"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d="M916 4 V29 C916 49 900 57 878 57 H626 C603 57 590 48 590 29 V17" />
+            <path className="fhead-arrow" d="M582 24 L590 14 L598 24" />
+          </svg>
+          <span className="freturn-label">correction.patch → views</span>
+        </div>
+      </div>
 
-      <p className="fconductor">
-        <span>The constraint</span> The model decides what is worth keeping and
-        where it belongs. Code does the fetching, filing and validation. Argus
-        should spend tokens on judgement, not admin.
-      </p>
-    </div>
+      <figcaption className="fconductor">
+        <span>The constraint</span> The model judges what is worth keeping and
+        where it belongs. Code does the fetching, filing and validation. I
+        question the output, and a correction changes the view—not its history.
+      </figcaption>
+    </figure>
   );
 }

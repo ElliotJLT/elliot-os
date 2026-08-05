@@ -4,77 +4,89 @@ import Reveal from "../components/Reveal";
 
 export const metadata = { title: "Loops · Elliot Little" };
 
-const STATUS_LABEL: Record<string, string> = {
-  running: "running",
-  armed: "armed",
-  paused: "paused",
-};
-
-/**
- * The ladder from "The Loop Was Never the Hard Part", marked against the site
- * that publishes it. Each rung hands the machine one more piece of the job:
- * the check, the stop condition, the trigger, the prompt. Two of these are not
- * where the article's argument would predict, which is the point of showing it.
- */
-const LADDER: {
-  name: string;
-  needs: string;
-  reality: string;
-  verdict: string;
-  state: "yes" | "partial" | "no";
-}[] = [
+const AUTHORITY = [
   {
-    name: "the check",
-    needs: "What correct looks like is written down, so the loop can verify its own work instead of you eyeballing it.",
-    reality:
-      "Half. The improvement loop scores its proposal before raising it, but the three checks are booleans and not one of them has ever failed.",
-    verdict: "partial",
-    state: "partial",
+    system: "Shipping digest",
+    reads: "Public GitHub events and commit metadata",
+    changes: "/now, spend ledger and its own run record",
+    evaluation: "Deterministic extraction; optional grounded summary",
+    human: "Publishes without per-run approval; I own and can disable the workflow",
+    health: "healthy",
+    tone: "healthy",
   },
   {
-    name: "the stop condition",
-    needs: "Done is defined, and a second model judges every attempt against it until it passes or runs out of tries.",
-    reality:
-      "Missing. Nothing judges an attempt or retries one. Both agents run once and hand in whatever came out.",
-    verdict: "not reached",
-    state: "no",
-  },
-  {
-    name: "the trigger",
-    needs: "It runs on a schedule or watches for events, laptop open or not.",
-    reality:
-      "Yes. The shipping-log agent has fired on its cron every morning, commits under its own identity, and posts \"quiet day\" rather than inventing activity when there is none.",
-    verdict: "running",
-    state: "yes",
-  },
-  {
-    name: "the prompt",
-    needs: "The loop watches your work, decides what needs doing, does it, and something reviews it before you see it. Your job is the merge.",
-    reality:
-      "Built, switched off. The improvement loop reads real activity and raises one change as a pull request, which is this rung by design. It has run once, by hand, and has never been put on its schedule.",
-    verdict: "dormant",
-    state: "partial",
+    system: "Positioning review",
+    reads: "Public GitHub, Medium and selected site source",
+    changes: "A recommendation record and a PR containing that record",
+    evaluation: "Three weak presence checks; optional model judge; no retry",
+    human: "I implement, edit or reject the recommendation; the agent cannot alter the site",
+    health: "dormant",
+    tone: "dormant",
   },
 ];
 
+const ANATOMY = [
+  {
+    name: "collect",
+    owner: "code",
+    copy: "Read public repositories, the latest Medium posts and selected site files.",
+  },
+  {
+    name: "propose",
+    owner: "code / model",
+    copy: "Choose one gap. With no API key this is deterministic; with one, a model can frame it.",
+  },
+  {
+    name: "check",
+    owner: "weak gate",
+    copy: "Test for a named source, non-cosmetic title and a rationale over forty characters.",
+  },
+  {
+    name: "decide",
+    owner: "me",
+    copy: "I decide whether the recommendation deserves implementation, editing or rejection.",
+  },
+  {
+    name: "record",
+    owner: "manual today",
+    copy: "Write the human outcome to the ledger. PR closure is not yet synchronised automatically.",
+  },
+];
+
+function formatDate(value: string | null) {
+  if (!value) return "never";
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${value}T00:00:00Z`));
+}
+
+function daysSince(value: string | null) {
+  if (!value) return null;
+  const elapsed = Date.now() - new Date(`${value}T00:00:00Z`).getTime();
+  return Math.max(0, Math.floor(elapsed / 86_400_000));
+}
+
 export default function Loops() {
-  const { loops } = getLoops();
+  const data = getLoops();
   const agentLog = getAgentLog();
+  const shipping = data.loops.find((system) => system.id === "now-refresh");
+  const review = data.loops.find((system) => system.id === "self-improve");
+  const lastDecision = data.decisions[0]?.date ?? null;
+  const decisionAge = daysSince(lastDecision);
 
   return (
     <main>
-      <div className="mai">
+      <div className="mai loops-page">
         <Reveal immediate>
-          <header className="wr-head">
-            <div className="wr-head-main">
-              {/* The "oo" is drawn as a lemniscate on the same baseline as
-                  the serif, traced continuously so the title performs what
-                  the page describes. Falls back to plain "Loops" without
-                  CSS or motion. */}
-              <h1 className="wr-title rv-settle">
+          <header className="loops-hero">
+            <div>
+              <span className="loops-wordmark rv-settle" aria-label="Loops">
                 L
-                <span className="lemni" role="img" aria-label="oo">
-                  <svg viewBox="0 0 84 48" aria-hidden="true" focusable="false">
+                <span className="lemni" aria-hidden="true">
+                  <svg viewBox="0 0 84 48" focusable="false">
                     <path
                       className="lemni-trace"
                       d="M42 24 C42 9 58 5 68 11 C78 17 78 31 68 37 C58 43 42 39 42 24 C42 9 26 5 16 11 C6 17 6 31 16 37 C26 43 42 39 42 24 Z"
@@ -83,196 +95,196 @@ export default function Loops() {
                   </svg>
                 </span>
                 ps
+              </span>
+              <h1 className="wr-title rv-settle">
+                Where agents act and where they stop.
               </h1>
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              Two agents keep this site current. One runs on a schedule and
-              rewrites the shipping log. The other reads what I have actually
-              been doing and proposes a single change as a pull request I can
-              close. What each one costs and what stops it is below. So are
-              the rungs neither of them has reached.
+              Two narrow systems sit behind this site. One publishes facts
+              from GitHub. The other recommends changes but cannot touch the
+              site. Their sources, checks, failures and human boundaries are
+              visible below.
             </p>
           </header>
         </Reveal>
 
         <Reveal>
-          <h2 className="mai-kick rv-settle">where these actually sit</h2>
+          <h2 id="authority" className="mai-kick rv-settle">
+            authority map
+          </h2>
         </Reveal>
         <Reveal>
-          <p className="muted rv-settle" style={{ marginTop: 0 }}>
-            A loop is an agent repeating cycles of work until a stop condition
-            is met. The ladder is what you hand over at each rung: the check,
-            the stop condition, the trigger, the prompt. I set that out in{" "}
-            <a href="https://medium.com/@elliotJL/the-loop-was-never-the-hard-part-5bdd4352acab">
-              The Loop Was Never the Hard Part
-            </a>
-            . So here is where this site actually sits.
-          </p>
+          <div className="authority-wrap rv-settle">
+            <table className="authority-table">
+              <thead>
+                <tr>
+                  <th>system</th>
+                  <th>reads</th>
+                  <th>may change</th>
+                  <th>evaluation</th>
+                  <th>human boundary</th>
+                  <th>health</th>
+                </tr>
+              </thead>
+              <tbody>
+                {AUTHORITY.map((row) => (
+                  <tr key={row.system}>
+                    <th scope="row" data-label="system">{row.system}</th>
+                    <td data-label="reads">{row.reads}</td>
+                    <td data-label="may change">{row.changes}</td>
+                    <td data-label="evaluation">{row.evaluation}</td>
+                    <td data-label="human boundary">{row.human}</td>
+                    <td data-label="health">
+                      <span className={`system-health ${row.tone}`}>{row.health}</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <h2 id="decisions" className="mai-kick rv-settle">
+            decision record
+          </h2>
         </Reveal>
         <Reveal>
-          <ol className="ladder rv-settle">
-            {LADDER.map((l) => (
-              <li key={l.name} data-state={l.state}>
-                <div className="rung-head">
-                  <span className="rung-no" />
-                  <span className="rung-name">{l.name}</span>
-                  <span className="rung-verdict">{l.verdict}</span>
+          <div className="decision-record rv-settle">
+            <div className="decision-denominator">
+              <span>{data.decisions.length} recorded decision</span>
+              <span>0 rejected</span>
+              <span>0 edited</span>
+              <span>0 no-op reviews</span>
+            </div>
+            <ol className="decision-list">
+              {data.decisions.map((decision) => (
+                <li key={`${decision.date}-${decision.title}`}>
+                  <time dateTime={decision.date}>{formatDate(decision.date)}</time>
+                  <span className={`decision-outcome ${decision.outcome}`}>
+                    {decision.outcome}
+                  </span>
+                  <div>
+                    <h3>{decision.title}</h3>
+                    <p>{decision.human_decision}</p>
+                    {decision.evidence_url && (
+                      <a href={decision.evidence_url}>view the implementing commit ↗</a>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <p className="evidence-gap">
+              <span>What this does not prove yet</span> One accepted suggestion
+              is not evidence of a mature system. Signal counts, edited and
+              rejected recommendations, disagreement reasons, time saved and
+              cost per accepted outcome are not recorded yet.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <h2 id="anatomy" className="mai-kick rv-settle">
+            anatomy of the positioning review
+          </h2>
+        </Reveal>
+        <Reveal>
+          <div className="anatomy-viewport rv-settle" tabIndex={0}>
+            <ol className="agent-anatomy" aria-label="Positioning review stages">
+              {ANATOMY.map((stage, index) => (
+                <li key={stage.name}>
+                  <span className="anatomy-no">{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{stage.name}</h3>
+                  <span className="anatomy-owner">[{stage.owner}]</span>
+                  <p>{stage.copy}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <h2 id="failures" className="mai-kick rv-settle">
+            failure log
+          </h2>
+        </Reveal>
+        <Reveal>
+          <ol className="failure-log rv-settle">
+            {data.failures.map((failure) => (
+              <li key={`${failure.date}-${failure.title}`}>
+                <div className="failure-meta">
+                  <time dateTime={failure.date}>{formatDate(failure.date)}</time>
+                  <span className={`failure-status ${failure.status}`}>{failure.status}</span>
                 </div>
-                <p className="rung-needs">{l.needs}</p>
-                <p className="rout">{l.reality}</p>
+                <div>
+                  <h3>{failure.title}</h3>
+                  <p>{failure.effect}</p>
+                  <p className="failure-change"><span>change</span> {failure.change}</p>
+                  {failure.evidence_url && <a href={failure.evidence_url}>evidence ↗</a>}
+                </div>
               </li>
             ))}
           </ol>
         </Reveal>
-        <Reveal>
-          <p className="muted rv-settle">
-            The gap is rung two. The trigger runs daily and the top rung is
-            built, and there is nothing judging attempts in between. That is
-            the setup I called an outage with a subscription. This one is
-            not, only because it costs nothing and cannot break anything.
-          </p>
-        </Reveal>
-        <Reveal>
-          <p className="muted rv-settle">
-            Rung one has a worse version of the same problem. In{" "}
-            <a href="https://medium.com/@elliotJL/the-product-engineer-and-the-end-of-the-handoff-93181f170779">
-              The Product Engineer and the End of the Handoff
-            </a>{" "}
-            I argued that you uncover a rubric by reading real failures rather
-            than inventing one up front. I invented these up front. That is
-            why they pass every time. Writing a stop condition that can
-            actually reject something is the next job, and I probably cannot
-            write a good one until this thing has failed a few times where
-            people can see it.
-          </p>
-        </Reveal>
 
         <Reveal>
-          <h2 className="mai-kick rv-settle">running loops</h2>
+          <h2 id="history" className="mai-kick rv-settle">
+            compact history
+          </h2>
         </Reveal>
         <Reveal>
-        <div className="looplist rv-settle">
-          {loops.map((l) => (
-            <div className="loopcard" key={l.id}>
-              <div className="loophead">
-                <span className={"layer " + l.layer}>{l.layer} loop</span>
-                <h3>{l.name}</h3>
-                <span className={"lstatus " + l.status}>
-                  <span className="dot" />
-                  {STATUS_LABEL[l.status] || l.status}
-                </span>
-              </div>
-              <p className="loopnote">{l.note}</p>
-              <dl className="loopmeta">
-                <div>
-                  <dt>surface</dt>
-                  <dd>{l.surface}</dd>
+          <div className="system-history rv-settle">
+            {shipping && (
+              <article>
+                <div className="system-history-head">
+                  <h3>{shipping.name}</h3>
+                  <span className="system-health healthy">healthy</span>
                 </div>
-                <div>
-                  <dt>cadence</dt>
-                  <dd>{l.cadence}</dd>
+                <dl>
+                  <div><dt>successful runs</dt><dd>{shipping.runs}</dd></div>
+                  <div><dt>last run</dt><dd>{formatDate(shipping.last_run)}</dd></div>
+                  <div><dt>model spend</dt><dd>${shipping.spend_usd.toFixed(4)}</dd></div>
+                </dl>
+                <p>{shipping.note}</p>
+              </article>
+            )}
+            {review && (
+              <article>
+                <div className="system-history-head">
+                  <h3>{review.name}</h3>
+                  <span className="system-health dormant">dormant</span>
                 </div>
-                <div>
-                  <dt>gate</dt>
-                  <dd>{l.gate}</dd>
-                </div>
-                <div>
-                  <dt>runs</dt>
-                  <dd>{l.runs}</dd>
-                </div>
-                <div>
-                  <dt>last run</dt>
-                  <dd>{l.last_run || "—"}</dd>
-                </div>
-                <div>
-                  <dt>spend</dt>
-                  <dd>${l.spend_usd.toFixed(4)}</dd>
-                </div>
-              </dl>
-              <p className="stoprule">
-                <span>stopping rule</span> {l.stop_rule}
-              </p>
-
-              {l.id === "now-refresh" && agentLog && (
-                <div className="proposals">
-                  <div className="ptitle">latest output</div>
-                  <div
-                    className="prose agentlog"
-                    dangerouslySetInnerHTML={{ __html: agentLog }}
-                  />
-                </div>
-              )}
-
-              {l.proposals.length > 0 && (
-                <div className="proposals">
-                  <div className="ptitle">proposals</div>
-                  {l.proposals.map((p, i) => (
-                    <div className="proposal" key={i}>
-                      <div className="phead">
-                        <span className={"psrc " + p.source}>{p.source}</span>
-                        <span className="pdate">{p.date}</span>
-                        <span className={"pstatus " + p.status}>{p.status}</span>
-                      </div>
-                      <div className="pname">
-                        {p.pr_url ? <a href={p.pr_url}>{p.title}</a> : p.title}
-                      </div>
-                      <p className="prat">{p.rationale}</p>
-                      {p.eval && (
-                        <div className="peval">
-                          <span className={"verdict " + p.eval.verdict}>
-                            eval: {p.eval.verdict} · {p.eval.score.toFixed(2)}
-                          </span>
-                          {p.eval.checks.map((c) => (
-                            <span
-                              key={c.name}
-                              className={"echeck " + (c.pass ? "ok" : "no")}
-                            >
-                              {c.pass ? "✓" : "✕"} {c.name}
-                            </span>
-                          ))}
-                          <span className="eby">{p.eval.by}</span>
-                        </div>
-                      )}
-                      {p.eval?.critique && (
-                        <p className="ecrit">“{p.eval.critique}”</p>
-                      )}
-                      {p.shipped && (
-                        <p className="pshipped">→ shipped: {p.shipped}</p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+                <dl>
+                  <div><dt>manual runs</dt><dd>{review.runs}</dd></div>
+                  <div><dt>last decision</dt><dd>{formatDate(lastDecision)}</dd></div>
+                  <div><dt>days since outcome</dt><dd>{decisionAge ?? "—"}</dd></div>
+                </dl>
+                <p>{review.note}</p>
+              </article>
+            )}
+          </div>
         </Reveal>
 
+        {agentLog && (
+          <Reveal>
+            <details className="latest-digest rv-settle">
+              <summary>Latest automatically published shipping digest</summary>
+              <div
+                className="prose agentlog"
+                dangerouslySetInnerHTML={{ __html: agentLog }}
+              />
+            </details>
+          </Reveal>
+        )}
+
         <Reveal>
-          <h2 className="mai-kick rv-settle">how the outer loop works</h2>
-        </Reveal>
-        <Reveal>
-          <p className="muted rv-settle">
-            Every cycle it reads real material (Elliot&apos;s public GitHub
-            activity, his Medium writing, and the site&apos;s own current
-            state) and proposes the single most useful change to make the
-            site useful to someone hiring a hands-on AI product leader. It
-            looks for proof that I can own an unclear problem, build close to
-            the code and improve how the team works. The proposal arrives as a
-            pull request. Merging it is the accept; closing it is the reject.
-            Both are visible in the{" "}
-            <a href="/changelog">changelog</a>.
-          </p>
-        </Reveal>
-        <Reveal>
-          <p className="faint mono rv-settle">
-            runs dormant by default: no schedule, no spend, until an API key
-            is set and the workflow enabled. code:{" "}
-            <a href="https://github.com/ElliotJLT/elliot-os/blob/main/scripts/agent-improve.mjs">
-              scripts/agent-improve.mjs
-            </a>
-            .
-          </p>
+          <nav className="machinery-links rv-settle" aria-label="Agent system source code">
+            <span>the machinery</span>
+            <a href="https://github.com/ElliotJLT/elliot-os/blob/main/scripts/agent-now.mjs">shipping digest source ↗</a>
+            <a href="https://github.com/ElliotJLT/elliot-os/blob/main/scripts/agent-improve.mjs">positioning review source ↗</a>
+            <a href="https://github.com/ElliotJLT/elliot-os/actions">workflow runs ↗</a>
+          </nav>
         </Reveal>
       </div>
     </main>
