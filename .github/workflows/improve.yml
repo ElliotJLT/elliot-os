@@ -1,8 +1,9 @@
-name: Agent — improvement loop (outer)
+name: Agent — positioning review
 
-# The outer loop. Reads Elliot's real GitHub + Medium activity and the site's
-# current state, then proposes ONE employer-facing improvement as a pull
-# request for human review. It never merges itself.
+# Reads Elliot's public GitHub + Medium activity and selected site source,
+# then records ONE employer-facing recommendation in a pull request. The PR
+# contains the recommendation record, not the proposed site change. Elliot
+# decides whether to implement, edit or reject it.
 #
 # Ships DORMANT: the weekly schedule below is commented out, so nothing runs
 # until Elliot enables it. Runs $0 without ANTHROPIC_API_KEY (deterministic
@@ -53,7 +54,7 @@ jobs:
           {
             echo ""
             echo "---"
-            echo "_Proposed by the outer loop. Merging this PR accepts the change; closing it rejects it. Either way it lands in the changelog. See [/loops](https://elliotjlt.github.io/elliot-os/loops/)._"
+            echo "_Recorded by the positioning review. This PR contains a recommendation record, not the proposed site change. Merging keeps the recommendation; Elliot still decides whether and how to implement it. See [/loops](https://elliotjlt.github.io/elliot-os/loops/)._"
           } >> /tmp/body.md
 
           git config user.name "elliot-os agent"

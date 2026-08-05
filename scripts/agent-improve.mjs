@@ -1,11 +1,12 @@
-// The improvement loop — the site's OUTER loop.
+// The positioning review. It is deliberately described as a review rather
+// than a loop: there is no retry path, and its pull request records a
+// recommendation rather than implementing the proposed site change.
 //
-// Inner loops (like scripts/agent-now.mjs) keep one surface fresh. This one
-// steps back and asks a different question every week: given what Elliot
+// Given what Elliot
 // actually shipped and wrote, and what employers hiring hands-on AI product
 // leaders care about right now, what is the single most useful change to this
 // site? It never invents activity — it reads real sources and proposes ONE
-// improvement as a pull request for a human to approve or reject.
+// improvement as a recommendation for a human to implement, edit or reject.
 //
 // Sources (all public, $0):
 //   - GitHub repos + recent events   (what he built)
@@ -282,7 +283,9 @@ function recordProposal(proposal, today, cost) {
   loop.last_run = today;
   loop.runs = (loop.runs || 0) + 1;
   loop.spend_usd = +((loop.spend_usd || 0) + cost).toFixed(6);
-  loop.status = "running";
+  // A manual run does not make an unscheduled system "running". It returns
+  // to dormant after recording the result.
+  loop.status = "dormant";
   loop.proposals = loop.proposals || [];
   if (proposal) {
     loop.proposals.unshift({ date: today, status: "proposed", ...proposal });

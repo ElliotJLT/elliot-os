@@ -3456,3 +3456,563 @@ main:has(> .band) {
 .pod .wr-h {
   margin-top: 6px;
 }
+
+/* ====================================================== loops, authority */
+/* The page is a control surface now, not an essay about loop theory. Its
+   hierarchy follows the actual governance question: scope first, decisions
+   second, mechanism third, failures before the compact run ledger. */
+.loops-hero {
+  padding: 12px 0 34px;
+}
+
+.loops-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  margin-bottom: 10px;
+  font-family: var(--display);
+  font-size: 28px;
+  line-height: 1;
+  color: var(--accent-ink);
+}
+
+.loops-wordmark .lemni {
+  width: 1.16em;
+  height: 0.56em;
+  margin-inline: 0.04em;
+}
+
+.loops-hero .wr-title {
+  max-width: 15ch;
+  margin-top: 0;
+}
+
+@media (min-width: 900px) {
+  .loops-hero {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    column-gap: 64px;
+    align-items: center;
+  }
+
+  .loops-hero .mai-sub {
+    max-width: none;
+    margin-bottom: 0;
+  }
+}
+
+.authority-wrap {
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--bg-2);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+.authority-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.authority-table th,
+.authority-table td {
+  padding: 18px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  text-align: left;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.48;
+  text-wrap: pretty;
+}
+
+.authority-table thead th {
+  padding-block: 13px;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.authority-table tbody th {
+  font-family: var(--display);
+  font-size: 19px;
+  line-height: 1.1;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.authority-table tr:last-child th,
+.authority-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.authority-table th:nth-child(1) { width: 14%; }
+.authority-table th:nth-child(2) { width: 16%; }
+.authority-table th:nth-child(3) { width: 18%; }
+.authority-table th:nth-child(4) { width: 18%; }
+.authority-table th:nth-child(5) { width: 25%; }
+.authority-table th:nth-child(6) { width: 9%; }
+
+.system-health,
+.decision-outcome,
+.failure-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.system-health::before,
+.failure-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.system-health.healthy,
+.failure-status.repaired {
+  color: var(--accent-2);
+}
+
+.system-health.dormant,
+.failure-status.open {
+  color: var(--accent-ink);
+}
+
+.decision-record {
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--bg-2);
+}
+
+.decision-denominator {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.decision-denominator span:first-child {
+  color: var(--ink);
+}
+
+.decision-list,
+.failure-log,
+.agent-anatomy {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.decision-list li {
+  display: grid;
+  grid-template-columns: 105px 78px minmax(0, 1fr);
+  gap: 18px;
+  padding: 25px 22px;
+  align-items: start;
+}
+
+.decision-list time,
+.failure-meta time {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.decision-outcome.accepted {
+  color: var(--accent-2);
+}
+
+.decision-outcome.edited,
+.decision-outcome.no-op {
+  color: var(--accent-ink);
+}
+
+.decision-outcome.rejected {
+  color: var(--muted);
+}
+
+.decision-list h3,
+.failure-log h3,
+.system-history h3 {
+  margin: 0 0 6px;
+  font-family: var(--display);
+  font-size: 20px;
+  line-height: 1.15;
+  font-weight: 500;
+}
+
+.decision-list p,
+.failure-log p,
+.system-history p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.decision-list a,
+.failure-log a {
+  display: inline-block;
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--accent-ink);
+}
+
+.evidence-gap {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.35fr) minmax(0, 1fr);
+  gap: 24px;
+  margin: 0;
+  padding: 19px 22px 21px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.evidence-gap span {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.anatomy-viewport {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-2) transparent;
+}
+
+.agent-anatomy {
+  min-width: 900px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.agent-anatomy li {
+  position: relative;
+  min-height: 172px;
+  padding: 18px;
+  border-radius: 14px;
+  background: var(--bg-2);
+}
+
+.agent-anatomy li:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  top: 74px;
+  right: -11px;
+  z-index: 2;
+  width: 10px;
+  background: var(--bg);
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--accent-ink);
+}
+
+.anatomy-no,
+.anatomy-owner {
+  font-family: var(--mono);
+  font-size: 9px;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+.anatomy-no {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--faint);
+}
+
+.anatomy-owner {
+  color: var(--accent-ink);
+}
+
+.agent-anatomy h3 {
+  display: inline;
+  margin: 0 8px 0 0;
+  font-family: var(--display);
+  font-size: 21px;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.agent-anatomy p {
+  margin: 13px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.48;
+}
+
+.failure-log {
+  border-top: 1px solid var(--line);
+}
+
+.failure-log li {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 30px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.failure-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.failure-change {
+  margin-top: 8px !important;
+  color: var(--ink-2) !important;
+}
+
+.failure-change span {
+  margin-right: 7px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.system-history {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.system-history article {
+  padding: 24px;
+  border-radius: 18px;
+  background: var(--bg-2);
+}
+
+.system-history-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.system-history dl {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.system-history dl > div {
+  min-width: 0;
+  padding: 11px 12px;
+  border-radius: 10px;
+  background: var(--paper);
+}
+
+.system-history dt {
+  margin-bottom: 4px;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  line-height: 1.35;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.system-history dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.latest-digest {
+  margin-top: 14px;
+  border-radius: 14px;
+  background: var(--bg-2);
+}
+
+.latest-digest summary {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 18px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.latest-digest summary::marker,
+.latest-digest summary::-webkit-details-marker {
+  display: none;
+}
+
+.latest-digest summary::after {
+  content: "↘";
+  flex: 0 0 auto;
+  font-size: 13px;
+  color: var(--accent-ink);
+  transform: rotate(0deg);
+  transition: transform 180ms ease;
+}
+
+.latest-digest[open] summary::after {
+  transform: rotate(90deg);
+}
+
+.latest-digest .agentlog {
+  padding: 0 18px 18px;
+}
+
+.machinery-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px 22px;
+  margin-top: 32px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 10.5px;
+}
+
+.machinery-links span {
+  margin-right: auto;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.machinery-links a {
+  color: var(--accent-ink);
+}
+
+@media (max-width: 760px) {
+  .authority-wrap {
+    overflow: visible;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .authority-table,
+  .authority-table tbody,
+  .authority-table tr,
+  .authority-table th,
+  .authority-table td {
+    display: block;
+    width: 100% !important;
+  }
+
+  .authority-table thead {
+    display: none;
+  }
+
+  .authority-table tr {
+    margin-bottom: 12px;
+    padding: 13px 0;
+    border-radius: 16px;
+    background: var(--bg-2);
+  }
+
+  .authority-table th,
+  .authority-table td {
+    display: grid;
+    grid-template-columns: 100px minmax(0, 1fr);
+    gap: 12px;
+    padding: 7px 16px;
+    border: 0;
+  }
+
+  .authority-table th::before,
+  .authority-table td::before {
+    content: attr(data-label);
+    font-family: var(--mono);
+    font-size: 8.5px;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  .authority-table tbody th {
+    font-family: var(--sans);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .decision-list li {
+    grid-template-columns: 1fr auto;
+    gap: 8px 18px;
+  }
+
+  .decision-list li > div {
+    grid-column: 1 / -1;
+  }
+
+  .evidence-gap {
+    display: block;
+  }
+
+  .evidence-gap span {
+    display: block;
+    margin-bottom: 7px;
+  }
+
+  .failure-log li {
+    display: block;
+  }
+
+  .failure-meta {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .system-history {
+    grid-template-columns: 1fr;
+  }
+
+  .system-history dl {
+    grid-template-columns: 1fr;
+  }
+
+  .machinery-links {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .machinery-links span {
+    margin: 0 0 5px;
+  }
+}

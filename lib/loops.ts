@@ -26,10 +26,9 @@ export type Loop = {
   id: string;
   name: string;
   surface: string;
-  layer: "inner" | "outer";
   cadence: string;
   gate: string;
-  status: "running" | "armed" | "paused";
+  status: "healthy" | "dormant" | "paused";
   stop_rule: string;
   last_run: string | null;
   runs: number;
@@ -38,7 +37,31 @@ export type Loop = {
   proposals: Proposal[];
 };
 
-export type Loops = { updated: string; loops: Loop[] };
+export type Decision = {
+  date: string;
+  system: string;
+  outcome: "accepted" | "edited" | "rejected" | "no-op";
+  title: string;
+  human_decision: string;
+  evidence_url?: string;
+};
+
+export type Failure = {
+  date: string;
+  system: string;
+  title: string;
+  effect: string;
+  change: string;
+  status: "repaired" | "open";
+  evidence_url?: string;
+};
+
+export type Loops = {
+  updated: string;
+  loops: Loop[];
+  decisions: Decision[];
+  failures: Failure[];
+};
 
 export function getLoops(): Loops {
   return JSON.parse(
