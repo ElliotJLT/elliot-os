@@ -1,11 +1,10 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-08-04, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 91 commits across 5 repos.*
+*Shipping log for the 7 days to 2026-08-10, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 68 commits across 4 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 29 commits. "Merge pull request #14 from ElliotJLT/elliot/argus-fix-and-copy" (c1a2351), "Fix argus diagram facts, retarget return edge, four copy edits" (3ab916c), "Merge pull request #13 from ElliotJLT/ElliotJLT/personal-site-bugfixes" (6c43108) and 26 more
-- **[impactlab](https://github.com/ElliotJLT/impactlab)**: 29 commits. "Log decision 015: Week fragments are borderless (team call)" (da62a6e), "Week: newest fragments first, remove per-item borders" (6c6299a), "Week: newest-first, staggered drift-in, gradient CTA dissolving into a scrim" (048eae0) and 26 more
-- **[boulot-os](https://github.com/ElliotJLT/boulot-os)**: 26 commits. "Drop the withdrawal note, and say who the instructions belong to" (99b7443), "Landing page: what it does for the person, not who it is fighting" (b938488), "Six chips into four, grouped by what each one measures" (62f4cd1) and 23 more
-- **[ElliotJLT](https://github.com/ElliotJLT/ElliotJLT)**: 5 commits. "Refine dog-years project description for clarity" (1ea4561), "Update README.md" (a6107dc), "Update README.md" (7bb213b) and 2 more
-- **[dog-years](https://github.com/ElliotJLT/dog-years)**: 2 commits. "Tighten claims to what a black-box behavioral test actually supports" (ce37160), "dog-years: fix Claude's time-estimation genre reflex, with the experiments that found it" (3ed6afd)
+- **[orbital-elliotlittle-task](https://github.com/ElliotJLT/orbital-elliotlittle-task)**: 30 commits. made public. "Merge pull request #4 from ElliotJLT/ElliotJLT/final-polish" (9d14d08), "Bring the spec back in line with what shipped" (51fd1de), "Merge pull request #3 from ElliotJLT/ElliotJLT/loom-link" (3ddf92f) and 27 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 24 commits. "Merge pull request #21 from ElliotJLT/ElliotJLT/enlarge-nav-add-dropdowns" (a13b417), "Polish Loops navigation and hero effects" (7a1855b), "Merge pull request #20 from ElliotJLT/ElliotJLT/enlarge-nav-add-dropdowns" (8435244) and 21 more
+- **[boulot-os](https://github.com/ElliotJLT/boulot-os)**: 8 commits. "Drop the withdrawal note, and say who the instructions belong to" (99b7443), "Landing page: what it does for the person, not who it is fighting" (b938488), "Six chips into four, grouped by what each one measures" (62f4cd1) and 5 more
+- **[ElliotJLT](https://github.com/ElliotJLT/ElliotJLT)**: 6 commits. "Update README.md" (682d76a), "Refine dog-years project description for clarity" (1ea4561), "Update README.md" (a6107dc) and 3 more
 <!-- agent:end -->
 
 ## by hand
