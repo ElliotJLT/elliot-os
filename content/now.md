@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-08-13, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 7 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-08-14, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 0 commits across 0 repos.*
 
-- **[orbital-elliotlittle-task](https://github.com/ElliotJLT/orbital-elliotlittle-task)**: 7 commits. "Merge pull request #4 from ElliotJLT/ElliotJLT/final-polish" (9d14d08), "Bring the spec back in line with what shipped" (51fd1de), "Merge pull request #3 from ElliotJLT/ElliotJLT/loom-link" (3ddf92f) and 4 more
+- Quiet week on public GitHub. The private repos tell a different story.
 <!-- agent:end -->
 
 ## by hand
