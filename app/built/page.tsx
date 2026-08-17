@@ -6,7 +6,6 @@ import Reveal from "../components/Reveal";
 import { CareerCards } from "../components/Career";
 import { Pill } from "../components/Frame";
 import HoverLabel from "../components/HoverLabel";
-import StackExplorer from "../components/StackExplorer";
 
 export const metadata = { title: "Built · Elliot Little" };
 
@@ -175,6 +174,23 @@ export default async function Built() {
         </Reveal>
 
         <Reveal>
+          <figure className="build-photo build-photo-built rv-settle">
+            <div className="build-photo-frame">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${basePath}/building-with-the-team.jpg`}
+                alt="Elliot leaning over a laptop while working with another person"
+                width={1920}
+                height={1280}
+              />
+            </div>
+            <figcaption>
+              I work through the prototype with the person at the keyboard.
+            </figcaption>
+          </figure>
+        </Reveal>
+
+        <Reveal>
           <h2 id="through-line" className="mai-kick rv-settle">
             the through-line
           </h2>
@@ -276,83 +292,6 @@ export default async function Built() {
         </Reveal>
 
         <Reveal>
-          <h2 id="mentoring" className="mai-kick rv-settle">
-            mentoring
-          </h2>
-        </Reveal>
-        <Reveal>
-          <p className="muted rv-settle" style={{ marginTop: 0 }}>
-            I have mentored alongside the products for four years, with
-            students and early-career professionals at Zero Gravity and product
-            peers through Lenny&apos;s community.
-          </p>
-        </Reveal>
-        <Reveal>
-          <div className="mentoring-grid rv-settle">
-            <article className="mentor-card">
-              <div className="mentor-card-head">
-                <span className="mentor-logo-shell">
-                  {/* The adjacent heading names the programme. */}
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    className="mentor-logo"
-                    src={`${basePath}/mentoring/lennys-mentorship.svg`}
-                    alt=""
-                    width={52}
-                    height={52}
-                  />
-                </span>
-                <div>
-                  <h3>
-                    <a href="https://www.lennysmentors.com/">
-                      Lenny&apos;s Newsletter
-                    </a>
-                  </h3>
-                  <span className="mentor-meta">
-                    mentor &amp; mentee · 2024–present
-                  </span>
-                </div>
-              </div>
-              <p>
-                I take part on both sides of the product community&apos;s
-                mentorship programme: helping another operator work through a
-                difficult product or career decision, then taking my own hard
-                calls to someone else.
-              </p>
-            </article>
-
-            <article className="mentor-card">
-              <div className="mentor-card-head">
-                <span className="mentor-logo-shell">
-                  {/* The adjacent heading names the organisation. */}
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    className="mentor-logo"
-                    src={`${basePath}/career/zero-gravity.jpeg`}
-                    alt=""
-                    width={52}
-                    height={52}
-                  />
-                </span>
-                <div>
-                  <h3>
-                    <a href="https://www.zerogravity.co.uk/">Zero Gravity</a>
-                  </h3>
-                  <span className="mentor-meta">mentor · 2022–present</span>
-                </div>
-              </div>
-              <p>
-                Alongside leading product, I coached students and early-career
-                professionals from low-opportunity backgrounds through
-                university and career decisions. I used those conversations to
-                keep the product close to the choices they faced between
-                sessions.
-              </p>
-            </article>
-          </div>
-        </Reveal>
-
-        <Reveal>
           <h2 id="argus" className="mai-kick rv-settle">
             argus
           </h2>
@@ -379,24 +318,6 @@ export default async function Built() {
         <Reveal>
           <div className="rv-settle">
             <ArgusFlow />
-          </div>
-        </Reveal>
-
-        <Reveal>
-          <h2 id="stack" className="mai-kick rv-settle">
-            my stack
-          </h2>
-        </Reveal>
-        <Reveal>
-          <p className="muted rv-settle" style={{ marginTop: 0 }}>
-            The small set of tools I reach for repeatedly. Pick one to see the
-            job it does in the system; none earns a place here just for being
-            fashionable.
-          </p>
-        </Reveal>
-        <Reveal>
-          <div className="rv-settle">
-            <StackExplorer />
           </div>
         </Reveal>
 

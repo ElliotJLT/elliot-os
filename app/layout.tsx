@@ -129,6 +129,10 @@ export default function RootLayout({
                     name="LinkedIn"
                     href="https://www.linkedin.com/in/hireelliot/"
                   />
+                  <IconLink
+                    name="Bluesky"
+                    href="https://bsky.app/profile/8lliot.bsky.social"
+                  />
                   <IconLink name="Medium" href="https://medium.com/@elliotJL" />
                 </div>
                 <a href={`${basePath}/llms.txt`}>llms.txt</a>
