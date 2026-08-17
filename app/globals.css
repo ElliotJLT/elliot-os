@@ -554,8 +554,8 @@ li {
 
 /* ------------------------------------------------------- the through-line */
 /* Was a running list split by hairlines, the same treatment as everything
-   else on the old page. Each repo is its own card now, same language as
-   the homepage's work list and career snapshot. */
+   else on the old page. Each repo is its own card now, matching the career
+   snapshot without repeating its content. */
 .record-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1564,6 +1564,14 @@ h2::before {
   margin-top: 22px;
 }
 
+.stack-home-intro {
+  max-width: 760px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
 .stack-tabs {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -1606,29 +1614,28 @@ h2::before {
 }
 
 .stack-mark {
-  width: 24px;
-  height: 24px;
-  flex: 0 0 24px;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
   display: grid;
   place-items: center;
-  color: var(--faint);
-  transition: color 0.15s ease-out;
+  padding: 4px;
+  overflow: hidden;
+  border-radius: 9px;
+  background: #fff;
+  outline: 1px solid oklch(0 0 0 / 0.1);
+  outline-offset: -1px;
 }
 
-.stack-tab:hover .stack-mark,
-.stack-tab[data-selected="true"] .stack-mark {
-  color: var(--accent-ink);
+:root[data-theme="dark"] .stack-mark {
+  outline-color: oklch(1 0 0 / 0.1);
 }
 
-.stack-mark svg {
-  width: 20px;
-  height: 20px;
-  overflow: visible;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.stack-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .stack-panel {
@@ -1642,7 +1649,6 @@ h2::before {
   padding: 30px 34px;
   border-radius: 18px;
   background: var(--bg-2);
-  animation: stack-panel-in 0.22s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .stack-panel-heading {
@@ -1656,15 +1662,8 @@ h2::before {
   width: 54px;
   height: 54px;
   flex-basis: 54px;
+  padding: 9px;
   border-radius: 14px;
-  background: var(--paper);
-  box-shadow: inset 0 0 0 1px var(--line);
-  color: var(--accent-ink);
-}
-
-.stack-mark-large svg {
-  width: 28px;
-  height: 28px;
 }
 
 .stack-role {
@@ -1704,17 +1703,6 @@ h2::before {
   color: var(--accent-ink);
 }
 
-@keyframes stack-panel-in {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @media (max-width: 760px) {
   .stack-tabs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1732,12 +1720,6 @@ h2::before {
 
   .stack-panel p {
     margin-bottom: 14px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .stack-panel {
-    animation: none;
   }
 }
 
@@ -1894,10 +1876,9 @@ h2::before {
 }
 
 /* ============================================================== snapshot */
-/* Career facts belong in their own section, not folded into either the
-   work list above or the reference below — the snapshot is the resume
-   claim, the quote is someone else vouching for it, and the two shouldn't
-   read as one block. */
+/* Career facts belong in their own section, not folded into the reference
+   below: the snapshot is the resume claim, while the quote is someone else
+   vouching for it. */
 .career-snap {
   display: grid;
   grid-template-columns: 1fr;
@@ -1977,14 +1958,21 @@ h2::before {
   margin: 0;
 }
 
-/* Mentoring sits between the career record and the systems below it. The
-   two programmes share one compact card language; the logos identify the
-   context without turning the section into another timeline. */
+/* The two programmes share one compact card language on the homepage; the
+   logos identify the context without turning mentoring into another timeline. */
 .mentoring-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
-  margin: 16px 0 40px;
+  margin: 20px 0 56px;
+}
+
+.mentoring-home-intro {
+  max-width: 680px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  text-wrap: pretty;
 }
 
 @media (min-width: 700px) {
@@ -1994,7 +1982,7 @@ h2::before {
 }
 
 .mentor-card {
-  padding: 26px 28px;
+  padding: 24px 26px;
   background: var(--bg-2);
   border-radius: 18px;
 }
@@ -2690,51 +2678,66 @@ h2[id] {
   width: 100%;
 }
 
-/* No kicker label above this any more — MAI's own sections often run
-   straight from whitespace into the content, and a small label on every
-   block was reading as scaffolding rather than signal. Air does the job
-   the label was doing. */
-.work-list {
-  padding-top: 56px;
+/* Real work breaks up the run of diagrams and cards. Both photographs keep
+   their native colour; the crop changes with the viewport, not the image. */
+.build-photo {
+  margin: 0;
 }
 
-/* The work list used to be a running set of rows split by a hairline, the
-   same treatment as everything else on the page. Each build is its own
-   module now — a soft card rather than a divider — closer to how MAI
-   separates one product from the next. */
-.work-row {
-  background: var(--bg-2);
-  border-top: none;
+.build-photo-home {
+  margin-top: 56px;
+}
+
+.build-photo-frame {
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
   border-radius: 20px;
-  padding: 28px;
-  margin-bottom: 16px;
+  background: var(--bg-2);
+  outline: 1px solid oklch(0 0 0 / 0.1);
+  outline-offset: -1px;
 }
 
-.work-row:last-child {
-  margin-bottom: 0;
+:root[data-theme="dark"] .build-photo-frame {
+  outline-color: oklch(1 0 0 / 0.1);
 }
 
-@media (min-width: 900px) {
-  .work-row {
-    padding: 36px 40px;
-  }
-}
-
-.work-icon {
+.build-photo-frame img {
+  display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
-  display: grid;
-  place-items: center;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  color: var(--accent-ink);
+  height: 100%;
+  object-fit: cover;
 }
 
-.work-icon svg {
-  width: 30%;
-  max-width: 60px;
-  height: auto;
+.build-photo-home .build-photo-frame img {
+  object-position: center 46%;
+}
+
+.build-photo-home .build-photo-frame,
+.build-photo-built .build-photo-frame {
+  aspect-ratio: 16 / 7;
+}
+
+.build-photo-built .build-photo-frame img {
+  object-position: center 57%;
+}
+
+.build-photo figcaption {
+  max-width: none;
+  margin: 12px 0 0;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--faint);
+  text-wrap: pretty;
+}
+
+@media (max-width: 640px) {
+  .build-photo-frame,
+  .build-photo-home .build-photo-frame,
+  .build-photo-built .build-photo-frame {
+    aspect-ratio: 4 / 3;
+    border-radius: 16px;
+  }
 }
 
 .mai-rowlabel {
@@ -2861,26 +2864,11 @@ a.mai-rowname:hover {
   max-width: 60ch;
 }
 
-/* ------------------------------------------------------- skills and stack */
+/* ----------------------------------------------------------------- proof */
 .vouch-col {
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-
-.stack-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.stack-chip {
-  font-family: var(--mono);
-  font-size: 12.5px;
-  color: var(--muted);
-  background: var(--bg-2);
-  border-radius: 999px;
-  padding: 8px 16px;
 }
 
 /* The old numbered-section h2 rules still applied to the new kicker

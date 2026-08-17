@@ -4,50 +4,13 @@ import { getQuotes } from "@/lib/quotes";
 import { getMedia } from "@/lib/writing";
 import { getRoles } from "@/lib/roles";
 import Reveal, { Words } from "./components/Reveal";
-import { WorkIcon, Pill, Slot } from "./components/Frame";
+import { Pill, Slot } from "./components/Frame";
 import Values from "./components/Values";
 import HeroBricks from "./components/HeroBricks";
+import MentoringCards from "./components/Mentoring";
+import StackExplorer from "./components/StackExplorer";
 
-/** Each build gets a row: an icon, a name, and what it does. */
-const WORK: {
-  name: string;
-  href: string;
-  label: string;
-  icon: "tutor" | "ward" | "argus" | "crux";
-  body: string;
-}[] = [
-  {
-    name: "Zero Gravity AI STEM tutor",
-    href: "https://www.zerogravity.co.uk/tutor",
-    label: "In production",
-    icon: "tutor",
-    body: "An A-Level tutor that coaches a student to the answer and refuses to hand it over. Marking tested against official mark schemes took accuracy from a ~67% bare-model baseline to over 99%. Four subjects, every major UK exam board.",
-  },
-  {
-    name: "argus",
-    href: "/built",
-    label: "Private research system",
-    icon: "argus",
-    body: "Turns transcripts, feeds and my own notes into evidence-backed views on product work, careers and startup ideas. Fetching, deduplication, names and paths are code. I spend model calls on whether a source is worth keeping and which view it changes.",
-  },
-  {
-    name: "crux",
-    href: "https://elliotjlt.github.io/crux/research.html",
-    label: "Ongoing research",
-    icon: "crux",
-    body: "Every team moving its code-writing to agents is about to ask what the humans still do. Crux measures it: what a human rejected, redirected or killed while the model did the typing. Method, results run on myself, objections and limitations all published.",
-  },
-  {
-    name: "ward",
-    href: "https://github.com/ElliotJLT/ward",
-    label: "Published evals",
-    icon: "ward",
-    body: "Separates a safeguarding disclosure from ordinary bad conduct, grounded in KCSIE rather than keyword matching. On its published synthetic core set: 90% recall at 100% precision, against 50/83 for a keyword baseline.",
-  },
-];
-
-/** One row shape for a project and a piece of writing alike: an image, a
- *  label, a name, a CTA, and a line of body copy. */
+/** One row shape for a piece of writing: image, date, title, CTA and note. */
 function Row({
   image,
   label,
@@ -55,7 +18,6 @@ function Row({
   href,
   cta,
   body,
-  card = false,
 }: {
   image: React.ReactNode;
   label: string;
@@ -63,10 +25,9 @@ function Row({
   href: string;
   cta: string;
   body: string | null;
-  card?: boolean;
 }) {
   return (
-    <article className={"mai-row" + (card ? " work-row" : "")}>
+    <article className="mai-row">
       <div className="rv-develop">{image}</div>
       <div className="rv-settle">
         <span className="mai-rowlabel">{label}</span>
@@ -79,18 +40,6 @@ function Row({
     </article>
   );
 }
-
-const STACK = [
-  "Claude",
-  "Claude Code",
-  "Next.js",
-  "Rails",
-  "Hotwire Native",
-  "pgvector",
-  "RAG",
-  "MCP",
-  "Multi-agent systems",
-];
 
 export default async function Home() {
   const { reference: ref } = getQuotes();
@@ -161,22 +110,6 @@ export default async function Home() {
           { name: "Remember", said: "At Zero Gravity the team adopted the operating guide I wrote. Now Crux records the calls a commit misses, and Argus carries my corrections into the next answer." },
         ]}
       />
-
-      <div className="work-list">
-        {WORK.map((w) => (
-          <Reveal key={w.name}>
-            <Row
-              card
-              image={<WorkIcon name={w.icon} />}
-              label={w.label}
-              name={w.name}
-              href={w.href}
-              cta="Learn more"
-              body={w.body}
-            />
-          </Reveal>
-        ))}
-      </div>
 
       <Reveal>
         <h2 className="mai-kick rv-settle">Career</h2>
@@ -251,14 +184,31 @@ export default async function Home() {
                 />
               </a>
             </figure>
-            <div className="stack-row">
-              {STACK.map((s) => (
-                <span className="stack-chip" key={s}>
-                  {s}
-                </span>
-              ))}
-            </div>
           </div>
+        </div>
+      </Reveal>
+
+      <Reveal>
+        <h2 className="mai-kick rv-settle">My stack</h2>
+        <p className="stack-home-intro muted rv-settle">
+          The small set of tools I reach for repeatedly. Pick one to see the
+          job it does in the system; none earns a place here just for being
+          fashionable.
+        </p>
+        <div className="stack-home rv-settle">
+          <StackExplorer basePath={basePath} />
+        </div>
+      </Reveal>
+
+      <Reveal>
+        <h2 className="mai-kick rv-settle">Mentoring</h2>
+        <p className="mentoring-home-intro muted rv-settle">
+          I mentor alongside the products: students and early-career
+          professionals at Zero Gravity, and product peers through Lenny&apos;s
+          community.
+        </p>
+        <div className="rv-settle">
+          <MentoringCards />
         </div>
       </Reveal>
 
@@ -286,6 +236,24 @@ export default async function Home() {
             body={noteFor(p.title)}
           />
         ))}
+      </Reveal>
+
+      <Reveal>
+        <figure className="build-photo build-photo-home rv-settle">
+          <div className="build-photo-frame">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`${basePath}/building-together.jpg`}
+              alt="Elliot smiling with a group as they compare rough orange block prototypes around a table"
+              width={1920}
+              height={1280}
+            />
+          </div>
+          <figcaption>
+            I bring rough prototypes into the room while people can still
+            change them.
+          </figcaption>
+        </figure>
       </Reveal>
 
     </div>
