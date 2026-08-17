@@ -1,11 +1,8 @@
-import Link from "next/link";
 import { getRepos, FEATURED } from "@/lib/github";
-import { getRoles } from "@/lib/roles";
 import ArgusFlow from "../components/ArgusFlow";
 import Reveal from "../components/Reveal";
-import { CareerCards } from "../components/Career";
-import { Pill } from "../components/Frame";
 import HoverLabel from "../components/HoverLabel";
+import ProductPortfolio from "../components/ProductPortfolio";
 
 export const metadata = { title: "Built · Elliot Little" };
 
@@ -56,11 +53,10 @@ const BLURBS: Record<string, { title: string; blurb: string }> = {
 
 export default async function Built() {
   const repos = await getRepos();
-  const record = getRoles();
   const byName = new Map(repos.map((r) => [r.name, r]));
 
   return (
-    <main>
+    <main className="built-page">
       <div className="mai">
         <Reveal immediate>
           <header className="wr-head">
@@ -78,99 +74,23 @@ export default async function Built() {
           </header>
         </Reveal>
 
-        {/* The tutor is four years of work in production on the App Store,
-            so it gets a card of its own rather than levelling with a
-            research repo and this website. */}
         <Reveal>
           <h2 id="production" className="mai-kick rv-settle">
-            in production
+            selected product work
           </h2>
         </Reveal>
         <Reveal>
-          <section className="flagship rv-settle">
-            <h3>Zero Gravity AI STEM tutor</h3>
-            <p className="fclaim">
-              A private tutor at the shoulder of students whose families could
-              never pay for one.
-            </p>
-            <div className="flagship-context">
-              <p>
-                I spent four years building at Zero Gravity before the tutor
-                shipped. I led product across the journey from university
-                applications into careers, then turned to the grades that open
-                those doors.
-              </p>
-              <p>
-                I led a multi-year AI career co-pilot and oversaw a migration
-                of roughly 120,000 user accounts out of a legacy community
-                platform. I also oversaw major refactors of the mentoring
-                product ahead of agentic tooling, while mentoring
-                low-opportunity students and professionals alongside the build.
-              </p>
-            </div>
-            {/* Set as a case study rather than a description. A list of
-                features says what exists; the beats below say what was
-                decided and what it cost, which is the thing a reader is
-                actually trying to work out. */}
-            <dl className="case">
-              <div className="case-beat">
-                <dt>the problem</dt>
-                <dd>
-                  A-Level students whose families cannot buy an hour of a
-                  tutor&apos;s time. The obvious build is a chatbot that answers
-                  homework, which raises a grade once and teaches nothing. The
-                  useful build refuses.
-                </dd>
-              </div>
-
-              <div className="case-beat">
-                <dt>the product call</dt>
-                <dd>
-                  Socratic from the prompt up, and hold it under pressure:
-                  students get inventive about extracting the answer, so
-                  refusing had to survive adversarial asking rather than a
-                  polite first no. Coaching, practice, marking and assignments
-                  run as separate agents with their own pedagogy and evaluator,
-                  because one prompt doing four jobs degrades all four.
-                </dd>
-              </div>
-
-              <div className="case-beat">
-                <dt>what production required</dt>
-                <dd>
-                  A working prompt was the start. Production meant testing
-                  marking against real past papers and official mark schemes,
-                  grading each coaching session against the Socratic spec and
-                  recording safety signals on every interaction. We shipped
-                  daily while tightening those safeguards.
-                </dd>
-              </div>
-
-              <div className="case-beat">
-                <dt>what happened</dt>
-                <dd>
-                  Marking accuracy from a ~67% bare-model baseline to over 99%.
-                  Live across four STEM subjects on every major UK exam board,
-                  direct to students and through a school hub for teachers.
-                  First commit to the App Store in 45 days. Selected as one of
-                  eight companies nationally for the DfE and DSIT AI Tutoring
-                  Tools Pioneers Programme, held to the government&apos;s
-                  Generative AI Product Safety Standards.
-                </dd>
-              </div>
-            </dl>
-            <div className="flinks">
-              <Pill href="https://www.zerogravity.co.uk/tutor">
-                the product
-              </Pill>
-              <Pill href="https://apps.apple.com/gb/app/zero-gravity-tutor/id6760364095">
-                App Store
-              </Pill>
-              <Pill href="https://open.spotify.com/episode/3D8quBCXrMNgIF87czhux3">
-                the podcast episode
-              </Pill>
-            </div>
-          </section>
+          <p className="product-work-intro muted rv-settle">
+            At Farewill I worked between customers, legal specialists and
+            operations. At Zero Gravity I moved from product and design into
+            hands-on product engineering. The products below show the problems
+            I owned, what the team shipped and where my role changed.
+          </p>
+        </Reveal>
+        <Reveal>
+          <div className="rv-settle">
+            <ProductPortfolio basePath={basePath} />
+          </div>
         </Reveal>
 
         <Reveal>
@@ -191,106 +111,25 @@ export default async function Built() {
         </Reveal>
 
         <Reveal>
-          <h2 id="through-line" className="mai-kick rv-settle">
-            the through-line
-          </h2>
-        </Reveal>
-        <Reveal>
-          <div className="through-line rv-settle">
-            <p className="muted" style={{ marginTop: 0 }}>
-              AI makes software cheap to produce. I use that speed to test an
-              idea, then do the slower work that earns a place in production. I
-              decide where the model can improvise and where the product needs
-              certainty, then name an owner for each failure.
-            </p>
-            <p className="muted">
-              The tutor, ward, boulot, crux and this site all make judgement
-              visible: what got checked, what got rejected and who decided. At
-              Zero Gravity the team adopted the operating guide and I wrote 28%
-              of the merged commits. The same question matters before a student
-              sees a mark, before an application goes out and before an agent
-              changes this page.{" "}
-              <a href="https://elliotjlt.github.io/crux/research.html">
-                crux
-              </a>{" "}
-              is what I built when I realised the diff could not answer it.
-            </p>
-          </div>
-        </Reveal>
-        <Reveal>
-          <div className="record-grid rv-settle">
-            <div className="record-card">
-              <div className="rhead">
-                <span className="rorg">ward</span>
-                <span className="rmeta">safeguarding, for under-18s</span>
-              </div>
-              <p className="rout">
-                Decides which messages from a child are genuine safeguarding
-                disclosures and routes those to a named human on a clock,
-                grounded in KCSIE rather than keyword matching. Built around
-                precision, because a Designated Safeguarding Lead who gets
-                paged on every false alarm learns to ignore the alerts, which
-                is worse than having none. On its published synthetic sets
-                the Claude judge reaches 90% recall at 100% precision,
-                against 50/83 for a keyword baseline.
+          <section
+            id="independent-work"
+            className="work-bridge rv-settle"
+            aria-labelledby="independent-work-title"
+          >
+            <span className="mai-kick">Independent work</span>
+            <div className="work-bridge-grid">
+              <h2 id="independent-work-title" className="work-bridge-title">
+                My independent work starts with problems I run into myself.
+              </h2>
+              <p className="work-bridge-copy">
+                I built Argus because I could not retrieve my research, and crux
+                because a code diff could not explain the decisions behind it.
+                I apply the same test to each project below: use it in my own
+                work and keep changing it until I trust it.
               </p>
             </div>
-            <div className="record-card">
-              <div className="rhead">
-                <span className="rorg">boulot</span>
-                <span className="rmeta">adversarial review</span>
-              </div>
-              <p className="rout">
-                A local career system that keeps the whole search on your
-                machine and learns which claims earn a reply. Three agents with
-                opposing briefs stress-test each CV. I built it for my own
-                search, still use it and made it free and open source.
-              </p>
-            </div>
-            <div className="record-card">
-              <div className="rhead">
-                <span className="rorg">crux</span>
-                <span className="rmeta">the human half</span>
-              </div>
-              <p className="rout">
-                The judgement no commit log records: what a person rejected,
-                redirected, or killed while the model did the typing. Ongoing
-                research, with the method, the results run on myself, the
-                honest objections and the limitations all published.
-              </p>
-            </div>
-            <div className="record-card">
-              <div className="rhead">
-                <span className="rorg">this site</span>
-                <span className="rmeta">the agent&apos;s own work</span>
-              </div>
-              <p className="rout">
-                An agent proposes one change, a rubric scores it against
-                explicit criteria, and a human merges it or does not. Every
-                cadence, gate and stopping rule is published on{" "}
-                <Link href="/loops">/loops</Link>, and the spend is metered.
-              </p>
-            </div>
-          </div>
+          </section>
         </Reveal>
-
-        <Reveal>
-          <h2 id="track-record" className="mai-kick rv-settle">
-            track record
-          </h2>
-        </Reveal>
-        <Reveal>
-          <p className="muted rv-settle" style={{ marginTop: 0, fontSize: 15 }}>
-            Roles and the outcome that mattered in each. Full history,
-            titles, and references on <a href={record.linkedin}>LinkedIn</a>.
-          </p>
-        </Reveal>
-        <Reveal>
-          <div className="rv-settle">
-            <CareerCards roles={record.roles} />
-          </div>
-        </Reveal>
-
         <Reveal>
           <h2 id="argus" className="mai-kick rv-settle">
             argus

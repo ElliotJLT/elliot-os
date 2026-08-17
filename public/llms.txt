@@ -21,11 +21,19 @@ does the work that earns a place in production. He decides where a model can
 improvise, where the product needs certainty and who owns a failure. His
 evals, operating rules and named owners make those decisions inspectable.
 
-Elliot spent four years building at Zero Gravity before the tutor shipped. He
-led a multi-year AI career co-pilot, oversaw a migration of roughly 120,000
-user accounts out of a legacy community platform and oversaw major refactors
-of the mentoring product ahead of agentic tooling. He mentored low-opportunity
-students and professionals alongside the build.
+Elliot spent four years building at Zero Gravity. He led product and design
+for partner-funded learning pathways in 2023, then designed and led the
+platform's first end-to-end AI product: Career Co-pilot. It used a student's
+CV and platform profile to build the CV with them, retrieve relevant mentors,
+learning and community advice, and answer career questions against Zero
+Gravity's knowledge. The later AI tutor added hands-on product engineering to
+that role. Elliot wrote 28% of its merged code while leading six engineers and
+a designer.
+
+He also oversaw a migration of roughly 120,000 user accounts out of a legacy
+community platform and major mentoring-product refactors ahead of agentic
+tooling. He mentored low-opportunity students and professionals alongside the
+build.
 
 The AI tutor was one of eight companies selected nationwide for the UK
 government's AI Tutoring Tools Pioneers Programme. The programme is designed
@@ -38,7 +46,20 @@ named owner or a piece of software. Responsible AI supplies one demanding
 example. Farewill, MealsForTheNHS and Flash Pack show the same operating
 habit in regulated services, crisis delivery and consumer travel.
 
-- Zero Gravity AI STEM tutor (in production) — a working prompt was the
+- Farewill probate operations: Elliot led product and operations between
+  customers, legal specialists and the case team. He shipped guided intake,
+  workflow automation, audit logs, case tracking and integrations with HMCTS,
+  HMRC and banking. Agent errors fell 69% and case handling moved from two
+  weeks to four days. https://farewill.com/apply-for-probate
+- Zero Gravity learning pathways: partner-funded courses for companies
+  including Accenture, HSBC, KPMG and Snap, combining video, staged
+  progression, quizzes and an early AI skills check. The library did not earn
+  enough repeat student use; that miss shaped Career Co-pilot's retrieval-led
+  approach.
+- Zero Gravity Career Co-pilot: the platform's first end-to-end AI product.
+  It built a CV with the student and used their profile to retrieve relevant
+  mentors, learning pathways, community posts and career guidance.
+- Zero Gravity AI STEM tutor (in production): a working prompt was the
   start. The production product is Socratic by design: it
   coaches a student to the answer and will not hand it over, however
   creatively they ask, and an always-on evaluator grades every session
@@ -79,15 +100,17 @@ habit in regulated services, crisis delivery and consumer travel.
   around it. Languages BA (Birmingham/Fudan): French and English native,
   Spanish fluent, Chinese intermediate. BlueDot Impact AI Governance &
   Alignment graduate.
-- Track record: Zero Gravity (built and deployed a production multi-agent
-  AI STEM tutor for A-Level students, live on every major UK exam board;
+- Track record: Zero Gravity (led partner learning pathways, Career Co-pilot
+  and a production multi-agent AI STEM tutor for A-Level students, live on
+  every major UK exam board;
   first commit to App Store in 45 days; marking accuracy raised from a
   ~67% bare-model baseline to over 99% via evals against official mark
   schemes; selected as one of eight companies nationally for the DfE and
   DSIT AI Tutoring Tools Pioneers Programme, safe AI tutoring for
   disadvantaged pupils), Flash Pack (pre-seed to Series A), MealsForTheNHS
-  (co-founder, £1.8m raised, 303k meals delivered), Farewill (SRA/FCA
-  regulated).
+  (co-founder, £1.8m raised, 303k meals delivered), Farewill (led the probate
+  product inside SRA/FCA-regulated operations; agent errors down 69%, case
+  handling from two weeks to four days).
 - Podcast: "Building a Career Co-pilot for Disadvantaged Students: How
   Zero Gravity Bridges Knowing and Doing", on Just Now Possible with
   Teresa Torres.

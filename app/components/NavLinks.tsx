@@ -36,9 +36,9 @@ const MENUS: Menu[] = [
         href: "/built#production",
       },
       {
-        eyebrow: "02 · method",
-        title: "The through-line",
-        href: "/built#through-line",
+        eyebrow: "02 · independent",
+        title: "Independent work",
+        href: "/built#independent-work",
       },
       {
         eyebrow: "03 · systems",

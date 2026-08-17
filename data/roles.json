@@ -8,15 +8,15 @@
       "url": "https://www.zerogravity.co.uk/tutor",
       "role": "Head of Product — Founding Hire #4",
       "dates": "Feb 2022 – Jul 2026",
-      "outcome": "Led product across Zero Gravity's university, career and mentoring journey for four years, including a multi-year AI career co-pilot, a ~120,000-account legacy migration and major mentoring-platform refactors ahead of agentic tooling. Mentored low-opportunity students and professionals alongside the build. The work culminated in the AI STEM tutor: six engineers and a designer, first commit to App Store in 45 days, 28% of merged commits written by me, marking accuracy from ~67% to over 99%, and one of eight companies selected for the DfE and DSIT programme."
+      "outcome": "Led product for four years across partner-funded learning pathways, the platform's first end-to-end AI Career Co-pilot and the AI STEM tutor. Oversaw a ~120,000-account legacy migration and mentoring-platform refactors ahead of agentic tooling. The tutor team shipped from first commit to the App Store in 45 days; I wrote 28% of merged code, and evals took marking accuracy from ~67% to over 99%."
     },
     {
       "org": "Farewill",
       "logo": "career/farewill.jpeg",
-      "url": "",
+      "url": "https://farewill.com/apply-for-probate",
       "role": "Product & Operations Lead",
       "dates": "Jan 2021 – Jan 2022",
-      "outcome": "Shipped internal tooling and API integrations (HMCTS, HMRC, banking) in an SRA/FCA-regulated environment that cut agent errors 69% and case-handling from two weeks to four days, plus a vulnerable-user framework adopted company-wide."
+      "outcome": "Led product and operations for Farewill's probate service, working between customers, legal specialists and the case team. Shipped workflow automation, case tracking and integrations with HMCTS, HMRC and banking that cut agent errors 69% and case handling from two weeks to four days, plus a vulnerable-user framework adopted company-wide."
     },
     {
       "org": "MealsForTheNHS",
