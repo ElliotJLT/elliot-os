@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     apple: [{ url: `${basePath}/icon-180.png`, sizes: "180x180" }],
   },
   description:
-    "Hands-on AI product leader with eight years in startups. Four times a founding hire; most recently selected for the UK government's eight-company AI tutor programme.",
+    "Hands-on AI product leader who finds the problem, builds close to the code and leads teams through production. Four times a founding hire.",
 };
 
 // Runs before paint so the stored theme never flashes.

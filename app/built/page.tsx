@@ -10,11 +10,13 @@ import StackExplorer from "../components/StackExplorer";
 
 export const metadata = { title: "Built · Elliot Little" };
 
+const basePath = process.env.BASE_PATH || "";
+
 const BLURBS: Record<string, { title: string; blurb: string }> = {
   "boulot-os": {
     title: "boulot",
     blurb:
-      "Open-source career-ops system that runs on your own laptop through Claude Code. Tailors your CV per role, then three adversarial agents (hiring manager, reviewer, strategist) fight over the draft. Built for my own search in a brutal market; it worked, so I open-sourced it.",
+      "A free, local career system that keeps your experience, applications and outcomes on your own machine. It learns which claims earn a reply and carries that evidence into the next application.",
   },
   "Claude-Skill-Potions": {
     title: "claude-skill-potions",
@@ -70,10 +72,9 @@ export default async function Built() {
               </h1>
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              I have usually been the person carrying all three. Some of the
-              work is software. Some is the operating guide, eval or named
-              owner that stops the next release becoming a small
-              organisational crisis.
+              I start by finding the wider problem beneath the request. Then I
+              stay close to the code and the team until the product works for
+              its users and the business can support it.
             </p>
           </header>
         </Reveal>
@@ -93,6 +94,21 @@ export default async function Built() {
               A private tutor at the shoulder of students whose families could
               never pay for one.
             </p>
+            <div className="flagship-context">
+              <p>
+                I spent four years building at Zero Gravity before the tutor
+                shipped. I led product across the journey from university
+                applications into careers, then turned to the grades that open
+                those doors.
+              </p>
+              <p>
+                I led a multi-year AI career co-pilot and oversaw a migration
+                of roughly 120,000 user accounts out of a legacy community
+                platform. I also oversaw major refactors of the mentoring
+                product ahead of agentic tooling, while mentoring
+                low-opportunity students and professionals alongside the build.
+              </p>
+            </div>
             {/* Set as a case study rather than a description. A list of
                 features says what exists; the beats below say what was
                 decided and what it cost, which is the thing a reader is
@@ -109,7 +125,7 @@ export default async function Built() {
               </div>
 
               <div className="case-beat">
-                <dt>the call</dt>
+                <dt>the product call</dt>
                 <dd>
                   Socratic from the prompt up, and hold it under pressure:
                   students get inventive about extracting the answer, so
@@ -121,14 +137,13 @@ export default async function Built() {
               </div>
 
               <div className="case-beat">
-                <dt>where the work actually went</dt>
+                <dt>what production required</dt>
                 <dd>
-                  Not the model. Correctness evaluation: marking tested against
-                  real past papers and official mark schemes, an always-on
-                  evaluator grading every coaching session against the Socratic
-                  spec, and safety telemetry on every interaction. Shipping
-                  daily while the safeguards only got tighter was the
-                  discipline problem, and it was harder than the AI.
+                  A working prompt was the start. Production meant testing
+                  marking against real past papers and official mark schemes,
+                  grading each coaching session against the Socratic spec and
+                  recording safety signals on every interaction. We shipped
+                  daily while tightening those safeguards.
                 </dd>
               </div>
 
@@ -167,18 +182,16 @@ export default async function Built() {
         <Reveal>
           <div className="through-line rv-settle">
             <p className="muted" style={{ marginTop: 0 }}>
-              LLMs make output abundant. I care about products that make
-              judgement and craft more visible, not less. The tutor, ward,
-              boulot, crux and this site came from the same habit: turn an
-              uncertain decision into something people can run and inspect.
-              That might be software, an eval or simply a name beside the
-              outcome. At Zero Gravity the team adopted the operating guide
-              and I still wrote 28% of the merged commits. I like the join
-              between those two jobs.
+              AI makes software cheap to produce. I use that speed to test an
+              idea, then do the slower work that earns a place in production. I
+              decide where the model can improvise and where the product needs
+              certainty, then name an owner for each failure.
             </p>
             <p className="muted">
-              The question I keep asking is ordinary enough: what got checked,
-              what got rejected, and who decided? It matters before a student
+              The tutor, ward, boulot, crux and this site all make judgement
+              visible: what got checked, what got rejected and who decided. At
+              Zero Gravity the team adopted the operating guide and I wrote 28%
+              of the merged commits. The same question matters before a student
               sees a mark, before an application goes out and before an agent
               changes this page.{" "}
               <a href="https://elliotjlt.github.io/crux/research.html">
@@ -212,10 +225,10 @@ export default async function Built() {
                 <span className="rmeta">adversarial review</span>
               </div>
               <p className="rout">
-                Three agents with opposing briefs, a hiring manager, a
-                reviewer and a strategist, argue over a CV before it is
-                allowed out. I ran my own search through it, then
-                open-sourced it. My partner and my sister use it too.
+                A local career system that keeps the whole search on your
+                machine and learns which claims earn a reply. Three agents with
+                opposing briefs stress-test each CV. I built it for my own
+                search, still use it and made it free and open source.
               </p>
             </div>
             <div className="record-card">
@@ -259,6 +272,83 @@ export default async function Built() {
         <Reveal>
           <div className="rv-settle">
             <CareerCards roles={record.roles} />
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <h2 id="mentoring" className="mai-kick rv-settle">
+            mentoring
+          </h2>
+        </Reveal>
+        <Reveal>
+          <p className="muted rv-settle" style={{ marginTop: 0 }}>
+            I have mentored alongside the products for four years, with
+            students and early-career professionals at Zero Gravity and product
+            peers through Lenny&apos;s community.
+          </p>
+        </Reveal>
+        <Reveal>
+          <div className="mentoring-grid rv-settle">
+            <article className="mentor-card">
+              <div className="mentor-card-head">
+                <span className="mentor-logo-shell">
+                  {/* The adjacent heading names the programme. */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className="mentor-logo"
+                    src={`${basePath}/mentoring/lennys-mentorship.svg`}
+                    alt=""
+                    width={52}
+                    height={52}
+                  />
+                </span>
+                <div>
+                  <h3>
+                    <a href="https://www.lennysmentors.com/">
+                      Lenny&apos;s Newsletter
+                    </a>
+                  </h3>
+                  <span className="mentor-meta">
+                    mentor &amp; mentee · 2024–present
+                  </span>
+                </div>
+              </div>
+              <p>
+                I take part on both sides of the product community&apos;s
+                mentorship programme: helping another operator work through a
+                difficult product or career decision, then taking my own hard
+                calls to someone else.
+              </p>
+            </article>
+
+            <article className="mentor-card">
+              <div className="mentor-card-head">
+                <span className="mentor-logo-shell">
+                  {/* The adjacent heading names the organisation. */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    className="mentor-logo"
+                    src={`${basePath}/career/zero-gravity.jpeg`}
+                    alt=""
+                    width={52}
+                    height={52}
+                  />
+                </span>
+                <div>
+                  <h3>
+                    <a href="https://www.zerogravity.co.uk/">Zero Gravity</a>
+                  </h3>
+                  <span className="mentor-meta">mentor · 2022–present</span>
+                </div>
+              </div>
+              <p>
+                Alongside leading product, I coached students and early-career
+                professionals from low-opportunity backgrounds through
+                university and career decisions. I used those conversations to
+                keep the product close to the choices they faced between
+                sessions.
+              </p>
+            </article>
           </div>
         </Reveal>
 
