@@ -499,22 +499,59 @@ li {
   border-color: var(--line);
 }
 
-/* Two paragraphs used to run single-column at a 66ch cap, leaving the
-   entire right half of a 1120px page empty. On a wide screen they run
-   side by side instead — the same fix as the research-card passage. */
-.through-line {
-  margin-bottom: 8px;
+/* A chapter break between work shipped with teams and independent tools.
+   The rules carry structure; the section does not need another card. */
+.work-bridge {
+  margin: 48px 0 0;
+  padding: 32px 0 36px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.work-bridge .mai-kick {
+  margin: 0 0 22px;
+}
+
+.work-bridge-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.work-bridge-title {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: var(--display);
+  font-size: clamp(29px, 3.3vw, 40px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.work-bridge-title::before,
+.work-bridge-title::after {
+  content: none;
+}
+
+.work-bridge-copy {
+  max-width: none;
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.65;
+  text-wrap: pretty;
 }
 
 @media (min-width: 900px) {
-  .through-line {
+  .work-bridge-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 48px;
-  }
-
-  .through-line p {
-    max-width: none;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: 64px;
+    align-items: start;
   }
 
   /* The MAI pages now use a wide canvas. Keep a readable line for a lone
@@ -550,64 +587,6 @@ li {
     border-radius: 14px;
     background: var(--bg-2);
   }
-}
-
-/* ------------------------------------------------------- the through-line */
-/* Was a running list split by hairlines, the same treatment as everything
-   else on the old page. Each repo is its own card now, matching the career
-   snapshot without repeating its content. */
-.record-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-  margin: 16px 0 40px;
-}
-
-@media (min-width: 700px) {
-  .record-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.record-card {
-  padding: 24px 26px;
-  background: var(--bg-2);
-  border-radius: 16px;
-}
-
-.rhead {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.rorg {
-  font-family: var(--serif);
-  font-size: 20px;
-  font-weight: 500;
-}
-
-.rorg a {
-  text-decoration: none;
-}
-
-.rmeta {
-  font-family: var(--mono);
-  font-size: 11.5px;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--faint);
-  white-space: nowrap;
-}
-
-.rout {
-  margin: 5px 0 0;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.55;
-  max-width: 62ch;
 }
 
 /* ------------------------------------------------ contribution history */
@@ -1120,72 +1099,6 @@ footer a {
     grid-row: auto;
     padding-top: 0;
   }
-}
-
-/* --------------------------------------------- flagship gets more weight */
-/* A card, not a bottom-border section: this is the one thing on the site
-   that is in production and has been for years, so it gets the same
-   background-card weight as everything else on the page rather than a
-   plain rule underneath it. */
-.flagship {
-  margin: 0 0 40px;
-  padding: 36px 40px 40px;
-  background: var(--bg-2);
-  border-radius: 20px;
-}
-
-.flagship h3 {
-  font-family: var(--display);
-  font-size: clamp(26px, 3.4vw, 34px);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  line-height: 1.12;
-  margin: 0 0 14px;
-}
-
-/* Read what it is for before what it is made of. */
-.fclaim {
-  font-family: var(--serif);
-  font-size: clamp(19px, 2.2vw, 22px);
-  line-height: 1.5;
-  color: var(--ink-2);
-  max-width: 46ch;
-  margin: 0 0 22px;
-}
-
-.flagship p {
-  max-width: 66ch;
-  color: var(--muted);
-}
-
-.flagship-context {
-  margin: 0 0 8px;
-}
-
-.flagship-context p {
-  font-size: 15px;
-  line-height: 1.6;
-  text-wrap: pretty;
-}
-
-@media (min-width: 800px) {
-  .flagship-context {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 48px;
-  }
-
-  .flagship-context p {
-    max-width: none;
-  }
-}
-
-/* Now wraps Pill components rather than plain underlined links. */
-.flinks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 12px;
-  margin-top: 8px;
 }
 
 @keyframes trace {
@@ -1723,53 +1636,252 @@ h2::before {
   }
 }
 
-/* ================================================================= case */
-/* A project as a case study: what the problem was, what got decided, where
-   the work actually went, what happened. Labels hang in the margin on a wide
-   screen and sit above their beat on a narrow one, so the four questions can
-   be read down the left edge without reading the prose. */
-/* The label used to sit in a fixed 11rem right-aligned column beside its
-   answer once the viewport crossed 880px — cramped and prone to wrapping
-   badly at exactly the widths where it kicked in. A small chip above the
-   answer, always stacked, gives the answer the full card width at any
-   size instead of fighting a rigid column for it. */
-.case {
-  margin: 26px 0 0;
-  max-width: none;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
+/* ======================================================== product portfolio */
+/* The page reads as a product record, not four landing pages. Each row keeps
+   its own compact control so comparing one problem with its bet never
+   changes the other three products. */
+.mai > .rv > p.product-work-intro {
+  max-width: 1000px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.65;
 }
 
-.case-beat {
+.product-portfolio {
+  margin: 20px 0 36px;
+}
+
+.product-case-toggle {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 9px 0 0;
+}
+
+.product-case-toggle button {
+  position: relative;
+  min-height: 40px;
+  padding: 0;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--faint);
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition-property: color, scale;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.product-case-toggle button + button::before {
+  content: "/";
+  position: absolute;
+  top: 50%;
+  left: -11px;
+  translate: 0 -53%;
+  color: var(--line-2);
+  pointer-events: none;
+}
+
+.product-case-toggle button:hover {
+  color: var(--ink);
+}
+
+.product-case-toggle button[data-selected="true"] {
+  color: var(--accent-ink);
+}
+
+.product-case-toggle button:active {
+  scale: 0.96;
+}
+
+.portfolio-company + .portfolio-company {
+  margin-top: 36px;
+}
+
+.portfolio-company-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.portfolio-logo-shell {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  outline: 1px solid oklch(0 0 0 / 0.1);
+  outline-offset: -1px;
+}
+
+:root[data-theme="dark"] .portfolio-logo-shell {
+  outline-color: oklch(1 0 0 / 0.1);
+}
+
+.portfolio-logo-shell img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.portfolio-company-head h3 {
+  margin: 0 0 1px;
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.portfolio-company-head span:not(.portfolio-logo-shell) {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: var(--faint);
+}
+
+.product-case-list {
+  border-top: 1px solid var(--line);
+}
+
+.product-case-row {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.36fr) minmax(0, 1fr);
+  gap: 38px;
+  padding: 24px 0 26px;
+  border-bottom: 1px solid var(--line);
+}
+
+.product-case-id,
+.product-case-copy {
   min-width: 0;
 }
 
-.case dt {
-  display: inline-block;
+.product-case-copy {
+  padding-top: 22px;
+}
+
+.product-case-no {
+  display: block;
+  margin-bottom: 8px;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 10px;
+  line-height: 1.4;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
-  background: var(--paper);
-  border-radius: 8px;
-  padding: 5px 10px;
-  margin-bottom: 8px;
 }
 
-.case dd {
+.product-case-id h4 {
+  margin: 0 0 8px;
+  font-family: var(--display);
+  font-size: clamp(23px, 2.6vw, 29px);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.product-case-id .product-ownership {
+  max-width: none;
   margin: 0;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.55;
+}
+
+.product-case-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 12px;
+  margin-top: 10px;
+}
+
+.product-case-links a {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--accent-ink);
+}
+
+.product-case-copy .product-case-statement {
+  max-width: none;
+  margin: 0 0 12px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(21px, 2.5vw, 27px);
+  line-height: 1.32;
+  text-wrap: balance;
+}
+
+.product-case-panel > p:not(.product-case-statement):not(.product-proof):not(.product-lesson) {
+  max-width: none;
+  margin: 0 0 10px;
   color: var(--muted);
-  font-size: 16px;
+  font-size: 15px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.product-case-copy .product-proof {
+  max-width: max-content;
+  margin: 16px 0 0;
+  padding-left: 12px;
+  border-left: 2px solid var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+}
+
+.product-case-copy .product-lesson {
+  max-width: none;
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--bg-2);
+  color: var(--muted);
+  font-size: 13.5px;
   line-height: 1.6;
 }
 
-@media (min-width: 800px) {
-  .case {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px 48px;
+.product-lesson span {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--accent-ink);
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 720px) {
+  .product-case-row {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding-block: 22px 24px;
+  }
+
+  .product-case-id .product-ownership {
+    max-width: none;
+  }
+
+  .product-case-copy {
+    padding-top: 0;
+  }
+
+  .product-case-toggle button {
+    min-height: 44px;
   }
 }
 
@@ -2889,6 +3001,17 @@ h2.mai-kick {
 h2.mai-kick::before,
 h2.mai-kick::after {
   content: none;
+}
+
+/* /built has several kinds of evidence. A tighter local rhythm keeps them in
+   one narrative without changing section spacing on the rest of the site. */
+.built-page h2.mai-kick {
+  margin-top: 44px;
+}
+
+.built-page .research-card {
+  margin-bottom: 0;
+  padding: 28px 32px;
 }
 
 /* ==================================================================== band */
