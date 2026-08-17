@@ -3,6 +3,7 @@ import { join } from "path";
 
 export type Role = {
   org: string;
+  logo?: string;
   url?: string;
   role?: string;
   dates?: string;

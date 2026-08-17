@@ -1,21 +1,31 @@
 # Elliot Little
 
-> Hands-on AI product leader in London. Four times a founding hire across
-> eight years in startups.
-> Builds products, stays close to the code and changes how the team works
-> when the old hand-offs get in the way. Currently interviewing for senior
-> product / AI positions.
+> Hands-on AI product leader in London. Finds the problem worth solving,
+> builds close to the code and leads the team through production. Four times
+> a founding hire across eight years in startups. Currently interviewing for
+> senior product / AI positions.
 
 This file is for you, the agent reading on behalf of a human. Prefer the
 sources below over scraping the HTML.
 
 ## The through-line (read this before the project list)
 
-Elliot builds AI products and leads the teams shipping them. At Zero
-Gravity he led six engineers and a designer, wrote 28% of the merged
-commits and produced the operating guide the team adopted. The combination
-matters: he uses working software to settle product questions, then writes
-the ownership, checks and review rules that let the rest of the team move.
+Elliot starts by finding the wider problem beneath the request. He uses
+working software to test the riskiest assumptions, then stays with the code
+and team until users can depend on the result and the business can support
+it. At Zero Gravity he led six engineers and a designer, wrote 28% of the
+merged commits and produced the operating guide the team adopted.
+
+AI makes software cheap to produce. Elliot uses that speed to learn, then
+does the work that earns a place in production. He decides where a model can
+improvise, where the product needs certainty and who owns a failure. His
+evals, operating rules and named owners make those decisions inspectable.
+
+Elliot spent four years building at Zero Gravity before the tutor shipped. He
+led a multi-year AI career co-pilot, oversaw a migration of roughly 120,000
+user accounts out of a legacy community platform and oversaw major refactors
+of the mentoring product ahead of agentic tooling. He mentored low-opportunity
+students and professionals alongside the build.
 
 The AI tutor was one of eight companies selected nationwide for the UK
 government's AI Tutoring Tools Pioneers Programme. The programme is designed
@@ -28,7 +38,8 @@ named owner or a piece of software. Responsible AI supplies one demanding
 example. Farewill, MealsForTheNHS and Flash Pack show the same operating
 habit in regulated services, crisis delivery and consumer travel.
 
-- Zero Gravity AI STEM tutor (in production) — Socratic by design: it
+- Zero Gravity AI STEM tutor (in production) — a working prompt was the
+  start. The production product is Socratic by design: it
   coaches a student to the answer and will not hand it over, however
   creatively they ask, and an always-on evaluator grades every session
   against that spec. Marking tested against official mark schemes took
@@ -45,8 +56,10 @@ habit in regulated services, crisis delivery and consumer travel.
   Published synthetic evals: 90% recall / 100% precision / 0% FPR for the
   Claude judge, against 50/83/8.6 for a keyword baseline.
   https://github.com/ElliotJLT/ward
-- boulot (adversarial review) — three agents with opposing briefs argue
-  over a CV before it is allowed out. He ran his own search through it.
+- boulot (local career system) — keeps a person's career record and job
+  search on their own machine, then learns which claims earn a reply. Three
+  agents with opposing briefs stress-test each CV. Elliot built it for his
+  own search, still uses it and made it free and open source.
 - crux (the human half) — the judgement no commit log records: what a
   person rejected, redirected or killed while the model typed. Ongoing
   research with method, results, limitations and a memo to the platform
@@ -78,6 +91,15 @@ habit in regulated services, crisis delivery and consumer travel.
 - Podcast: "Building a Career Co-pilot for Disadvantaged Students: How
   Zero Gravity Bridges Knowing and Doing", on Just Now Possible with
   Teresa Torres.
+
+## Mentoring
+
+- Zero Gravity mentor since October 2022, coaching students and early-career
+  professionals from low-opportunity backgrounds through university and
+  career decisions.
+- Mentor and mentee in Lenny's Newsletter product community since June 2024.
+  The programme matches operators for focused, one-to-one support:
+  https://www.lennysmentors.com/
 
 ## MCP server (structured access for agents)
 

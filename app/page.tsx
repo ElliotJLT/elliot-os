@@ -107,7 +107,9 @@ export default async function Home() {
         <HeroBricks />
         <Reveal immediate>
           <div className="band-in">
-            <span className="band-kick rv-settle">Hi, I&apos;m Elliot</span>
+            <span className="band-kick rv-settle">
+              Hands-on AI product leader
+            </span>
             <h1 className="band-h">
               <Words text="I build AI products and lead the teams shipping them." />
             </h1>
@@ -153,7 +155,7 @@ export default async function Home() {
     <div className="mai">
       <Values
         items={[
-          { name: "Own", said: "My first startup job began at employee ten. Another began as a WhatsApp group during lockdown. I have spent eight years taking responsibility before there was much structure to hide behind." },
+          { name: "Own", said: "I am drawn to dauntingly large missions: make death less bureaucratic for families, feed NHS staff through a pandemic, give a student the tutor their family cannot buy. I find the practical problem inside that scale, then turn it into something a team can ship." },
           { name: "Build", said: "At MealsForTheNHS, day one was a WhatsApp group and day ten was a marketplace serving 146 hospitals. At Zero Gravity I wrote 28% of the merged commits while leading product." },
           { name: "Check", said: "At Farewill, agent errors fell 69% and case handling moved from two weeks to four days. At Zero Gravity, tutor marking moved from a 67% baseline to over 99% against real past papers and official mark schemes." },
           { name: "Remember", said: "At Zero Gravity the team adopted the operating guide I wrote. Now Crux records the calls a commit misses, and Argus carries my corrections into the next answer." },
@@ -184,6 +186,17 @@ export default async function Home() {
           <ol className="career-timeline">
             {roles.map((r) => (
               <li key={r.org}>
+                {r.logo && (
+                  // The adjacent heading already names the company.
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    className="career-timeline-logo"
+                    src={`${basePath}/${r.logo}`}
+                    alt=""
+                    width={44}
+                    height={44}
+                  />
+                )}
                 <h3>{r.url ? <a href={r.url}>{r.org}</a> : r.org}</h3>
                 {(r.role || r.dates) && (
                   <span className="career-meta">

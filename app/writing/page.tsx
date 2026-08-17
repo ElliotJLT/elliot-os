@@ -26,8 +26,9 @@ export default async function Writing() {
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
               I write about product leadership while doing the building:
-              tutors, evals, agent loops and the team decisions around them.
-              Newest first, from Medium.
+              choosing a problem worth solving and using AI to carry it into
+              production without surrendering judgement. Newest first, from
+              Medium.
             </p>
           </header>
         </Reveal>
