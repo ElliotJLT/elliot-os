@@ -137,10 +137,10 @@ const COMPANIES: Company[] = [
             "The tutor coaches towards the answer and refuses to hand it over.",
           paragraphs: [
             "Coaching, practice, marking and assignments run as separate agents, each with its own pedagogy and evaluator. We test marking against past papers and official mark schemes, and record safety signals on each interaction.",
-            "It is live across four STEM subjects and every major UK exam board, direct to students and through a school hub for teachers. The DfE and DSIT selected Zero Gravity as one of eight companies for the AI Tutoring Tools Pioneers Programme.",
+            "We launched across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB, direct to students and through a school hub for teachers. Eleven weeks later, we won one of eight £300,000 UK government R&D contracts to test safe AI tutoring in schools, alongside Pearson and ElevenLabs.",
           ],
           proof:
-            "~67% → 99%+ marking accuracy · first commit to the App Store in 45 days",
+            "~67% → 99%+ on internal marking evals · App Store in 45 days",
         },
         links: [
           {

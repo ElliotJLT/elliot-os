@@ -2,6 +2,7 @@ import { getPosts, noteFor, isDemoted, getMedia } from "@/lib/writing";
 import { getQuotes } from "@/lib/quotes";
 import Reveal from "../components/Reveal";
 import HoverLabel from "../components/HoverLabel";
+import ReaderQuotes from "../components/ReaderQuotes";
 
 export const metadata = { title: "Writing · Elliot Little" };
 
@@ -35,14 +36,9 @@ export default async function Writing() {
 
         {readers?.length > 0 && (
           <Reveal>
-            <ul className="said-grid rv-settle">
-              {readers.map((r) => (
-                <li key={r.who}>
-                  <p>{r.quote}</p>
-                  <span>{r.who}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="rv-settle">
+              <ReaderQuotes readers={readers} basePath={basePath} />
+            </div>
           </Reveal>
         )}
 

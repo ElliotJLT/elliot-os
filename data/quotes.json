@@ -13,20 +13,25 @@
   },
   "readers": [
     {
-      "quote": "Such a sharp, clear-eyed analysis of the challenges we're all grappling with.",
-      "who": "Subscriber"
+      "quote": "Perfect if you're currently navigating the messy, magical reality of AI implementation",
+      "who": "AI Summit London",
+      "logo": "quotes/ai-summit-london.png"
     },
     {
       "quote": "This is a sensational write-up",
-      "who": "Australian Institute for Machine Learning"
+      "who": "Australian Institute for Machine Learning",
+      "logo": "quotes/adelaide-university.svg"
     },
     {
-      "quote": "Perfect if you're currently navigating the messy, magical reality of AI implementation",
-      "who": "AI Summit London"
+      "quote": "Such a sharp, clear-eyed analysis of the challenges we're all grappling with.",
+      "who": "Medium subscriber",
+      "logo": "quotes/medium.svg"
     },
     {
       "quote": "One of the few AI articles that I felt was worth reading in recent times.",
-      "who": "Uplevyl"
+      "who": "Uplevyl",
+      "logo": "quotes/uplevyl.png",
+      "logoTone": "dark"
     }
   ]
 }

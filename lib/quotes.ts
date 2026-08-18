@@ -10,7 +10,12 @@ export type Reference = {
   body: string[];
 };
 
-export type Reader = { quote: string; who: string };
+export type Reader = {
+  quote: string;
+  who: string;
+  logo: string;
+  logoTone?: "light" | "dark";
+};
 
 export function getQuotes(): { reference: Reference; readers: Reader[] } {
   return JSON.parse(

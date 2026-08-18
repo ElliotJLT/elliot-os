@@ -1640,15 +1640,9 @@ h2::before {
 /* The page reads as a product record, not four landing pages. Each row keeps
    its own compact control so comparing one problem with its bet never
    changes the other three products. */
-.mai > .rv > p.product-work-intro {
-  max-width: 1000px;
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.65;
-}
 
 .product-portfolio {
-  margin: 20px 0 36px;
+  margin: 4px 0 36px;
 }
 
 .product-case-toggle {
@@ -2686,9 +2680,27 @@ h2[id] {
   font-size: 13px;
   text-decoration: none;
   border: 1px solid transparent;
-  transition-property: background-color, color, border-color;
-  transition-duration: 0.18s;
+  transition-property: background-color, color, border-color, scale;
+  transition-duration: 150ms;
   transition-timing-function: ease-out;
+}
+
+.pill-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.pill-icon-only {
+  width: 49px;
+  height: 49px;
+  justify-content: center;
+  padding: 0;
+}
+
+.pill-icon-only .pill-icon {
+  width: 18px;
+  height: 18px;
 }
 
 .pill-soft {
@@ -2711,7 +2723,7 @@ h2[id] {
 }
 
 .pill:active {
-  scale: 0.97;
+  scale: 0.96;
 }
 
 .pill-arrow {
@@ -3138,39 +3150,47 @@ main:has(> .band) {
   line-height: 1.1;
   letter-spacing: -0.02em;
   color: #faf3e8;
-  margin: 0 auto 34px;
+  margin: 0 auto 28px;
   max-width: 26ch;
   text-wrap: balance;
 }
 
 .band-profile {
-  display: flow-root;
-  width: min(920px, 100%);
+  display: grid;
+  grid-template-columns: 156px minmax(0, 1fr);
+  grid-template-areas:
+    "face copy"
+    "face actions";
+  column-gap: 28px;
+  row-gap: 10px;
+  align-items: center;
+  width: min(860px, 100%);
   margin: 0 auto;
   text-align: left;
 }
 
 .band-face {
-  float: left;
-  width: 176px;
-  height: 176px;
+  grid-area: face;
+  width: 156px;
+  height: 156px;
   border-radius: 50%;
   object-fit: cover;
-  shape-outside: circle(50%);
   /* A ring rather than an outline: against a saturated band the photo needs
      separating from the colour, and white does it without a shadow. */
   border: 3px solid #faf3e8;
-  margin: 1px 34px 14px 0;
+  margin: 0;
   display: block;
 }
 
 .band-sub {
+  grid-area: copy;
+  align-self: end;
   font-family: var(--serif);
-  font-size: clamp(18px, 1.55vw, 20px);
-  line-height: 1.55;
+  font-size: clamp(18px, 1.45vw, 19px);
+  line-height: 1.5;
   color: #fff6ed;
   max-width: none;
-  margin: 0 0 14px;
+  margin: 0;
   text-wrap: pretty;
 }
 
@@ -3184,8 +3204,9 @@ main:has(> .band) {
 }
 
 .band-profile .band-cta {
-  clear: both;
-  justify-content: center;
+  grid-area: actions;
+  align-self: start;
+  justify-content: flex-start;
 }
 
 @media (max-width: 680px) {
@@ -3194,23 +3215,24 @@ main:has(> .band) {
   }
 
   .band-profile {
+    display: flex;
+    flex-direction: column;
     text-align: center;
   }
 
   .band-face {
-    float: none;
-    shape-outside: none;
     width: 136px;
     height: 136px;
     margin: 0 auto 20px;
   }
 
   .band-sub {
+    margin-bottom: 10px;
     margin-inline: auto;
   }
 
   .band-profile .band-cta {
-    clear: none;
+    align-self: stretch;
     justify-content: center;
   }
 }
@@ -3696,42 +3718,220 @@ main:has(> .band) {
   text-underline-offset: 3px;
 }
 
-/* -------------------------------------------------- reader quotes, v5 */
-.said-grid {
-  list-style: none;
-  display: grid;
-  gap: 18px;
-  grid-template-columns: 1fr;
+/* ------------------------------------------- reader quote carousel */
+/* One source at a time: the mark and the words share a quiet editorial row.
+   The whole row remains a native scroll-snap surface for trackpads and touch. */
+.reader-carousel {
   margin: 0 0 46px;
-  padding: 0;
+  padding: 14px 0 12px;
+  border-block: 1px solid var(--line);
 }
 
-@media (min-width: 760px) {
-  .said-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
+.reader-slide-window {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
 }
 
-.said-grid li {
-  background: var(--bg-2);
-  border-radius: 14px;
-  padding: 20px 20px 18px;
+.reader-slide-window::-webkit-scrollbar {
+  display: none;
 }
 
-.said-grid p {
-  margin: 0 0 12px;
+.reader-slide-track {
+  display: flex;
+}
+
+.reader-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.72fr) minmax(0, 1.55fr);
+  align-items: center;
+  gap: clamp(34px, 6vw, 66px);
+  margin: 0;
+  padding: 22px 4px 20px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.reader-slide-logo {
+  width: 100%;
+  max-width: 224px;
+  height: 92px;
+  display: grid;
+  place-items: center;
+  justify-self: start;
+  padding: 17px 22px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow:
+    0 1px 1px oklch(0 0 0 / 0.05),
+    0 10px 28px oklch(0 0 0 / 0.055);
+}
+
+.reader-slide-logo[data-tone="dark"] {
+  background: #526a72;
+}
+
+.reader-slide-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+}
+
+.reader-slide-copy {
+  min-width: 0;
+  max-width: 610px;
+}
+
+.reader-slide blockquote {
+  max-width: 40ch;
+  margin: 0 0 13px;
+  color: var(--ink);
   font-family: var(--serif);
-  font-size: 16px;
-  line-height: 1.45;
+  font-size: clamp(21px, 2.4vw, 27px);
+  line-height: 1.38;
+  text-wrap: balance;
+}
+
+.reader-slide figcaption {
+  margin: 0;
+  color: var(--accent-ink);
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.reader-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+}
+
+.reader-carousel-arrow {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--faint);
+  font: 500 15px/1 var(--sans);
+  cursor: pointer;
+  transition-property: color, scale;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.reader-carousel-arrow:hover {
   color: var(--ink);
 }
 
-.said-grid span {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--faint);
+.reader-carousel-arrow:active,
+.reader-carousel-tab:active {
+  scale: 0.96;
+}
+
+.reader-carousel-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reader-carousel-tab {
+  position: relative;
+  width: 27px;
+  height: 40px;
+  padding: 0;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: scale 150ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.reader-carousel-tab::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--line-2);
+  transition-property: background-color, height;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.reader-carousel-tab:hover::before {
+  background: var(--muted);
+}
+
+.reader-carousel-tab[data-active="true"]::before {
+  height: 2px;
+  background: var(--accent);
+}
+
+@media (max-width: 759px) {
+  .reader-carousel {
+    margin-bottom: 38px;
+    padding-top: 10px;
+  }
+
+  .reader-slide {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 18px 2px 16px;
+  }
+
+  .reader-slide-logo {
+    max-width: 204px;
+    height: 78px;
+    justify-self: center;
+    padding: 14px 18px;
+  }
+
+  .reader-slide-copy {
+    max-width: 100%;
+  }
+
+  .reader-slide blockquote {
+    max-width: 30ch;
+    margin-inline: auto;
+    font-size: 21px;
+    text-align: center;
+  }
+
+  .reader-slide figcaption {
+    text-align: center;
+  }
+
+  .reader-carousel-arrow {
+    width: 44px;
+    height: 44px;
+  }
+
+  .reader-carousel-tab {
+    height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reader-carousel-arrow,
+  .reader-carousel-tab,
+  .reader-carousel-tab::before {
+    transition-duration: 0.01ms;
+  }
 }
 
 /* ---------------------------------------------------------- podcast */

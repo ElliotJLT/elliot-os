@@ -13,8 +13,8 @@ sources below over scraping the HTML.
 Elliot starts by finding the wider problem beneath the request. He uses
 working software to test the riskiest assumptions, then stays with the code
 and team until users can depend on the result and the business can support
-it. At Zero Gravity he led six engineers and a designer, wrote 28% of the
-merged commits and produced the operating guide the team adopted.
+it. At Zero Gravity he led three engineers and a designer, wrote 28% of the
+tutor's merged code and produced the operating guide the team adopted.
 
 AI makes software cheap to produce. Elliot uses that speed to learn, then
 does the work that earns a place in production. He decides where a model can
@@ -27,7 +27,7 @@ platform's first end-to-end AI product: Career Co-pilot. It used a student's
 CV and platform profile to build the CV with them, retrieve relevant mentors,
 learning and community advice, and answer career questions against Zero
 Gravity's knowledge. The later AI tutor added hands-on product engineering to
-that role. Elliot wrote 28% of its merged code while leading six engineers and
+that role. Elliot wrote 28% of its merged code while leading three engineers and
 a designer.
 
 He also oversaw a migration of roughly 120,000 user accounts out of a legacy
@@ -35,10 +35,10 @@ community platform and major mentoring-product refactors ahead of agentic
 tooling. He mentored low-opportunity students and professionals alongside the
 build.
 
-The AI tutor was one of eight companies selected nationwide for the UK
-government's AI Tutoring Tools Pioneers Programme. The programme is designed
-to test tools with teachers and could support up to 450,000 disadvantaged
-pupils a year.
+Eleven weeks after the AI tutor reached the App Store, the UK government
+awarded Zero Gravity one of eight £300,000 R&D contracts to test safe AI
+tutoring tools in schools. The programme could support up to 450,000
+disadvantaged pupils a year.
 
 His recent work asks one ordinary question in several places: what got
 checked, what got rejected, and who decided? The answer might be an eval, a
@@ -63,13 +63,12 @@ habit in regulated services, crisis delivery and consumer travel.
   start. The production product is Socratic by design: it
   coaches a student to the answer and will not hand it over, however
   creatively they ask, and an always-on evaluator grades every session
-  against that spec. Marking tested against official mark schemes took
-  accuracy from a ~67% bare-model baseline to over 99%. Four STEM
-  subjects, every major UK exam board, first commit to App Store in 45
-  days, and it was selected as one of eight companies nationally for the
-  DfE and DSIT AI Tutoring Tools Pioneers Programme (safe AI tutoring for
-  disadvantaged pupils, which requires meeting the government's
-  Generative AI Product Safety Standards).
+  against that spec. Internal marking evals against official mark schemes
+  moved accuracy from a ~67% bare-model baseline to over 99%. It launched
+  across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB,
+  reaching the App Store 45 days after the first commit. The UK government
+  later awarded Zero Gravity one of eight £300,000 R&D contracts to test safe
+  AI tutoring tools for disadvantaged pupils.
 - ward (safeguarding, under-18s) — decides which messages from a child
   are genuine safeguarding disclosures and routes them to a named human on
   a clock, grounded in KCSIE rather than keyword matching. Built around
@@ -101,13 +100,12 @@ habit in regulated services, crisis delivery and consumer travel.
   Spanish fluent, Chinese intermediate. BlueDot Impact AI Governance &
   Alignment graduate.
 - Track record: Zero Gravity (led partner learning pathways, Career Co-pilot
-  and a production multi-agent AI STEM tutor for A-Level students, live on
-  every major UK exam board;
-  first commit to App Store in 45 days; marking accuracy raised from a
-  ~67% bare-model baseline to over 99% via evals against official mark
-  schemes; selected as one of eight companies nationally for the DfE and
-  DSIT AI Tutoring Tools Pioneers Programme, safe AI tutoring for
-  disadvantaged pupils), Flash Pack (pre-seed to Series A), MealsForTheNHS
+  and a production multi-agent AI STEM tutor for GCSE, A-Level and IB
+  students; first commit to App Store in 45 days; internal marking evals
+  moved accuracy from a ~67% bare-model baseline to over 99% against official
+  mark schemes; the UK government awarded Zero Gravity one of eight £300,000
+  R&D contracts to test safe AI tutoring tools for disadvantaged pupils),
+  Flash Pack (pre-seed to Series A), MealsForTheNHS
   (co-founder, £1.8m raised, 303k meals delivered), Farewill (led the probate
   product inside SRA/FCA-regulated operations; agent errors down 69%, case
   handling from two weeks to four days).
