@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-08-17, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 0 commits across 0 repos.*
+*Shipping log for the 7 days to 2026-08-18, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 8 commits across 1 repos.*
 
-- Quiet week on public GitHub. The private repos tell a different story.
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 8 commits. "Merge pull request #24 from ElliotJLT/ElliotJLT/enlarge-nav-add-dropdowns" (ccc2f89), "Reframe Built page around product work" (e62d6d5), "Merge pull request #23 from ElliotJLT/ElliotJLT/enlarge-nav-add-dropdowns" (4900109) and 5 more
 <!-- agent:end -->
 
 ## by hand
