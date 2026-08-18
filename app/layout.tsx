@@ -98,11 +98,19 @@ export default function RootLayout({
                 One closing block. */}
             <div className="foot-cta">
               <div className="band-cta">
-                <Pill href="mailto:elliotjlittle@gmail.com" tone="solid" arrow>
-                  Get in touch
+                <Pill
+                  href="mailto:elliotjlittle@gmail.com"
+                  tone="solid"
+                  icon="mail"
+                >
+                  Email me
                 </Pill>
-                <Pill href="/built" tone="soft">
-                  See the work
+                <Pill
+                  href="https://cal.com/elliotjl/30min"
+                  tone="soft"
+                  icon="coffee"
+                >
+                  Book a coffee
                 </Pill>
               </div>
             </div>

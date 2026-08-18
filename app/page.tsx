@@ -73,22 +73,33 @@ export default async function Home() {
               />
               <p className="band-sub rv-settle">
                 Four times a founding hire across eight years in startups.
-                Most recently I led six engineers and a designer to build an
-                AI tutor from first commit to the App Store in 45 days. Zero
-                Gravity was one of eight companies selected nationwide for
-                the{" "}
-                <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
-                  UK&nbsp;government&apos;s AI Tutoring Tools Pioneers Programme
+                Most recently I led three engineers and a designer to build an
+                AI tutor from scratch, wrote 28% of the code and took it from
+                first commit to one of eight{" "}
+                <a href="https://www.find-tender.service.gov.uk/Notice/062117-2026">
+                  UK government-backed AI tutoring partnerships
                 </a>
-                , which could support up to 450,000 disadvantaged pupils a
-                year.
+                {" "}nationwide.
               </p>
               <div className="band-cta rv-settle">
                 <Pill href="/built" tone="cream" arrow>
-                  Read the work
+                  See what I&apos;ve built
                 </Pill>
-                <Pill href="mailto:elliotjlittle@gmail.com" tone="ghost">
-                  Get in touch
+                <Pill
+                  href="mailto:elliotjlittle@gmail.com"
+                  tone="ghost"
+                  icon="mail"
+                  iconOnly
+                >
+                  Email me
+                </Pill>
+                <Pill
+                  href="https://cal.com/elliotjl/30min"
+                  tone="ghost"
+                  icon="coffee"
+                  iconOnly
+                >
+                  Book a coffee
                 </Pill>
               </div>
             </div>
@@ -105,8 +116,8 @@ export default async function Home() {
       <Values
         items={[
           { name: "Own", said: "I am drawn to dauntingly large missions: make death less bureaucratic for families, feed NHS staff through a pandemic, give a student the tutor their family cannot buy. I find the practical problem inside that scale, then turn it into something a team can ship." },
-          { name: "Build", said: "At MealsForTheNHS, day one was a WhatsApp group and day ten was a marketplace serving 146 hospitals. At Zero Gravity I wrote 28% of the merged commits while leading product." },
-          { name: "Check", said: "At Farewill, agent errors fell 69% and case handling moved from two weeks to four days. At Zero Gravity, tutor marking moved from a 67% baseline to over 99% against real past papers and official mark schemes." },
+          { name: "Build", said: "At MealsForTheNHS, day one was a WhatsApp group and day ten was a marketplace serving 146 hospitals. At Zero Gravity I wrote 28% of the tutor's merged code while leading product." },
+          { name: "Check", said: "At Farewill, agent errors fell 69% and case handling moved from two weeks to four days. At Zero Gravity, our internal tutor evals moved marking accuracy from a 67% baseline to over 99% against real past papers and official mark schemes." },
           { name: "Remember", said: "At Zero Gravity the team adopted the operating guide I wrote. Now Crux records the calls a commit misses, and Argus carries my corrections into the next answer." },
         ]}
       />

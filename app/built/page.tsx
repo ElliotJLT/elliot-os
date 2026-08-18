@@ -80,14 +80,6 @@ export default async function Built() {
           </h2>
         </Reveal>
         <Reveal>
-          <p className="product-work-intro muted rv-settle">
-            At Farewill I worked between customers, legal specialists and
-            operations. At Zero Gravity I moved from product and design into
-            hands-on product engineering. The products below show the problems
-            I owned, what the team shipped and where my role changed.
-          </p>
-        </Reveal>
-        <Reveal>
           <div className="rv-settle">
             <ProductPortfolio basePath={basePath} />
           </div>
