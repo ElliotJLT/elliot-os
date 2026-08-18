@@ -2177,35 +2177,43 @@ h2::before {
    around it, closer to how a testimonial actually gets shown elsewhere. */
 .vouch {
   margin: 16px 0 0;
-  padding: 40px 40px 36px;
+  padding: 28px 32px 26px;
   background: var(--bg-2);
   border-radius: 20px;
   max-width: 640px;
 }
 
 .vouch-mark {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   display: grid;
   place-items: center;
   background: var(--paper);
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 11px;
   color: var(--accent-ink);
-  margin-bottom: 22px;
+  margin-bottom: 16px;
 }
 
 .vouch-mark svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 .vouch blockquote {
-  margin: 0 0 22px;
+  margin: 0 0 18px;
   font-family: var(--serif);
-  font-size: clamp(18px, 2.1vw, 22px);
-  line-height: 1.45;
+  font-size: clamp(16.5px, 1.6vw, 18px);
+  line-height: 1.44;
   color: var(--ink);
+}
+
+.vouch blockquote p {
+  margin: 0 0 9px;
+}
+
+.vouch blockquote p:last-child {
+  margin-bottom: 0;
 }
 
 .vouch figcaption {

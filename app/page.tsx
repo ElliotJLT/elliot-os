@@ -158,7 +158,12 @@ export default async function Home() {
                   <path d="M8 8c-2.2 0-4 1.8-4 4v6h6v-6H7c0-1.1.9-2 2-2V8H8zm10 0c-2.2 0-4 1.8-4 4v6h6v-6h-3c0-1.1.9-2 2-2V8h-1z" />
                 </svg>
               </div>
-              <blockquote>{ref.pull}</blockquote>
+              <blockquote>
+                {ref.body.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+                <p>{ref.pull}</p>
+              </blockquote>
               <figcaption>
                 <span className="vname">{ref.name}</span>
                 <span className="vrole">{ref.role}</span>
