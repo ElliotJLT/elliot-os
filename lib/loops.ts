@@ -9,8 +9,11 @@ export type EvalRecord = {
   by: string;
 };
 
+export type Check = { name: string; pass: boolean };
+
 export type Proposal = {
   date: string;
+  /** "proposed" once it clears the gate, "held" when the gate rejected it. */
   status: string;
   source: string;
   title: string;
@@ -19,6 +22,9 @@ export type Proposal = {
   change?: string;
   pr_url?: string;
   shipped?: string;
+  /** Which version of the logic and the prompt produced this. */
+  impl_version?: string;
+  prompt_version?: string;
   eval?: EvalRecord;
 };
 
@@ -34,6 +40,19 @@ export type Loop = {
   runs: number;
   spend_usd: number;
   note: string;
+  /** Authority map, kept here rather than in the page so the two cannot drift. */
+  reads?: string;
+  may_change?: string;
+  human_boundary?: string;
+  /**
+   * Whether a stranger can check this row. "public" means the source and the
+   * eval suite are open; "private" means it is testimony. The distinction is
+   * the point of the list: a wall of unverifiable claims about private agents
+   * is weaker than one loop somebody can audit.
+   */
+  evidence?: "public" | "private";
+  /** Runs against the golden set and publishes a full trace. */
+  audited?: boolean;
   proposals: Proposal[];
 };
 

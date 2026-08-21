@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-08-18, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 8 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-08-18, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 6 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 8 commits. "Merge pull request #24 from ElliotJLT/ElliotJLT/enlarge-nav-add-dropdowns" (ccc2f89), "Reframe Built page around product work" (e62d6d5), "Merge pull request #23 from ElliotJLT/ElliotJLT/enlarge-nav-add-dropdowns" (4900109) and 5 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 6 commits. "Reframe homepage workshop photo" (dbc8b12), "Show full reference without breaking career layout" (e92e2fd), "Polish homepage and writing proof" (7da0be4) and 3 more
 <!-- agent:end -->
 
 ## by hand

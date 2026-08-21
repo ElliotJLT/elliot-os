@@ -4,8 +4,14 @@ on:
   schedule:
     # Daily. A weekly cadence left the shipping log up to six days behind a
     # heavy day of shipping, which is the opposite of the point. The run is
-    # deterministic unless ANTHROPIC_API_KEY is set, so daily costs nothing,
-    # and it exits without committing when there is nothing new to say.
+    # deterministic unless ANTHROPIC_API_KEY is set, so daily costs nothing.
+    #
+    # It exits without committing when there is nothing new to say. That was
+    # claimed here for a month before it was true: the log's header carries the
+    # run date, so the file changed every day regardless, and the loop committed
+    # 26 days running — twice publishing "0 commits across 0 repos" under a
+    # commit message announcing a refresh. agent-now.mjs now compares the
+    # substance below the header and exits early when it matches.
     - cron: "0 6 * * *" # 06:00 UTC daily
   workflow_dispatch:
 
