@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-28",
+  "updated": "2026-08-29",
   "loops": [
     {
       "id": "now-refresh",
@@ -9,8 +9,8 @@
       "gate": "deterministic extraction · optional grounded summary",
       "status": "healthy",
       "stop_rule": "publishes the latest seven-day window; never invents activity",
-      "last_run": "2026-08-28",
-      "runs": 35,
+      "last_run": "2026-08-29",
+      "runs": 36,
       "spend_usd": 0,
       "note": "Collects public GitHub activity and publishes a seven-day factual digest. It can add a grounded model summary when an API key is present; all twelve recorded runs used deterministic output at $0.",
       "proposals": []
