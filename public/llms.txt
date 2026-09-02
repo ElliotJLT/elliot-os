@@ -157,6 +157,15 @@ habit in regulated services, crisis delivery and consumer travel.
 - Note: /now and /next were folded into /loops on 2026-07-25 and now
   redirect there. The markdown sources above are unchanged.
 
+## Evals
+
+The checking work collected in one place: the tutor's marking evals
+against official mark schemes (~67% → 99%+, hallucinated marks 4.6% → 0),
+ward's precision-first safeguarding evals, the pre-LLM version of the same
+discipline at Farewill, and crux evaluating the human in the loop. Each
+entry states its limitations alongside its numbers:
+https://elliotjlt.github.io/elliot-os/evals/
+
 ## Writing
 
 Essays on product leadership while doing the building: AI products, team

@@ -12,7 +12,7 @@ stopping rule per loop, the shipping log the inner loop last wrote, and
 the open commitments. Agents get a structured route in via `llms.txt` and
 an MCP server.
 
-Four routes: `/built`, `/writing`, `/loops`, `/changelog`. `/now` and
+Five routes: `/built`, `/writing`, `/evals`, `/loops`, `/changelog`. `/now` and
 `/next` were folded into `/loops` on 2026-07-25 and redirect there; their
 markdown sources are unchanged, since the agent scripts and the MCP
 server read the files rather than the pages.
