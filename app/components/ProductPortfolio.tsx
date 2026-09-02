@@ -137,7 +137,7 @@ const COMPANIES: Company[] = [
             "The tutor coaches towards the answer and refuses to hand it over.",
           paragraphs: [
             "Coaching, practice, marking and assignments run as separate agents, each with its own pedagogy and evaluator. We test marking against past papers and official mark schemes, and record safety signals on each interaction.",
-            "We launched across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB, direct to students and through a school hub for teachers. Eleven weeks later, we won one of eight £300,000 UK government R&D contracts to test safe AI tutoring in schools, alongside Pearson and ElevenLabs.",
+            "We launched across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB, direct to students and through a school hub for teachers. Eleven weeks later, the government selected us for its AI Tutoring Tools Pioneers Programme: eight companies chosen nationally to test safe AI tutoring in schools. We placed 2nd, scoring ahead of frontier US labs and the largest UK curriculum incumbents.",
           ],
           proof:
             "~67% → 99%+ on internal marking evals · App Store in 45 days",

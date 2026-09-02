@@ -26,12 +26,12 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SITE = "https://elliotjlt.github.io/elliot-os";
 const GH_USER = "ElliotJLT";
 const FEATURED = [
+  "ward",
   "boulot-os",
   "Claude-Skill-Potions",
   "vox",
   "dabble",
   "homebuyer-mcp",
-  "claude-eval-toolkit",
   "crux",
   "hooksmith",
 ];
