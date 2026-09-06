@@ -16,7 +16,8 @@ npx tsc --noEmit       # typecheck
 
 - `content/now.md` has two authors. The block between `agent:begin` and
   `agent:end` belongs to `scripts/agent-now.mjs`; never hand-edit it. The
-  hand-written half below it renders on the home page.
+  hand-written half below it is served by the MCP server's `get_now` and
+  is not rendered on any page right now.
 - `data/spend.json` and `data/loops.json` are written by the agents in CI.
   Edit `loops.json` prose by hand if needed, but leave `runs`, `last_run`
   and `spend_usd` to the scripts.

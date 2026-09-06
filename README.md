@@ -38,7 +38,8 @@ path. Local dev serves from `/`.
 
 - `content/now.md` — two authors: the agent's shipping log between the
   `agent:begin/end` markers (rendered under its loop on `/loops`), and the
-  hand-written half below it (rendered on the home page)
+  hand-written half below it (served raw by the MCP server's `get_now`;
+  no page renders it at the moment)
 - `data/spend.json` — the agent's inference ledger. Only runs that
   actually called a model are recorded, so its count is model calls; the
   footer's run counter comes from `data/loops.json` instead
