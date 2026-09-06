@@ -74,12 +74,12 @@ export default async function Home() {
               <p className="band-sub rv-settle">
                 Four times a founding hire across eight years in startups.
                 Most recently I led three engineers and a designer to build an
-                AI tutor from scratch, wrote 28% of the code and took it from
-                first commit to one of eight{" "}
-                <a href="https://www.find-tender.service.gov.uk/Notice/062117-2026">
-                  UK government-backed AI tutoring partnerships
+                AI tutor from scratch, wrote 28% of the code and took it to
+                2nd place nationally in the{" "}
+                <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
+                  UK government&apos;s AI Tutoring Tools Pioneers Programme
                 </a>
-                {" "}nationwide.
+                .
               </p>
               <div className="band-cta rv-settle">
                 <Pill href="/built" tone="cream" arrow>

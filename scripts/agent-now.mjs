@@ -107,9 +107,6 @@ function renderLog({ byRepo, commitCount }, today) {
       `- **[${repo}](https://github.com/${GITHUB_USER}/${repo})**: ${n} commit${n === 1 ? "" : "s"}. ${detail}${extra}`,
     );
   }
-  if (sorted.length === 0) {
-    lines.push("- Quiet week on public GitHub. The private repos tell a different story.");
-  }
   return lines.join("\n");
 }
 
@@ -180,6 +177,22 @@ function recordLoopRun(id, today, run) {
 const today = new Date().toISOString().slice(0, 10);
 const events = await fetchEvents();
 const d = await digest(events);
+
+// An empty week used to overwrite the log with "0 commits across 0 repos"
+// and an excuse — the freshest line on a site whose whole claim is "I ship".
+// A dated log of the last real week is honest; a fresh-stamped zero is
+// anti-evidence. So on quiet weeks the previous log stands, and only the
+// loop telemetry records that the agent ran.
+const hasActivity = [...d.byRepo.values()].some(
+  (info) => info.commits.length > 0 || info.created || info.release,
+);
+if (!hasActivity) {
+  const run = recordSpend(null, today);
+  recordLoopRun("now-refresh", today, run);
+  console.log("No public activity this window; previous shipping log kept. $0.");
+  process.exit(0);
+}
+
 const log = renderLog(d, today);
 const { text: summary, usage } = await summarise(log);
 
