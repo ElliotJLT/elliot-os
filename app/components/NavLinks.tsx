@@ -105,6 +105,7 @@ const MENUS: Menu[] = [
 ];
 
 const LINKS = [
+  ["/evals", "evals"],
   ["/loops", "loops"],
   ["/changelog", "changelog"],
 ] as const;

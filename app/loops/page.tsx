@@ -1,57 +1,10 @@
-import { getLoops } from "@/lib/loops";
+import { getLoops, type Loop, type Proposal } from "@/lib/loops";
+import { getEvals, getCases } from "@/lib/evals";
+import { getPricing } from "@/lib/pricing";
 import { getAgentLog } from "@/lib/content";
 import Reveal from "../components/Reveal";
 
 export const metadata = { title: "Loops · Elliot Little" };
-
-const AUTHORITY = [
-  {
-    system: "Shipping digest",
-    reads: "Public GitHub events and commit metadata",
-    changes: "/now, spend ledger and its own run record",
-    evaluation: "Deterministic extraction; optional grounded summary",
-    human: "Publishes without per-run approval; I own and can disable the workflow",
-    health: "healthy",
-    tone: "healthy",
-  },
-  {
-    system: "Positioning review",
-    reads: "Public GitHub, Medium and selected site source",
-    changes: "A recommendation record and a PR containing that record",
-    evaluation: "Three weak presence checks; optional model judge; no retry",
-    human: "I implement, edit or reject the recommendation; the agent cannot alter the site",
-    health: "dormant",
-    tone: "dormant",
-  },
-];
-
-const ANATOMY = [
-  {
-    name: "collect",
-    owner: "code",
-    copy: "Read public repositories, the latest Medium posts and selected site files.",
-  },
-  {
-    name: "propose",
-    owner: "code / model",
-    copy: "Choose one gap. With no API key this is deterministic; with one, a model can frame it.",
-  },
-  {
-    name: "check",
-    owner: "weak gate",
-    copy: "Test for a named source, non-cosmetic title and a rationale over forty characters.",
-  },
-  {
-    name: "decide",
-    owner: "me",
-    copy: "I decide whether the recommendation deserves implementation, editing or rejection.",
-  },
-  {
-    name: "record",
-    owner: "manual today",
-    copy: "Write the human outcome to the ledger. PR closure is not yet synchronised automatically.",
-  },
-];
 
 function formatDate(value: string | null) {
   if (!value) return "never";
@@ -63,19 +16,27 @@ function formatDate(value: string | null) {
   }).format(new Date(`${value}T00:00:00Z`));
 }
 
-function daysSince(value: string | null) {
-  if (!value) return null;
-  const elapsed = Date.now() - new Date(`${value}T00:00:00Z`).getTime();
-  return Math.max(0, Math.floor(elapsed / 86_400_000));
-}
-
 export default function Loops() {
   const data = getLoops();
+  const evals = getEvals();
+  const cases = getCases();
+  const pricing = getPricing();
   const agentLog = getAgentLog();
-  const shipping = data.loops.find((system) => system.id === "now-refresh");
-  const review = data.loops.find((system) => system.id === "self-improve");
-  const lastDecision = data.decisions[0]?.date ?? null;
-  const decisionAge = daysSince(lastDecision);
+
+  const review = data.loops.find((l) => l.id === "self-improve");
+  const runs = evals.runs;
+  const latestEval = runs[0];
+  const firstEval = runs[runs.length - 1];
+  const improved = latestEval && firstEval && latestEval.passed > firstEval.passed;
+
+  // The most recent thing the review actually did, gate result and all.
+  const trace: Proposal | undefined = review?.proposals?.[0];
+
+  const allProposals = data.loops.flatMap((l) => l.proposals ?? []);
+  const heldCount = allProposals.filter((p) => p.status === "held").length;
+  const byOutcome = (o: string) => data.decisions.filter((d) => d.outcome === o).length;
+
+  const caseFor = (id: string) => cases.find((c) => c.id === id);
 
   return (
     <main>
@@ -85,21 +46,23 @@ export default function Loops() {
             <div>
               <span className="mai-kick rv-settle">Loops</span>
               <h1 className="wr-title rv-settle">
-                Where agents act and where they stop.
+                The loops I actually run.
               </h1>
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              Two narrow systems sit behind this site. One publishes facts
-              from GitHub. The other recommends changes but cannot touch the
-              site. Their sources, checks, failures and human boundaries are
-              visible below.
+              Agents that run on a schedule and change something real. Most of
+              mine are private, so you have only my word for them. Two are not:
+              they maintain this page, their source and their eval suite are
+              open, and everything below the list is me showing my working on
+              those.
             </p>
           </header>
         </Reveal>
 
+        {/* ------------------------------------------------------- the fleet */}
         <Reveal>
-          <h2 id="authority" className="mai-kick rv-settle">
-            authority map
+          <h2 id="fleet" className="mai-kick rv-settle">
+            the fleet
           </h2>
         </Reveal>
         <Reveal>
@@ -107,32 +70,218 @@ export default function Loops() {
             <table className="authority-table">
               <thead>
                 <tr>
-                  <th>system</th>
+                  <th>loop</th>
                   <th>reads</th>
                   <th>may change</th>
-                  <th>evaluation</th>
                   <th>human boundary</th>
-                  <th>health</th>
+                  <th>last run</th>
+                  <th>can you check it</th>
                 </tr>
               </thead>
               <tbody>
-                {AUTHORITY.map((row) => (
-                  <tr key={row.system}>
-                    <th scope="row" data-label="system">{row.system}</th>
-                    <td data-label="reads">{row.reads}</td>
-                    <td data-label="may change">{row.changes}</td>
-                    <td data-label="evaluation">{row.evaluation}</td>
-                    <td data-label="human boundary">{row.human}</td>
-                    <td data-label="health">
-                      <span className={`system-health ${row.tone}`}>{row.health}</span>
+                {data.loops.map((loop: Loop) => (
+                  <tr key={loop.id}>
+                    <th scope="row" data-label="loop">
+                      {loop.name}
+                      <span className="authority-cadence">{loop.cadence}</span>
+                    </th>
+                    <td data-label="reads">{loop.reads}</td>
+                    <td data-label="may change">{loop.may_change}</td>
+                    <td data-label="human boundary">{loop.human_boundary}</td>
+                    <td data-label="last run">
+                      {formatDate(loop.last_run)}
+                      <span className="authority-cadence">
+                        <span className={`system-health ${loop.status}`}>
+                          {loop.status}
+                        </span>
+                      </span>
+                    </td>
+                    <td data-label="can you check it">
+                      {loop.evidence === "public" ? (
+                        <span className="evidence-yes">
+                          source + evals
+                          {loop.audited && <em>audited below</em>}
+                        </span>
+                      ) : (
+                        <span className="evidence-no">my word</span>
+                      )}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            <p className="authority-foot">
+              The last column is the one that matters. A list of private agents
+              is a list of claims, and claims are cheap — so the two you can
+              open are the ones the rest of this page is about. Stopping rules,
+              in each loop&rsquo;s own words:{" "}
+              {data.loops.map((loop, i) => (
+                <span key={loop.id}>
+                  {i > 0 && " "}
+                  <em>{loop.name}</em> — {loop.stop_rule}.
+                </span>
+              ))}
+            </p>
           </div>
         </Reveal>
 
+        {/* ------------------------------------------------------ eval suite */}
+        <Reveal>
+          <h2 id="evals" className="mai-kick rv-settle">
+            the two you can audit
+          </h2>
+        </Reveal>
+        <Reveal>
+          <div className="eval-panel rv-settle">
+            <div className="eval-head">
+              <div className="eval-rate">
+                <strong>
+                  {latestEval.passed}<span>/{latestEval.total}</span>
+                </strong>
+                <span className="eval-rate-label">
+                  review v{latestEval.impl_version} · prompt v
+                  {latestEval.prompt_version}
+                  {latestEval.digest_version &&
+                    ` · digest v${latestEval.digest_version}`}
+                </span>
+              </div>
+              <p>
+                {cases.length} held-out cases covering both systems, run against
+                the same functions they call in production rather than a copy of
+                them. No model runs in the suite, so it is deterministic, free,
+                and able to gate every commit.
+              </p>
+            </div>
+
+            <ol className="eval-history">
+              {runs.map((run) => (
+                <li key={`${run.impl_version}-${run.prompt_version}-${run.date}`}>
+                  <div className="eval-run-head">
+                    <span className="eval-version">
+                      review v{run.impl_version} · prompt v{run.prompt_version}
+                      {run.digest_version && ` · digest v${run.digest_version}`}
+                    </span>
+                    <span className="eval-score">
+                      {run.passed}/{run.total}
+                    </span>
+                  </div>
+                  <div
+                    className="eval-bar"
+                    role="img"
+                    aria-label={`${run.passed} of ${run.total} cases passing`}
+                  >
+                    <span style={{ width: `${(run.passed / run.total) * 100}%` }} />
+                  </div>
+                  {run.failing.length > 0 && (
+                    <ul className="eval-failing">
+                      {run.failing.map((id) => (
+                        <li key={id}>
+                          <code>{id}</code>
+                          {caseFor(id) && <span>{caseFor(id)!.why}</span>}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ol>
+
+            {improved && (
+              <p className="eval-note">
+                <span>What the three runs are</span> The cases were written
+                against the behaviour these systems should have, then run
+                against the behaviour they had, so the first number is what was
+                actually deployed rather than a starting point chosen to
+                flatter. The review&rsquo;s gate averaged three checks against a
+                0.6 threshold, making its worst possible score 0.67 — it could
+                not reject anything, and a proposal citing a repository that
+                does not exist passed as grounded. The digest built every commit
+                URL as <code>/repos/ElliotJLT/&#123;name&#125;</code>, so work on
+                anyone else&rsquo;s project 404ed and vanished, and it ignored
+                pull requests entirely. Both now hold, and the suite fails the
+                build if either slips back.
+              </p>
+            )}
+            <p className="eval-caveat">
+              <span>What this does not prove</span> I wrote the cases, so the
+              suite tests my idea of correct. {cases.length} cases is a small
+              set, and a green run means no known regression rather than a
+              correct agent. Its value is the next change, not this number: the
+              pass rate is recorded per version, so an edit that makes the
+              output feel better while scoring worse is visible instead of
+              arguable.
+            </p>
+          </div>
+        </Reveal>
+
+        {/* ------------------------------------------------------- run trace */}
+        {trace && (
+          <>
+            <Reveal>
+              <h2 id="trace" className="mai-kick rv-settle">
+                last run, end to end
+              </h2>
+            </Reveal>
+            <Reveal>
+              <div className="run-trace rv-settle">
+                <div className="trace-meta">
+                  <time dateTime={trace.date}>{formatDate(trace.date)}</time>
+                  <span className={`decision-outcome ${trace.status === "held" ? "rejected" : "accepted"}`}>
+                    {trace.status === "held" ? "held by the gate" : "cleared the gate"}
+                  </span>
+                  {trace.impl_version && (
+                    <span className="trace-version">
+                      impl v{trace.impl_version} · prompt v{trace.prompt_version}
+                    </span>
+                  )}
+                </div>
+
+                <ol className="trace-steps">
+                  <li>
+                    <span className="trace-step">read</span>
+                    <p>
+                      Public repositories, the Medium feed, and the site&rsquo;s
+                      own source for what it already surfaces.
+                    </p>
+                  </li>
+                  <li>
+                    <span className="trace-step">propose</span>
+                    <p>
+                      <strong>{trace.title}</strong>
+                    </p>
+                    <p className="trace-rationale">{trace.rationale}</p>
+                  </li>
+                  <li>
+                    <span className="trace-step">gate</span>
+                    <ul className="trace-checks">
+                      {trace.eval?.checks.map((check) => (
+                        <li key={check.name} data-pass={check.pass}>
+                          <span>{check.pass ? "pass" : "fail"}</span>
+                          {check.name}
+                        </li>
+                      ))}
+                    </ul>
+                    {trace.eval?.critique && (
+                      <p className="trace-rationale">{trace.eval.critique}</p>
+                    )}
+                    <p className="trace-by">
+                      judged by {trace.eval?.by}. Every check is required.
+                    </p>
+                  </li>
+                  <li>
+                    <span className="trace-step">decide</span>
+                    <p>
+                      Mine. The agent opens a pull request containing the
+                      recommendation, not the change.
+                    </p>
+                  </li>
+                </ol>
+              </div>
+            </Reveal>
+          </>
+        )}
+
+        {/* ------------------------------------------------- decision record */}
         <Reveal>
           <h2 id="decisions" className="mai-kick rv-settle">
             decision record
@@ -141,10 +290,14 @@ export default function Loops() {
         <Reveal>
           <div className="decision-record rv-settle">
             <div className="decision-denominator">
-              <span>{data.decisions.length} recorded decision</span>
-              <span>0 rejected</span>
-              <span>0 edited</span>
-              <span>0 no-op reviews</span>
+              <span>
+                {allProposals.length} proposal
+                {allProposals.length === 1 ? "" : "s"}
+              </span>
+              <span>{heldCount} held by the gate</span>
+              <span>{byOutcome("accepted")} accepted</span>
+              <span>{byOutcome("edited")} edited</span>
+              <span>{byOutcome("rejected")} rejected</span>
             </div>
             <ol className="decision-list">
               {data.decisions.map((decision) => (
@@ -164,34 +317,15 @@ export default function Loops() {
               ))}
             </ol>
             <p className="evidence-gap">
-              <span>What this does not prove yet</span> One accepted suggestion
-              is not evidence of a mature system. Signal counts, edited and
-              rejected recommendations, disagreement reasons, time saved and
-              cost per accepted outcome are not recorded yet.
+              <span>What this does not prove yet</span> The review has run twice
+              and the outcome column is thin. Until there are rejections in it,
+              the acceptance rate is a number with no denominator worth quoting.
+              Time saved and cost per accepted outcome are not recorded at all.
             </p>
           </div>
         </Reveal>
 
-        <Reveal>
-          <h2 id="anatomy" className="mai-kick rv-settle">
-            anatomy of the positioning review
-          </h2>
-        </Reveal>
-        <Reveal>
-          <div className="anatomy-viewport rv-settle" tabIndex={0}>
-            <ol className="agent-anatomy" aria-label="Positioning review stages">
-              {ANATOMY.map((stage, index) => (
-                <li key={stage.name}>
-                  <span className="anatomy-no">{String(index + 1).padStart(2, "0")}</span>
-                  <h3>{stage.name}</h3>
-                  <span className="anatomy-owner">[{stage.owner}]</span>
-                  <p>{stage.copy}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </Reveal>
-
+        {/* ------------------------------------------------------ failure log */}
         <Reveal>
           <h2 id="failures" className="mai-kick rv-settle">
             failure log
@@ -203,55 +337,21 @@ export default function Loops() {
               <li key={`${failure.date}-${failure.title}`}>
                 <div className="failure-meta">
                   <time dateTime={failure.date}>{formatDate(failure.date)}</time>
-                  <span className={`failure-status ${failure.status}`}>{failure.status}</span>
+                  <span className={`failure-status ${failure.status}`}>
+                    {failure.status}
+                  </span>
                 </div>
                 <div>
                   <h3>{failure.title}</h3>
                   <p>{failure.effect}</p>
-                  <p className="failure-change"><span>change</span> {failure.change}</p>
+                  <p className="failure-change">
+                    <span>change</span> {failure.change}
+                  </p>
                   {failure.evidence_url && <a href={failure.evidence_url}>evidence ↗</a>}
                 </div>
               </li>
             ))}
           </ol>
-        </Reveal>
-
-        <Reveal>
-          <h2 id="history" className="mai-kick rv-settle">
-            compact history
-          </h2>
-        </Reveal>
-        <Reveal>
-          <div className="system-history rv-settle">
-            {shipping && (
-              <article>
-                <div className="system-history-head">
-                  <h3>{shipping.name}</h3>
-                  <span className="system-health healthy">healthy</span>
-                </div>
-                <dl>
-                  <div><dt>successful runs</dt><dd>{shipping.runs}</dd></div>
-                  <div><dt>last run</dt><dd>{formatDate(shipping.last_run)}</dd></div>
-                  <div><dt>model spend</dt><dd>${shipping.spend_usd.toFixed(4)}</dd></div>
-                </dl>
-                <p>{shipping.note}</p>
-              </article>
-            )}
-            {review && (
-              <article>
-                <div className="system-history-head">
-                  <h3>{review.name}</h3>
-                  <span className="system-health dormant">dormant</span>
-                </div>
-                <dl>
-                  <div><dt>manual runs</dt><dd>{review.runs}</dd></div>
-                  <div><dt>last decision</dt><dd>{formatDate(lastDecision)}</dd></div>
-                  <div><dt>days since outcome</dt><dd>{decisionAge ?? "—"}</dd></div>
-                </dl>
-                <p>{review.note}</p>
-              </article>
-            )}
-          </div>
         </Reveal>
 
         {agentLog && (
@@ -269,10 +369,27 @@ export default function Loops() {
         <Reveal>
           <nav className="machinery-links rv-settle" aria-label="Agent system source code">
             <span>the machinery</span>
-            <a href="https://github.com/ElliotJLT/elliot-os/blob/main/scripts/agent-now.mjs">shipping digest source ↗</a>
-            <a href="https://github.com/ElliotJLT/elliot-os/blob/main/scripts/agent-improve.mjs">positioning review source ↗</a>
+            <a href="https://github.com/ElliotJLT/elliot-os/tree/main/evals">
+              the golden set ↗
+            </a>
+            <a href="https://github.com/ElliotJLT/elliot-os/blob/main/scripts/lib/positioning.mjs">
+              review logic ↗
+            </a>
+            <a href="https://github.com/ElliotJLT/elliot-os/blob/main/scripts/lib/shipping.mjs">
+              digest logic ↗
+            </a>
             <a href="https://github.com/ElliotJLT/elliot-os/actions">workflow runs ↗</a>
           </nav>
+        </Reveal>
+
+        <Reveal>
+          <p className="pricing-note rv-settle">
+            Token counts in the ledger are measured. Any dollar figure derived
+            from them uses the rates in <code>data/pricing.json</code>, last
+            checked {formatDate(pricing.checked)} — model pricing changes
+            without notice, so treat an old date as a reason to re-verify rather
+            than a number to rely on.
+          </p>
         </Reveal>
       </div>
     </main>

@@ -1,36 +1,49 @@
-// The positioning review. It is deliberately described as a review rather
-// than a loop: there is no retry path, and its pull request records a
-// recommendation rather than implementing the proposed site change.
+// The positioning review.
 //
-// Given what Elliot
-// actually shipped and wrote, and what employers hiring hands-on AI product
-// leaders care about right now, what is the single most useful change to this
-// site? It never invents activity — it reads real sources and proposes ONE
-// improvement as a recommendation for a human to implement, edit or reject.
+// Given what Elliot actually shipped and wrote, and what employers hiring
+// hands-on AI product leaders care about, what is the single most useful change
+// to this site? It never invents activity — it reads real sources and proposes
+// ONE improvement as a recommendation for a human to implement, edit or reject.
 //
 // Sources (all public, $0):
 //   - GitHub repos + recent events   (what he built)
 //   - Medium feed                    (what he wrote)
 //   - the site's own current state   (what's already surfaced)
 //
+// It is a loop rather than a cron job because the outcome of the last cycle is
+// an input to the next one: recordProposal writes Elliot's decision back to
+// data/loops.json, and renderHistory feeds those decisions into the prompt, so
+// a line of reasoning he rejected is not offered again unchanged.
+//
+// Its decision logic lives in scripts/lib/positioning.mjs, which is also what
+// scripts/eval-agents.mjs runs the golden set against. One copy, so the
+// published pass rate is evidence about this agent rather than about a
+// reimplementation of it.
+//
 // Without ANTHROPIC_API_KEY it still runs: it does the deterministic scan and
-// proposes the top gap it finds (e.g. "new repo not featured", "new post not
-// linked"), at $0. With the key, Claude reasons over the same material for the
-// sharpest positioning change and records the real token cost. Either way the
-// output is a proposal record in data/loops.json and a brief the workflow
-// turns into a PR. It does not touch site content directly.
+// proposes the top gap it finds, at $0. With the key, Claude reasons over the
+// same material for the sharpest positioning change and records the real token
+// cost. Either way the output is a proposal record in data/loops.json and a
+// brief the workflow turns into a PR. It does not touch site content directly.
 
 import { readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  scan,
+  buildCandidate,
+  gate,
+  EVAL_THRESHOLD,
+  IMPL_VERSION,
+} from "./lib/positioning.mjs";
+import { POSITIONING, JUDGE, renderHistory } from "./lib/prompts.mjs";
+import { costOf } from "./lib/pricing.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const USER = "ElliotJLT";
 const MEDIUM = "https://medium.com/@elliotJL/feed";
 const LOOP_ID = "self-improve";
-
 const MODEL = "claude-haiku-4-5";
-const PRICE_PER_MTOK = { input: 1.0, output: 5.0 };
 
 const ghHeaders = () => {
   const h = { Accept: "application/vnd.github+json" };
@@ -64,14 +77,16 @@ async function getRepos() {
     );
     if (!res.ok) throw new Error(String(res.status));
     const repos = await res.json();
-    return repos
-      .filter((r) => !r.fork)
-      .map((r) => ({
-        name: r.name,
-        stars: r.stargazers_count,
-        pushed_at: r.pushed_at,
-        description: r.description,
-      }));
+    // fork/archived are passed through rather than filtered here: scan() owns
+    // that rule now, so the eval suite can hold it to account.
+    return repos.map((r) => ({
+      name: r.name,
+      stars: r.stargazers_count,
+      fork: r.fork,
+      archived: r.archived,
+      pushed_at: r.pushed_at,
+      description: r.description,
+    }));
   }, []);
 }
 
@@ -95,63 +110,42 @@ async function getPosts() {
 }
 
 // What the site already surfaces, read straight from source.
+//
+// lib/writing.ts and app/writing/ are in here because /writing renders the
+// Medium feed at build time. Leaving them out was a real defect: the scanner
+// could not see the page that surfaces every post, so its one working rule
+// would have proposed "link this post" for posts already on the site, forever.
 function siteState() {
   const built = safeSync(() => readFileSync(join(ROOT, "app/built/page.tsx"), "utf-8"), "");
   const featured = [...built.matchAll(/"([\w-]+)":\s*{/g)].map((m) => m[1]);
+  const writing = safeSync(() => readFileSync(join(ROOT, "lib/writing.ts"), "utf-8"), "");
+  // Posts with a curated note, as opposed to ones the live feed merely lists.
+  const annotated = [...writing.matchAll(/https:\/\/medium\.com\/[^\s"']+/g)].map((m) =>
+    m[0].split("?")[0],
+  );
   const corpus = [
     "app/built/page.tsx",
+    "app/writing/page.tsx",
+    "lib/writing.ts",
     "content/now.md",
     "public/llms.txt",
   ]
     .map((p) => safeSync(() => readFileSync(join(ROOT, p), "utf-8"), ""))
     .join("\n");
-  return { featured, corpus };
+  return { featured, annotated, corpus };
 }
 
-// ---- deterministic scan --------------------------------------------------
-
-const RECENT_DAYS = 30;
-
-function scan({ repos, posts, state }) {
-  const findings = [];
-  const cutoff = Date.now() - RECENT_DAYS * 86400000;
-
-  // Repos with real recent activity that aren't featured or even mentioned.
-  for (const r of repos) {
-    const active = new Date(r.pushed_at).getTime() > cutoff;
-    const mentioned = state.corpus.includes(r.name);
-    if (active && !state.featured.includes(r.name) && r.description) {
-      findings.push({
-        source: "github",
-        weight: (r.stars || 0) + (mentioned ? 0 : 3),
-        title: `Surface recent work: ${r.name}`,
-        detail:
-          `${r.name} was pushed in the last ${RECENT_DAYS} days` +
-          `${r.stars ? ` (★${r.stars})` : ""} but ${mentioned ? "isn't featured" : "isn't on the site"}. ` +
-          `"${r.description}" — worth a /built blurb if it's employer-relevant.`,
-      });
-    }
-  }
-
-  // Writing the site doesn't link yet.
-  for (const p of posts) {
-    if (p.link && !state.corpus.includes(p.link)) {
-      findings.push({
-        source: "medium",
-        weight: 4,
-        title: `Link new writing: ${p.title}`,
-        detail: `Post "${p.title}" (${p.date}) isn't linked anywhere on the site. ${p.link}`,
-      });
-    }
-  }
-
-  findings.sort((a, b) => b.weight - a.weight);
-  return findings;
+/** Past decisions, newest first — the loop's memory. */
+function pastDecisions() {
+  return safeSync(() => {
+    const data = JSON.parse(readFileSync(join(ROOT, "data", "loops.json"), "utf-8"));
+    return data.decisions || [];
+  }, []);
 }
 
 // ---- optional LLM positioning pass ---------------------------------------
 
-async function positioning(findings, state) {
+async function positioning(findings, state, history) {
   if (!process.env.ANTHROPIC_API_KEY) return { proposal: null, usage: null };
   const { default: Anthropic } = await import("@anthropic-ai/sdk");
   const client = new Anthropic();
@@ -160,22 +154,14 @@ async function positioning(findings, state) {
     (findings.length
       ? findings.slice(0, 6).map((f) => `- [${f.source}] ${f.title}: ${f.detail}`).join("\n")
       : "- none: no new repos or posts to surface this cycle.") +
+    `\n\nWhat happened to your previous proposals:\n${renderHistory(history)}` +
     `\n\nThe site's current positioning (llms.txt + pages), truncated:\n` +
     state.corpus.slice(0, 4000);
 
   const msg = await client.messages.create({
     model: MODEL,
     max_tokens: 500,
-    system:
-      "You are the outer-loop agent for Elliot Little's personal site. Elliot is a " +
-      "hands-on product leader interviewing for senior product / AI roles. Your job: propose " +
-      "the SINGLE most useful change for an employer hiring someone who can own an unclear " +
-      "problem, build close to the code, and improve how the team ships, grounded ONLY in " +
-      "the real material provided. " +
-      "Never invent activity or claims. Prefer surfacing real recent work and sharpening " +
-      "framing over cosmetic changes. If nothing is worth doing this cycle, say so plainly. " +
-      "British English, no marketing adjectives, no em-dashes. Reply as JSON: " +
-      '{"worth_doing": bool, "title": string, "rationale": string, "files": string[], "change": string}.',
+    system: POSITIONING.system,
     messages: [{ role: "user", content: context }],
   });
   const text = msg.content.find((b) => b.type === "text")?.text?.trim() || "";
@@ -190,31 +176,12 @@ async function positioning(findings, state) {
 
 // ---- eval gate -----------------------------------------------------------
 //
-// A proposal is not trusted just because a model wrote it. Before it ships,
-// it clears a rubric: grounded in a real source, a single change, not merely
-// cosmetic, and employer-relevant. Deterministic checks always run; with a
-// key an LLM judge scores it too. Below threshold, the loop holds — a
-// deliberate non-proposal is a valid, and often correct, outcome.
-
-const EVAL_THRESHOLD = 0.6;
-
-function deterministicEval(candidate, { repos, posts }) {
-  const hay = `${candidate.title} ${candidate.rationale} ${candidate.change || ""}`;
-  const grounded =
-    posts.some((p) => p.link && hay.includes(p.link)) ||
-    repos.some((r) => hay.includes(r.name));
-  const cosmetic = /\b(colour|color|font|spacing|margin|padding|css|pixel)\b/i.test(
-    candidate.title,
-  );
-  const substantive = (candidate.rationale || "").length > 40;
-  const checks = [
-    { name: "grounded in a real source", pass: grounded },
-    { name: "not cosmetic-only", pass: !cosmetic },
-    { name: "has a substantive rationale", pass: substantive },
-  ];
-  const score = checks.filter((c) => c.pass).length / checks.length;
-  return { checks, score, source: "deterministic" };
-}
+// A proposal is not trusted just because a model wrote it. Before it ships it
+// clears the rubric in scripts/lib/positioning.mjs: grounded in a real source,
+// not merely cosmetic, and a rationale a human can decide against. Every check
+// is required. With a key an LLM judge scores it as a second opinion, and
+// either the judge or the deterministic gate can reject. Below the bar the loop
+// holds — a deliberate non-proposal is a valid, and often correct, outcome.
 
 async function judge(candidate, context) {
   if (!process.env.ANTHROPIC_API_KEY) return { llm: null, usage: null };
@@ -223,13 +190,7 @@ async function judge(candidate, context) {
   const msg = await client.messages.create({
     model: MODEL,
     max_tokens: 300,
-    system:
-      "You are the evaluator in a generate-then-evaluate loop for Elliot Little's " +
-      "hiring site. Score a proposed site change against this rubric, each 0-1: " +
-      "grounded (uses only real material, invents nothing), leverage (moves the " +
-      "needle for employers hiring a hands-on AI product leader), specificity (concrete, " +
-      "actionable). Be strict; a personal site does not need busywork. Reply as JSON: " +
-      '{"grounded":n,"leverage":n,"specificity":n,"verdict":"pass|revise|reject","critique":string}.',
+    system: JUDGE.system,
     messages: [
       {
         role: "user",
@@ -255,10 +216,7 @@ function recordSpend(usage, today) {
   if (!usage) return 0;
   const path = join(ROOT, "data", "spend.json");
   const spend = JSON.parse(readFileSync(path, "utf-8"));
-  const cost = +(
-    (usage.input_tokens / 1e6) * PRICE_PER_MTOK.input +
-    (usage.output_tokens / 1e6) * PRICE_PER_MTOK.output
-  ).toFixed(6);
+  const cost = costOf(MODEL, usage);
   spend.runs.push({
     date: today,
     model: MODEL,
@@ -276,21 +234,37 @@ function recordSpend(usage, today) {
   return cost;
 }
 
-function recordProposal(proposal, today, cost) {
+// Held candidates are recorded too. A gate whose rejections are invisible is
+// indistinguishable from a gate that never fires, which is what the old one
+// was: the rejected count on /loops is the number that makes the accepted one
+// worth anything.
+function recordProposal(proposal, held, today, cost) {
   const path = join(ROOT, "data", "loops.json");
   const data = JSON.parse(readFileSync(path, "utf-8"));
   const loop = data.loops.find((l) => l.id === LOOP_ID);
+  // Re-running on a day already counted is a retry, not a second cycle — the
+  // same guard the digest has. Without it a manual re-run inflated the run
+  // count and pushed a duplicate of the same proposal onto the record.
+  const sameDay = loop.last_run === today;
   loop.last_run = today;
-  loop.runs = (loop.runs || 0) + 1;
+  if (!sameDay) loop.runs = (loop.runs || 0) + 1;
   loop.spend_usd = +((loop.spend_usd || 0) + cost).toFixed(6);
   // A manual run does not make an unscheduled system "running". It returns
   // to dormant after recording the result.
   loop.status = "dormant";
   loop.proposals = loop.proposals || [];
-  if (proposal) {
-    loop.proposals.unshift({ date: today, status: "proposed", ...proposal });
-    loop.proposals = loop.proposals.slice(0, 12);
+  const stamp = { impl_version: IMPL_VERSION, prompt_version: POSITIONING.version };
+  const record = proposal
+    ? { date: today, status: "proposed", ...stamp, ...proposal }
+    : held
+      ? { date: today, status: "held", ...stamp, ...held }
+      : null;
+  if (record) {
+    // A retry replaces the day's record rather than stacking a second copy.
+    if (sameDay && loop.proposals[0]?.date === today) loop.proposals.shift();
+    loop.proposals.unshift(record);
   }
+  loop.proposals = loop.proposals.slice(0, 12);
   data.updated = today;
   writeFileSync(path, JSON.stringify(data, null, 2) + "\n");
 }
@@ -300,59 +274,45 @@ function recordProposal(proposal, today, cost) {
 const today = new Date().toISOString().slice(0, 10);
 const [repos, posts] = [await getRepos(), await getPosts()];
 const state = siteState();
+const history = pastDecisions();
 const findings = scan({ repos, posts, state });
 
-const { proposal: llm, usage } = await positioning(findings, state);
+const { proposal: llm, usage } = await positioning(findings, state, history);
 let totalUsage = usage;
 
-// Build a candidate from the strongest available signal.
-let candidate = null;
-if (llm && llm.worth_doing !== false) {
-  candidate = {
-    source: "positioning",
-    title: llm.title,
-    rationale: llm.rationale,
-    files: llm.files || [],
-    change: llm.change || "",
-  };
-} else if (!llm && findings.length) {
-  const top = findings[0];
-  candidate = {
-    source: top.source,
-    title: top.title,
-    rationale: top.detail,
-    files: [],
-    change: "Review and, if employer-relevant, surface this on the site.",
-  };
-}
+const candidate = buildCandidate(findings, llm);
 
-// The eval gate: score the candidate before it ships. Below threshold, hold.
+// The gate: score the candidate before it ships. Below the bar, hold.
 let proposal = null;
+let held = null;
 let evalRecord = null;
 if (candidate) {
-  const det = deterministicEval(candidate, { repos, posts });
+  const det = gate(candidate, { repos, posts });
   const { llm: llmEval, usage: judgeUsage } = await judge(candidate, state.corpus);
   if (judgeUsage)
     totalUsage = {
       input_tokens: (totalUsage?.input_tokens || 0) + judgeUsage.input_tokens,
       output_tokens: (totalUsage?.output_tokens || 0) + judgeUsage.output_tokens,
     };
-  const score = llmEval ? llmEval.score : det.score;
-  const verdict = llmEval ? llmEval.verdict : det.score >= EVAL_THRESHOLD ? "pass" : "reject";
+  // Either reviewer can reject. The judge cannot rescue a candidate the
+  // deterministic gate refused, and vice versa.
+  const verdict =
+    det.verdict === "reject" || llmEval?.verdict === "reject" || (llmEval && llmEval.score < EVAL_THRESHOLD)
+      ? "reject"
+      : "pass";
   evalRecord = {
-    score,
+    score: llmEval ? llmEval.score : det.score,
     verdict,
     checks: det.checks,
     critique: llmEval?.critique || null,
     by: llmEval ? "llm-judge + deterministic" : "deterministic",
   };
-  if (verdict !== "reject" && score >= EVAL_THRESHOLD) {
-    proposal = { ...candidate, eval: evalRecord };
-  }
+  if (verdict === "pass") proposal = { ...candidate, eval: evalRecord };
+  else held = { ...candidate, eval: evalRecord };
 }
 
 const cost = recordSpend(totalUsage, today);
-recordProposal(proposal, today, cost);
+recordProposal(proposal, held, today, cost);
 
 if (proposal) {
   const slug = proposal.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 48);
@@ -366,10 +326,10 @@ if (proposal) {
   if (proposal.files?.length) console.log(`\n**Files:** ${proposal.files.join(", ")}`);
 } else {
   console.log("NO_PROPOSAL");
-  if (candidate && evalRecord) {
+  if (held) {
+    const failed = held.eval.checks.filter((c) => !c.pass).map((c) => c.name);
     console.log(
-      `Candidate held by the eval gate: "${candidate.title}" scored ` +
-        `${evalRecord.score} (${evalRecord.verdict}). ${evalRecord.critique || ""} ` +
+      `Candidate held by the gate: "${held.title}" — ${failed.length ? `failed: ${failed.join(", ")}` : held.eval.critique || "judge rejected"}. ` +
         `A held proposal is the gate working, not a failure.`,
     );
   } else {

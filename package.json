@@ -6,7 +6,10 @@
     "prebuild": "node scripts/fetch-media.mjs",
     "build": "next build",
     "start": "next start",
-    "mcp": "node mcp/server.mjs"
+    "mcp": "node mcp/server.mjs",
+    "eval": "node scripts/eval-agents.mjs",
+    "eval:check": "node scripts/eval-agents.mjs --check",
+    "eval:record": "node scripts/eval-agents.mjs --record"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.112.5",

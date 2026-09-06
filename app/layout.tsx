@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Newsreader, Archivo, Instrument_Serif } from "next/font/google";
 import { getSpend } from "@/lib/telemetry";
+import { getLoops } from "@/lib/loops";
 import NavLinks from "./components/NavLinks";
 import ThemeToggle from "./components/ThemeToggle";
 import { IconLink } from "./components/Icons";
@@ -64,6 +65,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const spend = getSpend();
   const tokens = spend.totals.input_tokens + spend.totals.output_tokens;
+  // Runs come from the loop records, not the inference ledger: the ledger
+  // only holds runs that called a model, and most runs of this site's agents
+  // are deterministic. Only loops whose source and evals are public count.
+  const agentRuns = getLoops()
+    .loops.filter((l) => l.audited)
+    .reduce((n, l) => n + l.runs, 0);
   return (
     <html
       lang="en"
@@ -148,8 +155,8 @@ export default function RootLayout({
             </div>
             <div className="foot-base">
               <span>
-                {spend.totals.runs} agent run
-                {spend.totals.runs === 1 ? "" : "s"}
+                {agentRuns} agent run
+                {agentRuns === 1 ? "" : "s"}
                 {/* Only claim a token figure when one was actually metered:
                     a hardcoded "0 tokens" reads as a broken gauge. */}
                 {tokens > 0

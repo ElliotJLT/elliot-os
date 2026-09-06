@@ -36,8 +36,10 @@ tooling. He mentored low-opportunity students and professionals alongside the
 build.
 
 Eleven weeks after the AI tutor reached the App Store, the UK government
-awarded Zero Gravity one of eight £300,000 R&D contracts to test safe AI
-tutoring tools in schools. The programme could support up to 450,000
+selected Zero Gravity for its AI Tutoring Tools Pioneers Programme: eight
+companies chosen nationally to test safe AI tutoring tools in schools. Zero
+Gravity placed 2nd, scoring ahead of frontier US labs and the largest UK
+curriculum incumbents. The programme could support up to 450,000
 disadvantaged pupils a year.
 
 His recent work asks one ordinary question in several places: what got
@@ -67,8 +69,9 @@ habit in regulated services, crisis delivery and consumer travel.
   moved accuracy from a ~67% bare-model baseline to over 99%. It launched
   across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB,
   reaching the App Store 45 days after the first commit. The UK government
-  later awarded Zero Gravity one of eight £300,000 R&D contracts to test safe
-  AI tutoring tools for disadvantaged pupils.
+  later selected Zero Gravity for its AI Tutoring Tools Pioneers Programme,
+  where it placed 2nd nationally among the eight companies chosen to test
+  safe AI tutoring tools for disadvantaged pupils.
 - ward (safeguarding, under-18s) — decides which messages from a child
   are genuine safeguarding disclosures and routes them to a named human on
   a clock, grounded in KCSIE rather than keyword matching. Built around
@@ -103,8 +106,9 @@ habit in regulated services, crisis delivery and consumer travel.
   and a production multi-agent AI STEM tutor for GCSE, A-Level and IB
   students; first commit to App Store in 45 days; internal marking evals
   moved accuracy from a ~67% bare-model baseline to over 99% against official
-  mark schemes; the UK government awarded Zero Gravity one of eight £300,000
-  R&D contracts to test safe AI tutoring tools for disadvantaged pupils),
+  mark schemes; the UK government selected Zero Gravity for its AI Tutoring
+  Tools Pioneers Programme, where it placed 2nd nationally among the eight
+  companies chosen to test safe AI tutoring tools for disadvantaged pupils),
   Flash Pack (pre-seed to Series A), MealsForTheNHS
   (co-founder, £1.8m raised, 303k meals delivered), Farewill (led the probate
   product inside SRA/FCA-regulated operations; agent errors down 69%, case
@@ -152,6 +156,15 @@ habit in regulated services, crisis delivery and consumer travel.
 - Site changelog: https://github.com/ElliotJLT/elliot-os/commits/main
 - Note: /now and /next were folded into /loops on 2026-07-25 and now
   redirect there. The markdown sources above are unchanged.
+
+## Evals
+
+The checking work collected in one place: the tutor's marking evals
+against official mark schemes (~67% → 99%+, hallucinated marks 4.6% → 0),
+ward's precision-first safeguarding evals, the pre-LLM version of the same
+discipline at Farewill, and crux evaluating the human in the loop. Each
+entry states its limitations alongside its numbers:
+https://elliotjlt.github.io/elliot-os/evals/
 
 ## Writing
 

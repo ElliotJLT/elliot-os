@@ -1,0 +1,35 @@
+name: Evals — agent behaviour
+
+# The golden set runs on every change to the agent, its prompts or the suite
+# itself, and fails the build if the pass rate drops below the best already
+# recorded in data/evals.json. Without this the published pass rate would be a
+# number from the day someone last remembered to run it.
+#
+# Deterministic and $0: no model is called, so it can gate every commit.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - "evals/**"
+      - "data/evals.json"
+  pull_request:
+    paths:
+      - "scripts/**"
+      - "evals/**"
+      - "data/evals.json"
+  workflow_dispatch:
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Run the golden set
+        run: node scripts/eval-agents.mjs --check

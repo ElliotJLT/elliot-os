@@ -1,0 +1,8 @@
+{
+  "checked": "2026-05-01",
+  "source": "https://www.anthropic.com/pricing",
+  "note": "USD per million tokens, as recorded on the date above. Model pricing changes without notice, so anything computed from this table is only as current as `checked`. Tokens are the ground truth in data/spend.json; dollars are derived at render time from this file, and the site prints the date next to any figure it derives. Re-verify before treating a dollar number here as current.",
+  "models": {
+    "claude-haiku-4-5": { "input": 1.0, "output": 5.0 }
+  }
+}
