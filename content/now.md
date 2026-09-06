@@ -14,8 +14,9 @@
   works: [elliotjlittle@gmail.com](mailto:elliotjlittle@gmail.com).
 - Built this site over two days in public. v1 was a portfolio; what it is
   now, and the agents that keep it current, are on [/loops](/loops).
-- Running argus daily: a private fleet of agents that reads the AI news
-  each morning and writes me a brief before I sit down.
+- argus, a private fleet of five agents, read the AI news each morning
+  and wrote me a brief before I sat down: 61 briefs. Paused since August.
+  Its row, and why you cannot audit it, is on [/loops](/loops).
 - [boulot](https://github.com/ElliotJLT/boulot-os), my open-source
-  career-ops system, got its public release this month. My partner and my
-  sister both use it.
+  career-ops system, went public in June. My partner and my sister both
+  use it.

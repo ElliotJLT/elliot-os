@@ -13,9 +13,9 @@ gate's verdict, the authority each one holds, and where I stopped them.
 Agents get a structured route in via `llms.txt` and an MCP server.
 
 Five routes: `/built`, `/writing`, `/evals`, `/loops`, `/changelog`. `/now` and
-`/next` were folded into `/loops` on 2026-07-25 and redirect there; their
-markdown sources are unchanged, since the agent scripts and the MCP
-server read the files rather than the pages.
+`/next` were folded into `/loops` on 2026-07-25 and redirect there.
+`content/now.md` is still the file the agent writes and the MCP server
+reads.
 
 ## Stack
 
@@ -39,13 +39,11 @@ path. Local dev serves from `/`.
 - `content/now.md` — two authors: the agent's shipping log between the
   `agent:begin/end` markers (rendered under its loop on `/loops`), and the
   hand-written half below it (rendered on the home page)
-- `content/next.md` — open commitments; the `building` and `exploring`
-  sections render on `/loops`
-- `data/spend.json` — the agent's inference ledger; the footer counter
-  and `/loops` render it. Only runs that actually called a model are
-  recorded, so the count is model calls rather than cron firings
-- `data/evals.json` — pass rate of the positioning review per
-  implementation and prompt version; `/loops` renders the history
+- `data/spend.json` — the agent's inference ledger. Only runs that
+  actually called a model are recorded, so its count is model calls; the
+  footer's run counter comes from `data/loops.json` instead
+- `data/evals.json` — pass rate of both agents per implementation and
+  prompt version; `/loops` renders the history
 - `data/pricing.json` — one dated rate table. Tokens are the ground
   truth in the ledger; dollars are derived from here at render time and
   the site prints the date the rates were last checked
@@ -87,5 +85,5 @@ ignored `PullRequestEvent` entirely.
 ## MCP server
 
 `node mcp/server.mjs` starts a zero-dependency MCP server over stdio
-exposing `get_profile`, `get_projects`, `get_now`, `get_roadmap`,
-`get_spend`, and `get_fit(job_spec)`. See `mcp/README.md`.
+exposing `get_profile`, `get_projects`, `get_now`, `get_spend`, and
+`get_fit(job_spec)`. See `mcp/README.md`.
