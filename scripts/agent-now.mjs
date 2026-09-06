@@ -12,16 +12,17 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { costOf } from "./lib/pricing.mjs";
+import { classify, commitsUrl, isNoise, shape, renderLog } from "./lib/shipping.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const GITHUB_USER = "ElliotJLT";
 const WINDOW_DAYS = 7;
 
 // Model for the optional summary. Haiku: cheapest fit for a one-paragraph
-// weekly rewrite. Pricing cached 2026-05 from Anthropic docs — verify if the
-// numbers on the site start mattering.
+// weekly rewrite. Rates live in data/pricing.json with the date they were
+// checked, rather than as a constant here that goes stale silently.
 const MODEL = "claude-haiku-4-5";
-const PRICE_PER_MTOK = { input: 1.0, output: 5.0 };
 
 const BEGIN = "<!-- agent:begin -->";
 const END = "<!-- agent:end -->";
@@ -40,74 +41,44 @@ async function fetchEvents() {
 
 // The events API no longer includes commit details in PushEvent payloads
 // (only head/before shas), so pushes tell us which repos moved and a
-// follow-up /commits?since= call per repo fetches the actual commits.
+// follow-up /commits call per repo fetches the actual commits. That call is
+// always scoped to one author: on a repo Elliot does not own it otherwise
+// returns every contributor's work, and publishing a stranger's commits as
+// his would be worse than the blindness this replaced.
 async function digest(events) {
   const cutoff = new Date(Date.now() - WINDOW_DAYS * 24 * 3600 * 1000);
-  const recent = events.filter((e) => new Date(e.created_at) > cutoff);
-  const byRepo = new Map();
-
-  for (const e of recent) {
-    const repo = e.repo.name.replace(`${GITHUB_USER}/`, "");
-    const entry = byRepo.get(repo) || { pushed: false };
-    if (e.type === "PushEvent") entry.pushed = true;
-    if (e.type === "CreateEvent" && e.payload.ref_type === "repository")
-      entry.created = true;
-    if (e.type === "ReleaseEvent") entry.release = e.payload.release?.tag_name;
-    if (e.type === "PublicEvent") entry.madePublic = true;
-    byRepo.set(repo, entry);
-  }
+  const { repos, prs } = classify(events, GITHUB_USER, cutoff.getTime());
 
   const headers = { Accept: "application/vnd.github+json" };
   if (process.env.GITHUB_TOKEN)
     headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
 
-  let commitCount = 0;
-  for (const [repo, entry] of byRepo) {
-    entry.commits = [];
+  for (const entry of repos.values()) {
     if (!entry.pushed) continue;
     const res = await fetch(
-      `https://api.github.com/repos/${GITHUB_USER}/${repo}/commits?since=${cutoff.toISOString()}&per_page=30`,
+      commitsUrl(entry.fullName, GITHUB_USER, cutoff.toISOString()),
       { headers },
     );
     if (!res.ok) continue;
     for (const c of await res.json()) {
       const message = c.commit.message.split("\n")[0];
-      // Skip the agent's own commits so it doesn't report on itself
-      if (message.startsWith("agent:")) continue;
+      if (isNoise(message)) continue;
       entry.commits.push({ sha: c.sha.slice(0, 7), message });
-      commitCount++;
     }
   }
-  return { byRepo, commitCount };
-}
 
-function renderLog({ byRepo, commitCount }, today) {
-  const sorted = [...byRepo.entries()]
-    .filter(([, info]) => info.commits.length > 0 || info.created || info.release)
-    .sort((a, b) => b[1].commits.length - a[1].commits.length);
-  const lines = [];
-  lines.push(
-    `*Shipping log for the ${WINDOW_DAYS} days to ${today}, derived from the ` +
-      `[public GitHub events API](https://api.github.com/users/${GITHUB_USER}/events/public). ` +
-      `${commitCount} commits across ${sorted.length} repos.*`,
-  );
-  lines.push("");
-  for (const [repo, info] of sorted) {
-    const bits = [];
-    if (info.created) bits.push("new repo");
-    if (info.madePublic) bits.push("made public");
-    if (info.release) bits.push(`release ${info.release}`);
-    const shown = info.commits.slice(0, 3);
-    const cite = shown.map((c) => `"${c.message}" (${c.sha})`).join(", ");
-    const extra =
-      info.commits.length > 3 ? ` and ${info.commits.length - 3} more` : "";
-    const detail = [bits.join(", "), cite].filter(Boolean).join(". ");
-    const n = info.commits.length;
-    lines.push(
-      `- **[${repo}](https://github.com/${GITHUB_USER}/${repo})**: ${n} commit${n === 1 ? "" : "s"}. ${detail}${extra}`,
-    );
+  // The public feed's pull_request payload carries a number and an API url but
+  // no title, so a readable line needs one extra call per pull request.
+  for (const p of prs) {
+    if (!p.url) continue;
+    const res = await fetch(p.url, { headers });
+    if (!res.ok) continue;
+    const full = await res.json();
+    p.title = full.title;
+    if (full.merged === true) p.merged = true;
   }
-  return lines.join("\n");
+
+  return shape({ repos, prs });
 }
 
 async function summarise(logMarkdown) {
@@ -129,20 +100,19 @@ async function summarise(logMarkdown) {
   return { text, usage: msg.usage };
 }
 
+// Only inference goes on the inference ledger. Appending a zero row on every
+// deterministic run gave the ledger 26 identical entries of nothing and made
+// the footer's run counter a count of cron firings rather than of model calls.
 function recordSpend(usage, today) {
   const path = join(ROOT, "data", "spend.json");
   const spend = JSON.parse(readFileSync(path, "utf-8"));
+  if (!usage) return { date: today, model: null, input_tokens: 0, output_tokens: 0, cost_usd: 0 };
   const run = {
     date: today,
-    model: usage ? MODEL : null,
-    input_tokens: usage?.input_tokens ?? 0,
-    output_tokens: usage?.output_tokens ?? 0,
-    cost_usd: usage
-      ? +(
-          (usage.input_tokens / 1e6) * PRICE_PER_MTOK.input +
-          (usage.output_tokens / 1e6) * PRICE_PER_MTOK.output
-        ).toFixed(6)
-      : 0,
+    model: MODEL,
+    input_tokens: usage.input_tokens,
+    output_tokens: usage.output_tokens,
+    cost_usd: costOf(MODEL, usage),
   };
   spend.runs.push(run);
   spend.totals = {
@@ -159,6 +129,11 @@ function recordSpend(usage, today) {
 // the page whose whole claim is "measured, not estimated" — reported one run
 // and a stale last_run while spend.json recorded three. The control panel has
 // to be right about the thing it controls.
+//
+// This is only reached when the digest actually changed, so `runs` counts runs
+// that had something new to say. The schedule fires daily either way; a run
+// that finds nothing exits before here and leaves no trace, which is the
+// honest record of a quiet day.
 function recordLoopRun(id, today, run) {
   const path = join(ROOT, "data", "loops.json");
   const loops = JSON.parse(readFileSync(path, "utf-8"));
@@ -179,21 +154,20 @@ const events = await fetchEvents();
 const d = await digest(events);
 
 // An empty week used to overwrite the log with "0 commits across 0 repos"
-// and an excuse — the freshest line on a site whose whole claim is "I ship".
+// and an excuse: the freshest line on a site whose whole claim is "I ship".
 // A dated log of the last real week is honest; a fresh-stamped zero is
-// anti-evidence. So on quiet weeks the previous log stands, and only the
-// loop telemetry records that the agent ran.
-const hasActivity = [...d.byRepo.values()].some(
-  (info) => info.commits.length > 0 || info.created || info.release,
-);
+// anti-evidence. So on a quiet week the previous log stands and the run
+// leaves no trace, which is the same exit the substance check below takes.
+// renderLog still knows how to say "quiet week" (evals pin that); this is
+// the one caller, and it chooses not to publish it over real work.
+const hasActivity =
+  d.own.length > 0 || d.external.length > 0 || d.externalPrs.length > 0;
 if (!hasActivity) {
-  const run = recordSpend(null, today);
-  recordLoopRun("now-refresh", today, run);
-  console.log("No public activity this window; previous shipping log kept. $0.");
+  console.log("No public activity this window; previous shipping log kept. Nothing committed.");
   process.exit(0);
 }
 
-const log = renderLog(d, today);
+const log = renderLog(d, today, WINDOW_DAYS, GITHUB_USER);
 const { text: summary, usage } = await summarise(log);
 
 const nowPath = join(ROOT, "content", "now.md");
@@ -208,6 +182,22 @@ const section = [
   log,
   END,
 ].filter(Boolean).join("\n");
+
+// The header line carries today's date, so the section differs every single
+// day even when nothing shipped. That is why this loop committed 26 days
+// running, twice publishing "0 commits across 0 repos" and still opening a
+// commit called "refresh shipping log". Compare everything below the header:
+// if the substance is identical, write nothing and let the workflow's
+// `git diff --quiet` end the run without a commit.
+const substance = (text) => text.split("\n").slice(2).join("\n").trim();
+const current = now.slice(start, end + END.length);
+if (substance(section) === substance(current)) {
+  console.log(
+    `No change: ${d.commitCount} commits digested, same as the last published log. ` +
+      `Nothing committed.`,
+  );
+  process.exit(0);
+}
 
 writeFileSync(nowPath, now.slice(0, start) + section + now.slice(end + END.length));
 const run = recordSpend(usage, today);

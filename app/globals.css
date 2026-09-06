@@ -739,8 +739,8 @@ li {
 }
 
 /* Each stat as its own chip against the card's paper rather than a bare
-   grid split by hairlines — same instinct as the ladder's numbered chips:
-   a value should look like a distinct fact, not a row in a spreadsheet. */
+   grid split by hairlines: a value should look like a distinct fact, not a
+   row in a spreadsheet. */
 .loopmeta {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1147,119 +1147,6 @@ dd {
   content: "";
   position: absolute;
   inset: -11px;
-}
-
-/* ---------------------------------------------------------------- ladder */
-/* The four rungs of loop engineering with an honest mark against each. The
-   ring carries the state so no badge has to: solid where the rung is
-   reached, dashed where it is half done, faded where it was never attempted.
-   Colour is not the only channel, since the border style differs too. */
-/* A numbered chip and a name chip on one row, an italic requirement line,
-   then the verdict as ordinary prose — after how MAI's careers page lays
-   out a numbered benefit list, rather than the small ring-and-paragraph
-   treatment every other numbered thing on this site already uses. */
-.ladder {
-  list-style: none;
-  counter-reset: rung;
-  margin: 8px 0 0;
-  padding: 0;
-}
-
-.ladder li {
-  counter-increment: rung;
-  padding: 28px 0;
-  border-top: 1px solid var(--line);
-}
-
-.ladder li:first-child {
-  padding-top: 6px;
-  border-top: none;
-}
-
-.rung-head {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.rung-no {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--faint);
-  background: var(--bg-2);
-  border-radius: 8px;
-  padding: 7px 11px;
-}
-
-.rung-no::before {
-  content: counter(rung, decimal-leading-zero);
-}
-
-.rung-name {
-  font-family: var(--serif);
-  font-size: 17px;
-  font-weight: 500;
-  color: var(--ink);
-  background: var(--bg-2);
-  border-radius: 8px;
-  padding: 7px 16px;
-}
-
-.ladder li[data-state="no"] .rung-name {
-  color: var(--muted);
-}
-
-.rung-verdict {
-  margin-left: auto;
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--faint);
-}
-
-.ladder li[data-state="yes"] .rung-verdict {
-  color: var(--accent-2);
-}
-
-.ladder li[data-state="partial"] .rung-verdict {
-  color: var(--accent-ink);
-}
-
-.rung-needs {
-  font-family: var(--serif);
-  font-style: italic;
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.5;
-  max-width: 60ch;
-  margin: 0 0 10px;
-}
-
-.ladder .rout {
-  margin: 0;
-  max-width: 66ch;
-}
-
-@media (min-width: 800px) {
-  .ladder li {
-    display: grid;
-    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-    column-gap: 48px;
-    align-items: start;
-  }
-
-  .rung-head {
-    grid-column: 1 / -1;
-  }
-
-  .rung-needs,
-  .ladder .rout {
-    max-width: none;
-    margin-bottom: 0;
-  }
 }
 
 /* Section numbers were 11px and the same size as their label. They are the
@@ -4054,11 +3941,11 @@ main:has(> .band) {
   border-bottom: 0;
 }
 
-.authority-table th:nth-child(1) { width: 14%; }
-.authority-table th:nth-child(2) { width: 16%; }
-.authority-table th:nth-child(3) { width: 18%; }
-.authority-table th:nth-child(4) { width: 18%; }
-.authority-table th:nth-child(5) { width: 25%; }
+.authority-table th:nth-child(1) { width: 15%; }
+.authority-table th:nth-child(2) { width: 19%; }
+.authority-table th:nth-child(3) { width: 21%; }
+.authority-table th:nth-child(4) { width: 26%; }
+.authority-table th:nth-child(5) { width: 10%; }
 .authority-table th:nth-child(6) { width: 9%; }
 
 .system-health,
@@ -4520,4 +4407,357 @@ main:has(> .band) {
   .machinery-links span {
     margin: 0 0 5px;
   }
+}
+
+/* ------------------------------------------------------------ eval suite */
+/* The pass rate is the page's headline claim, so it is set like a headline:
+   one big measured figure, then the runs beneath it as bars rather than a
+   chart, because two data points drawn as a line chart is a lie about how
+   much evidence there is. */
+.eval-panel {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--bg-2);
+  overflow: hidden;
+}
+
+.eval-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+  padding: 24px 26px;
+  border-bottom: 1px solid var(--line);
+}
+
+.eval-rate strong {
+  display: block;
+  font-family: var(--display);
+  font-size: 54px;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.eval-rate strong span {
+  color: var(--faint);
+  font-size: 30px;
+}
+
+.eval-rate-label {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+}
+
+.eval-head p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.eval-head code,
+.pricing-note code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  color: var(--ink-2);
+}
+
+.eval-history {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.eval-history li {
+  padding: 18px 26px;
+  border-bottom: 1px solid var(--line);
+}
+
+.eval-history li:last-child {
+  border-bottom: 0;
+}
+
+.eval-run-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.eval-version {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+}
+
+.eval-score {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* A rule that fills, not a progress bar with a radius and a gradient. */
+.eval-bar {
+  height: 3px;
+  background: var(--line-2);
+  overflow: hidden;
+}
+
+.eval-bar span {
+  display: block;
+  height: 100%;
+  background: var(--chart);
+}
+
+.eval-failing {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.eval-failing li {
+  padding: 0;
+  border: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 200px) minmax(0, 1fr);
+  gap: 4px 18px;
+  align-items: baseline;
+}
+
+.eval-failing code {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--accent-ink);
+}
+
+.eval-failing span {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.eval-note,
+.eval-caveat,
+.authority-foot,
+.pricing-note {
+  margin: 0;
+  padding: 18px 26px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.eval-note span:first-child,
+.eval-caveat span:first-child {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.eval-caveat {
+  background: var(--flag);
+}
+
+/* ------------------------------------------------------------- run trace */
+.run-trace {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.trace-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+}
+
+.trace-meta time,
+.trace-version {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+}
+
+.trace-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.trace-steps li {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 6px 20px;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.trace-steps li:last-child {
+  border-bottom: 0;
+}
+
+.trace-step {
+  /* Spans however many rows the step happens to have: the gate step carries
+     a checklist and a critique, the others a single line. */
+  grid-row: 1 / -1;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--accent-ink);
+  padding-top: 3px;
+}
+
+.trace-steps p {
+  grid-column: 2;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.trace-rationale,
+.trace-by {
+  font-size: 13px !important;
+  color: var(--muted) !important;
+}
+
+.trace-checks {
+  grid-column: 2;
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.trace-checks li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+/* The verdict word carries the state; colour is a second channel, not the
+   only one, so this still reads when it is printed or filtered. */
+.trace-checks li span {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  min-width: 34px;
+  color: var(--accent-2);
+}
+
+.trace-checks li[data-pass="false"] span {
+  color: var(--accent-ink);
+}
+
+.trace-checks li[data-pass="false"] {
+  color: var(--muted);
+}
+
+/* -------------------------------------------------- authority table extras */
+.authority-cadence {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  color: var(--faint);
+  font-weight: 400;
+}
+
+.authority-foot {
+  border-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.authority-foot em {
+  font-style: normal;
+  color: var(--ink-2);
+}
+
+.pricing-note {
+  border-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 12px;
+}
+
+@media (max-width: 720px) {
+  .eval-head {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .eval-failing li,
+  .trace-steps li {
+    grid-template-columns: 1fr;
+  }
+
+  .trace-step {
+    grid-row: auto;
+  }
+
+  .trace-steps p,
+  .trace-checks {
+    grid-column: 1;
+  }
+}
+
+/* ------------------------------------------------- evidence column */
+/* The one column that decides whether a row is proof or testimony, so the
+   two states differ in word and weight, not just colour. */
+.evidence-yes,
+.evidence-no {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.03em;
+}
+
+.evidence-yes {
+  color: var(--accent-2);
+}
+
+.evidence-yes em {
+  display: block;
+  margin-top: 3px;
+  font-style: normal;
+  color: var(--faint);
+}
+
+.evidence-no {
+  color: var(--faint);
+}
+
+.system-health.paused {
+  color: var(--faint);
+}
+
+.system-health.paused::before {
+  background: var(--faint);
 }

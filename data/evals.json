@@ -1,0 +1,58 @@
+{
+  "updated": "2026-08-18",
+  "suite": "agent behaviour",
+  "note": "Pass rate of both agents against evals/cases.mjs and evals/shipping-cases.mjs, per version. Written by scripts/eval-agents.mjs --record. Every entry was measured by running the suite against that version of the code, including the pre-suite baselines.",
+  "runs": [
+    {
+      "date": "2026-08-18",
+      "impl_version": "2",
+      "prompt_version": "1",
+      "digest_version": "2",
+      "passed": 28,
+      "total": 28,
+      "failing": []
+    },
+    {
+      "date": "2026-08-18",
+      "impl_version": "2",
+      "prompt_version": "1",
+      "digest_version": "1",
+      "passed": 20,
+      "total": 28,
+      "failing": [
+        "commits-url-keeps-external-owner",
+        "commits-url-pins-the-author",
+        "commits-url-refuses-a-bare-repo-name",
+        "merge-commits-are-not-shipping",
+        "pull-requests-are-seen-at-all",
+        "external-work-is-told-apart-from-my-own",
+        "a-merged-pull-request-says-merged",
+        "other-peoples-projects-lead-the-log"
+      ]
+    },
+    {
+      "date": "2026-08-18",
+      "impl_version": "1",
+      "prompt_version": "1",
+      "digest_version": "1",
+      "passed": 14,
+      "total": 28,
+      "failing": [
+        "repo-is-fork",
+        "repo-archived",
+        "post-annotated-on-writing",
+        "gate-ungrounded",
+        "gate-invented-source",
+        "gate-thin-rationale",
+        "commits-url-keeps-external-owner",
+        "commits-url-pins-the-author",
+        "commits-url-refuses-a-bare-repo-name",
+        "merge-commits-are-not-shipping",
+        "pull-requests-are-seen-at-all",
+        "external-work-is-told-apart-from-my-own",
+        "a-merged-pull-request-says-merged",
+        "other-peoples-projects-lead-the-log"
+      ]
+    }
+  ]
+}

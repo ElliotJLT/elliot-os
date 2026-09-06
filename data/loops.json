@@ -4,7 +4,7 @@
     {
       "id": "now-refresh",
       "name": "shipping digest",
-      "surface": "/now · automatic publication",
+      "surface": "content/now.md · automatic publication",
       "cadence": "daily · 06:00 UTC",
       "gate": "deterministic extraction · optional grounded summary",
       "status": "healthy",
@@ -13,7 +13,12 @@
       "runs": 44,
       "spend_usd": 0,
       "note": "Collects public GitHub activity and publishes a seven-day factual digest. It can add a grounded model summary when an API key is present; all twelve recorded runs used deterministic output at $0.",
-      "proposals": []
+      "proposals": [],
+      "reads": "Public GitHub events and commit metadata",
+      "may_change": "content/now.md, the spend ledger and its own run record",
+      "human_boundary": "Publishes without per-run approval. I own and can disable the workflow.",
+      "evidence": "public",
+      "audited": true
     },
     {
       "id": "self-improve",
@@ -23,11 +28,42 @@
       "gate": "weak deterministic checks · optional model judge · no retry",
       "status": "dormant",
       "stop_rule": "records at most one recommendation, or none when no candidate clears the gate",
-      "last_run": "2026-07-22",
-      "runs": 1,
+      "last_run": "2026-08-18",
+      "runs": 2,
       "spend_usd": 0,
       "note": "Reads public work and selected site source, then records a recommendation. Its PR does not contain the proposed site change; Elliot still has to implement, edit or reject it.",
       "proposals": [
+        {
+          "date": "2026-08-18",
+          "status": "proposed",
+          "impl_version": "2",
+          "prompt_version": "1",
+          "source": "github",
+          "title": "Surface recent work: orbital-elliotlittle-task",
+          "rationale": "orbital-elliotlittle-task was pushed in the last 30 days (★1) but isn't on the site. \"Document Q&A for commercial real estate due diligence — Orbital product engineering task\" — worth a /built blurb if it's employer-relevant.",
+          "files": [],
+          "change": "Review and, if employer-relevant, surface this on the site.",
+          "eval": {
+            "score": 1,
+            "verdict": "pass",
+            "checks": [
+              {
+                "name": "grounded in a real source",
+                "pass": true
+              },
+              {
+                "name": "not cosmetic-only",
+                "pass": true
+              },
+              {
+                "name": "has a substantive rationale",
+                "pass": true
+              }
+            ],
+            "critique": null,
+            "by": "deterministic"
+          }
+        },
         {
           "date": "2026-07-22",
           "status": "accepted",
@@ -58,7 +94,31 @@
             "by": "deterministic"
           }
         }
-      ]
+      ],
+      "reads": "Public GitHub, the Medium feed and selected site source",
+      "may_change": "A recommendation record, and a PR containing that record",
+      "human_boundary": "I implement, edit or reject it. The agent cannot alter the site.",
+      "evidence": "public",
+      "audited": true
+    },
+    {
+      "id": "argus",
+      "name": "argus",
+      "surface": "a private corpus and the brief I read at breakfast",
+      "cadence": "daily · 06:00 scout, 07:00 brief, overnight weave · weekly health check",
+      "gate": "a small model call decides whether a source is worth keeping and which view it changes",
+      "status": "paused",
+      "stop_rule": "appends only; an artefact's one-paragraph current state is the sole thing it may rewrite",
+      "last_run": "2026-08-03",
+      "runs": 61,
+      "spend_usd": 0,
+      "reads": "AI news sources, podcast transcripts, books and my own notes",
+      "may_change": "A private corpus and the morning brief. Nothing it writes reaches this site unread.",
+      "human_boundary": "Private repo. I am the only reader, and I decide what graduates into anything public.",
+      "evidence": "private",
+      "audited": false,
+      "note": "Five agents — scout, librarian, synthesist, brief, conductor. 61 briefs written. You cannot check any of this: the repo is private, so this row is my word, which is why it sits next to two loops whose source and evals are open.",
+      "proposals": []
     }
   ],
   "decisions": [
@@ -73,6 +133,40 @@
   ],
   "failures": [
     {
+      "date": "2026-08-18",
+      "system": "now-refresh",
+      "title": "Five months of contributions to other projects were invisible",
+      "effect": "The digest built every commit URL as /repos/ElliotJLT/{name} after stripping the owner, so a contribution to anthropics/claude-code-action became a malformed path that 404ed and was dropped by a silent continue. It also handled only pushes, repo creation, releases and going public, ignoring pull requests entirely. A merged security fix in modelcontextprotocol/servers could not appear in the shipping log under any circumstances.",
+      "change": "Repo names keep their owner, pull requests are read from the feed and their titles hydrated from the API, and contributions to other people's projects lead the log. The commit call is now always scoped with author=, because the unfiltered call returns every contributor's work and publishing a stranger's commits would be worse than the blindness it replaced. Eight eval cases pin all of it.",
+      "status": "repaired",
+      "evidence_url": "https://github.com/ElliotJLT/elliot-os/blob/main/evals/shipping-cases.mjs"
+    },
+    {
+      "date": "2026-08-18",
+      "system": "self-improve",
+      "title": "The gate could not reject anything",
+      "effect": "Three checks averaged against a 0.6 threshold gave a worst possible score of 0.67, so every candidate passed. A recommendation citing a repository that does not exist would have been published as grounded. It never fired in production only because the schedule was off.",
+      "change": "Every check is now required and the verdict is their conjunction. Three eval cases pin the behaviour, and the suite gates every push to scripts/.",
+      "status": "repaired",
+      "evidence_url": "https://github.com/ElliotJLT/elliot-os/blob/main/evals/cases.mjs"
+    },
+    {
+      "date": "2026-08-18",
+      "system": "now-refresh",
+      "title": "26 days of commits announcing nothing",
+      "effect": "The shipping log embeds the run date in its own header, so the file differed every day whether or not anything shipped and the workflow committed regardless. On 16 and 17 August it published \"0 commits across 0 repos\" under a commit message announcing a refresh, and appended a zero row to the inference ledger each time.",
+      "change": "Compare the substance below the header and exit before writing when it matches. The ledger only records runs that actually called a model, so its run count means model calls rather than cron firings.",
+      "status": "repaired"
+    },
+    {
+      "date": "2026-08-18",
+      "system": "self-improve",
+      "title": "The scanner could not see the page that surfaces every post",
+      "effect": "/writing began rendering the Medium feed at build time on 25 July, but the scan only read built/page.tsx, now.md and llms.txt. Its one working rule — is this post linked anywhere — could from then on only produce false positives. Enabling the schedule would have proposed linking a post already on the site.",
+      "change": "The scan reads lib/writing.ts and asks the question that still has an answer: is the post annotated, not is it linked. Two eval cases cover both sides.",
+      "status": "repaired"
+    },
+    {
       "date": "2026-08-05",
       "system": "now-refresh",
       "title": "The digest ran; its own telemetry disappeared",
@@ -86,8 +180,8 @@
       "system": "self-improve",
       "title": "A substring check presented itself as a perfect evaluation",
       "effect": "The first recommendation scored 1.00 because it named a real source, avoided cosmetic words in its title and supplied more than forty characters of rationale. That checks form, not whether the change was good.",
-      "change": "Remove the score from the public evidence and label the gate accurately as weak. It needs real edited and rejected recommendations before its rubric can claim rigour.",
-      "status": "open"
+      "change": "Closed on 2026-08-18. The gate now requires every check rather than averaging them, and evals/cases.mjs holds it to that: gate-ungrounded, gate-invented-source and gate-thin-rationale all failed against the old logic and pass against the new one.",
+      "status": "repaired"
     },
     {
       "date": "2026-07-22",
