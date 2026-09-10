@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-09-07, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 6 commits across 2 repos.*
+*Shipping log for the 7 days to 2026-09-10, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 4 commits across 2 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 4 commits. "Docs: the hand-written half of now.md is not rendered on any page" (ae0bf8a), "Reconcile merged agent work, fix stale claims, count runs from loop records" (5c268d4), "Add /evals: the checking layer as its own route" (14eb65c) and 1 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 2 commits. "Docs: the hand-written half of now.md is not rendered on any page" (ae0bf8a), "Reconcile merged agent work, fix stale claims, count runs from loop records" (5c268d4)
 - **[ElliotJLT](https://github.com/ElliotJLT/ElliotJLT)**: 2 commits. "Profile: add argus" (c78683a), "Condense profile README" (53870ce)
 <!-- agent:end -->
 
