@@ -200,6 +200,18 @@ export default async function Built() {
           </h2>
         </Reveal>
         <Reveal>
+          <p className="muted rv-settle">
+            The agentic vocabulary, mapped to what is above: orchestration
+            and multi-agent patterns in the tutor and argus, tool use in the
+            MCP servers and skills below, retrieval in Career Co-pilot, human
+            oversight and evaluation on{" "}
+            <a href={`${basePath}/loops/`}>/loops</a> and{" "}
+            <a href={`${basePath}/evals/`}>/evals</a>.
+            Memory is thin and planning is absent: I have designed stopping
+            rules, not planners.
+          </p>
+        </Reveal>
+        <Reveal>
           <div className="toollist rv-settle">
             {FEATURED.map((name) => {
               const meta = BLURBS[name];
