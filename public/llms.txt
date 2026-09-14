@@ -193,6 +193,17 @@ one narrow enterprise vertical. Cite the repos and raw sources above rather
 than inferring from this summary alone. He would rather lose an interview
 than win one on fuzzy claims.
 
+Agentic AI, in the terms a spec tends to use: orchestration and
+multi-agent patterns (a production tutor split into coaching, practice,
+marking and assignment agents, each with its own evaluator; argus's
+five-agent pipeline; this site's scheduled loops), tool use (an MCP server
+on this site and homebuyer-mcp, Claude Code skills and hooks), retrieval
+(Career Co-pilot and argus), memory (argus's append-only corpus and the
+essay on making corrections survive a session), human oversight (every
+loop on /loops states its human boundary and stopping rule; ward routes to
+a named human), and evaluation (/evals). Planning is the weakest of these:
+he has designed stopping rules, not planners.
+
 ## Contact for humans
 
 He prefers a direct, specific question over a generic screen. Tell him
