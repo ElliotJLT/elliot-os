@@ -1,4 +1,10 @@
-import { getPosts, noteFor, isDemoted, getMedia } from "@/lib/writing";
+import {
+  getPosts,
+  noteFor,
+  getMedia,
+  groupPosts,
+  FEATURED,
+} from "@/lib/writing";
 import { getQuotes } from "@/lib/quotes";
 import Reveal from "../components/Reveal";
 import HoverLabel from "../components/HoverLabel";
@@ -9,8 +15,7 @@ export const metadata = { title: "Writing · Elliot Little" };
 const basePath = process.env.BASE_PATH || "";
 
 export default async function Writing() {
-  const all = await getPosts(20);
-  const posts = all.filter((p) => !isDemoted(p.title));
+  const groups = groupPosts(await getPosts(20));
   const media = getMedia();
   const { readers } = getQuotes();
 
@@ -26,10 +31,9 @@ export default async function Writing() {
               </h1>
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              I write about product leadership while doing the building:
-              choosing a problem worth solving and using AI to carry it into
-              production without surrendering judgement. Newest first, from
-              Medium.
+              I write about shipping AI to people the model can hurt if it&apos;s
+              wrong, and about leading the team while doing the building.
+              Newest first inside each section, from Medium.
             </p>
           </header>
         </Reveal>
@@ -67,40 +71,77 @@ export default async function Writing() {
           </Reveal>
         )}
 
-        <Reveal>
-          <div id="essays" className="anchor-target" />
-          <div className="wr-grid">
-            {posts.map((p, idx) => (
-              <HoverLabel label="Read it →" key={p.link}>
-                <a
-                  className="wr-card rv-settle"
-                  href={p.link}
-                  style={{ "--rv-delay": `${idx * 90}ms` } as React.CSSProperties}
-                >
-                  <div className="wr-shot rv-develop">
-                    {media.posts[p.link] ? (
-                      /* eslint-disable-next-line @next/next/no-img-element */
-                      <img src={`${basePath}/${media.posts[p.link]}`} alt="" />
-                    ) : (
-                      <span className="wr-noshot">No image</span>
-                    )}
-                  </div>
+        <div id="essays" className="anchor-target" />
+
+        {FEATURED && (
+          <Reveal>
+            <div className="wr-grid">
+              <HoverLabel label="Read it →">
+                <a className="wr-card rv-settle" href={FEATURED.link}>
                   <div className="wr-meta">
-                    <span className="wr-date">{p.date}</span>
-                    <h2 className="wr-h">{p.title}</h2>
-                    {noteFor(p.title) && (
-                      <p className="wr-note">{noteFor(p.title)}</p>
-                    )}
+                    <span className="wr-date">Featured</span>
+                    <h2 className="wr-h">{FEATURED.title}</h2>
+                    <p className="wr-note">{FEATURED.note}</p>
                     <span className="wr-go">
                       Read it <span aria-hidden="true">→</span>
                     </span>
                   </div>
                 </a>
               </HoverLabel>
-            ))}
-          </div>
-        </Reveal>
+            </div>
+          </Reveal>
+        )}
 
+        {groups.map(
+          (g) =>
+            g.posts.length > 0 && (
+              <Reveal key={g.id}>
+                <div id={g.id} className="anchor-target" />
+                <h2 className="mai-kick rv-settle">{g.heading}</h2>
+                <p
+                  className="muted rv-settle"
+                  style={{ maxWidth: 680, margin: "0 0 22px" }}
+                >
+                  {g.standfirst}
+                </p>
+                <div className="wr-grid">
+                  {g.posts.map((p, idx) => (
+                    <HoverLabel label="Read it →" key={p.link}>
+                      <a
+                        className="wr-card rv-settle"
+                        href={p.link}
+                        style={
+                          { "--rv-delay": `${idx * 90}ms` } as React.CSSProperties
+                        }
+                      >
+                        <div className="wr-shot rv-develop">
+                          {media.posts[p.link] ? (
+                            /* eslint-disable-next-line @next/next/no-img-element */
+                            <img
+                              src={`${basePath}/${media.posts[p.link]}`}
+                              alt=""
+                            />
+                          ) : (
+                            <span className="wr-noshot">No image</span>
+                          )}
+                        </div>
+                        <div className="wr-meta">
+                          <span className="wr-date">{p.date}</span>
+                          <h3 className="wr-h">{p.title}</h3>
+                          {noteFor(p.title) && (
+                            <p className="wr-note">{noteFor(p.title)}</p>
+                          )}
+                          <span className="wr-go">
+                            Read it <span aria-hidden="true">→</span>
+                          </span>
+                        </div>
+                      </a>
+                    </HoverLabel>
+                  ))}
+                </div>
+              </Reveal>
+            ),
+        )}
 
       </div>
     </main>

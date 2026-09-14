@@ -123,6 +123,27 @@ export default async function Home() {
       />
 
       <Reveal>
+        <h2 className="mai-kick rv-settle">Where next</h2>
+        <div className="mentoring-grid rv-settle">
+          <article className="mentor-card">
+            <h3>Early stage</h3>
+            <p>
+              Founding or first product / ops lead, seed to Series A, ideally
+              AI-native. London or remote.
+            </p>
+          </article>
+          <article className="mentor-card">
+            <h3>Inside government</h3>
+            <p>
+              A tour building a public service: the No10 Innovation Fellowship
+              or i.AI shape. Four times I&apos;ve built alongside government
+              (NHS, HMCTS, FCO, DfE), never inside it.
+            </p>
+          </article>
+        </div>
+      </Reveal>
+
+      <Reveal>
         <h2 className="mai-kick rv-settle">Career</h2>
       </Reveal>
       <Reveal>

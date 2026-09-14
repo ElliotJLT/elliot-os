@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { THEMES } from "./themes";
 
 // Recent writing, derived from the Medium feed at build time. Falls back to a
 // curated list if the feed is unreachable, so a build never breaks on it.
@@ -77,6 +78,56 @@ export function noteFor(title: string): string | null {
   const hit = NOTES.find(([k]) => title.includes(k));
   return hit ? hit[1] : null;
 }
+
+/**
+ * /writing is read by subject, not as one feed. Each group is a site theme
+ * (lib/themes.ts) with a one-line standfirst and the title substrings that
+ * belong under it. A post matches the first group that names it; anything
+ * unmatched and not demoted lands under "Earlier". Newest first within each.
+ */
+export const GROUPS: [heading: string, standfirst: string, keys: string[]][] = [
+  [THEMES[0].label, THEMES[0].line, ["Bad Advice", "Amsterdam", "Trust Gap"]],
+  [THEMES[1].label, THEMES[1].line, ["Product Engineer", "100+ AI Leaders"]],
+  [THEMES[2].label, THEMES[2].line, ["Loop Was Never", "Same Mistakes"]],
+];
+
+const EARLIER: [string, string] = [
+  "Earlier",
+  "Pieces from before the AI work took over the writing.",
+];
+
+export type PostGroup = {
+  id: string;
+  heading: string;
+  standfirst: string;
+  posts: Post[];
+};
+
+export function groupPosts(posts: Post[]): PostGroup[] {
+  const live = posts.filter((p) => !isDemoted(p.title));
+  const taken = new Set<string>();
+  const groups: PostGroup[] = GROUPS.map(([heading, standfirst, keys], i) => {
+    const hits = live.filter(
+      (p) => !taken.has(p.link) && keys.some((k) => p.title.includes(k)),
+    );
+    for (const p of hits) taken.add(p.link);
+    return { id: THEMES[i]?.id ?? `group-${i + 1}`, heading, standfirst, posts: hits };
+  });
+  groups.push({
+    id: "earlier",
+    heading: EARLIER[0],
+    standfirst: EARLIER[1],
+    posts: live.filter((p) => !taken.has(p.link)),
+  });
+  return groups;
+}
+
+/**
+ * One piece pinned above the groups, at wr-card size. Null renders nothing.
+ * Fill it when the classroom write-up is live.
+ */
+export type Featured = { title: string; link: string; note: string };
+export const FEATURED = null as Featured | null;
 
 export async function getPosts(limit = 4): Promise<Post[]> {
   try {

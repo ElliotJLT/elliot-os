@@ -9,10 +9,10 @@
 
 *The section above is the agent's. This one is mine.*
 
-- Looking for my next role: senior product, or founding product engineer
-  at a company where agents do the typing and small teams own the
-  outcome. Between roles and using every day of the gap to ship. Email
-  works: [elliotjlittle@gmail.com](mailto:elliotjlittle@gmail.com).
+- Looking for the next thing in one of two shapes: founding product or
+  ops lead at an early-stage company, or a tour inside government building
+  a public service. Email works:
+  [elliotjlittle@gmail.com](mailto:elliotjlittle@gmail.com).
 - Built this site over two days in public. v1 was a portfolio; what it is
   now, and the agents that keep it current, are on [/loops](/loops).
 - argus, a private fleet of five agents, read the AI news each morning

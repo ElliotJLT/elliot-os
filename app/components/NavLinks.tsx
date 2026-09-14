@@ -2,6 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { THEMES } from "@/lib/themes";
+
+// Menu rows say what Elliot did, not which category it sits in, and each
+// eyebrow names the site theme it belongs to (lib/themes.ts).
+const [WRONG, LEADING, AGENTS] = THEMES;
 
 type MenuItem = {
   eyebrow: string;
@@ -31,28 +36,28 @@ const MENUS: Menu[] = [
     intro: "Products, systems and research built around the judgement before something ships.",
     items: [
       {
-        eyebrow: "01 · shipped",
-        title: "In production",
+        eyebrow: `01 · ${WRONG.short}`,
+        title: "Shipped AI to students and families",
         href: "/built#production",
       },
       {
-        eyebrow: "02 · independent",
-        title: "Independent work",
+        eyebrow: `02 · ${WRONG.short}`,
+        title: "Built safeguarding and career tools",
         href: "/built#independent-work",
       },
       {
-        eyebrow: "03 · systems",
-        title: "Argus",
+        eyebrow: `03 · ${AGENTS.short}`,
+        title: "Run a research fleet that reads for me",
         href: "/built#argus",
       },
       {
-        eyebrow: "04 · published",
-        title: "Research",
+        eyebrow: `04 · ${AGENTS.short}`,
+        title: "Measured the human in the loop",
         href: "/built#research",
       },
       {
-        eyebrow: "05 · open source",
-        title: "Agent tools",
+        eyebrow: `05 · ${AGENTS.short}`,
+        title: "Open-sourced tools for agent work",
         href: "/built#agent-tools",
       },
     ],
@@ -70,24 +75,24 @@ const MENUS: Menu[] = [
     intro: "Essays on shipping AI where a plausible wrong answer still carries real cost.",
     items: [
       {
-        eyebrow: "01 · product",
-        title: "Product engineering",
-        href: "/writing#essays",
+        eyebrow: `01 · ${WRONG.short}`,
+        title: "When the user pays for a wrong answer",
+        href: `/writing#${WRONG.id}`,
       },
       {
-        eyebrow: "02 · systems",
-        title: "Agent loops",
-        href: "https://medium.com/@elliotJL/the-loop-was-never-the-hard-part-5bdd4352acab",
+        eyebrow: `02 · ${LEADING.short}`,
+        title: "Leading the team while building it",
+        href: `/writing#${LEADING.id}`,
       },
       {
-        eyebrow: "03 · practice",
-        title: "The end of the handoff",
-        href: "https://medium.com/@elliotJL/the-product-engineer-and-the-end-of-the-handoff-93181f170779",
+        eyebrow: `03 · ${AGENTS.short}`,
+        title: "Loops, stopping rules and evals",
+        href: `/writing#${AGENTS.id}`,
       },
       {
-        eyebrow: "04 · deployment",
-        title: "Trust and adoption",
-        href: "/writing#essays",
+        eyebrow: "04 · earlier",
+        title: "Before the AI work",
+        href: "/writing#earlier",
       },
       {
         eyebrow: "05 · conversation",

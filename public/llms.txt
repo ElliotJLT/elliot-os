@@ -65,8 +65,10 @@ habit in regulated services, crisis delivery and consumer travel.
   start. The production product is Socratic by design: it
   coaches a student to the answer and will not hand it over, however
   creatively they ask, and an always-on evaluator grades every session
-  against that spec. Internal marking evals against official mark schemes
-  moved accuracy from a ~67% bare-model baseline to over 99%. It launched
+  against that spec. It is built to the DfE's Generative AI Product Safety
+  Standards for under-18s and had 1,247 students by June 2026. Internal
+  marking evals against official mark schemes moved accuracy from a ~67%
+  bare-model baseline to over 99%. It launched
   across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB,
   reaching the App Store 45 days after the first commit. The UK government
   later selected Zero Gravity for its AI Tutoring Tools Pioneers Programme,
