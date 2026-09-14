@@ -247,11 +247,13 @@ p {
    other way, to roughly 88 characters at the 760px wrap. Both are pulled into
    range below; elements inside cards are already narrower, so the cap only
    bites on paragraphs that would otherwise span the whole column. */
+/* One reading measure for prose. Wide enough that a paragraph does not
+   look like a sidebar next to a full-width list, narrow enough to read. */
 .muted,
 .loopnote,
 .prose p,
 .prose li {
-  max-width: 66ch;
+  max-width: 80ch;
 }
 
 /* Avoid single-word last lines on the paragraphs a reader actually reads. */
@@ -385,7 +387,7 @@ li {
   margin: 12px 0 0;
   color: var(--muted);
   font-size: 15px;
-  max-width: 66ch;
+  max-width: 80ch;
 }
 
 .research-card .meta {
@@ -395,25 +397,8 @@ li {
   margin-top: 14px;
 }
 
-@media (min-width: 800px) {
-  .research-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 40px;
-  }
-
-  .research-card > h3 {
-    grid-column: 1 / -1;
-  }
-
-  .research-card p {
-    max-width: none;
-  }
-
-  .research-card > .meta {
-    grid-column: 1 / -1;
-  }
-}
+/* Eval cards stack their paragraphs. They used to split into two columns
+   above 800px, which read as two sidebars inside one card. */
 
 /* --------------------------------------------------------------- ledger */
 /* Each day is its own card rather than a hairline header over a flat run
@@ -558,7 +543,7 @@ li {
      introduction, but let related paragraphs use the second half of it
      instead of inheriting the old narrow-page 66ch cap and leaving a void. */
   .mai > .rv > p.muted {
-    max-width: 78ch;
+    max-width: 80ch;
   }
 
   .copy-spread,
@@ -568,15 +553,22 @@ li {
     gap: 0 48px;
   }
 
+  /* Body paragraphs stack. Side-by-side prose reads as two sidebars and
+     leaves a void under the shorter one. .copy-aside keeps its shape because
+     the second child is a card, not a paragraph. */
   .copy-spread {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .copy-aside {
     grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.7fr);
   }
 
-  .copy-spread p,
+  .copy-spread p {
+    max-width: 80ch;
+    margin-bottom: 16px;
+  }
+
   .copy-aside p {
     max-width: none;
     margin-bottom: 0;
@@ -1634,10 +1626,12 @@ h2::before {
   border-top: 1px solid var(--line);
 }
 
+/* Header block, then the copy. The old two-column shape put a short id
+   column beside a long copy column and left a void under the toggle. */
 .product-case-row {
   display: grid;
-  grid-template-columns: minmax(190px, 0.36fr) minmax(0, 1fr);
-  gap: 38px;
+  grid-template-columns: 1fr;
+  gap: 14px;
   padding: 24px 0 26px;
   border-bottom: 1px solid var(--line);
 }
@@ -1648,7 +1642,12 @@ h2::before {
 }
 
 .product-case-copy {
-  padding-top: 22px;
+  padding-top: 0;
+  max-width: 80ch;
+}
+
+.product-case-copy .product-case-links {
+  margin-top: 18px;
 }
 
 .product-case-no {
@@ -2244,7 +2243,7 @@ h2::before {
     0 20px 50px rgba(52, 46, 41, 0.12);
 }
 
-.nav-menu:hover .nav-menu-shell,
+.nav-menu[data-open] .nav-menu-shell,
 .nav-menu:has(:focus-visible) .nav-menu-shell {
   visibility: visible;
   opacity: 1;
@@ -2252,7 +2251,7 @@ h2::before {
   pointer-events: auto;
 }
 
-.nav-menu:hover .nav-menu-trigger svg,
+.nav-menu[data-open] .nav-menu-trigger svg,
 .nav-menu:has(:focus-visible) .nav-menu-trigger svg {
   background: var(--line);
   transform: rotate(180deg);
@@ -3362,40 +3361,21 @@ main:has(> .band) {
 /* Tall rounded cards in a grid, after microsoft.ai/blog: the image carries
    the card, the metadata sits under it, and the whole tile lifts on hover
    rather than only the link changing colour. */
-/* Used to cap at 62ch regardless of how wide the page was, so a 1120px
-   page ran a narrow column of text with most of its width sitting empty.
-   Kicker and headline stay left, the standfirst moves beside them on a
-   wide screen instead of stacking under — the same "label left,
-   description right" shape as a work row or the MAI reference module. */
+/* Page header: kicker, headline, then the standfirst underneath. The
+   standfirst used to sit in a second column beside the headline on wide
+   screens, which read as a sidebar and put the first sentence of the page
+   off to the right of where the eye lands. One column, top to bottom. */
 .wr-head {
-  padding: 12px 0 44px;
+  padding: 12px 0 40px;
 }
 
-/* `grid-row: 1 / -1` on mai-sub used to be how this centred it against the
-   kicker+headline — but negative grid lines resolve against the *explicit*
-   grid, which was never declared row-wise, so the span collapsed to row 1
-   and the standfirst sat pinned to the top instead of centred against the
-   full headline height. A plain wrapper around the kicker+headline sidesteps
-   the whole problem: two grid items, one row, align-items does the rest. */
-@media (min-width: 900px) {
-  .wr-head {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    column-gap: 56px;
-    align-items: center;
-  }
+.wr-head > .wr-title {
+  margin-bottom: 18px;
+}
 
-  .wr-head > .wr-title {
-    margin-bottom: 0;
-  }
-
-  .wr-head > .mai-sub {
-    margin-bottom: 0;
-    /* .mai-sub's own 56ch cap is for the centred hero context — here the
-       grid column is already the right measure, and the ch cap on top of
-       it just left the column's own width unused. */
-    max-width: none;
-  }
+.wr-head > .mai-sub {
+  max-width: 40em;
+  margin: 0;
 }
 
 .wr-title {

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { THEMES } from "@/lib/themes";
 
 // Menu rows say what Elliot did, not which category it sits in, and each
@@ -33,7 +34,7 @@ const MENUS: Menu[] = [
     href: "/built",
     label: "built",
     listLabel: "Explore the work",
-    intro: "Products, systems and research built around the judgement before something ships.",
+    intro: "The judgement before something ships.",
     items: [
       {
         eyebrow: `01 · ${WRONG.short}`,
@@ -47,7 +48,7 @@ const MENUS: Menu[] = [
       },
       {
         eyebrow: `03 · ${AGENTS.short}`,
-        title: "Run a research fleet that reads for me",
+        title: "Built a fleet that reads for me",
         href: "/built#argus",
       },
       {
@@ -64,7 +65,7 @@ const MENUS: Menu[] = [
     feature: {
       eyebrow: "Selected work",
       title: "Judgement before output.",
-      copy: "Products and systems built for the point where a plausible answer still is not safe enough to ship.",
+      copy: "Built for the point where plausible is not yet safe to ship.",
       cta: "See everything built",
     },
   },
@@ -72,11 +73,11 @@ const MENUS: Menu[] = [
     href: "/writing",
     label: "writing",
     listLabel: "Read by subject",
-    intro: "Essays on shipping AI where a plausible wrong answer still carries real cost.",
+    intro: "Essays from shipping AI where errors cost.",
     items: [
       {
         eyebrow: `01 · ${WRONG.short}`,
-        title: "When the user pays for a wrong answer",
+        title: "When wrong answers cost",
         href: `/writing#${WRONG.id}`,
       },
       {
@@ -103,16 +104,17 @@ const MENUS: Menu[] = [
     feature: {
       eyebrow: "Notes from the field",
       title: "Where wrong answers carry real cost.",
-      copy: "Essays on shipping AI, responsible deployment, and the human judgement the loop cannot automate.",
+      copy: "Shipping AI, and the judgement the loop cannot automate.",
       cta: "Read all writing",
     },
   },
 ];
 
+// /changelog still exists (the footer links to it as the receipts) but it is
+// not a destination, so it does not earn a slot in the nav.
 const LINKS = [
   ["/evals", "evals"],
   ["/loops", "loops"],
-  ["/changelog", "changelog"],
 ] as const;
 
 function NavMenu({
@@ -124,13 +126,76 @@ function NavMenu({
   active: boolean;
   basePath: string;
 }) {
+  // Open state lives in React rather than in :hover alone. Pure :hover had
+  // two failures: the trigger sits inside the nav pill, so moving straight
+  // down to the panel crossed the pill's padding, lost the hover and closed
+  // the menu before the pointer reached it; and clicking the trigger
+  // navigated, which re-rendered the nav and dropped the menu on the new
+  // page. Now hover opens with a short grace on leave, click toggles, and
+  // Escape, an outside click or a route change closes.
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const timer = useRef<number | null>(null);
+  const hoverCapable = () =>
+    typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches;
+  const clear = () => {
+    if (timer.current !== null) {
+      window.clearTimeout(timer.current);
+      timer.current = null;
+    }
+  };
+  const enter = () => {
+    if (!hoverCapable()) return;
+    clear();
+    setOpen(true);
+  };
+  const leave = () => {
+    if (!hoverCapable()) return;
+    clear();
+    timer.current = window.setTimeout(() => setOpen(false), 180);
+  };
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: PointerEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("keydown", onKey);
+      clear();
+    };
+  }, [open]);
+
   return (
-    <div className="nav-menu">
+    <div
+      className="nav-menu"
+      ref={ref}
+      data-open={open || undefined}
+      onMouseEnter={enter}
+      onMouseLeave={leave}
+    >
       <Link
         className="nav-menu-trigger"
         href={menu.href}
         data-active={active || undefined}
         aria-haspopup="true"
+        aria-expanded={open}
+        onClick={(e) => {
+          e.preventDefault();
+          clear();
+          setOpen((o) => !o);
+        }}
       >
         {menu.label}
         <svg viewBox="0 0 10 6" aria-hidden="true">

@@ -98,10 +98,7 @@ export default async function Writing() {
               <Reveal key={g.id}>
                 <div id={g.id} className="anchor-target" />
                 <h2 className="mai-kick rv-settle">{g.heading}</h2>
-                <p
-                  className="muted rv-settle"
-                  style={{ maxWidth: 680, margin: "0 0 22px" }}
-                >
+                <p className="muted rv-settle" style={{ margin: "0 0 22px" }}>
                   {g.standfirst}
                 </p>
                 <div className="wr-grid">

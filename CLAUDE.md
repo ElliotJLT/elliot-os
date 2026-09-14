@@ -32,6 +32,18 @@ and who decided?
   background, what was built and for whom, how it was validated, and the
   team. First person, plain, no hero lines.
 
+## Layout rules
+
+- One column, top to bottom: kicker, headline, standfirst under it, then
+  the body. Never put a standfirst or a paragraph beside a headline, and
+  never run body prose in two columns. A short column beside a long one
+  leaves a void, and the reader's eye lands on the wrong side.
+- Prose measure is 80ch (`.muted`, `.prose`, `.copy-spread p`), standfirsts
+  40em. Do not add per-section width overrides.
+- Nav dropdown rows, intros and feature copy are one line each.
+- The nav menu is state-driven (hover with a grace period, click to toggle,
+  Escape or outside click to close). Do not go back to pure `:hover`.
+
 ## Rules that are easy to break
 
 - `content/now.md` has two authors. The block between `agent:begin` and

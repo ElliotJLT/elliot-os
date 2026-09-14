@@ -225,13 +225,6 @@ function ProductCase({ product }: { product: Product }) {
             Bet
           </button>
         </div>
-        <div className="product-case-links">
-          {product.links.map((link) => (
-            <a href={link.href} key={link.href}>
-              {link.label} ↗
-            </a>
-          ))}
-        </div>
       </div>
 
       <div className="product-case-copy">
@@ -249,6 +242,13 @@ function ProductCase({ product }: { product: Product }) {
           {"proof" in copy && copy.proof && (
             <p className="product-proof">{copy.proof}</p>
           )}
+        </div>
+        <div className="product-case-links">
+          {product.links.map((link) => (
+            <a href={link.href} key={link.href}>
+              {link.label} ↗
+            </a>
+          ))}
         </div>
       </div>
     </article>
