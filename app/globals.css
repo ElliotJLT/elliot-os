@@ -1622,99 +1622,84 @@ h2::before {
   color: var(--faint);
 }
 
-.product-case-list {
-  border-top: 1px solid var(--line);
+/* The one line under a section kicker. Sits tight to the kicker, then the
+   cards or list follow. */
+.section-line {
+  margin: -8px 0 22px;
+  font-size: 16px;
+  line-height: 1.55;
 }
 
-/* Header block, then the copy. The old two-column shape put a short id
-   column beside a long copy column and left a void under the toggle. */
-.product-case-row {
+/* Cases as a two-up grid of cards, all visible. Each card: company, name,
+   the bet in one line, its proof, then Problem / Bet expanding in place. */
+.case-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 14px;
-  padding: 24px 0 26px;
-  border-bottom: 1px solid var(--line);
+  gap: 18px;
+  margin: 18px 0 8px;
 }
 
-.product-case-id,
-.product-case-copy {
+@media (min-width: 900px) {
+  .case-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.case-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 26px 28px 22px;
+  background: var(--bg-2);
+  border-radius: 18px;
+}
+
+.case-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.case-card-head > div {
   min-width: 0;
 }
 
-.product-case-copy {
-  padding-top: 0;
-  max-width: 80ch;
-}
-
-.product-case-copy .product-case-links {
-  margin-top: 18px;
-}
-
-.product-case-no {
+.case-card-company {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   font-family: var(--mono);
   font-size: 10px;
   line-height: 1.4;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent-ink);
 }
 
-.product-case-id h4 {
-  margin: 0 0 8px;
+.case-card h4 {
+  margin: 0;
   font-family: var(--display);
-  font-size: clamp(23px, 2.6vw, 29px);
+  font-size: clamp(22px, 2.2vw, 26px);
   font-weight: 500;
   letter-spacing: -0.015em;
   line-height: 1.12;
   text-wrap: balance;
 }
 
-.product-case-id .product-ownership {
-  max-width: none;
-  margin: 0;
-  color: var(--faint);
-  font-family: var(--mono);
-  font-size: 10.5px;
-  line-height: 1.55;
-}
-
-.product-case-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px 12px;
-  margin-top: 10px;
-}
-
-.product-case-links a {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  color: var(--accent-ink);
-}
-
-.product-case-copy .product-case-statement {
+.case-card-statement {
   max-width: none;
   margin: 0 0 12px;
   color: var(--ink);
   font-family: var(--serif);
-  font-size: clamp(21px, 2.5vw, 27px);
-  line-height: 1.32;
-  text-wrap: balance;
-}
-
-.product-case-panel > p:not(.product-case-statement):not(.product-proof):not(.product-lesson) {
-  max-width: none;
-  margin: 0 0 10px;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: clamp(18px, 1.8vw, 21px);
+  line-height: 1.38;
   text-wrap: pretty;
 }
 
-.product-case-copy .product-proof {
+.case-card .product-proof {
   max-width: max-content;
-  margin: 16px 0 0;
+  margin: 0 0 12px;
   padding-left: 12px;
   border-left: 2px solid var(--accent);
   color: var(--accent-ink);
@@ -1724,12 +1709,50 @@ h2::before {
   font-variant-numeric: tabular-nums;
 }
 
-.product-case-copy .product-lesson {
+.case-card .product-ownership {
   max-width: none;
-  margin: 16px 0 0;
+  margin: 0;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.55;
+}
+
+.case-card .product-case-toggle {
+  margin-top: 6px;
+}
+
+.case-card .product-case-panel {
+  margin-top: 4px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.product-case-panel .product-case-statement {
+  max-width: none;
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.product-case-panel > p:not(.product-case-statement):not(.product-lesson) {
+  max-width: none;
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.product-case-panel .product-lesson {
+  max-width: none;
+  margin: 12px 0 4px;
   padding: 12px 14px;
   border-radius: 12px;
-  background: var(--bg-2);
+  background: var(--paper);
   color: var(--muted);
   font-size: 13.5px;
   line-height: 1.6;
@@ -1745,19 +1768,23 @@ h2::before {
   text-transform: uppercase;
 }
 
+.product-case-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 12px;
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.product-case-links a {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--accent-ink);
+}
+
 @media (max-width: 720px) {
-  .product-case-row {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    padding-block: 22px 24px;
-  }
-
-  .product-case-id .product-ownership {
-    max-width: none;
-  }
-
-  .product-case-copy {
-    padding-top: 0;
+  .case-card {
+    padding: 22px 20px 20px;
   }
 
   .product-case-toggle button {

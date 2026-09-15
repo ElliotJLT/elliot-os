@@ -38,11 +38,17 @@ and who decided?
   the body. Never put a standfirst or a paragraph beside a headline, and
   never run body prose in two columns. A short column beside a long one
   leaves a void, and the reader's eye lands on the wrong side.
+- Look at the space before writing into it. Outside a card, a section is
+  one kicker, one standfirst of at most two lines at desktop width, then
+  cards, a grid, a table or a list. No stacked paragraphs of prose on a
+  page: if it needs three paragraphs it needs a card or a cut. Condense
+  first, then add. /writing is the reference shape.
 - Prose measure is 80ch (`.muted`, `.prose`, `.copy-spread p`), standfirsts
   40em. Do not add per-section width overrides.
 - Nav dropdown rows, intros and feature copy are one line each.
-- The nav menu is state-driven (hover with a grace period, click to toggle,
-  Escape or outside click to close). Do not go back to pure `:hover`.
+- The nav menu is state-driven: hover opens with a grace period, Escape or
+  an outside click closes, and clicking the trigger navigates to the page.
+  Do not go back to pure `:hover`.
 
 ## Rules that are easy to break
 

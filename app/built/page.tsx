@@ -67,9 +67,8 @@ export default async function Built() {
               </h1>
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              I start by finding the wider problem beneath the request. Then I
-              stay close to the code and the team until the product works for
-              its users and the business can support it.
+              Find the wider problem beneath the request, then stay close to
+              the code and the team until users can depend on it.
             </p>
           </header>
         </Reveal>
@@ -78,6 +77,10 @@ export default async function Built() {
           <h2 id="production" className="mai-kick rv-settle">
             selected product work
           </h2>
+          <p className="muted rv-settle section-line">
+            Four products in production. The bet and the proof on each card;
+            Problem or Bet opens the full story.
+          </p>
         </Reveal>
         <Reveal>
           <div className="rv-settle">
@@ -102,50 +105,17 @@ export default async function Built() {
           </figure>
         </Reveal>
 
-        <Reveal>
-          <section
-            id="independent-work"
-            className="work-bridge rv-settle"
-            aria-labelledby="independent-work-title"
-          >
-            <span className="mai-kick">Independent work</span>
-            <div className="work-bridge-grid">
-              <h2 id="independent-work-title" className="work-bridge-title">
-                My independent work starts with problems I run into myself.
-              </h2>
-              <p className="work-bridge-copy">
-                I built Argus because I could not retrieve my research, and crux
-                because a code diff could not explain the decisions behind it.
-                I apply the same test to each project below: use it in my own
-                work and keep changing it until I trust it.
-              </p>
-            </div>
-          </section>
-        </Reveal>
+        <div id="independent-work" className="anchor-target" />
         <Reveal>
           <h2 id="argus" className="mai-kick rv-settle">
             argus
           </h2>
+          <p className="muted rv-settle section-line">
+            My private research system. Code fetches, deduplicates and files;
+            one model call decides whether a source is kept and which view it
+            moves.
+          </p>
         </Reveal>
-        <div className="copy-spread">
-          <Reveal>
-            <p className="muted rv-settle" style={{ marginTop: 0 }}>
-              My private research system for product work, career questions,
-              startup ideas and LLMs. It takes transcripts, feeds and my own
-              notes, then builds evidence-backed views I can question or
-              correct. Argus measures useful shifts in a view rather than the
-              size of its corpus.
-            </p>
-          </Reveal>
-          <Reveal delay={90}>
-            <p className="muted rv-settle" style={{ marginTop: 0 }}>
-              The cheap jobs are code: fetching captions, deduplicating sources,
-              validating paths and rebuilding views. The model gets a compact
-              excerpt and one decision to make. It keeps, discards or holds the
-              source for review, then says which existing view should move.
-            </p>
-          </Reveal>
-        </div>
         <Reveal>
           <div className="rv-settle">
             <ArgusFlow />
@@ -156,6 +126,9 @@ export default async function Built() {
           <h2 id="research" className="mai-kick rv-settle">
             research
           </h2>
+          <p className="muted rv-settle section-line">
+            What the human decided while the model typed, measured.
+          </p>
         </Reveal>
         <Reveal>
           <div className="research-card rv-settle">
@@ -166,24 +139,15 @@ export default async function Built() {
             </h3>
             <p>
               You are shipping faster than ever. Are you getting sharper, or
-              just getting carried? Nothing currently measures that. I
-              noticed it in myself at Zero Gravity: shipping faster than I
-              ever had, and slower to say what I would have done differently.
-              Output has never been higher and no instrument tells you
-              whether the person behind it is improving, plateauing or
-              quietly atrophying. Fluency frameworks answer the baseline and
-              everyone will pass them; the layer above is where the
-              difference sits, in trust calibration, resistance to output
-              that looks polished, and knowing what to kill.
+              just carried? Nothing measures that. I noticed it in myself at
+              Zero Gravity: faster than I had ever shipped, and slower to say
+              what I would have done differently.
             </p>
             <p>
               crux measures it. A Claude Code hook reads each session and
-              extracts what the human actually decided: what got rejected,
-              redirected or killed while the model did the typing. Ongoing
-              research rather than a product, published with the method, the
-              results run on myself, the honest objections, the limitations,
-              and a memo to the platform layer about the half that nothing
-              measures.
+              extracts what the human decided: what got rejected, redirected
+              or killed while the model typed. Published as research, with
+              the method, results run on myself, objections and limitations.
             </p>
             <div className="meta">
               <a href="https://elliotjlt.github.io/crux/research.html">
@@ -198,17 +162,9 @@ export default async function Built() {
           <h2 id="agent-tools" className="mai-kick rv-settle">
             agent tools
           </h2>
-        </Reveal>
-        <Reveal>
-          <p className="muted rv-settle">
-            The agentic vocabulary, mapped to what is above: orchestration
-            and multi-agent patterns in the tutor and argus, tool use in the
-            MCP servers and skills below, retrieval in Career Co-pilot, human
-            oversight and evaluation on{" "}
-            <a href={`${basePath}/loops/`}>/loops</a> and{" "}
-            <a href={`${basePath}/evals/`}>/evals</a>.
-            Memory is thin and planning is absent: I have designed stopping
-            rules, not planners.
+          <p className="muted rv-settle section-line">
+            Open source, built for my own agent work: skills, hooks, MCP
+            servers and a safeguarding layer with published evals.
           </p>
         </Reveal>
         <Reveal>
@@ -243,12 +199,8 @@ export default async function Built() {
 
         <Reveal>
           <h2 className="mai-kick rv-settle">ideas or feedback?</h2>
-        </Reveal>
-        <Reveal>
-          <p className="muted rv-settle">
-            Two systems here are real but private: argus, an agent fleet that
-            turns research into working views, and LifeOS, the front door that
-            routes my whole setup. Ask me about either:{" "}
+          <p className="muted rv-settle section-line">
+            argus and LifeOS are real but private. Ask me about either:{" "}
             <a href="mailto:elliotjlittle@gmail.com">
               elliotjlittle@gmail.com
             </a>

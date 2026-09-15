@@ -15,36 +15,13 @@ export default function Evals() {
               </h1>
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              I have asked the same question of a production tutor for
-              teenagers, a safeguarding layer, a regulated probate operation
-              and my own AI-assisted work. This page collects the checking
-              work in one place: what each eval measures, the numbers it
-              produced, and the failure it exists to catch.
+              The same question, asked of a tutor for teenagers, a
+              safeguarding layer, a regulated probate operation and my own
+              AI-assisted work. Each entry: what the eval measures, the
+              numbers, and the failure it exists to catch.
             </p>
           </header>
         </Reveal>
-
-        <div className="copy-spread">
-          <Reveal>
-            <p className="muted rv-settle" style={{ marginTop: 0 }}>
-              AI makes plausible output nearly free, which moves the scarce
-              work one layer up: deciding whether the output is true, safe
-              and worth shipping. A demo needs a good answer once. A product
-              needs to know its failure rate, in numbers, before a user
-              finds it.
-            </p>
-          </Reveal>
-          <Reveal delay={90}>
-            <p className="muted rv-settle" style={{ marginTop: 0 }}>
-              So each build below starts from the same place: name the
-              failure that actually hurts someone, build the measurement
-              before scaling the feature, and give the result an owner. The
-              habit predates LLMs. Evals are the software version of an old
-              operations discipline: define the error, count it, make
-              someone accountable for the count.
-            </p>
-          </Reveal>
-        </div>
 
         <Reveal>
           <h2 id="tutor" className="mai-kick rv-settle">

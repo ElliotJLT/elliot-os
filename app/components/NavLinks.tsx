@@ -126,13 +126,12 @@ function NavMenu({
   active: boolean;
   basePath: string;
 }) {
-  // Open state lives in React rather than in :hover alone. Pure :hover had
-  // two failures: the trigger sits inside the nav pill, so moving straight
+  // Open state lives in React rather than in :hover alone. Pure :hover
+  // failed because the trigger sits inside the nav pill: moving straight
   // down to the panel crossed the pill's padding, lost the hover and closed
-  // the menu before the pointer reached it; and clicking the trigger
-  // navigated, which re-rendered the nav and dropped the menu on the new
-  // page. Now hover opens with a short grace on leave, click toggles, and
-  // Escape, an outside click or a route change closes.
+  // the menu before the pointer reached it. Now hover opens with a short
+  // grace on leave, and Escape, an outside click or a route change closes.
+  // Clicking the trigger navigates: "built" takes you to /built.
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -191,11 +190,6 @@ function NavMenu({
         data-active={active || undefined}
         aria-haspopup="true"
         aria-expanded={open}
-        onClick={(e) => {
-          e.preventDefault();
-          clear();
-          setOpen((o) => !o);
-        }}
       >
         {menu.label}
         <svg viewBox="0 0 10 6" aria-hidden="true">

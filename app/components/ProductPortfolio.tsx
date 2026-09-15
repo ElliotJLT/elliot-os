@@ -24,6 +24,8 @@ type Product = {
 type Company = {
   name: string;
   meta: string;
+  /** Years, for the card eyebrow. The role is in meta and on the CV. */
+  stint: string;
   logo: string;
   products: Product[];
 };
@@ -32,6 +34,7 @@ const COMPANIES: Company[] = [
   {
     name: "Farewill",
     meta: "Product & Operations Lead · 2021–22",
+    stint: "2021–22",
     logo: "career/farewill.jpeg",
     products: [
       {
@@ -67,6 +70,7 @@ const COMPANIES: Company[] = [
   {
     name: "Zero Gravity",
     meta: "Founding hire #4 · Head of Product · 2022–26",
+    stint: "2022–26",
     logo: "career/zero-gravity.jpeg",
     products: [
       {
@@ -158,98 +162,120 @@ const COMPANIES: Company[] = [
 ];
 
 export default function ProductPortfolio({ basePath = "" }: { basePath?: string }) {
-  return (
-    <div className="product-portfolio">
-      {COMPANIES.map((company) => (
-        <section className="portfolio-company" key={company.name}>
-          <header className="portfolio-company-head">
-            <span className="portfolio-logo-shell">
-              {/* The adjacent heading names the company. */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`${basePath}/${company.logo}`}
-                alt=""
-                width={48}
-                height={48}
-              />
-            </span>
-            <div>
-              <h3>{company.name}</h3>
-              <span>{company.meta}</span>
-            </div>
-          </header>
+  // One grid of cases, each carrying its company, so all four sit on one
+  // screen at desktop width. The company header rows they used to hang under
+  // are folded into each card's eyebrow.
+  const cases = COMPANIES.flatMap((company) =>
+    company.products.map((product) => ({ company, product })),
+  );
 
-          <div className="product-case-list">
-            {company.products.map((product) => (
-              <ProductCase product={product} key={product.name} />
-            ))}
-          </div>
-        </section>
+  return (
+    <div className="case-grid">
+      {cases.map(({ company, product }) => (
+        <ProductCase
+          company={company}
+          product={product}
+          basePath={basePath}
+          key={product.name}
+        />
       ))}
     </div>
   );
 }
 
-function ProductCase({ product }: { product: Product }) {
-  const [view, setView] = useState<View>("bet");
-  const copy = product[view];
+function ProductCase({
+  company,
+  product,
+  basePath,
+}: {
+  company: Company;
+  product: Product;
+  basePath: string;
+}) {
+  // Collapsed by default: the card shows the bet in one line and its proof.
+  // Problem or Bet expands the full copy in place; the selected one again
+  // collapses it. Nothing on the page is hidden behind a slide.
+  const [view, setView] = useState<View | null>(null);
+  const copy: { title: string; paragraphs: string[]; lesson?: string } | null =
+    view ? product[view] : null;
   const panelId = `product-${product.order}-copy`;
+  const toggle = (next: View) => setView((v) => (v === next ? null : next));
 
   return (
-    <article className="product-case-row">
-      <div className="product-case-id">
-        <span className="product-case-no">{product.order}</span>
-        <h4>{product.name}</h4>
-        <p className="product-ownership">{product.ownership}</p>
-        <div
-          className="product-case-toggle"
-          role="group"
-          aria-label={`Show the problem or bet for ${product.name}`}
-        >
-          <button
-            type="button"
-            aria-controls={panelId}
-            aria-pressed={view === "problem"}
-            data-selected={view === "problem"}
-            onClick={() => setView("problem")}
-          >
-            Problem
-          </button>
-          <button
-            type="button"
-            aria-controls={panelId}
-            aria-pressed={view === "bet"}
-            data-selected={view === "bet"}
-            onClick={() => setView("bet")}
-          >
-            Bet
-          </button>
+    <article className="case-card">
+      <header className="case-card-head">
+        <span className="portfolio-logo-shell">
+          {/* The adjacent eyebrow names the company. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`${basePath}/${company.logo}`}
+            alt=""
+            width={48}
+            height={48}
+          />
+        </span>
+        <div>
+          <span className="case-card-company">
+            {company.name} · {company.stint}
+          </span>
+          <h4>{product.name}</h4>
         </div>
+      </header>
+
+      <p className="case-card-statement">{product.bet.title}</p>
+      {product.bet.proof && (
+        <p className="product-proof">{product.bet.proof}</p>
+      )}
+      <p className="product-ownership">{product.ownership}</p>
+
+      <div
+        className="product-case-toggle"
+        role="group"
+        aria-label={`Read the problem or the bet for ${product.name}`}
+      >
+        <button
+          type="button"
+          aria-controls={panelId}
+          aria-expanded={view === "problem"}
+          data-selected={view === "problem"}
+          onClick={() => toggle("problem")}
+        >
+          Problem
+        </button>
+        <button
+          type="button"
+          aria-controls={panelId}
+          aria-expanded={view === "bet"}
+          data-selected={view === "bet"}
+          onClick={() => toggle("bet")}
+        >
+          Bet
+        </button>
       </div>
 
-      <div className="product-case-copy">
+      {copy && view && (
         <div className="product-case-panel" id={panelId}>
-          <p className="product-case-statement">{copy.title}</p>
+          {view === "problem" && (
+            <p className="product-case-statement">{copy.title}</p>
+          )}
           {copy.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
-          {"lesson" in copy && copy.lesson && (
+          {copy.lesson && (
             <p className="product-lesson">
               <span>What we learned</span>
               {copy.lesson}
             </p>
           )}
-          {"proof" in copy && copy.proof && (
-            <p className="product-proof">{copy.proof}</p>
-          )}
         </div>
-        <div className="product-case-links">
-          {product.links.map((link) => (
-            <a href={link.href} key={link.href}>
-              {link.label} ↗
-            </a>
-          ))}
-        </div>
+      )}
+
+      <div className="product-case-links">
+        {product.links.map((link) => (
+          <a href={link.href} key={link.href}>
+            {link.label} ↗
+          </a>
+        ))}
       </div>
     </article>
   );
