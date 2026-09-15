@@ -1630,39 +1630,33 @@ h2::before {
   line-height: 1.55;
 }
 
-/* Cases as a two-up grid of cards, all visible. Each card: company, name,
-   the bet in one line, its proof, then Problem / Bet expanding in place. */
+/* Cases, one card per row. Inside each card every element has its own slot:
+   header (logo, company, name, role), a labelled row for the bet and one for
+   the proof, then a footer with the Problem / Bet control and the links. */
 .case-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 18px;
+  gap: 16px;
   margin: 18px 0 8px;
 }
 
-@media (min-width: 900px) {
-  .case-grid {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
-}
-
 .case-card {
-  display: flex;
-  flex-direction: column;
   min-width: 0;
-  padding: 26px 28px 22px;
+  padding: 22px 28px 20px;
   background: var(--bg-2);
   border-radius: 18px;
 }
 
 .case-card-head {
-  display: flex;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 18px;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
 }
 
-.case-card-head > div {
+.case-card-id {
   min-width: 0;
 }
 
@@ -1687,9 +1681,43 @@ h2::before {
   text-wrap: balance;
 }
 
-.case-card-statement {
-  max-width: none;
-  margin: 0 0 12px;
+.case-card-role {
+  max-width: 30ch;
+  text-align: right;
+  color: var(--faint);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  line-height: 1.5;
+}
+
+.case-spec {
+  margin: 0;
+}
+
+.case-spec-row {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.case-spec dt {
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.case-spec dd {
+  margin: 0;
+  min-width: 0;
+}
+
+.case-spec-statement {
   color: var(--ink);
   font-family: var(--serif);
   font-size: clamp(18px, 1.8vw, 21px);
@@ -1697,35 +1725,56 @@ h2::before {
   text-wrap: pretty;
 }
 
-.case-card .product-proof {
-  max-width: max-content;
-  margin: 0 0 12px;
-  padding-left: 12px;
-  border-left: 2px solid var(--accent);
+.case-spec-proof {
   color: var(--accent-ink);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   line-height: 1.55;
   font-variant-numeric: tabular-nums;
 }
 
-.case-card .product-ownership {
-  max-width: none;
-  margin: 0;
-  color: var(--faint);
-  font-family: var(--mono);
-  font-size: 10.5px;
-  line-height: 1.55;
+.case-card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 20px;
+  padding-top: 6px;
 }
 
 .case-card .product-case-toggle {
-  margin-top: 6px;
+  margin: 0;
+}
+
+.product-case-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 14px;
+  margin: 0;
+}
+
+.product-case-links a {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--accent-ink);
 }
 
 .case-card .product-case-panel {
-  margin-top: 4px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
+  margin-top: 10px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: var(--paper);
+  max-width: none;
+}
+
+.product-case-panel-label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
 }
 
 .product-case-panel .product-case-statement {
@@ -1739,7 +1788,7 @@ h2::before {
 }
 
 .product-case-panel > p:not(.product-case-statement):not(.product-lesson) {
-  max-width: none;
+  max-width: 80ch;
   margin: 0 0 10px;
   color: var(--muted);
   font-size: 15px;
@@ -1748,11 +1797,11 @@ h2::before {
 }
 
 .product-case-panel .product-lesson {
-  max-width: none;
-  margin: 12px 0 4px;
+  max-width: 80ch;
+  margin: 12px 0 0;
   padding: 12px 14px;
-  border-radius: 12px;
-  background: var(--paper);
+  border-radius: 10px;
+  background: var(--bg-2);
   color: var(--muted);
   font-size: 13.5px;
   line-height: 1.6;
@@ -1768,23 +1817,24 @@ h2::before {
   text-transform: uppercase;
 }
 
-.product-case-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px 12px;
-  margin-top: auto;
-  padding-top: 16px;
-}
-
-.product-case-links a {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  color: var(--accent-ink);
-}
-
 @media (max-width: 720px) {
   .case-card {
-    padding: 22px 20px 20px;
+    padding: 20px 20px 18px;
+  }
+
+  .case-card-head {
+    grid-template-columns: 44px minmax(0, 1fr);
+  }
+
+  .case-card-role {
+    grid-column: 2;
+    max-width: none;
+    text-align: left;
+  }
+
+  .case-spec-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 
   .product-case-toggle button {

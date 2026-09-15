@@ -200,7 +200,10 @@ function ProductCase({
     view ? product[view] : null;
   const panelId = `product-${product.order}-copy`;
   const toggle = (next: View) => setView((v) => (v === next ? null : next));
-
+  // One card per row. Every element has its own slot: the header carries
+  // identity and role, a labelled row each for the bet and the proof, and a
+  // footer with the Problem / Bet control on the left and links on the
+  // right. The opened copy sits under the footer, beneath the control.
   return (
     <article className="case-card">
       <header className="case-card-head">
@@ -214,54 +217,74 @@ function ProductCase({
             height={48}
           />
         </span>
-        <div>
+        <div className="case-card-id">
           <span className="case-card-company">
             {company.name} · {company.stint}
           </span>
           <h4>{product.name}</h4>
         </div>
+        <span className="case-card-role">{product.ownership}</span>
       </header>
 
-      <p className="case-card-statement">{product.bet.title}</p>
-      {product.bet.proof && (
-        <p className="product-proof">{product.bet.proof}</p>
-      )}
-      <p className="product-ownership">{product.ownership}</p>
+      <dl className="case-spec">
+        <div className="case-spec-row">
+          <dt>The bet</dt>
+          <dd className="case-spec-statement">{product.bet.title}</dd>
+        </div>
+        {product.bet.proof && (
+          <div className="case-spec-row">
+            <dt>Proof</dt>
+            <dd className="case-spec-proof">{product.bet.proof}</dd>
+          </div>
+        )}
+      </dl>
 
-      <div
-        className="product-case-toggle"
-        role="group"
-        aria-label={`Read the problem or the bet for ${product.name}`}
-      >
-        <button
-          type="button"
-          aria-controls={panelId}
-          aria-expanded={view === "problem"}
-          data-selected={view === "problem"}
-          onClick={() => toggle("problem")}
+      <div className="case-card-foot">
+        <div
+          className="product-case-toggle"
+          role="group"
+          aria-label={`Read the problem or the bet for ${product.name}`}
         >
-          Problem
-        </button>
-        <button
-          type="button"
-          aria-controls={panelId}
-          aria-expanded={view === "bet"}
-          data-selected={view === "bet"}
-          onClick={() => toggle("bet")}
-        >
-          Bet
-        </button>
+          <button
+            type="button"
+            aria-controls={panelId}
+            aria-expanded={view === "problem"}
+            data-selected={view === "problem"}
+            onClick={() => toggle("problem")}
+          >
+            Problem
+          </button>
+          <button
+            type="button"
+            aria-controls={panelId}
+            aria-expanded={view === "bet"}
+            data-selected={view === "bet"}
+            onClick={() => toggle("bet")}
+          >
+            Bet
+          </button>
+        </div>
+        <div className="product-case-links">
+          {product.links.map((link) => (
+            <a href={link.href} key={link.href}>
+              {link.label} ↗
+            </a>
+          ))}
+        </div>
       </div>
 
       {copy && view && (
         <div className="product-case-panel" id={panelId}>
+          <span className="product-case-panel-label">
+            {view === "problem" ? "The problem" : "The bet, in full"}
+          </span>
           {view === "problem" && (
             <p className="product-case-statement">{copy.title}</p>
           )}
           {copy.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
-          {copy.lesson && (
+          {"lesson" in copy && copy.lesson && (
             <p className="product-lesson">
               <span>What we learned</span>
               {copy.lesson}
@@ -269,14 +292,6 @@ function ProductCase({
           )}
         </div>
       )}
-
-      <div className="product-case-links">
-        {product.links.map((link) => (
-          <a href={link.href} key={link.href}>
-            {link.label} ↗
-          </a>
-        ))}
-      </div>
     </article>
   );
 }
