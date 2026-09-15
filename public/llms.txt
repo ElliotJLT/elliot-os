@@ -72,7 +72,7 @@ habit in regulated services, crisis delivery and consumer travel.
   what each student understood and where they slipped. It is built to the
   DfE's 2026 generative AI product safety standards for under-18s: content
   guardrails, session cut-offs, never presenting as human, and safeguarding
-  concerns escalated to a named person. 1,247 students by June 2026.
+  concerns escalated to a named person. 10,000 students by June 2026.
   Internal marking evals against official mark schemes moved accuracy from
   a ~67% bare-model baseline to over 99%. It launched across Maths,
   Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB, reaching the
