@@ -184,7 +184,7 @@ const COMPANIES: Company[] = [
             "Deployment is teachers first, class by class, with whole-school access agreed with leadership. The DPIA pack, data flow maps and the mapping to the DfE 2026 standards are written before a data lead asks for them, because data protection is the thing that stops a school saying yes.",
           ],
           proof:
-            "Teachers onboarded first, deployed class by class · a named teacher on every flag · DPIA pack ready before it is asked for",
+            "850+ UK schools · 91% student activation via school referral · a named teacher on every flag",
         },
         links: [
           {

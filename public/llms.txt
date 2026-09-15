@@ -79,10 +79,9 @@ habit in regulated services, crisis delivery and consumer travel.
   App Store 45 days after the first commit. The UK government later
   selected Zero Gravity for its AI Tutoring Tools Pioneers Programme, where
   it placed 2nd nationally among the eight companies chosen to test safe AI
-  tutoring tools for disadvantaged pupils. Company figures after Elliot's
-  tenure ended (Zero Gravity, September 2026): 850+ partner schools,
-  50,000+ tutoring sessions, +0.5 grades for its most active students in
-  summer 2026 exams.
+  tutoring tools for disadvantaged pupils. Zero Gravity, September 2026:
+  850+ partner schools, 50,000+ tutoring sessions, +0.5 grades for its
+  most active students in summer 2026 exams.
 - Zero Gravity school hub (the B2B layer on the tutor): teachers build
   homework from their own material, every student is coached through the
   same questions at their own level, and the teacher sees the same day who
@@ -91,7 +90,8 @@ habit in regulated services, crisis delivery and consumer travel.
   department see which topics drag a class or a school. Role-scoped access,
   safeguarding flags to named staff only, and the DPIA pack and DfE 2026
   standards mapping written before a data lead asks. Deployed teachers
-  first, class by class.
+  first, class by class: 850+ UK schools, and 91% of students activate
+  when referred through their school.
 - ward (safeguarding, under-18s) — decides which messages from a child
   are genuine safeguarding disclosures and routes them to a named human on
   a clock, grounded in KCSIE rather than keyword matching. Built around
