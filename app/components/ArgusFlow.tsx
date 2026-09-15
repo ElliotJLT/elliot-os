@@ -40,32 +40,32 @@ const STAGES: Stage[] = [
   {
     id: "views",
     name: "views",
-    meta: "current model",
+    meta: "what I currently think",
     by: "code + me",
-    note: "Evidence, implications and every before-and-after stay visible.",
+    note: "One paragraph per position, with the evidence and every change to it kept.",
   },
   {
     id: "answers",
     name: "answers",
-    meta: "bounded retrieval",
+    meta: "cited retrieval",
     by: "ask",
-    note: "A useful answer, cited back to the material that supports it.",
+    note: "An answer built only from the views and sources, with citations.",
   },
   {
     id: "me",
     name: "me",
     meta: "human judgement",
     by: "decide",
-    note: "Question the answer, correct the position or make the call.",
+    note: "Question the answer, correct the view, or make the call. Corrections go back in as signals.",
   },
 ];
 
-export default function ArgusFlow() {
+export default function ArgusFlow({ state = "live" }: { state?: string }) {
   return (
     <figure className="flow">
       <div className="flowbar" aria-hidden="true">
         <span>argus/pipeline</span>
-        <span className="flowbar-state">● live view</span>
+        <span className="flowbar-state">● {state}</span>
       </div>
 
       <div className="flow-viewport" tabIndex={0} aria-label="Argus pipeline diagram">
@@ -103,7 +103,8 @@ export default function ArgusFlow() {
       <figcaption className="fconductor">
         <span>The constraint</span> The model judges what is worth keeping and
         where it belongs. Code does the fetching, filing and validation. I
-        question the output, and a correction changes the view—not its history.
+        question the output, and a correction changes the view while its
+        history stays.
       </figcaption>
     </figure>
   );

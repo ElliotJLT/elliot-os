@@ -43,8 +43,9 @@ and who decided?
   cards, a grid, a table or a list. No stacked paragraphs of prose on a
   page: if it needs three paragraphs it needs a card or a cut. Condense
   first, then add. /writing is the reference shape.
-- Prose measure is 80ch (`.muted`, `.prose`, `.copy-spread p`), standfirsts
-  40em. Do not add per-section width overrides.
+- Prose has no max-width. The container and the card padding set the line
+  length. Do not add per-element caps; a paragraph that turns back early
+  beside a full-width list reads as a mistake.
 - Nav dropdown rows, intros and feature copy are one line each.
 - The nav menu is state-driven: hover opens with a grace period, Escape or
   an outside click closes, and clicking the trigger navigates to the page.

@@ -13,14 +13,14 @@ export const FEATURED = [
   "Claude-Skill-Potions",
   "vox",
   "dabble",
-  "ward",
   "homebuyer-mcp",
   "hooksmith",
 ];
 
-// crux gets its own section on /built (it is research, not tooling), so it is
-// neither a FEATURED tool card nor part of the "everything else" tail.
-export const RESEARCH = ["crux"];
+// crux and ward get the research section on /built (published method and
+// evals, not tooling), so they are neither FEATURED tool cards nor part of
+// the "everything else" tail.
+export const RESEARCH = ["crux", "ward"];
 
 const EXCLUDE = ["ElliotJLT", "zg-product-engineer-task", ...RESEARCH];
 

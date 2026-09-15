@@ -165,9 +165,11 @@ export default function ProductPortfolio({ basePath = "" }: { basePath?: string 
   // One grid of cases, each carrying its company, so all four sit on one
   // screen at desktop width. The company header rows they used to hang under
   // are folded into each card's eyebrow.
+  // The tutor leads: it is the most recent, the most checked, and the one
+  // both readers came for. The rest keep their order.
   const cases = COMPANIES.flatMap((company) =>
     company.products.map((product) => ({ company, product })),
-  );
+  ).sort((a, b) => Number(b.product.name === "AI STEM tutor") - Number(a.product.name === "AI STEM tutor"));
 
   return (
     <div className="case-grid">
@@ -192,10 +194,10 @@ function ProductCase({
   product: Product;
   basePath: string;
 }) {
-  // Collapsed by default: the card shows the bet in one line and its proof.
-  // Problem or Bet expands the full copy in place; the selected one again
-  // collapses it. Nothing on the page is hidden behind a slide.
-  const [view, setView] = useState<View | null>(null);
+  // The problem opens by default, so the card reads problem, bet, proof
+  // without a click. Bet swaps the panel; the selected one again collapses
+  // it. Nothing on the page is hidden behind a slide.
+  const [view, setView] = useState<View | null>("problem");
   const copy: { title: string; paragraphs: string[]; lesson?: string } | null =
     view ? product[view] : null;
   const panelId = `product-${product.order}-copy`;

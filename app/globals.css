@@ -247,13 +247,14 @@ p {
    other way, to roughly 88 characters at the 760px wrap. Both are pulled into
    range below; elements inside cards are already narrower, so the cap only
    bites on paragraphs that would otherwise span the whole column. */
-/* One reading measure for prose. Wide enough that a paragraph does not
-   look like a sidebar next to a full-width list, narrow enough to read. */
+/* Prose runs the full measure of whatever holds it. The container and card
+   padding set the line length; no per-element cap, so a paragraph never
+   turns back early beside a full-width list. */
 .muted,
 .loopnote,
 .prose p,
 .prose li {
-  max-width: 80ch;
+  max-width: none;
 }
 
 /* Avoid single-word last lines on the paragraphs a reader actually reads. */
@@ -387,7 +388,48 @@ li {
   margin: 12px 0 0;
   color: var(--muted);
   font-size: 15px;
-  max-width: 80ch;
+  max-width: none;
+}
+
+/* Two research cards side by side; each is a card, not a column of prose. */
+.research-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+@media (min-width: 900px) {
+  .research-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.research-grid .research-card {
+  margin-bottom: 0;
+}
+
+.research-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.research-card-head h3 {
+  margin: 0;
+}
+
+/* Fixed colours: the shell is white in both themes like the company logos,
+   so the stroke cannot follow the theme's ink or it vanishes in dark mode. */
+.research-icon {
+  color: #2a2622;
+  background: #fff;
+}
+
+.research-icon svg {
+  width: 24px;
+  height: 24px;
 }
 
 .research-card .meta {
@@ -543,7 +585,7 @@ li {
      introduction, but let related paragraphs use the second half of it
      instead of inheriting the old narrow-page 66ch cap and leaving a void. */
   .mai > .rv > p.muted {
-    max-width: 80ch;
+    max-width: none;
   }
 
   .copy-spread,
@@ -565,7 +607,7 @@ li {
   }
 
   .copy-spread p {
-    max-width: 80ch;
+    max-width: none;
     margin-bottom: 16px;
   }
 
@@ -1788,7 +1830,7 @@ h2::before {
 }
 
 .product-case-panel > p:not(.product-case-statement):not(.product-lesson) {
-  max-width: 80ch;
+  max-width: none;
   margin: 0 0 10px;
   color: var(--muted);
   font-size: 15px;
@@ -1797,7 +1839,7 @@ h2::before {
 }
 
 .product-case-panel .product-lesson {
-  max-width: 80ch;
+  max-width: none;
   margin: 12px 0 0;
   padding: 12px 14px;
   border-radius: 10px;
@@ -3450,8 +3492,9 @@ main:has(> .band) {
   margin-bottom: 18px;
 }
 
-.wr-head > .mai-sub {
-  max-width: 40em;
+.wr-head > .mai-sub,
+.loops-hero .mai-sub {
+  max-width: none;
   margin: 0;
 }
 
