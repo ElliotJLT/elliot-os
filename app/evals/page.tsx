@@ -51,8 +51,11 @@ export default function Evals() {
               over, however creatively they ask. An always-on evaluator
               grades every session against that spec, because a tutor that
               caves under prompt pressure is a homework machine with better
-              manners. Safety signals are recorded on each interaction and
-              routed into a safeguarding case-management flow.
+              manners. Teachers can flag a mark they disagree with, and each
+              flag becomes a case in the suite, so the eval set grows from
+              the classroom rather than from what we imagined. Safety
+              signals are recorded on each interaction and routed into a
+              safeguarding case-management flow.
             </p>
             <div className="meta">
               ~67% → 99%+ on marking evals · hallucinated marks 4.6% → 0 ·

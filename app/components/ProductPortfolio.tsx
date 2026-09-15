@@ -133,18 +133,20 @@ const COMPANIES: Company[] = [
           title:
             "Students could get an AI-generated answer in seconds. Teachers could not see whether their students understood the method.",
           paragraphs: [
-            "Generic AI tools complete the work when a student asks, then hand over the final answer when pushed. Teachers support a full class and cannot coach each step or inspect every chat. They lose the evidence they need to tell whether a student understands the method.",
+            "Generic AI tools complete the work when a student asks, then hand over the final answer when pushed. Reading a solution is passive, so the learning stops there. A teacher with thirty students cannot coach each step or read every chat, and loses the evidence they need to tell whether a student understands the method or has copied one.",
+            "The stakes are exam marks. A tutor that confidently teaches something the mark scheme will penalise is worse than no tutor, because the student cannot tell and finds out in the exam hall.",
           ],
         },
         bet: {
           title:
             "The tutor coaches towards the answer and refuses to hand it over.",
           paragraphs: [
-            "Coaching, practice, marking and assignments run as separate agents, each with its own pedagogy and evaluator. We test marking against past papers and official mark schemes, and record safety signals on each interaction. Built to the DfE's Generative AI Product Safety Standards for under-18s.",
-            "We launched across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB, direct to students and through a school hub for teachers: 1,247 students by June 2026. Eleven weeks later, the government selected us for its AI Tutoring Tools Pioneers Programme: eight companies chosen nationally to test safe AI tutoring in schools. We placed 2nd, scoring ahead of frontier US labs and the largest UK curriculum incumbents.",
+            "The Socratic method is architectural, not a prompt: the tutor asks the next question until the student gets there themselves, and cannot be talked into handing over the answer. Coaching, practice, marking and assignments run as separate agents, each with its own pedagogy and evaluator. Marking is tested against real past papers and official mark schemes, and it recognises alternative methods the way a teacher would. A student can type the question or snap a photo of handwritten working.",
+            "Every answer is grounded in the exact exam board and course a student is taught. It remembers what each student understands, where they slipped and what helped, and adjusts next time. We launched across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB, direct to students and through the school hub below: 1,247 students by June 2026.",
+            "Built to the DfE's 2026 generative AI product safety standards for under-18s: content guardrails, session cut-offs, usage limits for younger students, the tutor never presenting itself as human, and a safeguarding concern cutting the session and escalating to a named person rather than a transcript dump. Student data is never used to train external models. Eleven weeks after launch, the government selected us for its AI Tutoring Tools Pioneers Programme, eight companies chosen nationally to test safe AI tutoring in schools. We placed 2nd, ahead of frontier US labs and the largest UK curriculum incumbents.",
           ],
           proof:
-            "~67% → 99%+ on internal marking evals · App Store in 45 days",
+            "~67% → 99%+ on internal marking evals · App Store in 45 days · 2nd of 8 in the DfE Pioneers Programme",
         },
         links: [
           {
@@ -154,6 +156,44 @@ const COMPANIES: Company[] = [
           {
             label: "App Store",
             href: "https://apps.apple.com/gb/app/zero-gravity-tutor/id6760364095",
+          },
+          {
+            label: "trust and safeguarding",
+            href: "https://www.zerogravity.co.uk/tutor/trust",
+          },
+        ],
+      },
+      {
+        order: "05",
+        name: "School hub",
+        ownership: "Led product and design · the B2B layer on the tutor",
+        problem: {
+          title:
+            "One teacher, thirty students, one homework. They found out who was stuck at the next assessment, weeks after it mattered.",
+          paragraphs: [
+            "Homework help from a chatbot is a black box: the teacher sees a finished answer and nothing of the thinking. Coaching each student at their own level is what every teacher would do with the time, and no one has it. Interventions that could change a grade happen after the window has closed.",
+            "Schools also cannot say yes to AI without paper: a DPIA, a data lead's questions, a governor asking why. The product had to be defensible before it could be useful.",
+          ],
+        },
+        bet: {
+          title:
+            "Same homework for the class, different help for each student, and the teacher sees who needs them before the next lesson.",
+          paragraphs: [
+            "Teachers build homework from their own material and send it in a click. Every student does the same questions and is coached through them at their own level. As the work comes in, the teacher sees who has it, who needs another go and who is ready for more, the same day rather than at the next assessment. A weekly summary per class names the gap, the students to nudge and the ones to stretch. It drafts; the teacher decides.",
+            "Heads of department see which topics are dragging a class or a school, by subject, while there is still time to act. A lesson builder turns a topic and a level into a plan, slides and a worksheet grounded in the specification, tuned by the misconceptions the tutor has already seen. Access is scoped by role: a subject teacher, a form tutor and a senior leader each see what their job needs, and safeguarding flags go only to the staff the school names.",
+            "Deployment is teachers first, class by class, with whole-school access agreed with leadership. The DPIA pack, data flow maps and the mapping to the DfE 2026 standards are written before a data lead asks for them, because data protection is the thing that stops a school saying yes.",
+          ],
+          proof:
+            "Teachers onboarded first, deployed class by class · a named teacher on every flag · DPIA pack ready before it is asked for",
+        },
+        links: [
+          {
+            label: "for teachers",
+            href: "https://www.zerogravity.co.uk/tutor/teachers",
+          },
+          {
+            label: "for school leaders",
+            href: "https://www.zerogravity.co.uk/tutor/school-leaders",
           },
         ],
       },
@@ -165,11 +205,16 @@ export default function ProductPortfolio({ basePath = "" }: { basePath?: string 
   // One grid of cases, each carrying its company, so all four sit on one
   // screen at desktop width. The company header rows they used to hang under
   // are folded into each card's eyebrow.
-  // The tutor leads: it is the most recent, the most checked, and the one
-  // both readers came for. The rest keep their order.
+  // The tutor leads and its school hub follows: the most recent, the most
+  // checked, and the pair both readers came for. The rest keep their order.
+  const LEAD = ["AI STEM tutor", "School hub"];
+  const rank = (name: string) => {
+    const i = LEAD.indexOf(name);
+    return i === -1 ? LEAD.length : i;
+  };
   const cases = COMPANIES.flatMap((company) =>
     company.products.map((product) => ({ company, product })),
-  ).sort((a, b) => Number(b.product.name === "AI STEM tutor") - Number(a.product.name === "AI STEM tutor"));
+  ).sort((a, b) => rank(a.product.name) - rank(b.product.name));
 
   return (
     <div className="case-grid">

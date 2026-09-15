@@ -101,8 +101,8 @@ export default async function Built() {
             selected product work
           </h2>
           <p className="muted rv-settle section-line">
-            Four products in production. The bet and the proof on each card;
-            Problem or Bet opens the full story.
+            Five products in production. Problem, bet and proof on each card;
+            the tutor and the school hub teachers run it through lead.
           </p>
         </Reveal>
         <Reveal>
