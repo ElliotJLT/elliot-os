@@ -50,11 +50,9 @@ export default function Loops() {
               </h1>
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              Agents that run on a schedule and change something real. Most of
-              mine are private, so you have only my word for them. Two are not:
-              they maintain this page, their source and their eval suite are
-              open, and everything below the list is me showing my working on
-              those.
+              Agents that run on a schedule and change something real. Two are
+              open and maintain this page; their source and evals are below.
+              The rest are private, so you have my word.
             </p>
           </header>
         </Reveal>

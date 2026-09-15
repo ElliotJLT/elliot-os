@@ -12,6 +12,45 @@ npm run eval:check     # golden set over both agents; gates CI on scripts/ and e
 npx tsc --noEmit       # typecheck
 ```
 
+## Themes: the rule for all copy
+
+Three themes run through the site, defined once in `lib/themes.ts`:
+
+1. Shipping AI to people who can't afford it to be wrong
+2. Product leadership while building
+3. Working with agents
+
+The question underneath all three: what got checked, what got rejected,
+and who decided?
+
+- Every nav row, section heading, /writing group, card blurb and home
+  section ties to one theme, and its eyebrow names that theme.
+- A label says what Elliot did, not which category it sits in. "Shipped AI
+  to students and families", not "In production".
+- Two readers must find their equivalent in under a minute: a
+  founding-stage hirer, and a government fellowship reader looking for
+  background, what was built and for whom, how it was validated, and the
+  team. First person, plain, no hero lines.
+
+## Layout rules
+
+- One column, top to bottom: kicker, headline, standfirst under it, then
+  the body. Never put a standfirst or a paragraph beside a headline, and
+  never run body prose in two columns. A short column beside a long one
+  leaves a void, and the reader's eye lands on the wrong side.
+- Look at the space before writing into it. Outside a card, a section is
+  one kicker, one standfirst of at most two lines at desktop width, then
+  cards, a grid, a table or a list. No stacked paragraphs of prose on a
+  page: if it needs three paragraphs it needs a card or a cut. Condense
+  first, then add. /writing is the reference shape.
+- Prose has no max-width. The container and the card padding set the line
+  length. Do not add per-element caps; a paragraph that turns back early
+  beside a full-width list reads as a mistake.
+- Nav dropdown rows, intros and feature copy are one line each.
+- The nav menu is state-driven: hover opens with a grace period, Escape or
+  an outside click closes, and clicking the trigger navigates to the page.
+  Do not go back to pure `:hover`.
+
 ## Rules that are easy to break
 
 - `content/now.md` has two authors. The block between `agent:begin` and

@@ -2,6 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { THEMES } from "@/lib/themes";
+
+// Menu rows say what Elliot did, not which category it sits in, and each
+// eyebrow names the site theme it belongs to (lib/themes.ts).
+const [WRONG, LEADING, AGENTS] = THEMES;
 
 type MenuItem = {
   eyebrow: string;
@@ -28,38 +34,38 @@ const MENUS: Menu[] = [
     href: "/built",
     label: "built",
     listLabel: "Explore the work",
-    intro: "Products, systems and research built around the judgement before something ships.",
+    intro: "The judgement before something ships.",
     items: [
       {
-        eyebrow: "01 · shipped",
-        title: "In production",
+        eyebrow: `01 · ${WRONG.short}`,
+        title: "Shipped AI to students and families",
         href: "/built#production",
       },
       {
-        eyebrow: "02 · independent",
-        title: "Independent work",
+        eyebrow: `02 · ${WRONG.short}`,
+        title: "Built safeguarding and career tools",
         href: "/built#independent-work",
       },
       {
-        eyebrow: "03 · systems",
-        title: "Argus",
+        eyebrow: `03 · ${AGENTS.short}`,
+        title: "Built a fleet that reads for me",
         href: "/built#argus",
       },
       {
-        eyebrow: "04 · published",
-        title: "Research",
+        eyebrow: `04 · ${AGENTS.short}`,
+        title: "Measured the human in the loop",
         href: "/built#research",
       },
       {
-        eyebrow: "05 · open source",
-        title: "Agent tools",
+        eyebrow: `05 · ${AGENTS.short}`,
+        title: "Open-sourced tools for agent work",
         href: "/built#agent-tools",
       },
     ],
     feature: {
       eyebrow: "Selected work",
       title: "Judgement before output.",
-      copy: "Products and systems built for the point where a plausible answer still is not safe enough to ship.",
+      copy: "Built for the point where plausible is not yet safe to ship.",
       cta: "See everything built",
     },
   },
@@ -67,27 +73,27 @@ const MENUS: Menu[] = [
     href: "/writing",
     label: "writing",
     listLabel: "Read by subject",
-    intro: "Essays on shipping AI where a plausible wrong answer still carries real cost.",
+    intro: "Essays from shipping AI where errors cost.",
     items: [
       {
-        eyebrow: "01 · product",
-        title: "Product engineering",
-        href: "/writing#essays",
+        eyebrow: `01 · ${WRONG.short}`,
+        title: "When wrong answers cost",
+        href: `/writing#${WRONG.id}`,
       },
       {
-        eyebrow: "02 · systems",
-        title: "Agent loops",
-        href: "https://medium.com/@elliotJL/the-loop-was-never-the-hard-part-5bdd4352acab",
+        eyebrow: `02 · ${LEADING.short}`,
+        title: "Leading the team while building it",
+        href: `/writing#${LEADING.id}`,
       },
       {
-        eyebrow: "03 · practice",
-        title: "The end of the handoff",
-        href: "https://medium.com/@elliotJL/the-product-engineer-and-the-end-of-the-handoff-93181f170779",
+        eyebrow: `03 · ${AGENTS.short}`,
+        title: "Loops, stopping rules and evals",
+        href: `/writing#${AGENTS.id}`,
       },
       {
-        eyebrow: "04 · deployment",
-        title: "Trust and adoption",
-        href: "/writing#essays",
+        eyebrow: "04 · earlier",
+        title: "Before the AI work",
+        href: "/writing#earlier",
       },
       {
         eyebrow: "05 · conversation",
@@ -98,16 +104,17 @@ const MENUS: Menu[] = [
     feature: {
       eyebrow: "Notes from the field",
       title: "Where wrong answers carry real cost.",
-      copy: "Essays on shipping AI, responsible deployment, and the human judgement the loop cannot automate.",
+      copy: "Shipping AI, and the judgement the loop cannot automate.",
       cta: "Read all writing",
     },
   },
 ];
 
+// /changelog still exists (the footer links to it as the receipts) but it is
+// not a destination, so it does not earn a slot in the nav.
 const LINKS = [
   ["/evals", "evals"],
   ["/loops", "loops"],
-  ["/changelog", "changelog"],
 ] as const;
 
 function NavMenu({
@@ -119,13 +126,70 @@ function NavMenu({
   active: boolean;
   basePath: string;
 }) {
+  // Open state lives in React rather than in :hover alone. Pure :hover
+  // failed because the trigger sits inside the nav pill: moving straight
+  // down to the panel crossed the pill's padding, lost the hover and closed
+  // the menu before the pointer reached it. Now hover opens with a short
+  // grace on leave, and Escape, an outside click or a route change closes.
+  // Clicking the trigger navigates: "built" takes you to /built.
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const timer = useRef<number | null>(null);
+  const hoverCapable = () =>
+    typeof window !== "undefined" && window.matchMedia("(hover: hover)").matches;
+  const clear = () => {
+    if (timer.current !== null) {
+      window.clearTimeout(timer.current);
+      timer.current = null;
+    }
+  };
+  const enter = () => {
+    if (!hoverCapable()) return;
+    clear();
+    setOpen(true);
+  };
+  const leave = () => {
+    if (!hoverCapable()) return;
+    clear();
+    timer.current = window.setTimeout(() => setOpen(false), 180);
+  };
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: PointerEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("keydown", onKey);
+      clear();
+    };
+  }, [open]);
+
   return (
-    <div className="nav-menu">
+    <div
+      className="nav-menu"
+      ref={ref}
+      data-open={open || undefined}
+      onMouseEnter={enter}
+      onMouseLeave={leave}
+    >
       <Link
         className="nav-menu-trigger"
         href={menu.href}
         data-active={active || undefined}
         aria-haspopup="true"
+        aria-expanded={open}
       >
         {menu.label}
         <svg viewBox="0 0 10 6" aria-hidden="true">

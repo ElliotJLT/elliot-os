@@ -247,11 +247,14 @@ p {
    other way, to roughly 88 characters at the 760px wrap. Both are pulled into
    range below; elements inside cards are already narrower, so the cap only
    bites on paragraphs that would otherwise span the whole column. */
+/* Prose runs the full measure of whatever holds it. The container and card
+   padding set the line length; no per-element cap, so a paragraph never
+   turns back early beside a full-width list. */
 .muted,
 .loopnote,
 .prose p,
 .prose li {
-  max-width: 66ch;
+  max-width: none;
 }
 
 /* Avoid single-word last lines on the paragraphs a reader actually reads. */
@@ -385,7 +388,48 @@ li {
   margin: 12px 0 0;
   color: var(--muted);
   font-size: 15px;
-  max-width: 66ch;
+  max-width: none;
+}
+
+/* Two research cards side by side; each is a card, not a column of prose. */
+.research-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+@media (min-width: 900px) {
+  .research-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.research-grid .research-card {
+  margin-bottom: 0;
+}
+
+.research-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.research-card-head h3 {
+  margin: 0;
+}
+
+/* Fixed colours: the shell is white in both themes like the company logos,
+   so the stroke cannot follow the theme's ink or it vanishes in dark mode. */
+.research-icon {
+  color: #2a2622;
+  background: #fff;
+}
+
+.research-icon svg {
+  width: 24px;
+  height: 24px;
 }
 
 .research-card .meta {
@@ -395,25 +439,8 @@ li {
   margin-top: 14px;
 }
 
-@media (min-width: 800px) {
-  .research-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 40px;
-  }
-
-  .research-card > h3 {
-    grid-column: 1 / -1;
-  }
-
-  .research-card p {
-    max-width: none;
-  }
-
-  .research-card > .meta {
-    grid-column: 1 / -1;
-  }
-}
+/* Eval cards stack their paragraphs. They used to split into two columns
+   above 800px, which read as two sidebars inside one card. */
 
 /* --------------------------------------------------------------- ledger */
 /* Each day is its own card rather than a hairline header over a flat run
@@ -558,7 +585,7 @@ li {
      introduction, but let related paragraphs use the second half of it
      instead of inheriting the old narrow-page 66ch cap and leaving a void. */
   .mai > .rv > p.muted {
-    max-width: 78ch;
+    max-width: none;
   }
 
   .copy-spread,
@@ -568,15 +595,22 @@ li {
     gap: 0 48px;
   }
 
+  /* Body paragraphs stack. Side-by-side prose reads as two sidebars and
+     leaves a void under the shorter one. .copy-aside keeps its shape because
+     the second child is a card, not a paragraph. */
   .copy-spread {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
   .copy-aside {
     grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.7fr);
   }
 
-  .copy-spread p,
+  .copy-spread p {
+    max-width: none;
+    margin-bottom: 16px;
+  }
+
   .copy-aside p {
     max-width: none;
     margin-bottom: 0;
@@ -1630,62 +1664,135 @@ h2::before {
   color: var(--faint);
 }
 
-.product-case-list {
-  border-top: 1px solid var(--line);
+/* The one line under a section kicker. Sits tight to the kicker, then the
+   cards or list follow. */
+.section-line {
+  margin: -8px 0 22px;
+  font-size: 16px;
+  line-height: 1.55;
 }
 
-.product-case-row {
+/* Cases, one card per row. Inside each card every element has its own slot:
+   header (logo, company, name, role), a labelled row for the bet and one for
+   the proof, then a footer with the Problem / Bet control and the links. */
+.case-grid {
   display: grid;
-  grid-template-columns: minmax(190px, 0.36fr) minmax(0, 1fr);
-  gap: 38px;
-  padding: 24px 0 26px;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin: 18px 0 8px;
+}
+
+.case-card {
+  min-width: 0;
+  padding: 22px 28px 20px;
+  background: var(--bg-2);
+  border-radius: 18px;
+}
+
+.case-card-head {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 16px;
   border-bottom: 1px solid var(--line);
 }
 
-.product-case-id,
-.product-case-copy {
+.case-card-id {
   min-width: 0;
 }
 
-.product-case-copy {
-  padding-top: 22px;
-}
-
-.product-case-no {
+.case-card-company {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   font-family: var(--mono);
   font-size: 10px;
   line-height: 1.4;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent-ink);
 }
 
-.product-case-id h4 {
-  margin: 0 0 8px;
+.case-card h4 {
+  margin: 0;
   font-family: var(--display);
-  font-size: clamp(23px, 2.6vw, 29px);
+  font-size: clamp(22px, 2.2vw, 26px);
   font-weight: 500;
   letter-spacing: -0.015em;
   line-height: 1.12;
   text-wrap: balance;
 }
 
-.product-case-id .product-ownership {
-  max-width: none;
-  margin: 0;
+.case-card-role {
+  max-width: 30ch;
+  text-align: right;
   color: var(--faint);
   font-family: var(--mono);
   font-size: 10.5px;
+  line-height: 1.5;
+}
+
+.case-spec {
+  margin: 0;
+}
+
+.case-spec-row {
+  display: grid;
+  grid-template-columns: 88px minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.case-spec dt {
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.case-spec dd {
+  margin: 0;
+  min-width: 0;
+}
+
+.case-spec-statement {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.8vw, 21px);
+  line-height: 1.38;
+  text-wrap: pretty;
+}
+
+.case-spec-proof {
+  color: var(--accent-ink);
+  font-family: var(--mono);
+  font-size: 11px;
   line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+}
+
+.case-card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 20px;
+  padding-top: 6px;
+}
+
+.case-card .product-case-toggle {
+  margin: 0;
 }
 
 .product-case-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px 12px;
-  margin-top: 10px;
+  gap: 5px 14px;
+  margin: 0;
 }
 
 .product-case-links a {
@@ -1694,17 +1801,35 @@ h2::before {
   color: var(--accent-ink);
 }
 
-.product-case-copy .product-case-statement {
+.case-card .product-case-panel {
+  margin-top: 10px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: var(--paper);
   max-width: none;
-  margin: 0 0 12px;
-  color: var(--ink);
-  font-family: var(--serif);
-  font-size: clamp(21px, 2.5vw, 27px);
-  line-height: 1.32;
-  text-wrap: balance;
 }
 
-.product-case-panel > p:not(.product-case-statement):not(.product-proof):not(.product-lesson) {
+.product-case-panel-label {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.product-case-panel .product-case-statement {
+  max-width: none;
+  margin: 0 0 10px;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.4;
+  text-wrap: pretty;
+}
+
+.product-case-panel > p:not(.product-case-statement):not(.product-lesson) {
   max-width: none;
   margin: 0 0 10px;
   color: var(--muted);
@@ -1713,23 +1838,11 @@ h2::before {
   text-wrap: pretty;
 }
 
-.product-case-copy .product-proof {
-  max-width: max-content;
-  margin: 16px 0 0;
-  padding-left: 12px;
-  border-left: 2px solid var(--accent);
-  color: var(--accent-ink);
-  font-family: var(--mono);
-  font-size: 10.5px;
-  line-height: 1.55;
-  font-variant-numeric: tabular-nums;
-}
-
-.product-case-copy .product-lesson {
+.product-case-panel .product-lesson {
   max-width: none;
-  margin: 16px 0 0;
+  margin: 12px 0 0;
   padding: 12px 14px;
-  border-radius: 12px;
+  border-radius: 10px;
   background: var(--bg-2);
   color: var(--muted);
   font-size: 13.5px;
@@ -1747,18 +1860,23 @@ h2::before {
 }
 
 @media (max-width: 720px) {
-  .product-case-row {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    padding-block: 22px 24px;
+  .case-card {
+    padding: 20px 20px 18px;
   }
 
-  .product-case-id .product-ownership {
+  .case-card-head {
+    grid-template-columns: 44px minmax(0, 1fr);
+  }
+
+  .case-card-role {
+    grid-column: 2;
     max-width: none;
+    text-align: left;
   }
 
-  .product-case-copy {
-    padding-top: 0;
+  .case-spec-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
   }
 
   .product-case-toggle button {
@@ -2244,7 +2362,7 @@ h2::before {
     0 20px 50px rgba(52, 46, 41, 0.12);
 }
 
-.nav-menu:hover .nav-menu-shell,
+.nav-menu[data-open] .nav-menu-shell,
 .nav-menu:has(:focus-visible) .nav-menu-shell {
   visibility: visible;
   opacity: 1;
@@ -2252,7 +2370,7 @@ h2::before {
   pointer-events: auto;
 }
 
-.nav-menu:hover .nav-menu-trigger svg,
+.nav-menu[data-open] .nav-menu-trigger svg,
 .nav-menu:has(:focus-visible) .nav-menu-trigger svg {
   background: var(--line);
   transform: rotate(180deg);
@@ -3362,40 +3480,22 @@ main:has(> .band) {
 /* Tall rounded cards in a grid, after microsoft.ai/blog: the image carries
    the card, the metadata sits under it, and the whole tile lifts on hover
    rather than only the link changing colour. */
-/* Used to cap at 62ch regardless of how wide the page was, so a 1120px
-   page ran a narrow column of text with most of its width sitting empty.
-   Kicker and headline stay left, the standfirst moves beside them on a
-   wide screen instead of stacking under — the same "label left,
-   description right" shape as a work row or the MAI reference module. */
+/* Page header: kicker, headline, then the standfirst underneath. The
+   standfirst used to sit in a second column beside the headline on wide
+   screens, which read as a sidebar and put the first sentence of the page
+   off to the right of where the eye lands. One column, top to bottom. */
 .wr-head {
-  padding: 12px 0 44px;
+  padding: 12px 0 40px;
 }
 
-/* `grid-row: 1 / -1` on mai-sub used to be how this centred it against the
-   kicker+headline — but negative grid lines resolve against the *explicit*
-   grid, which was never declared row-wise, so the span collapsed to row 1
-   and the standfirst sat pinned to the top instead of centred against the
-   full headline height. A plain wrapper around the kicker+headline sidesteps
-   the whole problem: two grid items, one row, align-items does the rest. */
-@media (min-width: 900px) {
-  .wr-head {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    column-gap: 56px;
-    align-items: center;
-  }
+.wr-head > .wr-title {
+  margin-bottom: 18px;
+}
 
-  .wr-head > .wr-title {
-    margin-bottom: 0;
-  }
-
-  .wr-head > .mai-sub {
-    margin-bottom: 0;
-    /* .mai-sub's own 56ch cap is for the centred hero context — here the
-       grid column is already the right measure, and the ch cap on top of
-       it just left the column's own width unused. */
-    max-width: none;
-  }
+.wr-head > .mai-sub,
+.loops-hero .mai-sub {
+  max-width: none;
+  margin: 0;
 }
 
 .wr-title {

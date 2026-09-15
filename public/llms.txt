@@ -62,16 +62,36 @@ habit in regulated services, crisis delivery and consumer travel.
   It built a CV with the student and used their profile to retrieve relevant
   mentors, learning pathways, community posts and career guidance.
 - Zero Gravity AI STEM tutor (in production): a working prompt was the
-  start. The production product is Socratic by design: it
-  coaches a student to the answer and will not hand it over, however
-  creatively they ask, and an always-on evaluator grades every session
-  against that spec. Internal marking evals against official mark schemes
-  moved accuracy from a ~67% bare-model baseline to over 99%. It launched
-  across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB,
-  reaching the App Store 45 days after the first commit. The UK government
-  later selected Zero Gravity for its AI Tutoring Tools Pioneers Programme,
-  where it placed 2nd nationally among the eight companies chosen to test
-  safe AI tutoring tools for disadvantaged pupils.
+  start. The production product is Socratic by design: it coaches a
+  student to the answer one question at a time and will not hand it over,
+  however creatively they ask, and an always-on evaluator grades every
+  session against that spec. Coaching, practice, marking and assignments
+  run as separate agents, each with its own pedagogy and evaluator. Every
+  answer is grounded in the exact exam board and course the student is
+  taught, marking recognises alternative methods, and the tutor remembers
+  what each student understood and where they slipped. It is built to the
+  DfE's 2026 generative AI product safety standards for under-18s: content
+  guardrails, session cut-offs, never presenting as human, and safeguarding
+  concerns escalated to a named person. 10,000 students by June 2026.
+  Internal marking evals against official mark schemes moved accuracy from
+  a ~67% bare-model baseline to over 99%. It launched across Maths,
+  Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB, reaching the
+  App Store 45 days after the first commit. The UK government later
+  selected Zero Gravity for its AI Tutoring Tools Pioneers Programme, where
+  it placed 2nd nationally among the eight companies chosen to test safe AI
+  tutoring tools for disadvantaged pupils. Zero Gravity, September 2026:
+  850+ partner schools, 50,000+ tutoring sessions, +0.5 grades for its
+  most active students in summer 2026 exams.
+- Zero Gravity school hub (the B2B layer on the tutor): teachers build
+  homework from their own material, every student is coached through the
+  same questions at their own level, and the teacher sees the same day who
+  has it, who needs another go and who is ready for more. A weekly
+  per-class summary names the gap and the students to nudge; heads of
+  department see which topics drag a class or a school. Role-scoped access,
+  safeguarding flags to named staff only, and the DPIA pack and DfE 2026
+  standards mapping written before a data lead asks. Deployed teachers
+  first, class by class: 850+ UK schools, and 91% of students activate
+  when referred through their school.
 - ward (safeguarding, under-18s) — decides which messages from a child
   are genuine safeguarding disclosures and routes them to a named human on
   a clock, grounded in KCSIE rather than keyword matching. Built around
@@ -102,9 +122,10 @@ habit in regulated services, crisis delivery and consumer travel.
   around it. Languages BA (Birmingham/Fudan): French and English native,
   Spanish fluent, Chinese intermediate. BlueDot Impact AI Governance &
   Alignment graduate.
-- Track record: Zero Gravity (led partner learning pathways, Career Co-pilot
-  and a production multi-agent AI STEM tutor for GCSE, A-Level and IB
-  students; first commit to App Store in 45 days; internal marking evals
+- Track record: Zero Gravity (led partner learning pathways, Career Co-pilot,
+  a production multi-agent AI STEM tutor for GCSE, A-Level and IB students
+  and the school hub teachers run it through; first commit to App Store in
+  45 days; internal marking evals
   moved accuracy from a ~67% bare-model baseline to over 99% against official
   mark schemes; the UK government selected Zero Gravity for its AI Tutoring
   Tools Pioneers Programme, where it placed 2nd nationally among the eight

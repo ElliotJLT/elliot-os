@@ -24,6 +24,8 @@ type Product = {
 type Company = {
   name: string;
   meta: string;
+  /** Years, for the card eyebrow. The role is in meta and on the CV. */
+  stint: string;
   logo: string;
   products: Product[];
 };
@@ -32,6 +34,7 @@ const COMPANIES: Company[] = [
   {
     name: "Farewill",
     meta: "Product & Operations Lead · 2021–22",
+    stint: "2021–22",
     logo: "career/farewill.jpeg",
     products: [
       {
@@ -67,6 +70,7 @@ const COMPANIES: Company[] = [
   {
     name: "Zero Gravity",
     meta: "Founding hire #4 · Head of Product · 2022–26",
+    stint: "2022–26",
     logo: "career/zero-gravity.jpeg",
     products: [
       {
@@ -129,18 +133,20 @@ const COMPANIES: Company[] = [
           title:
             "Students could get an AI-generated answer in seconds. Teachers could not see whether their students understood the method.",
           paragraphs: [
-            "Generic AI tools complete the work when a student asks, then hand over the final answer when pushed. Teachers support a full class and cannot coach each step or inspect every chat. They lose the evidence they need to tell whether a student understands the method.",
+            "Generic AI tools complete the work when a student asks, then hand over the final answer when pushed. Reading a solution is passive, so the learning stops there. A teacher with thirty students cannot coach each step or read every chat, and loses the evidence they need to tell whether a student understands the method or has copied one.",
+            "The stakes are exam marks. A tutor that confidently teaches something the mark scheme will penalise is worse than no tutor, because the student cannot tell and finds out in the exam hall.",
           ],
         },
         bet: {
           title:
             "The tutor coaches towards the answer and refuses to hand it over.",
           paragraphs: [
-            "Coaching, practice, marking and assignments run as separate agents, each with its own pedagogy and evaluator. We test marking against past papers and official mark schemes, and record safety signals on each interaction.",
-            "We launched across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB, direct to students and through a school hub for teachers. Eleven weeks later, the government selected us for its AI Tutoring Tools Pioneers Programme: eight companies chosen nationally to test safe AI tutoring in schools. We placed 2nd, scoring ahead of frontier US labs and the largest UK curriculum incumbents.",
+            "The Socratic method is architectural, not a prompt: the tutor asks the next question until the student gets there themselves, and cannot be talked into handing over the answer. Coaching, practice, marking and assignments run as separate agents, each with its own pedagogy and evaluator. Marking is tested against real past papers and official mark schemes, and it recognises alternative methods the way a teacher would. A student can type the question or snap a photo of handwritten working.",
+            "Every answer is grounded in the exact exam board and course a student is taught. It remembers what each student understands, where they slipped and what helped, and adjusts next time. We launched across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB, direct to students and through the school hub below: 10,000 students by June 2026.",
+            "Built to the DfE's 2026 generative AI product safety standards for under-18s: content guardrails, session cut-offs, usage limits for younger students, the tutor never presenting itself as human, and a safeguarding concern cutting the session and escalating to a named person rather than a transcript dump. Student data is never used to train external models. Eleven weeks after launch, the government selected us for its AI Tutoring Tools Pioneers Programme, eight companies chosen nationally to test safe AI tutoring in schools. We placed 2nd, ahead of frontier US labs and the largest UK curriculum incumbents.",
           ],
           proof:
-            "~67% → 99%+ on internal marking evals · App Store in 45 days",
+            "~67% → 99%+ on internal marking evals · App Store in 45 days · 2nd of 8 in the DfE Pioneers Programme",
         },
         links: [
           {
@@ -151,6 +157,44 @@ const COMPANIES: Company[] = [
             label: "App Store",
             href: "https://apps.apple.com/gb/app/zero-gravity-tutor/id6760364095",
           },
+          {
+            label: "trust and safeguarding",
+            href: "https://www.zerogravity.co.uk/tutor/trust",
+          },
+        ],
+      },
+      {
+        order: "05",
+        name: "School hub",
+        ownership: "Led product and design · the B2B layer on the tutor",
+        problem: {
+          title:
+            "One teacher, thirty students, one homework. They found out who was stuck at the next assessment, weeks after it mattered.",
+          paragraphs: [
+            "Homework help from a chatbot is a black box: the teacher sees a finished answer and nothing of the thinking. Coaching each student at their own level is what every teacher would do with the time, and no one has it. Interventions that could change a grade happen after the window has closed.",
+            "Schools also cannot say yes to AI without paper: a DPIA, a data lead's questions, a governor asking why. The product had to be defensible before it could be useful.",
+          ],
+        },
+        bet: {
+          title:
+            "Same homework for the class, different help for each student, and the teacher sees who needs them before the next lesson.",
+          paragraphs: [
+            "Teachers build homework from their own material and send it in a click. Every student does the same questions and is coached through them at their own level. As the work comes in, the teacher sees who has it, who needs another go and who is ready for more, the same day rather than at the next assessment. A weekly summary per class names the gap, the students to nudge and the ones to stretch. It drafts; the teacher decides.",
+            "Heads of department see which topics are dragging a class or a school, by subject, while there is still time to act. A lesson builder turns a topic and a level into a plan, slides and a worksheet grounded in the specification, tuned by the misconceptions the tutor has already seen. Access is scoped by role: a subject teacher, a form tutor and a senior leader each see what their job needs, and safeguarding flags go only to the staff the school names.",
+            "Deployment is teachers first, class by class, with whole-school access agreed with leadership. The DPIA pack, data flow maps and the mapping to the DfE 2026 standards are written before a data lead asks for them, because data protection is the thing that stops a school saying yes.",
+          ],
+          proof:
+            "850+ UK schools · 91% student activation via school referral · a named teacher on every flag",
+        },
+        links: [
+          {
+            label: "for teachers",
+            href: "https://www.zerogravity.co.uk/tutor/teachers",
+          },
+          {
+            label: "for school leaders",
+            href: "https://www.zerogravity.co.uk/tutor/school-leaders",
+          },
         ],
       },
     ],
@@ -158,69 +202,111 @@ const COMPANIES: Company[] = [
 ];
 
 export default function ProductPortfolio({ basePath = "" }: { basePath?: string }) {
-  return (
-    <div className="product-portfolio">
-      {COMPANIES.map((company) => (
-        <section className="portfolio-company" key={company.name}>
-          <header className="portfolio-company-head">
-            <span className="portfolio-logo-shell">
-              {/* The adjacent heading names the company. */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`${basePath}/${company.logo}`}
-                alt=""
-                width={48}
-                height={48}
-              />
-            </span>
-            <div>
-              <h3>{company.name}</h3>
-              <span>{company.meta}</span>
-            </div>
-          </header>
+  // One grid of cases, each carrying its company, so all four sit on one
+  // screen at desktop width. The company header rows they used to hang under
+  // are folded into each card's eyebrow.
+  // The tutor leads and its school hub follows: the most recent, the most
+  // checked, and the pair both readers came for. The rest keep their order.
+  const LEAD = ["AI STEM tutor", "School hub"];
+  const rank = (name: string) => {
+    const i = LEAD.indexOf(name);
+    return i === -1 ? LEAD.length : i;
+  };
+  const cases = COMPANIES.flatMap((company) =>
+    company.products.map((product) => ({ company, product })),
+  ).sort((a, b) => rank(a.product.name) - rank(b.product.name));
 
-          <div className="product-case-list">
-            {company.products.map((product) => (
-              <ProductCase product={product} key={product.name} />
-            ))}
-          </div>
-        </section>
+  return (
+    <div className="case-grid">
+      {cases.map(({ company, product }) => (
+        <ProductCase
+          company={company}
+          product={product}
+          basePath={basePath}
+          key={product.name}
+        />
       ))}
     </div>
   );
 }
 
-function ProductCase({ product }: { product: Product }) {
-  const [view, setView] = useState<View>("bet");
-  const copy = product[view];
+function ProductCase({
+  company,
+  product,
+  basePath,
+}: {
+  company: Company;
+  product: Product;
+  basePath: string;
+}) {
+  // The problem opens by default, so the card reads problem, bet, proof
+  // without a click. Bet swaps the panel; the selected one again collapses
+  // it. Nothing on the page is hidden behind a slide.
+  const [view, setView] = useState<View | null>("problem");
+  const copy: { title: string; paragraphs: string[]; lesson?: string } | null =
+    view ? product[view] : null;
   const panelId = `product-${product.order}-copy`;
-
+  const toggle = (next: View) => setView((v) => (v === next ? null : next));
+  // One card per row. Every element has its own slot: the header carries
+  // identity and role, a labelled row each for the bet and the proof, and a
+  // footer with the Problem / Bet control on the left and links on the
+  // right. The opened copy sits under the footer, beneath the control.
   return (
-    <article className="product-case-row">
-      <div className="product-case-id">
-        <span className="product-case-no">{product.order}</span>
-        <h4>{product.name}</h4>
-        <p className="product-ownership">{product.ownership}</p>
+    <article className="case-card">
+      <header className="case-card-head">
+        <span className="portfolio-logo-shell">
+          {/* The adjacent eyebrow names the company. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`${basePath}/${company.logo}`}
+            alt=""
+            width={48}
+            height={48}
+          />
+        </span>
+        <div className="case-card-id">
+          <span className="case-card-company">
+            {company.name} · {company.stint}
+          </span>
+          <h4>{product.name}</h4>
+        </div>
+        <span className="case-card-role">{product.ownership}</span>
+      </header>
+
+      <dl className="case-spec">
+        <div className="case-spec-row">
+          <dt>The bet</dt>
+          <dd className="case-spec-statement">{product.bet.title}</dd>
+        </div>
+        {product.bet.proof && (
+          <div className="case-spec-row">
+            <dt>Proof</dt>
+            <dd className="case-spec-proof">{product.bet.proof}</dd>
+          </div>
+        )}
+      </dl>
+
+      <div className="case-card-foot">
         <div
           className="product-case-toggle"
           role="group"
-          aria-label={`Show the problem or bet for ${product.name}`}
+          aria-label={`Read the problem or the bet for ${product.name}`}
         >
           <button
             type="button"
             aria-controls={panelId}
-            aria-pressed={view === "problem"}
+            aria-expanded={view === "problem"}
             data-selected={view === "problem"}
-            onClick={() => setView("problem")}
+            onClick={() => toggle("problem")}
           >
             Problem
           </button>
           <button
             type="button"
             aria-controls={panelId}
-            aria-pressed={view === "bet"}
+            aria-expanded={view === "bet"}
             data-selected={view === "bet"}
-            onClick={() => setView("bet")}
+            onClick={() => toggle("bet")}
           >
             Bet
           </button>
@@ -234,9 +320,14 @@ function ProductCase({ product }: { product: Product }) {
         </div>
       </div>
 
-      <div className="product-case-copy">
+      {copy && view && (
         <div className="product-case-panel" id={panelId}>
-          <p className="product-case-statement">{copy.title}</p>
+          <span className="product-case-panel-label">
+            {view === "problem" ? "The problem" : "The bet, in full"}
+          </span>
+          {view === "problem" && (
+            <p className="product-case-statement">{copy.title}</p>
+          )}
           {copy.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
@@ -246,11 +337,8 @@ function ProductCase({ product }: { product: Product }) {
               {copy.lesson}
             </p>
           )}
-          {"proof" in copy && copy.proof && (
-            <p className="product-proof">{copy.proof}</p>
-          )}
         </div>
-      </div>
+      )}
     </article>
   );
 }
