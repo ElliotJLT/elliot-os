@@ -72,14 +72,13 @@ export default async function Home() {
                 height={176}
               />
               <p className="band-sub rv-settle">
-                Four times a founding hire across eight years in startups.
-                Most recently I led three engineers and a designer to build an
-                AI tutor from scratch, wrote 28% of the code and took it to
-                2nd place nationally in the{" "}
+                Eight years building from zero across four startups. At Zero
+                Gravity, I led the product and team that took our AI STEM
+                tutor from concept into schools and secured selection for the{" "}
                 <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
                   UK government&apos;s AI Tutoring Tools Pioneers Programme
                 </a>
-                .
+                , alongside Google and ElevenLabs.
               </p>
               <div className="band-cta rv-settle">
                 <Pill href="/built" tone="cream" arrow>
