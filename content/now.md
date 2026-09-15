@@ -1,8 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-09-10, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 4 commits across 2 repos.*
+*Shipping log for the 7 days to 2026-09-15, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 10 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 2 commits. "Docs: the hand-written half of now.md is not rendered on any page" (ae0bf8a), "Reconcile merged agent work, fix stale claims, count runs from loop records" (5c268d4)
-- **[ElliotJLT](https://github.com/ElliotJLT/ElliotJLT)**: 2 commits. "Profile: add argus" (c78683a), "Condense profile README" (53870ce)
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 10 commits. "Home: new hero description" (a1fab0e), "Tutor: 10,000 students by June 2026, not 1,247" (fd5a5ad), "School hub proof: 850+ UK schools, 91% student activation via school referral" (11c9e67) and 7 more
 <!-- agent:end -->
 
 ## by hand
