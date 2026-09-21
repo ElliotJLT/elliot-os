@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-09-18, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 16 commits across 3 repos.*
+*Shipping log for the 7 days to 2026-09-21, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 13 commits across 3 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 10 commits. "Home: new hero description" (a1fab0e), "Tutor: 10,000 students by June 2026, not 1,247" (fd5a5ad), "School hub proof: 850+ UK schools, 91% student activation via school referral" (11c9e67) and 7 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 7 commits. "Home: new hero description" (a1fab0e), "Tutor: 10,000 students by June 2026, not 1,247" (fd5a5ad), "School hub proof: 850+ UK schools, 91% student activation via school referral" (11c9e67) and 4 more
 - **[dog-years](https://github.com/ElliotJLT/dog-years)**: 5 commits. "Make the measurement loop installable in two commands" (1d8914e), "Fix silent tool-call loss, add doctor, tests and CI" (3798efa), "Make the published results checkable from a clone" (0a9dbab) and 2 more
 - **[ElliotJLT](https://github.com/ElliotJLT/ElliotJLT)**: 1 commit. "Update README.md" (aaa5049)
 <!-- agent:end -->
