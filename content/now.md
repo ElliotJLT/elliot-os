@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-09-23, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 3 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-09-24, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 1 commits across 1 repos.*
 
-- **[dog-years](https://github.com/ElliotJLT/dog-years)**: 3 commits. "Make the measurement loop installable in two commands" (1d8914e), "Fix silent tool-call loss, add doctor, tests and CI" (3798efa), "Make the published results checkable from a clone" (0a9dbab)
+- **[dog-years](https://github.com/ElliotJLT/dog-years)**: 1 commit. "Make the measurement loop installable in two commands" (1d8914e)
 <!-- agent:end -->
 
 ## by hand
