@@ -1408,170 +1408,23 @@ h2::before {
   color: var(--ink);
 }
 
-/* ======================================================== stack explorer */
-.stack-explorer {
-  margin-top: 22px;
-}
 
-.stack-home-intro {
-  max-width: 760px;
-  margin: 0;
-  font-size: 16px;
-  line-height: 1.6;
-  text-wrap: pretty;
-}
 
-.stack-tabs {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 9px;
-}
 
-.stack-tab {
-  appearance: none;
-  min-height: 58px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 12px;
-  border: 0;
-  border-radius: 11px;
-  background: var(--bg-2);
-  box-shadow: inset 0 0 0 1px transparent;
-  color: var(--muted);
-  font: 500 12.5px/1.2 var(--sans);
-  text-align: left;
-  cursor: pointer;
-  transition-property: background-color, box-shadow, color, transform;
-  transition-duration: 0.15s;
-  transition-timing-function: ease-out;
-}
 
-.stack-tab:hover {
-  color: var(--ink);
-  box-shadow: inset 0 0 0 1px var(--line-2);
-}
 
-.stack-tab[data-selected="true"] {
-  color: var(--ink);
-  background: var(--paper);
-  box-shadow: inset 0 0 0 1px var(--accent);
-}
 
-.stack-tab:active {
-  transform: scale(0.96);
-}
 
-.stack-mark {
-  width: 30px;
-  height: 30px;
-  flex: 0 0 30px;
-  display: grid;
-  place-items: center;
-  padding: 4px;
-  overflow: hidden;
-  border-radius: 9px;
-  background: #fff;
-  outline: 1px solid oklch(0 0 0 / 0.1);
-  outline-offset: -1px;
-}
 
-:root[data-theme="dark"] .stack-mark {
-  outline-color: oklch(1 0 0 / 0.1);
-}
 
-.stack-mark img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
 
-.stack-panel {
-  min-height: 190px;
-  display: grid;
-  grid-template-columns: minmax(190px, 0.65fr) minmax(280px, 1.35fr);
-  grid-template-rows: 1fr auto;
-  column-gap: 48px;
-  align-items: center;
-  margin-top: 12px;
-  padding: 30px 34px;
-  border-radius: 18px;
-  background: var(--bg-2);
-}
 
-.stack-panel-heading {
-  grid-row: 1 / -1;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
 
-.stack-mark-large {
-  width: 54px;
-  height: 54px;
-  flex-basis: 54px;
-  padding: 9px;
-  border-radius: 14px;
-}
 
-.stack-role {
-  display: block;
-  margin-bottom: 5px;
-  font-family: var(--mono);
-  font-size: 11px;
-  line-height: 1.2;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
-  font-weight: 500;
-}
 
-.stack-panel h3 {
-  margin: 0;
-  font-family: var(--display);
-  font-size: clamp(24px, 3vw, 34px);
-  line-height: 1;
-  font-weight: 500;
-}
 
-.stack-panel p {
-  align-self: end;
-  margin: 0 0 14px;
-  max-width: 62ch;
-  color: var(--muted);
-  font-size: 15px;
-  line-height: 1.55;
-  text-wrap: pretty;
-}
 
-.stack-panel > a {
-  align-self: start;
-  justify-self: start;
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--accent-ink);
-}
 
-@media (max-width: 760px) {
-  .stack-tabs {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .stack-panel {
-    min-height: 0;
-    display: block;
-    padding: 24px;
-  }
-
-  .stack-panel-heading {
-    margin-bottom: 20px;
-  }
-
-  .stack-panel p {
-    margin-bottom: 14px;
-  }
-}
 
 /* ======================================================== product portfolio */
 /* The page reads as a product record, not four landing pages. Each row keeps
@@ -5395,7 +5248,6 @@ main:has(> .band) {
 .research-card,
 .case-card,
 .mentor-card,
-.stack-panel,
 .github-snake-link,
 .vouch,
 .pod,
@@ -5519,4 +5371,401 @@ h2.mai-kick + p.muted,
   font-family: var(--mono);
   font-weight: 500;
   letter-spacing: 0.1em;
+}
+
+/* ========================================================= my stack: phones
+   The original explorer, restored for phones and reduced motion. */
+.stack-explorer {
+  margin-top: 22px;
+}
+
+.stack-home-intro {
+  max-width: 760px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.stack-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.stack-tab {
+  appearance: none;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 11px;
+  background: var(--bg-2);
+  box-shadow: inset 0 0 0 1px transparent;
+  color: var(--muted);
+  font: 500 12.5px/1.2 var(--sans);
+  text-align: left;
+  cursor: pointer;
+  transition-property: background-color, box-shadow, color, transform;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-out;
+}
+
+.stack-tab:hover {
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+}
+
+.stack-tab[data-selected="true"] {
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.stack-tab:active {
+  transform: scale(0.96);
+}
+
+.stack-mark {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  display: grid;
+  place-items: center;
+  padding: 4px;
+  overflow: hidden;
+  border-radius: 9px;
+  background: #fff;
+  outline: 1px solid oklch(0 0 0 / 0.1);
+  outline-offset: -1px;
+}
+
+:root[data-theme="dark"] .stack-mark {
+  outline-color: oklch(1 0 0 / 0.1);
+}
+
+.stack-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.stack-panel {
+  min-height: 190px;
+  display: grid;
+  grid-template-columns: minmax(190px, 0.65fr) minmax(280px, 1.35fr);
+  grid-template-rows: 1fr auto;
+  column-gap: 48px;
+  align-items: center;
+  margin-top: 12px;
+  padding: 30px 34px;
+  border-radius: 18px;
+  background: var(--bg-2);
+}
+
+.stack-panel-heading {
+  grid-row: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.stack-mark-large {
+  width: 54px;
+  height: 54px;
+  flex-basis: 54px;
+  padding: 9px;
+  border-radius: 14px;
+}
+
+.stack-role {
+  display: block;
+  margin-bottom: 5px;
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  font-weight: 500;
+}
+
+.stack-panel h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1;
+  font-weight: 500;
+}
+
+.stack-panel p {
+  align-self: end;
+  margin: 0 0 14px;
+  max-width: 62ch;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.stack-panel > a:not(.pill) {
+  align-self: start;
+  justify-self: start;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent-ink);
+}
+
+
+
+
+
+@media (max-width: 760px) {
+  .stack-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stack-panel {
+    min-height: 0;
+    display: block;
+    padding: 24px;
+  }
+
+  .stack-panel-heading {
+    margin-bottom: 20px;
+  }
+
+  .stack-panel p {
+    margin-bottom: 14px;
+  }
+}
+
+.stack-panel {
+  background: var(--panel);
+  border: none;
+  border-radius: 26px;
+  box-shadow: var(--lift);
+}
+
+/* ======================================================== my stack: desktop
+   A pinned field after microsoft.ai's "Join us": the section holds for a
+   couple of screens while tiles fly out from behind the centred copy, come
+   into focus mid-flight and blur out past the page edges. JS sets --tx,
+   --ty, --sc, --blur and --fade per tile. */
+.stack-mobile {
+  display: none;
+}
+
+.stack-field {
+  position: relative;
+  height: 320vh;
+  margin: 24px 0;
+}
+
+/* Full-bleed so tiles can leave the page, clipped so they never widen it. */
+.stack-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+.stack-tiles {
+  position: absolute;
+  inset: 0;
+}
+
+.stack-tile {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--s);
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  opacity: var(--fade, 0);
+  filter: blur(var(--blur, 8px));
+  transform: translate(-50%, -50%) translate(var(--tx, 0px), var(--ty, 0px))
+    scale(var(--sc, 0.6));
+  will-change: transform, filter, opacity;
+}
+
+.stack-tile:hover,
+.stack-tile:focus-visible,
+.stack-tile[data-on] {
+  filter: none;
+}
+
+.stack-tile-face {
+  width: var(--s);
+  height: var(--s);
+  display: grid;
+  place-items: center;
+  padding: 24%;
+  border-radius: 24%;
+  background: #fff;
+  box-shadow: var(--lift);
+}
+
+.stack-tile[data-on] .stack-tile-face {
+  outline: 2px solid var(--accent-ink);
+  outline-offset: 3px;
+}
+
+.stack-tile-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Names show on hover or keyboard focus only; the button carries the
+   accessible name and the centre copy names the picked tool. */
+.stack-tile-name {
+  font-family: var(--mono);
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+
+.stack-tile:hover .stack-tile-name,
+.stack-tile:focus-visible .stack-tile-name {
+  opacity: 1;
+}
+
+.stack-centre {
+  position: relative;
+  z-index: 1;
+  width: min(480px, 40vw);
+  text-align: center;
+}
+
+.stack-centre .sec-title {
+  margin-bottom: 14px;
+}
+
+.stack-centre-body {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.5;
+  max-width: none;
+}
+
+.stack-centre-links {
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 860px), (prefers-reduced-motion: reduce) {
+  .stack-desktop {
+    display: none;
+  }
+
+  .stack-mobile {
+    display: block;
+  }
+}
+
+/* Masthead slides away on scroll down, back on scroll up (NavAutoHide). */
+.mai-nav {
+  transition: transform 0.32s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.nav-hidden .mai-nav {
+  transform: translateY(calc(-100% - 20px));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mai-nav {
+    transition: none;
+  }
+}
+
+.stack-panel > .pill {
+  justify-self: start;
+  align-self: start;
+}
+
+.stack-explorer-cta {
+  margin-top: 18px;
+}
+
+/* Footer: a centred column on phones; on desktop it runs the full width,
+   name on the left, link columns in the middle, the two actions on the
+   right, and the base line across the bottom. */
+.foot-brand {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  footer {
+    padding: 72px 0 32px;
+  }
+
+  footer > .wrap {
+    max-width: none;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "cols cta"
+      "base base";
+    column-gap: 48px;
+    align-items: start;
+  }
+
+  footer .foot-cols {
+    grid-area: cols;
+    grid-template-columns: minmax(160px, 1fr) minmax(0, 0.7fr) minmax(0, 1.3fr) minmax(0, 1fr);
+    padding-bottom: 72px;
+  }
+
+  footer .foot-cta {
+    grid-area: cta;
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  footer .foot-cta .band-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  footer .foot-base {
+    grid-area: base;
+  }
+
+  .foot-brand {
+    display: block;
+    font-family: var(--display);
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+}
+
+@media (min-width: 1400px) {
+  footer .foot-cta .band-cta {
+    flex-direction: row;
+  }
 }

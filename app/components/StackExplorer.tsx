@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Pill } from "./Frame";
 
 type Tool = {
   id: string;
@@ -131,6 +132,14 @@ export default function StackExplorer({ basePath = "" }: { basePath?: string }) 
         })}
       </div>
 
+      {!selected && (
+        <div className="stack-explorer-cta">
+          <Pill href="/built" arrow>
+            See what I&apos;ve built
+          </Pill>
+        </div>
+      )}
+
       {selected && (
         <div
           key={selected.id}
@@ -150,7 +159,9 @@ export default function StackExplorer({ basePath = "" }: { basePath?: string }) 
             </div>
           </div>
           <p>{selected.use}</p>
-          <a href={selected.href}>visit {selected.name} ↗</a>
+          <Pill href="/built" arrow>
+            See what I&apos;ve built
+          </Pill>
         </div>
       )}
     </div>
