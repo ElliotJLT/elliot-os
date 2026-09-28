@@ -37,7 +37,7 @@ export default function Loops() {
               What I hand to machines, and what I keep.
             </h1>
             <p className="mai-sub rv-settle">
-              The system I run my own work on, how each part works, and a
+              A real prompt from the first day, the system behind it, and a
               public ledger that would show it failing.
             </p>
           </header>
@@ -50,16 +50,40 @@ export default function Loops() {
           />
         </Reveal>
 
+        {/* ------------------------------------------------------ one real case */}
+        <Reveal>
+          <section className="loop-case rv-settle" aria-labelledby="loop-case-title">
+            <span className="loop-label">a real prompt · 28 September 2026</span>
+            <h2 id="loop-case-title">The question reached me. The result is still open.</h2>
+            <p>
+              I had said &lsquo;a lot of the heavy lifting can be done by an LLM
+              system&rsquo; and, in the same capture, that I wanted to retain
+              taste and judgement. Overnight Cervo put those words beside a{" "}
+              <a href="https://osf.io/preprints/psyarxiv/5y6m4_v1">
+                study of people relying on deliberately unreliable AI advice
+              </a>
+              . It asked whether offloading the work could erode the edge I
+              wanted to keep. The study cannot answer that question about my
+              work. The prompt made the tension hard to ignore.
+            </p>
+            <div className="loop-case-status">
+              <div><span className="loop-label">my call</span><p>Not recorded yet.</p></div>
+              <div><span className="loop-label">result</span><p>Too early to know.</p></div>
+              <div><span className="loop-label">next check</span><p>12 October. I will record whether the prompt changed an action, was noise, or should have stayed silent.</p></div>
+            </div>
+          </section>
+        </Reveal>
+
         {/* ---------------------------------------------------------- the idea */}
         <Reveal>
           <h2 id="idea" className="mai-kick rv-settle">
             the idea
           </h2>
           <p className="muted rv-settle section-line">
-            David Allen&rsquo;s point, picked up by Ben Thompson in{" "}
-            <em>Write Things Down</em>: the mind is RAM. I start more than I
-            finish, so I built the assistant that holds the list, and kept the
-            calls.
+            I&apos;ve spent years building systems that keep work moving after I
+            step away. David Allen and Ben Thompson got me thinking about a
+            more personal version: can an agent carry the continuity of my
+            work and return when there is a decision worth making?
           </p>
         </Reveal>
 
@@ -75,8 +99,8 @@ export default function Loops() {
             <div>
               <span className="loop-label">I keep</span>
               <p>
-                Which move matters today. What to kill. What to ship. Anything
-                that goes out with my name on it.
+                Whether to take, change or ignore the suggested move. What to
+                kill or ship. Anything that goes out with my name on it.
               </p>
             </div>
           </div>
@@ -128,26 +152,6 @@ export default function Loops() {
             alt="Three inputs flowing into one output: my captured words, stated versus revealed priorities, and three days of new writing on my threads, producing at most one collision or nothing."
           />
         </Reveal>
-        <Reveal>
-          <blockquote className="loop-example rv-settle">
-            <span className="loop-label">a real one, 28 September 2026</span>
-            <p>
-              On 28 Sep you said &lsquo;a lot of the heavy lifting can be done
-              by an LLM system&rsquo; and named &lsquo;retaining taste and
-              judgment&rsquo; as the deeper thread in the same breath. This
-              week&rsquo;s research is about exactly that mechanism.
-            </p>
-            <p className="loop-example-link">
-              Less Accurate, More Confident: The More We Rely On AI, The Less
-              We Question What We Think We Know
-            </p>
-            <p>
-              Is offloading the heavy lifting the hack, or is it the thing that
-              erodes the edge you&rsquo;re trying to protect?
-            </p>
-          </blockquote>
-        </Reveal>
-
         {/* ------------------------------------------------------------ ledger */}
         <Reveal>
           <h2 id="ledger" className="mai-kick rv-settle">
