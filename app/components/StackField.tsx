@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Pill } from "./Frame";
 
 type Tool = {
   id: string;
@@ -99,18 +100,18 @@ const TOOLS: Tool[] = [
 // (0..1); `end` is where it leaves, in viewport units; `lift` bends the
 // path up or down. Sides alternate so the field stays balanced.
 const FLIGHTS = [
-  { side: -1, delay: -0.3, end: [-62, -34], s: 176 },
-  { side: 1, delay: -0.22, end: [64, 26], s: 156 },
-  { side: -1, delay: -0.14, end: [-70, 30], s: 148 },
-  { side: 1, delay: -0.06, end: [60, -38], s: 184 },
-  { side: -1, delay: 0.02, end: [-58, 4], s: 140 },
-  { side: 1, delay: 0.1, end: [72, 6], s: 168 },
-  { side: -1, delay: 0.18, end: [-66, -14], s: 160 },
-  { side: 1, delay: 0.26, end: [62, 40], s: 144 },
-  { side: -1, delay: 0.34, end: [-60, 38], s: 180 },
-  { side: 1, delay: 0.42, end: [66, -20], s: 152 },
+  { side: -1, delay: -0.5, end: [-62, -40], s: 176 },
+  { side: 1, delay: -0.39, end: [64, 34], s: 156 },
+  { side: -1, delay: -0.28, end: [-70, 32], s: 148 },
+  { side: 1, delay: -0.17, end: [60, -42], s: 184 },
+  { side: -1, delay: -0.06, end: [-58, 8], s: 140 },
+  { side: 1, delay: 0.05, end: [72, -6], s: 168 },
+  { side: -1, delay: 0.16, end: [-66, -24], s: 160 },
+  { side: 1, delay: 0.27, end: [62, 40], s: 144 },
+  { side: -1, delay: 0.38, end: [-60, 40], s: 180 },
+  { side: 1, delay: 0.49, end: [66, -30], s: 152 },
 ];
-const TRIP = 0.62; // share of the scroll one flight takes; flights overlap
+const TRIP = 0.8; // share of the scroll one flight takes; flights overlap
 
 /**
  * The stack as a pinned field, after the "Join us" section on microsoft.ai:
@@ -137,24 +138,36 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
       const vw = window.innerWidth;
       const travel = Math.max(1, r.height - vh);
       const copy = centreRef.current?.getBoundingClientRect();
-      const half = copy ? copy.width / 2 : 260;
       const p = Math.min(1, Math.max(0, -r.top / travel));
       tileRefs.current.forEach((tile, i) => {
         if (!tile) return;
         const f = FLIGHTS[i % FLIGHTS.length];
         const t = Math.min(1, Math.max(0, (p - f.delay) / TRIP));
         const e = t * t * (3 - 2 * t);
-        // Start just outside the copy block and only move outward, so a tile
-        // can never cross the text.
-        const startX = f.side * (half + 36 + (f.s * 0.6) / 2);
+        // Launch from the centre, behind the copy.
+        const startX = f.side * 0.04 * vw;
         const endX = (f.end[0] / 100) * vw;
         const x = startX + (endX - startX) * e;
-        const y = f.end[1] * e * 0.9;
+        const y = (f.end[1] / 100) * vh * e;
+        const sc = 0.6 + 0.65 * e;
         const blur = t < 0.42 ? ((0.42 - t) / 0.42) * 8 : ((t - 0.42) / 0.58) * 11;
-        const fade = t <= 0 ? 0 : Math.min(1, t / 0.1) * (t >= 1 ? 0 : 1);
+        // Invisible while any part of it is behind the copy, then fading in
+        // over the next 60px of clearance: it emerges, it never overlaps.
+        let clear = 1;
+        if (copy) {
+          const half = (f.s * sc) / 2;
+          const cx = vw / 2 + x;
+          const cy = vh / 2 + y;
+          const gapX = Math.max(copy.left - (cx + half), cx - half - copy.right);
+          const gapY = Math.max(copy.top - (cy + half), cy - half - copy.bottom);
+          const gap = Math.max(gapX, gapY) - 12;
+          clear = Math.min(1, Math.max(0, gap / 60));
+        }
+        const fade = t <= 0 || t >= 1 ? 0 : clear;
         tile.style.setProperty("--tx", `${x.toFixed(1)}px`);
-        tile.style.setProperty("--ty", `${((y / 100) * vh).toFixed(1)}px`);
-        tile.style.setProperty("--sc", (0.6 + 0.65 * e).toFixed(3));
+        tile.style.setProperty("--ty", `${y.toFixed(1)}px`);
+        tile.style.setProperty("--sc", sc.toFixed(3));
+        tile.style.pointerEvents = fade < 0.2 ? "none" : "";
         tile.style.setProperty("--blur", `${blur.toFixed(2)}px`);
         tile.style.setProperty("--fade", fade.toFixed(3));
       });
@@ -222,10 +235,9 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
             <p className="sec-title">{selected.name}</p>
             <p className="stack-centre-body">{selected.use}</p>
             <div className="stack-centre-links">
-              <a href={`${basePath}/built/`}>see what I&apos;ve built →</a>
-              <button type="button" onClick={() => setSelectedId(null)}>
-                all tools
-              </button>
+              <Pill href="/built" arrow>
+                See what I&apos;ve built
+              </Pill>
             </div>
           </div>
         ) : (

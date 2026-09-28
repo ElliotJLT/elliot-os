@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Pill } from "./Frame";
 
 type Tool = {
   id: string;
@@ -150,7 +151,9 @@ export default function StackExplorer({ basePath = "" }: { basePath?: string }) 
             </div>
           </div>
           <p>{selected.use}</p>
-          <a href={`${basePath}/built/`}>see what I&apos;ve built →</a>
+          <Pill href="/built" arrow>
+            See what I&apos;ve built
+          </Pill>
         </div>
       )}
     </div>

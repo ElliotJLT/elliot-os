@@ -5511,7 +5511,7 @@ h2.mai-kick + p.muted,
   text-wrap: pretty;
 }
 
-.stack-panel > a {
+.stack-panel > a:not(.pill) {
   align-self: start;
   justify-self: start;
   font-family: var(--mono);
@@ -5519,23 +5519,9 @@ h2.mai-kick + p.muted,
   color: var(--accent-ink);
 }
 
-.stack-tabs {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 
-.stack-panel {
-    min-height: 0;
-    display: block;
-    padding: 24px;
-  }
 
-.stack-panel-heading {
-    margin-bottom: 20px;
-  }
 
-.stack-panel p {
-    margin-bottom: 14px;
-  }
 
 @media (max-width: 760px) {
   .stack-tabs {
@@ -5682,23 +5668,9 @@ h2.mai-kick + p.muted,
 }
 
 .stack-centre-links {
-  margin-top: 20px;
+  margin-top: 22px;
   display: flex;
   justify-content: center;
-  gap: 18px;
-  font-family: var(--mono);
-  font-size: 13px;
-}
-
-.stack-centre-links button {
-  appearance: none;
-  border: 0;
-  background: none;
-  padding: 0;
-  color: var(--muted);
-  font: inherit;
-  text-decoration: underline;
-  cursor: pointer;
 }
 
 @media (max-width: 860px), (prefers-reduced-motion: reduce) {
@@ -5724,4 +5696,9 @@ h2.mai-kick + p.muted,
   .mai-nav {
     transition: none;
   }
+}
+
+.stack-panel > .pill {
+  justify-self: start;
+  align-self: start;
 }
