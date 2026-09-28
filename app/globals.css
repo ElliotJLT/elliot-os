@@ -5187,3 +5187,86 @@ main:has(> .band) {
     display: none;
   }
 }
+
+/* ------------------------------------------------------------ phone menu */
+/* Only where .mai-links is hidden (720px and below). */
+.mob-menu {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .mob-menu {
+    display: block;
+  }
+
+  /* The panel hangs from the whole masthead, not from the button. */
+  .mai-nav-inner {
+    position: relative;
+  }
+}
+
+.mob-menu-btn {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.mob-menu-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.mob-menu-btn[aria-expanded="true"] {
+  background: var(--bg-2);
+}
+
+.mob-menu-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: 0 1px 2px rgba(52, 46, 41, 0.04),
+    0 12px 32px rgba(52, 46, 41, 0.1);
+}
+
+.mob-menu-panel a {
+  font-family: var(--display);
+  font-size: 24px;
+  line-height: 1.2;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+.mob-menu-panel a[data-active] {
+  background: var(--bg-2);
+}
+
+.mob-menu-panel .mob-menu-mail {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--accent-ink);
+  margin-top: 4px;
+  border-top: 1px solid var(--line);
+  border-radius: 0 0 14px 14px;
+}

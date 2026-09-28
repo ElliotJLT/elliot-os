@@ -73,8 +73,8 @@ and who decided?
 
 ## Layout
 
-- `app/` routes: `/`, `/built`, `/writing`, `/evals`, `/loops`, `/changelog`
-- `lib/` build-time readers (GitHub API, git log, content, loops, evals)
+- `app/` routes: `/`, `/built`, `/writing`, `/evals`, `/loops`
+- `lib/` build-time readers (GitHub API, content, loops, evals)
 - `scripts/` the two agents plus `fetch-media.mjs`; `evals/` their cases
 - `mcp/` zero-dependency MCP server over stdio exposing the site's data
 - `public/llms.txt` the machine-readable profile agents read first
