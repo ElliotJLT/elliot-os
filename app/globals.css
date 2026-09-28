@@ -4956,73 +4956,14 @@ main:has(> .band) {
 .loop-steps-2 { grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); }
 
 /* ================================================================== evals */
-/* The loop is drawn in the page's own ink, no card behind it. */
-.ev-figure {
-  margin: 8px 0 28px;
-}
 
-.ev-loop {
-  display: block;
-  width: 100%;
-  max-width: 760px;
-  height: auto;
-  margin: 0 auto;
-  color: var(--ink);
-  overflow: visible;
-}
 
-.ev-loop-arc {
-  fill: none;
-  stroke: var(--faint);
-  stroke-opacity: 0.7;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  color: var(--faint);
-}
 
-.ev-loop-no {
-  font-family: var(--mono);
-  font-size: 13px;
-  letter-spacing: 0.12em;
-  fill: var(--accent-ink);
-}
 
-.ev-loop-label {
-  font-family: var(--display);
-  font-size: 27px;
-  letter-spacing: -0.01em;
-  fill: var(--ink);
-}
 
-.ev-loop-bar-ring {
-  fill: none;
-  stroke: var(--accent-ink);
-  stroke-width: 1.6;
-}
 
-.ev-loop-tick {
-  fill: none;
-  stroke: var(--accent-ink);
-  stroke-width: 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
 
-.ev-loop-bar {
-  font-family: var(--mono);
-  font-size: 14px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  fill: var(--accent-ink);
-}
 
-/* Below this the labels would shrink past the 11px floor; the numbered
-   steps underneath carry the same content. */
-@media (max-width: 700px) {
-  .ev-figure {
-    display: none;
-  }
-}
 
 .ev-steps {
   list-style: none;
@@ -5083,44 +5024,11 @@ main:has(> .band) {
   color: var(--ink-2);
 }
 
-.ev-card dl {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 4px 20px;
-  margin: 18px 0 0;
-}
 
-@media (min-width: 700px) {
-  .ev-card dl {
-    grid-template-columns: 120px 1fr;
-    row-gap: 10px;
-  }
-}
 
-.ev-card dt {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--faint);
-  padding-top: 3px;
-}
 
-.ev-card dd {
-  margin: 0 0 8px;
-  font-size: 15px;
-  color: var(--ink-2);
-}
 
-@media (min-width: 700px) {
-  .ev-card dd {
-    margin: 0;
-  }
-}
 
-.ev-loops {
-  margin: 4px 0 0;
-}
 
 .ev-vs {
   width: 100%;
@@ -5161,41 +5069,53 @@ main:has(> .band) {
   color: var(--muted);
 }
 
-/* Results first: a skim should meet the proof before the method. */
-.ev-stats {
-  list-style: none;
-  margin: 28px 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0 24px;
-}
 
-@media (min-width: 900px) {
-  .ev-stats {
-    grid-template-columns: repeat(4, 1fr);
+
+
+
+
+/* Six habits read better two across than three: each has a reason and a
+   receipt, and three columns turned them into slivers. */
+@media (min-width: 1000px) {
+  .ev-calls {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-.ev-stats li {
-  border-top: 1px solid var(--line-2);
-  padding: 14px 0 18px;
+.ev-places {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.ev-stats strong {
-  display: block;
-  font-family: var(--display);
-  font-weight: 400;
-  font-size: clamp(30px, 3.4vw, 40px);
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+.ev-places li {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px 28px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+
+.ev-places li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 760px) {
+  .ev-places li {
+    grid-template-columns: 240px 1fr;
+    align-items: baseline;
+  }
+}
+
+.ev-places a {
+  font-family: var(--serif);
+  font-size: 19px;
   color: var(--ink);
 }
 
-.ev-stats span {
-  display: block;
-  margin-top: 8px;
-  font-size: 14px;
-  line-height: 1.45;
+.ev-places p {
+  margin: 0;
+  font-size: 15px;
   color: var(--muted);
+  max-width: none;
 }

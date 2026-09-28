@@ -1,51 +1,70 @@
 import Reveal from "../components/Reveal";
-import EvalLoop from "../components/EvalLoop";
-import { getCases, getEvals } from "@/lib/evals";
-
-const basePath = process.env.BASE_PATH || "";
 
 export const metadata = { title: "Evals · Elliot Little" };
 
-// The six boxes in the loop diagram, in order. Each says what the step is in
-// plain English, then where I actually did it.
-const STEPS = [
+// VERIFY (Elliot, 2026-09-28): written to lean on how and why over numbers,
+// and a few lines go further than the record I had to hand. Check before
+// leaning on them in an interview:
+// - "I read sessions every week" (the reading habit is real; the cadence is a guess)
+// - "Nobody had guessed it" about the tutor's marking failure
+// - "owned the bar" at Zero Gravity
+// Headline numbers are deliberately off this page: without the denominators
+// (how many cases, held out or not, who marked them) an eval person picks
+// them apart. They belong in the conversation, not the page.
+const HOW = [
   {
-    name: "Real use",
-    what: "Start from what people actually do with it. The spec was a guess.",
-    where: "Tutor: real past papers, marked against the official mark schemes.",
+    call: "Borrow the bar from whoever would know",
+    why: "If the team writes the rubric, the model gets marked on our opinions. Examiners and regulators have spent years arguing about what good looks like, so I take theirs. A good case is one two experts would mark the same way without talking to each other.",
+    where: "Tutor: the exam boards' mark schemes. ward: KCSIE. Farewill: the regulator's rules, turned into error types.",
   },
   {
-    name: "Read the failures",
-    what: "Sit and read the conversations. The failures that matter are rarely the ones you'd have guessed.",
-    where: "Tutor: the dangerous one was confident marking the mark scheme doesn't back up.",
+    call: "Decide which mistake you can live with",
+    why: "Everything gets something wrong. The product call is which way it fails. In safeguarding I'd rather miss an edge case than page a safeguarding lead with false alarms until they stop reading the alerts.",
+    where: "ward: built precision first, on purpose, and says so in the method.",
   },
   {
-    name: "Name them",
-    what: "Group what you find into a handful of named failure types and count them. Now it's a list you can fix instead of a feeling.",
-    where: "Farewill: named error types, counted rather than remembered. Agent errors fell 69%.",
+    call: "Mark the conversation, not just the answer",
+    why: "A tutor can get every answer right and still be useless if it hands them over. What made it a tutor was refusing to, however nicely a student asked, so the conversation itself got marked on every session.",
+    where: "Tutor: an evaluator grading every session against the Socratic spec.",
   },
   {
-    name: "Write the test",
-    what: "One pass or fail check per failure. Plain code where the answer can be checked, a model where it can't. No scores out of ten.",
-    where: "Tutor: hallucinated marking points went from 4.6% of sessions to zero.",
+    call: "Read the transcripts yourself",
+    why: "Evals catch it before launch, monitoring catches it in production, and reading transcripts catches what both of them missed. No layer's enough on its own. I read sessions every week, and the failures that mattered were never on anyone's list.",
+    where: "Tutor: the worst failure was confident marking the mark scheme didn't back up. Nobody had guessed it.",
   },
   {
-    name: "Check the marker",
-    what: "A model marking a model has to pass its own exam first: it has to agree with a human expert before anyone trusts the number.",
-    where: "ward: the eval sets and method are published, so anyone can check the marker.",
+    call: "Turn every complaint into a case",
+    why: "A teacher spots a wrong mark in seconds; I'd take hours. So every mark a teacher flagged became a test, and the suite grew from classrooms instead of from our imagination.",
+    where: "Tutor: teacher flags fed straight back into the eval set.",
   },
   {
-    name: "Gate every change",
-    what: "The checks run before anything ships. If the score drops, it doesn't go out. Then back to real use, because new failures turn up.",
-    where: "Tutor: every mark a teacher flagged became a new test case.",
+    call: "Keep one suite you're failing",
+    why: "The eval is the spec, so part of it should describe what you can't do yet. A regression suite stops you going backwards and should stay green. A capability suite you're mostly failing shows you where to go next. If everything's green, you've stopped learning.",
+    where: "This site: the agent's suite failed half its cases on the first run. Fixing that was the work, and now it's the regression suite that keeps it fixed.",
   },
 ];
 
-const STATS = [
-  { n: "67% → 99%+", what: "Tutor marking accuracy, against real past papers and mark schemes" },
-  { n: "4.6% → 0", what: "Tutor sessions with a hallucinated marking point" },
-  { n: "100%", what: "Precision on ward's safeguarding evals, at 90% recall" },
-  { n: "−69%", what: "Agent errors at Farewill, before any LLM was involved" },
+const PLACES = [
+  {
+    name: "Zero Gravity AI STEM tutor",
+    href: "https://www.zerogravity.co.uk/tutor",
+    line: "An AI tutor for GCSE and A-level STEM, used in UK schools. I built the eval pipeline and owned the bar.",
+  },
+  {
+    name: "ward",
+    href: "https://github.com/ElliotJLT/ward",
+    line: "Safeguarding for apps children use. Open source, with the eval sets and the method published.",
+  },
+  {
+    name: "Farewill probate",
+    href: "https://farewill.com/apply-for-probate",
+    line: "Regulated probate operations, before LLMs. The same habit, with spreadsheets instead of judges.",
+  },
+  {
+    name: "This site",
+    href: "https://github.com/ElliotJLT/elliot-os/tree/main/evals",
+    line: "Its own agent has an eval suite in the repo, and CI fails any change that breaks it. The first run failed half of it, which is the point.",
+  },
 ];
 
 const THEATRE = [
@@ -69,14 +88,13 @@ const THEATRE = [
     "A suite that has never once failed",
     "A suite with a record of catching things before they shipped",
   ],
+  [
+    "One headline accuracy number",
+    "A pass rate with its denominator: how many cases, who wrote them, what still fails",
+  ],
 ];
 
 export default function Evals() {
-  const cases = getCases();
-  const runs = getEvals().runs;
-  const latestRun = runs[0];
-  const firstRun = runs[runs.length - 1];
-
   return (
     <main>
       <div className="mai">
@@ -85,167 +103,57 @@ export default function Evals() {
             <div className="wr-head-main">
               <span className="mai-kick rv-settle">Evals</span>
               <h1 className="wr-title rv-settle">
-                Marking the AI&apos;s homework.
+                Deciding what good looks like.
               </h1>
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              An eval is a mark scheme for software that never gives the same
-              answer twice. This is how I write them, and three places
-              they&apos;ve had to hold up.
+              Everyone runs evals now. The hard bit is the calls around them:
+              whose bar, which mistake you can live with, and when a green
+              dashboard is lying to you. This is how I make them.
             </p>
-            <ul className="ev-stats rv-settle">
-              {STATS.map((x) => (
-                <li key={x.n}>
-                  <strong>{x.n}</strong>
-                  <span>{x.what}</span>
-                </li>
-              ))}
-            </ul>
           </header>
         </Reveal>
 
         <Reveal>
           <h2 id="how" className="mai-kick rv-settle">
-            how an eval works
+            how I do evals
           </h2>
           <p className="muted rv-settle" style={{ margin: "0 0 22px" }}>
-            Six steps, round and round. The middle is the bar: what good looks
-            like, written down by someone who&apos;d know.
+            Six habits, each with the place it came from.
           </p>
         </Reveal>
         <Reveal>
-          <figure className="ev-figure rv-develop">
-            <EvalLoop steps={STEPS.map((s) => s.name)} />
-          </figure>
-        </Reveal>
-        <Reveal>
-          <ol className="ev-steps rv-settle">
-            {STEPS.map((s, i) => (
-              <li key={s.name} className="ev-step">
+          <ol className="ev-steps ev-calls rv-settle">
+            {HOW.map((c, i) => (
+              <li key={c.call} className="ev-step">
                 <span className="ev-step-no">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3>{s.name}</h3>
-                <p>{s.what}</p>
-                <p className="ev-step-where">{s.where}</p>
+                <h3>{c.call}</h3>
+                <p>{c.why}</p>
+                <p className="ev-step-where">{c.where}</p>
               </li>
             ))}
           </ol>
         </Reveal>
 
         <Reveal>
-          <h2 id="done" className="mai-kick rv-settle">
+          <h2 id="where" className="mai-kick rv-settle">
             where I&apos;ve done it
           </h2>
           <p className="muted rv-settle" style={{ margin: "0 0 22px" }}>
-            Three places where getting it wrong had a cost someone else would
-            pay.
+            Places where getting it wrong had a cost someone else would pay.
           </p>
         </Reveal>
         <Reveal>
-          <div className="research-card ev-card rv-settle">
-            <h3>
-              <a href="https://www.zerogravity.co.uk/tutor">
-                Zero Gravity AI STEM tutor
-              </a>
-            </h3>
-            <p>
-              An AI tutor for GCSE and A-level STEM, used in UK schools. If it
-              marks wrong, a student learns it wrong and finds out in the exam
-              hall.
-            </p>
-            <dl>
-              <dt>The bar</dt>
-              <dd>The exam board&apos;s own mark scheme, on real past papers.</dd>
-              <dt>Also checked</dt>
-              <dd>
-                Every session, against the Socratic spec: coach the student to
-                the answer, never hand it over, however nicely they ask.
-              </dd>
-              <dt>Built on</dt>
-              <dd>
-                An eval pipeline I built on Langfuse. Teachers could flag any
-                mark they disagreed with, and each flag went back in as a case.
-              </dd>
-              <dt>Result</dt>
-              <dd>
-                Marking accuracy from about 67% to over 99%. Hallucinated
-                marking points from 4.6% of sessions to zero.
-              </dd>
-            </dl>
-          </div>
-        </Reveal>
-        <Reveal>
-          <div className="research-card ev-card rv-settle">
-            <h3>
-              <a href="https://github.com/ElliotJLT/ward">ward</a>
-            </h3>
-            <p>
-              A safeguarding layer for apps children use. When a child
-              discloses something serious, a named adult has to see it, and
-              fast.
-            </p>
-            <dl>
-              <dt>The bar</dt>
-              <dd>KCSIE, the statutory guidance schools already work to.</dd>
-              <dt>The metric</dt>
-              <dd>
-                Precision first. A safeguarding lead who gets paged for every
-                false alarm stops reading the alerts, and then you&apos;ve got
-                nothing.
-              </dd>
-              <dt>Result</dt>
-              <dd>
-                100% precision at 90% recall, no false positives. Keyword
-                matching on the same sets: 83% precision, 50% recall, 8.6%
-                false positives.
-              </dd>
-            </dl>
-            <div className="meta">
-              <a href="https://github.com/ElliotJLT/ward/blob/main/METHODOLOGY.md">
-                method and eval sets
-              </a>
-            </div>
-          </div>
-        </Reveal>
-        <Reveal>
-          <div className="research-card ev-card rv-settle">
-            <h3>
-              <a href="https://farewill.com/apply-for-probate">
-                Farewill probate
-              </a>
-            </h3>
-            <p>
-              The same habit, before LLMs. Probate is regulated by the SRA and
-              FCA, and a mistake there is a grieving family&apos;s estate
-              handled wrong.
-            </p>
-            <dl>
-              <dt>The bar</dt>
-              <dd>
-                The regulation, turned into named error types we counted
-                instead of remembered.
-              </dd>
-              <dt>Result</dt>
-              <dd>
-                Agent errors down 69%. Case handling from two weeks to four
-                days.
-              </dd>
-            </dl>
-          </div>
-        </Reveal>
-        <Reveal>
-          <p className="muted rv-settle ev-loops">
-            The smallest one you can open yourself is this site&apos;s own
-            agent. Its first eval run scored {firstRun?.passed}/
-            {firstRun?.total} and caught a review gate that couldn&apos;t
-            reject anything. It passes {latestRun?.passed}/{latestRun?.total}{" "}
-            now, and CI fails any change that breaks it.{" "}
-            <a href="https://github.com/ElliotJLT/elliot-os/tree/main/evals">
-              The {cases.length} cases are on GitHub
-            </a>
-            .
-          </p>
+          <ul className="ev-places rv-settle">
+            {PLACES.map((p) => (
+              <li key={p.name}>
+                <a href={p.href}>{p.name}</a>
+                <p>{p.line}</p>
+              </li>
+            ))}
+          </ul>
         </Reveal>
 
         <Reveal>
@@ -286,7 +194,6 @@ export default function Evals() {
             . Start there.
           </p>
         </Reveal>
-
       </div>
     </main>
   );

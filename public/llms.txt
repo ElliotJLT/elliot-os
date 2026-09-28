@@ -183,12 +183,11 @@ habit in regulated services, crisis delivery and consumer travel.
 
 ## Evals
 
-How I run evals, and where: the loop (read real failures first, name them,
-one pass/fail test per failure, check the model marker against a human,
-gate every change), then the proof. The tutor's marking evals against
-official mark schemes (~67% → 99%+, hallucinated marks 4.6% → 0), ward's
-precision-first safeguarding evals, and the pre-LLM version of the same
-discipline at Farewill:
+How I do evals, and why: borrow the bar from whoever would know (exam
+boards' mark schemes, KCSIE, the regulator), decide which mistake you can
+live with, mark behaviour as well as answers, read the transcripts yourself,
+let the people closest to it add cases, and treat the eval as the spec.
+Where: the Zero Gravity tutor, ward, Farewill probate and this site's agent:
 https://elliotjlt.github.io/elliot-os/evals/
 
 ## Writing
