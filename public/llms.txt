@@ -188,7 +188,7 @@ one pass/fail test per failure, check the model marker against a human,
 gate every change), then the proof. The tutor's marking evals against
 official mark schemes (~67% → 99%+, hallucinated marks 4.6% → 0), ward's
 precision-first safeguarding evals, and the pre-LLM version of the same
-discipline at Farewill. Limitations are stated alongside the numbers:
+discipline at Farewill:
 https://elliotjlt.github.io/elliot-os/evals/
 
 ## Writing

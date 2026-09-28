@@ -4954,7 +4954,6 @@ main:has(> .band) {
 .loop-fig-slot p { margin: 0; }
 @media (max-width: 720px) { .loop-split { grid-template-columns: 1fr; } }
 .loop-steps-2 { grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); }
-.foot-looking { margin: 0 0 18px; color: var(--ink-2); font-size: 16px; line-height: 1.5; text-align: center; }
 
 /* ================================================================== evals */
 /* The loop is drawn in the page's own ink, no card behind it. */
@@ -5159,5 +5158,44 @@ main:has(> .band) {
 .ev-credit {
   margin: 18px 0 0;
   font-size: 15px;
+  color: var(--muted);
+}
+
+/* Results first: a skim should meet the proof before the method. */
+.ev-stats {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 24px;
+}
+
+@media (min-width: 900px) {
+  .ev-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.ev-stats li {
+  border-top: 1px solid var(--line-2);
+  padding: 14px 0 18px;
+}
+
+.ev-stats strong {
+  display: block;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(30px, 3.4vw, 40px);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.ev-stats span {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.45;
   color: var(--muted);
 }

@@ -41,6 +41,13 @@ const STEPS = [
   },
 ];
 
+const STATS = [
+  { n: "67% → 99%+", what: "Tutor marking accuracy, against real past papers and mark schemes" },
+  { n: "4.6% → 0", what: "Tutor sessions with a hallucinated marking point" },
+  { n: "100%", what: "Precision on ward's safeguarding evals, at 90% recall" },
+  { n: "−69%", what: "Agent errors at Farewill, before any LLM was involved" },
+];
+
 const THEATRE = [
   [
     "A helpfulness score out of ten on a dashboard nobody opens",
@@ -86,6 +93,14 @@ export default function Evals() {
               answer twice. This is how I write them, and three places
               they&apos;ve had to hold up.
             </p>
+            <ul className="ev-stats rv-settle">
+              {STATS.map((x) => (
+                <li key={x.n}>
+                  <strong>{x.n}</strong>
+                  <span>{x.what}</span>
+                </li>
+              ))}
+            </ul>
           </header>
         </Reveal>
 
@@ -272,24 +287,6 @@ export default function Evals() {
           </p>
         </Reveal>
 
-        <Reveal>
-          <h2 className="mai-kick rv-settle">what these numbers aren&apos;t</h2>
-        </Reveal>
-        <Reveal>
-          <div className="research-card rv-settle">
-            <p style={{ marginTop: 0 }}>
-              The tutor evals are internal. They ran against official mark
-              schemes, but nobody independent has audited them. ward&apos;s
-              eval sets are synthetic, because real disclosures from children
-              aren&apos;t something anyone should be collecting for a
-              benchmark. If you want to poke at any of it,{" "}
-              <a href="mailto:elliotjlittle@gmail.com">
-                elliotjlittle@gmail.com
-              </a>
-              .
-            </p>
-          </div>
-        </Reveal>
       </div>
     </main>
   );
