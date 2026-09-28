@@ -1,6 +1,4 @@
 import { getRepos, FEATURED } from "@/lib/github";
-import { getLoops } from "@/lib/loops";
-import ArgusFlow from "../components/ArgusFlow";
 import Reveal from "../components/Reveal";
 import HoverLabel from "../components/HoverLabel";
 import ProductPortfolio from "../components/ProductPortfolio";
@@ -76,7 +74,6 @@ function ResearchIcon({ name }: { name: "crux" | "ward" }) {
 export default async function Built() {
   const repos = await getRepos();
   const byName = new Map(repos.map((r) => [r.name, r]));
-  const argus = getLoops().loops.find((l) => l.id === "argus");
 
   return (
     <main className="built-page">
@@ -129,28 +126,6 @@ export default async function Built() {
         </Reveal>
 
         <div id="independent-work" className="anchor-target" />
-        <Reveal>
-          <h2 id="argus" className="mai-kick rv-settle">
-            argus
-          </h2>
-          <p className="muted rv-settle section-line">
-            My private research system, paused since August after 61 morning
-            briefs. Code fetches, deduplicates and files. One model call per
-            source decides whether it is kept and which view it moves.
-          </p>
-        </Reveal>
-        <Reveal>
-          <div className="rv-settle">
-            <ArgusFlow
-              state={
-                argus?.status === "paused"
-                  ? `paused · last brief ${argus.last_run}`
-                  : "live"
-              }
-            />
-          </div>
-        </Reveal>
-
         <Reveal>
           <h2 id="research" className="mai-kick rv-settle">
             research
@@ -260,7 +235,8 @@ export default async function Built() {
         <Reveal>
           <h2 className="mai-kick rv-settle">ideas or feedback?</h2>
           <p className="muted rv-settle section-line">
-            argus and LifeOS are real but private. Ask me about either:{" "}
+            The system I run my own work on is private; how it works is on{" "}
+            <a href="/loops">/loops</a>. Anything else:{" "}
             <a href="mailto:elliotjlittle@gmail.com">
               elliotjlittle@gmail.com
             </a>
