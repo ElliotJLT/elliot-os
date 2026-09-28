@@ -103,8 +103,8 @@ export default function Evals() {
           <h2 id="how" className="mai-kick rv-settle">
             how I do evals
           </h2>
-          <p className="muted rv-settle" style={{ margin: "0 0 22px" }}>
-            Six habits, each with the place it came from.
+          <p className="sec-title rv-settle">
+            Six habits, and where each one came from.
           </p>
         </Reveal>
         <Reveal>
@@ -131,8 +131,8 @@ export default function Evals() {
           <h2 id="where" className="mai-kick rv-settle">
             where I&apos;ve done it
           </h2>
-          <p className="muted rv-settle" style={{ margin: "0 0 22px" }}>
-            Places where getting it wrong had a cost someone else would pay.
+          <p className="sec-title rv-settle">
+            Places where getting it wrong cost someone else.
           </p>
         </Reveal>
         <Reveal>

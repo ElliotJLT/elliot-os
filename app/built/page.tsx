@@ -103,9 +103,10 @@ export default async function Built() {
           <h2 id="production" className="mai-kick rv-settle">
             selected product work
           </h2>
+          <p className="sec-title rv-settle">Five products in production.</p>
           <p className="muted rv-settle section-line">
-            Five products in production. Each card gives the problem, the bet
-            and the proof, starting with the tutor and the school hub.
+            Each card leads with the bet and the proof. The problem behind it
+            is one tap away.
           </p>
         </Reveal>
         <Reveal>
@@ -136,9 +137,10 @@ export default async function Built() {
           <h2 id="research" className="mai-kick rv-settle">
             research
           </h2>
+          <p className="sec-title rv-settle">Published checking work.</p>
           <p className="muted rv-settle section-line">
-            Two pieces of published checking work: the human in the loop, and
-            safeguarding for under-18s. Method, results and limitations open.
+            The human in the loop, and safeguarding for under-18s. Method,
+            results and limitations open.
           </p>
         </Reveal>
         <Reveal>
@@ -203,9 +205,9 @@ export default async function Built() {
           <h2 id="agent-tools" className="mai-kick rv-settle">
             agent tools
           </h2>
+          <p className="sec-title rv-settle">Open-source tools for my own agent work.</p>
           <p className="muted rv-settle section-line">
-            Open source, built for my own agent work: skills, hooks, MCP
-            servers and a local career system.
+            Skills, hooks, MCP servers and a local career system.
           </p>
         </Reveal>
         <Reveal>
