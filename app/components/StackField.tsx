@@ -94,28 +94,29 @@ const TOOLS: Tool[] = [
   },
 ];
 
-// Where each tile sits around the centred copy (percent of the field),
-// its size, how far it drifts on scroll (depth, -1..1), and when in the
-// scroll it comes into focus (0..1). Neighbours are staggered on purpose so
-// focus moves around the field instead of sweeping one side.
-const SLOTS = [
-  { x: 6, y: 6, s: 132, depth: -0.8, focus: 0.3 },
-  { x: 21, y: 30, s: 104, depth: 0.5, focus: 0.62 },
-  { x: 3, y: 56, s: 92, depth: -0.3, focus: 0.45 },
-  { x: 17, y: 76, s: 124, depth: 0.9, focus: 0.74 },
-  { x: 44, y: 1, s: 84, depth: 0.4, focus: 0.52 },
-  { x: 79, y: 4, s: 116, depth: 0.7, focus: 0.36 },
-  { x: 71, y: 30, s: 136, depth: -0.6, focus: 0.68 },
-  { x: 88, y: 50, s: 88, depth: 0.2, focus: 0.26 },
-  { x: 74, y: 72, s: 108, depth: -0.9, focus: 0.58 },
-  { x: 49, y: 88, s: 80, depth: 0.6, focus: 0.8 },
+// Each tile launches from just off-centre and flies out past the left or
+// right edge of the page. `delay` is when in the pinned scroll it sets off
+// (0..1); `end` is where it leaves, in viewport units; `lift` bends the
+// path up or down. Sides alternate so the field stays balanced.
+const FLIGHTS = [
+  { side: -1, delay: -0.3, end: [-62, -34], s: 176 },
+  { side: 1, delay: -0.22, end: [64, 26], s: 156 },
+  { side: -1, delay: -0.14, end: [-70, 30], s: 148 },
+  { side: 1, delay: -0.06, end: [60, -38], s: 184 },
+  { side: -1, delay: 0.02, end: [-58, 4], s: 140 },
+  { side: 1, delay: 0.1, end: [72, 6], s: 168 },
+  { side: -1, delay: 0.18, end: [-66, -14], s: 160 },
+  { side: 1, delay: 0.26, end: [62, 40], s: 144 },
+  { side: -1, delay: 0.34, end: [-60, 38], s: 180 },
+  { side: 1, delay: 0.42, end: [66, -20], s: 152 },
 ];
+const TRIP = 0.62; // share of the scroll one flight takes; flights overlap
 
 /**
- * The stack as a field of tiles round a centred block, after the "Join us"
- * section on microsoft.ai: tiles drift in and out of focus as the page
- * scrolls. Picking one swaps the centre copy for the job it does. Reduced
- * motion keeps every tile sharp and still.
+ * The stack as a pinned field, after the "Join us" section on microsoft.ai:
+ * tiles emerge from behind the centred copy, come into focus mid-flight and
+ * blur out as they leave the page. Picking one swaps the centre copy for
+ * the job it does. Desktop only: phones and reduced motion get the explorer.
  */
 export default function StackField({ basePath = "" }: { basePath?: string }) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -126,21 +127,29 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
   useEffect(() => {
     const field = fieldRef.current;
     if (!field) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let frame = 0;
     const update = () => {
       frame = 0;
       const r = field.getBoundingClientRect();
       const vh = window.innerHeight;
-      const p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height)));
+      const vw = window.innerWidth;
+      const travel = Math.max(1, r.height - vh);
+      const p = Math.min(1, Math.max(0, -r.top / travel));
       tileRefs.current.forEach((tile, i) => {
         if (!tile) return;
-        const slot = SLOTS[i % SLOTS.length];
-        const off = Math.abs(p - slot.focus);
-        tile.style.setProperty("--blur", `${Math.min(9, Math.max(0, (off - 0.05) * 38)).toFixed(2)}px`);
-        tile.style.setProperty("--fade", Math.max(0.5, 1 - off * 1.3).toFixed(3));
-        tile.style.setProperty("--drift", `${(slot.depth * (0.5 - p) * 110).toFixed(1)}px`);
+        const f = FLIGHTS[i % FLIGHTS.length];
+        const t = Math.min(1, Math.max(0, (p - f.delay) / TRIP));
+        const e = t * t * (3 - 2 * t);
+        const x = f.side * 4 + (f.end[0] - f.side * 4) * e;
+        const y = f.end[1] * e;
+        const blur = t < 0.42 ? ((0.42 - t) / 0.42) * 8 : ((t - 0.42) / 0.58) * 11;
+        const fade = t <= 0 ? 0 : Math.min(1, t / 0.1) * (t >= 1 ? 0 : 1);
+        tile.style.setProperty("--tx", `${((x / 100) * vw).toFixed(1)}px`);
+        tile.style.setProperty("--ty", `${((y / 100) * vh).toFixed(1)}px`);
+        tile.style.setProperty("--sc", (0.6 + 0.65 * e).toFixed(3));
+        tile.style.setProperty("--blur", `${blur.toFixed(2)}px`);
+        tile.style.setProperty("--fade", fade.toFixed(3));
       });
     };
     const queue = () => {
@@ -158,9 +167,10 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
 
   return (
     <div className="stack-field" ref={fieldRef}>
+      <div className="stack-pin">
       <div className="stack-tiles" role="group" aria-label="Tools I use">
         {TOOLS.map((tool, i) => {
-          const slot = SLOTS[i % SLOTS.length];
+          const f = FLIGHTS[i % FLIGHTS.length];
           const on = tool.id === selectedId;
           return (
             <button
@@ -175,9 +185,7 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
               aria-controls="stack-centre"
               style={
                 {
-                  "--x": `${slot.x}%`,
-                  "--y": `${slot.y}%`,
-                  "--s": `${slot.s}px`,
+                  "--s": `${f.s}px`,
                 } as React.CSSProperties
               }
               onClick={() => setSelectedId(on ? null : tool.id)}
@@ -218,6 +226,7 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
             </p>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

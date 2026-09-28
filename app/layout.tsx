@@ -4,6 +4,7 @@ import { Newsreader, Archivo, Instrument_Serif } from "next/font/google";
 import NavLinks from "./components/NavLinks";
 import ThemeToggle from "./components/ThemeToggle";
 import MobileMenu from "./components/MobileMenu";
+import NavAutoHide from "./components/NavAutoHide";
 import { IconLink } from "./components/Icons";
 import { Pill } from "./components/Frame";
 import "./globals.css";
@@ -82,6 +83,7 @@ export default function RootLayout({
             </nav>
             <ThemeToggle />
             <MobileMenu />
+            <NavAutoHide />
             <Pill href="mailto:elliotjlittle@gmail.com" tone="solid">
               Get in touch
             </Pill>
