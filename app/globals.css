@@ -5179,3 +5179,11 @@ main:has(> .band) {
     display: none;
   }
 }
+
+/* And the other way round: where the diagram shows, the step cards would
+   only repeat it. */
+@media (min-width: 901px) {
+  .loop-steps {
+    display: none;
+  }
+}
