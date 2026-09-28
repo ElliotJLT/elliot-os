@@ -2,7 +2,7 @@ const basePath = process.env.BASE_PATH || "";
 import { getPosts, noteFor, isDemoted } from "@/lib/writing";
 import { getMedia } from "@/lib/writing";
 import { getRoles } from "@/lib/roles";
-import Reveal, { Words } from "./components/Reveal";
+import Reveal, { Words, RiseWords } from "./components/Reveal";
 import { Pill, Slot } from "./components/Frame";
 import Values from "./components/Values";
 import HeroBricks from "./components/HeroBricks";
@@ -33,8 +33,8 @@ function Row({
       <div className="rv-develop">{image}</div>
       <div className="rv-settle">
         <span className="mai-rowlabel">{label}</span>
-        <a className="mai-rowname" href={href}>
-          {name}
+        <a className="mai-rowname" href={href} aria-label={name}>
+          <RiseWords text={name} />
         </a>
         <Pill href={href}>{cta}</Pill>
       </div>
@@ -153,9 +153,10 @@ export default async function Home() {
 
       <Reveal>
         <h2 className="mai-kick rv-settle">Writing</h2>
-        {posts.map((p) => (
+      </Reveal>
+      {posts.map((p) => (
+        <Reveal key={p.link}>
           <Row
-            key={p.link}
             image={
               media.posts[p.link] ? (
                 /* eslint-disable-next-line @next/next/no-img-element */
@@ -174,8 +175,8 @@ export default async function Home() {
             cta="Read it"
             body={noteFor(p.title)}
           />
-        ))}
-      </Reveal>
+        </Reveal>
+      ))}
 
       <Reveal>
         <figure className="build-photo build-photo-home rv-settle">

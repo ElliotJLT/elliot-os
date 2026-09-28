@@ -6237,3 +6237,38 @@ h2.mai-kick + p.muted,
     animation: none;
   }
 }
+
+/* ============================================================ rise words
+   A title's words rise through a clip line as its row reveals: used on the
+   homepage writing rows, where the titles are the point. */
+.rise-clip {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* room for descenders, so only unrisen words are clipped */
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.rise-w {
+  display: inline-block;
+}
+
+.js .rv .rise-w {
+  transition: transform 0.7s var(--rv-ease), opacity 0.45s ease-out;
+  transition-delay: calc(0.12s + var(--i) * 40ms);
+}
+
+.js .rv:not(.is-revealed) .rise-w {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .rv .rise-w,
+  .js .rv:not(.is-revealed) .rise-w {
+    transform: none;
+    opacity: 1;
+    transition: none;
+  }
+}

@@ -39,9 +39,10 @@ export default function Reveal({
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
+    // `immediate` plays this block on mount; it must not mark the page as
+    // seen, or every other block on it would skip its entrance (it did).
     if (immediate || seen.has(pathname)) {
       setShown(true);
-      seen.add(pathname);
       return;
     }
     const el = ref.current;
@@ -52,8 +53,15 @@ export default function Reveal({
     // The observer's own first callback fires immediately with the current
     // intersection state, so a block already on screen (e.g. a client-side
     // remount) reveals on that first callback without a separate rect read.
+    // The observer reports once straight away with the current state. If
+    // that first report never arrives, the observer is broken and the
+    // failsafe below shows the content; otherwise it waits to be scrolled
+    // to. (The failsafe used to fire regardless, which revealed everything
+    // below the fold 1.6s after load, before anyone could scroll to it.)
+    let reported = false;
     const io = new IntersectionObserver(
       (entries) => {
+        reported = true;
         if (entries[0].isIntersecting) {
           setShown(true);
           seen.add(pathname);
@@ -64,7 +72,9 @@ export default function Reveal({
     );
     io.observe(el);
     // Failsafe: never leave content hidden if the observer never fires.
-    const t = setTimeout(() => setShown(true), 1600);
+    const t = setTimeout(() => {
+      if (!reported) setShown(true);
+    }, 1600);
     return () => {
       io.disconnect();
       clearTimeout(t);
@@ -102,6 +112,32 @@ export function Words({ text, className }: { text: string; className?: string })
         >
           {w}
           {i < text.split(" ").length - 1 ? " " : ""}
+        </span>
+      ))}
+    </span>
+  );
+}
+
+/**
+ * A title whose words rise through a clip line, one after another, when
+ * its block reveals. The link or heading around it carries the full text as
+ * its label, so screen readers hear the title once.
+ */
+export function RiseWords({ text }: { text: string }) {
+  const words = text.split(" ");
+  return (
+    <span aria-hidden="true">
+      {words.map((w, i) => (
+        <span key={`${w}-${i}`}>
+          <span className="rise-clip">
+            <span
+              className="rise-w"
+              style={{ "--i": i } as React.CSSProperties}
+            >
+              {w}
+            </span>
+          </span>
+          {i < words.length - 1 ? " " : ""}
         </span>
       ))}
     </span>
