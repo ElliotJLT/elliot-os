@@ -146,7 +146,8 @@ export default async function Writing() {
             off the clock
           </h2>
           <p className="muted rv-settle" style={{ margin: "0 0 22px" }}>
-            I was writing long before a model could do it for me.
+            Writing came first, long before the AI work, and I still do it for
+            the fun of it.
           </p>
         </Reveal>
         <Reveal>
