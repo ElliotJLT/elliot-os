@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-09-24, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 1 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-09-28, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 22 commits across 1 repos.*
 
-- **[dog-years](https://github.com/ElliotJLT/dog-years)**: 1 commit. "Make the measurement loop installable in two commands" (1d8914e)
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 22 commits. "Drop the proof bands; keep the section headlines and slimmer cards" (7820f5e), "Hierarchy pass on /built, /evals and /loops" (f90f4af), "/evals: section headlines and readable receipts" (1ee917c) and 19 more
 <!-- agent:end -->
 
 ## by hand
