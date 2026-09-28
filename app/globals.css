@@ -4987,25 +4987,50 @@ main:has(> .band) {
 }
 
 .ev-step {
-  background: var(--bg-2);
+  background: var(--paper);
+  border: 1px solid var(--line);
   border-radius: 20px;
-  padding: 22px 24px;
+  padding: 24px 26px;
   display: flex;
   flex-direction: column;
+}
+
+.ev-step-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+/* A soft disc keeps the thin stroke from floating on the paper. */
+.ev-step-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-2);
+  color: var(--accent-ink);
+}
+
+.habit-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
 }
 
 .ev-step-no {
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.12em;
-  color: var(--accent-ink);
+  color: var(--faint);
 }
 
 .ev-step h3 {
   font-family: var(--serif);
   font-size: 20px;
   font-weight: 500;
-  margin: 6px 0 8px;
+  margin: 0 0 8px;
 }
 
 .ev-step p {
@@ -5030,44 +5055,11 @@ main:has(> .band) {
 
 
 
-.ev-vs {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 15px;
-}
 
-.ev-vs th {
-  text-align: left;
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 400;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--faint);
-  padding: 0 16px 10px 0;
-  border-bottom: 1px solid var(--line-2);
-  width: 50%;
-}
 
-.ev-vs td {
-  vertical-align: top;
-  padding: 14px 16px 14px 0;
-  border-bottom: 1px solid var(--line);
-}
 
-.ev-vs td:first-child {
-  color: var(--muted);
-}
 
-.ev-vs td:last-child {
-  color: var(--ink);
-}
 
-.ev-credit {
-  margin: 18px 0 0;
-  font-size: 15px;
-  color: var(--muted);
-}
 
 
 

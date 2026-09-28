@@ -1,4 +1,5 @@
 import Reveal from "../components/Reveal";
+import HabitIcon from "../components/HabitIcon";
 
 export const metadata = { title: "Evals · Elliot Little" };
 
@@ -8,36 +9,43 @@ export const metadata = { title: "Evals · Elliot Little" };
 // - "I read sessions every week" (the reading habit is real; the cadence is a guess)
 // - "Nobody had guessed it" about the tutor's marking failure
 // - "owned the bar" at Zero Gravity
+// - the Socratic evaluator being "checked against teachers' judgement first"
 // Headline numbers are deliberately off this page: without the denominators
 // (how many cases, held out or not, who marked them) an eval person picks
 // them apart. They belong in the conversation, not the page.
 const HOW = [
   {
+    icon: "bar" as const,
     call: "Borrow the bar from whoever would know",
     why: "If the team writes the rubric, the model gets marked on our opinions. Examiners and regulators have spent years arguing about what good looks like, so I take theirs. A good case is one two experts would mark the same way without talking to each other.",
     where: "Tutor: the exam boards' mark schemes. ward: KCSIE. Farewill: the regulator's rules, turned into error types.",
   },
   {
+    icon: "balance" as const,
     call: "Decide which mistake you can live with",
     why: "Everything gets something wrong. The product call is which way it fails. In safeguarding I'd rather miss an edge case than page a safeguarding lead with false alarms until they stop reading the alerts.",
     where: "ward: built precision first, on purpose, and says so in the method.",
   },
   {
+    icon: "conversation" as const,
     call: "Mark the conversation, not just the answer",
-    why: "A tutor can get every answer right and still be useless if it hands them over. What made it a tutor was refusing to, however nicely a student asked, so the conversation itself got marked on every session.",
-    where: "Tutor: an evaluator grading every session against the Socratic spec.",
+    why: "A tutor can get every answer right and still be useless if it hands them over. What made it a tutor was refusing to, however nicely a student asked, so the conversation itself got marked. That takes a model as the marker, and a model marker has to agree with a teacher before I trust a word it says.",
+    where: "Tutor: an evaluator grading every session against the Socratic spec, checked against teachers' judgement first.",
   },
   {
+    icon: "transcript" as const,
     call: "Read the transcripts yourself",
     why: "Evals catch it before launch, monitoring catches it in production, and reading transcripts catches what both of them missed. No layer's enough on its own. I read sessions every week, and the failures that mattered were never on anyone's list.",
     where: "Tutor: the worst failure was confident marking the mark scheme didn't back up. Nobody had guessed it.",
   },
   {
+    icon: "flag" as const,
     call: "Turn every complaint into a case",
     why: "A teacher spots a wrong mark in seconds; I'd take hours. So every mark a teacher flagged became a test, and the suite grew from classrooms instead of from our imagination.",
     where: "Tutor: teacher flags fed straight back into the eval set.",
   },
   {
+    icon: "failing" as const,
     call: "Keep one suite you're failing",
     why: "The eval is the spec, so part of it should describe what you can't do yet. A regression suite stops you going backwards and should stay green. A capability suite you're mostly failing shows you where to go next. If everything's green, you've stopped learning.",
     where: "This site: the agent's suite failed half its cases on the first run. Fixing that was the work, and now it's the regression suite that keeps it fixed.",
@@ -65,33 +73,6 @@ const PLACES = [
     href: "https://github.com/ElliotJLT/elliot-os/tree/main/evals",
     line: "Its own agent has an eval suite in the repo, and CI fails any change that breaks it. The first run failed half of it, which is the point.",
   },
-];
-
-const THEATRE = [
-  [
-    "A helpfulness score out of ten on a dashboard nobody opens",
-    "A pass or fail check for a failure someone has actually seen",
-  ],
-  [
-    "A rubric written in a meeting before launch",
-    "A rubric written after reading the real conversations",
-  ],
-  [
-    "A vendor's off-the-shelf hallucination score",
-    "Your own cases, from your own users",
-  ],
-  [
-    "A model marking a model, and nobody checking it",
-    "A marker that agrees with a human expert before anyone trusts it",
-  ],
-  [
-    "A suite that has never once failed",
-    "A suite with a record of catching things before they shipped",
-  ],
-  [
-    "One headline accuracy number",
-    "A pass rate with its denominator: how many cases, who wrote them, what still fails",
-  ],
 ];
 
 export default function Evals() {
@@ -126,9 +107,14 @@ export default function Evals() {
           <ol className="ev-steps ev-calls rv-settle">
             {HOW.map((c, i) => (
               <li key={c.call} className="ev-step">
-                <span className="ev-step-no">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                <div className="ev-step-head">
+                  <span className="ev-step-icon">
+                    <HabitIcon name={c.icon} />
+                  </span>
+                  <span className="ev-step-no">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
                 <h3>{c.call}</h3>
                 <p>{c.why}</p>
                 <p className="ev-step-where">{c.where}</p>
@@ -156,44 +142,6 @@ export default function Evals() {
           </ul>
         </Reveal>
 
-        <Reveal>
-          <h2 id="theatre" className="mai-kick rv-settle">
-            spotting eval theatre
-          </h2>
-          <p className="muted rv-settle" style={{ margin: "0 0 22px" }}>
-            Evals are easy to fake. If you&apos;re hiring someone to do this,
-            this is what to look for.
-          </p>
-        </Reveal>
-        <Reveal>
-          <table className="ev-vs rv-settle">
-            <thead>
-              <tr>
-                <th scope="col">Theatre</th>
-                <th scope="col">The real thing</th>
-              </tr>
-            </thead>
-            <tbody>
-              {THEATRE.map(([fake, real]) => (
-                <tr key={fake}>
-                  <td>{fake}</td>
-                  <td>{real}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <p className="ev-credit rv-settle">
-            Most of this I learned the hard way. The clearest version of it is{" "}
-            <a href="https://www.lennysnewsletter.com/p/why-ai-evals-are-the-hottest-new-skill">
-              Hamel Husain and Shreya Shankar on Lenny&apos;s Podcast
-            </a>{" "}
-            and{" "}
-            <a href="https://www.lennysnewsletter.com/p/beyond-vibe-checks-a-pms-complete">
-              Aman Khan&apos;s guide for PMs
-            </a>
-            . Start there.
-          </p>
-        </Reveal>
       </div>
     </main>
   );
