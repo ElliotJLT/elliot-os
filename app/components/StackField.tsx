@@ -125,6 +125,7 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
   const fieldRef = useRef<HTMLDivElement>(null);
   const tileRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const centreRef = useRef<HTMLDivElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const field = fieldRef.current;
@@ -138,6 +139,10 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
       const vw = window.innerWidth;
       const travel = Math.max(1, r.height - vh);
       const copy = centreRef.current?.getBoundingClientRect();
+      const pin = pinRef.current?.getBoundingClientRect();
+      // Nothing shows until the section has pinned and fills the screen;
+      // the last 40px of the approach fades the field in.
+      const onScreen = Math.min(1, Math.max(0, 1 - r.top / 40));
       const p = Math.min(1, Math.max(0, -r.top / travel));
       tileRefs.current.forEach((tile, i) => {
         if (!tile) return;
@@ -156,14 +161,16 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
         let clear = 1;
         if (copy) {
           const half = (f.s * sc) / 2;
-          const cx = vw / 2 + x;
-          const cy = vh / 2 + y;
+          // Measured from the pin's real centre, so the check holds while it
+          // is still sliding in or out, not just once it's pinned.
+          const cx = (pin ? pin.left + pin.width / 2 : vw / 2) + x;
+          const cy = (pin ? pin.top + pin.height / 2 : vh / 2) + y;
           const gapX = Math.max(copy.left - (cx + half), cx - half - copy.right);
           const gapY = Math.max(copy.top - (cy + half), cy - half - copy.bottom);
           const gap = Math.max(gapX, gapY) - 12;
           clear = Math.min(1, Math.max(0, gap / 60));
         }
-        const fade = t <= 0 || t >= 1 ? 0 : clear;
+        const fade = t <= 0 || t >= 1 ? 0 : clear * onScreen;
         tile.style.setProperty("--tx", `${x.toFixed(1)}px`);
         tile.style.setProperty("--ty", `${y.toFixed(1)}px`);
         tile.style.setProperty("--sc", sc.toFixed(3));
@@ -187,7 +194,7 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
 
   return (
     <div className="stack-field" ref={fieldRef}>
-      <div className="stack-pin">
+      <div className="stack-pin" ref={pinRef}>
       <div className="stack-tiles" role="group" aria-label="Tools I use">
         {TOOLS.map((tool, i) => {
           const f = FLIGHTS[i % FLIGHTS.length];
@@ -250,6 +257,11 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
               Pick one to see the job it does in the system; none earns a place
               here just for being fashionable.
             </p>
+            <div className="stack-centre-links">
+              <Pill href="/built" arrow>
+                See what I&apos;ve built
+              </Pill>
+            </div>
           </div>
         )}
       </div>

@@ -5702,3 +5702,7 @@ h2.mai-kick + p.muted,
   justify-self: start;
   align-self: start;
 }
+
+.stack-explorer-cta {
+  margin-top: 18px;
+}

@@ -132,6 +132,14 @@ export default function StackExplorer({ basePath = "" }: { basePath?: string }) 
         })}
       </div>
 
+      {!selected && (
+        <div className="stack-explorer-cta">
+          <Pill href="/built" arrow>
+            See what I&apos;ve built
+          </Pill>
+        </div>
+      )}
+
       {selected && (
         <div
           key={selected.id}
