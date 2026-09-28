@@ -3,8 +3,6 @@ import { getRepos, FEATURED } from "@/lib/github";
 import Reveal from "../components/Reveal";
 import HoverLabel from "../components/HoverLabel";
 import ProductPortfolio from "../components/ProductPortfolio";
-import Bench from "../components/Bench";
-import { getEvals } from "@/lib/evals";
 
 export const metadata = { title: "Built · Elliot Little" };
 
@@ -80,9 +78,6 @@ function ResearchIcon({ name }: { name: "crux" | "ward" }) {
 }
 
 export default async function Built() {
-  const evalRuns = getEvals().runs;
-  const latestRun = evalRuns[0];
-  const firstRun = evalRuns[evalRuns.length - 1];
   const repos = await getRepos();
   const byName = new Map(repos.map((r) => [r.name, r]));
 
@@ -135,24 +130,6 @@ export default async function Built() {
               I work through the prototype with the person at the keyboard.
             </figcaption>
           </figure>
-        </Reveal>
-
-        <Reveal>
-          <h2 id="systems" className="mai-kick rv-settle">
-            how the work runs
-          </h2>
-          <p className="sec-title rv-settle">
-            The systems behind the products.
-          </p>
-          <p className="muted rv-settle section-line">
-            Ways of working, the agents and the evals I set up. Pick one to see
-            it run.
-          </p>
-        </Reveal>
-        <Reveal>
-          <div className="rv-settle">
-            <Bench firstRun={firstRun} latestRun={latestRun} />
-          </div>
         </Reveal>
 
         <div id="independent-work" className="anchor-target" />
