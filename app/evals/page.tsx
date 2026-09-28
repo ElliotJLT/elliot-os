@@ -22,9 +22,9 @@ const HOW = [
   },
   {
     icon: "balance" as const,
-    call: "Decide which mistake you can live with",
-    why: "Everything gets something wrong. The product call is which way it fails. In safeguarding I'd rather miss an edge case than page a safeguarding lead with false alarms until they stop reading the alerts.",
-    where: "ward: built precision first, on purpose, and says so in the method.",
+    call: "Decide which way it's allowed to fail",
+    why: "Every model gets something wrong, so the product call is which kind of wrong you design for. In safeguarding, an alert nobody trusts is as dangerous as no alert: bury the safeguarding lead in false alarms and the real one gets skimmed past. So catch everything first, then earn their trust by cutting the noise.",
+    where: "Tutor: detection shipped first, then we cut the false alarms without missing a single disclosure. ward: precision first, and the method says why.",
   },
   {
     icon: "conversation" as const,
@@ -41,7 +41,7 @@ const HOW = [
   {
     icon: "flag" as const,
     call: "Turn every complaint into a case",
-    why: "A teacher spots a wrong mark in seconds; I'd take hours. So every mark a teacher flagged became a test, and the suite grew from classrooms instead of from our imagination.",
+    why: "Teachers spot a wrong mark in seconds, so every mark a teacher flagged became a test. The suite grew from classrooms instead of from our imagination.",
     where: "Tutor: teacher flags fed straight back into the eval set.",
   },
   {
@@ -69,7 +69,7 @@ const PLACES = [
     id: "farewill",
     name: "Farewill probate",
     href: "https://farewill.com/apply-for-probate",
-    line: "Regulated probate operations, before LLMs. The same habit, with spreadsheets instead of judges.",
+    line: "Regulated probate operations, before LLMs. The same habit: errors named, counted and fixed by type, instead of remembered.",
   },
   {
     id: "site",
@@ -93,7 +93,7 @@ export default function Evals() {
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
               Everyone runs evals now. The hard bit is the calls around them:
-              whose bar, which mistake you can live with, and when a green
+              whose bar, which way it&apos;s allowed to fail, and when a green
               dashboard is lying to you. This is how I make them.
             </p>
           </header>

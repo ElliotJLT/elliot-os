@@ -110,8 +110,6 @@ const MENUS: Menu[] = [
   },
 ];
 
-// /changelog still exists (the footer links to it as the receipts) but it is
-// not a destination, so it does not earn a slot in the nav.
 const LINKS = [
   ["/evals", "evals"],
   ["/loops", "loops"],
