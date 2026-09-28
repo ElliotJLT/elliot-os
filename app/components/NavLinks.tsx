@@ -48,8 +48,8 @@ const MENUS: Menu[] = [
       },
       {
         eyebrow: `03 · ${AGENTS.short}`,
-        title: "Built a fleet that reads for me",
-        href: "/built#argus",
+        title: "Built the system I run my work on",
+        href: "/loops",
       },
       {
         eyebrow: `04 · ${AGENTS.short}`,

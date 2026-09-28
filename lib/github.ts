@@ -10,11 +10,9 @@ export type Repo = {
 // Curated on /built with hand-written blurbs; everything else lists below them.
 export const FEATURED = [
   "boulot-os",
-  "Claude-Skill-Potions",
-  "vox",
-  "dabble",
+  "dog-years",
   "homebuyer-mcp",
-  "hooksmith",
+  "Claude-Skill-Potions",
 ];
 
 // crux and ward get the research section on /built (published method and
