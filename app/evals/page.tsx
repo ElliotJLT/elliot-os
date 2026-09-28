@@ -1,6 +1,6 @@
 import Reveal from "../components/Reveal";
 import EvalLoop from "../components/EvalLoop";
-import { getCases } from "@/lib/evals";
+import { getCases, getEvals } from "@/lib/evals";
 
 const basePath = process.env.BASE_PATH || "";
 
@@ -59,13 +59,16 @@ const THEATRE = [
     "A marker that agrees with a human expert before anyone trusts it",
   ],
   [
-    "100% pass, every run",
-    "A suite that still catches things. If nothing ever fails, it isn't testing anything",
+    "A suite that has never once failed",
+    "A suite with a record of catching things before they shipped",
   ],
 ];
 
 export default function Evals() {
   const cases = getCases();
+  const runs = getEvals().runs;
+  const latestRun = runs[0];
+  const firstRun = runs[runs.length - 1];
 
   return (
     <main>
@@ -218,10 +221,15 @@ export default function Evals() {
         </Reveal>
         <Reveal>
           <p className="muted rv-settle ev-loops">
-            Want one you can open yourself? The agent that keeps this site
-            current has {cases.length} test cases, and CI fails any change
-            that breaks them. It&apos;s on <a href={`${basePath}/loops/`}>/loops</a>,
-            failures included.
+            The smallest one you can open yourself is this site&apos;s own
+            agent. Its first eval run scored {firstRun?.passed}/
+            {firstRun?.total} and caught a review gate that couldn&apos;t
+            reject anything. It passes {latestRun?.passed}/{latestRun?.total}{" "}
+            now, and CI fails any change that breaks it.{" "}
+            <a href="https://github.com/ElliotJLT/elliot-os/tree/main/evals">
+              The {cases.length} cases are on GitHub
+            </a>
+            .
           </p>
         </Reveal>
 
