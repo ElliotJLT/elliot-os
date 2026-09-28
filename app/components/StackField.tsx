@@ -99,19 +99,23 @@ const TOOLS: Tool[] = [
 // right edge of the page. `delay` is when in the pinned scroll it sets off
 // (0..1); `end` is where it leaves, in viewport units; `lift` bends the
 // path up or down. Sides alternate so the field stays balanced.
+// The sequence, after microsoft.ai: two tiles already drifting in an empty
+// field, then the copy fades in, then the rest launch from behind it.
+// `delay` is when in the pinned scroll a tile sets off (0..1).
 const FLIGHTS = [
-  { side: -1, delay: -0.5, end: [-62, -40], s: 176 },
-  { side: 1, delay: -0.39, end: [64, 34], s: 156 },
-  { side: -1, delay: -0.28, end: [-70, 32], s: 148 },
-  { side: 1, delay: -0.17, end: [60, -42], s: 184 },
-  { side: -1, delay: -0.06, end: [-58, 8], s: 140 },
-  { side: 1, delay: 0.05, end: [72, -6], s: 168 },
-  { side: -1, delay: 0.16, end: [-66, -24], s: 160 },
-  { side: 1, delay: 0.27, end: [62, 40], s: 144 },
-  { side: -1, delay: 0.38, end: [-60, 40], s: 180 },
-  { side: 1, delay: 0.49, end: [66, -30], s: 152 },
+  { side: -1, delay: -0.36, end: [-62, -40], s: 176 },
+  { side: 1, delay: -0.3, end: [64, 34], s: 156 },
+  { side: -1, delay: 0.08, end: [-70, 32], s: 148 },
+  { side: 1, delay: 0.15, end: [60, -42], s: 184 },
+  { side: -1, delay: 0.22, end: [-58, 8], s: 140 },
+  { side: 1, delay: 0.29, end: [72, -6], s: 168 },
+  { side: -1, delay: 0.36, end: [-66, -24], s: 160 },
+  { side: 1, delay: 0.43, end: [62, 40], s: 144 },
+  { side: -1, delay: 0.5, end: [-60, 40], s: 180 },
+  { side: 1, delay: 0.57, end: [66, -30], s: 152 },
 ];
-const TRIP = 0.8; // share of the scroll one flight takes; flights overlap
+const TRIP = 0.62; // share of the scroll one flight takes; flights overlap
+const COPY_IN = [0.1, 0.22]; // the copy fades and sharpens in over this span
 
 /**
  * The stack as a pinned field, after the "Join us" section on microsoft.ai:
@@ -144,6 +148,15 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
       // the last 40px of the approach fades the field in.
       const onScreen = Math.min(1, Math.max(0, 1 - r.top / 40));
       const p = Math.min(1, Math.max(0, -r.top / travel));
+      // Copy: invisible and blurred in the empty field, then resolves.
+      const c = Math.min(1, Math.max(0, (p - COPY_IN[0]) / (COPY_IN[1] - COPY_IN[0])));
+      const ce = c * c * (3 - 2 * c);
+      const centre = centreRef.current;
+      if (centre) {
+        centre.style.opacity = ce.toFixed(3);
+        centre.style.filter = ce >= 1 ? "" : `blur(${((1 - ce) * 10).toFixed(2)}px)`;
+        centre.style.visibility = ce <= 0 ? "hidden" : "";
+      }
       tileRefs.current.forEach((tile, i) => {
         if (!tile) return;
         const f = FLIGHTS[i % FLIGHTS.length];

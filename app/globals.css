@@ -5561,7 +5561,7 @@ h2.mai-kick + p.muted,
 
 .stack-field {
   position: relative;
-  height: 280vh;
+  height: 320vh;
   margin: 24px 0;
 }
 
@@ -5705,4 +5705,67 @@ h2.mai-kick + p.muted,
 
 .stack-explorer-cta {
   margin-top: 18px;
+}
+
+/* Footer: a centred column on phones; on desktop it runs the full width,
+   name on the left, link columns in the middle, the two actions on the
+   right, and the base line across the bottom. */
+.foot-brand {
+  display: none;
+}
+
+@media (min-width: 1200px) {
+  footer {
+    padding: 72px 0 32px;
+  }
+
+  footer > .wrap {
+    max-width: none;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "cols cta"
+      "base base";
+    column-gap: 48px;
+    align-items: start;
+  }
+
+  footer .foot-cols {
+    grid-area: cols;
+    grid-template-columns: minmax(160px, 1fr) minmax(0, 0.7fr) minmax(0, 1.3fr) minmax(0, 1fr);
+    padding-bottom: 72px;
+  }
+
+  footer .foot-cta {
+    grid-area: cta;
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  footer .foot-cta .band-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  footer .foot-base {
+    grid-area: base;
+  }
+
+  .foot-brand {
+    display: block;
+    font-family: var(--display);
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+}
+
+@media (min-width: 1400px) {
+  footer .foot-cta .band-cta {
+    flex-direction: row;
+  }
 }

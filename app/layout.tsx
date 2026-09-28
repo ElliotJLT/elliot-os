@@ -116,6 +116,9 @@ export default function RootLayout({
               </div>
             </div>
             <div className="foot-cols">
+              <Link href="/" className="foot-brand">
+                Elliot Little
+              </Link>
               <nav className="foot-col">
                 <span className="foot-h">Sections</span>
                 <Link href="/built">Built</Link>
