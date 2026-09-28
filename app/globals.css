@@ -5483,3 +5483,40 @@ h1,
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
+
+/* One item-title style: anything that names a thing in a card, row or
+   timeline (a job, a product, a habit, a repo, a piece of writing). */
+.case-card h4,
+.mentor-card h3,
+.mentor-card h3 a,
+.research-card > h3,
+.research-card > h3 a,
+.research-card-head h3,
+.research-card-head h3 a,
+.ev-step h3,
+.career-timeline h3,
+.career-timeline h3 a,
+.wr-h,
+.toolrow h3,
+.ev-places a,
+.ev-places-name {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* Section standfirsts and short body lines sit at one size. */
+h2.mai-kick + p.muted,
+.section-line,
+.loop-split p {
+  font-size: 16px;
+}
+
+/* Footer labels match every other caps label. */
+.foot-h {
+  font-family: var(--mono);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
