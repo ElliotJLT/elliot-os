@@ -3234,12 +3234,12 @@ main:has(> .band) {
   border: 3px solid #faf3e8;
   margin: 0;
   display: block;
-  /* A fourteen-frame sprite (see TrackingPortrait); frame 4 is the one
+  /* An eleven-frame sprite (see TrackingPortrait); frame 4 is the one
      looking out, so it is also what shows before JS or with reduced motion. */
   background-color: #faf3e8;
   background-repeat: no-repeat;
-  background-size: 1400% 100%;
-  background-position: 30.769% 0;
+  background-size: 1100% 100%;
+  background-position: 40% 0;
 }
 
 .band-sub {

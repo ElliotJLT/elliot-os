@@ -4,12 +4,12 @@ import { useEffect, useRef } from "react";
 
 const basePath = process.env.BASE_PATH || "";
 
-// One sprite, fourteen frames left to right: the 3x3 gaze grid read row by
-// row (up-left through down-right), then the click reactions: wink, shock,
-// flinch, swat, finger guns. Frame 4 looks at the reader.
-const FRAMES = 14;
+// One sprite, eleven frames left to right: the 3x3 gaze grid read row by
+// row (up-left through down-right), then the click reactions: a flinch and
+// a "what was that for?". Frame 4 looks at the reader.
+const FRAMES = 11;
 const CENTRE = 4;
-const REACTIONS = [9, 10, 11, 12, 13];
+const REACTIONS = [9, 10];
 const REACT_MS = 650;
 
 // Screen angles in 45° steps from pointing right, clockwise (y runs down).
@@ -65,8 +65,7 @@ export default function TrackingPortrait({ className }: { className: string }) {
       if (!frame) frame = requestAnimationFrame(updateGaze);
     };
 
-    // A different reaction every click, never the same one twice running,
-    // so clicking again is the point.
+    // Never the same reaction twice running; with two, clicks alternate.
     const onPointerDown = () => {
       window.clearTimeout(reactTimer);
       let next = reaction;
