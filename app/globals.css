@@ -3193,6 +3193,12 @@ main:has(> .band) {
   border: 3px solid #faf3e8;
   margin: 0;
   display: block;
+  /* A ten-frame sprite (see TrackingPortrait); frame 4 is the one looking
+     out, so it is also what shows before JS or with reduced motion. */
+  background-color: #faf3e8;
+  background-repeat: no-repeat;
+  background-size: 1000% 100%;
+  background-position: 44.444% 0;
 }
 
 .band-sub {

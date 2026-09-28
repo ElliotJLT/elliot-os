@@ -7,6 +7,7 @@ import Reveal, { Words } from "./components/Reveal";
 import { Pill, Slot } from "./components/Frame";
 import Values from "./components/Values";
 import HeroBricks from "./components/HeroBricks";
+import TrackingPortrait from "./components/TrackingPortrait";
 import MentoringCards from "./components/Mentoring";
 import StackExplorer from "./components/StackExplorer";
 
@@ -63,14 +64,7 @@ export default async function Home() {
               <Words text="I build AI products and lead the teams shipping them." />
             </h1>
             <div className="band-profile">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                className="band-face rv-develop"
-                src={`${basePath}/portrait.jpg`}
-                alt="Elliot Little"
-                width={176}
-                height={176}
-              />
+              <TrackingPortrait className="band-face rv-develop" />
               <p className="band-sub rv-settle">
                 Eight years building from zero across four startups. At Zero
                 Gravity, I led the product and team that took our AI STEM

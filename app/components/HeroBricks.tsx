@@ -14,6 +14,11 @@ const MORTAR = 4;
 const GLOW_RADIUS = 132;
 const GLOW_LIFE = 720;
 const MAX_GLOWS = 32;
+// Lit bricks are stippled rather than tinted, to match the dithered portrait:
+// light arrives as more dots, not as a smoother wash.
+const GRIT_TILE = 97;
+const GRIT_LEVELS = 16;
+const WARMTHS = ["255, 224, 178", "248, 190, 137"];
 
 /** A fixed brick wall whose existing blocks illuminate under the pointer. */
 export default function HeroBricks() {
@@ -90,6 +95,45 @@ export default function HeroBricks() {
     let height = 0;
     let glows: GlowPoint[] = [];
     let last: { x: number; y: number } | null = null;
+    // grit[warmth][level]: one noise threshold map, so a brighter level keeps
+    // every dot of the dimmer ones and the stipple thickens instead of
+    // reshuffling as the glow fades.
+    let grit: CanvasPattern[][] = [];
+    let gritDensity = 0;
+
+    const buildGrit = (density: number) => {
+      if (density === gritDensity) return;
+      gritDensity = density;
+      const thresholds = Array.from(
+        { length: GRIT_TILE * GRIT_TILE },
+        () => Math.random(),
+      );
+      grit = WARMTHS.map((warmth) =>
+        Array.from({ length: GRIT_LEVELS + 1 }, (_, level) => {
+          const tile = document.createElement("canvas");
+          tile.width = GRIT_TILE;
+          tile.height = GRIT_TILE;
+          const tileContext = tile.getContext("2d")!;
+          const pixels = tileContext.createImageData(GRIT_TILE, GRIT_TILE);
+          const [red, green, blue] = warmth.split(", ").map(Number);
+          const cutoff = level / GRIT_LEVELS;
+          thresholds.forEach((threshold, index) => {
+            if (threshold >= cutoff) return;
+            pixels.data.set([red, green, blue, 255], index * 4);
+          });
+          tileContext.putImageData(pixels, 0, 0);
+          const pattern = context.createPattern(tile, "repeat")!;
+          // One tile pixel per canvas pixel, not per CSS pixel.
+          pattern.setTransform(new DOMMatrix().scale(1 / density));
+          return pattern;
+        }),
+      );
+    };
+
+    const gritFor = (variation: number, amount: number) =>
+      grit[variation === 0 ? 0 : 1][
+        Math.min(GRIT_LEVELS, Math.round(amount * GRIT_LEVELS))
+      ];
 
     const influenceAt = (x: number, y: number, now: number) => {
       let influence = 0;
@@ -140,14 +184,12 @@ export default function HeroBricks() {
           const centerY = y + BRICK_HEIGHT / 2;
           const influence = influenceAt(centerX, centerY, now);
           const variation = (row + column + 6) % 3;
-          const warmth = variation === 0 ? "255, 224, 178" : "248, 190, 137";
+          const warmth = WARMTHS[variation === 0 ? 0 : 1];
           const brickX = x + MORTAR / 2;
           const brickY = y + MORTAR / 2;
           const brickWidth = BRICK_WIDTH - MORTAR;
           const brickHeight = BRICK_HEIGHT - MORTAR;
 
-          context.fillStyle = `rgba(${warmth}, ${influence * 0.115})`;
-          context.strokeStyle = `rgba(${warmth}, ${0.004 + influence * 0.34})`;
           context.lineWidth = 1;
           context.beginPath();
           context.roundRect(
@@ -157,8 +199,19 @@ export default function HeroBricks() {
             brickHeight,
             2,
           );
-          context.fill();
-          context.stroke();
+          if (influence > 0.01) {
+            context.globalAlpha = 0.5;
+            context.fillStyle = gritFor(variation, influence * 0.3);
+            context.fill();
+            context.globalAlpha = 0.85;
+            context.lineWidth = 1.5;
+            context.strokeStyle = gritFor(variation, influence * 0.75);
+            context.stroke();
+            context.globalAlpha = 1;
+          } else {
+            context.strokeStyle = `rgba(${warmth}, 0.004)`;
+            context.stroke();
+          }
         }
       }
 
@@ -218,6 +271,7 @@ export default function HeroBricks() {
       canvas.width = Math.round(width * density);
       canvas.height = Math.round(height * density);
       context.setTransform(density, 0, 0, density, 0, 0);
+      buildGrit(density);
       glows = [];
       last = null;
       draw(performance.now());
