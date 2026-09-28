@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Newsreader, Schibsted_Grotesk } from "next/font/google";
+import { Newsreader, Archivo, Instrument_Serif } from "next/font/google";
 import NavLinks from "./components/NavLinks";
 import ThemeToggle from "./components/ThemeToggle";
 import MobileMenu from "./components/MobileMenu";
@@ -10,24 +10,32 @@ import "./globals.css";
 
 const basePath = process.env.BASE_PATH || "";
 
-// Two families, both self-hosted at build (no runtime third-party request).
-// Newsreader does every headline and the reading serif: variable, with the
-// optical-size axis, so display sizes get its sharper high-contrast cut.
-// Schibsted Grotesk, drawn for a Nordic newspaper group, does body, labels
-// and UI. Monospace is kept for data only (--data in globals.css).
+// Both self-hosted at build — no runtime third-party request, consistent
+// with the site's no-external-anything rule. Newsreader is the editorial
+// display serif; Archivo is a neutral Akzidenz-lineage grotesque for
+// running text and UI (a free stand-in for Söhne's Swiss warmth).
 const newsreader = Newsreader({
   subsets: ["latin"],
-  weight: "variable",
-  axes: ["opsz"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   display: "swap",
   variable: "--font-serif",
 });
 
-const schibsted = Schibsted_Grotesk({
+// A display face with real stroke contrast. Newsreader is a soft old-style
+// built for long reading; at 74px it reads gentle, which is the single
+// biggest reason this page kept coming back as "tasteful and boring".
+const instrument = Instrument_Serif({
   subsets: ["latin"],
-  weight: "variable",
+  weight: ["400"],
   style: ["normal", "italic"],
+  display: "swap",
+  variable: "--font-display",
+});
+
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
   variable: "--font-sans",
 });
@@ -57,7 +65,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${schibsted.variable}`}
+      className={`${newsreader.variable} ${archivo.variable} ${instrument.variable}`}
       suppressHydrationWarning
     >
       <body>

@@ -30,16 +30,11 @@
   --flag: #f0ead9;
   --shadow: 0 1px 1px rgba(27, 24, 17, 0.03);
   --shadow-lift: 0 10px 30px rgba(27, 24, 17, 0.07);
-  /* Two families. --display and --serif are both Newsreader: its optical
-     sizes do the display job. --mono is kept as a name for the many label
-     rules that used it, but now points at the text face; real monospace is
-     --data, for dates, times, numbers, versions and code only. */
+  --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
   --sans: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Helvetica, Arial, sans-serif;
+    Roboto, Helvetica, Arial, sans-serif;
   --serif: var(--font-serif), "Iowan Old Style", "Georgia", serif;
-  --display: var(--font-serif), "Iowan Old Style", "Georgia", serif;
-  --mono: var(--sans);
-  --data: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
+  --display: var(--font-display), "Instrument Serif", "Times New Roman", serif;
   --r: 2px;
   color-scheme: light;
 }
@@ -197,9 +192,9 @@ h2 {
   align-items: baseline;
   gap: 12px;
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
   margin: 76px 0 22px;
@@ -286,7 +281,7 @@ p {
 }
 
 .mono {
-  font-family: var(--data);
+  font-family: var(--mono);
   font-size: 12.5px;
 }
 
@@ -475,12 +470,13 @@ li {
 }
 
 .timeline .day {
-  font-family: var(--data);
+  font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
   margin: 0 0 12px;
+  font-weight: 500;
 }
 
 .entry {
@@ -524,13 +520,12 @@ li {
 
 .badge {
   font-family: var(--sans);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 1px 7px;
   border-radius: var(--r);
   border: 1px solid;
-  font-weight: 600;
 }
 
 .badge.agent {
@@ -683,11 +678,11 @@ li {
   gap: 12px;
   margin: 0 0 10px;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.3;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .github-snake-label {
@@ -739,14 +734,13 @@ li {
 
 .layer {
   font-family: var(--sans);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 2px 8px;
   border-radius: var(--r);
   border: 1px solid var(--line-2);
   color: var(--muted);
-  font-weight: 600;
 }
 
 .layer.inner {
@@ -762,11 +756,10 @@ li {
   align-items: center;
   gap: 6px;
   font-family: var(--sans);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
-  font-weight: 600;
 }
 
 .lstatus .dot {
@@ -816,12 +809,11 @@ li {
 
 .loopmeta dt {
   font-family: var(--sans);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
   margin-bottom: 3px;
-  font-weight: 600;
 }
 
 .loopmeta dd {
@@ -842,11 +834,10 @@ li {
 .stoprule span {
   color: var(--faint);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 12px;
+  letter-spacing: 0.1em;
+  font-size: 11px;
   margin-right: 8px;
   font-family: var(--sans);
-  font-weight: 600;
 }
 
 .proposals {
@@ -858,12 +849,11 @@ li {
 
 .ptitle {
   font-family: var(--sans);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--faint);
   margin-bottom: 10px;
-  font-weight: 600;
 }
 
 .proposal {
@@ -885,30 +875,28 @@ li {
 
 .psrc {
   font-family: var(--sans);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 1px 7px;
   border-radius: var(--r);
   border: 1px solid var(--line-2);
   color: var(--accent-ink);
-  font-weight: 600;
 }
 
 .pdate {
-  font-family: var(--data);
-  font-size: 11px;
+  font-family: var(--mono);
+  font-size: 12px;
   color: var(--faint);
 }
 
 .pstatus {
   margin-left: auto;
   font-family: var(--sans);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
-  font-weight: 600;
 }
 
 .pstatus.accepted {
@@ -1007,7 +995,7 @@ li {
 }
 
 .prose code {
-  font-family: var(--data);
+  font-family: var(--mono);
   font-size: 13px;
   background: var(--bg-2);
   border: 1px solid var(--line);
@@ -1112,8 +1100,8 @@ footer a {
 }
 
 .toolrow .meta {
-  font-family: var(--data);
-  font-size: 11.5px;
+  font-family: var(--mono);
+  font-size: 12px;
   color: var(--faint);
   margin-top: 8px;
 }
@@ -1236,12 +1224,12 @@ h2::before {
   padding: 0 18px;
   border-bottom: 1px solid var(--line);
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .flowbar::before {
@@ -1345,11 +1333,11 @@ h2::before {
 .fmeta,
 .fby {
   font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .fmeta {
@@ -1395,12 +1383,12 @@ h2::before {
   padding: 0 7px;
   background: var(--bg-2);
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.4;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .fconductor {
@@ -1531,12 +1519,12 @@ h2::before {
   display: block;
   margin-bottom: 5px;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.2;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .stack-panel h3 {
@@ -1611,8 +1599,8 @@ h2::before {
   border: 0;
   background: transparent;
   color: var(--faint);
-  font: 600 12px/1 var(--mono);
-  letter-spacing: 0.06em;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
   transition-property: color, scale;
@@ -1735,12 +1723,12 @@ h2::before {
   display: block;
   margin-bottom: 4px;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.4;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .case-card h4 {
@@ -1777,12 +1765,12 @@ h2::before {
 
 .case-spec dt {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.5;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .case-spec dd {
@@ -1855,11 +1843,11 @@ h2::before {
   display: block;
   margin-bottom: 8px;
   font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .product-case-panel .product-case-statement {
@@ -1897,10 +1885,10 @@ h2::before {
   margin-bottom: 4px;
   color: var(--accent-ink);
   font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 @media (max-width: 720px) {
@@ -1951,9 +1939,9 @@ h2::before {
 
 .foot-h {
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--faint);
   margin-bottom: 3px;
@@ -2198,12 +2186,12 @@ h2::before {
 .mentor-meta {
   display: block;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.45;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   color: var(--faint);
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .mentor-card p {
@@ -2431,9 +2419,9 @@ h2::before {
 .nav-feature-eyebrow {
   display: block;
   font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   line-height: 1.4;
   text-transform: uppercase;
   color: var(--faint);
@@ -2803,12 +2791,12 @@ h2[id] {
   place-items: center;
   color: var(--faint);
   font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-align: center;
   padding: 12px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* ----------------------------------------------------------- mai page */
@@ -2822,11 +2810,10 @@ h2[id] {
   display: block;
   font-family: var(--mono);
   font-size: 12px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent-ink);
   margin-bottom: 22px;
-  font-weight: 600;
 }
 
 .mai-sub {
@@ -3074,10 +3061,9 @@ h2.mai-kick {
   margin: 48px 0 8px;
   font-family: var(--mono);
   font-size: 12px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--accent-ink);
-  font-weight: 600;
 }
 
 h2.mai-kick::before,
@@ -3228,11 +3214,10 @@ main:has(> .band) {
   display: block;
   font-family: var(--mono);
   font-size: 12px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #ffe9dc;
   margin-bottom: 18px;
-  font-weight: 600;
 }
 
 .band-h {
@@ -3719,11 +3704,11 @@ main:has(> .band) {
 
 .wr-noshot {
   font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .wr-meta {
@@ -3744,8 +3729,8 @@ main:has(> .band) {
 }
 
 .wr-date {
-  font-family: var(--data);
-  font-size: 11px;
+  font-family: var(--mono);
+  font-size: 12px;
   letter-spacing: 0.06em;
   color: var(--faint);
   font-variant-numeric: tabular-nums;
@@ -3894,11 +3879,11 @@ main:has(> .band) {
   margin: 0;
   color: var(--accent-ink);
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.5;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .reader-carousel-controls {
@@ -4118,10 +4103,10 @@ main:has(> .band) {
 .authority-table thead th {
   padding-block: 13px;
   font-family: var(--mono);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 500;
   line-height: 1.2;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
 }
@@ -4153,12 +4138,12 @@ main:has(> .band) {
   align-items: center;
   gap: 6px;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.2;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .system-health::before,
@@ -4221,8 +4206,8 @@ main:has(> .band) {
 
 .decision-list time,
 .failure-meta time {
-  font-family: var(--data);
-  font-size: 11px;
+  font-family: var(--mono);
+  font-size: 12px;
   color: var(--faint);
   font-variant-numeric: tabular-nums;
 }
@@ -4282,12 +4267,12 @@ main:has(> .band) {
 
 .evidence-gap span {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.5;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .anatomy-viewport {
@@ -4328,12 +4313,12 @@ main:has(> .band) {
 .anatomy-no,
 .anatomy-owner {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.2;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .anatomy-no {
@@ -4389,11 +4374,11 @@ main:has(> .band) {
 .failure-change span {
   margin-right: 7px;
   font-family: var(--mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .system-history {
@@ -4432,12 +4417,12 @@ main:has(> .band) {
 .system-history dt {
   margin-bottom: 4px;
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 11px;
   line-height: 1.35;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .system-history dd {
@@ -4553,12 +4538,12 @@ main:has(> .band) {
   .authority-table td::before {
     content: attr(data-label);
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 11px;
     line-height: 1.5;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--faint);
-  font-weight: 600;
+  font-weight: 500;
 }
 
   .authority-table tbody th {
@@ -4667,7 +4652,7 @@ main:has(> .band) {
 
 .eval-head code,
 .pricing-note code {
-  font-family: var(--data);
+  font-family: var(--mono);
   font-size: 0.88em;
   color: var(--ink-2);
 }
@@ -4696,14 +4681,14 @@ main:has(> .band) {
 }
 
 .eval-version {
-  font-family: var(--data);
-  font-size: 11px;
+  font-family: var(--mono);
+  font-size: 12px;
   letter-spacing: 0.04em;
   color: var(--faint);
 }
 
 .eval-score {
-  font-family: var(--data);
+  font-family: var(--mono);
   font-size: 13px;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
@@ -4740,8 +4725,8 @@ main:has(> .band) {
 }
 
 .eval-failing code {
-  font-family: var(--data);
-  font-size: 11px;
+  font-family: var(--mono);
+  font-size: 12px;
   color: var(--accent-ink);
 }
 
@@ -4797,8 +4782,8 @@ main:has(> .band) {
 
 .trace-meta time,
 .trace-version {
-  font-family: var(--data);
-  font-size: 11px;
+  font-family: var(--mono);
+  font-size: 12px;
   letter-spacing: 0.04em;
   color: var(--faint);
 }
@@ -4967,8 +4952,8 @@ main:has(> .band) {
 }
 
 /* ---------------------------------------------------------------- /loops */
-.loop-label { display: block; font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px;
-  font-weight: 600;
+.loop-label { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px;
+  font-weight: 500;
 }
 .loop-split { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); margin: 8px 0 48px; }
 .loop-split > div { background: var(--paper); padding: 20px 22px; }
@@ -4979,14 +4964,13 @@ main:has(> .band) {
 .loop-step-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
 .loop-step-head h3 { margin: 0; font-family: var(--display); font-size: 24px; font-weight: 400; }
 .loop-step-n { font-family: var(--mono); font-size: 12px; color: var(--accent-ink); }
-.loop-step-when { margin-left: auto; font-family: var(--data); font-size: 11px; color: var(--faint); white-space: nowrap; }
+.loop-step-when { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--faint); white-space: nowrap; }
 .loop-steps p { margin: 0; line-height: 1.55; color: var(--ink-2); font-size: 15px; }
 .loop-rules { padding-left: 18px; margin: 8px 0 48px; }
 .loop-rules li { margin-bottom: 10px; line-height: 1.55; color: var(--ink-2); }
 .loop-ledger { width: 100%; border-collapse: collapse; margin: 8px 0 14px; font-size: 15px; }
 .loop-ledger th, .loop-ledger td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
-.loop-ledger thead th { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint); font-weight: 600; }
-@media (max-width: 420px) { .loop-ledger th, .loop-ledger td { padding: 10px 6px; } .loop-ledger thead th { letter-spacing: 0.02em; } }
+.loop-ledger thead th { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--faint); font-weight: 500; }
 .loop-note { display: block; font-family: var(--mono); font-size: 12px; color: var(--faint); }
 .loop-fig { margin: 8px 0 36px; }
 .loop-fig img { width: 100%; height: auto; border-radius: var(--r); border: 1px solid var(--line); }
@@ -5182,7 +5166,7 @@ main:has(> .band) {
 }
 
 .lf-when {
-  font-family: var(--data);
+  font-family: var(--mono);
   font-size: 13px;
   letter-spacing: 0.06em;
   fill: var(--accent-ink);
@@ -5349,41 +5333,22 @@ main:has(> .band) {
 }
 
 /* ============================================================ panels v2
-   Site-wide since 2026-09-28: warm paper panels lifted by shadow instead of
-   outlined, a heavy serif for titles, bold sans labels instead of mono,
-   plain ink icons. Later rules win over the older ones above on purpose. */
+   Surface only: warm paper panels lifted by a soft shadow instead of an
+   outline, larger radius, dashed dividers, plain ink icons. Type is left to
+   the rules above. */
 :root {
   --panel: #f4eee2;
   --lift: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
     0 1px 2px rgba(52, 46, 41, 0.06), 0 14px 32px -14px rgba(52, 46, 41, 0.22);
 }
-
 :root[data-theme="dark"] {
   --panel: #131e1d;
   --lift: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
     0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 32px -14px rgba(0, 0, 0, 0.6);
 }
-
-.mai-kick,
-h2.mai-kick {
-  font-family: var(--sans);
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  color: var(--ink);
-}
-
-.wr-title,
-.sec-title {
-  font-family: var(--serif);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
 .ev-steps {
   gap: 18px;
 }
-
 .ev-step {
   background: var(--panel);
   border: none;
@@ -5391,82 +5356,42 @@ h2.mai-kick {
   padding: 28px 30px 26px;
   box-shadow: var(--lift);
 }
-
 .ev-step-head {
   margin-bottom: 18px;
 }
-
 .ev-step-icon {
   width: auto;
   height: auto;
   background: none;
   color: var(--ink);
 }
-
 .habit-icon {
   width: 28px;
   height: 28px;
 }
-
-.ev-step-no {
-  font-family: var(--sans);
-  font-weight: 600;
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--ink-2);
-}
-
-.ev-step h3 {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 23px;
-  line-height: 1.2;
-  letter-spacing: -0.015em;
-  margin-bottom: 10px;
-}
-
-.ev-step p {
-  color: var(--ink-2);
-  font-size: 15.5px;
-  line-height: 1.55;
-}
-
 .ev-step p + .ev-step-where {
   border-top: 1px dashed var(--line-2);
   padding-top: 14px;
 }
-
 .ev-places {
   background: var(--panel);
   border-radius: 26px;
   box-shadow: var(--lift);
   padding: 8px 30px;
 }
-
 .ev-places li {
   border-top: 1px dashed var(--line-2);
 }
-
 .ev-places li:first-child,
 .ev-places li:last-child {
   border-bottom: none;
 }
-
 .ev-places li:first-child {
   border-top: none;
 }
-
-.ev-places a {
-  font-weight: 600;
-  text-decoration: none;
-}
-
 .ev-places a:hover {
   text-decoration: underline;
 }
-
-/* Every live card-type component moves onto the same panel. */
 .research-card,
 .case-card,
 .mentor-card,
@@ -5481,21 +5406,15 @@ h2.mai-kick {
   border-radius: 26px;
   box-shadow: var(--lift);
 }
-
-/* The split was two paper cells on a hairline grid; on a panel the halves
-   just need a divider. */
 .loop-split {
   gap: 0;
 }
-
 .loop-split > div {
   background: none;
 }
-
 .loop-split > div + div {
   border-left: 1px dashed var(--line-2);
 }
-
 @media (max-width: 720px) {
   .loop-split > div + div {
     border-left: none;
@@ -5503,63 +5422,64 @@ h2.mai-kick {
   }
 }
 
+/* ================================================================ type tidy
+   The pairing stays (Instrument Serif display, Newsreader reading, Archivo
+   text, SF Mono labels); this only makes each job use one face and one size.
+   Instrument Serif ships in one weight, so nothing may ask it for bold: the
+   browser would smear a fake one. */
+html {
+  font-synthesis-weight: none;
+}
+
+/* Every card title is the display face at one size. */
+.case-card h4,
+.mentor-card h3,
+.mentor-card h3 a,
 .research-card > h3,
 .research-card > h3 a,
-.mentor-card h3,
-.case-card h4 {
-  font-family: var(--serif);
-  font-weight: 600;
-  letter-spacing: -0.015em;
+.ev-step h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
-.loop-label,
-.case-spec dt,
-.case-card-company,
-.product-case-panel-label {
-  font-family: var(--sans);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: var(--ink-2);
-}
-
-/* ================================================================== type
-   Weights for the two-family system. Newsreader's display cut is heavier
-   than the old one-weight display serif, so titles sit at 500 and section
-   and card titles at 560. Labels are bold grotesque caps, tracked less than
-   mono needed. */
-.wr-title,
-.band-h,
-h1 {
-  font-weight: 500;
-  letter-spacing: -0.025em;
-}
-
-.sec-title,
-.ev-step h3,
-.ev-places a,
-.ev-places-name,
-.research-card > h3,
-.research-card > h3 a,
-.mentor-card h3,
-.case-card h4 {
-  font-weight: 560;
-  letter-spacing: -0.015em;
-}
-
-.mai-sub,
-.band-sub {
-  font-family: var(--serif);
-}
-
+/* Section kickers: one style everywhere. */
 .mai-kick,
 h2.mai-kick,
-.band-kick,
-.ev-step-no {
-  font-weight: 700;
-  letter-spacing: 0.06em;
+.band-kick {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
 }
 
-.ev-step p,
-.ev-places p {
-  font-size: 16px;
+.career-timeline h3,
+.career-timeline h3 a {
+  font-weight: 400;
+}
+
+@media (max-width: 420px) {
+  .loop-ledger th,
+  .loop-ledger td {
+    padding: 10px 6px;
+  }
+
+  .loop-ledger thead th {
+    letter-spacing: 0.04em;
+  }
+}
+
+h1,
+.wr-title,
+.band-h,
+.band-h * {
+  font-weight: 400;
+}
+
+.ev-step-no {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
