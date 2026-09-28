@@ -106,15 +106,17 @@ const FLIGHTS = [
   { side: -1, delay: -0.36, end: [-62, -40], s: 176 },
   { side: 1, delay: -0.3, end: [64, 34], s: 156 },
   { side: -1, delay: 0.08, end: [-70, 32], s: 148 },
-  { side: 1, delay: 0.15, end: [60, -42], s: 184 },
-  { side: -1, delay: 0.22, end: [-58, 8], s: 140 },
-  { side: 1, delay: 0.29, end: [72, -6], s: 168 },
-  { side: -1, delay: 0.36, end: [-66, -24], s: 160 },
-  { side: 1, delay: 0.43, end: [62, 40], s: 144 },
-  { side: -1, delay: 0.5, end: [-60, 40], s: 180 },
-  { side: 1, delay: 0.57, end: [66, -30], s: 152 },
+  { side: 1, delay: 0.13, end: [60, -42], s: 184 },
+  { side: -1, delay: 0.18, end: [-58, 8], s: 140 },
+  { side: 1, delay: 0.23, end: [72, -6], s: 168 },
+  { side: -1, delay: 0.28, end: [-66, -24], s: 160 },
+  { side: 1, delay: 0.33, end: [62, 40], s: 144 },
+  { side: -1, delay: 0.38, end: [-60, 40], s: 180 },
+  { side: 1, delay: 0.43, end: [66, -30], s: 152 },
 ];
-const TRIP = 0.62; // share of the scroll one flight takes; flights overlap
+// Every flight lands (t = 1) by p = 0.95, so nothing is still in the air
+// when the section lets go.
+const TRIP = 0.52; // share of the scroll one flight takes; flights overlap
 const COPY_IN = [0.1, 0.22]; // the copy fades and sharpens in over this span
 
 /**
@@ -146,7 +148,11 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
       const pin = pinRef.current?.getBoundingClientRect();
       // Nothing shows until the section has pinned and fills the screen;
       // the last 40px of the approach fades the field in.
-      const onScreen = Math.min(1, Math.max(0, 1 - r.top / 40));
+      // In over the last 40px before the pin, out over the first 40px after
+      // it releases, so no tile is ever left behind on the page.
+      const onScreen =
+        Math.min(1, Math.max(0, 1 - r.top / 40)) *
+        Math.min(1, Math.max(0, (r.bottom - vh) / 40));
       const p = Math.min(1, Math.max(0, -r.top / travel));
       // Copy: invisible and blurred in the empty field, then resolves.
       const c = Math.min(1, Math.max(0, (p - COPY_IN[0]) / (COPY_IN[1] - COPY_IN[0])));
