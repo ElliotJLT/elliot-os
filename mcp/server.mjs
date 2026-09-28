@@ -29,11 +29,9 @@ const FEATURED = [
   "ward",
   "boulot-os",
   "Claude-Skill-Potions",
-  "vox",
-  "dabble",
+  "dog-years",
   "homebuyer-mcp",
   "crux",
-  "hooksmith",
 ];
 
 const read = (p) => readFileSync(join(ROOT, p), "utf-8");

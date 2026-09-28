@@ -67,14 +67,12 @@ export default function Loops() {
     <main>
       <div className="mai loops-page">
         <Reveal immediate>
-          <header className="loops-hero">
-            <div>
-              <span className="mai-kick rv-settle">Loops</span>
-              <h1 className="wr-title rv-settle">
-                What I hand to machines, and what I keep.
-              </h1>
-            </div>
-            <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
+          <header className="wr-head">
+            <span className="mai-kick rv-settle">Loops · working with agents</span>
+            <h1 className="wr-title rv-settle">
+              What I hand to machines, and what I keep.
+            </h1>
+            <p className="mai-sub rv-settle">
               The system I run my own work on, how each part works, and a
               public ledger that would show it failing.
             </p>
@@ -93,24 +91,12 @@ export default function Loops() {
           <h2 id="idea" className="mai-kick rv-settle">
             the idea
           </h2>
-          <div className="loop-prose rv-settle">
-            <p>
-              David Allen&rsquo;s point in <em>Getting Things Done</em> is that
-              the mind is RAM. Every open loop you carry in your head takes up
-              space, and the part of your mind holding it is bad at reminding
-              you at the right moment. Ben Thompson picked this up in{" "}
-              <em>Write Things Down</em>: he never ran his own task system
-              well, so first an assistant ran it for him, and now an agent
-              does.
-            </p>
-            <p>
-              I&rsquo;m the same. I start more than I finish, and ideas die in
-              my head because I judge them alone. So I built the assistant. It
-              holds the list and the reminders, and it resurfaces my own
-              thinking when something new makes it relevant. The calls stay
-              with me.
-            </p>
-          </div>
+          <p className="muted rv-settle section-line">
+            David Allen&rsquo;s point, picked up by Ben Thompson in{" "}
+            <em>Write Things Down</em>: the mind is RAM. I start more than I
+            finish, so I built the assistant that holds the list, and kept the
+            calls.
+          </p>
         </Reveal>
 
         <Reveal>
@@ -164,23 +150,35 @@ export default function Loops() {
           <h2 id="night" className="mai-kick rv-settle">
             the night pass
           </h2>
-          <div className="loop-prose rv-settle">
-            <p>
-              This is the piece Allen wished for. Your mind reminds you about
-              flat batteries when you see the flat ones, not when you walk past
-              the right ones in a shop. The night pass tries to get the timing
-              right. It started as <em>Sleep On It</em>, which I built with
-              three others at the Claude Communities Impact Lab in London in
-              July 2026: an app that goes back through weeks of half-ideas and
-              finds the two thoughts that turn out to be the same thought.
-            </p>
-            <p>
-              Two rules carry over. It never writes my material: every quote
-              is something I actually said. And it keeps what I say I want
-              apart from what my behaviour shows, because where those diverge
-              is the most useful thing it can tell me.
-            </p>
-          </div>
+          <p className="muted rv-settle section-line">
+            Your mind reminds you about flat batteries when you see the flat
+            ones, not when you pass the right ones in a shop. This part tries
+            to get the timing right.
+          </p>
+          <ul className="loop-steps loop-steps-2 rv-settle">
+            <li>
+              <div className="loop-step-head">
+                <h3>Where it came from</h3>
+              </div>
+              <p>
+                <em>Sleep On It</em>, which I built with three others at the
+                Claude Communities Impact Lab in London in July 2026: an app
+                that goes back through weeks of half-ideas and finds the two
+                thoughts that turn out to be the same thought.
+              </p>
+            </li>
+            <li>
+              <div className="loop-step-head">
+                <h3>Two rules it kept</h3>
+              </div>
+              <p>
+                It never writes my material: every quote is something I
+                actually said. And it keeps what I say I want apart from what my
+                behaviour shows, because where those diverge is the most useful
+                thing it can tell me.
+              </p>
+            </li>
+          </ul>
         </Reveal>
         <Reveal>
           <LoopFigure

@@ -19,6 +19,11 @@ const BLURBS: Record<string, { title: string; blurb: string }> = {
     blurb:
       "Curated Claude Code skills for ops and product workflows. The skills directory is 40k+ deep; these are the ones that actually work.",
   },
+  "dog-years": {
+    title: "dog-years",
+    blurb:
+      "Agents estimate in human weeks: ask for a plan and you get \"Phase 1: Weeks 1–2\" from something that can start now. The experiments that found the reflex, and a Claude Code skill that separates agent work from human waiting.",
+  },
   vox: {
     title: "vox",
     blurb:
@@ -99,8 +104,8 @@ export default async function Built() {
             selected product work
           </h2>
           <p className="muted rv-settle section-line">
-            Five products in production. Problem, bet and proof on each card;
-            the tutor and the school hub teachers run it through lead.
+            Five products in production. Each card gives the problem, the bet
+            and the proof, starting with the tutor and the school hub.
           </p>
         </Reveal>
         <Reveal>

@@ -104,6 +104,11 @@ export default function RootLayout({
                 contribution count, then the footer said the same thing again.
                 One closing block. */}
             <div className="foot-cta">
+              <p className="foot-looking">
+                Looking for a founding product or ops lead role at an
+                early-stage company, or a tour inside government building a
+                public service.
+              </p>
               <div className="band-cta">
                 <Pill
                   href="mailto:elliotjlittle@gmail.com"

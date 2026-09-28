@@ -112,8 +112,11 @@ habit in regulated services, crisis delivery and consumer travel.
   ideas. Code handles acquisition, deduplication, filing and validation. A
   small model call decides whether the source is worth keeping and which
   existing view it changes.
-- this site — the agent's own proposals: an agent proposes, a rubric
-  scores, a human merges. https://elliotjlt.github.io/elliot-os/loops/
+- the system he runs his own work on — capture by Telegram or any Claude
+  Code session, one board that reads his job tracker and household list
+  without copying them, a nightly pass over his own words and fresh news,
+  one message at 07:30, a Friday review. Aggregate weekly ledger published:
+  https://elliotjlt.github.io/elliot-os/loops/
 
 ## Who
 
@@ -221,8 +224,8 @@ five-agent pipeline; this site's scheduled loops), tool use (an MCP server
 on this site and homebuyer-mcp, Claude Code skills and hooks), retrieval
 (Career Co-pilot and argus), memory (argus's append-only corpus and the
 essay on making corrections survive a session), human oversight (every
-loop on /loops states its human boundary and stopping rule; ward routes to
-a named human), and evaluation (/evals). Planning is the weakest of these:
+/loops sets out what the machine holds and what he keeps, with a weekly
+ledger that can show the system failing; ward routes to a named human), and evaluation (/evals). Planning is the weakest of these:
 he has designed stopping rules, not planners.
 
 ## Contact for humans
