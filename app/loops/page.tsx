@@ -115,40 +115,16 @@ export default function Loops() {
           <p className="muted rv-settle section-line">
             Overnight it looks for one link between something I&rsquo;ve said
             and something new worth reading, and quotes my own words back to
-            me. Most nights it finds nothing, and says so.
+            me. Most nights it finds nothing, and says so. It&rsquo;s a
+            rebuild of Sleep On It, which I made with three others at the
+            Claude Communities Impact Lab in July.
           </p>
-
         </Reveal>
         <Reveal>
           <LoopFigure
             name="night"
             alt="Three inputs flowing into one output: my captured words, stated versus revealed priorities, and three days of new writing on my threads, producing at most one collision or nothing."
           />
-        </Reveal>
-        <Reveal>
-          <blockquote className="loop-example rv-settle">
-            <span className="loop-label">what it sent me, 28 September 2026</span>
-            <p>
-              On 28 Sep you said &lsquo;a lot of the heavy lifting can be done
-              by an LLM system&rsquo; and named &lsquo;retaining taste and
-              judgment&rsquo; as the deeper thread in the same breath. This
-              week&rsquo;s research is about exactly that mechanism.
-            </p>
-            <span className="loop-label">the piece it paired it with</span>
-            <p className="loop-example-link">
-              Less Accurate, More Confident: The More We Rely On AI, The Less
-              We Question What We Think We Know
-            </p>
-            <span className="loop-label">the question it left me</span>
-            <p>
-              Is offloading the heavy lifting the hack, or is it the thing that
-              erodes the edge you&rsquo;re trying to protect?
-            </p>
-          </blockquote>
-          <p className="muted rv-settle loop-origin">
-            It&rsquo;s a rebuild of Sleep On It, which I made with three others
-            at the Claude Communities Impact Lab in July.
-          </p>
         </Reveal>
 
         {/* ------------------------------------------------------------ ledger */}

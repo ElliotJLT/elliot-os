@@ -4932,10 +4932,6 @@ main:has(> .band) {
 .loop-step-n { font-family: var(--mono); font-size: 12px; color: var(--accent-ink); }
 .loop-step-when { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--faint); white-space: nowrap; }
 .loop-steps p { margin: 0; line-height: 1.55; color: var(--ink-2); font-size: 15px; }
-.loop-example { margin: 16px 0 12px; padding: 20px 24px; border-left: 3px solid var(--accent); background: var(--paper); }
-.loop-example p { margin: 0 0 10px; line-height: 1.6; font-family: var(--serif); font-size: 17px; }
-.loop-example p:last-child { margin-bottom: 0; }
-.loop-example-link { font-family: var(--mono) !important; font-size: 13px !important; color: var(--muted); }
 .loop-rules { padding-left: 18px; margin: 8px 0 48px; }
 .loop-rules li { margin-bottom: 10px; line-height: 1.55; color: var(--ink-2); }
 .loop-ledger { width: 100%; border-collapse: collapse; margin: 8px 0 14px; font-size: 15px; }

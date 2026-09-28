@@ -1,6 +1,6 @@
 # /loops figure slots
 
-Each slot on /loops renders `public/loops/<name>.png` (or `.jpg`, `.webp`, `.svg`) when that file exists. Until then the slot shows a dashed placeholder in `npm run dev` and renders nothing on the live site. So: generate the image, save it with the right name, push. No code changes needed.
+Each slot on /loops renders `public/loops/<name>.png` (or `.jpg`, `.webp`, `.svg`) when that file exists. Until then the slot renders nothing, in dev and on the live site. So: generate the image, save it with the right name, push. No code changes needed.
 
 House style for every prompt below: flat editorial illustration, off-white paper background (#fef9ed) with warm dark ink (#342e29), one orange accent (#cc5600) and one muted green (#3f6b47). Thin lines, generous white space. No gradients, no glow, no robots, no brains, no circuit boards, no 3D, no stock-photo people. Readable labels in a plain serif. Landscape 16:9, at least 1600px wide.
 
