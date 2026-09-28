@@ -1201,7 +1201,6 @@ h2::before {
   font-weight: 600;
 }
 
-
 /* ================================================================= flow */
 /* Argus is a system, not a chronology. The diagram therefore keeps a real
    left-to-right code-pipeline shape. It owns a wide canvas and scrolls on a
@@ -3482,7 +3481,6 @@ main:has(> .band) {
   }
 }
 
-
 /* ============================================================== painted */
 /* The turbulence mask shredded the right edge into spikes and stretched the
    crop. Removed rather than tuned: a clean rounded crop is worth more than a
@@ -3513,8 +3511,6 @@ main:has(> .band) {
   object-fit: cover;
   display: block;
 }
-
-
 
 .foot-cta {
   text-align: center;
@@ -4957,14 +4953,6 @@ main:has(> .band) {
 
 /* ================================================================== evals */
 
-
-
-
-
-
-
-
-
 .ev-steps {
   list-style: none;
   margin: 0;
@@ -5049,23 +5037,6 @@ main:has(> .band) {
   color: var(--ink-2);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Six habits read better two across than three: each has a reason and a
    receipt, and three columns turned them into slivers. */
 @media (min-width: 1000px) {
@@ -5081,6 +5052,7 @@ main:has(> .band) {
 }
 
 .ev-places li {
+  scroll-margin-top: 104px;
   display: grid;
   grid-template-columns: 1fr;
   gap: 4px 28px;

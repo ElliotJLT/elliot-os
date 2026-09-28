@@ -14,6 +14,10 @@
     {
       "date": "2026-09-28",
       "what": "The first morning brief fell back to the plain board text: under launchd the Claude CLI couldn't find node. Fixed the same day; the fallback is why a message still arrived."
+    },
+    {
+      "date": "2026-09-28",
+      "what": "The night pass stated a count it had worked out itself, and got it wrong. Anything numeric is now computed in code before the model sees it, and the model is told never to count."
     }
   ]
 }

@@ -54,24 +54,28 @@ const HOW = [
 
 const PLACES = [
   {
+    id: "tutor",
     name: "Zero Gravity AI STEM tutor",
     href: "https://www.zerogravity.co.uk/tutor",
     line: "An AI tutor for GCSE and A-level STEM, used in UK schools. I built the eval pipeline and owned the bar.",
   },
   {
+    id: "ward",
     name: "ward",
     href: "https://github.com/ElliotJLT/ward",
     line: "Safeguarding for apps children use. Open source, with the eval sets and the method published.",
   },
   {
+    id: "farewill",
     name: "Farewill probate",
     href: "https://farewill.com/apply-for-probate",
     line: "Regulated probate operations, before LLMs. The same habit, with spreadsheets instead of judges.",
   },
   {
+    id: "site",
     name: "This site",
     href: "https://github.com/ElliotJLT/elliot-os/tree/main/evals",
-    line: "Its own agent has an eval suite in the repo, and CI fails any change that breaks it. The first run failed half of it, which is the point.",
+    line: "The agent that keeps it current has an eval suite in the repo, and CI fails any change that breaks it. The first run showed its review gate couldn't reject anything: a proposal citing a repository that doesn't exist passed as grounded.",
   },
 ];
 
@@ -134,7 +138,7 @@ export default function Evals() {
         <Reveal>
           <ul className="ev-places rv-settle">
             {PLACES.map((p) => (
-              <li key={p.name}>
+              <li key={p.name} id={p.id}>
                 <a href={p.href}>{p.name}</a>
                 <p>{p.line}</p>
               </li>
