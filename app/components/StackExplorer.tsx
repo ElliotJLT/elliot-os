@@ -150,7 +150,7 @@ export default function StackExplorer({ basePath = "" }: { basePath?: string }) 
             </div>
           </div>
           <p>{selected.use}</p>
-          <a href={selected.href}>visit {selected.name} ↗</a>
+          <a href={`${basePath}/built/`}>see what I&apos;ve built →</a>
         </div>
       )}
     </div>

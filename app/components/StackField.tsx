@@ -123,6 +123,7 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
   const selected = TOOLS.find((t) => t.id === selectedId);
   const fieldRef = useRef<HTMLDivElement>(null);
   const tileRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const centreRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const field = fieldRef.current;
@@ -135,17 +136,23 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
       const vh = window.innerHeight;
       const vw = window.innerWidth;
       const travel = Math.max(1, r.height - vh);
+      const copy = centreRef.current?.getBoundingClientRect();
+      const half = copy ? copy.width / 2 : 260;
       const p = Math.min(1, Math.max(0, -r.top / travel));
       tileRefs.current.forEach((tile, i) => {
         if (!tile) return;
         const f = FLIGHTS[i % FLIGHTS.length];
         const t = Math.min(1, Math.max(0, (p - f.delay) / TRIP));
         const e = t * t * (3 - 2 * t);
-        const x = f.side * 4 + (f.end[0] - f.side * 4) * e;
-        const y = f.end[1] * e;
+        // Start just outside the copy block and only move outward, so a tile
+        // can never cross the text.
+        const startX = f.side * (half + 36 + (f.s * 0.6) / 2);
+        const endX = (f.end[0] / 100) * vw;
+        const x = startX + (endX - startX) * e;
+        const y = f.end[1] * e * 0.9;
         const blur = t < 0.42 ? ((0.42 - t) / 0.42) * 8 : ((t - 0.42) / 0.58) * 11;
         const fade = t <= 0 ? 0 : Math.min(1, t / 0.1) * (t >= 1 ? 0 : 1);
-        tile.style.setProperty("--tx", `${((x / 100) * vw).toFixed(1)}px`);
+        tile.style.setProperty("--tx", `${x.toFixed(1)}px`);
         tile.style.setProperty("--ty", `${((y / 100) * vh).toFixed(1)}px`);
         tile.style.setProperty("--sc", (0.6 + 0.65 * e).toFixed(3));
         tile.style.setProperty("--blur", `${blur.toFixed(2)}px`);
@@ -182,6 +189,7 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
               className="stack-tile"
               data-on={on || undefined}
               aria-pressed={on}
+              aria-label={tool.name}
               aria-controls="stack-centre"
               style={
                 {
@@ -191,24 +199,30 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
               onClick={() => setSelectedId(on ? null : tool.id)}
             >
               <span className="stack-tile-face">
-                {/* The name under the tile is the accessible label. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={`${basePath}/stack/${tool.logo}`} alt="" />
               </span>
-              <span className="stack-tile-name">{tool.name}</span>
+              <span className="stack-tile-name" aria-hidden="true">
+                {tool.name}
+              </span>
             </button>
           );
         })}
       </div>
 
-      <div className="stack-centre" id="stack-centre" aria-live="polite">
+      <div
+        className="stack-centre"
+        id="stack-centre"
+        aria-live="polite"
+        ref={centreRef}
+      >
         {selected ? (
           <div key={selected.id} className="stack-centre-in">
             <span className="mai-kick">{selected.role}</span>
             <p className="sec-title">{selected.name}</p>
             <p className="stack-centre-body">{selected.use}</p>
             <div className="stack-centre-links">
-              <a href={selected.href}>visit {selected.name} ↗</a>
+              <a href={`${basePath}/built/`}>see what I&apos;ve built →</a>
               <button type="button" onClick={() => setSelectedId(null)}>
                 all tools
               </button>

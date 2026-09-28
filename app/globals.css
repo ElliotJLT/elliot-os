@@ -5646,10 +5646,19 @@ h2.mai-kick + p.muted,
   object-fit: contain;
 }
 
+/* Names show on hover or keyboard focus only; the button carries the
+   accessible name and the centre copy names the picked tool. */
 .stack-tile-name {
   font-family: var(--mono);
   font-size: 12px;
   white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+
+.stack-tile:hover .stack-tile-name,
+.stack-tile:focus-visible .stack-tile-name {
+  opacity: 1;
 }
 
 .stack-centre {
@@ -5657,10 +5666,6 @@ h2.mai-kick + p.muted,
   z-index: 1;
   width: min(480px, 40vw);
   text-align: center;
-  padding: 28px 12px;
-  border-radius: 40px;
-  /* A soft pool of page colour, so tiles passing behind never cut the copy. */
-  background: radial-gradient(closest-side, var(--bg) 70%, transparent);
 }
 
 .stack-centre .sec-title {
