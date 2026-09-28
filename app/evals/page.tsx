@@ -128,16 +128,6 @@ export default function Evals() {
         </Reveal>
 
         <Reveal>
-          <aside className="proof-band rv-settle">
-            <span className="proof-band-kick">Zero Gravity · safeguarding</span>
-            <p className="proof-band-line">
-              Detection shipped first. Then we cut the false alarms without
-              missing a single disclosure.
-            </p>
-          </aside>
-        </Reveal>
-
-        <Reveal>
           <h2 id="where" className="mai-kick rv-settle">
             where I&apos;ve done it
           </h2>

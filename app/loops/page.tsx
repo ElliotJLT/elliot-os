@@ -67,7 +67,7 @@ export default function Loops() {
         </Reveal>
 
         <Reveal>
-          <div className="proof-band proof-band-split rv-settle">
+          <div className="loop-split rv-settle">
             <div>
               <span className="loop-label">the machine holds</span>
               <p>

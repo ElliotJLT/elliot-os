@@ -100,18 +100,6 @@ export default async function Built() {
         </Reveal>
 
         <Reveal>
-          <aside className="proof-band rv-settle">
-            <span className="proof-band-kick">
-              Zero Gravity · DfE AI Tutoring Tools Pioneers Programme
-            </span>
-            <p className="proof-band-line">
-              Picked as one of eight companies to test safe AI tutoring for
-              disadvantaged pupils. We placed 2nd, with a £300k grant.
-            </p>
-          </aside>
-        </Reveal>
-
-        <Reveal>
           <h2 id="production" className="mai-kick rv-settle">
             selected product work
           </h2>
