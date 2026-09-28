@@ -4,17 +4,18 @@ import { useEffect, useRef } from "react";
 
 const basePath = process.env.BASE_PATH || "";
 
-// One sprite, ten frames left to right: the 3x3 gaze grid read row by row
-// (up-left through down-right), then the wink. Frame 4 looks at the reader.
-const FRAMES = 10;
+// One sprite, fourteen frames left to right: the 3x3 gaze grid read row by
+// row (up-left through down-right), then the click reactions: wink, shock,
+// flinch, swat, finger guns. Frame 4 looks at the reader.
+const FRAMES = 14;
 const CENTRE = 4;
-const WINK = 9;
-const WINK_MS = 220;
+const REACTIONS = [9, 10, 11, 12, 13];
+const REACT_MS = 650;
 
 // Screen angles in 45° steps from pointing right, clockwise (y runs down).
 const SECTOR_TO_FRAME = [5, 8, 7, 6, 3, 0, 1, 2];
 
-/** The hero portrait: follows the pointer with its eyes, winks on a click. */
+/** The hero portrait: follows the pointer with its eyes, reacts to a click. */
 export default function TrackingPortrait({ className }: { className: string }) {
   const faceRef = useRef<HTMLSpanElement>(null);
 
@@ -32,7 +33,8 @@ export default function TrackingPortrait({ className }: { className: string }) {
 
     let gaze = CENTRE;
     let shown = CENTRE;
-    let winkTimer = 0;
+    let reaction = -1;
+    let reactTimer = 0;
     let frame = 0;
     let pointer: { x: number; y: number } | null = null;
 
@@ -55,7 +57,7 @@ export default function TrackingPortrait({ className }: { className: string }) {
         const sector = Math.round(Math.atan2(dy, dx) / (Math.PI / 4));
         gaze = SECTOR_TO_FRAME[(sector + 8) % 8];
       }
-      if (!winkTimer) show(gaze);
+      if (!reactTimer) show(gaze);
     };
 
     const onPointerMove = (event: PointerEvent) => {
@@ -63,26 +65,33 @@ export default function TrackingPortrait({ className }: { className: string }) {
       if (!frame) frame = requestAnimationFrame(updateGaze);
     };
 
+    // A different reaction every click, never the same one twice running,
+    // so clicking again is the point.
     const onPointerDown = () => {
-      window.clearTimeout(winkTimer);
-      show(WINK);
-      winkTimer = window.setTimeout(() => {
-        winkTimer = 0;
+      window.clearTimeout(reactTimer);
+      let next = reaction;
+      while (next === reaction) {
+        next = Math.floor(Math.random() * REACTIONS.length);
+      }
+      reaction = next;
+      show(REACTIONS[reaction]);
+      reactTimer = window.setTimeout(() => {
+        reactTimer = 0;
         show(gaze);
-      }, WINK_MS);
+      }, REACT_MS);
     };
 
     if (canTrack) {
       window.addEventListener("pointermove", onPointerMove, { passive: true });
       window.addEventListener("pointerdown", onPointerDown, { passive: true });
     } else {
-      // Touch has no hover to follow, so a tap on the face is the whole game.
+      // Touch has no hover to follow, so tapping the face is the whole game.
       face.addEventListener("pointerdown", onPointerDown, { passive: true });
     }
 
     return () => {
       cancelAnimationFrame(frame);
-      window.clearTimeout(winkTimer);
+      window.clearTimeout(reactTimer);
       window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerdown", onPointerDown);
       face.removeEventListener("pointerdown", onPointerDown);
