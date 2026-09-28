@@ -8,7 +8,18 @@
       "url": "https://www.zerogravity.co.uk/tutor",
       "role": "Founding Operator (#4), then Head of Product",
       "dates": "Feb 2022 – Aug 2026",
-      "outcome": "Joined as employee #4 to build operations and grew the company from 4 to 40 people. Did ISO 27001 and 9001 solo as DPO, which unlocked our first FTSE 100 contracts. Then led product: the AI STEM tutor went from first commit to the App Store in under a month, and the DfE picked it for its AI Tutoring Tools Pioneers Programme, 2nd of eight with a £300k grant."
+      "outcome": "Joined as employee #4 to build operations and grew the company from 4 to 40 people. Did ISO 27001 and 9001 solo as DPO, which unlocked our first FTSE 100 contracts. Then led product: the AI STEM tutor went from first commit to the App Store in under a month, and the DfE picked it for its AI Tutoring Tools Pioneers Programme, 2nd of eight with a £300k grant.",
+      "photo": "career/team-zero-gravity.jpg",
+      "photoAlt": "The Zero Gravity team in the office, gathered round a sofa under the company sign",
+      "quote": {
+        "paras": [
+          "Elliot is the ultimate startup operator — a genuine Swiss Army knife who has made an impact across customer success, operations and product at Zero Gravity.",
+          "He doesn't just understand what AI makes possible; he builds with it, experiments rapidly and ships. He now contributes as many PRs as some of our senior engineers, while bringing the customer insight and commercial judgement you would expect from a strong product leader.",
+          "If I were starting another business tomorrow, Elliot would be one of the first people I'd try to hire."
+        ],
+        "name": "Joe Seddon",
+        "role": "Founder and CEO, Zero Gravity"
+      }
     },
     {
       "org": "Farewill",
@@ -32,7 +43,9 @@
       "url": "",
       "role": "Founding Operator (#8)",
       "dates": "Oct 2018 – Sep 2020",
-      "outcome": "Built the CX and crisis operations behind 400% YoY growth, scaling the team from 10 to 160 across 30+ markets, with NPS held above 90 through the US launch."
+      "outcome": "Built the CX and crisis operations behind 400% YoY growth, scaling the team from 10 to 160 across 30+ markets, with NPS held above 90 through the US launch.",
+      "photo": "career/team-flash-pack.jpg",
+      "photoAlt": "The Flash Pack team together in the office"
     }
   ]
 }

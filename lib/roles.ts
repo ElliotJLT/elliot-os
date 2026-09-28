@@ -8,6 +8,11 @@ export type Role = {
   role?: string;
   dates?: string;
   outcome: string;
+  /** A team photo shown across the top of the role's card. */
+  photo?: string;
+  photoAlt?: string;
+  /** A reference from someone who managed Elliot there, verbatim. */
+  quote?: { paras: string[]; name: string; role: string };
 };
 
 export type CareerRecord = {
