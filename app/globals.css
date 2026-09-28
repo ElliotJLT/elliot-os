@@ -4955,3 +4955,16 @@ main:has(> .band) {
 @media (max-width: 720px) { .loop-split { grid-template-columns: 1fr; } }
 .loop-steps-2 { grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); }
 .foot-looking { margin: 0 0 18px; color: var(--ink-2); font-size: 16px; line-height: 1.5; text-align: center; }
+
+/* ---------------------------------------------------------------- /evals cards */
+.evc-list { display: grid; gap: 16px; margin: 8px 0 32px; }
+.evc { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 22px 24px; }
+.evc-kicker { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+.evc h2 { margin: 0 0 14px; text-transform: none; letter-spacing: normal; color: var(--ink); font-family: var(--display); font-weight: 400; font-size: 28px; line-height: 1.15; }
+.evc dl { margin: 0; display: grid; gap: 10px; }
+.evc-row { display: grid; grid-template-columns: 190px 1fr; gap: 16px; }
+.evc-row dt { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint); padding-top: 3px; }
+.evc-row dd { margin: 0; line-height: 1.55; color: var(--ink-2); }
+.evc-row-result dd { color: var(--ink); font-weight: 600; }
+.evc-links { margin: 14px 0 0; display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; }
+@media (max-width: 720px) { .evc-row { grid-template-columns: 1fr; gap: 2px; } }
