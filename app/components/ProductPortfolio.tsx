@@ -239,10 +239,10 @@ function ProductCase({
   product: Product;
   basePath: string;
 }) {
-  // The problem opens by default, so the card reads problem, bet, proof
-  // without a click. Bet swaps the panel; the selected one again collapses
-  // it. Nothing on the page is hidden behind a slide.
-  const [view, setView] = useState<View | null>("problem");
+  // Closed by default: the card leads with the bet and the proof, and the
+  // problem or the full bet is one tap away. Five cards open at once read as
+  // a wall; the panel is still in the page, never behind a slide.
+  const [view, setView] = useState<View | null>(null);
   const copy: { title: string; paragraphs: string[]; lesson?: string } | null =
     view ? product[view] : null;
   const panelId = `product-${product.order}-copy`;
@@ -281,7 +281,11 @@ function ProductCase({
         {product.bet.proof && (
           <div className="case-spec-row">
             <dt>Proof</dt>
-            <dd className="case-spec-proof">{product.bet.proof}</dd>
+            <dd className="case-spec-proof">
+              {product.bet.proof.split(" · ").map((p) => (
+                <span key={p}>{p}</span>
+              ))}
+            </dd>
           </div>
         )}
       </dl>

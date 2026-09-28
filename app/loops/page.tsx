@@ -56,16 +56,18 @@ export default function Loops() {
           <h2 id="idea" className="mai-kick rv-settle">
             the idea
           </h2>
+          <p className="sec-title rv-settle">
+            I start more than I finish, so the machine holds the list and I
+            keep the calls.
+          </p>
           <p className="muted rv-settle section-line">
             David Allen&rsquo;s point, picked up by Ben Thompson in{" "}
-            <em>Write Things Down</em>: the mind is RAM. I start more than I
-            finish, so I built the assistant that holds the list, and kept the
-            calls.
+            <em>Write Things Down</em>: the mind is RAM.
           </p>
         </Reveal>
 
         <Reveal>
-          <div className="loop-split rv-settle">
+          <div className="proof-band proof-band-split rv-settle">
             <div>
               <span className="loop-label">the machine holds</span>
               <p>
@@ -88,6 +90,9 @@ export default function Loops() {
           <h2 id="how" className="mai-kick rv-settle">
             how it runs
           </h2>
+          <p className="sec-title rv-settle">
+            Six steps on three clocks: day, overnight and weekly.
+          </p>
         </Reveal>
         <Reveal>
           <LoopFlow />
@@ -112,6 +117,9 @@ export default function Loops() {
           <h2 id="night" className="mai-kick rv-settle">
             the night pass
           </h2>
+          <p className="sec-title rv-settle">
+            One link worth waking me for, or nothing.
+          </p>
           <p className="muted rv-settle section-line">
             Overnight it looks for one link between something I&rsquo;ve said
             and something new worth reading, and quotes my own words back to
@@ -132,6 +140,9 @@ export default function Loops() {
           <h2 id="ledger" className="mai-kick rv-settle">
             the ledger
           </h2>
+          <p className="sec-title rv-settle">
+            Counted by the system, including when it fails.
+          </p>
           <p className="muted rv-settle section-line">
             {ledger.note} Running since {formatDate(ledger.started)}.
           </p>

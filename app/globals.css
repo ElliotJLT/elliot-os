@@ -1772,17 +1772,28 @@ h2::before {
 
 .case-spec-statement {
   color: var(--ink);
-  font-family: var(--serif);
-  font-size: clamp(18px, 1.8vw, 21px);
-  line-height: 1.38;
-  text-wrap: pretty;
+  font-family: var(--display);
+  font-size: clamp(22px, 2.3vw, 28px);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .case-spec-proof {
-  color: var(--accent-ink);
-  font-family: var(--mono);
-  font-size: 11px;
-  line-height: 1.55;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.case-spec-proof span {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.35;
   font-variant-numeric: tabular-nums;
 }
 
@@ -4922,9 +4933,6 @@ main:has(> .band) {
 
 /* ---------------------------------------------------------------- /loops */
 .loop-label { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
-.loop-split { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); margin: 8px 0 48px; }
-.loop-split > div { background: var(--paper); padding: 20px 22px; }
-.loop-split p { margin: 0; line-height: 1.55; }
 .loop-steps { list-style: none; padding: 0; margin: 8px 0 48px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 16px; }
 .loop-steps li { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 18px 20px; }
 .loop-step-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
@@ -4944,7 +4952,6 @@ main:has(> .band) {
 .loop-fig-slot { border: 1px dashed var(--line-2); border-radius: var(--r); padding: 28px; min-height: 220px; display: flex; flex-direction: column; justify-content: center; gap: 8px; color: var(--faint); }
 .loop-fig-slot span, .loop-fig-slot em { font-family: var(--mono); font-size: 11px; }
 .loop-fig-slot p { margin: 0; }
-@media (max-width: 720px) { .loop-split { grid-template-columns: 1fr; } }
 .loop-steps-2 { grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr)); }
 
 /* ================================================================== evals */
@@ -5285,11 +5292,75 @@ main:has(> .band) {
   line-height: 1.12;
   letter-spacing: -0.015em;
   color: var(--ink);
-  margin: 2px 0 26px;
+  margin: 2px 0 18px;
   max-width: none;
   text-wrap: balance;
 }
 
+.sec-title:last-child {
+  margin-bottom: 26px;
+}
+
 .ev-step h3 + p {
   margin-bottom: 16px;
+}
+
+/* One colour block per page for the strongest proof: a landmark in the
+   scroll. The hero's rust by day, its aubergine at night; cream clears
+   5.4:1 on both. */
+.proof-band {
+  background: #ad5035;
+  color: #fff6ed;
+  border-radius: 24px;
+  padding: clamp(28px, 4vw, 48px) clamp(24px, 4vw, 52px);
+  margin: 40px 0 8px;
+}
+
+:root[data-theme="dark"] .proof-band {
+  background: #2d1d30;
+}
+
+.proof-band-kick,
+.proof-band .loop-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff6ed;
+  margin-bottom: 14px;
+}
+
+.proof-band-line {
+  font-family: var(--display);
+  font-size: clamp(26px, 3vw, 40px);
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  color: #fff6ed;
+  margin: 0;
+  max-width: none;
+  text-wrap: balance;
+}
+
+.proof-band-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  margin: 8px 0 48px;
+}
+
+@media (min-width: 720px) {
+  .proof-band-split {
+    grid-template-columns: 1fr 1fr;
+    gap: 44px;
+  }
+}
+
+.proof-band-split p {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(19px, 1.9vw, 23px);
+  line-height: 1.4;
+  color: #fff6ed;
+  max-width: none;
 }
