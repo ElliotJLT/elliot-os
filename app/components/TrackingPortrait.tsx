@@ -80,19 +80,17 @@ export default function TrackingPortrait({ className }: { className: string }) {
       }, REACT_MS);
     };
 
+    // The eyes follow the pointer anywhere; the face only reacts when it is
+    // the thing being clicked.
     if (canTrack) {
       window.addEventListener("pointermove", onPointerMove, { passive: true });
-      window.addEventListener("pointerdown", onPointerDown, { passive: true });
-    } else {
-      // Touch has no hover to follow, so tapping the face is the whole game.
-      face.addEventListener("pointerdown", onPointerDown, { passive: true });
     }
+    face.addEventListener("pointerdown", onPointerDown, { passive: true });
 
     return () => {
       cancelAnimationFrame(frame);
       window.clearTimeout(reactTimer);
       window.removeEventListener("pointermove", onPointerMove);
-      window.removeEventListener("pointerdown", onPointerDown);
       face.removeEventListener("pointerdown", onPointerDown);
     };
   }, []);
