@@ -1,6 +1,6 @@
-import { getLoops, type Loop, type Proposal } from "@/lib/loops";
+import { getLoops } from "@/lib/loops";
 import { getEvals, getCases } from "@/lib/evals";
-import { getPricing } from "@/lib/pricing";
+import { getLedger } from "@/lib/ledger";
 import { getAgentLog } from "@/lib/content";
 import Reveal from "../components/Reveal";
 
@@ -20,22 +20,13 @@ export default function Loops() {
   const data = getLoops();
   const evals = getEvals();
   const cases = getCases();
-  const pricing = getPricing();
+  const ledger = getLedger();
   const agentLog = getAgentLog();
 
-  const review = data.loops.find((l) => l.id === "self-improve");
   const runs = evals.runs;
   const latestEval = runs[0];
   const firstEval = runs[runs.length - 1];
   const improved = latestEval && firstEval && latestEval.passed > firstEval.passed;
-
-  // The most recent thing the review actually did, gate result and all.
-  const trace: Proposal | undefined = review?.proposals?.[0];
-
-  const allProposals = data.loops.flatMap((l) => l.proposals ?? []);
-  const heldCount = allProposals.filter((p) => p.status === "held").length;
-  const byOutcome = (o: string) => data.decisions.filter((d) => d.outcome === o).length;
-
   const caseFor = (id: string) => cases.find((c) => c.id === id);
 
   return (
@@ -46,62 +37,71 @@ export default function Loops() {
             <div>
               <span className="mai-kick rv-settle">Loops</span>
               <h1 className="wr-title rv-settle">
-                The loops I actually run.
+                What I hand to machines, and what I keep.
               </h1>
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              Agents that run on a schedule and change something real. Two are
-              open and maintain this page; their source and evals are below.
-              The rest are private, so you have my word.
+              One system I run my own work on, measured by a ledger that can
+              show it failing. One that keeps this site current, with its evals
+              open below.
             </p>
           </header>
         </Reveal>
 
-        {/* ------------------------------------------------------- the fleet */}
+        {/* -------------------------------------------------- the one I live in */}
         <Reveal>
-          <h2 id="fleet" className="mai-kick rv-settle">
-            the fleet
+          <h2 id="live" className="mai-kick rv-settle">
+            the one I live in
           </h2>
+          <p className="muted rv-settle section-line">
+            Ben Thompson&rsquo;s point in <em>Write Things Down</em> is David
+            Allen&rsquo;s: the mind is RAM, and an assistant that writes
+            everything down lets you empty it. Mine is Claude Code and a few
+            scripts. I text a thought to a bot and it lands in an inbox. A sweep
+            turns it into next actions. At 07:30 I get one move for the day. Job
+            applications and household tasks stay in the tools that own them;
+            the system reads them and never copies them.
+          </p>
         </Reveal>
         <Reveal>
           <div className="authority-wrap rv-settle">
             <table className="authority-table">
               <thead>
                 <tr>
-                  <th>loop</th>
-                  <th>reads</th>
-                  <th>may change</th>
-                  <th>human boundary</th>
-                  <th>last run</th>
-                  <th>can you check it</th>
+                  <th>the machine holds</th>
+                  <th>I keep</th>
                 </tr>
               </thead>
               <tbody>
-                {data.loops.map((loop: Loop) => (
-                  <tr key={loop.id}>
-                    <th scope="row" data-label="loop">
-                      {loop.name}
-                      <span className="authority-cadence">{loop.cadence}</span>
-                    </th>
-                    <td data-label="reads">{loop.reads}</td>
-                    <td data-label="may change">{loop.may_change}</td>
-                    <td data-label="human boundary">{loop.human_boundary}</td>
-                    <td data-label="last run">
-                      {formatDate(loop.last_run)}
-                      <span className="authority-cadence">
-                        <span className={`system-health ${loop.status}`}>
-                          {loop.status}
-                        </span>
-                      </span>
-                    </td>
-                    <td data-label="can you check it">
-                      {loop.evidence === "public" ? (
-                        <span className="evidence-yes">
-                          source + evals
-                          {loop.audited && <em>audited below</em>}
-                        </span>
-                      ) : (
-                        <span className="evidence-no">my word</span>
+                <tr>
+                  <td>capture, the tickler, what&rsquo;s overdue, who to chase, what I said three weeks ago</td>
+                  <td>which move matters today, what to kill, what to ship, anything with my name on it</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </Reveal>
+        <Reveal>
+          <div className="authority-wrap rv-settle">
+            <table className="authority-table">
+              <thead>
+                <tr>
+                  <th>week of</th>
+                  <th>loops closed</th>
+                  <th>thoughts captured</th>
+                  <th>morning briefs</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ledger.weeks.map((w) => (
+                  <tr key={w.week_of}>
+                    <th scope="row" data-label="week of">{formatDate(w.week_of)}</th>
+                    <td data-label="loops closed">{w.closed}</td>
+                    <td data-label="thoughts captured">{w.captured}</td>
+                    <td data-label="morning briefs">
+                      {w.briefs}
+                      {w.fallbacks > 0 && (
+                        <span className="authority-cadence">{w.fallbacks} fell back to plain text</span>
                       )}
                     </td>
                   </tr>
@@ -109,24 +109,47 @@ export default function Loops() {
               </tbody>
             </table>
             <p className="authority-foot">
-              The last column is the one that matters. A list of private agents
-              is a list of claims, and claims are cheap — so the two you can
-              open are the ones the rest of this page is about. Stopping rules,
-              in each loop&rsquo;s own words:{" "}
-              {data.loops.map((loop, i) => (
-                <span key={loop.id}>
-                  {i > 0 && " "}
-                  <em>{loop.name}</em> — {loop.stop_rule}.
-                </span>
-              ))}
+              {ledger.note} Running since {formatDate(ledger.started)}. What
+              would make it wrong: captures climbing while closed loops stay
+              flat. That would be a tidier way of not doing things, and on 12
+              October I check for it and cut the system back if so.
             </p>
           </div>
+        </Reveal>
+        {ledger.broke.length > 0 && (
+          <Reveal>
+            <ol className="failure-log rv-settle">
+              {ledger.broke.map((b) => (
+                <li key={b.date + b.what}>
+                  <div className="failure-meta">
+                    <time dateTime={b.date}>{formatDate(b.date)}</time>
+                    <span className="failure-status repaired">fixed</span>
+                  </div>
+                  <div>
+                    <p>{b.what}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+        )}
+
+        {/* --------------------------------------------------- the site's own */}
+        <Reveal>
+          <h2 id="site" className="mai-kick rv-settle">
+            the one that keeps this site current
+          </h2>
+          <p className="muted rv-settle section-line">
+            A daily agent turns my public GitHub activity into the shipping
+            digest below. It never fabricates a busy week: a quiet day posts
+            &ldquo;quiet day&rdquo;. Its evals are the part worth reading.
+          </p>
         </Reveal>
 
         {/* ------------------------------------------------------ eval suite */}
         <Reveal>
           <h2 id="evals" className="mai-kick rv-settle">
-            the two you can audit
+            its evals
           </h2>
         </Reveal>
         <Reveal>
@@ -212,116 +235,6 @@ export default function Loops() {
           </div>
         </Reveal>
 
-        {/* ------------------------------------------------------- run trace */}
-        {trace && (
-          <>
-            <Reveal>
-              <h2 id="trace" className="mai-kick rv-settle">
-                last run, end to end
-              </h2>
-            </Reveal>
-            <Reveal>
-              <div className="run-trace rv-settle">
-                <div className="trace-meta">
-                  <time dateTime={trace.date}>{formatDate(trace.date)}</time>
-                  <span className={`decision-outcome ${trace.status === "held" ? "rejected" : "accepted"}`}>
-                    {trace.status === "held" ? "held by the gate" : "cleared the gate"}
-                  </span>
-                  {trace.impl_version && (
-                    <span className="trace-version">
-                      impl v{trace.impl_version} · prompt v{trace.prompt_version}
-                    </span>
-                  )}
-                </div>
-
-                <ol className="trace-steps">
-                  <li>
-                    <span className="trace-step">read</span>
-                    <p>
-                      Public repositories, the Medium feed, and the site&rsquo;s
-                      own source for what it already surfaces.
-                    </p>
-                  </li>
-                  <li>
-                    <span className="trace-step">propose</span>
-                    <p>
-                      <strong>{trace.title}</strong>
-                    </p>
-                    <p className="trace-rationale">{trace.rationale}</p>
-                  </li>
-                  <li>
-                    <span className="trace-step">gate</span>
-                    <ul className="trace-checks">
-                      {trace.eval?.checks.map((check) => (
-                        <li key={check.name} data-pass={check.pass}>
-                          <span>{check.pass ? "pass" : "fail"}</span>
-                          {check.name}
-                        </li>
-                      ))}
-                    </ul>
-                    {trace.eval?.critique && (
-                      <p className="trace-rationale">{trace.eval.critique}</p>
-                    )}
-                    <p className="trace-by">
-                      judged by {trace.eval?.by}. Every check is required.
-                    </p>
-                  </li>
-                  <li>
-                    <span className="trace-step">decide</span>
-                    <p>
-                      Mine. The agent opens a pull request containing the
-                      recommendation, not the change.
-                    </p>
-                  </li>
-                </ol>
-              </div>
-            </Reveal>
-          </>
-        )}
-
-        {/* ------------------------------------------------- decision record */}
-        <Reveal>
-          <h2 id="decisions" className="mai-kick rv-settle">
-            decision record
-          </h2>
-        </Reveal>
-        <Reveal>
-          <div className="decision-record rv-settle">
-            <div className="decision-denominator">
-              <span>
-                {allProposals.length} proposal
-                {allProposals.length === 1 ? "" : "s"}
-              </span>
-              <span>{heldCount} held by the gate</span>
-              <span>{byOutcome("accepted")} accepted</span>
-              <span>{byOutcome("edited")} edited</span>
-              <span>{byOutcome("rejected")} rejected</span>
-            </div>
-            <ol className="decision-list">
-              {data.decisions.map((decision) => (
-                <li key={`${decision.date}-${decision.title}`}>
-                  <time dateTime={decision.date}>{formatDate(decision.date)}</time>
-                  <span className={`decision-outcome ${decision.outcome}`}>
-                    {decision.outcome}
-                  </span>
-                  <div>
-                    <h3>{decision.title}</h3>
-                    <p>{decision.human_decision}</p>
-                    {decision.evidence_url && (
-                      <a href={decision.evidence_url}>view the implementing commit ↗</a>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ol>
-            <p className="evidence-gap">
-              <span>What this does not prove yet</span> The review has run twice
-              and the outcome column is thin. Until there are rejections in it,
-              the acceptance rate is a number with no denominator worth quoting.
-              Time saved and cost per accepted outcome are not recorded at all.
-            </p>
-          </div>
-        </Reveal>
 
         {/* ------------------------------------------------------ failure log */}
         <Reveal>
@@ -378,16 +291,6 @@ export default function Loops() {
             </a>
             <a href="https://github.com/ElliotJLT/elliot-os/actions">workflow runs ↗</a>
           </nav>
-        </Reveal>
-
-        <Reveal>
-          <p className="pricing-note rv-settle">
-            Token counts in the ledger are measured. Any dollar figure derived
-            from them uses the rates in <code>data/pricing.json</code>, last
-            checked {formatDate(pricing.checked)} — model pricing changes
-            without notice, so treat an old date as a reason to re-verify rather
-            than a number to rely on.
-          </p>
         </Reveal>
       </div>
     </main>

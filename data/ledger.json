@@ -1,0 +1,13 @@
+{
+  "note": "Aggregates only, published by the system itself from its own logs. The loops, captures and briefs stay private.",
+  "started": "2026-09-28",
+  "weeks": [
+    { "week_of": "2026-09-28", "closed": 2, "captured": 1, "briefs": 2, "fallbacks": 1 }
+  ],
+  "broke": [
+    {
+      "date": "2026-09-28",
+      "what": "The first morning brief fell back to the plain board text: under launchd the Claude CLI couldn't find node. Fixed the same day; the fallback is why a message still arrived."
+    }
+  ]
+}
