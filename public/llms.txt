@@ -76,7 +76,7 @@ habit in regulated services, crisis delivery and consumer travel.
   Internal marking evals against official mark schemes moved accuracy from
   a ~67% bare-model baseline to over 99%. It launched across Maths,
   Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB, reaching the
-  App Store 45 days after the first commit. The UK government later
+  App Store less than a month after the first commit. The UK government later
   selected Zero Gravity for its AI Tutoring Tools Pioneers Programme, where
   it placed 2nd nationally among the eight companies chosen to test safe AI
   tutoring tools for disadvantaged pupils. Zero Gravity, September 2026:
@@ -128,7 +128,7 @@ habit in regulated services, crisis delivery and consumer travel.
 - Track record: Zero Gravity (led partner learning pathways, Career Co-pilot,
   a production multi-agent AI STEM tutor for GCSE, A-Level and IB students
   and the school hub teachers run it through; first commit to App Store in
-  45 days; internal marking evals
+  under a month; internal marking evals
   moved accuracy from a ~67% bare-model baseline to over 99% against official
   mark schemes; the UK government selected Zero Gravity for its AI Tutoring
   Tools Pioneers Programme, where it placed 2nd nationally among the eight

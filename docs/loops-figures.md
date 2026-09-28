@@ -1,6 +1,6 @@
 # /loops figure slots
 
-Each slot on /loops renders `public/loops/<name>.png` (or `.jpg`, `.webp`, `.svg`) when that file exists. Until then the slot shows a dashed placeholder in `npm run dev` and renders nothing on the live site. So: generate the image, save it with the right name, push. No code changes needed.
+Each slot on /loops renders `public/loops/<name>.png` (or `.jpg`, `.webp`, `.svg`) when that file exists. Until then the slot renders nothing, in dev and on the live site. So: generate the image, save it with the right name, push. No code changes needed.
 
 House style for every prompt below: flat editorial illustration, off-white paper background (#fef9ed) with warm dark ink (#342e29), one orange accent (#cc5600) and one muted green (#3f6b47). Thin lines, generous white space. No gradients, no glow, no robots, no brains, no circuit boards, no 3D, no stock-photo people. Readable labels in a plain serif. Landscape 16:9, at least 1600px wide.
 
@@ -10,9 +10,7 @@ Save as `public/loops/hero.png`.
 > A calm circular diagram of a personal work system, drawn like a page from a field notebook. Six small labelled stations around a loop: "capture", "sort", "one board", "night pass", "morning", "review". In the middle, a simple outline of one person at a desk. Arrows run clockwise between the stations. The "night pass" station sits in a faint dark band, as if it happens overnight. Style: [house style].
 
 ## flow
-Save as `public/loops/flow.png`.
-
-> A left-to-right process diagram with six steps. 1 "capture": a phone with a message bubble and a terminal prompt. 2 "sort": one line splitting into four labelled bins: "next action", "project", "waiting for", "nothing". 3 "one board": three sources ("my loops", "job tracker", "household list") feeding one list, with a small note "read, never copied". 4 "night pass": a moon icon over three inputs merging into a single card. 5 "morning 07:30": one message with a single bold line. 6 "Friday review": three question marks. Style: [house style].
+Built in code now (`app/components/LoopFlow.tsx`), not a generated image: exact labels, follows the theme. Edit the component, not a PNG.
 
 ## night
 Save as `public/loops/night.png`.

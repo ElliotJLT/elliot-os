@@ -146,7 +146,7 @@ const COMPANIES: Company[] = [
             "Built to the DfE's 2026 generative AI product safety standards for under-18s: content guardrails, session cut-offs, usage limits for younger students, the tutor never presenting itself as human, and a safeguarding concern cutting the session and escalating to a named person rather than a transcript dump. Student data is never used to train external models. Eleven weeks after launch, the government selected us for its AI Tutoring Tools Pioneers Programme, eight companies chosen nationally to test safe AI tutoring in schools. We placed 2nd, ahead of frontier US labs and the largest UK curriculum incumbents.",
           ],
           proof:
-            "~67% → 99%+ on internal marking evals · App Store in 45 days · 2nd of 8 in the DfE Pioneers Programme",
+            "~67% → 99%+ on internal marking evals · App Store in under a month · 2nd of 8 in the DfE Pioneers Programme",
         },
         links: [
           {
