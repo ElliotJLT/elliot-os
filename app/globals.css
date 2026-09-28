@@ -5027,10 +5027,16 @@ main:has(> .band) {
 .ev-step .ev-step-where {
   margin-top: auto;
   padding-top: 14px;
-  font-family: var(--mono);
-  font-size: 12px;
-  line-height: 1.55;
+  font-size: 14px;
+  line-height: 1.5;
   color: var(--ink-2);
+}
+
+/* The receipt sits under a hairline so it reads as proof, not more prose. */
+.ev-step p + .ev-step-where {
+  margin-top: auto;
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
 }
 
 /* Six habits read better two across than three: each has a reason and a
@@ -5269,4 +5275,21 @@ main:has(> .band) {
   margin-top: 4px;
   border-top: 1px solid var(--line);
   border-radius: 0 0 14px 14px;
+}
+
+/* A section's point, set as a headline under its kicker. Mono kickers were
+   the only section breaks, and at 12px a long page read as one block. */
+.sec-title {
+  font-family: var(--display);
+  font-size: clamp(26px, 2.7vw, 36px);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 2px 0 26px;
+  max-width: none;
+  text-wrap: balance;
+}
+
+.ev-step h3 + p {
+  margin-bottom: 16px;
 }
