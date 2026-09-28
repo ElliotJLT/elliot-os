@@ -442,7 +442,7 @@ li {
 
 .research-card .meta {
   font-family: var(--mono);
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--faint);
   margin-top: 14px;
 }
@@ -476,6 +476,7 @@ li {
   text-transform: uppercase;
   color: var(--faint);
   margin: 0 0 12px;
+  font-weight: 500;
 }
 
 .entry {
@@ -679,8 +680,9 @@ li {
   font-family: var(--mono);
   font-size: 11px;
   line-height: 1.3;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  font-weight: 500;
 }
 
 .github-snake-label {
@@ -884,7 +886,7 @@ li {
 
 .pdate {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--faint);
 }
 
@@ -922,7 +924,7 @@ li {
   align-items: center;
   gap: 6px 10px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .peval .verdict {
@@ -974,7 +976,7 @@ li {
 
 .pshipped {
   font-family: var(--mono);
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--accent-2);
   margin: 8px 0 0;
 }
@@ -1030,7 +1032,7 @@ footer a {
 
 .refnote {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--faint);
 }
 
@@ -1076,7 +1078,7 @@ footer a {
   grid-row: 1;
   counter-increment: tool;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--faint);
   padding-top: 5px;
 }
@@ -1099,7 +1101,7 @@ footer a {
 
 .toolrow .meta {
   font-family: var(--mono);
-  font-size: 11.5px;
+  font-size: 12px;
   color: var(--faint);
   margin-top: 8px;
 }
@@ -1224,9 +1226,10 @@ h2::before {
   font-family: var(--mono);
   font-size: 11px;
   line-height: 1;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
+  font-weight: 500;
 }
 
 .flowbar::before {
@@ -1306,7 +1309,7 @@ h2::before {
   display: block;
   margin-bottom: 12px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1;
   font-variant-numeric: tabular-nums;
   color: var(--faint);
@@ -1331,9 +1334,10 @@ h2::before {
 .fby {
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.045em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
+  font-weight: 500;
 }
 
 .fmeta {
@@ -1381,9 +1385,10 @@ h2::before {
   font-family: var(--mono);
   font-size: 11px;
   line-height: 1.4;
-  letter-spacing: 0.035em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
+  font-weight: 500;
 }
 
 .fconductor {
@@ -1516,9 +1521,10 @@ h2::before {
   font-family: var(--mono);
   font-size: 11px;
   line-height: 1.2;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
+  font-weight: 500;
 }
 
 .stack-panel h3 {
@@ -1543,7 +1549,7 @@ h2::before {
   align-self: start;
   justify-self: start;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--accent-ink);
 }
 
@@ -1594,7 +1600,7 @@ h2::before {
   background: transparent;
   color: var(--faint);
   font: 500 11px/1 var(--mono);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
   transition-property: color, scale;
@@ -1670,7 +1676,7 @@ h2::before {
 .portfolio-company-head span:not(.portfolio-logo-shell) {
   display: block;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.45;
   color: var(--faint);
 }
@@ -1719,9 +1725,10 @@ h2::before {
   font-family: var(--mono);
   font-size: 11px;
   line-height: 1.4;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
+  font-weight: 500;
 }
 
 .case-card h4 {
@@ -1739,7 +1746,7 @@ h2::before {
   text-align: right;
   color: var(--faint);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
@@ -1760,9 +1767,10 @@ h2::before {
   font-family: var(--mono);
   font-size: 11px;
   line-height: 1.5;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
+  font-weight: 500;
 }
 
 .case-spec dd {
@@ -1819,7 +1827,7 @@ h2::before {
 
 .product-case-links a {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--accent-ink);
 }
 
@@ -1836,9 +1844,10 @@ h2::before {
   margin-bottom: 8px;
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
+  font-weight: 500;
 }
 
 .product-case-panel .product-case-statement {
@@ -1879,6 +1888,7 @@ h2::before {
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  font-weight: 500;
 }
 
 @media (max-width: 720px) {
@@ -1958,7 +1968,7 @@ h2::before {
   padding: 16px 0 4px;
   border-top: 1px solid var(--line);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--faint);
   font-variant-numeric: tabular-nums;
 }
@@ -2077,7 +2087,7 @@ h2::before {
 .career-meta {
   display: block;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.03em;
   color: var(--faint);
   margin-bottom: 0;
@@ -2178,9 +2188,10 @@ h2::before {
   font-family: var(--mono);
   font-size: 11px;
   line-height: 1.45;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.1em;
   color: var(--faint);
   text-transform: uppercase;
+  font-weight: 500;
 }
 
 .mentor-card p {
@@ -2258,7 +2269,7 @@ h2::before {
 
 .vrole {
   font-family: var(--mono);
-  font-size: 11.5px;
+  font-size: 12px;
   letter-spacing: 0.02em;
   color: var(--faint);
 }
@@ -2410,7 +2421,7 @@ h2::before {
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.11em;
+  letter-spacing: 0.1em;
   line-height: 1.4;
   text-transform: uppercase;
   color: var(--faint);
@@ -2425,7 +2436,7 @@ h2::before {
   min-height: 54px;
   margin: 6px 0 16px;
   font-family: var(--mono);
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.55;
   color: var(--muted);
 }
@@ -2460,7 +2471,7 @@ h2::before {
   flex: 0 0 30px;
   font-family: var(--mono);
   color: var(--faint);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   transition: color 0.14s ease-out;
 }
@@ -2560,7 +2571,7 @@ h2::before {
 .nav-feature-cta {
   margin-top: auto;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--accent-ink);
 }
 
@@ -2781,10 +2792,11 @@ h2[id] {
   color: var(--faint);
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-align: center;
   padding: 12px;
+  font-weight: 500;
 }
 
 /* ----------------------------------------------------------- mai page */
@@ -2890,7 +2902,7 @@ h2[id] {
   max-width: none;
   margin: 12px 0 0;
   font-family: var(--mono);
-  font-size: 11.5px;
+  font-size: 12px;
   line-height: 1.55;
   color: var(--faint);
   text-wrap: pretty;
@@ -3015,7 +3027,7 @@ a.mai-rowname:hover {
 .career-timeline > li > .career-meta {
   display: block;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.02em;
   color: var(--faint);
   margin-bottom: 8px;
@@ -3693,9 +3705,10 @@ main:has(> .band) {
 .wr-noshot {
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
+  font-weight: 500;
 }
 
 .wr-meta {
@@ -3717,7 +3730,7 @@ main:has(> .band) {
 
 .wr-date {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   color: var(--faint);
   font-variant-numeric: tabular-nums;
@@ -3868,8 +3881,9 @@ main:has(> .band) {
   font-family: var(--mono);
   font-size: 11px;
   line-height: 1.5;
-  letter-spacing: 0.09em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  font-weight: 500;
 }
 
 .reader-carousel-controls {
@@ -4092,7 +4106,7 @@ main:has(> .band) {
   font-size: 11px;
   font-weight: 500;
   line-height: 1.2;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
 }
@@ -4126,9 +4140,10 @@ main:has(> .band) {
   font-family: var(--mono);
   font-size: 11px;
   line-height: 1.2;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   white-space: nowrap;
+  font-weight: 500;
 }
 
 .system-health::before,
@@ -4163,7 +4178,7 @@ main:has(> .band) {
   padding: 16px 22px;
   border-bottom: 1px solid var(--line);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   color: var(--faint);
   font-variant-numeric: tabular-nums;
@@ -4192,7 +4207,7 @@ main:has(> .band) {
 .decision-list time,
 .failure-meta time {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--faint);
   font-variant-numeric: tabular-nums;
 }
@@ -4234,7 +4249,7 @@ main:has(> .band) {
   display: inline-block;
   margin-top: 8px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--accent-ink);
 }
 
@@ -4254,9 +4269,10 @@ main:has(> .band) {
   font-family: var(--mono);
   font-size: 11px;
   line-height: 1.5;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
+  font-weight: 500;
 }
 
 .anatomy-viewport {
@@ -4299,9 +4315,10 @@ main:has(> .band) {
   font-family: var(--mono);
   font-size: 11px;
   line-height: 1.2;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
+  font-weight: 500;
 }
 
 .anatomy-no {
@@ -4358,9 +4375,10 @@ main:has(> .band) {
   margin-right: 7px;
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
+  font-weight: 500;
 }
 
 .system-history {
@@ -4401,9 +4419,10 @@ main:has(> .band) {
   font-family: var(--mono);
   font-size: 11px;
   line-height: 1.35;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
+  font-weight: 500;
 }
 
 .system-history dd {
@@ -4428,7 +4447,7 @@ main:has(> .band) {
   gap: 18px;
   padding: 0 18px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--ink-2);
   cursor: pointer;
 }
@@ -4464,7 +4483,7 @@ main:has(> .band) {
   padding-top: 18px;
   border-top: 1px solid var(--line);
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .machinery-links span {
@@ -4521,10 +4540,11 @@ main:has(> .band) {
     font-family: var(--mono);
     font-size: 11px;
     line-height: 1.5;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--faint);
-  }
+  font-weight: 500;
+}
 
   .authority-table tbody th {
     font-family: var(--sans);
@@ -4618,7 +4638,7 @@ main:has(> .band) {
   display: block;
   margin-top: 8px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   color: var(--faint);
 }
@@ -4662,7 +4682,7 @@ main:has(> .band) {
 
 .eval-version {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   color: var(--faint);
 }
@@ -4706,7 +4726,7 @@ main:has(> .band) {
 
 .eval-failing code {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   color: var(--accent-ink);
 }
 
@@ -4732,7 +4752,7 @@ main:has(> .band) {
 .eval-caveat span:first-child {
   display: block;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: lowercase;
   color: var(--ink);
@@ -4763,7 +4783,7 @@ main:has(> .band) {
 .trace-meta time,
 .trace-version {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.04em;
   color: var(--faint);
 }
@@ -4791,7 +4811,7 @@ main:has(> .band) {
      a checklist and a critique, the others a single line. */
   grid-row: 1 / -1;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   color: var(--accent-ink);
   padding-top: 3px;
@@ -4834,7 +4854,7 @@ main:has(> .band) {
    only one, so this still reads when it is printed or filtered. */
 .trace-checks li span {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.06em;
   min-width: 34px;
   color: var(--accent-2);
@@ -4853,7 +4873,7 @@ main:has(> .band) {
   display: block;
   margin-top: 4px;
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.03em;
   color: var(--faint);
   font-weight: 400;
@@ -4904,7 +4924,7 @@ main:has(> .band) {
 .evidence-yes,
 .evidence-no {
   font-family: var(--mono);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.03em;
 }
 
@@ -4932,7 +4952,9 @@ main:has(> .band) {
 }
 
 /* ---------------------------------------------------------------- /loops */
-.loop-label { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+.loop-label { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px;
+  font-weight: 500;
+}
 .loop-split { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); margin: 8px 0 48px; }
 .loop-split > div { background: var(--paper); padding: 20px 22px; }
 .loop-split p { margin: 0; line-height: 1.55; }
@@ -4942,19 +4964,19 @@ main:has(> .band) {
 .loop-step-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
 .loop-step-head h3 { margin: 0; font-family: var(--display); font-size: 24px; font-weight: 400; }
 .loop-step-n { font-family: var(--mono); font-size: 12px; color: var(--accent-ink); }
-.loop-step-when { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--faint); white-space: nowrap; }
+.loop-step-when { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--faint); white-space: nowrap; }
 .loop-steps p { margin: 0; line-height: 1.55; color: var(--ink-2); font-size: 15px; }
 .loop-rules { padding-left: 18px; margin: 8px 0 48px; }
 .loop-rules li { margin-bottom: 10px; line-height: 1.55; color: var(--ink-2); }
 .loop-ledger { width: 100%; border-collapse: collapse; margin: 8px 0 14px; font-size: 15px; }
 .loop-ledger th, .loop-ledger td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
-.loop-ledger thead th { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint); font-weight: 400; }
-.loop-note { display: block; font-family: var(--mono); font-size: 11px; color: var(--faint); }
+.loop-ledger thead th { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--faint); font-weight: 500; }
+.loop-note { display: block; font-family: var(--mono); font-size: 12px; color: var(--faint); }
 .loop-fig { margin: 8px 0 36px; }
 .loop-fig img { width: 100%; height: auto; border-radius: var(--r); border: 1px solid var(--line); }
 .loop-fig figcaption { font-size: 13px; color: var(--faint); margin-top: 8px; }
 .loop-fig-slot { border: 1px dashed var(--line-2); border-radius: var(--r); padding: 28px; min-height: 220px; display: flex; flex-direction: column; justify-content: center; gap: 8px; color: var(--faint); }
-.loop-fig-slot span, .loop-fig-slot em { font-family: var(--mono); font-size: 11px; }
+.loop-fig-slot span, .loop-fig-slot em { font-family: var(--mono); font-size: 12px; }
 .loop-fig-slot p { margin: 0; }
 .loop-steps-2 { grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr)); }
 
@@ -5084,7 +5106,8 @@ main:has(> .band) {
   }
 }
 
-.ev-places a {
+.ev-places a,
+.ev-places-name {
   font-family: var(--serif);
   font-size: 19px;
   color: var(--ink);
@@ -5307,4 +5330,193 @@ main:has(> .band) {
 
 .ev-step h3 + p {
   margin-bottom: 16px;
+}
+
+/* ============================================================ panels v2
+   Surface only: warm paper panels lifted by a soft shadow instead of an
+   outline, larger radius, dashed dividers, plain ink icons. Type is left to
+   the rules above. */
+:root {
+  --panel: #f4eee2;
+  --lift: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 1px 2px rgba(52, 46, 41, 0.06), 0 14px 32px -14px rgba(52, 46, 41, 0.22);
+}
+:root[data-theme="dark"] {
+  --panel: #131e1d;
+  --lift: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 32px -14px rgba(0, 0, 0, 0.6);
+}
+.ev-steps {
+  gap: 18px;
+}
+.ev-step {
+  background: var(--panel);
+  border: none;
+  border-radius: 26px;
+  padding: 28px 30px 26px;
+  box-shadow: var(--lift);
+}
+.ev-step-head {
+  margin-bottom: 18px;
+}
+.ev-step-icon {
+  width: auto;
+  height: auto;
+  background: none;
+  color: var(--ink);
+}
+.habit-icon {
+  width: 28px;
+  height: 28px;
+}
+.ev-step p + .ev-step-where {
+  border-top: 1px dashed var(--line-2);
+  padding-top: 14px;
+}
+.ev-places {
+  background: var(--panel);
+  border-radius: 26px;
+  box-shadow: var(--lift);
+  padding: 8px 30px;
+}
+.ev-places li {
+  border-top: 1px dashed var(--line-2);
+}
+.ev-places li:first-child,
+.ev-places li:last-child {
+  border-bottom: none;
+}
+.ev-places li:first-child {
+  border-top: none;
+}
+.ev-places a:hover {
+  text-decoration: underline;
+}
+.research-card,
+.case-card,
+.mentor-card,
+.stack-panel,
+.github-snake-link,
+.vouch,
+.pod,
+.loop-steps li,
+.loop-split {
+  background: var(--panel);
+  border: none;
+  border-radius: 26px;
+  box-shadow: var(--lift);
+}
+.loop-split {
+  gap: 0;
+}
+.loop-split > div {
+  background: none;
+}
+.loop-split > div + div {
+  border-left: 1px dashed var(--line-2);
+}
+@media (max-width: 720px) {
+  .loop-split > div + div {
+    border-left: none;
+    border-top: 1px dashed var(--line-2);
+  }
+}
+
+/* ================================================================ type tidy
+   The pairing stays (Instrument Serif display, Newsreader reading, Archivo
+   text, SF Mono labels); this only makes each job use one face and one size.
+   Instrument Serif ships in one weight, so nothing may ask it for bold: the
+   browser would smear a fake one. */
+html {
+  font-synthesis-weight: none;
+}
+
+/* Every card title is the display face at one size. */
+.case-card h4,
+.mentor-card h3,
+.mentor-card h3 a,
+.research-card > h3,
+.research-card > h3 a,
+.ev-step h3 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* Section kickers: one style everywhere. */
+.mai-kick,
+h2.mai-kick,
+.band-kick {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.career-timeline h3,
+.career-timeline h3 a {
+  font-weight: 400;
+}
+
+@media (max-width: 420px) {
+  .loop-ledger th,
+  .loop-ledger td {
+    padding: 10px 6px;
+  }
+
+  .loop-ledger thead th {
+    letter-spacing: 0.04em;
+  }
+}
+
+h1,
+.wr-title,
+.band-h,
+.band-h * {
+  font-weight: 400;
+}
+
+.ev-step-no {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* One item-title style: anything that names a thing in a card, row or
+   timeline (a job, a product, a habit, a repo, a piece of writing). */
+.case-card h4,
+.mentor-card h3,
+.mentor-card h3 a,
+.research-card > h3,
+.research-card > h3 a,
+.research-card-head h3,
+.research-card-head h3 a,
+.ev-step h3,
+.career-timeline h3,
+.career-timeline h3 a,
+.wr-h,
+.toolrow h3,
+.ev-places a,
+.ev-places-name {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* Section standfirsts and short body lines sit at one size. */
+h2.mai-kick + p.muted,
+.section-line,
+.loop-split p {
+  font-size: 16px;
+}
+
+/* Footer labels match every other caps label. */
+.foot-h {
+  font-family: var(--mono);
+  font-weight: 500;
+  letter-spacing: 0.1em;
 }

@@ -116,7 +116,7 @@ export default function Evals() {
                     <HabitIcon name={c.icon} />
                   </span>
                   <span className="ev-step-no">
-                    {String(i + 1).padStart(2, "0")}
+                    Habit {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
                 <h3>{c.call}</h3>
