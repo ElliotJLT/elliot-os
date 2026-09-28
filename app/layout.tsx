@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Newsreader, Archivo, Instrument_Serif } from "next/font/google";
 import NavLinks from "./components/NavLinks";
 import ThemeToggle from "./components/ThemeToggle";
+import MobileMenu from "./components/MobileMenu";
 import { IconLink } from "./components/Icons";
 import { Pill } from "./components/Frame";
 import "./globals.css";
@@ -80,6 +81,7 @@ export default function RootLayout({
               <NavLinks basePath={basePath} />
             </nav>
             <ThemeToggle />
+            <MobileMenu />
             <Pill href="mailto:elliotjlittle@gmail.com" tone="solid">
               Get in touch
             </Pill>
