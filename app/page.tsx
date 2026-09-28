@@ -9,7 +9,7 @@ import Values from "./components/Values";
 import HeroBricks from "./components/HeroBricks";
 import TrackingPortrait from "./components/TrackingPortrait";
 import MentoringCards from "./components/Mentoring";
-import StackExplorer from "./components/StackExplorer";
+import StackField from "./components/StackField";
 
 /** One row shape for a piece of writing: image, date, title, CTA and note. */
 function Row({
@@ -198,18 +198,6 @@ export default async function Home() {
       </Reveal>
 
       <Reveal>
-        <h2 className="mai-kick rv-settle">My stack</h2>
-        <p className="stack-home-intro muted rv-settle">
-          The small set of tools I reach for repeatedly. Pick one to see the
-          job it does in the system; none earns a place here just for being
-          fashionable.
-        </p>
-        <div className="stack-home rv-settle">
-          <StackExplorer basePath={basePath} />
-        </div>
-      </Reveal>
-
-      <Reveal>
         <h2 className="mai-kick rv-settle">Mentoring</h2>
         <p className="mentoring-home-intro muted rv-settle">
           I mentor alongside the products: students and early-career
@@ -218,6 +206,12 @@ export default async function Home() {
         </p>
         <div className="rv-settle">
           <MentoringCards />
+        </div>
+      </Reveal>
+
+      <Reveal>
+        <div className="rv-settle">
+          <StackField basePath={basePath} />
         </div>
       </Reveal>
 
