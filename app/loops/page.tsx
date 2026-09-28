@@ -176,7 +176,7 @@ export default function Loops() {
 
             <ol className="eval-history">
               {runs.map((run) => (
-                <li key={`${run.impl_version}-${run.prompt_version}-${run.date}`}>
+                <li key={`${run.impl_version}-${run.prompt_version}-${run.digest_version ?? 0}-${run.date}`}>
                   <div className="eval-run-head">
                     <span className="eval-version">
                       review v{run.impl_version} · prompt v{run.prompt_version}
