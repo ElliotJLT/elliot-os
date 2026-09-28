@@ -4923,3 +4923,34 @@ main:has(> .band) {
 .system-health.paused::before {
   background: var(--faint);
 }
+
+/* ---------------------------------------------------------------- /loops */
+.loop-prose p { font-size: 17px; line-height: 1.6; max-width: 68ch; margin: 0 0 14px; color: var(--ink-2); }
+.loop-label { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); margin-bottom: 8px; }
+.loop-split { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r); margin: 8px 0 48px; }
+.loop-split > div { background: var(--paper); padding: 20px 22px; }
+.loop-split p { margin: 0; line-height: 1.55; }
+.loop-steps { list-style: none; padding: 0; margin: 8px 0 48px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.loop-steps li { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); padding: 18px 20px; }
+.loop-step-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+.loop-step-head h3 { margin: 0; font-family: var(--display); font-size: 24px; font-weight: 400; }
+.loop-step-n { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+.loop-step-when { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--faint); white-space: nowrap; }
+.loop-steps p { margin: 0; line-height: 1.55; color: var(--ink-2); font-size: 15px; }
+.loop-example { margin: 16px 0 12px; padding: 20px 24px; border-left: 3px solid var(--accent); background: var(--paper); }
+.loop-example p { margin: 0 0 10px; line-height: 1.6; font-family: var(--serif); font-size: 17px; }
+.loop-example p:last-child { margin-bottom: 0; }
+.loop-example-link { font-family: var(--mono) !important; font-size: 13px !important; color: var(--muted); }
+.loop-rules { padding-left: 18px; margin: 8px 0 48px; max-width: 72ch; }
+.loop-rules li { margin-bottom: 10px; line-height: 1.55; color: var(--ink-2); }
+.loop-ledger { width: 100%; border-collapse: collapse; margin: 8px 0 14px; font-size: 15px; }
+.loop-ledger th, .loop-ledger td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.loop-ledger thead th { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--faint); font-weight: 400; }
+.loop-note { display: block; font-family: var(--mono); font-size: 11px; color: var(--faint); }
+.loop-fig { margin: 8px 0 36px; }
+.loop-fig img { width: 100%; height: auto; border-radius: var(--r); border: 1px solid var(--line); }
+.loop-fig figcaption { font-size: 13px; color: var(--faint); margin-top: 8px; }
+.loop-fig-slot { border: 1px dashed var(--line-2); border-radius: var(--r); padding: 28px; min-height: 220px; display: flex; flex-direction: column; justify-content: center; gap: 8px; color: var(--faint); }
+.loop-fig-slot span, .loop-fig-slot em { font-family: var(--mono); font-size: 11px; }
+.loop-fig-slot p { margin: 0; max-width: 60ch; }
+@media (max-width: 720px) { .loop-split { grid-template-columns: 1fr; } }

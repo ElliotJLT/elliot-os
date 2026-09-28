@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getRepos, FEATURED } from "@/lib/github";
 import Reveal from "../components/Reveal";
 import HoverLabel from "../components/HoverLabel";
@@ -236,7 +237,7 @@ export default async function Built() {
           <h2 className="mai-kick rv-settle">ideas or feedback?</h2>
           <p className="muted rv-settle section-line">
             The system I run my own work on is private; how it works is on{" "}
-            <a href="/loops">/loops</a>. Anything else:{" "}
+            <Link href="/loops">/loops</Link>. Anything else:{" "}
             <a href="mailto:elliotjlittle@gmail.com">
               elliotjlittle@gmail.com
             </a>

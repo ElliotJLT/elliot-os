@@ -1,8 +1,9 @@
-import { getLoops } from "@/lib/loops";
-import { getEvals, getCases } from "@/lib/evals";
+import { getEvals } from "@/lib/evals";
 import { getLedger } from "@/lib/ledger";
 import { getAgentLog } from "@/lib/content";
+import Link from "next/link";
 import Reveal from "../components/Reveal";
+import LoopFigure from "../components/LoopFigure";
 
 export const metadata = { title: "Loops · Elliot Little" };
 
@@ -16,18 +17,51 @@ function formatDate(value: string | null) {
   }).format(new Date(`${value}T00:00:00Z`));
 }
 
+const STEPS = [
+  {
+    n: "01",
+    name: "Capture",
+    when: "any time",
+    body: "A thought goes to a Telegram bot, or to /capture from whichever Claude Code session I'm in. It lands in an inbox and in an append-only record of everything I've said. Nothing is sorted or judged at this point. Getting it out of my head is the whole job.",
+  },
+  {
+    n: "02",
+    name: "Sort",
+    when: "when I run a sweep",
+    body: "Claude turns each inbox line into a next action written as a physical verb, a project with its first step, something I'm waiting on with a date to chase, or nothing. It also flags when one of the tools it reads from has gone stale.",
+  },
+  {
+    n: "03",
+    name: "One board",
+    when: "every run",
+    body: "A 330-line Python script with no model in it renders one list from three places: my own loops file, the status files in my job tracker, and the household list I share with my partner. It reads them where they live and copies nothing, so there is never a second version to drift.",
+  },
+  {
+    n: "04",
+    name: "The night pass",
+    when: "before 07:30",
+    body: "The part that notices. It reads my own captured words, the gap between the roles I say I want and the ones that actually reach interview, and three days of new writing on the threads I care about. At most one collision comes out, quoting me word for word, with one open question. Most nights it should say nothing.",
+  },
+  {
+    n: "05",
+    name: "Morning",
+    when: "07:30",
+    body: "One Telegram message: the single move for the day, anything genuinely due, and the night pass if it found something. Every Claude Code session I open also starts with the same 200-word summary, so no agent has to be told what's going on.",
+  },
+  {
+    n: "06",
+    name: "Review",
+    when: "Fridays, 16:00",
+    body: "Three questions arrive: what closed, what's stuck, what to drop. I answer in my own words, and the review is written from the data rather than from a journal I'd never keep.",
+  },
+];
+
 export default function Loops() {
-  const data = getLoops();
   const evals = getEvals();
-  const cases = getCases();
   const ledger = getLedger();
   const agentLog = getAgentLog();
-
-  const runs = evals.runs;
-  const latestEval = runs[0];
-  const firstEval = runs[runs.length - 1];
-  const improved = latestEval && firstEval && latestEval.passed > firstEval.passed;
-  const caseFor = (id: string) => cases.find((c) => c.id === id);
+  const latestEval = evals.runs[0];
+  const firstEval = evals.runs[evals.runs.length - 1];
 
   return (
     <main>
@@ -41,80 +75,222 @@ export default function Loops() {
               </h1>
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              One system I run my own work on, measured by a ledger that can
-              show it failing. One that keeps this site current, with its evals
-              open below.
+              The system I run my own work on, how each part works, and a
+              public ledger that would show it failing.
             </p>
           </header>
         </Reveal>
 
-        {/* -------------------------------------------------- the one I live in */}
         <Reveal>
-          <h2 id="live" className="mai-kick rv-settle">
-            the one I live in
+          <LoopFigure
+            name="hero"
+            alt="The loop at a glance: capture, sort, one board, the night pass, the morning message and the weekly review, arranged as a cycle around a person."
+          />
+        </Reveal>
+
+        {/* ---------------------------------------------------------- the idea */}
+        <Reveal>
+          <h2 id="idea" className="mai-kick rv-settle">
+            the idea
+          </h2>
+          <div className="loop-prose rv-settle">
+            <p>
+              David Allen&rsquo;s point in <em>Getting Things Done</em> is that
+              the mind is RAM. Every open loop you carry in your head takes up
+              space, and the part of your mind holding it is bad at reminding
+              you at the right moment. Ben Thompson picked this up in{" "}
+              <em>Write Things Down</em>: he never ran his own task system
+              well, so first an assistant ran it for him, and now an agent
+              does.
+            </p>
+            <p>
+              I&rsquo;m the same. I start more than I finish, and ideas die in
+              my head because I judge them alone. So I built the assistant. It
+              holds the list and the reminders, and it resurfaces my own
+              thinking when something new makes it relevant. The calls stay
+              with me.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal>
+          <div className="loop-split rv-settle">
+            <div>
+              <span className="loop-label">the machine holds</span>
+              <p>
+                Capture. The list. Dates, reminders and who to chase. What I
+                said three weeks ago and what&rsquo;s changed since.
+              </p>
+            </div>
+            <div>
+              <span className="loop-label">I keep</span>
+              <p>
+                Which move matters today. What to kill. What to ship. Anything
+                that goes out with my name on it.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* -------------------------------------------------------- how it runs */}
+        <Reveal>
+          <h2 id="how" className="mai-kick rv-settle">
+            how it runs
+          </h2>
+        </Reveal>
+        <Reveal>
+          <LoopFigure
+            name="flow"
+            alt="Diagram of the six steps: a thought is captured, sorted into a next action, rendered on one board with the job tracker and household list, checked overnight, sent as one morning move, and reviewed on Friday."
+          />
+        </Reveal>
+        <Reveal>
+          <ol className="loop-steps rv-settle">
+            {STEPS.map((s) => (
+              <li key={s.n}>
+                <div className="loop-step-head">
+                  <span className="loop-step-n">{s.n}</span>
+                  <h3>{s.name}</h3>
+                  <span className="loop-step-when">{s.when}</span>
+                </div>
+                <p>{s.body}</p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+
+        {/* ---------------------------------------------------- the night pass */}
+        <Reveal>
+          <h2 id="night" className="mai-kick rv-settle">
+            the night pass
+          </h2>
+          <div className="loop-prose rv-settle">
+            <p>
+              This is the piece Allen wished for. Your mind reminds you about
+              flat batteries when you see the flat ones, not when you walk past
+              the right ones in a shop. The night pass tries to get the timing
+              right. It started as <em>Sleep On It</em>, which I built with
+              three others at the Claude Communities Impact Lab in London in
+              July 2026: an app that goes back through weeks of half-ideas and
+              finds the two thoughts that turn out to be the same thought.
+            </p>
+            <p>
+              Two rules carry over. It never writes my material: every quote
+              is something I actually said. And it keeps what I say I want
+              apart from what my behaviour shows, because where those diverge
+              is the most useful thing it can tell me.
+            </p>
+          </div>
+        </Reveal>
+        <Reveal>
+          <LoopFigure
+            name="night"
+            alt="Three inputs flowing into one output: my captured words, stated versus revealed priorities, and three days of new writing on my threads, producing at most one collision or nothing."
+          />
+        </Reveal>
+        <Reveal>
+          <blockquote className="loop-example rv-settle">
+            <span className="loop-label">a real one, 28 September 2026</span>
+            <p>
+              On 28 Sep you said &lsquo;a lot of the heavy lifting can be done
+              by an LLM system&rsquo; and named &lsquo;retaining taste and
+              judgment&rsquo; as the deeper thread in the same breath. This
+              week&rsquo;s research is about exactly that mechanism.
+            </p>
+            <p className="loop-example-link">
+              Less Accurate, More Confident: The More We Rely On AI, The Less
+              We Question What We Think We Know
+            </p>
+            <p>
+              Is offloading the heavy lifting the hack, or is it the thing that
+              erodes the edge you&rsquo;re trying to protect?
+            </p>
+          </blockquote>
+          <p className="muted rv-settle section-line">
+            It asked the question I&rsquo;d been avoiding. That question is
+            also why{" "}
+            <a href="https://elliotjlt.github.io/crux/research.html">crux</a>{" "}
+            exists: it measures whether I&rsquo;m getting sharper or getting
+            carried.
+          </p>
+        </Reveal>
+
+        {/* ------------------------------------------------------ design rules */}
+        <Reveal>
+          <h2 id="rules" className="mai-kick rv-settle">
+            the rules it&rsquo;s built on
+          </h2>
+          <ul className="loop-rules rv-settle">
+            <li>
+              <strong>Code where it has to be right, a model where judgement helps.</strong>{" "}
+              Dates, reminders and counts are plain Python. Claude only sorts,
+              picks the day&rsquo;s move and looks for collisions.
+            </li>
+            <li>
+              <strong>Read, never copy.</strong> The job tracker and the
+              household list stay the source of truth. The board reads them each
+              time it renders.
+            </li>
+            <li>
+              <strong>My words are append-only.</strong> Nothing I capture is
+              edited or tidied, so the night pass can quote it exactly.
+            </li>
+            <li>
+              <strong>One message a day.</strong> If the morning message becomes
+              a list I skim, the system has failed.
+            </li>
+            <li>
+              <strong>Small and local.</strong> Claude Code, Python&rsquo;s
+              standard library, launchd, the Telegram Bot API, Exa for search,
+              and git. No database, no server.
+            </li>
+          </ul>
+        </Reveal>
+
+        {/* ------------------------------------------------------------ ledger */}
+        <Reveal>
+          <h2 id="ledger" className="mai-kick rv-settle">
+            the ledger
           </h2>
           <p className="muted rv-settle section-line">
-            Ben Thompson&rsquo;s point in <em>Write Things Down</em> is David
-            Allen&rsquo;s: the mind is RAM, and an assistant that writes
-            everything down lets you empty it. Mine is Claude Code and a few
-            scripts. I text a thought to a bot and it lands in an inbox. A sweep
-            turns it into next actions. At 07:30 I get one move for the day. Job
-            applications and household tasks stay in the tools that own them;
-            the system reads them and never copies them.
+            {ledger.note} Running since {formatDate(ledger.started)}.
           </p>
         </Reveal>
         <Reveal>
-          <div className="authority-wrap rv-settle">
-            <table className="authority-table">
-              <thead>
-                <tr>
-                  <th>the machine holds</th>
-                  <th>I keep</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>capture, the tickler, what&rsquo;s overdue, who to chase, what I said three weeks ago</td>
-                  <td>which move matters today, what to kill, what to ship, anything with my name on it</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <LoopFigure
+            name="ledger"
+            alt="Weekly chart of loops closed against thoughts captured since the system started."
+          />
         </Reveal>
         <Reveal>
-          <div className="authority-wrap rv-settle">
-            <table className="authority-table">
-              <thead>
-                <tr>
-                  <th>week of</th>
-                  <th>loops closed</th>
-                  <th>thoughts captured</th>
-                  <th>morning briefs</th>
+          <table className="loop-ledger rv-settle">
+            <thead>
+              <tr>
+                <th>week of</th>
+                <th>loops closed</th>
+                <th>thoughts captured</th>
+                <th>morning messages</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ledger.weeks.map((w) => (
+                <tr key={w.week_of}>
+                  <th scope="row">{formatDate(w.week_of)}</th>
+                  <td>{w.closed}</td>
+                  <td>{w.captured}</td>
+                  <td>
+                    {w.briefs}
+                    {w.fallbacks > 0 && <span className="loop-note">{w.fallbacks} fell back to plain text</span>}
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {ledger.weeks.map((w) => (
-                  <tr key={w.week_of}>
-                    <th scope="row" data-label="week of">{formatDate(w.week_of)}</th>
-                    <td data-label="loops closed">{w.closed}</td>
-                    <td data-label="thoughts captured">{w.captured}</td>
-                    <td data-label="morning briefs">
-                      {w.briefs}
-                      {w.fallbacks > 0 && (
-                        <span className="authority-cadence">{w.fallbacks} fell back to plain text</span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <p className="authority-foot">
-              {ledger.note} Running since {formatDate(ledger.started)}. What
-              would make it wrong: captures climbing while closed loops stay
-              flat. That would be a tidier way of not doing things, and on 12
-              October I check for it and cut the system back if so.
-            </p>
-          </div>
+              ))}
+            </tbody>
+          </table>
+          <p className="muted rv-settle section-line">
+            What would make it wrong: captures climbing while closed loops stay
+            flat. That would be a tidier way of not doing things. On 12 October
+            I check for exactly that, and cut the system back if I find it.
+          </p>
         </Reveal>
         {ledger.broke.length > 0 && (
           <Reveal>
@@ -134,164 +310,28 @@ export default function Loops() {
           </Reveal>
         )}
 
-        {/* --------------------------------------------------- the site's own */}
+        {/* ---------------------------------------------- the site's own loop */}
         <Reveal>
           <h2 id="site" className="mai-kick rv-settle">
-            the one that keeps this site current
+            the loop that keeps this site current
           </h2>
           <p className="muted rv-settle section-line">
             A daily agent turns my public GitHub activity into the shipping
-            digest below. It never fabricates a busy week: a quiet day posts
-            &ldquo;quiet day&rdquo;. Its evals are the part worth reading.
+            digest below; a quiet day posts &ldquo;quiet day&rdquo;. Its eval
+            suite went from {firstEval?.passed}/{firstEval?.total} to{" "}
+            {latestEval?.passed}/{latestEval?.total}, and the first run caught
+            a review gate that couldn&rsquo;t reject anything. Evals across my
+            work are on <Link href="/evals">/evals</Link>.
           </p>
         </Reveal>
-
-        {/* ------------------------------------------------------ eval suite */}
-        <Reveal>
-          <h2 id="evals" className="mai-kick rv-settle">
-            its evals
-          </h2>
-        </Reveal>
-        <Reveal>
-          <div className="eval-panel rv-settle">
-            <div className="eval-head">
-              <div className="eval-rate">
-                <strong>
-                  {latestEval.passed}<span>/{latestEval.total}</span>
-                </strong>
-                <span className="eval-rate-label">
-                  review v{latestEval.impl_version} · prompt v
-                  {latestEval.prompt_version}
-                  {latestEval.digest_version &&
-                    ` · digest v${latestEval.digest_version}`}
-                </span>
-              </div>
-              <p>
-                {cases.length} held-out cases covering both systems, run against
-                the same functions they call in production rather than a copy of
-                them. No model runs in the suite, so it is deterministic, free,
-                and able to gate every commit.
-              </p>
-            </div>
-
-            <ol className="eval-history">
-              {runs.map((run) => (
-                <li key={`${run.impl_version}-${run.prompt_version}-${run.digest_version ?? 0}-${run.date}`}>
-                  <div className="eval-run-head">
-                    <span className="eval-version">
-                      review v{run.impl_version} · prompt v{run.prompt_version}
-                      {run.digest_version && ` · digest v${run.digest_version}`}
-                    </span>
-                    <span className="eval-score">
-                      {run.passed}/{run.total}
-                    </span>
-                  </div>
-                  <div
-                    className="eval-bar"
-                    role="img"
-                    aria-label={`${run.passed} of ${run.total} cases passing`}
-                  >
-                    <span style={{ width: `${(run.passed / run.total) * 100}%` }} />
-                  </div>
-                  {run.failing.length > 0 && (
-                    <ul className="eval-failing">
-                      {run.failing.map((id) => (
-                        <li key={id}>
-                          <code>{id}</code>
-                          {caseFor(id) && <span>{caseFor(id)!.why}</span>}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
-            </ol>
-
-            {improved && (
-              <p className="eval-note">
-                <span>What the three runs are</span> The cases were written
-                against the behaviour these systems should have, then run
-                against the behaviour they had, so the first number is what was
-                actually deployed rather than a starting point chosen to
-                flatter. The review&rsquo;s gate averaged three checks against a
-                0.6 threshold, making its worst possible score 0.67 — it could
-                not reject anything, and a proposal citing a repository that
-                does not exist passed as grounded. The digest built every commit
-                URL as <code>/repos/ElliotJLT/&#123;name&#125;</code>, so work on
-                anyone else&rsquo;s project 404ed and vanished, and it ignored
-                pull requests entirely. Both now hold, and the suite fails the
-                build if either slips back.
-              </p>
-            )}
-            <p className="eval-caveat">
-              <span>What this does not prove</span> I wrote the cases, so the
-              suite tests my idea of correct. {cases.length} cases is a small
-              set, and a green run means no known regression rather than a
-              correct agent. Its value is the next change, not this number: the
-              pass rate is recorded per version, so an edit that makes the
-              output feel better while scoring worse is visible instead of
-              arguable.
-            </p>
-          </div>
-        </Reveal>
-
-
-        {/* ------------------------------------------------------ failure log */}
-        <Reveal>
-          <h2 id="failures" className="mai-kick rv-settle">
-            failure log
-          </h2>
-        </Reveal>
-        <Reveal>
-          <ol className="failure-log rv-settle">
-            {data.failures.map((failure) => (
-              <li key={`${failure.date}-${failure.title}`}>
-                <div className="failure-meta">
-                  <time dateTime={failure.date}>{formatDate(failure.date)}</time>
-                  <span className={`failure-status ${failure.status}`}>
-                    {failure.status}
-                  </span>
-                </div>
-                <div>
-                  <h3>{failure.title}</h3>
-                  <p>{failure.effect}</p>
-                  <p className="failure-change">
-                    <span>change</span> {failure.change}
-                  </p>
-                  {failure.evidence_url && <a href={failure.evidence_url}>evidence ↗</a>}
-                </div>
-              </li>
-            ))}
-          </ol>
-        </Reveal>
-
         {agentLog && (
           <Reveal>
             <details className="latest-digest rv-settle">
-              <summary>Latest automatically published shipping digest</summary>
-              <div
-                className="prose agentlog"
-                dangerouslySetInnerHTML={{ __html: agentLog }}
-              />
+              <summary>Latest shipping digest</summary>
+              <div className="prose agentlog" dangerouslySetInnerHTML={{ __html: agentLog }} />
             </details>
           </Reveal>
         )}
-
-        <Reveal>
-          <nav className="machinery-links rv-settle" aria-label="Agent system source code">
-            <span>the machinery</span>
-            <a href="https://github.com/ElliotJLT/elliot-os/tree/main/evals">
-              the golden set ↗
-            </a>
-            <a href="https://github.com/ElliotJLT/elliot-os/blob/main/scripts/lib/positioning.mjs">
-              review logic ↗
-            </a>
-            <a href="https://github.com/ElliotJLT/elliot-os/blob/main/scripts/lib/shipping.mjs">
-              digest logic ↗
-            </a>
-            <a href="https://github.com/ElliotJLT/elliot-os/actions">workflow runs ↗</a>
-          </nav>
-        </Reveal>
       </div>
     </main>
   );
