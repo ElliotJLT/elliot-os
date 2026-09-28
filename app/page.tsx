@@ -111,7 +111,7 @@ export default async function Home() {
           { name: "Own", said: "I am drawn to dauntingly large missions: make death less bureaucratic for families, feed NHS staff through a pandemic, give a student the tutor their family cannot buy. I find the practical problem inside that scale, then turn it into something a team can ship." },
           { name: "Build", said: "At MealsForTheNHS, day one was a WhatsApp group and day ten was a marketplace serving 146 hospitals. At Zero Gravity I wrote 28% of the tutor's merged code while leading product." },
           { name: "Check", said: "At Farewill, agent errors fell 69% and case handling moved from two weeks to four days. At Zero Gravity, our internal tutor evals moved marking accuracy from a 67% baseline to over 99% against real past papers and official mark schemes." },
-          { name: "Remember", said: "At Zero Gravity the team adopted the operating guide I wrote. Now Crux records the calls a commit misses, and the system on /loops holds every open loop and follow-up, so nothing I start depends on my memory." },
+          { name: "Remember", said: "I write things down so they outlast me. A decision or a lesson that only lives in someone's head is gone by next quarter. At Zero Gravity that meant the operating guide the whole team worked from. Now it's a system that keeps track of everything I've started, so nothing gets dropped." },
         ]}
       />
 
