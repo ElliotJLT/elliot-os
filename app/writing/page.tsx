@@ -140,6 +140,33 @@ export default async function Writing() {
             ),
         )}
 
+        {/* Off-theme on purpose: the writing that came before the AI work. */}
+        <Reveal>
+          <h2 id="off-the-clock" className="mai-kick rv-settle">
+            off the clock
+          </h2>
+          <p className="muted rv-settle" style={{ margin: "0 0 22px" }}>
+            I was writing long before a model could do it for me.
+          </p>
+        </Reveal>
+        <Reveal>
+          <ul className="ev-places rv-settle">
+            <li>
+              <a href="https://www.newcastle360.com/authors/elliot-little/">
+                Newcastle360
+              </a>
+              <p>
+                Newcastle United features, 2016 to 2018: player profiles, a
+                125th-anniversary quiz, and how Willie McFaul got from Ulster
+                to Guam.
+              </p>
+            </li>
+            <li>
+              <span className="ev-places-name">Horror stories</span>
+              <p>What I write when it&apos;s just for me.</p>
+            </li>
+          </ul>
+        </Reveal>
       </div>
     </main>
   );

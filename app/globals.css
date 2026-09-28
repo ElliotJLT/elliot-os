@@ -5084,7 +5084,8 @@ main:has(> .band) {
   }
 }
 
-.ev-places a {
+.ev-places a,
+.ev-places-name {
   font-family: var(--serif);
   font-size: 19px;
   color: var(--ink);
