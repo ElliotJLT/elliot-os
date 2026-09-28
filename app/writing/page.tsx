@@ -163,8 +163,8 @@ export default async function Writing() {
               </p>
             </li>
             <li>
-              <span className="ev-places-name">Horror stories</span>
-              <p>What I write when it&apos;s just for me.</p>
+              <span className="ev-places-name">Horror</span>
+              <p>Short stories and screenplays, which is what I write when it&apos;s just for me.</p>
             </li>
           </ul>
         </Reveal>
