@@ -1,6 +1,4 @@
-import { getEvals } from "@/lib/evals";
 import { getLedger } from "@/lib/ledger";
-import { getAgentLog } from "@/lib/content";
 import Link from "next/link";
 import Reveal from "../components/Reveal";
 import LoopFigure from "../components/LoopFigure";
@@ -18,50 +16,16 @@ function formatDate(value: string | null) {
 }
 
 const STEPS = [
-  {
-    n: "01",
-    name: "Capture",
-    when: "any time",
-    body: "A thought goes to a Telegram bot, or to /capture from whichever Claude Code session I'm in. It lands in an inbox and in an append-only record of everything I've said. Nothing is sorted or judged at this point. Getting it out of my head is the whole job.",
-  },
-  {
-    n: "02",
-    name: "Sort",
-    when: "when I run a sweep",
-    body: "Claude turns each inbox line into a next action written as a physical verb, a project with its first step, something I'm waiting on with a date to chase, or nothing. It also flags when one of the tools it reads from has gone stale.",
-  },
-  {
-    n: "03",
-    name: "One board",
-    when: "every run",
-    body: "A 330-line Python script with no model in it renders one list from three places: my own loops file, the status files in my job tracker, and the household list I share with my partner. It reads them where they live and copies nothing, so there is never a second version to drift.",
-  },
-  {
-    n: "04",
-    name: "The night pass",
-    when: "before 07:30",
-    body: "The part that notices. It reads my own captured words, the gap between the roles I say I want and the ones that actually reach interview, and three days of new writing on the threads I care about. At most one collision comes out, quoting me word for word, with one open question. Most nights it should say nothing.",
-  },
-  {
-    n: "05",
-    name: "Morning",
-    when: "07:30",
-    body: "One Telegram message: the single move for the day, anything genuinely due, and the night pass if it found something. Every Claude Code session I open also starts with the same 200-word summary, so no agent has to be told what's going on.",
-  },
-  {
-    n: "06",
-    name: "Review",
-    when: "Fridays, 16:00",
-    body: "Three questions arrive: what closed, what's stuck, what to drop. I answer in my own words, and the review is written from the data rather than from a journal I'd never keep.",
-  },
+  { n: "01", name: "Capture", when: "any time", body: "I text a bot, or type /capture in any Claude Code session. It's kept word for word." },
+  { n: "02", name: "Sort", when: "when I run a sweep", body: "Claude turns each line into a next action, a project, someone to chase, or nothing." },
+  { n: "03", name: "One board", when: "every run", body: "Plain Python, no model, renders one list from my loops, my job tracker and our household list, reading each where it lives." },
+  { n: "04", name: "Night pass", when: "before 07:30", body: "Looks across what I've said, my written positions and three days of news for one connection worth waking me for. Most nights, nothing." },
+  { n: "05", name: "Morning", when: "07:30", body: "One Telegram message: one move for the day, anything due, and the night pass if it found something." },
+  { n: "06", name: "Review", when: "Fridays, 16:00", body: "Three questions: what closed, what's stuck, what to drop." },
 ];
 
 export default function Loops() {
-  const evals = getEvals();
   const ledger = getLedger();
-  const agentLog = getAgentLog();
-  const latestEval = evals.runs[0];
-  const firstEval = evals.runs[evals.runs.length - 1];
 
   return (
     <main>
@@ -151,34 +115,12 @@ export default function Loops() {
             the night pass
           </h2>
           <p className="muted rv-settle section-line">
-            Your mind reminds you about flat batteries when you see the flat
-            ones, not when you pass the right ones in a shop. This part tries
-            to get the timing right.
+            David Allen&rsquo;s flat batteries: your mind reminds you when you
+            see the flat ones, not when you pass the right ones in a shop. This
+            is a rebuild of Sleep On It, which I made with three others at the
+            Claude Communities Impact Lab in July, and it only ever quotes me.
           </p>
-          <ul className="loop-steps loop-steps-2 rv-settle">
-            <li>
-              <div className="loop-step-head">
-                <h3>Where it came from</h3>
-              </div>
-              <p>
-                <em>Sleep On It</em>, which I built with three others at the
-                Claude Communities Impact Lab in London in July 2026: an app
-                that goes back through weeks of half-ideas and finds the two
-                thoughts that turn out to be the same thought.
-              </p>
-            </li>
-            <li>
-              <div className="loop-step-head">
-                <h3>Two rules it kept</h3>
-              </div>
-              <p>
-                It never writes my material: every quote is something I
-                actually said. And it keeps what I say I want apart from what my
-                behaviour shows, because where those diverge is the most useful
-                thing it can tell me.
-              </p>
-            </li>
-          </ul>
+
         </Reveal>
         <Reveal>
           <LoopFigure
@@ -204,45 +146,6 @@ export default function Loops() {
               erodes the edge you&rsquo;re trying to protect?
             </p>
           </blockquote>
-          <p className="muted rv-settle section-line">
-            It asked the question I&rsquo;d been avoiding. That question is
-            also why{" "}
-            <a href="https://elliotjlt.github.io/crux/research.html">crux</a>{" "}
-            exists: it measures whether I&rsquo;m getting sharper or getting
-            carried.
-          </p>
-        </Reveal>
-
-        {/* ------------------------------------------------------ design rules */}
-        <Reveal>
-          <h2 id="rules" className="mai-kick rv-settle">
-            the rules it&rsquo;s built on
-          </h2>
-          <ul className="loop-rules rv-settle">
-            <li>
-              <strong>Code where it has to be right, a model where judgement helps.</strong>{" "}
-              Dates, reminders and counts are plain Python. Claude only sorts,
-              picks the day&rsquo;s move and looks for collisions.
-            </li>
-            <li>
-              <strong>Read, never copy.</strong> The job tracker and the
-              household list stay the source of truth. The board reads them each
-              time it renders.
-            </li>
-            <li>
-              <strong>My words are append-only.</strong> Nothing I capture is
-              edited or tidied, so the night pass can quote it exactly.
-            </li>
-            <li>
-              <strong>One message a day.</strong> If the morning message becomes
-              a list I skim, the system has failed.
-            </li>
-            <li>
-              <strong>Small and local.</strong> Claude Code, Python&rsquo;s
-              standard library, launchd, the Telegram Bot API, Exa for search,
-              and git. No database, no server.
-            </li>
-          </ul>
         </Reveal>
 
         {/* ------------------------------------------------------------ ledger */}
@@ -253,12 +156,6 @@ export default function Loops() {
           <p className="muted rv-settle section-line">
             {ledger.note} Running since {formatDate(ledger.started)}.
           </p>
-        </Reveal>
-        <Reveal>
-          <LoopFigure
-            name="ledger"
-            alt="Weekly chart of loops closed against thoughts captured since the system started."
-          />
         </Reveal>
         <Reveal>
           <table className="loop-ledger rv-settle">
@@ -308,28 +205,12 @@ export default function Loops() {
           </Reveal>
         )}
 
-        {/* ---------------------------------------------- the site's own loop */}
         <Reveal>
-          <h2 id="site" className="mai-kick rv-settle">
-            the loop that keeps this site current
-          </h2>
           <p className="muted rv-settle section-line">
-            A daily agent turns my public GitHub activity into the shipping
-            digest below; a quiet day posts &ldquo;quiet day&rdquo;. Its eval
-            suite went from {firstEval?.passed}/{firstEval?.total} to{" "}
-            {latestEval?.passed}/{latestEval?.total}, and the first run caught
-            a review gate that couldn&rsquo;t reject anything. Evals across my
-            work are on <Link href="/evals">/evals</Link>.
+            The agent that keeps this site current, and its eval suite, are on{" "}
+            <Link href="/evals#site">/evals</Link>.
           </p>
         </Reveal>
-        {agentLog && (
-          <Reveal>
-            <details className="latest-digest rv-settle">
-              <summary>Latest shipping digest</summary>
-              <div className="prose agentlog" dangerouslySetInnerHTML={{ __html: agentLog }} />
-            </details>
-          </Reveal>
-        )}
       </div>
     </main>
   );
