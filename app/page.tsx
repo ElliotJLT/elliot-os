@@ -108,10 +108,10 @@ export default async function Home() {
     <div className="mai">
       <Values
         items={[
-          { name: "Own", said: "I am drawn to dauntingly large missions: make death less bureaucratic for families, feed NHS staff through a pandemic, give a student the tutor their family cannot buy. I find the practical problem inside that scale, then turn it into something a team can ship." },
+          { name: "Own", said: "I sit with the people doing the work before deciding what a team should build. At Farewill, probate agents showed me the data errors consuming solicitor time; I moved the product work to the input and case workflow." },
           { name: "Build", said: "At MealsForTheNHS, day one was a WhatsApp group and day ten was a marketplace serving 146 hospitals. At Zero Gravity I wrote 28% of the tutor's merged code while leading product." },
           { name: "Check", said: "At Farewill, agent errors fell 69% and case handling moved from two weeks to four days. At Zero Gravity, our internal tutor evals moved marking accuracy from a 67% baseline to over 99% against real past papers and official mark schemes." },
-          { name: "Remember", said: "At Zero Gravity the team adopted the operating guide I wrote. Now Crux records the calls a commit misses, and the system on /loops holds every open loop and follow-up, so nothing I start depends on my memory." },
+          { name: "Remember", said: "I write down why we chose a path and what happened after. Zero Gravity adopted the operating guide I wrote. Crux records the calls I visibly make in AI-assisted work; Cervo now tests whether its prompts changed a decision." },
         ]}
       />
 
