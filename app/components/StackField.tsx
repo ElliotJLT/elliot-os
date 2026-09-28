@@ -103,8 +103,8 @@ const TOOLS: Tool[] = [
 // field, then the copy fades in, then the rest launch from behind it.
 // `delay` is when in the pinned scroll a tile sets off (0..1).
 const FLIGHTS = [
-  { side: -1, delay: -0.36, end: [-62, -40], s: 176 },
-  { side: 1, delay: -0.3, end: [64, 34], s: 156 },
+  { side: -1, delay: -0.12, end: [-62, -40], s: 176 },
+  { side: 1, delay: -0.06, end: [64, 34], s: 156 },
   { side: -1, delay: 0.08, end: [-70, 32], s: 148 },
   { side: 1, delay: 0.13, end: [60, -42], s: 184 },
   { side: -1, delay: 0.18, end: [-58, 8], s: 140 },
@@ -189,7 +189,10 @@ export default function StackField({ basePath = "" }: { basePath?: string }) {
           const gap = Math.max(gapX, gapY) - 12;
           clear = Math.min(1, Math.max(0, gap / 60));
         }
-        const fade = t <= 0 || t >= 1 ? 0 : clear * onScreen;
+        // Before any copy shows, tiles can sit near the centre (the opening
+        // pair does). Once it starts to appear, they must be fully clear of it.
+        const gate = ce > 0 ? clear : 1;
+        const fade = t <= 0 || t >= 1 ? 0 : gate * onScreen;
         tile.style.setProperty("--tx", `${x.toFixed(1)}px`);
         tile.style.setProperty("--ty", `${y.toFixed(1)}px`);
         tile.style.setProperty("--sc", sc.toFixed(3));
