@@ -11,8 +11,8 @@ export type Role = {
   /** A team photo shown across the top of the role's card. */
   photo?: string;
   photoAlt?: string;
-  /** A reference from someone who managed Elliot there, shown over the photo. */
-  quote?: { text: string; name: string; role: string };
+  /** A reference from someone who managed Elliot there, verbatim. */
+  quote?: { paras: string[]; name: string; role: string };
 };
 
 export type CareerRecord = {

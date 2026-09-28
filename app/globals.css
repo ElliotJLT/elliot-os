@@ -5700,24 +5700,21 @@ h2.mai-kick + p.muted,
   outline-color: oklch(1 0 0 / 0.1);
 }
 
+/* Words lead; a photo, where there is one, sits beside them. */
 .cr-card {
   background: var(--panel);
   border-radius: 26px;
   box-shadow: var(--lift);
   overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .cr-photo {
-  position: relative;
-  margin: 0;
-  aspect-ratio: 16 / 9;
+  margin: 0 26px 24px;
+  border-radius: 16px;
   overflow: hidden;
-}
-
-@media (min-width: 900px) {
-  .cr-photo {
-    aspect-ratio: 21 / 9;
-  }
+  aspect-ratio: 16 / 9;
 }
 
 .cr-photo img {
@@ -5728,63 +5725,79 @@ h2.mai-kick + p.muted,
   object-position: 50% 35%;
 }
 
-/* The reference, as a frosted pill on the photo. */
-.cr-quote {
-  position: absolute;
-  left: 18px;
-  right: 18px;
-  bottom: 18px;
-  max-width: 560px;
-  padding: 16px 20px 14px;
-  border-radius: 20px;
-  background: color-mix(in srgb, var(--paper) 86%, transparent);
-  backdrop-filter: blur(14px) saturate(1.2);
-  -webkit-backdrop-filter: blur(14px) saturate(1.2);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08), 0 12px 32px -12px rgba(0, 0, 0, 0.35);
+@media (min-width: 760px) {
+  .cr-card:has(.cr-photo) {
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 32%);
+  }
+
+  .cr-photo {
+    margin: 22px 22px 22px 0;
+    aspect-ratio: 3 / 2;
+    align-self: start;
+  }
 }
 
-.cr-quote blockquote {
-  margin: 0 0 8px;
+/* The reference, verbatim, under the description. */
+.cr-ref {
+  margin: 18px 0 0;
+  padding-top: 16px;
+  border-top: 1px dashed var(--line-2);
+}
+
+.cr-ref blockquote {
+  margin: 0;
+}
+
+.cr-ref blockquote p {
   font-family: var(--serif);
-  font-size: 17px;
-  line-height: 1.42;
-  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  margin: 0 0 8px;
 }
 
-.cr-quote-by {
-  display: block;
+.cr-ref figcaption {
   font-family: var(--mono);
   font-size: 12px;
   color: var(--muted);
 }
 
-.cr-quote-by strong {
+.cr-ref figcaption strong {
   font-weight: 500;
   color: var(--ink-2);
 }
 
-/* On a phone the pill would cover most of the photo, so it sits under it. */
-@media (max-width: 560px) {
-  .cr-photo {
-    aspect-ratio: auto;
-    overflow: visible;
-  }
+/* Cards slide in from the rail side, once; logos light as the line
+   reaches them. */
+.js .rv .cr-slide {
+  transition: opacity 0.55s var(--rv-ease), transform 0.55s var(--rv-ease);
+  transition-delay: var(--rv-delay, 0s);
+}
 
-  .cr-photo img {
-    aspect-ratio: 16 / 9;
-    height: auto;
-  }
+.js .rv:not(.is-revealed) .cr-slide {
+  opacity: 0;
+  transform: translateX(-32px);
+}
 
-  .cr-quote {
-    position: static;
-    max-width: none;
-    margin: 0;
-    border-radius: 0;
-    background: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    box-shadow: none;
-    padding: 20px 26px 0;
+.cr-logo {
+  transition: filter 0.4s ease-out, opacity 0.4s ease-out, box-shadow 0.4s ease-out;
+}
+
+.js .cr-item:not([data-reached]) .cr-logo {
+  filter: grayscale(1);
+  opacity: 0.45;
+}
+
+.cr-item[data-reached] .cr-logo {
+  box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .rv .cr-slide,
+  .js .rv:not(.is-revealed) .cr-slide {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
@@ -5839,26 +5852,7 @@ h2.mai-kick + p.muted,
   }
 }
 
-/* Footer lead: the name and the GitHub snake. Its children join the
-   footer grid, so the snake can span the whitespace under the columns. */
-.foot-lead {
-  display: contents;
-}
 
-footer .github-snake {
-  grid-column: 1 / -1;
-  margin: 0;
-}
-
-@media (min-width: 1200px) {
-  footer .foot-cols .foot-brand {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  footer .github-snake {
-    grid-row: 2;
-    grid-column: 2 / -1;
-    max-width: 720px;
-  }
+.built-snake {
+  max-width: 760px;
 }

@@ -116,42 +116,9 @@ export default function RootLayout({
               </div>
             </div>
             <div className="foot-cols">
-              <div className="foot-lead">
-                <Link href="/" className="foot-brand">
-                  Elliot Little
-                </Link>
-                <figure className="github-snake">
-                  <a
-                    className="github-snake-link"
-                    href="https://github.com/ElliotJLT"
-                    aria-label="See ElliotJLT's contribution history on GitHub"
-                  >
-                    <figcaption>
-                      <span className="github-snake-label">GitHub activity</span>
-                      <span className="github-snake-meta">updated daily</span>
-                    </figcaption>
-                    {/* Both assets are generated from the live contribution graph
-                        during every deploy. Two images let the site's explicit
-                        theme toggle choose the right palette. */}
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      className="github-snake-image github-snake-light"
-                      src={`${basePath}/github-snake.svg`}
-                      alt="Animated GitHub contribution grid for ElliotJLT over the past year"
-                      width={880}
-                      height={192}
-                    />
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      className="github-snake-image github-snake-dark"
-                      src={`${basePath}/github-snake-dark.svg`}
-                      alt="Animated GitHub contribution grid for ElliotJLT over the past year"
-                      width={880}
-                      height={192}
-                    />
-                  </a>
-                </figure>
-              </div>
+              <Link href="/" className="foot-brand">
+                Elliot Little
+              </Link>
               <nav className="foot-col">
                 <span className="foot-h">Sections</span>
                 <Link href="/built">Built</Link>

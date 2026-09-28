@@ -241,6 +241,43 @@ export default async function Built() {
         </Reveal>
 
         <Reveal>
+          <h2 className="mai-kick rv-settle">GitHub activity</h2>
+          <div className="rv-settle built-snake">
+            <figure className="github-snake">
+              <a
+                className="github-snake-link"
+                href="https://github.com/ElliotJLT"
+                aria-label="See ElliotJLT's contribution history on GitHub"
+              >
+                <figcaption>
+                  <span className="github-snake-label">GitHub activity</span>
+                  <span className="github-snake-meta">updated daily</span>
+                </figcaption>
+                {/* Both assets are generated from the live contribution graph
+                    during every deploy. Two images let the site's explicit
+                    theme toggle choose the right palette. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className="github-snake-image github-snake-light"
+                  src={`${basePath}/github-snake.svg`}
+                  alt="Animated GitHub contribution grid for ElliotJLT over the past year"
+                  width={880}
+                  height={192}
+                />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className="github-snake-image github-snake-dark"
+                  src={`${basePath}/github-snake-dark.svg`}
+                  alt="Animated GitHub contribution grid for ElliotJLT over the past year"
+                  width={880}
+                  height={192}
+                />
+              </a>
+            </figure>
+          </div>
+        </Reveal>
+
+        <Reveal>
           <h2 className="mai-kick rv-settle">ideas or feedback?</h2>
           <p className="muted rv-settle section-line">
             The system I run my own work on is private; how it works is on{" "}

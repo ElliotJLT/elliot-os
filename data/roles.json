@@ -12,7 +12,11 @@
       "photo": "career/team-zero-gravity.jpg",
       "photoAlt": "The Zero Gravity team in the office, gathered round a sofa under the company sign",
       "quote": {
-        "text": "If I were starting another business tomorrow, Elliot would be one of the first people I'd try to hire.",
+        "paras": [
+          "Elliot is the ultimate startup operator — a genuine Swiss Army knife who has made an impact across customer success, operations and product at Zero Gravity.",
+          "He doesn't just understand what AI makes possible; he builds with it, experiments rapidly and ships. He now contributes as many PRs as some of our senior engineers, while bringing the customer insight and commercial judgement you would expect from a strong product leader.",
+          "If I were starting another business tomorrow, Elliot would be one of the first people I'd try to hire."
+        ],
         "name": "Joe Seddon",
         "role": "Founder and CEO, Zero Gravity"
       }
@@ -41,12 +45,7 @@
       "dates": "Oct 2018 – Sep 2020",
       "outcome": "Built the CX and crisis operations behind 400% YoY growth, scaling the team from 10 to 160 across 30+ markets, with NPS held above 90 through the US launch.",
       "photo": "career/team-flash-pack.jpg",
-      "photoAlt": "The Flash Pack team together in the office",
-      "quote": {
-        "text": "Time and time again Elliot went above and beyond for our customer, and he was always cool under pressure.",
-        "name": "Mike Goss",
-        "role": "Managed Elliot at Flash Pack, 2020"
-      }
+      "photoAlt": "The Flash Pack team together in the office"
     }
   ]
 }
