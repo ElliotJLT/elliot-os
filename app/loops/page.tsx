@@ -2,6 +2,7 @@ import { getLedger } from "@/lib/ledger";
 import Link from "next/link";
 import Reveal from "../components/Reveal";
 import LoopFigure from "../components/LoopFigure";
+import LoopFlow from "../components/LoopFlow";
 
 export const metadata = { title: "Loops · Elliot Little" };
 
@@ -89,10 +90,7 @@ export default function Loops() {
           </h2>
         </Reveal>
         <Reveal>
-          <LoopFigure
-            name="flow"
-            alt="Diagram of the six steps: a thought is captured, sorted into a next action, rendered on one board with the job tracker and household list, checked overnight, sent as one morning move, and reviewed on Friday."
-          />
+          <LoopFlow />
         </Reveal>
         <Reveal>
           <ol className="loop-steps rv-settle">
@@ -115,10 +113,9 @@ export default function Loops() {
             the night pass
           </h2>
           <p className="muted rv-settle section-line">
-            David Allen&rsquo;s flat batteries: your mind reminds you when you
-            see the flat ones, not when you pass the right ones in a shop. This
-            is a rebuild of Sleep On It, which I made with three others at the
-            Claude Communities Impact Lab in July, and it only ever quotes me.
+            Overnight it looks for one link between something I&rsquo;ve said
+            and something new worth reading, and quotes my own words back to
+            me. Most nights it finds nothing, and says so.
           </p>
 
         </Reveal>
@@ -130,22 +127,28 @@ export default function Loops() {
         </Reveal>
         <Reveal>
           <blockquote className="loop-example rv-settle">
-            <span className="loop-label">a real one, 28 September 2026</span>
+            <span className="loop-label">what it sent me, 28 September 2026</span>
             <p>
               On 28 Sep you said &lsquo;a lot of the heavy lifting can be done
               by an LLM system&rsquo; and named &lsquo;retaining taste and
               judgment&rsquo; as the deeper thread in the same breath. This
               week&rsquo;s research is about exactly that mechanism.
             </p>
+            <span className="loop-label">the piece it paired it with</span>
             <p className="loop-example-link">
               Less Accurate, More Confident: The More We Rely On AI, The Less
               We Question What We Think We Know
             </p>
+            <span className="loop-label">the question it left me</span>
             <p>
               Is offloading the heavy lifting the hack, or is it the thing that
               erodes the edge you&rsquo;re trying to protect?
             </p>
           </blockquote>
+          <p className="muted rv-settle loop-origin">
+            It&rsquo;s a rebuild of Sleep On It, which I made with three others
+            at the Claude Communities Impact Lab in July.
+          </p>
         </Reveal>
 
         {/* ------------------------------------------------------------ ledger */}

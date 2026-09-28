@@ -5091,3 +5091,95 @@ main:has(> .band) {
     cursor: pointer;
   }
 }
+
+/* /loops "how it runs": boxes and thin arrows in the page's own ink. */
+.loop-flow {
+  margin: 4px 0 28px;
+}
+
+.loop-flow svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--faint);
+  overflow: visible;
+}
+
+.lf-lane {
+  font-family: var(--display);
+  font-size: 24px;
+  fill: var(--muted);
+}
+
+.lf-box {
+  fill: var(--paper);
+  stroke: var(--line-2);
+  stroke-width: 1.4;
+}
+
+.lf-key {
+  fill: var(--bg-2);
+  stroke: var(--accent-ink);
+}
+
+.lf-title {
+  font-family: var(--sans);
+  font-size: 19px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+
+.lf-when {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  fill: var(--accent-ink);
+}
+
+.lf-body {
+  font-family: var(--sans);
+  font-size: 15.5px;
+  fill: var(--muted);
+}
+
+.lf-line {
+  fill: none;
+  stroke: var(--faint);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.lf-return {
+  stroke-dasharray: 5 6;
+}
+
+.lf-node {
+  fill: var(--bg);
+  stroke: var(--faint);
+  stroke-width: 1.4;
+}
+
+.lf-chip {
+  fill: var(--paper);
+  stroke: var(--line-2);
+  stroke-width: 1.2;
+}
+
+.lf-news {
+  stroke-dasharray: 4 4;
+}
+
+.lf-chip-text {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  fill: var(--ink-2);
+}
+
+/* Below this the labels would drop under the 11px floor; the numbered
+   steps underneath say the same thing. */
+@media (max-width: 900px) {
+  .loop-flow {
+    display: none;
+  }
+}
