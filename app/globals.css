@@ -17,7 +17,9 @@
   --ink: #342e29;
   --ink-2: #4a423b;
   --muted: #5d524b;
-  --faint: #8b8177;
+  --faint: #71665e;
+  /* Unlit principles: dim, but still 3:1 at display size. */
+  --vals-dim: #94897b;
   --line: #e9e0ca;
   --line-2: #d8cdb4;
   --rule: #342e29;
@@ -44,7 +46,8 @@
   --ink: #f4f1eb;
   --ink-2: #d6d2ca;
   --muted: #9b978e;
-  --faint: #6d6a63;
+  --faint: #8e8a81;
+  --vals-dim: #636660;
   --line: #1b2523;
   --line-2: #2b3735;
   --rule: #2e3a38;
@@ -147,6 +150,11 @@ a:hover {
   line-height: 1;
   cursor: pointer;
   padding: 4px;
+  /* The glyph is 14px; the hit area should not be. */
+  min-width: 32px;
+  min-height: 32px;
+  display: inline-grid;
+  place-items: center;
   transition: color 0.2s, transform 0.3s, scale 0.18s ease-out;
 }
 
@@ -161,7 +169,7 @@ a:hover {
 
 /* --------------------------------------------------------------- general */
 main {
-  padding: 40px 0 96px;
+  padding: 40px 0 64px;
   counter-reset: sec;
 }
 
@@ -374,7 +382,7 @@ li {
   padding: 32px 36px;
   background: var(--bg-2);
   border-radius: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
 .research-card > h3 a,
@@ -396,7 +404,7 @@ li {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
 @media (min-width: 900px) {
@@ -463,7 +471,7 @@ li {
 
 .timeline .day {
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
@@ -494,6 +502,9 @@ li {
 .entry .hash {
   color: var(--accent-ink);
   text-decoration: none;
+  display: inline-block;
+  min-height: 24px;
+  line-height: 24px;
 }
 
 .entry .hash:hover {
@@ -508,7 +519,7 @@ li {
 
 .badge {
   font-family: var(--sans);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 1px 7px;
@@ -666,7 +677,7 @@ li {
   gap: 12px;
   margin: 0 0 10px;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   line-height: 1.3;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -721,7 +732,7 @@ li {
 
 .layer {
   font-family: var(--sans);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   padding: 2px 8px;
@@ -743,7 +754,7 @@ li {
   align-items: center;
   gap: 6px;
   font-family: var(--sans);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
@@ -796,7 +807,7 @@ li {
 
 .loopmeta dt {
   font-family: var(--sans);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--faint);
@@ -822,7 +833,7 @@ li {
   color: var(--faint);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  font-size: 9.5px;
+  font-size: 11px;
   margin-right: 8px;
   font-family: var(--sans);
 }
@@ -836,7 +847,7 @@ li {
 
 .ptitle {
   font-family: var(--sans);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--faint);
@@ -862,7 +873,7 @@ li {
 
 .psrc {
   font-family: var(--sans);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 1px 7px;
@@ -880,7 +891,7 @@ li {
 .pstatus {
   margin-left: auto;
   font-family: var(--sans);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
@@ -911,7 +922,7 @@ li {
   align-items: center;
   gap: 6px 10px;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
 }
 
 .peval .verdict {
@@ -994,7 +1005,7 @@ li {
 footer {
   border-top: 1px solid var(--line);
   background: var(--bg);
-  padding: 72px 0 44px;
+  padding: 56px 0 40px;
   margin-top: 0;
 }
 
@@ -1212,7 +1223,7 @@ h2::before {
   padding: 0 18px;
   border-bottom: 1px solid var(--line);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1296,7 +1307,7 @@ h2::before {
   display: block;
   margin-bottom: 12px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1;
   font-variant-numeric: tabular-nums;
   color: var(--faint);
@@ -1320,7 +1331,7 @@ h2::before {
 .fmeta,
 .fby {
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.045em;
   text-transform: uppercase;
   font-variant-numeric: tabular-nums;
@@ -1369,7 +1380,7 @@ h2::before {
   padding: 0 7px;
   background: var(--bg-2);
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   line-height: 1.4;
   letter-spacing: 0.035em;
   text-transform: uppercase;
@@ -1504,7 +1515,7 @@ h2::before {
   display: block;
   margin-bottom: 5px;
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   line-height: 1.2;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1577,12 +1588,13 @@ h2::before {
 .product-case-toggle button {
   position: relative;
   min-height: 40px;
+  min-width: 32px;
   padding: 0;
   appearance: none;
   border: 0;
   background: transparent;
   color: var(--faint);
-  font: 500 10px/1 var(--mono);
+  font: 500 11px/1 var(--mono);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
@@ -1659,7 +1671,7 @@ h2::before {
 .portfolio-company-head span:not(.portfolio-logo-shell) {
   display: block;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   line-height: 1.45;
   color: var(--faint);
 }
@@ -1706,7 +1718,7 @@ h2::before {
   display: block;
   margin-bottom: 4px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.4;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1728,7 +1740,7 @@ h2::before {
   text-align: right;
   color: var(--faint);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   line-height: 1.5;
 }
 
@@ -1747,7 +1759,7 @@ h2::before {
 
 .case-spec dt {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.5;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1797,7 +1809,7 @@ h2::before {
 
 .product-case-links a {
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   color: var(--accent-ink);
 }
 
@@ -1813,7 +1825,7 @@ h2::before {
   display: block;
   margin-bottom: 8px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--accent-ink);
@@ -1854,7 +1866,7 @@ h2::before {
   margin-bottom: 4px;
   color: var(--accent-ink);
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -1907,7 +1919,7 @@ h2::before {
 
 .foot-h {
   font-family: var(--sans);
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -2154,7 +2166,7 @@ h2::before {
 .mentor-meta {
   display: block;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   line-height: 1.45;
   letter-spacing: 0.03em;
   color: var(--faint);
@@ -2386,7 +2398,7 @@ h2::before {
 .nav-feature-eyebrow {
   display: block;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.11em;
   line-height: 1.4;
@@ -2438,7 +2450,7 @@ h2::before {
   flex: 0 0 30px;
   font-family: var(--mono);
   color: var(--faint);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   transition: color 0.14s ease-out;
 }
@@ -2797,8 +2809,14 @@ h2[id] {
   gap: 24px;
   grid-template-columns: 1fr;
   align-items: center;
-  padding: 54px 0;
+  padding: 40px 0;
   border-top: 1px solid var(--line);
+}
+
+@media (max-width: 700px) {
+  .mai-row {
+    padding: 32px 0;
+  }
 }
 
 @media (min-width: 900px) {
@@ -2918,7 +2936,7 @@ a.mai-rowname:hover {
   display: grid;
   grid-template-columns: 1fr;
   gap: 40px;
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
 @media (min-width: 900px) {
@@ -3011,11 +3029,14 @@ a.mai-rowname:hover {
 /* The old numbered-section h2 rules still applied to the new kicker
    headings, so "Selected work" rendered as "01SELECTED WORK" with a rule
    above it. Kickers are labels, not numbered sections. */
+/* One section rhythm for every page: a block ends with a short margin and
+   the next kicker carries the gap, so card-to-heading is 24 + 48 on desktop
+   instead of the 40 + 56 that stacked up before. */
 h2.mai-kick {
   display: block;
   border: none;
   padding: 0;
-  margin: 56px 0 8px;
+  margin: 48px 0 8px;
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.16em;
@@ -3028,10 +3049,30 @@ h2.mai-kick::after {
   content: none;
 }
 
+@media (max-width: 700px) {
+  h2.mai-kick {
+    margin-top: 36px;
+  }
+
+  main {
+    padding-bottom: 48px;
+  }
+
+  footer {
+    padding-top: 44px;
+  }
+}
+
 /* /built has several kinds of evidence. A tighter local rhythm keeps them in
    one narrative without changing section spacing on the rest of the site. */
 .built-page h2.mai-kick {
-  margin-top: 44px;
+  margin-top: 40px;
+}
+
+@media (max-width: 700px) {
+  .built-page h2.mai-kick {
+    margin-top: 32px;
+  }
 }
 
 .built-page .research-card {
@@ -3377,7 +3418,7 @@ main:has(> .band) {
   font-size: clamp(30px, 4vw, 54px);
   line-height: 1.14;
   letter-spacing: -0.02em;
-  color: var(--line-2);
+  color: var(--vals-dim);
   transition: color 0.45s ease-out;
 }
 
@@ -3389,7 +3430,7 @@ main:has(> .band) {
   color: color-mix(
     in srgb,
     #faf3e8 calc(100% - var(--band-copy-percent)),
-    var(--line-2)
+    var(--vals-dim)
   );
 }
 
@@ -3477,9 +3518,24 @@ main:has(> .band) {
 
 .foot-cta {
   text-align: center;
-  padding: 0 0 56px;
-  margin-bottom: 44px;
+  padding: 0 0 40px;
+  margin-bottom: 32px;
   border-bottom: 1px solid var(--line);
+}
+
+/* On touch, the small link rows get a 24px hit area. Inline meta links take
+   vertical padding, which enlarges the target without moving the line. */
+@media (pointer: coarse) {
+  .product-case-links a,
+  .machinery-links a,
+  .foot-base a {
+    padding-block: 3px;
+  }
+
+  .meta a,
+  .foot-base span a {
+    padding-block: 5px;
+  }
 }
 
 /* ================================================================ writing */
@@ -3518,7 +3574,7 @@ main:has(> .band) {
   display: grid;
   gap: 34px 28px;
   grid-template-columns: 1fr;
-  padding-bottom: 20px;
+  padding-bottom: 8px;
 }
 
 @media (min-width: 680px) {
@@ -3803,7 +3859,7 @@ main:has(> .band) {
   margin: 0;
   color: var(--accent-ink);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.5;
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -4026,7 +4082,7 @@ main:has(> .band) {
 .authority-table thead th {
   padding-block: 13px;
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: 0.08em;
@@ -4061,7 +4117,7 @@ main:has(> .band) {
   align-items: center;
   gap: 6px;
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   line-height: 1.2;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -4100,7 +4156,7 @@ main:has(> .band) {
   padding: 16px 22px;
   border-bottom: 1px solid var(--line);
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   color: var(--faint);
   font-variant-numeric: tabular-nums;
@@ -4129,7 +4185,7 @@ main:has(> .band) {
 .decision-list time,
 .failure-meta time {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--faint);
   font-variant-numeric: tabular-nums;
 }
@@ -4171,7 +4227,7 @@ main:has(> .band) {
   display: inline-block;
   margin-top: 8px;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   color: var(--accent-ink);
 }
 
@@ -4189,7 +4245,7 @@ main:has(> .band) {
 
 .evidence-gap span {
   font-family: var(--mono);
-  font-size: 9.5px;
+  font-size: 11px;
   line-height: 1.5;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -4234,7 +4290,7 @@ main:has(> .band) {
 .anatomy-no,
 .anatomy-owner {
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.2;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -4294,7 +4350,7 @@ main:has(> .band) {
 .failure-change span {
   margin-right: 7px;
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--accent-ink);
@@ -4336,7 +4392,7 @@ main:has(> .band) {
 .system-history dt {
   margin-bottom: 4px;
   font-family: var(--mono);
-  font-size: 8.5px;
+  font-size: 11px;
   line-height: 1.35;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -4365,7 +4421,7 @@ main:has(> .band) {
   gap: 18px;
   padding: 0 18px;
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
   color: var(--ink-2);
   cursor: pointer;
 }
@@ -4401,7 +4457,7 @@ main:has(> .band) {
   padding-top: 18px;
   border-top: 1px solid var(--line);
   font-family: var(--mono);
-  font-size: 10.5px;
+  font-size: 11px;
 }
 
 .machinery-links span {
@@ -4456,7 +4512,7 @@ main:has(> .band) {
   .authority-table td::before {
     content: attr(data-label);
     font-family: var(--mono);
-    font-size: 8.5px;
+    font-size: 11px;
     line-height: 1.5;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -4555,7 +4611,7 @@ main:has(> .band) {
   display: block;
   margin-top: 8px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   color: var(--faint);
 }
@@ -4599,7 +4655,7 @@ main:has(> .band) {
 
 .eval-version {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   color: var(--faint);
 }
@@ -4669,7 +4725,7 @@ main:has(> .band) {
 .eval-caveat span:first-child {
   display: block;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: lowercase;
   color: var(--ink);
@@ -4700,7 +4756,7 @@ main:has(> .band) {
 .trace-meta time,
 .trace-version {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   color: var(--faint);
 }
@@ -4728,7 +4784,7 @@ main:has(> .band) {
      a checklist and a critique, the others a single line. */
   grid-row: 1 / -1;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   color: var(--accent-ink);
   padding-top: 3px;
@@ -4771,7 +4827,7 @@ main:has(> .band) {
    only one, so this still reads when it is printed or filtered. */
 .trace-checks li span {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.06em;
   min-width: 34px;
   color: var(--accent-2);
@@ -4790,7 +4846,7 @@ main:has(> .band) {
   display: block;
   margin-top: 4px;
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.03em;
   color: var(--faint);
   font-weight: 400;
@@ -4841,7 +4897,7 @@ main:has(> .band) {
 .evidence-yes,
 .evidence-no {
   font-family: var(--mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.03em;
 }
 
