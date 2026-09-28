@@ -1,6 +1,5 @@
 const basePath = process.env.BASE_PATH || "";
 import { getPosts, noteFor, isDemoted } from "@/lib/writing";
-import { getQuotes } from "@/lib/quotes";
 import { getMedia } from "@/lib/writing";
 import { getRoles } from "@/lib/roles";
 import Reveal, { Words } from "./components/Reveal";
@@ -10,6 +9,7 @@ import HeroBricks from "./components/HeroBricks";
 import TrackingPortrait from "./components/TrackingPortrait";
 import MentoringCards from "./components/Mentoring";
 import StackField from "./components/StackField";
+import Career from "./components/Career";
 import StackExplorer from "./components/StackExplorer";
 
 /** One row shape for a piece of writing: image, date, title, CTA and note. */
@@ -44,7 +44,6 @@ function Row({
 }
 
 export default async function Home() {
-  const { reference: ref } = getQuotes();
   const { roles } = getRoles();
   const media = getMedia();
   const posts = (await getPosts(20)).filter((x) => !isDemoted(x.title)).slice(0, 3);
@@ -119,84 +118,7 @@ export default async function Home() {
       <Reveal>
         <h2 className="mai-kick rv-settle">Career</h2>
       </Reveal>
-      <Reveal>
-        <div className="career-split rv-settle">
-          <ol className="career-timeline">
-            {roles.map((r) => (
-              <li key={r.org}>
-                {r.logo && (
-                  // The adjacent heading already names the company.
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    className="career-timeline-logo"
-                    src={`${basePath}/${r.logo}`}
-                    alt=""
-                    width={44}
-                    height={44}
-                  />
-                )}
-                <h3>{r.url ? <a href={r.url}>{r.org}</a> : r.org}</h3>
-                {(r.role || r.dates) && (
-                  <span className="career-meta">
-                    {[r.role, r.dates].filter(Boolean).join(" · ")}
-                  </span>
-                )}
-                <p>{r.outcome}</p>
-              </li>
-            ))}
-          </ol>
-          <div className="vouch-col">
-            <figure className="vouch">
-              <div className="vouch-mark" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8 8c-2.2 0-4 1.8-4 4v6h6v-6H7c0-1.1.9-2 2-2V8H8zm10 0c-2.2 0-4 1.8-4 4v6h6v-6h-3c0-1.1.9-2 2-2V8h-1z" />
-                </svg>
-              </div>
-              <blockquote>
-                {ref.body.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-                <p>{ref.pull}</p>
-              </blockquote>
-              <figcaption>
-                <span className="vname">{ref.name}</span>
-                <span className="vrole">{ref.role}</span>
-              </figcaption>
-            </figure>
-            <figure className="github-snake">
-              <a
-                className="github-snake-link"
-                href="https://github.com/ElliotJLT"
-                aria-label="See ElliotJLT's contribution history on GitHub"
-              >
-                <figcaption>
-                  <span className="github-snake-label">GitHub activity</span>
-                  <span className="github-snake-meta">updated daily</span>
-                </figcaption>
-                {/* Both assets are generated from the live contribution graph
-                    during every deploy. Two images let the site's explicit
-                    theme toggle choose the right palette. */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className="github-snake-image github-snake-light"
-                  src={`${basePath}/github-snake.svg`}
-                  alt="Animated GitHub contribution grid for ElliotJLT over the past year"
-                  width={880}
-                  height={192}
-                />
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  className="github-snake-image github-snake-dark"
-                  src={`${basePath}/github-snake-dark.svg`}
-                  alt="Animated GitHub contribution grid for ElliotJLT over the past year"
-                  width={880}
-                  height={192}
-                />
-              </a>
-            </figure>
-          </div>
-        </div>
-      </Reveal>
+      <Career roles={roles} />
 
       <Reveal>
         <h2 className="mai-kick rv-settle">Mentoring</h2>
