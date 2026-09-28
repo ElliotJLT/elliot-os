@@ -183,11 +183,12 @@ habit in regulated services, crisis delivery and consumer travel.
 
 ## Evals
 
-The checking work collected in one place: the tutor's marking evals
-against official mark schemes (~67% → 99%+, hallucinated marks 4.6% → 0),
-ward's precision-first safeguarding evals, the pre-LLM version of the same
-discipline at Farewill, and crux evaluating the human in the loop. Each
-entry states its limitations alongside its numbers:
+How I run evals, and where: the loop (read real failures first, name them,
+one pass/fail test per failure, check the model marker against a human,
+gate every change), then the proof. The tutor's marking evals against
+official mark schemes (~67% → 99%+, hallucinated marks 4.6% → 0), ward's
+precision-first safeguarding evals, and the pre-LLM version of the same
+discipline at Farewill. Limitations are stated alongside the numbers:
 https://elliotjlt.github.io/elliot-os/evals/
 
 ## Writing

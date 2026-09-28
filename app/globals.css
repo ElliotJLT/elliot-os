@@ -4955,3 +4955,209 @@ main:has(> .band) {
 @media (max-width: 720px) { .loop-split { grid-template-columns: 1fr; } }
 .loop-steps-2 { grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); }
 .foot-looking { margin: 0 0 18px; color: var(--ink-2); font-size: 16px; line-height: 1.5; text-align: center; }
+
+/* ================================================================== evals */
+/* The loop is drawn in the page's own ink, no card behind it. */
+.ev-figure {
+  margin: 8px 0 28px;
+}
+
+.ev-loop {
+  display: block;
+  width: 100%;
+  max-width: 760px;
+  height: auto;
+  margin: 0 auto;
+  color: var(--ink);
+  overflow: visible;
+}
+
+.ev-loop-arc {
+  fill: none;
+  stroke: var(--faint);
+  stroke-opacity: 0.7;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  color: var(--faint);
+}
+
+.ev-loop-no {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  fill: var(--accent-ink);
+}
+
+.ev-loop-label {
+  font-family: var(--display);
+  font-size: 27px;
+  letter-spacing: -0.01em;
+  fill: var(--ink);
+}
+
+.ev-loop-bar-ring {
+  fill: none;
+  stroke: var(--accent-ink);
+  stroke-width: 1.6;
+}
+
+.ev-loop-tick {
+  fill: none;
+  stroke: var(--accent-ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ev-loop-bar {
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  fill: var(--accent-ink);
+}
+
+/* Below this the labels would shrink past the 11px floor; the numbered
+   steps underneath carry the same content. */
+@media (max-width: 700px) {
+  .ev-figure {
+    display: none;
+  }
+}
+
+.ev-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 700px) {
+  .ev-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .ev-steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ev-step {
+  background: var(--bg-2);
+  border-radius: 20px;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ev-step-no {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--accent-ink);
+}
+
+.ev-step h3 {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+  margin: 6px 0 8px;
+}
+
+.ev-step p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--muted);
+  max-width: none;
+}
+
+.ev-step .ev-step-where {
+  margin-top: auto;
+  padding-top: 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.ev-card dl {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px 20px;
+  margin: 18px 0 0;
+}
+
+@media (min-width: 700px) {
+  .ev-card dl {
+    grid-template-columns: 120px 1fr;
+    row-gap: 10px;
+  }
+}
+
+.ev-card dt {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding-top: 3px;
+}
+
+.ev-card dd {
+  margin: 0 0 8px;
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+@media (min-width: 700px) {
+  .ev-card dd {
+    margin: 0;
+  }
+}
+
+.ev-loops {
+  margin: 4px 0 0;
+}
+
+.ev-vs {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.ev-vs th {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 0 16px 10px 0;
+  border-bottom: 1px solid var(--line-2);
+  width: 50%;
+}
+
+.ev-vs td {
+  vertical-align: top;
+  padding: 14px 16px 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.ev-vs td:first-child {
+  color: var(--muted);
+}
+
+.ev-vs td:last-child {
+  color: var(--ink);
+}
+
+.ev-credit {
+  margin: 18px 0 0;
+  font-size: 15px;
+  color: var(--muted);
+}

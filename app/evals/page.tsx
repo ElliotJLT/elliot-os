@@ -1,8 +1,72 @@
 import Reveal from "../components/Reveal";
+import EvalLoop from "../components/EvalLoop";
+import { getCases } from "@/lib/evals";
+
+const basePath = process.env.BASE_PATH || "";
 
 export const metadata = { title: "Evals · Elliot Little" };
 
+// The six boxes in the loop diagram, in order. Each says what the step is in
+// plain English, then where I actually did it.
+const STEPS = [
+  {
+    name: "Real use",
+    what: "Start from what people actually do with it. The spec was a guess.",
+    where: "Tutor: real past papers, marked against the official mark schemes.",
+  },
+  {
+    name: "Read the failures",
+    what: "Sit and read the conversations. The failures that matter are rarely the ones you'd have guessed.",
+    where: "Tutor: the dangerous one was confident marking the mark scheme doesn't back up.",
+  },
+  {
+    name: "Name them",
+    what: "Group what you find into a handful of named failure types and count them. Now it's a list you can fix instead of a feeling.",
+    where: "Farewill: named error types, counted rather than remembered. Agent errors fell 69%.",
+  },
+  {
+    name: "Write the test",
+    what: "One pass or fail check per failure. Plain code where the answer can be checked, a model where it can't. No scores out of ten.",
+    where: "Tutor: hallucinated marking points went from 4.6% of sessions to zero.",
+  },
+  {
+    name: "Check the marker",
+    what: "A model marking a model has to pass its own exam first: it has to agree with a human expert before anyone trusts the number.",
+    where: "ward: the eval sets and method are published, so anyone can check the marker.",
+  },
+  {
+    name: "Gate every change",
+    what: "The checks run before anything ships. If the score drops, it doesn't go out. Then back to real use, because new failures turn up.",
+    where: "Tutor: every mark a teacher flagged became a new test case.",
+  },
+];
+
+const THEATRE = [
+  [
+    "A helpfulness score out of ten on a dashboard nobody opens",
+    "A pass or fail check for a failure someone has actually seen",
+  ],
+  [
+    "A rubric written in a meeting before launch",
+    "A rubric written after reading the real conversations",
+  ],
+  [
+    "A vendor's off-the-shelf hallucination score",
+    "Your own cases, from your own users",
+  ],
+  [
+    "A model marking a model, and nobody checking it",
+    "A marker that agrees with a human expert before anyone trusts it",
+  ],
+  [
+    "100% pass, every run",
+    "A suite that still catches things. If nothing ever fails, it isn't testing anything",
+  ],
+];
+
 export default function Evals() {
+  const cases = getCases();
+
   return (
     <main>
       <div className="mai">
@@ -11,171 +75,212 @@ export default function Evals() {
             <div className="wr-head-main">
               <span className="mai-kick rv-settle">Evals</span>
               <h1 className="wr-title rv-settle">
-                What got checked, what got rejected, and who decided?
+                Marking the AI&apos;s homework.
               </h1>
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              The same question, asked of a tutor for teenagers, a
-              safeguarding layer, a regulated probate operation and my own
-              AI-assisted work. Each entry: what the eval measures, the
-              numbers, and the failure it exists to catch.
+              An eval is a mark scheme for software that never gives the same
+              answer twice. This is how I write them, and three places
+              they&apos;ve had to hold up.
             </p>
           </header>
         </Reveal>
 
         <Reveal>
-          <h2 id="tutor" className="mai-kick rv-settle">
-            01 · marking a tutor against the mark scheme
+          <h2 id="how" className="mai-kick rv-settle">
+            how an eval works
           </h2>
+          <p className="muted rv-settle" style={{ margin: "0 0 22px" }}>
+            Six steps, round and round. The middle is the bar: what good looks
+            like, written down by someone who&apos;d know.
+          </p>
         </Reveal>
         <Reveal>
-          <div className="research-card rv-settle">
+          <figure className="ev-figure rv-develop">
+            <EvalLoop steps={STEPS.map((s) => s.name)} />
+          </figure>
+        </Reveal>
+        <Reveal>
+          <ol className="ev-steps rv-settle">
+            {STEPS.map((s, i) => (
+              <li key={s.name} className="ev-step">
+                <span className="ev-step-no">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3>{s.name}</h3>
+                <p>{s.what}</p>
+                <p className="ev-step-where">{s.where}</p>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+
+        <Reveal>
+          <h2 id="done" className="mai-kick rv-settle">
+            where I&apos;ve done it
+          </h2>
+          <p className="muted rv-settle" style={{ margin: "0 0 22px" }}>
+            Three places where getting it wrong had a cost someone else would
+            pay.
+          </p>
+        </Reveal>
+        <Reveal>
+          <div className="research-card ev-card rv-settle">
             <h3>
               <a href="https://www.zerogravity.co.uk/tutor">
                 Zero Gravity AI STEM tutor
               </a>
             </h3>
             <p>
-              The failure that matters: a tutor that confidently teaches a
-              student something the mark scheme will penalise. The student
-              cannot tell, and finds out in the exam hall. So the eval
-              pipeline tests marking against real past papers and official
-              mark schemes, not against what a model finds plausible. The
-              bare model started at roughly 67%; the shipped product marks at
-              over 99%, and hallucinated marking points went from 4.6% of
-              sessions to zero.
+              An AI tutor for GCSE and A-level STEM, used in UK schools. If it
+              marks wrong, a student learns it wrong and finds out in the exam
+              hall.
             </p>
-            <p>
-              Accuracy is only half the spec. The tutor is Socratic by
-              design: it coaches a student to the answer and will not hand it
-              over, however creatively they ask. An always-on evaluator
-              grades every session against that spec, because a tutor that
-              caves under prompt pressure is a homework machine with better
-              manners. Teachers can flag a mark they disagree with, and each
-              flag becomes a case in the suite, so the eval set grows from
-              the classroom rather than from what we imagined. Safety
-              signals are recorded on each interaction and routed into a
-              safeguarding case-management flow.
-            </p>
-            <div className="meta">
-              ~67% → 99%+ on marking evals · hallucinated marks 4.6% → 0 ·
-              every session graded against the Socratic spec
-            </div>
+            <dl>
+              <dt>The bar</dt>
+              <dd>The exam board&apos;s own mark scheme, on real past papers.</dd>
+              <dt>Also checked</dt>
+              <dd>
+                Every session, against the Socratic spec: coach the student to
+                the answer, never hand it over, however nicely they ask.
+              </dd>
+              <dt>Built on</dt>
+              <dd>
+                An eval pipeline I built on Langfuse. Teachers could flag any
+                mark they disagreed with, and each flag went back in as a case.
+              </dd>
+              <dt>Result</dt>
+              <dd>
+                Marking accuracy from about 67% to over 99%. Hallucinated
+                marking points from 4.6% of sessions to zero.
+              </dd>
+            </dl>
           </div>
         </Reveal>
-
         <Reveal>
-          <h2 id="ward" className="mai-kick rv-settle">
-            02 · the precision problem in safeguarding
-          </h2>
-        </Reveal>
-        <Reveal>
-          <div className="research-card rv-settle">
+          <div className="research-card ev-card rv-settle">
             <h3>
               <a href="https://github.com/ElliotJLT/ward">ward</a>
             </h3>
             <p>
-              When a child discloses something serious to an app, a named
-              human has to see it on a clock. The tempting metric is recall:
-              catch everything. But a Designated Safeguarding Lead who gets
-              paged on every false alarm stops trusting the alerts, and an
-              ignored alert system is worse than none. ward is built around
-              that asymmetry: separate genuine disclosures from ordinary bad
-              conduct, grounded in KCSIE rather than keyword matching.
+              A safeguarding layer for apps children use. When a child
+              discloses something serious, a named adult has to see it, and
+              fast.
             </p>
-            <p>
-              On the published synthetic eval sets, the Claude judge reaches
-              90% recall at 100% precision and a 0% false-positive rate; the
-              keyword baseline manages 50% recall at 83% precision with an
-              8.6% false-positive rate. The method, the eval sets and the
-              limitations are published alongside the code.
-            </p>
+            <dl>
+              <dt>The bar</dt>
+              <dd>KCSIE, the statutory guidance schools already work to.</dd>
+              <dt>The metric</dt>
+              <dd>
+                Precision first. A safeguarding lead who gets paged for every
+                false alarm stops reading the alerts, and then you&apos;ve got
+                nothing.
+              </dd>
+              <dt>Result</dt>
+              <dd>
+                100% precision at 90% recall, no false positives. Keyword
+                matching on the same sets: 83% precision, 50% recall, 8.6%
+                false positives.
+              </dd>
+            </dl>
             <div className="meta">
-              90% recall · 100% precision · 0% false positives, vs 50/83/8.6
-              for keywords ·{" "}
               <a href="https://github.com/ElliotJLT/ward/blob/main/METHODOLOGY.md">
-                methodology
+                method and eval sets
               </a>
             </div>
           </div>
         </Reveal>
-
         <Reveal>
-          <h2 id="farewill" className="mai-kick rv-settle">
-            03 · the same discipline before LLMs
-          </h2>
-        </Reveal>
-        <Reveal>
-          <div className="research-card rv-settle">
+          <div className="research-card ev-card rv-settle">
             <h3>
               <a href="https://farewill.com/apply-for-probate">
-                Farewill probate operations
+                Farewill probate
               </a>
             </h3>
             <p>
-              Probate runs inside SRA and FCA regulation, where an agent
-              error is not a bug ticket, it is a grieving family's estate
-              handled wrongly. The checking layer there was operational
-              rather than computational: guided intake, workflow automation,
-              audit logs and case tracking, with error categories defined and
-              counted rather than anecdotally remembered. Agent errors fell
-              69% and case handling moved from two weeks to four days.
+              The same habit, before LLMs. Probate is regulated by the SRA and
+              FCA, and a mistake there is a grieving family&apos;s estate
+              handled wrong.
             </p>
-            <p>
-              This is the habit the AI work inherits. The instrument changed
-              from a process audit to an eval pipeline; the question stayed
-              the same.
-            </p>
-            <div className="meta">
-              agent errors down 69% · case handling from two weeks to four
-              days · SRA/FCA-regulated
-            </div>
+            <dl>
+              <dt>The bar</dt>
+              <dd>
+                The regulation, turned into named error types we counted
+                instead of remembered.
+              </dd>
+              <dt>Result</dt>
+              <dd>
+                Agent errors down 69%. Case handling from two weeks to four
+                days.
+              </dd>
+            </dl>
           </div>
+        </Reveal>
+        <Reveal>
+          <p className="muted rv-settle ev-loops">
+            Want one you can open yourself? The agent that keeps this site
+            current has {cases.length} test cases, and CI fails any change
+            that breaks them. It&apos;s on <a href={`${basePath}/loops/`}>/loops</a>,
+            failures included.
+          </p>
         </Reveal>
 
         <Reveal>
-          <h2 id="crux" className="mai-kick rv-settle">
-            04 · evaluating the human in the loop
+          <h2 id="theatre" className="mai-kick rv-settle">
+            spotting eval theatre
           </h2>
+          <p className="muted rv-settle" style={{ margin: "0 0 22px" }}>
+            Evals are easy to fake. If you&apos;re hiring someone to do this,
+            this is what to look for.
+          </p>
+        </Reveal>
+        <Reveal>
+          <table className="ev-vs rv-settle">
+            <thead>
+              <tr>
+                <th scope="col">Theatre</th>
+                <th scope="col">The real thing</th>
+              </tr>
+            </thead>
+            <tbody>
+              {THEATRE.map(([fake, real]) => (
+                <tr key={fake}>
+                  <td>{fake}</td>
+                  <td>{real}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="ev-credit rv-settle">
+            Most of this I learned the hard way. The clearest version of it is{" "}
+            <a href="https://www.lennysnewsletter.com/p/why-ai-evals-are-the-hottest-new-skill">
+              Hamel Husain and Shreya Shankar on Lenny&apos;s Podcast
+            </a>{" "}
+            and{" "}
+            <a href="https://www.lennysnewsletter.com/p/beyond-vibe-checks-a-pms-complete">
+              Aman Khan&apos;s guide for PMs
+            </a>
+            . Start there.
+          </p>
+        </Reveal>
+
+        <Reveal>
+          <h2 className="mai-kick rv-settle">what these numbers aren&apos;t</h2>
         </Reveal>
         <Reveal>
           <div className="research-card rv-settle">
-            <h3>
-              <a href="https://elliotjlt.github.io/crux/research.html">crux</a>
-            </h3>
-            <p>
-              The uncomfortable eval is the one pointed at yourself. When AI
-              does the typing, output stops being evidence of skill; the
-              judgement is in what got rejected, redirected or killed, and
-              nothing measures that. crux reads my own sessions and extracts
-              those calls, published as ongoing research with the method, the
-              results run on myself and the honest objections.
+            <p style={{ marginTop: 0 }}>
+              The tutor evals are internal. They ran against official mark
+              schemes, but nobody independent has audited them. ward&apos;s
+              eval sets are synthetic, because real disclosures from children
+              aren&apos;t something anyone should be collecting for a
+              benchmark. If you want to poke at any of it,{" "}
+              <a href="mailto:elliotjlittle@gmail.com">
+                elliotjlittle@gmail.com
+              </a>
+              .
             </p>
-            <div className="meta">
-              <a href="https://elliotjlt.github.io/crux/research.html">
-                read the research
-              </a>{" "}
-              · <a href="https://github.com/ElliotJLT/crux">repo</a>
-            </div>
           </div>
-        </Reveal>
-
-        <Reveal>
-          <h2 className="mai-kick rv-settle">what these numbers are not</h2>
-        </Reveal>
-        <Reveal>
-          <p className="muted rv-settle">
-            The tutor evals are internal, run against official mark schemes
-            but not independently audited. ward's eval sets are synthetic,
-            because real safeguarding disclosures from children are not a
-            dataset anyone should be assembling for benchmarks; the
-            methodology says what that does and does not prove. I publish the
-            limitations with the numbers because a metric that hides its
-            weaknesses is exactly the failure these systems exist to catch.
-            If you want to poke at any of it:{" "}
-            <a href="mailto:elliotjlittle@gmail.com">elliotjlittle@gmail.com</a>
-            .
-          </p>
         </Reveal>
       </div>
     </main>
