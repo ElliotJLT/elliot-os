@@ -81,7 +81,7 @@ export default async function Built() {
           <h2 id="production" className="mai-kick rv-settle">
             01 · what I shipped
           </h2>
-          <p className="sec-title rv-settle">Ten things I&apos;ve built, newest first.</p>
+          <p className="sec-title rv-settle">Eleven things I&apos;ve built, newest first.</p>
           <p className="muted rv-settle section-line">
             Open one for the problem, the bet and the proof.
           </p>

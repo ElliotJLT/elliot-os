@@ -2,7 +2,6 @@ const basePath = process.env.BASE_PATH || "";
 import { getPosts, noteFor, isDemoted } from "@/lib/writing";
 import { getMedia } from "@/lib/writing";
 import { getRoles } from "@/lib/roles";
-import { getQuotes } from "@/lib/quotes";
 import Reveal, { Words, RiseWords } from "./components/Reveal";
 import { Pill, Slot } from "./components/Frame";
 import Values from "./components/Values";
@@ -45,14 +44,7 @@ function Row({
 }
 
 export default async function Home() {
-  const { reference } = getQuotes();
-  // The pull line leads the Career section, so the Zero Gravity card drops it
-  // rather than repeating it a few lines further down.
-  const roles = getRoles().roles.map((r) =>
-    r.quote
-      ? { ...r, quote: { ...r.quote, paras: r.quote.paras.filter((q) => q !== reference.pull) } }
-      : r,
-  );
+  const { roles } = getRoles();
   const media = getMedia();
   const posts = (await getPosts(20)).filter((x) => !isDemoted(x.title)).slice(0, 3);
 
@@ -126,14 +118,6 @@ export default async function Home() {
 
       <Reveal>
         <h2 className="mai-kick rv-settle">Career</h2>
-        <figure className="career-pull rv-settle">
-          <blockquote>
-            <p>&ldquo;{reference.pull}&rdquo;</p>
-          </blockquote>
-          <figcaption>
-            <strong>{reference.name}</strong> · {reference.role}
-          </figcaption>
-        </figure>
       </Reveal>
       <Career roles={roles} />
 

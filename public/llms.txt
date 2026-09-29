@@ -64,6 +64,12 @@ habit in regulated services, crisis delivery and consumer travel.
     91% of conversations and halved weekly support time from 8 to 4 hours,
     so no dedicated hire was needed. CSAT 84%, NPS 80+, first response under
     two hours, resolution within 48. Conversation tags fed the roadmap.
+  - Safeguarding: designated safeguarding lead. Built message flagging
+    from regex rules to AI flags, Unitary image recognition and hash
+    matching, with a case kanban, automated outreach to schools and the
+    policy. About 20 cases a month, 1 in 10 at the highest severity; none
+    missed; false alarms down 86%; average response to schools 2.3 hours;
+    reported to the board monthly.
   - School-to-university journey: mentee-to-mentor conversion rose from 6%
     to 40%, keeping students on one platform; 120,000 students through it.
 - Zero Gravity learning pathways: partner-funded courses for companies

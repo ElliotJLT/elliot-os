@@ -143,6 +143,30 @@ const COMPANIES: Company[] = [
     logo: "career/zero-gravity.jpeg",
     products: [
       {
+        order: "11",
+        name: "Safeguarding",
+        summary:
+          "The flagging and case system that kept messages between students and adult mentors safe, run with me as designated safeguarding lead.",
+        headline: { n: "0", label: "missed safeguarding cases" },
+        problem:
+          "Students and adult mentors message each other, so a disclosure or a grooming risk in any message had to reach a person fast.",
+        bet:
+          "Move from keyword rules to AI flags, image recognition and hash matching, with one named person accountable for every case.",
+        outcomes: [
+          { n: "0", label: "missed safeguarding cases" },
+          { n: "86%", label: "fewer false alarms" },
+          { n: "~20", label: "cases a month, 1 in 10 at the highest severity" },
+          { n: "2.3h", label: "average response to schools" },
+        ],
+        how: [
+          "Regex flags first, then AI flags with Unitary image recognition, then hash matching.",
+          "A kanban of cases, with automated outreach to schools.",
+          "Owned the safeguarding policy, and reported to the board every month.",
+        ],
+        role: "Designated safeguarding lead; built the system",
+        links: [],
+      },
+      {
         order: "07",
         name: "Company operating system",
         summary:
@@ -340,7 +364,7 @@ const GROUPS = [
   {
     title: "Built the operation",
     when: "Zero Gravity · 2022–24",
-    names: ["Customer support", "School to university journey", "Company operating system"],
+    names: ["Safeguarding", "Customer support", "School to university journey", "Company operating system"],
   },
   {
     title: "Before Zero Gravity",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Role } from "@/lib/roles";
 import Reveal from "./Reveal";
 
@@ -10,19 +10,26 @@ const basePath = process.env.BASE_PATH || "";
  * Career as a timeline of panels, Zero Gravity first and Flash Pack last.
  * The rail draws down as the section is read; each logo lights as the line
  * reaches it and its card slides in from the rail side, once. The words
- * lead each card; a team photo sits beside them. Reduced motion shows the
- * rail drawn and everything in place.
+ * lead; a team photo runs full width under them. Each bullet
+ * lights the same way, as the line draws level with it. A reference sits
+ * under its role as a quote panel. Reduced motion shows the rail drawn and
+ * everything in place.
  */
+// Longer roles show their first four bullets; the rest open on request.
+const SHOWN = 4;
+
 export default function Career({ roles }: { roles: Role[] }) {
   const listRef = useRef<HTMLOListElement>(null);
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const list = listRef.current;
     if (!list) return;
     const items = [...list.querySelectorAll<HTMLElement>(".cr-item")];
+    const points = [...list.querySelectorAll<HTMLElement>(".cr-points li")];
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       list.style.setProperty("--draw", "1");
-      items.forEach((it) => it.setAttribute("data-reached", ""));
+      [...items, ...points].forEach((it) => it.setAttribute("data-reached", ""));
       return;
     }
     let frame = 0;
@@ -37,6 +44,10 @@ export default function Career({ roles }: { roles: Role[] }) {
       const tip = draw * r.height;
       items.forEach((it) => {
         if (it.offsetTop + 40 <= tip) it.setAttribute("data-reached", "");
+      });
+      // Bullets light as the tip draws level with them, and stay lit.
+      points.forEach((pt) => {
+        if (pt.getBoundingClientRect().top - r.top + 10 <= tip) pt.setAttribute("data-reached", "");
       });
     };
     const queue = () => {
@@ -77,18 +88,28 @@ export default function Career({ roles }: { roles: Role[] }) {
                       {[r.role, r.dates].filter(Boolean).join(" · ")}
                     </span>
                   )}
-                  <p>{r.outcome}</p>
-                  {r.quote && (
-                    <figure className="cr-ref">
-                      <blockquote>
-                        {r.quote.paras.map((q) => (
-                          <p key={q}>{q}</p>
-                        ))}
-                      </blockquote>
-                      <figcaption>
-                        <strong>{r.quote.name}</strong> · {r.quote.role}
-                      </figcaption>
-                    </figure>
+                  <ul className="cr-points" id={`cr-points-${r.org}`}>
+                    {r.bullets.map((b, i) =>
+                      i < SHOWN || expanded[r.org] ? (
+                        // Bullets opened by the reader are lit straight away.
+                        <li key={b} className={i >= SHOWN ? "cr-extra" : undefined}>
+                          {b}
+                        </li>
+                      ) : null,
+                    )}
+                  </ul>
+                  {r.bullets.length > SHOWN && (
+                    <button
+                      type="button"
+                      className="cr-more"
+                      aria-expanded={!!expanded[r.org]}
+                      aria-controls={`cr-points-${r.org}`}
+                      onClick={() => setExpanded((e) => ({ ...e, [r.org]: !e[r.org] }))}
+                    >
+                      {expanded[r.org]
+                        ? "Show less ↑"
+                        : `${r.bullets.length - SHOWN} more from ${r.org} ↓`}
+                    </button>
                   )}
                 </div>
                 {r.photo && (
@@ -98,7 +119,23 @@ export default function Career({ roles }: { roles: Role[] }) {
                       src={`${basePath}/${r.photo}`}
                       alt={r.photoAlt || ""}
                       loading="lazy"
+                      style={r.photoPosition ? { objectPosition: r.photoPosition } : undefined}
                     />
+                  </figure>
+                )}
+                {r.quote && (
+                  <figure className="cr-quote">
+                    <span className="cr-quote-mark" aria-hidden="true">
+                      &ldquo;
+                    </span>
+                    <blockquote>
+                      {r.quote.paras.map((q) => (
+                        <p key={q}>{q}</p>
+                      ))}
+                    </blockquote>
+                    <figcaption>
+                      <strong>{r.quote.name}</strong> · {r.quote.role}
+                    </figcaption>
                   </figure>
                 )}
               </article>
