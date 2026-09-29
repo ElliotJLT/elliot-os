@@ -108,8 +108,34 @@ export default function Bench({
         { k: "info", t: "82 days to launch · 240 PRs before it" },
         { k: "ok", t: "median PR 120 lines · 1.8h to merge" },
         { k: "ok", t: "5.2 merged PRs per engineer per week" },
-        { k: "warn", t: "design PRs waited 5.6 days · gave design a cadence" },
         { k: "info", t: "every review finding lands in .claude/rules" },
+      ],
+    },
+    {
+      id: "design",
+      name: "Design at both ends",
+      meta: "Zero Gravity · tutor",
+      where: "vision · build · polish",
+      steps: [
+        { name: "Vision", note: "the designer sets the direction" },
+        { name: "Prototype", note: "anyone builds rough, to learn" },
+        { name: "System", note: "one design system from day one" },
+        { name: "Build", note: "the founder, engineers and me, on the system" },
+        { name: "Polish", note: "design craft on what users see" },
+        { name: "Ship", note: "every screen on the same foundations" },
+      ],
+      notes: [
+        "The designer owns the vision up front and the polish at the end.",
+        "The system is how a designer's taste reaches the screens they never touch.",
+      ],
+      tags: ["Claude Code", "GitHub"],
+      log: [
+        { k: "cmd", t: "open design" },
+        { k: "warn", t: "design happened after the fact: polishing decisions already made" },
+        { k: "info", t: "split prototyping from polish" },
+        { k: "warn", t: "everyone building in their own style" },
+        { k: "warn", t: "design PRs waited 5.6 days · gave design a cadence" },
+        { k: "ok", t: "one design system from day one, shared by the founder, engineers and me" },
       ],
     },
     {
@@ -283,17 +309,28 @@ export default function Bench({
         </div>
         {card(
           "harness",
-          "span-2",
+          "",
           "The harness",
           "Anthropic's long-running agent patterns, and where each one already ran at Zero Gravity.",
           <span className="v-map">
-            {harness.steps.slice(0, 4).map((s) => (
+            {harness.steps.slice(0, 3).map((s) => (
               <span key={s.name}>
                 <em>{s.name}</em>
                 <i>→</i>
                 <b>{s.note}</b>
               </span>
             ))}
+          </span>,
+        )}
+        {card(
+          "design",
+          "",
+          "Design at both ends",
+          "The designer owns the vision and the polish; everyone builds the middle on one design system.",
+          <span className="v-log">
+            <span>◆ vision · designer</span>
+            <span>· build · everyone, on the system</span>
+            <span>◆ polish · designer</span>
           </span>,
         )}
         {card(
