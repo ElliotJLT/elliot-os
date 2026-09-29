@@ -8,6 +8,8 @@ type Product = {
   name: string;
   /** What it is and who it's for, in one plain sentence. */
   summary: string;
+  /** The one number the closed row leads with. */
+  headline: { n: string; label: string };
   /** The problem, in one line. */
   problem: string;
   /** The decision taken, and what it risked, in one line. */
@@ -43,6 +45,7 @@ const COMPANIES: Company[] = [
         name: "CX and crisis operations",
         summary:
           "The customer and crisis operations behind Flash Pack's small-group trips for solo travellers in their 30s and 40s, through 400% year-on-year growth.",
+        headline: { n: "90+", label: "NPS, held through the US launch" },
         problem:
           "When I joined, ops was the founders answering emails: no CRM, no ticketing, no supplier contracts.",
         bet:
@@ -76,6 +79,7 @@ const COMPANIES: Company[] = [
         name: "Hospital meals marketplace",
         summary:
           "A volunteer-run charity that got restaurant meals to NHS staff through the first COVID wave.",
+        headline: { n: "303,000", label: "meals in 100 days" },
         problem:
           "Hospitals needed to feed their staff through the first wave, and restaurants had closed.",
         bet:
@@ -106,6 +110,7 @@ const COMPANIES: Company[] = [
         name: "Probate operations",
         summary:
           "Farewill's probate service, which helps grieving families through the legal work of settling an estate.",
+        headline: { n: "5 → 2", label: "solicitors needed, once the input errors were fixed" },
         problem:
           "About 30% of solicitor time went on fixing input errors, and the plan on the table was to hire more solicitors.",
         bet:
@@ -142,6 +147,7 @@ const COMPANIES: Company[] = [
         name: "Company operating system",
         summary:
           "How Zero Gravity ran as it grew from 4 people: hiring, budgets, revenue ops, internal comms and a company brain in Notion.",
+        headline: { n: "£1.5m", label: "ARR, run through the revenue ops" },
         problem:
           "Hiring, budgets, revenue tracking and company knowledge had no system behind them, and each new tool added more manual work.",
         bet:
@@ -165,6 +171,7 @@ const COMPANIES: Company[] = [
         name: "School to university journey",
         summary:
           "The sign-up, activation and mentoring path that kept students on one platform from school through university.",
+        headline: { n: "6% → 40%", label: "of mentees going on to mentor" },
         problem:
           "Students joined at school, and the platform needed a reason for them to stay once they reached university.",
         bet:
@@ -186,6 +193,7 @@ const COMPANIES: Company[] = [
         name: "Customer support",
         summary:
           "The support function for students, mentors and partners: an AI assistant answering first, and a knowledge base the whole team used.",
+        headline: { n: "91%", label: "of conversations resolved by the AI assistant" },
         problem:
           "Support questions were answered by hand, and what students asked about wasn't recorded anywhere the product team could use.",
         bet:
@@ -216,6 +224,7 @@ const COMPANIES: Company[] = [
         name: "Learning pathways",
         summary:
           "Short, Duolingo-style courses funded by partners, with an AI assignment at the end.",
+        headline: { n: "12% vs 45%", label: "uptake against target: the miss that shaped Co-pilot" },
         problem:
           "Students had nothing useful to do on the platform between mentoring sessions.",
         bet:
@@ -240,6 +249,7 @@ const COMPANIES: Company[] = [
         name: "Career Co-pilot",
         summary:
           "An AI career assistant that searched a student's CV, job posts and community posts, and talked them through what fitted.",
+        headline: { n: "Beta", label: "the retrieval the tutor was built on" },
         problem:
           "The platform held students' CVs, thousands of job posts and thousands of community posts, and no way to ask across them.",
         bet:
@@ -263,6 +273,7 @@ const COMPANIES: Company[] = [
         name: "School hub",
         summary:
           "The teacher's side of the tutor: one homework for the class, help at each student's level, and the teacher sees who's stuck the same day.",
+        headline: { n: "91% vs 23%", label: "activation, teacher-led against self-signup" },
         problem:
           "Teachers set one homework for a whole class and only find out who was stuck when they mark it.",
         bet:
@@ -287,6 +298,7 @@ const COMPANIES: Company[] = [
         name: "AI STEM tutor",
         summary:
           "An AI tutor for GCSE and A-level students that coaches them to the answer instead of handing it over.",
+        headline: { n: "47%", label: "of monthly students active each week, across 10,000" },
         problem:
           "Students without a tutor at home get stuck alone, and a general chatbot just gives them the answer.",
         bet:
@@ -317,46 +329,63 @@ const COMPANIES: Company[] = [
   },
 ];
 
-// Newest first: the tutor and its school hub, the operations years at Zero
-// Gravity, then back through the career.
-const ORDER = [
-  "AI STEM tutor",
-  "School hub",
-  "Career Co-pilot",
-  "Learning pathways",
-  "Customer support",
-  "School to university journey",
-  "Company operating system",
-  "Probate operations",
-  "Hospital meals marketplace",
-  "CX and crisis operations",
+// Newest first, in three eras: the product years at Zero Gravity, the
+// operations years before them, then the career before Zero Gravity.
+const GROUPS = [
+  {
+    title: "Led product",
+    when: "Zero Gravity · 2024–26",
+    names: ["AI STEM tutor", "School hub", "Career Co-pilot", "Learning pathways"],
+  },
+  {
+    title: "Built the operation",
+    when: "Zero Gravity · 2022–24",
+    names: ["Customer support", "School to university journey", "Company operating system"],
+  },
+  {
+    title: "Before Zero Gravity",
+    when: "2018–22",
+    names: ["Probate operations", "Hospital meals marketplace", "CX and crisis operations"],
+  },
 ];
 
 /**
- * The work as a stack of slim cards: company, product, the bet in a line and
- * the headline proof. One opens at a time, showing the problem, the bet in
+ * The work as slim cards in three eras: company, product and the one number
+ * that proves it. One opens at a time, showing the problem, the bet in
  * full, the proof and a screenshot. Everything is in the page; closed cards
  * only collapse it.
  */
 export default function ProductPortfolio({ basePath = "" }: { basePath?: string }) {
-  const cases = COMPANIES.flatMap((company) =>
-    company.products.map((product) => ({ company, product })),
-  ).sort((a, b) => ORDER.indexOf(a.product.name) - ORDER.indexOf(b.product.name));
+  const byName = new Map(
+    COMPANIES.flatMap((company) =>
+      company.products.map((product) => [product.name, { company, product }] as const),
+    ),
+  );
   const [open, setOpen] = useState<string | null>(null);
 
   return (
     <div className="ws">
-      {cases.map(({ company, product }) => (
-        <WorkCard
-          key={product.name}
-          company={company}
-          product={product}
-          basePath={basePath}
-          open={open === product.name}
-          onToggle={() =>
-            setOpen((o) => (o === product.name ? null : product.name))
-          }
-        />
+      {GROUPS.map((group) => (
+        <section className="ws-group" key={group.title} aria-label={group.title}>
+          <h3 className="ws-group-h">
+            <span>{group.title}</span> {group.when}
+          </h3>
+          {group.names.map((name) => {
+            const { company, product } = byName.get(name)!;
+            return (
+              <WorkCard
+                key={name}
+                company={company}
+                product={product}
+                basePath={basePath}
+                // The era heading already carries Zero Gravity's years.
+                showStint={!group.when.includes(company.stint)}
+                open={open === name}
+                onToggle={() => setOpen((o) => (o === name ? null : name))}
+              />
+            );
+          })}
+        </section>
       ))}
     </div>
   );
@@ -366,12 +395,14 @@ function WorkCard({
   company,
   product,
   basePath,
+  showStint,
   open,
   onToggle,
 }: {
   company: Company;
   product: Product;
   basePath: string;
+  showStint: boolean;
   open: boolean;
   onToggle: () => void;
 }) {
@@ -395,7 +426,7 @@ function WorkCard({
   );
   return (
     <article className="ws-card" data-open={open || undefined}>
-      <h3 className="ws-h">
+      <h4 className="ws-h">
         <button
           type="button"
           className="ws-row"
@@ -414,18 +445,22 @@ function WorkCard({
           />
           <span className="ws-id">
             <span className="ws-co">
-              {company.name} · {company.stint}
+              {showStint ? `${company.name} · ${company.stint}` : company.name}
             </span>
             <span className="ws-name">{product.name}</span>
           </span>
-          <span className="ws-bet">{product.summary}</span>
+          <span className="ws-lead">
+            <b>{product.headline.n}</b>
+            <span>{product.headline.label}</span>
+          </span>
           <span className="ws-plus" aria-hidden="true" />
         </button>
-      </h3>
+      </h4>
 
       <div className="ws-panel" id={id} role="region" aria-label={product.name}>
         <div className="ws-panel-in">
           <div className="ws-body">
+            <p className="ws-summary">{product.summary}</p>
             <span className="ws-label">Problem</span>
             <p className="ws-problem">{product.problem}</p>
             <span className="ws-label">The bet</span>
