@@ -9,7 +9,7 @@ const basePath = process.env.BASE_PATH || "";
 // Longer roles show their first four bullets; the rest open on request.
 const SHOWN = 4;
 
-/** Set for the visit once he's been thrown off the page. */
+/** Fired when he's thrown, so the other rail on the page loses him too. */
 const GONE = "elliot-flung";
 
 /** The year a role started, from "Feb 2022 – Aug 2026". */
@@ -70,10 +70,9 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
     const dot = tipRef.current;
     if (!list || !svg || !track || !drawn || !dot) return;
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    // Once he's been picked up and thrown, he's gone for the visit, from
-    // this rail and the mentoring one.
-    let gone = sessionStorage.getItem(GONE) === "1";
-    if (gone) dot.hidden = true;
+    // Once he's been picked up and thrown, he's gone from this rail and the
+    // mentoring one until the page loads again.
+    let gone = false;
     const vanish = () => {
       gone = true;
       dot.hidden = true;
@@ -121,7 +120,6 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
       document.body.appendChild(body);
       vanish();
       window.dispatchEvent(new Event(GONE));
-      sessionStorage.setItem(GONE, "1");
 
       const dx = e.clientX - box.left;
       const dy = e.clientY - box.top;
