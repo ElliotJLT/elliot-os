@@ -298,6 +298,23 @@ function WorkCard({
   onToggle: () => void;
 }) {
   const id = `work-${product.order}`;
+  // Elliot's part and the links sit under the screenshot when there is one,
+  // so the left column ends on the evidence rather than a credit line.
+  const foot = (
+    <div className="ws-foot">
+      <span className="ws-label">My part</span>
+      <p className="ws-role-text">{product.role}</p>
+      {product.links.length > 0 && (
+        <p className="ws-links">
+          {product.links.map((link) => (
+            <a href={link.href} key={link.href}>
+              {link.label} ↗
+            </a>
+          ))}
+        </p>
+      )}
+    </div>
+  );
   return (
     <article className="ws-card" data-open={open || undefined}>
       <h3 className="ws-h">
@@ -358,24 +375,20 @@ function WorkCard({
                 {product.lesson}
               </p>
             )}
-            <p className="ws-foot">
-              <span>{product.role}</span>
-              {product.links.map((link) => (
-                <a href={link.href} key={link.href}>
-                  {link.label} ↗
-                </a>
-              ))}
-            </p>
+            {!product.image && foot}
           </div>
           {product.image && (
-            <figure className="ws-shot">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`${basePath}/${product.image.src}`}
-                alt={product.image.alt}
-                loading="lazy"
-              />
-            </figure>
+            <div className="ws-side">
+              <figure className="ws-shot">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`${basePath}/${product.image.src}`}
+                  alt={product.image.alt}
+                  loading="lazy"
+                />
+              </figure>
+              {foot}
+            </div>
           )}
         </div>
       </div>
