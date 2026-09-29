@@ -194,6 +194,13 @@ export default async function Home() {
           />
         </Reveal>
       ))}
+      <Reveal>
+        <div className="home-more rv-settle">
+          <Pill href="/writing" arrow>
+            See all writing
+          </Pill>
+        </div>
+      </Reveal>
 
       <Reveal>
         <figure className="build-photo build-photo-home rv-settle">

@@ -147,53 +147,56 @@ export default function Loops() {
             {ledger.note} Running since {formatDate(ledger.started)}.
           </p>
         </Reveal>
+        {/* The table, the test that would prove it wrong and the failure log
+            sit in one panel, the way /evals holds its table. */}
         <Reveal>
-          <table className="loop-ledger rv-settle">
-            <thead>
-              <tr>
-                <th>week of</th>
-                <th>loops closed</th>
-                <th>thoughts captured</th>
-                <th>morning messages</th>
-              </tr>
-            </thead>
-            <tbody>
-              {ledger.weeks.map((w) => (
-                <tr key={w.week_of}>
-                  <th scope="row">{formatDate(w.week_of)}</th>
-                  <td>{w.closed}</td>
-                  <td>{w.captured}</td>
-                  <td>
-                    {w.briefs}
-                    {w.fallbacks > 0 && <span className="loop-note">{w.fallbacks} fell back to plain text</span>}
-                  </td>
+          <div className="loop-ledger-panel rv-settle">
+            <table className="loop-ledger">
+              <thead>
+                <tr>
+                  <th>week of</th>
+                  <th>loops closed</th>
+                  <th>thoughts captured</th>
+                  <th>morning messages</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <p className="muted rv-settle section-line">
-            What would make it wrong: captures climbing while closed loops stay
-            flat. That would be a tidier way of not doing things. On 12 October
-            I check for exactly that, and cut the system back if I find it.
-          </p>
+              </thead>
+              <tbody>
+                {ledger.weeks.map((w) => (
+                  <tr key={w.week_of}>
+                    <th scope="row">{formatDate(w.week_of)}</th>
+                    <td>{w.closed}</td>
+                    <td>{w.captured}</td>
+                    <td>
+                      {w.briefs}
+                      {w.fallbacks > 0 && <span className="loop-note">{w.fallbacks} fell back to plain text</span>}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p className="loop-ledger-test">
+              What would make it wrong: captures climbing while closed loops
+              stay flat. That would be a tidier way of not doing things. On 12
+              October I check for exactly that, and cut the system back if I
+              find it.
+            </p>
+            {ledger.broke.length > 0 && (
+              <ol className="failure-log">
+                {ledger.broke.map((b) => (
+                  <li key={b.date + b.what}>
+                    <div className="failure-meta">
+                      <time dateTime={b.date}>{formatDate(b.date)}</time>
+                      <span className="failure-status repaired">fixed</span>
+                    </div>
+                    <div>
+                      <p>{b.what}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </div>
         </Reveal>
-        {ledger.broke.length > 0 && (
-          <Reveal>
-            <ol className="failure-log rv-settle">
-              {ledger.broke.map((b) => (
-                <li key={b.date + b.what}>
-                  <div className="failure-meta">
-                    <time dateTime={b.date}>{formatDate(b.date)}</time>
-                    <span className="failure-status repaired">fixed</span>
-                  </div>
-                  <div>
-                    <p>{b.what}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </Reveal>
-        )}
 
         <Reveal>
           <p className="muted rv-settle section-line">
