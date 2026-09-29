@@ -6,46 +6,113 @@ import Reveal from "./Reveal";
 
 const basePath = process.env.BASE_PATH || "";
 
+// Longer roles show their first four bullets; the rest open on request.
+const SHOWN = 4;
+
+/** The year a role started, from "Feb 2022 – Aug 2026". */
+const startYear = (dates?: string) => dates?.match(/\d{4}/)?.[0];
+
+// The rail's x inside the list, and how far the line stands off the things
+// it goes round: a logo (44px and its ring) and a year stop.
+const X = 22;
+const LOGO_R = 29;
+const YEAR_R = 23;
+// Half the gap between roles, where each year stop sits.
+const GAP = 16;
+
+/**
+ * The rail as one path: straight down the list, bending round the right of
+ * each logo and year stop in a half circle, so the line and the dot riding
+ * its tip trace their outline instead of passing behind them.
+ */
+function railPath(list: HTMLElement) {
+  const stops: { y: number; r: number }[] = [];
+  list.querySelectorAll<HTMLElement>(".cr-item").forEach((it) => {
+    if (it.querySelector(".cr-logo")) stops.push({ y: it.offsetTop + 40, r: LOGO_R });
+    if (it.querySelector(".cr-year")) stops.push({ y: it.offsetTop + it.offsetHeight + GAP, r: YEAR_R });
+  });
+  let d = `M${X} 0`;
+  let y = 0;
+  for (const s of stops) {
+    d += ` L${X} ${s.y - s.r} A${s.r} ${s.r} 0 0 1 ${X} ${s.y + s.r}`;
+    y = s.y + s.r;
+  }
+  return { d, end: y };
+}
+
 /**
  * Career as a timeline of panels, Zero Gravity first and Flash Pack last.
- * The rail draws down as the section is read; each logo lights as the line
+ * The rail draws down as the section is read, bending round each logo and
+ * year stop, with a dot on its tip. Each logo lights as the line
  * reaches it and its card slides in from the rail side, once. The words
  * lead; a team photo runs full width under them. Each bullet
  * lights the same way, as the line draws level with it. A reference sits
  * under its role as a quote panel. Reduced motion shows the rail drawn and
  * everything in place.
  */
-// Longer roles show their first four bullets; the rest open on request.
-const SHOWN = 4;
-
 export default function Career({ roles, id = "career" }: { roles: Role[]; id?: string }) {
   const listRef = useRef<HTMLOListElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const trackRef = useRef<SVGPathElement>(null);
+  const drawnRef = useRef<SVGPathElement>(null);
+  const tipRef = useRef<HTMLSpanElement>(null);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const list = listRef.current;
-    if (!list) return;
-    const items = [...list.querySelectorAll<HTMLElement>(".cr-item")];
-    const points = [...list.querySelectorAll<HTMLElement>(".cr-points li")];
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      list.style.setProperty("--draw", "1");
-      [...items, ...points].forEach((it) => it.setAttribute("data-reached", ""));
-      return;
-    }
+    const svg = svgRef.current;
+    const track = trackRef.current;
+    const drawn = drawnRef.current;
+    const dot = tipRef.current;
+    if (!list || !svg || !track || !drawn || !dot) return;
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Length along the path against depth, sampled once per layout, so the
+    // tip's depth on screen maps to how much of the path to draw.
+    let total = 0;
+    let end = 0;
+    let samples: { len: number; y: number }[] = [];
+    const layout = () => {
+      const path = railPath(list);
+      end = path.end;
+      track.setAttribute("d", path.d);
+      drawn.setAttribute("d", path.d);
+      svg.setAttribute("height", String(Math.ceil(end + 4)));
+      total = track.getTotalLength();
+      samples = [];
+      for (let len = 0; len <= total; len += 3) samples.push({ len, y: track.getPointAtLength(len).y });
+      samples.push({ len: total, y: end });
+    };
+    const lengthAt = (y: number) => {
+      let lo = 0;
+      let hi = samples.length - 1;
+      while (lo < hi) {
+        const mid = (lo + hi) >> 1;
+        if (samples[mid].y < y) lo = mid + 1;
+        else hi = mid;
+      }
+      return samples[lo]?.len ?? 0;
+    };
+
     let frame = 0;
     const update = () => {
       frame = 0;
+      const items = [...list.querySelectorAll<HTMLElement>(".cr-item")];
+      const points = [...list.querySelectorAll<HTMLElement>(".cr-points li")];
       const r = list.getBoundingClientRect();
-      // Drawn to the point two thirds down the screen: where the eye is.
-      const reach = window.innerHeight * 0.66 - r.top;
-      const draw = Math.min(1, Math.max(0, reach / r.height));
-      list.style.setProperty("--draw", draw.toFixed(4));
-      // A role's logo lights once the drawn line reaches it, and stays lit.
-      const tip = draw * r.height;
+      // The tip sits two thirds down the screen: where the eye is.
+      const tip = still ? end : Math.min(end, Math.max(0, window.innerHeight * 0.66 - r.top));
+      const len = still ? total : lengthAt(tip);
+      drawn.style.strokeDasharray = `${len} ${total}`;
+      const at = track.getPointAtLength(len);
+      dot.style.transform = `translate(${at.x}px, ${at.y}px)`;
+      list.toggleAttribute("data-drawing", !still && len > 0 && len < total);
+      // Logos light as the line starts round them; a year once it's passed;
+      // bullets as the tip draws level. Each stays lit.
       items.forEach((it) => {
-        if (it.offsetTop + 40 <= tip) it.setAttribute("data-reached", "");
+        if (it.offsetTop + 18 <= tip) it.setAttribute("data-reached", "");
+        if (it.offsetTop + it.offsetHeight + GAP - YEAR_R <= tip) it.setAttribute("data-passed", "");
       });
-      // Bullets light as the tip draws level with them, and stay lit.
       points.forEach((pt) => {
         if (pt.getBoundingClientRect().top - r.top + 10 <= tip) pt.setAttribute("data-reached", "");
       });
@@ -53,21 +120,40 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
     const queue = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
+    // Heights move as images load and roles open, so the path is redrawn
+    // whenever the list changes size.
+    const resized = new ResizeObserver(() => {
+      layout();
+      queue();
+    });
+    resized.observe(list);
+    layout();
     update();
     window.addEventListener("scroll", queue, { passive: true });
-    window.addEventListener("resize", queue, { passive: true });
     return () => {
       cancelAnimationFrame(frame);
+      resized.disconnect();
       window.removeEventListener("scroll", queue);
-      window.removeEventListener("resize", queue);
     };
   }, []);
 
   return (
     <div className="cr">
       <ol className="cr-line" ref={listRef}>
+        <li className="cr-rail" aria-hidden="true">
+          <svg ref={svgRef} width="80">
+            <path className="cr-rail-track" ref={trackRef} />
+            <path className="cr-rail-drawn" ref={drawnRef} />
+          </svg>
+          <span className="cr-tip" ref={tipRef} />
+        </li>
         {roles.map((r) => (
           <li key={r.org} className="cr-item">
+            {startYear(r.dates) && (
+              <span className="cr-year" aria-hidden="true">
+                {startYear(r.dates)}
+              </span>
+            )}
             {r.logo && (
               // The card's heading names the company.
               // eslint-disable-next-line @next/next/no-img-element
