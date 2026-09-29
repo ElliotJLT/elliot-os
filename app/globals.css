@@ -6830,9 +6830,10 @@ main:has(> .fold) {
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(22, 18, 14, 0.82) 0%,
-    rgba(22, 18, 14, 0.5) 42%,
-    rgba(22, 18, 14, 0) 70%
+    rgba(22, 18, 14, 0.86) 0%,
+    rgba(22, 18, 14, 0.66) 45%,
+    rgba(22, 18, 14, 0.52) 62%,
+    rgba(22, 18, 14, 0) 82%
   );
   pointer-events: none;
 }
@@ -6960,7 +6961,7 @@ main:has(> .fold) {
   }
 
   .fold-photo::after {
-    background: linear-gradient(to top, rgba(22, 18, 14, 0.55), rgba(22, 18, 14, 0) 30%);
+    background: linear-gradient(to top, rgba(22, 18, 14, 0.82), rgba(22, 18, 14, 0.5) 22%, rgba(22, 18, 14, 0) 42%);
   }
 
   .built-body {
