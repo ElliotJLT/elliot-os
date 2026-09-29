@@ -5739,19 +5739,23 @@ h2.mai-kick + p.muted,
   position: relative;
 }
 
-/* The dot that rides the tip of the line; placed by Career.tsx. Only shown
-   while the line is moving. */
+/* The face that rides the tip of the line, placed by Career.tsx: a black
+   and white portrait in a rust ring. Behind the year stops, in front of the
+   line. Only shown while the line is moving. */
 .cr-tip {
   position: absolute;
   z-index: 2;
   left: 0;
   top: 0;
-  width: 9px;
-  height: 9px;
-  margin: -4.5px 0 0 -4.5px;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
   border-radius: 50%;
-  background: var(--accent-ink);
-  box-shadow: 0 0 0 3px var(--bg), 0 0 0 7px color-mix(in oklab, var(--accent-ink) 18%, transparent);
+  background-color: var(--bg);
+  background-size: cover;
+  background-position: center;
+  border: 2px solid var(--accent-ink);
+  box-shadow: 0 0 0 2px var(--bg);
   opacity: 0;
   transition: opacity 0.3s ease-out;
 }
@@ -5764,7 +5768,7 @@ h2.mai-kick + p.muted,
    role. Faint until the line has drawn past the role, then ink. */
 .cr-year {
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   left: -42px;
   bottom: -16px;
   transform: translate(-50%, 50%);
@@ -5785,9 +5789,27 @@ h2.mai-kick + p.muted,
   border-color: var(--accent-ink);
 }
 
+/* The year sits over the line, which runs behind it. Hidden until the tip
+   reaches it, then revealed left to right in steps, pill and all, so it
+   reads as being typed. */
+.js .cr-year {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.6s steps(6, end), color 0.4s ease-out, border-color 0.4s ease-out;
+}
 
-/* 32px: room for a year stop between roles, with the line's loop round it
-   clear of the loop round the next logo. */
+.js .cr-item[data-passed] .cr-year {
+  clip-path: inset(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .cr-year {
+    transition: none;
+  }
+}
+
+
+/* 32px: room for a year stop between roles, clear of the loop round the
+   next logo. */
 .cr-item + .cr-item {
   margin-top: 32px;
 }

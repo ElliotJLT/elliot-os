@@ -12,31 +12,32 @@ const SHOWN = 4;
 /** The year a role started, from "Feb 2022 – Aug 2026". */
 const startYear = (dates?: string) => dates?.match(/\d{4}/)?.[0];
 
-// The rail's x inside the list, and how far the line stands off the things
-// it goes round: a logo (44px and its ring) and a year stop.
+// The rail's x inside the list, and how far the line stands off a logo as it
+// goes round it.
 const X = 22;
-const LOGO_R = 29;
-const YEAR_R = 23;
-// Half the gap between roles, where each year stop sits.
+// 33: wide enough that the face riding the tip clears the logo it circles.
+const LOGO_R = 33;
+// Half the gap between roles, where each year stop sits over the line.
 const GAP = 16;
 
 /**
  * The rail as one path: straight down the list, bending round the right of
- * each logo and year stop in a half circle, so the line and the dot riding
- * its tip trace their outline instead of passing behind them.
+ * each logo in a half circle, so the line and the dot riding its tip trace
+ * the logo's outline. Year stops sit over the line, which runs behind them;
+ * the path ends at the last one.
  */
 function railPath(list: HTMLElement) {
-  const stops: { y: number; r: number }[] = [];
-  list.querySelectorAll<HTMLElement>(".cr-item").forEach((it) => {
-    if (it.querySelector(".cr-logo")) stops.push({ y: it.offsetTop + 40, r: LOGO_R });
-    if (it.querySelector(".cr-year")) stops.push({ y: it.offsetTop + it.offsetHeight + GAP, r: YEAR_R });
-  });
   let d = `M${X} 0`;
   let y = 0;
-  for (const s of stops) {
-    d += ` L${X} ${s.y - s.r} A${s.r} ${s.r} 0 0 1 ${X} ${s.y + s.r}`;
-    y = s.y + s.r;
-  }
+  list.querySelectorAll<HTMLElement>(".cr-item").forEach((it) => {
+    if (it.querySelector(".cr-logo")) {
+      const c = it.offsetTop + 40;
+      d += ` L${X} ${c - LOGO_R} A${LOGO_R} ${LOGO_R} 0 0 1 ${X} ${c + LOGO_R}`;
+      y = c + LOGO_R;
+    }
+    if (it.querySelector(".cr-year")) y = it.offsetTop + it.offsetHeight + GAP;
+  });
+  d += ` L${X} ${y}`;
   return { d, end: y };
 }
 
@@ -107,11 +108,12 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
       const at = track.getPointAtLength(len);
       dot.style.transform = `translate(${at.x}px, ${at.y}px)`;
       list.toggleAttribute("data-drawing", !still && len > 0 && len < total);
-      // Logos light as the line starts round them; a year once it's passed;
-      // bullets as the tip draws level. Each stays lit.
+      // Logos light as the line starts round them; a year types itself in
+      // as the tip reaches it; bullets light as the tip draws level. Each
+      // stays lit.
       items.forEach((it) => {
         if (it.offsetTop + 18 <= tip) it.setAttribute("data-reached", "");
-        if (it.offsetTop + it.offsetHeight + GAP - YEAR_R <= tip) it.setAttribute("data-passed", "");
+        if (it.offsetTop + it.offsetHeight + GAP <= tip) it.setAttribute("data-passed", "");
       });
       points.forEach((pt) => {
         if (pt.getBoundingClientRect().top - r.top + 10 <= tip) pt.setAttribute("data-reached", "");
@@ -145,7 +147,13 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
             <path className="cr-rail-track" ref={trackRef} />
             <path className="cr-rail-drawn" ref={drawnRef} />
           </svg>
-          <span className="cr-tip" ref={tipRef} />
+          {/* The tip is Elliot, in black and white, travelling down his own
+              career. */}
+          <span
+            className="cr-tip"
+            ref={tipRef}
+            style={{ backgroundImage: `url(${basePath}/career/face-tip.jpg)` }}
+          />
         </li>
         {roles.map((r) => (
           <li key={r.org} className="cr-item">
