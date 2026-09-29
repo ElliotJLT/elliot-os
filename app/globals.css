@@ -40,26 +40,26 @@
 }
 
 :root[data-theme="dark"] {
-  --bg: #08100f;
-  --bg-2: #0d1716;
-  --paper: #0f1918;
-  --ink: #f4f1eb;
-  --ink-2: #d6d2ca;
-  --muted: #9b978e;
-  --faint: #8e8a81;
-  --vals-dim: #636660;
-  --line: #1b2523;
-  --line-2: #2b3735;
-  --rule: #2e3a38;
-  /* Amber rather than the light-mode coral carried over: the dark palette
-     already leans sage-green (--accent-2 below), and amber pairs with that
-     instead of fighting it. Also clears contrast better against the dark
-     bg (8.56:1 / 10.50:1 vs 5.74:1 for the coral it replaces). */
-  --accent: #d9a441;
-  --accent-ink: #e6b95c;
-  --accent-2: #7bb389;
-  --chart: #6ba877;
-  --flag: #211d15;
+  /* Pen on paper, at night: warm black paper, off-white type, and one
+     colour, a fountain-pen blue, for every mark, link and lit state. */
+  --bg: #121211;
+  --bg-2: #1a1a18;
+  --paper: #1d1d1b;
+  --ink: #edebe5;
+  --ink-2: #d4d1ca;
+  --muted: #a09d96;
+  --faint: #8d8a83;
+  --vals-dim: #5f5d58;
+  --line: #2a2a27;
+  --line-2: #3a3a36;
+  --rule: #3a3a36;
+  --accent: #8fb3e0;
+  --accent-ink: #9fc0ea;
+  --accent-2: #8fb3e0;
+  --chart: #8fb3e0;
+  --flag: #1f1f1d;
+  --band-bg-dark: #16202c;
+  --band-pill-ink: #16202c;
   --shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   --shadow-lift: 0 10px 30px rgba(0, 0, 0, 0.4);
   color-scheme: dark;
@@ -2856,7 +2856,7 @@ main:has(> .band) {
   inset: 0 0 auto;
   height: 100%;
   display: block;
-  background: #ad5035;
+  background: var(--band-bg, #ad5035);
   opacity: 1;
   pointer-events: none;
 }
@@ -2871,7 +2871,7 @@ main:has(> .band) {
    same identity, but dark enough that switching themes changes the mood rather
    than merely recolouring the page around an unchanged hero. */
 :root[data-theme="dark"] .band-wash {
-  background: #2d1d30;
+  background: var(--band-bg-dark, #2d1d30);
 }
 
 /* A fixed stretcher-bond wall sits almost invisibly in the colour field.
@@ -3086,7 +3086,7 @@ main:has(> .band) {
 
 .pill-cream {
   background: #faf3e8;
-  color: #8a3c26;
+  color: var(--band-pill-ink, #8a3c26);
 }
 
 .pill-cream:hover {
@@ -5149,7 +5149,7 @@ main:has(> .band) {
     0 1px 2px rgba(52, 46, 41, 0.06), 0 14px 32px -14px rgba(52, 46, 41, 0.22);
 }
 :root[data-theme="dark"] {
-  --panel: #131e1d;
+  --panel: #1c1c1a;
   --lift: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
     0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 32px -14px rgba(0, 0, 0, 0.6);
 }
@@ -7583,4 +7583,151 @@ a.bento-card {
 
 .loop-ledger-panel .failure-log li:last-child {
   border-bottom: none;
+}
+
+/* ============================================================ palettes
+   Candidate palettes under review, switched with data-palette on <html>
+   (?palette= on localhost). Each sets light and dark. The pen palettes are
+   paper and ink with one colour, the pen; moss is warm paper and green. */
+:root[data-palette^="pen"] {
+  --bg: #f4f2ec;
+  --bg-2: #eceae3;
+  --paper: #fbfaf6;
+  --panel: #efede6;
+  --ink: #1b1b19;
+  --ink-2: #33322f;
+  --muted: #56544f;
+  --faint: #6b6963;
+  --vals-dim: #a3a09a;
+  --line: #e2dfd6;
+  --line-2: #cfcbc0;
+  --rule: #1b1b19;
+  --flag: #e9e7e0;
+  --band-bg: #1d1d1b;
+  --band-pill-ink: #1d1d1b;
+  --lift: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 1px 2px rgba(27, 27, 25, 0.06), 0 14px 32px -14px rgba(27, 27, 25, 0.2);
+}
+
+:root[data-palette^="pen"][data-theme="dark"] {
+  --bg: #121211;
+  --bg-2: #1a1a18;
+  --paper: #1d1d1b;
+  --panel: #1c1c1a;
+  --ink: #edebe5;
+  --ink-2: #d4d1ca;
+  --muted: #a09d96;
+  --faint: #8d8a83;
+  --vals-dim: #5f5d58;
+  --line: #2a2a27;
+  --line-2: #3a3a36;
+  --rule: #3a3a36;
+  --flag: #1f1f1d;
+  --lift: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 32px -14px rgba(0, 0, 0, 0.6);
+}
+
+:root[data-palette="pen-blue"] {
+  --accent: #2b5a8a;
+  --accent-ink: #1f3a5f;
+  --accent-2: #1f3a5f;
+  --chart: #1f3a5f;
+}
+
+:root[data-palette="pen-blue"][data-theme="dark"] {
+  --accent: #8fb3e0;
+  --accent-ink: #9fc0ea;
+  --accent-2: #8fb3e0;
+  --chart: #8fb3e0;
+  --band-bg-dark: #16202c;
+}
+
+:root[data-palette="pen-rust"] {
+  --accent: #b8520d;
+  --accent-ink: #a84600;
+  --accent-2: #a84600;
+  --chart: #a84600;
+}
+
+:root[data-palette="pen-rust"][data-theme="dark"] {
+  --accent: #e08a4f;
+  --accent-ink: #e89a62;
+  --accent-2: #e08a4f;
+  --chart: #e08a4f;
+  --band-bg-dark: #1f1813;
+}
+
+:root[data-palette="moss"] {
+  --bg: #f3f1e8;
+  --bg-2: #ebe8dc;
+  --paper: #faf8f0;
+  --panel: #eeebe0;
+  --ink: #1e211b;
+  --ink-2: #363a31;
+  --muted: #555a4e;
+  --faint: #6a6f62;
+  --vals-dim: #a2a597;
+  --line: #e0ddd0;
+  --line-2: #ccc8b8;
+  --rule: #1e211b;
+  --accent: #5b7d44;
+  --accent-ink: #4e6b3a;
+  --accent-2: #8a5a2b;
+  --chart: #4e6b3a;
+  --flag: #e7e4d8;
+  --band-bg: #3f5a30;
+  --band-pill-ink: #3f5a30;
+}
+
+:root[data-palette="moss"][data-theme="dark"] {
+  --bg: #111410;
+  --bg-2: #171b15;
+  --paper: #1b1f18;
+  --panel: #1a1e17;
+  --ink: #ecebe4;
+  --ink-2: #d2d2c8;
+  --muted: #9da094;
+  --faint: #8b8e82;
+  --vals-dim: #5d6056;
+  --line: #262b22;
+  --line-2: #353b30;
+  --rule: #353b30;
+  --accent: #9dbb86;
+  --accent-ink: #a9c692;
+  --accent-2: #c9a27a;
+  --chart: #9dbb86;
+  --flag: #1d2119;
+  --band-bg-dark: #1c2618;
+}
+
+/* The local-only switcher. */
+.palette-switch {
+  position: fixed;
+  z-index: 2000;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  padding: 5px;
+  border-radius: 999px;
+  background: var(--paper);
+  border: 1px solid var(--line-2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.palette-switch button {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 7px 13px;
+  font: 12px var(--mono);
+  color: var(--ink-2);
+  background: none;
+  cursor: pointer;
+}
+
+.palette-switch button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
 }
