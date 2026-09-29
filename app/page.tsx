@@ -2,6 +2,7 @@ const basePath = process.env.BASE_PATH || "";
 import { getPosts, noteFor, isDemoted } from "@/lib/writing";
 import { getMedia } from "@/lib/writing";
 import { getRoles } from "@/lib/roles";
+import { getQuotes } from "@/lib/quotes";
 import Reveal, { Words, RiseWords } from "./components/Reveal";
 import { Pill, Slot } from "./components/Frame";
 import Values from "./components/Values";
@@ -44,7 +45,14 @@ function Row({
 }
 
 export default async function Home() {
-  const { roles } = getRoles();
+  const { reference } = getQuotes();
+  // The pull line leads the Career section, so the Zero Gravity card drops it
+  // rather than repeating it a few lines further down.
+  const roles = getRoles().roles.map((r) =>
+    r.quote
+      ? { ...r, quote: { ...r.quote, paras: r.quote.paras.filter((q) => q !== reference.pull) } }
+      : r,
+  );
   const media = getMedia();
   const posts = (await getPosts(20)).filter((x) => !isDemoted(x.title)).slice(0, 3);
 
@@ -66,9 +74,10 @@ export default async function Home() {
             <div className="band-profile">
               <TrackingPortrait className="band-face rv-develop" />
               <p className="band-sub rv-settle">
-                Eight years building from zero across four startups. At Zero
-                Gravity, I led the product and team that took our AI STEM
-                tutor from concept into schools and secured selection for the{" "}
+                Eight years building early-stage products and the operations
+                behind them. At Zero Gravity I led product and the team that
+                took our AI STEM tutor from first commit to the App Store in
+                under a month, then into the{" "}
                 <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
                   UK government&apos;s AI Tutoring Tools Pioneers Programme
                 </a>
@@ -117,6 +126,14 @@ export default async function Home() {
 
       <Reveal>
         <h2 className="mai-kick rv-settle">Career</h2>
+        <figure className="career-pull rv-settle">
+          <blockquote>
+            <p>&ldquo;{reference.pull}&rdquo;</p>
+          </blockquote>
+          <figcaption>
+            <strong>{reference.name}</strong> · {reference.role}
+          </figcaption>
+        </figure>
       </Reveal>
       <Career roles={roles} />
 
