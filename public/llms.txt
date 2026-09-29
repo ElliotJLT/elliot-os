@@ -21,9 +21,10 @@ does the work that earns a place in production. He decides where a model can
 improvise, where the product needs certainty and who owns a failure. His
 evals, operating rules and named owners make those decisions inspectable.
 
-Elliot spent four years building at Zero Gravity. He led product and design
-for partner-funded learning pathways in 2023, then designed and led the
-platform's first end-to-end AI product: Career Co-pilot. It used tool calling
+Elliot spent four years building at Zero Gravity. From 2022 to 2024 he built
+the company's operations: the operating system, support and the student
+journey. From 2024 he led product: partner-funded learning pathways, then
+Career Co-pilot, the platform's first end-to-end AI product. It used tool calling
 across a student's CV, thousands of job posts and thousands of community posts,
 retrieved what was relevant and talked it through in chat. Run as a beta, it
 laid the retrieval groundwork for the tutor. The later AI tutor added hands-on
@@ -53,6 +54,15 @@ habit in regulated services, crisis delivery and consumer travel.
   workflow automation, audit logs, case tracking and integrations with HMCTS,
   HMRC and banking. Agent errors fell 69% and case handling moved from two
   weeks to four days. https://farewill.com/apply-for-probate
+- Zero Gravity operations (2022–24): the company operating system (hiring,
+  budgets, revenue ops in HubSpot and Zapier, a Notion company brain that
+  became Zero Gravity OS, whose MCP layer replaced four SaaS platforms and
+  cut onboarding from two weeks to three days); ISO 27001 and 9001 solo as
+  DPO, which unlocked the first FTSE 100 contracts; the support function (an
+  AI assistant on the team's knowledge base, conversation tags that fed the
+  roadmap, CSAT above 80%, first response under two hours, resolution in 48
+  hours); and the school-to-university journey, where mentee-to-mentor
+  conversion kept students on one platform, 120,000 students through it.
 - Zero Gravity learning pathways: partner-funded courses for companies
   including Accenture, HSBC, KPMG and Snap: Duolingo-style video, staged
   progression and quizzes, with an AI assignment at the end. 46% of students

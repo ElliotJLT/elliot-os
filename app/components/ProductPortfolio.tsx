@@ -39,7 +39,7 @@ const COMPANIES: Company[] = [
     logo: "career/flash-pack.jpeg",
     products: [
       {
-        order: "07",
+        order: "10",
         name: "CX and crisis operations",
         summary:
           "The customer and crisis operations behind Flash Pack's small-group trips for solo travellers in their 30s and 40s, through 400% year-on-year growth.",
@@ -72,7 +72,7 @@ const COMPANIES: Company[] = [
     logo: "career/meals-for-the-nhs.jpeg",
     products: [
       {
-        order: "06",
+        order: "09",
         name: "Hospital meals marketplace",
         summary:
           "A volunteer-run charity that got restaurant meals to NHS staff through the first COVID wave.",
@@ -102,7 +102,7 @@ const COMPANIES: Company[] = [
     logo: "career/farewill.jpeg",
     products: [
       {
-        order: "05",
+        order: "08",
         name: "Probate operations",
         summary:
           "Farewill's probate service, which helps grieving families through the legal work of settling an estate.",
@@ -134,7 +134,78 @@ const COMPANIES: Company[] = [
   },
   {
     name: "Zero Gravity",
-    stint: "2022–26",
+    stint: "2022–24",
+    logo: "career/zero-gravity.jpeg",
+    products: [
+      {
+        order: "07",
+        name: "Company operating system",
+        summary:
+          "How Zero Gravity ran as it grew from 4 people: hiring, budgets, revenue ops, internal comms and a company brain in Notion.",
+        problem:
+          "Hiring, budgets, revenue tracking and company knowledge had no system behind them, and each new tool added more manual work.",
+        bet:
+          "Build one operating system and wire the tools together, so the team did less re-keying as it grew.",
+        outcomes: [
+          { n: "4 → 1", label: "SaaS platforms, replaced by one system with an MCP layer" },
+          { n: "2 weeks → 3 days", label: "to onboard a new hire" },
+          { n: "ISO 27001 + 9001", label: "done solo as DPO, which unlocked our first FTSE 100 contracts" },
+        ],
+        how: [
+          "Hiring, onboarding, culture and a SaaS budget, run from one place.",
+          "Revenue ops in HubSpot, with Zapier taking out the manual steps.",
+          "A company brain in Notion that became the base of Zero Gravity OS.",
+        ],
+        role: "Built it as employee #4",
+        links: [],
+      },
+      {
+        order: "06",
+        name: "School to university journey",
+        summary:
+          "The sign-up, activation and mentoring path that kept students on one platform from school through university.",
+        problem:
+          "Students joined at school, and the platform needed a reason for them to stay once they reached university.",
+        bet:
+          "Turn mentees into mentors, so students helped at school stayed on to help the next group.",
+        outcomes: [
+          { n: "120,000", label: "students through the journey" },
+        ],
+        how: [
+          "Growth work across the sign-up funnel and first-week activation.",
+          "Mentee-to-mentor conversion as the bridge from school to university.",
+          "Automated with AI once the manual version worked.",
+        ],
+        role: "Led growth and operations",
+        links: [],
+      },
+      {
+        order: "05",
+        name: "Customer support",
+        summary:
+          "The support function for students, mentors and partners: an AI assistant answering first, and a knowledge base the whole team used.",
+        problem:
+          "Support questions were answered by hand, and what students asked about wasn't recorded anywhere the product team could use.",
+        bet:
+          "Write each answer down once and tag every conversation, so an AI assistant could take the repeat questions and the product team could read the rest.",
+        outcomes: [
+          { n: "80%+", label: "CSAT" },
+          { n: "Under 2h", label: "first response time" },
+          { n: "48h", label: "time to resolution" },
+        ],
+        how: [
+          "An AI assistant answering from the team's own knowledge base.",
+          "Bot workflows and SLAs routing everything else to the right person.",
+          "Conversation tags that later shaped the product roadmap.",
+        ],
+        role: "Built the function",
+        links: [],
+      },
+    ],
+  },
+  {
+    name: "Zero Gravity",
+    stint: "2024–26",
     logo: "career/zero-gravity.jpeg",
     products: [
       {
@@ -243,12 +314,16 @@ const COMPANIES: Company[] = [
   },
 ];
 
-// Newest first: the tutor and its school hub, then back through the career.
+// Newest first: the tutor and its school hub, the operations years at Zero
+// Gravity, then back through the career.
 const ORDER = [
   "AI STEM tutor",
   "School hub",
   "Career Co-pilot",
   "Learning pathways",
+  "Customer support",
+  "School to university journey",
+  "Company operating system",
   "Probate operations",
   "Hospital meals marketplace",
   "CX and crisis operations",
