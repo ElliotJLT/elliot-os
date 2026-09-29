@@ -54,15 +54,18 @@ habit in regulated services, crisis delivery and consumer travel.
   workflow automation, audit logs, case tracking and integrations with HMCTS,
   HMRC and banking. Agent errors fell 69% and case handling moved from two
   weeks to four days. https://farewill.com/apply-for-probate
-- Zero Gravity operations (2022–24): the company operating system (hiring,
-  budgets, revenue ops in HubSpot and Zapier, a Notion company brain that
-  became Zero Gravity OS, whose MCP layer replaced four SaaS platforms and
-  cut onboarding from two weeks to three days); ISO 27001 and 9001 solo as
-  DPO, which unlocked the first FTSE 100 contracts; the support function (an
-  AI assistant on the team's knowledge base, conversation tags that fed the
-  roadmap, CSAT above 80%, first response under two hours, resolution in 48
-  hours); and the school-to-university journey, where mentee-to-mentor
-  conversion kept students on one platform, 120,000 students through it.
+- Zero Gravity operations (2022–24):
+  - Company operating system: hiring, budgets, revenue ops in HubSpot and
+    Zapier behind £1.5m ARR, and a Notion company brain that became Zero
+    Gravity OS, whose MCP layer replaced four SaaS platforms and cut
+    onboarding from two weeks to three days. ISO 27001 and 9001 done solo as
+    DPO, which unlocked the first FTSE 100 contracts.
+  - Customer support: an AI assistant on the team's knowledge base resolved
+    91% of conversations and halved weekly support time from 8 to 4 hours,
+    so no dedicated hire was needed. CSAT 84%, NPS 80+, first response under
+    two hours, resolution within 48. Conversation tags fed the roadmap.
+  - School-to-university journey: mentee-to-mentor conversion rose from 6%
+    to 40%, keeping students on one platform; 120,000 students through it.
 - Zero Gravity learning pathways: partner-funded courses for companies
   including Accenture, HSBC, KPMG and Snap: Duolingo-style video, staged
   progression and quizzes, with an AI assignment at the end. 46% of students

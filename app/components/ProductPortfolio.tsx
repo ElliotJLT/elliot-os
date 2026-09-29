@@ -147,6 +147,7 @@ const COMPANIES: Company[] = [
         bet:
           "Build one operating system and wire the tools together, so the team did less re-keying as it grew.",
         outcomes: [
+          { n: "£1.5m", label: "ARR, tracked and billed through the revenue ops" },
           { n: "4 → 1", label: "SaaS platforms, replaced by one system with an MCP layer" },
           { n: "2 weeks → 3 days", label: "to onboard a new hire" },
           { n: "ISO 27001 + 9001", label: "done solo as DPO, which unlocked our first FTSE 100 contracts" },
@@ -169,6 +170,7 @@ const COMPANIES: Company[] = [
         bet:
           "Turn mentees into mentors, so students helped at school stayed on to help the next group.",
         outcomes: [
+          { n: "6% → 40%", label: "of mentees going on to mentor" },
           { n: "120,000", label: "students through the journey" },
         ],
         how: [
@@ -189,13 +191,14 @@ const COMPANIES: Company[] = [
         bet:
           "Write each answer down once and tag every conversation, so an AI assistant could take the repeat questions and the product team could read the rest.",
         outcomes: [
-          { n: "80%+", label: "CSAT" },
-          { n: "Under 2h", label: "first response time" },
-          { n: "48h", label: "time to resolution" },
+          { n: "91%", label: "of conversations resolved by the AI assistant" },
+          { n: "8h → 4h", label: "of support time a week, so no dedicated hire" },
+          { n: "84%", label: "CSAT: rated 4 or 5 out of 5" },
+          { n: "80+", label: "NPS" },
         ],
         how: [
           "An AI assistant answering from the team's own knowledge base.",
-          "Bot workflows and SLAs routing everything else to the right person.",
+          "Bot workflows routing the rest, on SLAs of first response under 2 hours and resolution within 48.",
           "Conversation tags that later shaped the product roadmap.",
         ],
         role: "Built the function",
