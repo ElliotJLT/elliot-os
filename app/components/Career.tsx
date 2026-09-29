@@ -9,6 +9,9 @@ const basePath = process.env.BASE_PATH || "";
 // Longer roles show their first four bullets; the rest open on request.
 const SHOWN = 4;
 
+/** Set for the visit once he's been thrown off the page. */
+const GONE = "elliot-flung";
+
 /** The year a role started, from "Feb 2022 – Aug 2026". */
 const startYear = (dates?: string) => dates?.match(/\d{4}/)?.[0];
 
@@ -67,6 +70,15 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
     const dot = tipRef.current;
     if (!list || !svg || !track || !drawn || !dot) return;
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    // Once he's been picked up and thrown, he's gone for the visit, from
+    // this rail and the mentoring one.
+    let gone = sessionStorage.getItem(GONE) === "1";
+    if (gone) dot.hidden = true;
+    const vanish = () => {
+      gone = true;
+      dot.hidden = true;
+    };
+    window.addEventListener(GONE, vanish);
 
     // Length along the path against depth, sampled once per layout, so the
     // tip's depth on screen maps to how much of the path to draw.
@@ -95,6 +107,72 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
       return samples[lo]?.len ?? 0;
     };
 
+    // Pick him up and he follows the pointer; let go and he flies on with the
+    // throw, falls under gravity off the screen, and doesn't come back. The
+    // flight is a copy on the page, so the rail's own element stays React's.
+    const grab = (e: PointerEvent) => {
+      if (gone) return;
+      e.preventDefault();
+      const box = dot.getBoundingClientRect();
+      const body = dot.cloneNode() as HTMLImageElement;
+      body.removeAttribute("hidden");
+      body.className = "cr-flung";
+      body.style.width = `${box.width}px`;
+      document.body.appendChild(body);
+      vanish();
+      window.dispatchEvent(new Event(GONE));
+      sessionStorage.setItem(GONE, "1");
+
+      const dx = e.clientX - box.left;
+      const dy = e.clientY - box.top;
+      let x = box.left;
+      let y = box.top;
+      let rot = 0;
+      const trail: { x: number; y: number; t: number }[] = [];
+      const place = () => {
+        body.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
+      };
+      place();
+      document.documentElement.style.cursor = "grabbing";
+      const move = (m: PointerEvent) => {
+        x = m.clientX - dx;
+        y = m.clientY - dy;
+        trail.push({ x, y, t: m.timeStamp });
+        if (trail.length > 6) trail.shift();
+        place();
+      };
+      const drop = () => {
+        window.removeEventListener("pointermove", move);
+        window.removeEventListener("pointerup", drop);
+        window.removeEventListener("pointercancel", drop);
+        body.classList.add("is-thrown");
+        document.documentElement.style.cursor = "";
+        // Throw speed from the last few pointer moves, in px per frame.
+        const a = trail[0];
+        const b = trail[trail.length - 1];
+        const dt = a && b && b.t > a.t ? (b.t - a.t) / 16.7 : 1;
+        let vx = a && b ? (b.x - a.x) / dt : 0;
+        let vy = a && b ? (b.y - a.y) / dt : 0;
+        const spin = vx * 0.6 + 2;
+        const fly = () => {
+          vy += 0.7;
+          vx *= 0.995;
+          x += vx;
+          y += vy;
+          rot += spin;
+          place();
+          const off = y > window.innerHeight + 200 || x < -300 || x > window.innerWidth + 300;
+          if (off) body.remove();
+          else requestAnimationFrame(fly);
+        };
+        requestAnimationFrame(fly);
+      };
+      window.addEventListener("pointermove", move);
+      window.addEventListener("pointerup", drop);
+      window.addEventListener("pointercancel", drop);
+    };
+    dot.addEventListener("pointerdown", grab);
+
     let frame = 0;
     const update = () => {
       frame = 0;
@@ -108,7 +186,7 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
       const at = track.getPointAtLength(len);
       // A slow sway as he falls, driven by how far down the line he is.
       const sway = Math.sin(len / 90) * 14;
-      dot.style.transform = `translate(${at.x}px, ${at.y}px) translate(-50%, -50%) rotate(${sway.toFixed(1)}deg)`;
+      if (!gone) dot.style.transform = `translate(${at.x}px, ${at.y}px) translate(-50%, -50%) rotate(${sway.toFixed(1)}deg)`;
       list.toggleAttribute("data-drawing", !still && len > 0 && len < total);
       // Logos light as the line starts round them; a year types itself in
       // as the tip reaches it; bullets light as the tip draws level. Each
@@ -138,6 +216,8 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
       cancelAnimationFrame(frame);
       resized.disconnect();
       window.removeEventListener("scroll", queue);
+      window.removeEventListener(GONE, vanish);
+      dot.removeEventListener("pointerdown", grab);
     };
   }, []);
 

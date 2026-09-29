@@ -5752,10 +5752,34 @@ h2.mai-kick + p.muted,
   opacity: 0;
   transition: opacity 0.3s ease-out;
   will-change: transform;
+  /* The rail ignores the pointer; he doesn't, once he's showing. */
+  pointer-events: none;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* While he's held and after he's thrown: a copy on top of everything. */
+.cr-flung {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  height: auto;
+  cursor: grabbing;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 10px 14px rgba(52, 46, 41, 0.25));
+}
+
+.cr-flung.is-thrown {
+  filter: none;
 }
 
 .cr-line[data-drawing] .cr-tip {
   opacity: 1;
+  pointer-events: auto;
 }
 
 /* ruler: each role's start year, a stop on the line in the gap below the
