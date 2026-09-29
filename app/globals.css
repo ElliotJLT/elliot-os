@@ -6163,7 +6163,7 @@ h2.mai-kick + p.muted,
   text-align: left;
   cursor: pointer;
   display: grid;
-  grid-template-columns: 40px 230px minmax(0, 1fr) 250px 22px;
+  grid-template-columns: 40px 230px minmax(0, 1fr) 22px;
   align-items: center;
   gap: 18px;
   padding: 16px 22px;
@@ -6366,6 +6366,10 @@ h2.mai-kick + p.muted,
   .ws-plus {
     grid-row: 1;
     grid-column: 3;
+  }
+
+  .ws-outcomes {
+    grid-template-columns: 1fr;
   }
 
   .ws-card[data-open] .ws-panel-in {
@@ -7077,4 +7081,59 @@ a.bento-card {
   height: 6px;
   border-radius: 50%;
   background: var(--accent-ink);
+}
+
+/* Open card: outcomes lead, big and plain. */
+.ws-outcomes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 18px 24px;
+  margin: 4px 0 26px;
+  padding-bottom: 22px;
+  border-bottom: 1px dashed var(--line-2);
+}
+
+.ws-outcomes div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ws-outcomes dt {
+  font-family: var(--display);
+  font-size: clamp(30px, 3vw, 40px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.ws-outcomes dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.ws-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 16px;
+  margin: 18px 0 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.ws-foot span {
+  color: var(--muted);
+}
+
+.ws-foot a {
+  color: var(--accent-ink);
+}
+
+.ws-card[data-open] .ws-bet {
+  -webkit-line-clamp: unset;
+  color: var(--ink-2);
 }
