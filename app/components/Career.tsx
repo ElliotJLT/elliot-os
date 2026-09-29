@@ -54,6 +54,61 @@ function railPath(list: HTMLElement) {
  * under its role as a quote panel. Reduced motion shows the rail drawn and
  * everything in place.
  */
+/**
+ * A marker-pen loop drawn round Elliot's face in a team photo when the photo
+ * comes into view. The photo is cropped with object-fit: cover, so the face's
+ * place in the image is mapped onto the box it's shown in.
+ */
+function FaceMark({ face }: { face: { x: number; y: number; r: number } }) {
+  const ref = useRef<SVGSVGElement>(null);
+  useEffect(() => {
+    const svg = ref.current;
+    const fig = svg?.parentElement;
+    const img = fig?.querySelector("img");
+    if (!svg || !fig || !img) return;
+    const place = () => {
+      if (!img.naturalWidth) return;
+      const W = fig.clientWidth;
+      const H = fig.clientHeight;
+      const scale = Math.max(W / img.naturalWidth, H / img.naturalHeight);
+      const w = img.naturalWidth * scale;
+      const h = img.naturalHeight * scale;
+      const [px, py] = getComputedStyle(img).objectPosition.split(" ").map((v) => parseFloat(v) / 100);
+      const x = (W - w) * px + face.x * w;
+      const y = (H - h) * py + face.y * h;
+      const r = face.r * w * 1.25;
+      Object.assign(svg.style, { left: `${x - r}px`, top: `${y - r}px`, width: `${r * 2}px`, height: `${r * 2}px` });
+    };
+    place();
+    img.addEventListener("load", place);
+    const resized = new ResizeObserver(place);
+    resized.observe(fig);
+    const seen = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          svg.setAttribute("data-drawn", "");
+          seen.disconnect();
+        }
+      },
+      { threshold: 0.6 },
+    );
+    seen.observe(fig);
+    return () => {
+      img.removeEventListener("load", place);
+      resized.disconnect();
+      seen.disconnect();
+    };
+  }, [face]);
+  return (
+    <svg className="cr-mark" ref={ref} viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        pathLength={1}
+        d="M20 38 C25 13 73 7 87 33 C98 57 76 89 47 89 C19 89 7 66 13 46 C17 31 33 20 55 19"
+      />
+    </svg>
+  );
+}
+
 export default function Career({ roles, id = "career" }: { roles: Role[]; id?: string }) {
   const listRef = useRef<HTMLOListElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -300,6 +355,7 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
                       loading="lazy"
                       style={r.photoPosition ? { objectPosition: r.photoPosition } : undefined}
                     />
+                    {r.face && <FaceMark face={r.face} />}
                   </figure>
                 )}
                 {r.quote && (
