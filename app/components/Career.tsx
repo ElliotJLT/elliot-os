@@ -18,7 +18,7 @@ const basePath = process.env.BASE_PATH || "";
 // Longer roles show their first four bullets; the rest open on request.
 const SHOWN = 4;
 
-export default function Career({ roles }: { roles: Role[] }) {
+export default function Career({ roles, id = "career" }: { roles: Role[]; id?: string }) {
   const listRef = useRef<HTMLOListElement>(null);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
@@ -88,12 +88,13 @@ export default function Career({ roles }: { roles: Role[] }) {
                       {[r.role, r.dates].filter(Boolean).join(" · ")}
                     </span>
                   )}
-                  <ul className="cr-points" id={`cr-points-${r.org}`}>
+                  <ul className="cr-points" id={`${id}-${r.org}`}>
                     {r.bullets.map((b, i) =>
                       i < SHOWN || expanded[r.org] ? (
                         // Bullets opened by the reader are lit straight away.
-                        <li key={b} className={i >= SHOWN ? "cr-extra" : undefined}>
-                          {b}
+                        <li key={b.t} className={i >= SHOWN ? "cr-extra" : undefined}>
+                          {b.k && <span className="cr-skill">{b.k}</span>}
+                          <span className="cr-proof">{b.t}</span>
                         </li>
                       ) : null,
                     )}
@@ -103,7 +104,7 @@ export default function Career({ roles }: { roles: Role[] }) {
                       type="button"
                       className="cr-more"
                       aria-expanded={!!expanded[r.org]}
-                      aria-controls={`cr-points-${r.org}`}
+                      aria-controls={`${id}-${r.org}`}
                       onClick={() => setExpanded((e) => ({ ...e, [r.org]: !e[r.org] }))}
                     >
                       {expanded[r.org]
