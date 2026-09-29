@@ -9,11 +9,11 @@ type Product = {
   ownership: string;
   problem: {
     title: string;
-    paragraphs: string[];
   };
   bet: {
     title: string;
-    paragraphs: string[];
+    /** What was done, as short bullets. */
+    points: string[];
     proof?: string;
     lesson?: string;
   };
@@ -49,16 +49,16 @@ const COMPANIES: Company[] = [
         problem: {
           title:
             "Families could not see the next step, and legal specialists spent expert time on administration.",
-          paragraphs: [
-            "Families must deal with assets, debts, tax, banks and the courts while grieving. Legal specialists spend hours chasing missing information and answering status questions instead of making the decisions that need their judgement.",
-          ],
         },
         bet: {
           title:
             "We gave each case a structured path and the legal team an operating system.",
-          paragraphs: [
-            "I worked between customers, legal specialists and operations. We built guided intake that populated case data, automation and audit logs around the legal workflow, and a tracker that showed the next action and helped the team estimate the specialist time a case would need.",
-            "I also shipped integrations with HMCTS, HMRC and banking services, reserving the legal team for decisions that needed their judgement.",
+          points: [
+            "Worked between customers, legal specialists and operations.",
+            "Guided intake that fills in the case data, with automation and audit logs around the legal workflow.",
+            "A tracker showing each case's next action and the specialist time it needs.",
+            "Integrations with HMCTS, HMRC and the banks, so the legal team only handled decisions.",
+            "A vulnerable-user framework, adopted company-wide.",
           ],
           proof:
             "Agent errors down 69% · case handling from two weeks to four days",
@@ -84,15 +84,13 @@ const COMPANIES: Company[] = [
         ownership: "Led product and design with the engineering team",
         problem: {
           title: "Students had no useful next step between mentoring sessions.",
-          paragraphs: [
-            "Some students waited for a mentor; others had weeks between conversations. During that time the platform gave them little reason to return. Employer partners also needed a way to prepare more students for the opportunities they funded.",
-          ],
         },
         bet: {
           title: "Partner-funded learning paths filled the gap.",
-          paragraphs: [
-            "In 2023 I led the team that shipped staged courses for partners including Accenture, HSBC, KPMG and Snap. They combined video, Duolingo-style progression, quizzes and an early AI skills check.",
-            "The product gave students a self-serve layer alongside mentoring and gave commercial partners a concrete way to fund access and preparation.",
+          points: [
+            "Staged courses with partners including Accenture, HSBC, KPMG and Snap, shipped in 2023.",
+            "Video, Duolingo-style progression, quizzes and an early AI skills check.",
+            "A self-serve layer between mentoring sessions, and a concrete way for partners to fund preparation.",
           ],
           lesson:
             "Students did not return to the library enough. That miss shaped Career Co-pilot: bring the next useful thing to the student instead of waiting for them to browse.",
@@ -111,15 +109,14 @@ const COMPANIES: Company[] = [
         problem: {
           title:
             "Students had to know what help they needed and where to find it.",
-          paragraphs: [
-            "We had built mentors, learning, opportunities and community advice into separate parts of the product. Students had to know what they needed and where to find it before Zero Gravity could help. Generic CV tools also replaced specific evidence with the same polished language.",
-          ],
         },
         bet: {
           title: "Career Co-pilot turned the catalogue into a guided next step.",
-          paragraphs: [
-            "I designed and led the first end-to-end AI product on the platform. It used a student’s CV and Zero Gravity profile to build the CV with them, suggest relevant mentors and learning, retrieve useful community posts and answer career questions against platform knowledge.",
-            "The CV grew with the student, and the co-pilot brought the next useful part of Zero Gravity into the conversation.",
+          points: [
+            "The first end-to-end AI product on the Zero Gravity platform.",
+            "Builds the CV with the student from their existing CV and profile, with guardrails against invented experience.",
+            "Suggests the right mentors and learning, and pulls in useful community posts.",
+            "Answers career questions against the platform's own knowledge.",
           ],
           proof: "First end-to-end AI product on the Zero Gravity platform",
         },
@@ -141,18 +138,17 @@ const COMPANIES: Company[] = [
         problem: {
           title:
             "Students could get an AI-generated answer in seconds. Teachers could not see whether their students understood the method.",
-          paragraphs: [
-            "Generic AI tools complete the work when a student asks, then hand over the final answer when pushed. Reading a solution is passive, so the learning stops there. A teacher with thirty students cannot coach each step or read every chat, and loses the evidence they need to tell whether a student understands the method or has copied one.",
-            "The stakes are exam marks. A tutor that confidently teaches something the mark scheme will penalise is worse than no tutor, because the student cannot tell and finds out in the exam hall.",
-          ],
         },
         bet: {
           title:
             "The tutor coaches towards the answer and refuses to hand it over.",
-          paragraphs: [
-            "The Socratic method is architectural, not a prompt: the tutor asks the next question until the student gets there themselves, and cannot be talked into handing over the answer. Coaching, practice, marking and assignments run as separate agents, each with its own pedagogy and evaluator. Marking is tested against real past papers and official mark schemes, and it recognises alternative methods the way a teacher would. A student can type the question or snap a photo of handwritten working.",
-            "Every answer is grounded in the exact exam board and course a student is taught. It remembers what each student understands, where they slipped and what helped, and adjusts next time. We launched across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB, direct to students and through the school hub below: 10,000 students by June 2026.",
-            "Built to the DfE's 2026 generative AI product safety standards for under-18s: content guardrails, session cut-offs, usage limits for younger students, the tutor never presenting itself as human, and a safeguarding concern cutting the session and escalating to a named person rather than a transcript dump. Student data is never used to train external models. Eleven weeks after launch, the government selected us for its AI Tutoring Tools Pioneers Programme, eight companies chosen nationally to test safe AI tutoring in schools. We placed 2nd, ahead of frontier US labs and the largest UK curriculum incumbents.",
+          points: [
+            "Socratic by design: it asks the next question until the student gets there, and can't be talked into giving the answer.",
+            "Coaching, practice, marking and assignments run as separate agents, each with its own evaluator.",
+            "Marking tested against real past papers and official mark schemes, and it accepts alternative methods the way a teacher would.",
+            "Grounded in each student's exam board and course: Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB.",
+            "Built to the DfE's 2026 safety standards for under-18s, with safeguarding concerns escalated to a named person.",
+            "10,000 students by June 2026. Picked for the DfE Pioneers Programme eleven weeks after launch.",
           ],
           proof:
             "~67% → 99%+ on internal marking evals · App Store in under a month · 2nd of 8 in the DfE Pioneers Programme",
@@ -179,18 +175,17 @@ const COMPANIES: Company[] = [
         problem: {
           title:
             "One teacher, thirty students, one homework. They found out who was stuck at the next assessment, weeks after it mattered.",
-          paragraphs: [
-            "Homework help from a chatbot is a black box: the teacher sees a finished answer and nothing of the thinking. Coaching each student at their own level is what every teacher would do with the time, and no one has it. Interventions that could change a grade happen after the window has closed.",
-            "Schools also cannot say yes to AI without paper: a DPIA, a data lead's questions, a governor asking why. The product had to be defensible before it could be useful.",
-          ],
         },
         bet: {
           title:
             "Same homework for the class, different help for each student, and the teacher sees who needs them before the next lesson.",
-          paragraphs: [
-            "Teachers build homework from their own material and send it in a click. Every student does the same questions and is coached through them at their own level. As the work comes in, the teacher sees who has it, who needs another go and who is ready for more, the same day rather than at the next assessment. A weekly summary per class names the gap, the students to nudge and the ones to stretch. It drafts; the teacher decides.",
-            "Heads of department see which topics are dragging a class or a school, by subject, while there is still time to act. A lesson builder turns a topic and a level into a plan, slides and a worksheet grounded in the specification, tuned by the misconceptions the tutor has already seen. Access is scoped by role: a subject teacher, a form tutor and a senior leader each see what their job needs, and safeguarding flags go only to the staff the school names.",
-            "Deployment is teachers first, class by class, with whole-school access agreed with leadership. The DPIA pack, data flow maps and the mapping to the DfE 2026 standards are written before a data lead asks for them, because data protection is the thing that stops a school saying yes.",
+          points: [
+            "Teachers build homework from their own material and send it in a click.",
+            "Every student gets the same questions, coached at their own level.",
+            "The teacher sees who has it, who needs another go and who's ready for more, the same day.",
+            "A weekly summary per class names the gap and who to nudge. It drafts; the teacher decides.",
+            "Heads of department see which topics are dragging, by subject, while there's still time to act.",
+            "The DPIA pack, data flows and DfE standards mapping are written before a data lead asks.",
           ],
           proof:
             "850+ UK schools · 91% student activation via school referral · a named teacher on every flag",
@@ -225,16 +220,15 @@ const COMPANIES: Company[] = [
         problem: {
           title:
             "Adventure travel carries ethical baggage: price inflation, plastic waste and carbon, paid for by the places the trips go.",
-          paragraphs: [
-            "Flash Pack's travellers loved the places they visited. The business model that took them there added to the problem: flights, single-use plastic on every trip, and money that often skipped the communities hosting them.",
-          ],
         },
         bet: {
           title:
             "A foundation inside the company, with pledges a traveller could see on the trip itself.",
-          paragraphs: [
-            "I co-founded the Flash Pack Foundation and worked with local partners to cut on-trip waste and back community projects in key destinations.",
-            "Its pledges: give back through grassroots projects in education, human rights, gender empowerment and animal welfare; cut the company's carbon footprint towards carbon neutral; and swap single-use plastic bottles for refillables for every traveller and guide.",
+          points: [
+            "Co-founded it, and worked with local partners on on-trip waste and community projects.",
+            "Grassroots partners in education, human rights, gender empowerment and animal welfare.",
+            "A carbon plan aimed at making Flash Pack carbon neutral.",
+            "Refillable bottles instead of single-use plastic for every traveller and guide.",
           ],
           proof: "Co-founded 2019 · grassroots partners in key destinations",
         },
@@ -251,15 +245,15 @@ const COMPANIES: Company[] = [
         problem: {
           title:
             "Solo travellers in their 30s and 40s were trusting a young company with trips in more than 30 countries.",
-          paragraphs: [
-            "Every trip is a promise kept by people on the ground in another time zone. As the business grew fast, the service behind it had to grow without the experience slipping, including when a trip went wrong.",
-          ],
         },
         bet: {
           title:
             "Build the customer and crisis operations as a system, so service scaled with the business.",
-          paragraphs: [
-            "I joined as hire #8 and built the CX and crisis operations systems behind the growth, scaling the team from 10 to 160 across 30+ markets. I owned the APAC and EMEA trip accounts and itineraries.",
+          points: [
+            "Joined as hire #8 and built the customer and crisis operations.",
+            "Scaled the team from 10 to 160 across 30+ markets.",
+            "Owned the APAC and EMEA trip accounts and itineraries.",
+            "Kept NPS above 90 through the US launch.",
           ],
           proof: "400% YoY growth · team 10 → 160 · NPS above 90 through the US launch",
         },
@@ -368,10 +362,12 @@ function WorkCard({
               <span className="ws-label">The problem</span>
               {product.problem.title}
             </p>
-            <div className="ws-label">The bet</div>
-            {product.bet.paragraphs.map((p) => (
-              <p key={p}>{p}</p>
-            ))}
+            <div className="ws-label">What I did</div>
+            <ul className="ws-points">
+              {product.bet.points.map((pt) => (
+                <li key={pt}>{pt}</li>
+              ))}
+            </ul>
             {product.bet.lesson && (
               <p className="product-lesson">
                 <span>What we learned</span>

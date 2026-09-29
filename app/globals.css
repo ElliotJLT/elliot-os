@@ -6974,3 +6974,107 @@ main:has(> .fold) {
     height: 100vh;
   }
 }
+
+/* "In the open" bento: link cards, the snake wide, tools as a list. */
+a.bento-card {
+  text-decoration: none;
+}
+
+.open-bento .bento-card {
+  min-height: 230px;
+}
+
+.open-snake .bento-visual {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.open-snake .github-snake-image {
+  width: 100%;
+  height: auto;
+}
+
+.open-tools {
+  cursor: default;
+}
+
+.open-tools:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--line);
+}
+
+.open-tools ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.open-tools li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+
+.open-tools li:first-child {
+  border-top: 0;
+}
+
+.open-tools li a {
+  font-family: var(--display);
+  font-size: 20px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.open-tools li a:hover {
+  color: var(--accent-ink);
+}
+
+.open-tools li span {
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+/* The Open row is plain green, like Run. */
+.open-bento .bento-intro .bento-kick {
+  color: var(--accent-2);
+}
+
+/* The log box only takes room once it has lines in it. */
+.bento-full .bench-log {
+  min-height: 0;
+}
+
+.ws-points {
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ws-points li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.ws-points li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-ink);
+}

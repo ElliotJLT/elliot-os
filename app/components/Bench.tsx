@@ -207,11 +207,15 @@ export default function Bench({
   const lastCard = useRef<HTMLButtonElement | null>(null);
   const track = openId ? byId[openId] : null;
 
-  // The log prints its run line by line when a system opens.
+  // The log prints its run line by line when a system opens. Keyed on the
+  // id, not the track object: TRACKS is rebuilt every render, so depending
+  // on the object restarted the log on every tick and it never printed.
+  const logLength = track?.log.length ?? 0;
   useEffect(() => {
-    if (!track) return;
+    if (!openId) return;
+    const total = logLength;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setShown(track.log.length);
+      setShown(total);
       return;
     }
     setShown(0);
@@ -219,10 +223,10 @@ export default function Bench({
     const timer = window.setInterval(() => {
       n += 1;
       setShown(n);
-      if (n >= track.log.length) window.clearInterval(timer);
+      if (n >= total) window.clearInterval(timer);
     }, 200);
     return () => window.clearInterval(timer);
-  }, [track]);
+  }, [openId, logLength]);
 
   // Opening moves focus to Close and keeps the bubble in view; closing
   // hands focus back to the card that opened it. Escape closes.
