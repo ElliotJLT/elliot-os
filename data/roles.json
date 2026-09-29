@@ -9,12 +9,13 @@
       "role": "Head of Product (joined as employee #4)",
       "dates": "Feb 2022 – Aug 2026",
       "bullets": [
-        "Led product and a squad of six engineers. The AI STEM tutor went from first commit to the App Store in under a month and reached 10,000 students, 47% of monthly users back every week.",
-        "Marking evals took accuracy from a 67% bare-model baseline to over 99% against official mark schemes, and the DfE picked the tutor for its AI Tutoring Tools Pioneers Programme, 2nd of eight with a £300k grant.",
-        "Took the school hub to 850+ UK schools: 91% of students activate when their teacher rolls it out, against 23% on self-signup.",
-        "Joined as employee #4 and built the operation as we grew to 40. Did ISO 27001 and 9001 solo as DPO, which unlocked our first FTSE 100 contracts, and ran the revenue ops behind £1.5m ARR.",
-        "Built support around an AI assistant that resolved 91% of conversations and halved weekly support time with no dedicated hire. CSAT 84%, NPS 80+.",
-        "Lifted mentee-to-mentor conversion from 6% to 40%, keeping 120,000 students on one platform from school to university."
+        "Led product and six engineers: the AI tutor went from first commit to the App Store in under a month.",
+        "10,000 students by June 2026, with 47% of monthly users back every week.",
+        "Marking accuracy from 67% to over 99%; picked for the DfE's AI Tutoring Tools Pioneers Programme with a £300k grant.",
+        "School hub in 850+ UK schools: 91% of students activate when a teacher rolls it out, against 23% on their own.",
+        "As employee #4: ISO 27001 and 9001 solo as DPO, our first FTSE 100 contracts, and revenue ops behind £1.5m ARR.",
+        "Support run by an AI assistant that resolved 91% of conversations, with no dedicated hire. CSAT 84%, NPS 80+.",
+        "Mentee-to-mentor conversion from 6% to 40% across 120,000 students."
       ],
       "photo": "career/team-zero-gravity.jpg",
       "photoAlt": "The Zero Gravity team in the office, gathered round a sofa under the company sign",
@@ -35,9 +36,9 @@
       "role": "Product & Operations Lead",
       "dates": "Jan 2021 – Feb 2022",
       "bullets": [
-        "Led product and operations for the probate service, between customers, legal specialists and the case team.",
-        "Cut case-agent errors 69% and case handling from two weeks to four days, with guided intake, case tracking and integrations with HMCTS, HMRC and the banks.",
-        "Fixed the input errors that took 30% of solicitor time, so two solicitors could do what had needed five. NPS went from 20 to 80+.",
+        "Led product and operations for probate, between customers, legal specialists and the case team.",
+        "Case-agent errors down 69% and case handling from two weeks to four days, through HMCTS, HMRC and bank integrations.",
+        "Fixed the input errors eating 30% of solicitor time: two solicitors did the work of five, and NPS went from 20 to 80+.",
         "Wrote the vulnerable-customer framework the whole company adopted."
       ]
     },
@@ -48,9 +49,9 @@
       "role": "Co-Founder",
       "dates": "Apr 2020 – Jan 2021",
       "bullets": [
-        "Co-founded a volunteer-run charity in the first COVID wave. Day 1 was a WhatsApp group; day 10 was a four-sided marketplace in production.",
-        "Delivered 303,000 meals in 100 days across 146 hospitals and 223 restaurants, 97% on time, and raised £1.8m.",
-        "Grew the volunteer team from 6 to 120 with a hiring playbook other leads could run."
+        "Day 1 was a WhatsApp group; day 10 was a four-sided marketplace in production.",
+        "303,000 meals in 100 days to 146 hospitals, 97% on time, and £1.8m raised.",
+        "Volunteer team grown from 6 to 120 with a hiring playbook other leads could run."
       ]
     },
     {
@@ -60,10 +61,10 @@
       "role": "Founding Operator (#10)",
       "dates": "Oct 2018 – Sep 2020",
       "bullets": [
-        "Built CX and crisis operations from nothing: no CRM, no ticketing and no supplier contracts when I joined.",
-        "Held NPS above 90 through 400% year-on-year growth and the US launch, which hit its 12-week plan on the day.",
-        "Hired and trained the first 15 ops staff and tripled the international partner network.",
-        "Kept a 100% safety record through the Sri Lanka attacks and COVID closures."
+        "Built CX and crisis operations from nothing: no CRM, ticketing or supplier contracts.",
+        "NPS held above 90 through 400% growth and a US launch that hit its 12-week plan.",
+        "Hired and trained the first 15 ops staff, and tripled the international partner network.",
+        "100% safety record through the Sri Lanka attacks and COVID closures."
       ],
       "photo": "career/team-flash-pack.jpg",
       "photoAlt": "The Flash Pack team together in the office"

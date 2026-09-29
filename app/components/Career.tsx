@@ -9,7 +9,8 @@ const basePath = process.env.BASE_PATH || "";
 /**
  * Career as a timeline of panels, Zero Gravity first and Flash Pack last.
  * The rail draws down as the section is read; each logo lights as the line
- * reaches it and its card slides in from the rail side, once. Each bullet
+ * reaches it and its card slides in from the rail side, once. The words
+ * lead; a team photo runs full width under them. Each bullet
  * lights the same way, as the line draws level with it. A reference sits
  * under its role as a quote panel. Reduced motion shows the rail drawn and
  * everything in place.

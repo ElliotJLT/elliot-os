@@ -5762,8 +5762,10 @@ h2.mai-kick + p.muted,
   grid-template-columns: minmax(0, 1fr);
 }
 
+/* The team photo runs full width under the bullets, so they get the whole
+   card instead of sharing it with a narrow column. */
 .cr-photo {
-  margin: 0 26px 24px;
+  margin: 0 22px 22px;
   border-radius: 16px;
   overflow: hidden;
   aspect-ratio: 16 / 9;
@@ -5778,14 +5780,8 @@ h2.mai-kick + p.muted,
 }
 
 @media (min-width: 760px) {
-  .cr-card:has(.cr-photo) {
-    grid-template-columns: minmax(0, 1fr) minmax(220px, 32%);
-  }
-
   .cr-photo {
-    margin: 22px 22px 22px 0;
-    aspect-ratio: 3 / 2;
-    align-self: start;
+    aspect-ratio: 16 / 5;
   }
 }
 
