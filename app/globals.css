@@ -2100,7 +2100,7 @@ h2::before {
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 11px 12px 11px 22px;
+  padding: 11px 12px 11px 26px;
   box-shadow: 0 1px 2px rgba(52, 46, 41, 0.04),
     0 8px 24px rgba(52, 46, 41, 0.05);
 }
@@ -2112,7 +2112,9 @@ h2::before {
      little larger than the rest of the site's display type, and closer
      tracking so it reads as set rather than loose. */
   font-family: var(--display);
-  font-size: 26px;
+  /* 32px: at 26 the condensed face read smaller than the Get in touch
+     button beside it, so the CTA outweighed the name. */
+  font-size: 32px;
   line-height: 1;
   letter-spacing: -0.02em;
   text-decoration: none;
@@ -2487,7 +2489,7 @@ h2[id] {
 
 @media (max-width: 720px) {
   .mai-brand {
-    font-size: 23px;
+    font-size: 27px;
   }
 
   .mai-links {
