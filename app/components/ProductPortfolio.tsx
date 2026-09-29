@@ -154,13 +154,14 @@ const COMPANIES: Company[] = [
           "Move from keyword rules to AI flags, image recognition and hash matching, with one named person accountable for every case.",
         outcomes: [
           { n: "0", label: "missed safeguarding cases" },
+          { n: "86%", label: "fewer false alarms" },
+          { n: "~20", label: "cases a month, 1 in 10 at the highest severity" },
           { n: "2.3h", label: "average response to schools" },
-          { n: "Monthly", label: "safeguarding report to the board" },
         ],
         how: [
           "Regex flags first, then AI flags with Unitary image recognition, then hash matching.",
           "A kanban of cases, with automated outreach to schools.",
-          "Owned the safeguarding policy.",
+          "Owned the safeguarding policy, and reported to the board every month.",
         ],
         role: "Designated safeguarding lead; built the system",
         links: [],

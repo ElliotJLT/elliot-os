@@ -67,7 +67,8 @@ habit in regulated services, crisis delivery and consumer travel.
   - Safeguarding: designated safeguarding lead. Built message flagging
     from regex rules to AI flags, Unitary image recognition and hash
     matching, with a case kanban, automated outreach to schools and the
-    policy. No missed cases; average response to schools 2.3 hours;
+    policy. About 20 cases a month, 1 in 10 at the highest severity; none
+    missed; false alarms down 86%; average response to schools 2.3 hours;
     reported to the board monthly.
   - School-to-university journey: mentee-to-mentor conversion rose from 6%
     to 40%, keeping students on one platform; 120,000 students through it.
