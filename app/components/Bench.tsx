@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Line = { k: "cmd" | "info" | "ok" | "warn"; t: string };
 type Track = {
@@ -15,9 +15,10 @@ type Track = {
 };
 
 /**
- * The systems behind the products, as a bench: pick a track on the left,
- * the canvas draws its flow and the log prints its run. Every line in a log
- * is something that happened; nothing here is sample data.
+ * The systems behind the products, as a bento: every system on one screen
+ * as a card with a small drawn visual. Open one and it fills the whole
+ * bubble with its flow, its rules and its run log. Every line in a log is
+ * something that happened; nothing here is sample data.
  */
 export default function Bench({
   firstRun,
@@ -198,12 +199,17 @@ export default function Bench({
     },
   ];
 
-  const [id, setId] = useState(TRACKS[0].id);
-  const [shown, setShown] = useState(TRACKS[0].log.length);
-  const track = TRACKS.find((t) => t.id === id) ?? TRACKS[0];
+  const byId = Object.fromEntries(TRACKS.map((t) => [t.id, t]));
+  const [openId, setOpenId] = useState<string | null>(null);
+  const [shown, setShown] = useState(0);
+  const bubbleRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const lastCard = useRef<HTMLButtonElement | null>(null);
+  const track = openId ? byId[openId] : null;
 
-  // The log prints its run line by line when a track opens.
+  // The log prints its run line by line when a system opens.
   useEffect(() => {
+    if (!track) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setShown(track.log.length);
       return;
@@ -214,41 +220,161 @@ export default function Bench({
       n += 1;
       setShown(n);
       if (n >= track.log.length) window.clearInterval(timer);
-    }, 220);
+    }, 200);
     return () => window.clearInterval(timer);
-  }, [id, track.log.length]);
+  }, [track]);
+
+  // Opening moves focus to Close and keeps the bubble in view; closing
+  // hands focus back to the card that opened it. Escape closes.
+  useEffect(() => {
+    if (!openId) return;
+    closeRef.current?.focus({ preventScroll: true });
+    const r = bubbleRef.current?.getBoundingClientRect();
+    if (r && r.top < 104) bubbleRef.current?.scrollIntoView({ block: "start" });
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [openId]);
+
+  const open = (id: string, el: HTMLButtonElement) => {
+    lastCard.current = el;
+    setOpenId(id);
+  };
+  const close = () => {
+    setOpenId(null);
+    requestAnimationFrame(() => lastCard.current?.focus({ preventScroll: true }));
+  };
+
+  const card = (id: string, span: string, title: string, blurb: string, visual: React.ReactNode) => (
+    <button
+      type="button"
+      className={`bento-card ${span}`}
+      onClick={(e) => open(id, e.currentTarget)}
+      aria-haspopup="dialog"
+    >
+      <span className="bento-visual" aria-hidden="true">
+        {visual}
+      </span>
+      <span className="bento-title">{title}</span>
+      <span className="bento-blurb">{blurb}</span>
+      <span className="bento-open" aria-hidden="true">
+        Open →
+      </span>
+    </button>
+  );
+
+  const harness = byId["harness"];
+  const site = byId["this-site"];
 
   return (
-    <div className="bench">
-      <div className="bench-bar">
-        <span className="bench-dots" aria-hidden="true">
-          <i />
-          <i />
-          <i />
-        </span>
-        <span className="bench-path">built / bench / {track.id}</span>
-        <span className="bench-ready">ready</span>
+    <div className="bento" ref={bubbleRef}>
+      <div className="bento-grid" hidden={!!track}>
+        <div className="bento-intro">
+          <p className="bento-kick">
+            <strong>Build</strong> the harness
+          </p>
+          <p>Rules, state and checks the agents work inside, written once and inherited by the team.</p>
+        </div>
+        {card(
+          "harness",
+          "span-2",
+          "The harness",
+          "Anthropic's long-running agent patterns, and where each one already ran at Zero Gravity.",
+          <span className="v-map">
+            {harness.steps.slice(0, 4).map((s) => (
+              <span key={s.name}>
+                <em>{s.name}</em>
+                <i>→</i>
+                <b>{s.note}</b>
+              </span>
+            ))}
+          </span>,
+        )}
+        {card(
+          "ways-of-working",
+          "",
+          "Ways of working",
+          "Product engineers, no requirements layer. The prototype is the spec.",
+          <span className="v-stat">
+            <b>120</b>
+            <em>lines in the median PR</em>
+            <em>1.8h to merge</em>
+          </span>,
+        )}
+        {card(
+          "agent-fleet",
+          "",
+          "Agent fleet",
+          "Monitoring, triage and fixes done by 06:00. Agents route; people decide.",
+          <span className="v-log">
+            <span>✓ error triage → fix PR</span>
+            <span>✓ review agent verified it</span>
+            <span>· pulse posted for Friday</span>
+          </span>,
+        )}
+        {card(
+          "operating-model",
+          "",
+          "Operating model",
+          "Platform, domain and subject-expert rings, with governance and cost built in.",
+          <span className="v-rings">
+            <i>experts</i>
+            <i>domain</i>
+            <i>platform</i>
+          </span>,
+        )}
+
+        <div className="bento-intro bento-intro-run">
+          <p className="bento-kick">
+            <strong>Run</strong> it, and keep it honest
+          </p>
+          <p>Checks that gate every change, and a record of what they caught.</p>
+        </div>
+        {card(
+          "evals",
+          "",
+          "Evals",
+          "Marked against the exam board's own mark schemes. Teacher flags become cases.",
+          <span className="v-checks">
+            <span><b>✓</b> mark scheme</span>
+            <span><b>✓</b> Socratic spec</span>
+            <span><b>!</b> teacher flag → new case</span>
+          </span>,
+        )}
+        {card(
+          "this-site",
+          "",
+          "This site",
+          "The agent that keeps this site current, gated by its own eval suite in CI.",
+          <span className="v-bars">
+            <span>
+              <em>first run</em>
+              <i style={{ "--w": `${(firstRun.passed / firstRun.total) * 100}%` } as React.CSSProperties} />
+              <b>{firstRun.passed}/{firstRun.total}</b>
+            </span>
+            <span>
+              <em>now</em>
+              <i style={{ "--w": `${(latestRun.passed / latestRun.total) * 100}%` } as React.CSSProperties} />
+              <b>{latestRun.passed}/{latestRun.total}</b>
+            </span>
+          </span>,
+        )}
       </div>
 
-      <div className="bench-body">
-        <nav className="bench-tracks" aria-label="Systems">
-          <span className="bench-label">Systems</span>
-          {TRACKS.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              className="bench-track"
-              aria-pressed={t.id === id}
-              onClick={() => setId(t.id)}
-            >
-              <span className="bench-track-name">{t.name}</span>
-              <span className="bench-track-meta">{t.meta}</span>
+      {track && (
+        <div className="bento-full" role="dialog" aria-label={track.name}>
+          <div className="bento-full-head">
+            <div>
+              <span className="bento-kick-sm">{track.meta}</span>
+              <p className="bento-full-title">{track.name}</p>
+            </div>
+            <button type="button" className="bento-close" ref={closeRef} onClick={close}>
+              Close <span aria-hidden="true">×</span>
             </button>
-          ))}
-        </nav>
-
-        <div className="bench-main">
-          <div className="bench-canvas" key={track.id}>
+          </div>
+          <div className="bench-canvas">
             <div className="bench-canvas-head">
               <span>{track.name}</span>
               <span>{track.where}</span>
@@ -258,10 +384,7 @@ export default function Bench({
               style={{ "--n": track.steps.length } as React.CSSProperties}
             >
               {track.steps.map((s, i) => (
-                <li
-                  key={s.name}
-                  style={{ "--i": i } as React.CSSProperties}
-                >
+                <li key={s.name} style={{ "--i": i } as React.CSSProperties}>
                   <span className="bench-step-name">{s.name}</span>
                   <span className="bench-step-note">{s.note}</span>
                 </li>
@@ -277,7 +400,6 @@ export default function Bench({
               ))}
             </div>
           </div>
-
           <div className="bench-log" aria-live="polite">
             {track.log.slice(0, shown).map((l, i) => (
               <div key={`${track.id}-${i}`} className={`bench-line bench-${l.k}`}>
@@ -289,12 +411,7 @@ export default function Bench({
             ))}
           </div>
         </div>
-      </div>
-
-      <div className="bench-foot">
-        <span>Six systems, one bench</span>
-        <span>Pick one on the left: the canvas draws it, the log prints its run</span>
-      </div>
+      )}
     </div>
   );
 }
