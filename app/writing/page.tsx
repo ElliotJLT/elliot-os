@@ -97,11 +97,25 @@ export default async function Writing() {
             g.posts.length > 0 && (
               <Reveal key={g.id}>
                 <div id={g.id} className="anchor-target" />
-                <h2 className="mai-kick rv-settle">{g.heading}</h2>
-                <p className="muted rv-settle" style={{ margin: "0 0 22px" }}>
-                  {g.standfirst}
-                </p>
-                <div className="wr-grid">
+                <h2 className="mai-kick rv-settle">{g.kick}</h2>
+                {/* Where the theme's short name and full label match, the
+                    standfirst takes the headline so it isn't said twice. */}
+                {g.heading.toLowerCase() === g.kick ? (
+                  <p className="sec-title rv-settle">{g.standfirst}</p>
+                ) : (
+                  <>
+                    <p className="sec-title rv-settle">{g.heading}</p>
+                    {g.standfirst && (
+                      <p className="muted rv-settle section-line">{g.standfirst}</p>
+                    )}
+                  </>
+                )}
+                {/* Two or four posts sit two across, so a row never ends on an
+                    empty third column. */}
+                <div
+                  className="wr-grid"
+                  data-cols={g.posts.length % 3 === 0 ? 3 : 2}
+                >
                   {g.posts.map((p, idx) => (
                     <HoverLabel label="Read it →" key={p.link}>
                       <a
@@ -145,9 +159,8 @@ export default async function Writing() {
           <h2 id="off-the-clock" className="mai-kick rv-settle">
             off the clock
           </h2>
-          <p className="muted rv-settle" style={{ margin: "0 0 22px" }}>
-            Writing came first, long before the AI work, and I still do it for
-            the fun of it.
+          <p className="sec-title rv-settle">
+            Writing came first, and I still do it for the fun of it.
           </p>
         </Reveal>
         <Reveal>

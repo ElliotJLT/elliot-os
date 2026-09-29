@@ -92,12 +92,14 @@ export const GROUPS: [heading: string, standfirst: string, keys: string[]][] = [
 ];
 
 const EARLIER: [string, string] = [
-  "Earlier",
   "Pieces from before the AI work took over the writing.",
+  "",
 ];
 
 export type PostGroup = {
   id: string;
+  /** The eyebrow: the theme's short name, as the other pages use. */
+  kick: string;
   heading: string;
   standfirst: string;
   posts: Post[];
@@ -111,10 +113,17 @@ export function groupPosts(posts: Post[]): PostGroup[] {
       (p) => !taken.has(p.link) && keys.some((k) => p.title.includes(k)),
     );
     for (const p of hits) taken.add(p.link);
-    return { id: THEMES[i]?.id ?? `group-${i + 1}`, heading, standfirst, posts: hits };
+    return {
+      id: THEMES[i]?.id ?? `group-${i + 1}`,
+      kick: THEMES[i]?.short ?? "",
+      heading,
+      standfirst,
+      posts: hits,
+    };
   });
   groups.push({
     id: "earlier",
+    kick: "earlier",
     heading: EARLIER[0],
     standfirst: EARLIER[1],
     posts: live.filter((p) => !taken.has(p.link)),

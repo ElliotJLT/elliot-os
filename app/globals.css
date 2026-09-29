@@ -3323,6 +3323,17 @@ main:has(> .band) {
   .wr-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .wr-grid[data-cols="2"] {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Two across, the blog's tall card ratio would make each image nearly
+     square at half the page; a landscape crop keeps the row's height in
+     line with the three-across groups. */
+  .wr-grid[data-cols="2"] .wr-shot {
+    aspect-ratio: 16 / 10;
+  }
 }
 
 .wr-card {
@@ -4845,9 +4856,45 @@ main:has(> .band) {
   }
 }
 
-/* /loops "how it runs": boxes and thin arrows in the page's own ink. */
+/* /loops "how it runs": boxes and thin arrows in the page's own ink, held
+   in the same panel as every other component on the site. */
 .loop-flow {
   margin: 4px 0 28px;
+  padding: 28px 34px 30px;
+  background: var(--panel);
+  border-radius: 26px;
+  box-shadow: var(--lift);
+}
+
+/* /loops ledger: table, falsification test and failure log in one panel. */
+.loop-ledger-panel {
+  margin: 8px 0 28px;
+  padding: 14px 30px 18px;
+  background: var(--panel);
+  border-radius: 26px;
+  box-shadow: var(--lift);
+}
+
+.loop-ledger-panel .loop-ledger {
+  margin: 0;
+}
+
+.loop-ledger-panel .loop-ledger tbody tr:last-child > * {
+  border-bottom: none;
+}
+
+.loop-ledger-test {
+  margin: 0;
+  padding: 16px 0;
+  border-top: 1px dashed var(--line-2);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.loop-ledger-panel .failure-log {
+  margin: 0;
+  border-top: 1px dashed var(--line-2);
 }
 
 .loop-flow svg {
@@ -7240,4 +7287,18 @@ a.bento-card {
   min-width: 0;
 }
 
+/* Home: the link under the three latest pieces to the full /writing index. */
+.home-more {
+  display: flex;
+  justify-content: flex-start;
+  margin: 8px 0 48px;
+}
 
+.loop-ledger-panel .failure-log li {
+  padding: 18px 0;
+  border-bottom: 1px dashed var(--line-2);
+}
+
+.loop-ledger-panel .failure-log li:last-child {
+  border-bottom: none;
+}
