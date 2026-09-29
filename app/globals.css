@@ -3303,7 +3303,9 @@ main:has(> .band) {
   letter-spacing: -0.022em;
   color: var(--ink);
   margin: 12px 0 22px;
-  text-wrap: balance;
+  /* pretty, not balance: balance halved the /writing headline into two
+     short lines and left the right of the page empty. */
+  text-wrap: pretty;
 }
 
 .wr-grid {
@@ -5085,7 +5087,8 @@ main:has(> .band) {
   color: var(--ink);
   margin: 2px 0 18px;
   max-width: none;
-  text-wrap: balance;
+  /* pretty, like .wr-title: balance turned lines back early on phones. */
+  text-wrap: pretty;
 }
 
 .sec-title:last-child {
