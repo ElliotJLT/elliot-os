@@ -14,6 +14,9 @@ export type Role = {
   photoAlt?: string;
   /** CSS object-position for the photo's crop, where the default cuts faces. */
   photoPosition?: string;
+  /** Where Elliot is in the photo, as fractions of the image's width and
+   * height (r of its width), so a marker can be drawn round his face. */
+  face?: { x: number; y: number; r: number };
   /** A reference from someone who managed Elliot there, verbatim. */
   quote?: { paras: string[]; name: string; role: string };
 };

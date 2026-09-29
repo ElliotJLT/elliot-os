@@ -5870,6 +5870,41 @@ h2.mai-kick + p.muted,
   aspect-ratio: 16 / 9;
 }
 
+/* Marker-pen loop round Elliot's face, drawn once the photo is in view. */
+.cr-photo {
+  position: relative;
+}
+
+.cr-mark {
+  position: absolute;
+  pointer-events: none;
+  overflow: visible;
+  transform: rotate(-8deg);
+}
+
+.cr-mark path {
+  fill: none;
+  stroke: var(--accent-ink);
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.9s cubic-bezier(0.6, 0.05, 0.3, 1) 0.2s;
+}
+
+.cr-mark[data-drawn] path {
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cr-mark path {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+}
+
 .cr-photo img {
   display: block;
   width: 100%;

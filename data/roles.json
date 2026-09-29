@@ -40,6 +40,11 @@
       ],
       "photo": "career/team-zero-gravity.jpg",
       "photoAlt": "The Zero Gravity team in the office, gathered round a sofa under the company sign",
+      "face": {
+        "x": 0.264,
+        "y": 0.292,
+        "r": 0.042
+      },
       "quote": {
         "paras": [
           "Elliot is the ultimate startup operator — a genuine Swiss Army knife who has made an impact across customer success, operations and product at Zero Gravity.",
@@ -122,7 +127,12 @@
       ],
       "photo": "career/team-flash-pack.jpg",
       "photoAlt": "The Flash Pack team together in the office",
-      "photoPosition": "50% 12%"
+      "photoPosition": "50% 12%",
+      "face": {
+        "x": 0.286,
+        "y": 0.156,
+        "r": 0.042
+      }
     }
   ],
   "mentoring": [
