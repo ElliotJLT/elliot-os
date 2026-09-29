@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { getRepos, FEATURED } from "@/lib/github";
 import Reveal from "../components/Reveal";
 import HoverLabel from "../components/HoverLabel";
 import ProductPortfolio from "../components/ProductPortfolio";
 import Bench from "../components/Bench";
+import FoldHero from "../components/FoldHero";
 import { getEvals } from "@/lib/evals";
 
 export const metadata = { title: "Built · Elliot Little" };
@@ -88,25 +88,19 @@ export default async function Built() {
 
   return (
     <main className="built-page">
-      <div className="mai">
-        <Reveal immediate>
-          <header className="wr-head">
-            <div className="wr-head-main">
-              <span className="mai-kick rv-settle">Built</span>
-              <h1 className="wr-title rv-settle">
-                I build the product and the way the team ships it.
-              </h1>
-            </div>
-            <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              Find the wider problem beneath the request, then stay close to
-              the code and the team until users can depend on it.
-            </p>
-          </header>
-        </Reveal>
+      <FoldHero
+        src={`${basePath}/building-with-the-team.jpg`}
+        alt="Elliot leaning over a laptop while working with another person"
+        caption="Working through the prototype with the person at the keyboard."
+        kicker="Built"
+        title="I build the product and the way the team ships it."
+        standfirst="Find the wider problem beneath the request, then stay close to the code and the team until users can depend on it."
+      />
+      <div className="mai built-body">
 
         <Reveal>
           <h2 id="production" className="mai-kick rv-settle">
-            selected product work
+            01 · what I shipped
           </h2>
           <p className="sec-title rv-settle">Seven things I&apos;ve built, newest first.</p>
           <p className="muted rv-settle section-line">
@@ -119,26 +113,10 @@ export default async function Built() {
           </div>
         </Reveal>
 
-        <Reveal>
-          <figure className="build-photo build-photo-built rv-settle">
-            <div className="build-photo-frame">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`${basePath}/building-with-the-team.jpg`}
-                alt="Elliot leaning over a laptop while working with another person"
-                width={1920}
-                height={1280}
-              />
-            </div>
-            <figcaption>
-              I work through the prototype with the person at the keyboard.
-            </figcaption>
-          </figure>
-        </Reveal>
 
         <Reveal>
           <h2 id="systems" className="mai-kick rv-settle">
-            how the work runs
+            02 · how the work runs
           </h2>
           <p className="sec-title rv-settle">
             The harness around the agents, and the team around the harness.
@@ -158,12 +136,12 @@ export default async function Built() {
         <div id="independent-work" className="anchor-target" />
         <Reveal>
           <h2 id="research" className="mai-kick rv-settle">
-            research
+            03 · in the open
           </h2>
-          <p className="sec-title rv-settle">Published checking work.</p>
+          <p className="sec-title rv-settle">What I&apos;m building now, where you can check it.</p>
           <p className="muted rv-settle section-line">
-            The human in the loop, and safeguarding for under-18s. Method,
-            results and limitations open.
+            Two pieces of published research, the tools I use on my own agent
+            work, and the commits behind them.
           </p>
         </Reveal>
         <Reveal>
@@ -225,13 +203,9 @@ export default async function Built() {
         </Reveal>
 
         <Reveal>
-          <h2 id="agent-tools" className="mai-kick rv-settle">
-            agent tools
-          </h2>
-          <p className="sec-title rv-settle">Open-source tools for my own agent work.</p>
-          <p className="muted rv-settle section-line">
-            Skills, hooks, MCP servers and a local career system.
-          </p>
+          <h3 id="agent-tools" className="built-sub rv-settle">
+            Agent tools: skills, hooks, MCP servers and a local career system
+          </h3>
         </Reveal>
         <Reveal>
           <div className="toollist rv-settle">
@@ -264,7 +238,7 @@ export default async function Built() {
         </Reveal>
 
         <Reveal>
-          <h2 className="mai-kick rv-settle">GitHub activity</h2>
+          <h3 className="built-sub rv-settle">The commits behind it</h3>
           <div className="rv-settle built-snake">
             <figure className="github-snake">
               <a
@@ -300,17 +274,6 @@ export default async function Built() {
           </div>
         </Reveal>
 
-        <Reveal>
-          <h2 className="mai-kick rv-settle">ideas or feedback?</h2>
-          <p className="muted rv-settle section-line">
-            The system I run my own work on is private; how it works is on{" "}
-            <Link href="/loops">/loops</Link>. Anything else:{" "}
-            <a href="mailto:elliotjlittle@gmail.com">
-              elliotjlittle@gmail.com
-            </a>
-            .
-          </p>
-        </Reveal>
       </div>
     </main>
   );

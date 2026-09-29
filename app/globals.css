@@ -6778,3 +6778,198 @@ h2.mai-kick + p.muted,
     animation: none;
   }
 }
+
+/* ============================================================= fold hero
+   /built opens on the team photo, full-bleed with the title on it. Over
+   the first stretch of scroll (--fold 0 → 1, set by FoldHero.tsx) it folds
+   in to the content width with rounded corners, and the page slides up. */
+main:has(> .fold) {
+  padding-top: 0;
+}
+
+.fold {
+  --fold: 0;
+  position: relative;
+  height: 175vh;
+}
+
+.fold-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Full-bleed at 0; at 1, inset to the 1120px content column and 96px
+   from the top, 40px from the bottom, with a 28px radius. */
+.fold-photo {
+  --side: max(26px, calc((100vw - 1120px) / 2 + 26px));
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  clip-path: inset(
+    calc(var(--fold) * 96px) calc(var(--fold) * var(--side))
+      calc(var(--fold) * 40px) calc(var(--fold) * var(--side))
+      round calc(var(--fold) * 28px)
+  );
+}
+
+.fold-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+  transform: scale(calc(1.06 - var(--fold) * 0.06));
+}
+
+/* A scrim at the foot of the photo so the cream title reads on it. */
+.fold-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(22, 18, 14, 0.82) 0%,
+    rgba(22, 18, 14, 0.5) 42%,
+    rgba(22, 18, 14, 0) 70%
+  );
+  pointer-events: none;
+}
+
+.fold-photo figcaption {
+  position: absolute;
+  z-index: 1;
+  right: calc(var(--fold) * var(--side) + 22px);
+  bottom: calc(var(--fold) * 40px + 18px);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: rgba(255, 246, 237, 0.8);
+}
+
+.fold-copy {
+  position: absolute;
+  z-index: 1;
+  left: max(26px, calc((100vw - 1120px) / 2 + 26px));
+  right: max(26px, calc((100vw - 1120px) / 2 + 26px));
+  bottom: calc(40px + 56px);
+  padding-left: calc(var(--fold) * 36px);
+  color: #fff6ed;
+}
+
+.fold-kick {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff6ed;
+  margin-bottom: 14px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
+}
+
+.fold-title {
+  margin: 0 0 16px;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: clamp(44px, 6vw, 84px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  color: #fff6ed;
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+.fold-sub {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.5;
+  color: rgba(255, 246, 237, 0.88);
+  max-width: 52ch;
+}
+
+.built-body {
+  position: relative;
+}
+
+/* Chapter sub-heads inside 03. */
+.built-sub {
+  all: unset;
+  display: block;
+  margin: 40px 0 14px;
+  font-family: var(--serif);
+  font-size: 21px;
+  color: var(--ink);
+}
+
+.built-sub::before,
+.built-sub::after {
+  content: none;
+}
+
+/* Phones and reduced motion: the folded state, no pin. */
+@media (max-width: 899px) {
+  .fold {
+    height: auto;
+    padding-top: 84px;
+  }
+
+  .fold-pin {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .fold-photo {
+    position: relative;
+    inset: auto;
+    margin: 0 20px;
+    border-radius: 22px;
+    overflow: hidden;
+    clip-path: none;
+    aspect-ratio: 4 / 5;
+  }
+
+  .fold-photo figcaption {
+    right: 16px;
+    bottom: 14px;
+    left: 16px;
+  }
+
+  .fold-copy {
+    position: relative;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    padding: 24px 26px 0;
+    color: var(--ink);
+  }
+
+  .fold-kick {
+    color: var(--accent-ink);
+  }
+
+  .fold-title {
+    color: var(--ink);
+  }
+
+  .fold-sub {
+    color: var(--muted);
+  }
+
+  .fold-photo::after {
+    background: linear-gradient(to top, rgba(22, 18, 14, 0.55), rgba(22, 18, 14, 0) 30%);
+  }
+
+  .built-body {
+    margin-top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) and (min-width: 900px) {
+  .fold {
+    height: 100vh;
+  }
+}
