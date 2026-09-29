@@ -2,29 +2,27 @@
 
 import { useState } from "react";
 
-type View = "problem" | "bet";
 
 type Product = {
   order: string;
   name: string;
-  ownership: string;
-  problem: {
-    title: string;
-    paragraphs: string[];
-  };
-  bet: {
-    title: string;
-    paragraphs: string[];
-    proof?: string;
-    lesson?: string;
-  };
+  /** What it is and who it's for, in one plain sentence. */
+  summary: string;
+  /** What it achieved, as a number or short phrase and a plain label. */
+  outcomes: { n: string; label: string }[];
+  /** How: three short bullets at most. */
+  how: string[];
+  /** Elliot's part, one line. */
+  role: string;
+  lesson?: string;
   links: { label: string; href: string }[];
+  /** A screenshot or photo shown when the card is open. */
+  image?: { src: string; alt: string };
 };
 
 type Company = {
   name: string;
-  meta: string;
-  /** Years, for the card eyebrow. The role is in meta and on the CV. */
+  /** Years, for the card eyebrow. */
   stint: string;
   logo: string;
   products: Product[];
@@ -33,316 +31,299 @@ type Company = {
 const COMPANIES: Company[] = [
   {
     name: "Farewill",
-    meta: "Product & Operations Lead · 2021–22",
     stint: "2021–22",
     logo: "career/farewill.jpeg",
     products: [
       {
         order: "01",
         name: "Probate operations",
-        ownership: "Led product, operations and workflow design",
-        problem: {
-          title:
-            "Families could not see the next step, and legal specialists spent expert time on administration.",
-          paragraphs: [
-            "Families must deal with assets, debts, tax, banks and the courts while grieving. Legal specialists spend hours chasing missing information and answering status questions instead of making the decisions that need their judgement.",
-          ],
-        },
-        bet: {
-          title:
-            "We gave each case a structured path and the legal team an operating system.",
-          paragraphs: [
-            "I worked between customers, legal specialists and operations. We built guided intake that populated case data, automation and audit logs around the legal workflow, and a tracker that showed the next action and helped the team estimate the specialist time a case would need.",
-            "I also shipped integrations with HMCTS, HMRC and banking services, reserving the legal team for decisions that needed their judgement.",
-          ],
-          proof:
-            "Agent errors down 69% · case handling from two weeks to four days",
+        summary:
+          "Farewill's probate service, which helps grieving families through the legal work of settling an estate.",
+        outcomes: [
+          { n: "69%", label: "fewer errors by case agents" },
+          { n: "2 weeks → 4 days", label: "to handle a case" },
+        ],
+        how: [
+          "A guided intake, and a tracker showing every case's next step.",
+          "Integrations with the courts (HMCTS), HMRC and the banks.",
+          "A framework for vulnerable customers, adopted company-wide.",
+        ],
+        role: "Led product and operations",
+        image: {
+          src: "work/farewill.jpg",
+          alt: "Farewill's online will service, with its Trustpilot rating and the steps to continue online",
         },
         links: [
-          {
-            label: "view the service",
-            href: "https://farewill.com/apply-for-probate",
-          },
+          { label: "view the service", href: "https://farewill.com/apply-for-probate" },
         ],
       },
     ],
   },
   {
     name: "Zero Gravity",
-    meta: "Founding hire #4 · Head of Product · 2022–26",
     stint: "2022–26",
     logo: "career/zero-gravity.jpeg",
     products: [
       {
         order: "02",
         name: "Learning pathways",
-        ownership: "Led product and design with the engineering team",
-        problem: {
-          title: "Students had no useful next step between mentoring sessions.",
-          paragraphs: [
-            "Some students waited for a mentor; others had weeks between conversations. During that time the platform gave them little reason to return. Employer partners also needed a way to prepare more students for the opportunities they funded.",
-          ],
-        },
-        bet: {
-          title: "Partner-funded learning paths filled the gap.",
-          paragraphs: [
-            "In 2023 I led the team that shipped staged courses for partners including Accenture, HSBC, KPMG and Snap. They combined video, Duolingo-style progression, quizzes and an early AI skills check.",
-            "The product gave students a self-serve layer alongside mentoring and gave commercial partners a concrete way to fund access and preparation.",
-          ],
-          lesson:
-            "Students did not return to the library enough. That miss shaped Career Co-pilot: bring the next useful thing to the student instead of waiting for them to browse.",
-        },
+        summary:
+          "Short, partner-funded courses that gave students something useful to do between mentoring sessions.",
+        outcomes: [],
+        how: [
+          "Built with partners including Accenture, HSBC, KPMG and Snap.",
+          "Video, bite-size progression, quizzes and an early AI skills check.",
+        ],
+        role: "Led product and design",
+        lesson:
+          "Students didn't come back to browse. That miss shaped Career Co-pilot: bring the next useful thing to the student.",
         links: [
-          {
-            label: "see learning at Zero Gravity",
-            href: "https://www.zerogravity.co.uk/",
-          },
+          { label: "see learning at Zero Gravity", href: "https://www.zerogravity.co.uk/" },
         ],
       },
       {
         order: "03",
         name: "Career Co-pilot",
-        ownership: "Led product, design and team delivery",
-        problem: {
-          title:
-            "Students had to know what help they needed and where to find it.",
-          paragraphs: [
-            "We had built mentors, learning, opportunities and community advice into separate parts of the product. Students had to know what they needed and where to find it before Zero Gravity could help. Generic CV tools also replaced specific evidence with the same polished language.",
-          ],
-        },
-        bet: {
-          title: "Career Co-pilot turned the catalogue into a guided next step.",
-          paragraphs: [
-            "I designed and led the first end-to-end AI product on the platform. It used a student’s CV and Zero Gravity profile to build the CV with them, suggest relevant mentors and learning, retrieve useful community posts and answer career questions against platform knowledge.",
-            "The CV grew with the student, and the co-pilot brought the next useful part of Zero Gravity into the conversation.",
-          ],
-          proof: "First end-to-end AI product on the Zero Gravity platform",
-        },
+        summary:
+          "An AI career assistant that builds a student's CV with them and points them to the right mentors and learning.",
+        outcomes: [{ n: "First", label: "end-to-end AI product on the platform" }],
+        how: [
+          "Builds the CV from what the student has actually done, never invented experience.",
+          "Suggests mentors, learning and useful community posts.",
+          "Answers career questions from the platform's own knowledge.",
+        ],
+        role: "Led product, design and delivery",
         links: [
-          {
-            label: "hear the podcast",
-            href: "https://open.spotify.com/episode/3D8quBCXrMNgIF87czhux3",
-          },
+          { label: "hear the podcast", href: "https://open.spotify.com/episode/3D8quBCXrMNgIF87czhux3" },
         ],
       },
       {
         order: "04",
         name: "AI STEM tutor",
-        ownership: "Led product and design · wrote 28% of merged code",
-        problem: {
-          title:
-            "Students could get an AI-generated answer in seconds. Teachers could not see whether their students understood the method.",
-          paragraphs: [
-            "Generic AI tools complete the work when a student asks, then hand over the final answer when pushed. Reading a solution is passive, so the learning stops there. A teacher with thirty students cannot coach each step or read every chat, and loses the evidence they need to tell whether a student understands the method or has copied one.",
-            "The stakes are exam marks. A tutor that confidently teaches something the mark scheme will penalise is worse than no tutor, because the student cannot tell and finds out in the exam hall.",
-          ],
-        },
-        bet: {
-          title:
-            "The tutor coaches towards the answer and refuses to hand it over.",
-          paragraphs: [
-            "The Socratic method is architectural, not a prompt: the tutor asks the next question until the student gets there themselves, and cannot be talked into handing over the answer. Coaching, practice, marking and assignments run as separate agents, each with its own pedagogy and evaluator. Marking is tested against real past papers and official mark schemes, and it recognises alternative methods the way a teacher would. A student can type the question or snap a photo of handwritten working.",
-            "Every answer is grounded in the exact exam board and course a student is taught. It remembers what each student understands, where they slipped and what helped, and adjusts next time. We launched across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB, direct to students and through the school hub below: 10,000 students by June 2026.",
-            "Built to the DfE's 2026 generative AI product safety standards for under-18s: content guardrails, session cut-offs, usage limits for younger students, the tutor never presenting itself as human, and a safeguarding concern cutting the session and escalating to a named person rather than a transcript dump. Student data is never used to train external models. Eleven weeks after launch, the government selected us for its AI Tutoring Tools Pioneers Programme, eight companies chosen nationally to test safe AI tutoring in schools. We placed 2nd, ahead of frontier US labs and the largest UK curriculum incumbents.",
-          ],
-          proof:
-            "~67% → 99%+ on internal marking evals · App Store in under a month · 2nd of 8 in the DfE Pioneers Programme",
+        summary:
+          "An AI tutor for GCSE and A-level students that coaches them to the answer instead of handing it over.",
+        outcomes: [
+          { n: "2nd of 8", label: "in the UK government's AI tutoring programme" },
+          { n: "10,000", label: "students by June 2026" },
+          { n: "Under a month", label: "from first commit to the App Store" },
+        ],
+        how: [
+          "Asks the next question until the student gets there, and won't give the answer away.",
+          "Marks work against the exam boards' own mark schemes.",
+          "Built to the Department for Education's safety standards for under-18s.",
+        ],
+        role: "Led product and design, and wrote 28% of the code",
+        image: {
+          src: "work/tutor.jpg",
+          alt: "Two screens of the Zero Gravity tutor app: the home screen asking what you want to learn today, and the subject picker",
         },
         links: [
-          {
-            label: "view the product",
-            href: "https://www.zerogravity.co.uk/tutor",
-          },
-          {
-            label: "App Store",
-            href: "https://apps.apple.com/gb/app/zero-gravity-tutor/id6760364095",
-          },
-          {
-            label: "trust and safeguarding",
-            href: "https://www.zerogravity.co.uk/tutor/trust",
-          },
+          { label: "view the product", href: "https://www.zerogravity.co.uk/tutor" },
+          { label: "App Store", href: "https://apps.apple.com/gb/app/zero-gravity-tutor/id6760364095" },
+          { label: "trust and safeguarding", href: "https://www.zerogravity.co.uk/tutor/trust" },
         ],
       },
       {
         order: "05",
         name: "School hub",
-        ownership: "Led product and design · the B2B layer on the tutor",
-        problem: {
-          title:
-            "One teacher, thirty students, one homework. They found out who was stuck at the next assessment, weeks after it mattered.",
-          paragraphs: [
-            "Homework help from a chatbot is a black box: the teacher sees a finished answer and nothing of the thinking. Coaching each student at their own level is what every teacher would do with the time, and no one has it. Interventions that could change a grade happen after the window has closed.",
-            "Schools also cannot say yes to AI without paper: a DPIA, a data lead's questions, a governor asking why. The product had to be defensible before it could be useful.",
-          ],
-        },
-        bet: {
-          title:
-            "Same homework for the class, different help for each student, and the teacher sees who needs them before the next lesson.",
-          paragraphs: [
-            "Teachers build homework from their own material and send it in a click. Every student does the same questions and is coached through them at their own level. As the work comes in, the teacher sees who has it, who needs another go and who is ready for more, the same day rather than at the next assessment. A weekly summary per class names the gap, the students to nudge and the ones to stretch. It drafts; the teacher decides.",
-            "Heads of department see which topics are dragging a class or a school, by subject, while there is still time to act. A lesson builder turns a topic and a level into a plan, slides and a worksheet grounded in the specification, tuned by the misconceptions the tutor has already seen. Access is scoped by role: a subject teacher, a form tutor and a senior leader each see what their job needs, and safeguarding flags go only to the staff the school names.",
-            "Deployment is teachers first, class by class, with whole-school access agreed with leadership. The DPIA pack, data flow maps and the mapping to the DfE 2026 standards are written before a data lead asks for them, because data protection is the thing that stops a school saying yes.",
-          ],
-          proof:
-            "850+ UK schools · 91% student activation via school referral · a named teacher on every flag",
-        },
-        links: [
-          {
-            label: "for teachers",
-            href: "https://www.zerogravity.co.uk/tutor/teachers",
-          },
-          {
-            label: "for school leaders",
-            href: "https://www.zerogravity.co.uk/tutor/school-leaders",
-          },
+        summary:
+          "The teacher's side of the tutor: one homework for the class, help at each student's level, and the teacher sees who's stuck the same day.",
+        outcomes: [
+          { n: "850+", label: "UK schools" },
+          { n: "91%", label: "of students active when their school referred them" },
         ],
+        how: [
+          "Homework built from the teacher's own material and sent in a click.",
+          "A weekly summary per class: who to nudge, who to stretch.",
+          "Data-protection paperwork ready before a school asks for it.",
+        ],
+        role: "Led product and design",
+        links: [
+          { label: "for teachers", href: "https://www.zerogravity.co.uk/tutor/teachers" },
+          { label: "for school leaders", href: "https://www.zerogravity.co.uk/tutor/school-leaders" },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Flash Pack",
+    stint: "2018–20",
+    logo: "career/flash-pack.jpeg",
+    products: [
+      {
+        order: "06",
+        name: "Flash Pack Foundation",
+        summary:
+          "Flash Pack's social-impact arm, set up so the trips gave back to the places they visited.",
+        outcomes: [{ n: "Co-founded", label: "in 2019" }],
+        how: [
+          "Grassroots partners in education, human rights, gender empowerment and animal welfare.",
+          "A carbon plan aimed at making the company carbon neutral.",
+          "Refillable bottles instead of single-use plastic on every trip.",
+        ],
+        role: "Co-founder",
+        image: {
+          src: "work/flash-pack-foundation.jpg",
+          alt: "The Flash Pack Foundation banner: a polar bear asleep on the ice, with the line small steps to big change",
+        },
+        links: [],
+      },
+      {
+        order: "07",
+        name: "CX and crisis operations",
+        summary:
+          "The customer and crisis operations behind Flash Pack's small-group trips for solo travellers in their 30s and 40s.",
+        outcomes: [
+          { n: "400%", label: "year-on-year growth" },
+          { n: "10 → 160", label: "people, across 30+ markets" },
+          { n: "90+", label: "NPS, held through the US launch" },
+        ],
+        how: [
+          "Built the customer and crisis operations as the company scaled.",
+          "Owned the APAC and EMEA trip accounts.",
+        ],
+        role: "Founding operator, hire #8",
+        image: {
+          src: "work/flash-pack.jpg",
+          alt: "A Flash Pack trip page for Borneo: Into the Jungle, with photos of rainforest, orangutans and a reef",
+        },
+        links: [],
       },
     ],
   },
 ];
 
+// Newest first: the tutor and its school hub, then back through the career.
+const ORDER = [
+  "AI STEM tutor",
+  "School hub",
+  "Career Co-pilot",
+  "Learning pathways",
+  "Probate operations",
+  "Flash Pack Foundation",
+  "CX and crisis operations",
+];
+
+/**
+ * The work as a stack of slim cards: company, product, the bet in a line and
+ * the headline proof. One opens at a time, showing the problem, the bet in
+ * full, the proof and a screenshot. Everything is in the page; closed cards
+ * only collapse it.
+ */
 export default function ProductPortfolio({ basePath = "" }: { basePath?: string }) {
-  // One grid of cases, each carrying its company, so all four sit on one
-  // screen at desktop width. The company header rows they used to hang under
-  // are folded into each card's eyebrow.
-  // The tutor leads and its school hub follows: the most recent, the most
-  // checked, and the pair both readers came for. The rest keep their order.
-  const LEAD = ["AI STEM tutor", "School hub"];
-  const rank = (name: string) => {
-    const i = LEAD.indexOf(name);
-    return i === -1 ? LEAD.length : i;
-  };
   const cases = COMPANIES.flatMap((company) =>
     company.products.map((product) => ({ company, product })),
-  ).sort((a, b) => rank(a.product.name) - rank(b.product.name));
+  ).sort((a, b) => ORDER.indexOf(a.product.name) - ORDER.indexOf(b.product.name));
+  const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <div className="case-grid">
+    <div className="ws">
       {cases.map(({ company, product }) => (
-        <ProductCase
+        <WorkCard
+          key={product.name}
           company={company}
           product={product}
           basePath={basePath}
-          key={product.name}
+          open={open === product.name}
+          onToggle={() =>
+            setOpen((o) => (o === product.name ? null : product.name))
+          }
         />
       ))}
     </div>
   );
 }
 
-function ProductCase({
+function WorkCard({
   company,
   product,
   basePath,
+  open,
+  onToggle,
 }: {
   company: Company;
   product: Product;
   basePath: string;
+  open: boolean;
+  onToggle: () => void;
 }) {
-  // Closed by default: the card leads with the bet and the proof, and the
-  // problem or the full bet is one tap away. Five cards open at once read as
-  // a wall; the panel is still in the page, never behind a slide.
-  const [view, setView] = useState<View | null>(null);
-  const copy: { title: string; paragraphs: string[]; lesson?: string } | null =
-    view ? product[view] : null;
-  const panelId = `product-${product.order}-copy`;
-  const toggle = (next: View) => setView((v) => (v === next ? null : next));
-  // One card per row. Every element has its own slot: the header carries
-  // identity and role, a labelled row each for the bet and the proof, and a
-  // footer with the Problem / Bet control on the left and links on the
-  // right. The opened copy sits under the footer, beneath the control.
+  const id = `work-${product.order}`;
   return (
-    <article className="case-card">
-      <header className="case-card-head">
-        <span className="portfolio-logo-shell">
-          {/* The adjacent eyebrow names the company. */}
+    <article className="ws-card" data-open={open || undefined}>
+      <h3 className="ws-h">
+        <button
+          type="button"
+          className="ws-row"
+          aria-expanded={open}
+          aria-controls={id}
+          onClick={onToggle}
+        >
+          {/* The eyebrow names the company. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
+            className="ws-logo"
             src={`${basePath}/${company.logo}`}
             alt=""
-            width={48}
-            height={48}
+            width={40}
+            height={40}
           />
-        </span>
-        <div className="case-card-id">
-          <span className="case-card-company">
-            {company.name} · {company.stint}
+          <span className="ws-id">
+            <span className="ws-co">
+              {company.name} · {company.stint}
+            </span>
+            <span className="ws-name">{product.name}</span>
           </span>
-          <h4>{product.name}</h4>
-        </div>
-        <span className="case-card-role">{product.ownership}</span>
-      </header>
+          <span className="ws-bet">{product.summary}</span>
+          <span className="ws-plus" aria-hidden="true" />
+        </button>
+      </h3>
 
-      <dl className="case-spec">
-        <div className="case-spec-row">
-          <dt>The bet</dt>
-          <dd className="case-spec-statement">{product.bet.title}</dd>
-        </div>
-        {product.bet.proof && (
-          <div className="case-spec-row">
-            <dt>Proof</dt>
-            <dd className="case-spec-proof">
-              {product.bet.proof.split(" · ").map((p) => (
-                <span key={p}>{p}</span>
+      <div className="ws-panel" id={id} role="region" aria-label={product.name}>
+        <div className="ws-panel-in">
+          <div className="ws-body">
+            {product.outcomes.length > 0 && (
+              <dl className="ws-outcomes">
+                {product.outcomes.map((o) => (
+                  <div key={o.n}>
+                    <dt>{o.n}</dt>
+                    <dd>{o.label}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+            <span className="ws-label">How</span>
+            <ul className="ws-points">
+              {product.how.map((pt) => (
+                <li key={pt}>{pt}</li>
               ))}
-            </dd>
+            </ul>
+            {product.lesson && (
+              <p className="product-lesson">
+                <span>What we learned</span>
+                {product.lesson}
+              </p>
+            )}
+            <p className="ws-foot">
+              <span>{product.role}</span>
+              {product.links.map((link) => (
+                <a href={link.href} key={link.href}>
+                  {link.label} ↗
+                </a>
+              ))}
+            </p>
           </div>
-        )}
-      </dl>
-
-      <div className="case-card-foot">
-        <div
-          className="product-case-toggle"
-          role="group"
-          aria-label={`Read the problem or the bet for ${product.name}`}
-        >
-          <button
-            type="button"
-            aria-controls={panelId}
-            aria-expanded={view === "problem"}
-            data-selected={view === "problem"}
-            onClick={() => toggle("problem")}
-          >
-            Problem
-          </button>
-          <button
-            type="button"
-            aria-controls={panelId}
-            aria-expanded={view === "bet"}
-            data-selected={view === "bet"}
-            onClick={() => toggle("bet")}
-          >
-            Bet
-          </button>
-        </div>
-        <div className="product-case-links">
-          {product.links.map((link) => (
-            <a href={link.href} key={link.href}>
-              {link.label} ↗
-            </a>
-          ))}
+          {product.image && (
+            <figure className="ws-shot">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${basePath}/${product.image.src}`}
+                alt={product.image.alt}
+                loading="lazy"
+              />
+            </figure>
+          )}
         </div>
       </div>
-
-      {copy && view && (
-        <div className="product-case-panel" id={panelId}>
-          <span className="product-case-panel-label">
-            {view === "problem" ? "The problem" : "The bet, in full"}
-          </span>
-          {view === "problem" && (
-            <p className="product-case-statement">{copy.title}</p>
-          )}
-          {copy.paragraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-          {"lesson" in copy && copy.lesson && (
-            <p className="product-lesson">
-              <span>What we learned</span>
-              {copy.lesson}
-            </p>
-          )}
-        </div>
-      )}
     </article>
   );
 }
