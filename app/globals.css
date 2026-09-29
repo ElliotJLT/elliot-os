@@ -5702,35 +5702,134 @@ h2.mai-kick + p.muted,
   position: relative;
 }
 
-/* The track, and the drawn part over it. */
-.cr-line::before,
-.cr-line::after {
-  content: "";
+/* The rail (Career.tsx draws the path): a faint track, the drawn part over
+   it, and a dot on the tip. It goes round each logo and year stop rather
+   than behind them. */
+.cr-rail {
   position: absolute;
-  left: 22px;
-  top: 22px;
-  bottom: 22px;
-  width: 1px;
+  inset: 0;
+  list-style: none;
+  pointer-events: none;
 }
 
-.cr-line::before {
-  background: var(--line);
+.cr-rail svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: visible;
 }
 
-.cr-line::after {
-  width: 2px;
-  left: 21.5px;
-  background: var(--accent-ink);
-  transform-origin: top;
-  transform: scaleY(var(--draw));
+.cr-rail path {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.cr-rail-track {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+
+.cr-rail-drawn {
+  stroke: var(--accent-ink);
+  stroke-width: 2;
+  stroke-dasharray: 0 99999;
 }
 
 .cr-item {
   position: relative;
 }
 
+/* Elliot, falling, on the tip of the line: a black and white cutout with a
+   rust outline, placed and swayed by Career.tsx. Behind the logos, years
+   and cards, so he tumbles past them. Only shown while the line moves. */
+.cr-tip {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  top: 0;
+  width: 56px;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  will-change: transform;
+  /* The rail ignores the pointer; he doesn't, once he's showing. */
+  pointer-events: none;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* While he's held and after he's thrown: a copy on top of everything. */
+.cr-flung {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  height: auto;
+  cursor: grabbing;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 10px 14px rgba(52, 46, 41, 0.25));
+}
+
+.cr-flung.is-thrown {
+  filter: none;
+}
+
+.cr-line[data-drawing] .cr-tip {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ruler: each role's start year, a stop on the line in the gap below the
+   role. Faint until the line has drawn past the role, then ink. */
+.cr-year {
+  position: absolute;
+  z-index: 3;
+  left: -42px;
+  bottom: -16px;
+  transform: translate(-50%, 50%);
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  color: var(--faint);
+  transition: color 0.4s ease-out, border-color 0.4s ease-out;
+}
+
+.cr-item[data-passed] .cr-year {
+  color: var(--accent-ink);
+  border-color: var(--accent-ink);
+}
+
+/* The year sits over the line, which runs behind it. Hidden until the tip
+   reaches it, then revealed left to right in steps, pill and all, so it
+   reads as being typed. */
+.js .cr-year {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.6s steps(6, end), color 0.4s ease-out, border-color 0.4s ease-out;
+}
+
+.js .cr-item[data-passed] .cr-year {
+  clip-path: inset(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .cr-year {
+    transition: none;
+  }
+}
+
+
+/* 32px: room for a year stop between roles, clear of the loop round the
+   next logo. */
 .cr-item + .cr-item {
-  margin-top: 18px;
+  margin-top: 32px;
 }
 
 .cr-logo {
@@ -5956,8 +6055,9 @@ h2.mai-kick + p.muted,
   opacity: 0.45;
 }
 
+/* No ring of its own: the line's loop round it is the ring. */
 .cr-item[data-reached] .cr-logo {
-  box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent-ink);
+  box-shadow: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -6009,14 +6109,15 @@ h2.mai-kick + p.muted,
     padding-left: 0;
   }
 
-  .cr-line::before,
-  .cr-line::after {
-    display: none;
-  }
-
   .cr-logo {
     position: static;
     margin: 0 0 10px;
+  }
+
+  /* No rail on phones, so nothing rides on it. */
+  .cr-rail,
+  .cr-year {
+    display: none;
   }
 }
 
