@@ -8,7 +8,11 @@ type Product = {
   name: string;
   /** What it is and who it's for, in one plain sentence. */
   summary: string;
-  /** What it achieved, as a number or short phrase and a plain label. */
+  /** The problem, in one line. */
+  problem: string;
+  /** The decision taken, and what it risked, in one line. */
+  bet: string;
+  /** The proof: a number or short phrase and a plain label. */
   outcomes: { n: string; label: string }[];
   /** How: three short bullets at most. */
   how: string[];
@@ -30,21 +34,90 @@ type Company = {
 
 const COMPANIES: Company[] = [
   {
+    name: "Flash Pack",
+    stint: "2018–20",
+    logo: "career/flash-pack.jpeg",
+    products: [
+      {
+        order: "07",
+        name: "CX and crisis operations",
+        summary:
+          "The customer and crisis operations behind Flash Pack's small-group trips for solo travellers in their 30s and 40s, through 400% year-on-year growth.",
+        problem:
+          "When I joined, ops was the founders answering emails: no CRM, no ticketing, no supplier contracts.",
+        bet:
+          "Build the operation ahead of each market: marketing didn't go live until support coverage was confirmed.",
+        outcomes: [
+          { n: "90+", label: "NPS, held through the US launch" },
+          { n: "12 weeks", label: "US launch plan, hit on the date" },
+          { n: "3×", label: "international partner network" },
+          { n: "15", label: "first ops hires, hired and trained" },
+        ],
+        how: [
+          "Intercom, response templates, supplier onboarding and a crisis protocol, set up from scratch.",
+          "ATOL compliance, safety standards and insurance, with a 100% safety record through the Sri Lanka attacks and COVID closures.",
+        ],
+        role: "Founding operator, hire #10",
+        image: {
+          src: "work/flash-pack.jpg",
+          alt: "A Flash Pack trip page for Borneo: Into the Jungle, with photos of rainforest, orangutans and a reef",
+        },
+        links: [],
+      },
+    ],
+  },
+  {
+    name: "MealsForTheNHS",
+    stint: "2020",
+    logo: "career/meals-for-the-nhs.jpeg",
+    products: [
+      {
+        order: "06",
+        name: "Hospital meals marketplace",
+        summary:
+          "A volunteer-run charity that got restaurant meals to NHS staff through the first COVID wave.",
+        problem:
+          "Hospitals needed to feed their staff through the first wave, and restaurants had closed.",
+        bet:
+          "Run it by hand on a WhatsApp group from day one, and have a working marketplace by day ten.",
+        outcomes: [
+          { n: "303,000", label: "meals in 100 days" },
+          { n: "146", label: "hospitals, served by 223 restaurants" },
+          { n: "£1.8m", label: "raised" },
+          { n: "97%", label: "of deliveries on time" },
+        ],
+        how: [
+          "A four-sided marketplace on Airtable: hospitals, restaurants, drivers and donors.",
+          "Automated dispatch and routing, which halved delivery errors.",
+          "A hiring playbook that took the volunteer team from 6 to 120.",
+        ],
+        role: "Co-founder",
+        links: [],
+      },
+    ],
+  },
+  {
     name: "Farewill",
     stint: "2021–22",
     logo: "career/farewill.jpeg",
     products: [
       {
-        order: "01",
+        order: "05",
         name: "Probate operations",
         summary:
           "Farewill's probate service, which helps grieving families through the legal work of settling an estate.",
+        problem:
+          "About 30% of solicitor time went on fixing input errors, and the plan on the table was to hire more solicitors.",
+        bet:
+          "Time every step, fix the input at the start and integrate with the courts, HMRC and the banks, instead of hiring.",
         outcomes: [
           { n: "69%", label: "fewer errors by case agents" },
           { n: "2 weeks → 4 days", label: "to handle a case" },
+          { n: "5 → 2", label: "solicitors needed" },
+          { n: "20 → 80+", label: "NPS" },
         ],
         how: [
-          "A guided intake, and a tracker showing every case's next step.",
+          "A guided intake, and a tracker giving each of a case's 23 stages its own deadline.",
           "Integrations with the courts (HMCTS), HMRC and the banks.",
           "A framework for vulnerable customers, adopted company-wide.",
         ],
@@ -65,18 +138,25 @@ const COMPANIES: Company[] = [
     logo: "career/zero-gravity.jpeg",
     products: [
       {
-        order: "02",
+        order: "04",
         name: "Learning pathways",
         summary:
-          "Short, partner-funded courses that gave students something useful to do between mentoring sessions.",
-        outcomes: [],
+          "Short, Duolingo-style courses funded by partners, with an AI assignment at the end.",
+        problem:
+          "Students had nothing useful to do on the platform between mentoring sessions.",
+        bet:
+          "Bite-size, partner-funded courses would bring them back between sessions.",
+        outcomes: [
+          { n: "46%", label: "of students who started a pathway finished it" },
+          { n: "12%", label: "uptake, against a 45% target" },
+        ],
         how: [
           "Built with partners including Accenture, HSBC, KPMG and Snap.",
-          "Video, bite-size progression, quizzes and an early AI skills check.",
+          "Video, bite-size progression, quizzes and an AI assignment to finish.",
         ],
         role: "Led product and design",
         lesson:
-          "Students didn't come back to browse. That miss shaped Career Co-pilot: bring the next useful thing to the student.",
+          "Completion held up; uptake never did. Students didn't come back to browse, and that miss shaped Career Co-pilot: bring the next useful thing to the student.",
         links: [
           { label: "see learning at Zero Gravity", href: "https://www.zerogravity.co.uk/" },
         ],
@@ -85,12 +165,19 @@ const COMPANIES: Company[] = [
         order: "03",
         name: "Career Co-pilot",
         summary:
-          "An AI career assistant that builds a student's CV with them and points them to the right mentors and learning.",
-        outcomes: [{ n: "First", label: "end-to-end AI product on the platform" }],
+          "An AI career assistant that searched a student's CV, job posts and community posts, and talked them through what fitted.",
+        problem:
+          "The platform held students' CVs, thousands of job posts and thousands of community posts, and no way to ask across them.",
+        bet:
+          "Ship retrieval and tool calling early, as a beta, so the next AI product would start with that work done.",
+        outcomes: [
+          { n: "First", label: "AI product on the platform, run as a beta" },
+          { n: "Groundwork", label: "the retrieval and tool calling the tutor was built on" },
+        ],
         how: [
-          "Builds the CV from what the student has actually done, never invented experience.",
-          "Suggests mentors, learning and useful community posts.",
-          "Answers career questions from the platform's own knowledge.",
+          "Tool calls across the student's CV, job posts and community posts.",
+          "Retrieves what's relevant and talks it through in chat.",
+          "Never invents experience the student doesn't have.",
         ],
         role: "Led product, design and delivery",
         links: [
@@ -98,42 +185,20 @@ const COMPANIES: Company[] = [
         ],
       },
       {
-        order: "04",
-        name: "AI STEM tutor",
-        summary:
-          "An AI tutor for GCSE and A-level students that coaches them to the answer instead of handing it over.",
-        outcomes: [
-          { n: "2nd of 8", label: "in the UK government's AI tutoring programme" },
-          { n: "10,000", label: "students by June 2026" },
-          { n: "Under a month", label: "from first commit to the App Store" },
-        ],
-        how: [
-          "Asks the next question until the student gets there, and won't give the answer away.",
-          "Marks work against the exam boards' own mark schemes.",
-          "Built to the Department for Education's safety standards for under-18s.",
-        ],
-        role: "Led product and design, and wrote 28% of the code",
-        image: {
-          src: "work/tutor.jpg",
-          alt: "Two screens of the Zero Gravity tutor app: the home screen asking what you want to learn today, and the subject picker",
-        },
-        links: [
-          { label: "view the product", href: "https://www.zerogravity.co.uk/tutor" },
-          { label: "App Store", href: "https://apps.apple.com/gb/app/zero-gravity-tutor/id6760364095" },
-          { label: "trust and safeguarding", href: "https://www.zerogravity.co.uk/tutor/trust" },
-        ],
-      },
-      {
-        order: "05",
+        order: "02",
         name: "School hub",
         summary:
           "The teacher's side of the tutor: one homework for the class, help at each student's level, and the teacher sees who's stuck the same day.",
+        problem:
+          "Teachers set one homework for a whole class and only find out who was stuck when they mark it.",
+        bet:
+          "Roll out through teachers, class by class, rather than asking students to sign up on their own.",
         outcomes: [
           { n: "850+", label: "UK schools" },
-          { n: "91%", label: "of students active when their school referred them" },
+          { n: "91%", label: "of students activate when a teacher rolls it out, against 23% on self-signup" },
         ],
         how: [
-          "Homework built from the teacher's own material and sent in a click.",
+          "Homework built from the teacher's own material.",
           "A weekly summary per class: who to nudge, who to stretch.",
           "Data-protection paperwork ready before a school asks for it.",
         ],
@@ -143,51 +208,36 @@ const COMPANIES: Company[] = [
           { label: "for school leaders", href: "https://www.zerogravity.co.uk/tutor/school-leaders" },
         ],
       },
-    ],
-  },
-  {
-    name: "Flash Pack",
-    stint: "2018–20",
-    logo: "career/flash-pack.jpeg",
-    products: [
       {
-        order: "06",
-        name: "Flash Pack Foundation",
+        order: "01",
+        name: "AI STEM tutor",
         summary:
-          "Flash Pack's social-impact arm, set up so the trips gave back to the places they visited.",
-        outcomes: [{ n: "Co-founded", label: "in 2019" }],
-        how: [
-          "Grassroots partners in education, human rights, gender empowerment and animal welfare.",
-          "A carbon plan aimed at making the company carbon neutral.",
-          "Refillable bottles instead of single-use plastic on every trip.",
-        ],
-        role: "Co-founder",
-        image: {
-          src: "work/flash-pack-foundation.jpg",
-          alt: "The Flash Pack Foundation banner: a polar bear asleep on the ice, with the line small steps to big change",
-        },
-        links: [],
-      },
-      {
-        order: "07",
-        name: "CX and crisis operations",
-        summary:
-          "The customer and crisis operations behind Flash Pack's small-group trips for solo travellers in their 30s and 40s.",
+          "An AI tutor for GCSE and A-level students that coaches them to the answer instead of handing it over.",
+        problem:
+          "Students without a tutor at home get stuck alone, and a general chatbot just gives them the answer.",
+        bet:
+          "A tutor that never hands over the answer would still keep students coming back.",
         outcomes: [
-          { n: "400%", label: "year-on-year growth" },
-          { n: "10 → 160", label: "people, across 30+ markets" },
-          { n: "90+", label: "NPS, held through the US launch" },
+          { n: "10,000", label: "students by June 2026" },
+          { n: "47%", label: "of monthly students active each week" },
+          { n: "67% → 99%+", label: "marking accuracy against official mark schemes" },
+          { n: "Under a month", label: "from first commit to the App Store" },
         ],
         how: [
-          "Built the customer and crisis operations as the company scaled.",
-          "Owned the APAC and EMEA trip accounts.",
+          "Coaching, practice, marking and assignments run as separate agents, each graded by its own evaluator.",
+          "Built to the Department for Education's safety standards for under-18s: false safeguarding alarms down 97%, none missed.",
+          "Selected for the UK government's AI Tutoring Tools Pioneers Programme.",
         ],
-        role: "Founding operator, hire #8",
+        role: "Led product and a squad of six engineers, and wrote 28% of the build's commits",
         image: {
-          src: "work/flash-pack.jpg",
-          alt: "A Flash Pack trip page for Borneo: Into the Jungle, with photos of rainforest, orangutans and a reef",
+          src: "work/tutor.jpg",
+          alt: "Two screens of the Zero Gravity tutor app: the home screen asking what you want to learn today, and the subject picker",
         },
-        links: [],
+        links: [
+          { label: "view the product", href: "https://www.zerogravity.co.uk/tutor" },
+          { label: "App Store", href: "https://apps.apple.com/gb/app/zero-gravity-tutor/id6760364095" },
+          { label: "trust and safeguarding", href: "https://www.zerogravity.co.uk/tutor/trust" },
+        ],
       },
     ],
   },
@@ -200,7 +250,7 @@ const ORDER = [
   "Career Co-pilot",
   "Learning pathways",
   "Probate operations",
-  "Flash Pack Foundation",
+  "Hospital meals marketplace",
   "CX and crisis operations",
 ];
 
@@ -248,6 +298,23 @@ function WorkCard({
   onToggle: () => void;
 }) {
   const id = `work-${product.order}`;
+  // Elliot's part and the links sit under the screenshot when there is one,
+  // so the left column ends on the evidence rather than a credit line.
+  const foot = (
+    <div className="ws-foot">
+      <span className="ws-label">My part</span>
+      <p className="ws-role-text">{product.role}</p>
+      {product.links.length > 0 && (
+        <p className="ws-links">
+          {product.links.map((link) => (
+            <a href={link.href} key={link.href}>
+              {link.label} ↗
+            </a>
+          ))}
+        </p>
+      )}
+    </div>
+  );
   return (
     <article className="ws-card" data-open={open || undefined}>
       <h3 className="ws-h">
@@ -281,6 +348,11 @@ function WorkCard({
       <div className="ws-panel" id={id} role="region" aria-label={product.name}>
         <div className="ws-panel-in">
           <div className="ws-body">
+            <span className="ws-label">Problem</span>
+            <p className="ws-problem">{product.problem}</p>
+            <span className="ws-label">The bet</span>
+            <p>{product.bet}</p>
+            <span className="ws-label">Proof</span>
             {product.outcomes.length > 0 && (
               <dl className="ws-outcomes">
                 {product.outcomes.map((o) => (
@@ -303,24 +375,20 @@ function WorkCard({
                 {product.lesson}
               </p>
             )}
-            <p className="ws-foot">
-              <span>{product.role}</span>
-              {product.links.map((link) => (
-                <a href={link.href} key={link.href}>
-                  {link.label} ↗
-                </a>
-              ))}
-            </p>
+            {!product.image && foot}
           </div>
           {product.image && (
-            <figure className="ws-shot">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={`${basePath}/${product.image.src}`}
-                alt={product.image.alt}
-                loading="lazy"
-              />
-            </figure>
+            <div className="ws-side">
+              <figure className="ws-shot">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`${basePath}/${product.image.src}`}
+                  alt={product.image.alt}
+                  loading="lazy"
+                />
+              </figure>
+              {foot}
+            </div>
           )}
         </div>
       </div>
