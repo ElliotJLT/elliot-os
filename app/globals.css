@@ -3154,6 +3154,44 @@ main:has(> .band) {
   padding: 0;
 }
 
+/* The pen marks (inkMarks.ts): drawn over the block, in the site's rust,
+   each one drawing in when its principle lights. */
+.vals {
+  position: relative;
+}
+
+.vals-ink {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.vals-ink path {
+  fill: none;
+  stroke: var(--accent-ink);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: vals-draw 0.9s cubic-bezier(0.55, 0.1, 0.3, 1) 0.15s forwards;
+}
+
+@keyframes vals-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vals-ink path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
 .vals-list li {
   font-family: var(--display);
   font-size: clamp(30px, 4vw, 54px);
