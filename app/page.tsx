@@ -81,7 +81,7 @@ export default async function Home() {
                 <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
                   UK government&apos;s AI Tutoring Tools Pioneers Programme
                 </a>
-                , 2nd of eight.
+                .
               </p>
               <div className="band-cta rv-settle">
                 <Pill href="/built" tone="cream" arrow>
