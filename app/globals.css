@@ -5739,25 +5739,19 @@ h2.mai-kick + p.muted,
   position: relative;
 }
 
-/* The face that rides the tip of the line, placed by Career.tsx: a black
-   and white portrait in a rust ring. Behind the year stops, in front of the
-   line. Only shown while the line is moving. */
+/* Elliot, falling, on the tip of the line: a black and white cutout with a
+   rust outline, placed and swayed by Career.tsx. Behind the logos, years
+   and cards, so he tumbles past them. Only shown while the line moves. */
 .cr-tip {
   position: absolute;
-  z-index: 2;
+  z-index: 0;
   left: 0;
   top: 0;
-  width: 24px;
-  height: 24px;
-  margin: -12px 0 0 -12px;
-  border-radius: 50%;
-  background-color: var(--bg);
-  background-size: cover;
-  background-position: center;
-  border: 2px solid var(--accent-ink);
-  box-shadow: 0 0 0 2px var(--bg);
+  width: 56px;
+  height: auto;
   opacity: 0;
   transition: opacity 0.3s ease-out;
+  will-change: transform;
 }
 
 .cr-line[data-drawing] .cr-tip {

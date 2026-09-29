@@ -56,7 +56,7 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
   const svgRef = useRef<SVGSVGElement>(null);
   const trackRef = useRef<SVGPathElement>(null);
   const drawnRef = useRef<SVGPathElement>(null);
-  const tipRef = useRef<HTMLSpanElement>(null);
+  const tipRef = useRef<HTMLImageElement>(null);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
@@ -106,7 +106,9 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
       const len = still ? total : lengthAt(tip);
       drawn.style.strokeDasharray = `${len} ${total}`;
       const at = track.getPointAtLength(len);
-      dot.style.transform = `translate(${at.x}px, ${at.y}px)`;
+      // A slow sway as he falls, driven by how far down the line he is.
+      const sway = Math.sin(len / 90) * 14;
+      dot.style.transform = `translate(${at.x}px, ${at.y}px) translate(-50%, -50%) rotate(${sway.toFixed(1)}deg)`;
       list.toggleAttribute("data-drawing", !still && len > 0 && len < total);
       // Logos light as the line starts round them; a year types itself in
       // as the tip reaches it; bullets light as the tip draws level. Each
@@ -147,12 +149,16 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
             <path className="cr-rail-track" ref={trackRef} />
             <path className="cr-rail-drawn" ref={drawnRef} />
           </svg>
-          {/* The tip is Elliot, in black and white, travelling down his own
-              career. */}
-          <span
+          {/* The tip is Elliot, cut out in black and white with a rust
+              outline, falling down his own career. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             className="cr-tip"
             ref={tipRef}
-            style={{ backgroundImage: `url(${basePath}/career/face-tip.jpg)` }}
+            src={`${basePath}/career/falling.png`}
+            alt=""
+            width={56}
+            height={44}
           />
         </li>
         {roles.map((r) => (
