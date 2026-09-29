@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Role } from "@/lib/roles";
 import Reveal from "./Reveal";
 
@@ -15,8 +15,12 @@ const basePath = process.env.BASE_PATH || "";
  * under its role as a quote panel. Reduced motion shows the rail drawn and
  * everything in place.
  */
+// Longer roles show their first four bullets; the rest open on request.
+const SHOWN = 4;
+
 export default function Career({ roles }: { roles: Role[] }) {
   const listRef = useRef<HTMLOListElement>(null);
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const list = listRef.current;
@@ -84,11 +88,29 @@ export default function Career({ roles }: { roles: Role[] }) {
                       {[r.role, r.dates].filter(Boolean).join(" · ")}
                     </span>
                   )}
-                  <ul className="cr-points">
-                    {r.bullets.map((b) => (
-                      <li key={b}>{b}</li>
-                    ))}
+                  <ul className="cr-points" id={`cr-points-${r.org}`}>
+                    {r.bullets.map((b, i) =>
+                      i < SHOWN || expanded[r.org] ? (
+                        // Bullets opened by the reader are lit straight away.
+                        <li key={b} className={i >= SHOWN ? "cr-extra" : undefined}>
+                          {b}
+                        </li>
+                      ) : null,
+                    )}
                   </ul>
+                  {r.bullets.length > SHOWN && (
+                    <button
+                      type="button"
+                      className="cr-more"
+                      aria-expanded={!!expanded[r.org]}
+                      aria-controls={`cr-points-${r.org}`}
+                      onClick={() => setExpanded((e) => ({ ...e, [r.org]: !e[r.org] }))}
+                    >
+                      {expanded[r.org]
+                        ? "Show less ↑"
+                        : `${r.bullets.length - SHOWN} more from ${r.org} ↓`}
+                    </button>
+                  )}
                 </div>
                 {r.photo && (
                   <figure className="cr-photo rv-develop">
@@ -97,6 +119,7 @@ export default function Career({ roles }: { roles: Role[] }) {
                       src={`${basePath}/${r.photo}`}
                       alt={r.photoAlt || ""}
                       loading="lazy"
+                      style={r.photoPosition ? { objectPosition: r.photoPosition } : undefined}
                     />
                   </figure>
                 )}

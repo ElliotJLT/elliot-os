@@ -12,6 +12,8 @@ export type Role = {
   /** A team photo shown across the top of the role's card. */
   photo?: string;
   photoAlt?: string;
+  /** CSS object-position for the photo's crop, where the default cuts faces. */
+  photoPosition?: string;
   /** A reference from someone who managed Elliot there, verbatim. */
   quote?: { paras: string[]; name: string; role: string };
 };

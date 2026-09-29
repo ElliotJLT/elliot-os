@@ -15,6 +15,7 @@
         "School hub in 850+ UK schools: 91% of students activate when a teacher rolls it out, against 23% on their own.",
         "As employee #4: ISO 27001 and 9001 solo as DPO, our first FTSE 100 contracts, and revenue ops behind £1.5m ARR.",
         "Support run by an AI assistant that resolved 91% of conversations, with no dedicated hire. CSAT 84%, NPS 80+.",
+        "Designated safeguarding lead: built message flagging from regex rules to AI flags, Unitary image recognition and hash matching. No missed cases; schools heard back in 2.3 hours on average, reported to the board monthly.",
         "Mentee-to-mentor conversion from 6% to 40% across 120,000 students."
       ],
       "photo": "career/team-zero-gravity.jpg",
@@ -67,7 +68,8 @@
         "100% safety record through the Sri Lanka attacks and COVID closures."
       ],
       "photo": "career/team-flash-pack.jpg",
-      "photoAlt": "The Flash Pack team together in the office"
+      "photoAlt": "The Flash Pack team together in the office",
+      "photoPosition": "50% 12%"
     }
   ]
 }

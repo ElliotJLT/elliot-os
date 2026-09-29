@@ -5822,13 +5822,32 @@ h2.mai-kick + p.muted,
   transition: background 0.4s ease-out;
 }
 
-.js .cr-points li:not([data-reached]) {
+.js .cr-points li:not([data-reached]):not(.cr-extra) {
   opacity: 0.18;
   transform: translateX(-6px);
 }
 
-.js .cr-points li:not([data-reached])::before {
+.js .cr-points li:not([data-reached]):not(.cr-extra)::before {
   background: transparent;
+}
+
+.cr-more {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 14px 0 0 20px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent-ink);
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--line-2);
+  text-underline-offset: 4px;
+}
+
+.cr-more:hover {
+  text-decoration-color: currentColor;
 }
 
 /* The reference as its own panel across the foot of the card: a tinted
