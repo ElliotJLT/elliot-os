@@ -72,7 +72,7 @@ export default async function Built() {
         alt="Elliot leaning over a laptop while working with another person"
         caption="Working through the prototype with the person at the keyboard."
         kicker="Built"
-        title="I build the product and the way the team ships it."
+        title="I build the product and the operation around it."
         standfirst="Find the wider problem beneath the request, then stay close to the code and the team until users can depend on it."
       />
       <div className="mai built-body">
@@ -101,9 +101,7 @@ export default async function Built() {
             The harness around the agents, and the team around the harness.
           </p>
           <p className="muted rv-settle section-line">
-            Shipping an agent is the easy part. These are the systems I set up
-            to keep them reliable, governed and improving. Pick one to see it
-            run.
+            Pick one to see it run.
           </p>
         </Reveal>
         <Reveal>
@@ -118,10 +116,6 @@ export default async function Built() {
             03 · in the open
           </h2>
           <p className="sec-title rv-settle">What I&apos;m building now, where you can check it.</p>
-          <p className="muted rv-settle section-line">
-            Two pieces of published research, the tools I use on my own agent
-            work, and the commits behind them.
-          </p>
         </Reveal>
         <Reveal>
           <div className="bento open-bento rv-settle">

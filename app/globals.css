@@ -5737,6 +5737,36 @@ h2.mai-kick + p.muted,
   }
 }
 
+/* The reference's pull line, as the Career section's standfirst. Same
+   serif and caption as the card quote, one size up, no box. */
+.career-pull {
+  margin: 0 0 28px;
+}
+
+.career-pull blockquote {
+  margin: 0 0 10px;
+}
+
+.career-pull blockquote p {
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.9vw, 21px);
+  line-height: 1.45;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.career-pull figcaption {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.career-pull figcaption strong {
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
 /* The reference, verbatim, under the description. */
 .cr-ref {
   margin: 18px 0 0;
