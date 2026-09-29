@@ -1,6 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { circle, loopTo, tick, underline, type Box } from "./inkMarks";
+
+// One pen mark per principle, in order: a loop from the word to what it
+// means, an underline, a tick, a circle.
+const MARKS = ["loop", "underline", "tick", "circle"] as const;
 
 /**
  * The principles stack, pinned while you read it.
@@ -23,7 +28,46 @@ export default function Values({
   items: { name: string; said: string }[];
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  const valsRef = useRef<HTMLDivElement>(null);
   const [i, setI] = useState(0);
+  const [mark, setMark] = useState<{ d: string; w: number; h: number } | null>(null);
+
+  // Measure the lit word and the statement, relative to the block they share,
+  // and build that principle's mark to fit them. Rebuilt on resize, so the
+  // mark always sits on the word as it's actually set.
+  useLayoutEffect(() => {
+    const vals = valsRef.current;
+    if (!vals) return;
+    const build = () => {
+      const word = vals.querySelectorAll<HTMLElement>(".vals-word")[i];
+      const said = vals.querySelector<HTMLElement>(".vals-said");
+      if (!word || !said) return;
+      const o = vals.getBoundingClientRect();
+      const r = word.getBoundingClientRect();
+      const box: Box = { left: r.left - o.left, top: r.top - o.top, right: r.right - o.left, bottom: r.bottom - o.top };
+      const s = said.getBoundingClientRect();
+      const lead = parseFloat(getComputedStyle(said.querySelector("p") ?? said).fontSize) || 22;
+      // The loop needs the statement beside the word; stacked on a phone it
+      // becomes an underline instead.
+      const beside = s.left - o.left > box.right + 60;
+      const kind = MARKS[i % MARKS.length];
+      const d =
+        kind === "loop"
+          ? beside
+            ? loopTo(box, [s.left - o.left, s.top - o.top + lead * 0.72])
+            : underline(box)
+          : kind === "underline"
+            ? underline(box)
+            : kind === "tick"
+              ? tick(box)
+              : circle(box);
+      setMark({ d, w: o.width, h: o.height });
+    };
+    build();
+    const resized = new ResizeObserver(build);
+    resized.observe(vals);
+    return () => resized.disconnect();
+  }, [i]);
 
   useEffect(() => {
     const el = ref.current;
@@ -64,14 +108,26 @@ export default function Values({
       style={{ "--vals-n": items.length } as React.CSSProperties}
     >
       <div className="vals-pin">
-        <div className="vals">
+        <div className="vals" ref={valsRef}>
           <ul className="vals-list">
             {items.map((v, n) => (
               <li key={v.name} data-on={n === i || undefined}>
-                {v.name}
+                <span className="vals-word">{v.name}</span>
               </li>
             ))}
           </ul>
+          {mark && (
+            <svg
+              className="vals-ink"
+              width={mark.w}
+              height={mark.h}
+              viewBox={`0 0 ${mark.w} ${mark.h}`}
+              aria-hidden="true"
+            >
+              {/* Keyed on the principle, so each one draws in fresh. */}
+              <path key={i} d={mark.d} pathLength={1} />
+            </svg>
+          )}
 
           <div className="vals-said" aria-live="polite">
             <p key={items[i].name} data-on>
