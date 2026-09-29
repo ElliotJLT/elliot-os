@@ -1,7 +1,8 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-09-28, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 22 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-09-29, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 23 commits across 2 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 22 commits. "Drop the proof bands; keep the section headlines and slimmer cards" (7820f5e), "Hierarchy pass on /built, /evals and /loops" (f90f4af), "/evals: section headlines and readable receipts" (1ee917c) and 19 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 22 commits. "/built: "Design at both ends" joins how the work runs" (981f6a8), "/built cards: one type system and one spacing rhythm" (efba8d1), "Headlines wrap pretty, not balanced, so lines run the full width" (1cefdb5) and 19 more
+- **[ElliotJLT](https://github.com/ElliotJLT/ElliotJLT)**: 1 commit. "Profile: point at /loops instead of argus; add dog-years" (a6840b8)
 <!-- agent:end -->
 
 ## by hand
