@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-type View = "problem" | "bet";
 
 type Product = {
   order: string;
@@ -19,6 +18,8 @@ type Product = {
     lesson?: string;
   };
   links: { label: string; href: string }[];
+  /** A screenshot or photo shown when the card is open. */
+  image?: { src: string; alt: string };
 };
 
 type Company = {
@@ -40,6 +41,10 @@ const COMPANIES: Company[] = [
       {
         order: "01",
         name: "Probate operations",
+        image: {
+          src: "work/farewill.jpg",
+          alt: "Farewill's online will service, with its Trustpilot rating and the steps to continue online",
+        },
         ownership: "Led product, operations and workflow design",
         problem: {
           title:
@@ -128,6 +133,10 @@ const COMPANIES: Company[] = [
       {
         order: "04",
         name: "AI STEM tutor",
+        image: {
+          src: "work/tutor.jpg",
+          alt: "Two screens of the Zero Gravity tutor app: the home screen asking what you want to learn today, and the subject picker",
+        },
         ownership: "Led product and design · wrote 28% of merged code",
         problem: {
           title:
@@ -199,150 +208,205 @@ const COMPANIES: Company[] = [
       },
     ],
   },
+  {
+    name: "Flash Pack",
+    meta: "Founding Operator (#8) · 2018–20",
+    stint: "2018–20",
+    logo: "career/flash-pack.jpeg",
+    products: [
+      {
+        order: "06",
+        name: "Flash Pack Foundation",
+        ownership: "Co-founder · 2019–20",
+        image: {
+          src: "work/flash-pack-foundation.jpg",
+          alt: "The Flash Pack Foundation banner: a polar bear asleep on the ice, with the line small steps to big change",
+        },
+        problem: {
+          title:
+            "Adventure travel carries ethical baggage: price inflation, plastic waste and carbon, paid for by the places the trips go.",
+          paragraphs: [
+            "Flash Pack's travellers loved the places they visited. The business model that took them there added to the problem: flights, single-use plastic on every trip, and money that often skipped the communities hosting them.",
+          ],
+        },
+        bet: {
+          title:
+            "A foundation inside the company, with pledges a traveller could see on the trip itself.",
+          paragraphs: [
+            "I co-founded the Flash Pack Foundation and worked with local partners to cut on-trip waste and back community projects in key destinations.",
+            "Its pledges: give back through grassroots projects in education, human rights, gender empowerment and animal welfare; cut the company's carbon footprint towards carbon neutral; and swap single-use plastic bottles for refillables for every traveller and guide.",
+          ],
+          proof: "Co-founded 2019 · grassroots partners in key destinations",
+        },
+        links: [],
+      },
+      {
+        order: "07",
+        name: "CX and crisis operations",
+        ownership: "Founding operator · built the service layer",
+        image: {
+          src: "work/flash-pack.jpg",
+          alt: "A Flash Pack trip page for Borneo: Into the Jungle, with photos of rainforest, orangutans and a reef",
+        },
+        problem: {
+          title:
+            "Solo travellers in their 30s and 40s were trusting a young company with trips in more than 30 countries.",
+          paragraphs: [
+            "Every trip is a promise kept by people on the ground in another time zone. As the business grew fast, the service behind it had to grow without the experience slipping, including when a trip went wrong.",
+          ],
+        },
+        bet: {
+          title:
+            "Build the customer and crisis operations as a system, so service scaled with the business.",
+          paragraphs: [
+            "I joined as hire #8 and built the CX and crisis operations systems behind the growth, scaling the team from 10 to 160 across 30+ markets. I owned the APAC and EMEA trip accounts and itineraries.",
+          ],
+          proof: "400% YoY growth · team 10 → 160 · NPS above 90 through the US launch",
+        },
+        links: [],
+      },
+    ],
+  }
 ];
 
+// Newest first: the tutor and its school hub, then back through the career.
+const ORDER = [
+  "AI STEM tutor",
+  "School hub",
+  "Career Co-pilot",
+  "Learning pathways",
+  "Probate operations",
+  "Flash Pack Foundation",
+  "CX and crisis operations",
+];
+
+/**
+ * The work as a stack of slim cards: company, product, the bet in a line and
+ * the headline proof. One opens at a time, showing the problem, the bet in
+ * full, the proof and a screenshot. Everything is in the page; closed cards
+ * only collapse it.
+ */
 export default function ProductPortfolio({ basePath = "" }: { basePath?: string }) {
-  // One grid of cases, each carrying its company, so all four sit on one
-  // screen at desktop width. The company header rows they used to hang under
-  // are folded into each card's eyebrow.
-  // The tutor leads and its school hub follows: the most recent, the most
-  // checked, and the pair both readers came for. The rest keep their order.
-  const LEAD = ["AI STEM tutor", "School hub"];
-  const rank = (name: string) => {
-    const i = LEAD.indexOf(name);
-    return i === -1 ? LEAD.length : i;
-  };
   const cases = COMPANIES.flatMap((company) =>
     company.products.map((product) => ({ company, product })),
-  ).sort((a, b) => rank(a.product.name) - rank(b.product.name));
+  ).sort((a, b) => ORDER.indexOf(a.product.name) - ORDER.indexOf(b.product.name));
+  const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <div className="case-grid">
+    <div className="ws">
       {cases.map(({ company, product }) => (
-        <ProductCase
+        <WorkCard
+          key={product.name}
           company={company}
           product={product}
           basePath={basePath}
-          key={product.name}
+          open={open === product.name}
+          onToggle={() =>
+            setOpen((o) => (o === product.name ? null : product.name))
+          }
         />
       ))}
     </div>
   );
 }
 
-function ProductCase({
+function WorkCard({
   company,
   product,
   basePath,
+  open,
+  onToggle,
 }: {
   company: Company;
   product: Product;
   basePath: string;
+  open: boolean;
+  onToggle: () => void;
 }) {
-  // Closed by default: the card leads with the bet and the proof, and the
-  // problem or the full bet is one tap away. Five cards open at once read as
-  // a wall; the panel is still in the page, never behind a slide.
-  const [view, setView] = useState<View | null>(null);
-  const copy: { title: string; paragraphs: string[]; lesson?: string } | null =
-    view ? product[view] : null;
-  const panelId = `product-${product.order}-copy`;
-  const toggle = (next: View) => setView((v) => (v === next ? null : next));
-  // One card per row. Every element has its own slot: the header carries
-  // identity and role, a labelled row each for the bet and the proof, and a
-  // footer with the Problem / Bet control on the left and links on the
-  // right. The opened copy sits under the footer, beneath the control.
+  const id = `work-${product.order}`;
+  const headline = product.bet.proof?.split(" · ")[0];
   return (
-    <article className="case-card">
-      <header className="case-card-head">
-        <span className="portfolio-logo-shell">
-          {/* The adjacent eyebrow names the company. */}
+    <article className="ws-card" data-open={open || undefined}>
+      <h3 className="ws-h">
+        <button
+          type="button"
+          className="ws-row"
+          aria-expanded={open}
+          aria-controls={id}
+          onClick={onToggle}
+        >
+          {/* The eyebrow names the company. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
+            className="ws-logo"
             src={`${basePath}/${company.logo}`}
             alt=""
-            width={48}
-            height={48}
+            width={40}
+            height={40}
           />
-        </span>
-        <div className="case-card-id">
-          <span className="case-card-company">
-            {company.name} · {company.stint}
+          <span className="ws-id">
+            <span className="ws-co">
+              {company.name} · {company.stint}
+            </span>
+            <span className="ws-name">{product.name}</span>
           </span>
-          <h4>{product.name}</h4>
-        </div>
-        <span className="case-card-role">{product.ownership}</span>
-      </header>
+          <span className="ws-bet">{product.bet.title}</span>
+          {headline ? (
+            <span className="ws-proof">{headline}</span>
+          ) : (
+            <span aria-hidden="true" />
+          )}
+          <span className="ws-plus" aria-hidden="true" />
+        </button>
+      </h3>
 
-      <dl className="case-spec">
-        <div className="case-spec-row">
-          <dt>The bet</dt>
-          <dd className="case-spec-statement">{product.bet.title}</dd>
-        </div>
-        {product.bet.proof && (
-          <div className="case-spec-row">
-            <dt>Proof</dt>
-            <dd className="case-spec-proof">
-              {product.bet.proof.split(" · ").map((p) => (
-                <span key={p}>{p}</span>
-              ))}
-            </dd>
+      <div className="ws-panel" id={id} role="region" aria-label={product.name}>
+        <div className="ws-panel-in">
+          <div className="ws-body">
+            <span className="ws-role">{product.ownership}</span>
+            <p className="ws-problem">
+              <span className="ws-label">The problem</span>
+              {product.problem.title}
+            </p>
+            <div className="ws-label">The bet</div>
+            {product.bet.paragraphs.map((p) => (
+              <p key={p}>{p}</p>
+            ))}
+            {product.bet.lesson && (
+              <p className="product-lesson">
+                <span>What we learned</span>
+                {product.bet.lesson}
+              </p>
+            )}
+            {product.bet.proof && (
+              <div className="case-spec-proof">
+                {product.bet.proof.split(" · ").map((x) => (
+                  <span key={x}>{x}</span>
+                ))}
+              </div>
+            )}
+            {product.links.length > 0 && (
+              <div className="product-case-links">
+                {product.links.map((link) => (
+                  <a href={link.href} key={link.href}>
+                    {link.label} ↗
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
-        )}
-      </dl>
-
-      <div className="case-card-foot">
-        <div
-          className="product-case-toggle"
-          role="group"
-          aria-label={`Read the problem or the bet for ${product.name}`}
-        >
-          <button
-            type="button"
-            aria-controls={panelId}
-            aria-expanded={view === "problem"}
-            data-selected={view === "problem"}
-            onClick={() => toggle("problem")}
-          >
-            Problem
-          </button>
-          <button
-            type="button"
-            aria-controls={panelId}
-            aria-expanded={view === "bet"}
-            data-selected={view === "bet"}
-            onClick={() => toggle("bet")}
-          >
-            Bet
-          </button>
-        </div>
-        <div className="product-case-links">
-          {product.links.map((link) => (
-            <a href={link.href} key={link.href}>
-              {link.label} ↗
-            </a>
-          ))}
+          {product.image && (
+            <figure className="ws-shot">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`${basePath}/${product.image.src}`}
+                alt={product.image.alt}
+                loading="lazy"
+              />
+            </figure>
+          )}
         </div>
       </div>
-
-      {copy && view && (
-        <div className="product-case-panel" id={panelId}>
-          <span className="product-case-panel-label">
-            {view === "problem" ? "The problem" : "The bet, in full"}
-          </span>
-          {view === "problem" && (
-            <p className="product-case-statement">{copy.title}</p>
-          )}
-          {copy.paragraphs.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-          {"lesson" in copy && copy.lesson && (
-            <p className="product-lesson">
-              <span>What we learned</span>
-              {copy.lesson}
-            </p>
-          )}
-        </div>
-      )}
     </article>
   );
 }

@@ -108,10 +108,9 @@ export default async function Built() {
           <h2 id="production" className="mai-kick rv-settle">
             selected product work
           </h2>
-          <p className="sec-title rv-settle">Five products in production.</p>
+          <p className="sec-title rv-settle">Seven things I&apos;ve built, newest first.</p>
           <p className="muted rv-settle section-line">
-            Each card leads with the bet and the proof. The problem behind it
-            is one tap away.
+            Open one for the problem, the bet and the proof.
           </p>
         </Reveal>
         <Reveal>
@@ -142,11 +141,12 @@ export default async function Built() {
             how the work runs
           </h2>
           <p className="sec-title rv-settle">
-            The systems behind the products.
+            The harness around the agents, and the team around the harness.
           </p>
           <p className="muted rv-settle section-line">
-            Ways of working, the agents and the evals I set up. Pick one to see
-            it run.
+            Shipping an agent is the easy part. These are the systems I set up
+            to keep them reliable, governed and improving. Pick one to see it
+            run.
           </p>
         </Reveal>
         <Reveal>

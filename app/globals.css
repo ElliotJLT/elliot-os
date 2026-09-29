@@ -6272,3 +6272,266 @@ h2.mai-kick + p.muted,
     transition: none;
   }
 }
+
+/* ============================================================ work stack
+   The product work as slim cards that open one at a time (ProductPortfolio).
+   Closed, a card is one line: logo, company, product, the bet, the headline
+   proof. Open, it grows to show the problem, the bet in full and a shot. */
+.ws {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 8px 0 24px;
+}
+
+.ws-card {
+  background: var(--panel);
+  border-radius: 20px;
+  box-shadow: var(--lift);
+  transition: transform 0.25s var(--rv-ease), box-shadow 0.25s ease-out;
+}
+
+.ws-card:not([data-open]):hover {
+  transform: translateY(-2px);
+}
+
+.ws-h {
+  all: unset;
+  display: block;
+}
+
+.ws-h::before,
+.ws-h::after {
+  content: none;
+}
+
+.ws-row {
+  appearance: none;
+  border: 0;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 40px 230px minmax(0, 1fr) 250px 22px;
+  align-items: center;
+  gap: 18px;
+  padding: 16px 22px;
+  color: inherit;
+  font: inherit;
+}
+
+.ws-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  object-fit: cover;
+  outline: 1px solid oklch(0 0 0 / 0.1);
+  outline-offset: -1px;
+}
+
+.ws-id {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.ws-co {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.ws-name {
+  font-family: var(--display);
+  font-size: 24px;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.ws-bet {
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.ws-proof {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--ink-2);
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  justify-self: end;
+}
+
+/* A plus that turns into a minus. */
+.ws-plus {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  justify-self: end;
+}
+
+.ws-plus::before,
+.ws-plus::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 6px;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--ink-2);
+  transition: transform 0.3s var(--rv-ease);
+}
+
+.ws-plus::after {
+  transform: rotate(90deg);
+}
+
+.ws-card[data-open] .ws-plus::after {
+  transform: rotate(0deg);
+}
+
+/* Open and close by animating the row height from 0fr to 1fr. */
+.ws-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s var(--rv-ease);
+}
+
+.ws-card[data-open] .ws-panel {
+  grid-template-rows: 1fr;
+}
+
+.ws-panel-in {
+  overflow: hidden;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  padding: 0 22px;
+}
+
+.ws-card[data-open] .ws-panel-in {
+  padding: 4px 22px 24px 80px;
+}
+
+.ws-card:not([data-open]) .ws-panel-in {
+  visibility: hidden;
+}
+
+@media (min-width: 900px) {
+  .ws-card[data-open] .ws-panel-in:has(.ws-shot) {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  }
+}
+
+.ws-body p {
+  margin: 0 0 12px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: none;
+}
+
+.ws-role {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--faint);
+  margin-bottom: 14px;
+}
+
+.ws-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin-bottom: 6px;
+}
+
+.ws-body .ws-problem {
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.45;
+  color: var(--ink);
+  margin-bottom: 18px;
+}
+
+.ws-body .case-spec-proof {
+  margin: 14px 0 12px;
+}
+
+.ws-shot {
+  margin: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  align-self: start;
+  max-height: 460px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 12px 28px -14px rgba(0, 0, 0, 0.3);
+}
+
+.ws-shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 460px;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* Tablets: the bet drops under the name. Phones: logo, name and the plus. */
+@media (max-width: 899px) {
+  .ws-row {
+    grid-template-columns: 40px minmax(0, 1fr) 22px;
+    row-gap: 8px;
+  }
+
+  .ws-bet {
+    grid-column: 2 / 3;
+  }
+
+  .ws-proof {
+    grid-column: 2 / 3;
+    justify-self: start;
+    max-width: 100%;
+  }
+
+  .ws-plus {
+    grid-row: 1;
+    grid-column: 3;
+  }
+
+  .ws-card[data-open] .ws-panel-in {
+    padding: 4px 20px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ws-card,
+  .ws-panel,
+  .ws-plus::before,
+  .ws-plus::after {
+    transition: none;
+  }
+}
+
+.ws-co {
+  white-space: nowrap;
+}

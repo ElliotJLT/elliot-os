@@ -28,6 +28,62 @@ export default function Bench({
 }) {
   const TRACKS: Track[] = [
     {
+      id: "harness",
+      name: "The harness",
+      meta: "Zero Gravity · this site",
+      where: "their pattern → mine",
+      steps: [
+        { name: "Progress file", note: "Linear umbrellas and a daily ledger" },
+        { name: "Feature list", note: "eval cases, each pass or fail" },
+        { name: "Clean state", note: "small PRs, merged the same day" },
+        { name: "Init script", note: "a guide every agent reads first" },
+        { name: "Worktrees", note: "one isolated checkout per task" },
+        { name: "Checker", note: "a separate agent reviews the work" },
+      ],
+      notes: [
+        "The agent forgets. The board doesn't.",
+        "Verification stays human.",
+      ],
+      tags: ["Claude Code", "MCP", "Conductor", "Linear"],
+      log: [
+        { k: "cmd", t: "open harness" },
+        { k: "info", t: "contributing guide v3.6: read by every engineer and agent" },
+        { k: "info", t: "connectors: Linear, Metabase, GitHub, Slack over MCP" },
+        { k: "info", t: "every review finding lands in .claude/rules" },
+        { k: "ok", t: "error triage spawns a fix PR · a review agent checks it" },
+        { k: "warn", t: "“the loop runs itself” must never mean nobody has an opinion" },
+        { k: "ok", t: "designed once, inherited by the whole team" },
+      ],
+    },
+    {
+      id: "operating-model",
+      name: "Operating model",
+      meta: "Zero Gravity · tutor",
+      where: "people · process · cost",
+      steps: [
+        { name: "Platform", note: "a tech lead owns the loops" },
+        { name: "Domain", note: "engineers own a metric and named users" },
+        { name: "Experts", note: "teachers flag marks; flags become cases" },
+        { name: "Eval loop", note: "from trace to fix in days" },
+        { name: "Governance", note: "DfE safety standards, ISO 27001" },
+        { name: "Cost", note: "routing and caching, per mode" },
+      ],
+      notes: [
+        "Engineers alone can't say what a good mark is. Teachers can.",
+        "Cost is a product call: the cheap model couldn't hold its tool calls.",
+      ],
+      tags: ["Langfuse", "Claude", "Linear"],
+      log: [
+        { k: "cmd", t: "open operating-model" },
+        { k: "info", t: "three rings: platform, domain, subject experts" },
+        { k: "ok", t: "every flagged mark became an eval case" },
+        { k: "warn", t: "production came in 4.6x over the cost plan" },
+        { k: "info", t: "a model 14x cheaper couldn't hold its tool calls" },
+        { k: "ok", t: "caching + routing by mode · $0.09 a session, 80%+ margin" },
+        { k: "ok", t: "ISO 27001 and 9001 solo as DPO · built to DfE standards" },
+      ],
+    },
+    {
       id: "ways-of-working",
       name: "Ways of working",
       meta: "Zero Gravity · 6 engineers",
@@ -236,7 +292,7 @@ export default function Bench({
       </div>
 
       <div className="bench-foot">
-        <span>Four systems, one bench</span>
+        <span>Six systems, one bench</span>
         <span>Pick one on the left: the canvas draws it, the log prints its run</span>
       </div>
     </div>
