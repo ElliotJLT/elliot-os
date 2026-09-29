@@ -410,7 +410,7 @@ function WorkCard({
   // Elliot's part and the links sit under the screenshot when there is one,
   // so the left column ends on the evidence rather than a credit line.
   const foot = (
-    <div className="ws-foot">
+    <div className="ws-foot ws-zone ws-block">
       <span className="ws-label">My part</span>
       <p className="ws-role-text">{product.role}</p>
       {product.links.length > 0 && (
@@ -459,35 +459,51 @@ function WorkCard({
 
       <div className="ws-panel" id={id} role="region" aria-label={product.name}>
         <div className="ws-panel-in">
+          {/* Three zones split by dashed rules: the case (what it is, the
+              problem, the bet), the proof, and how it was done. One sans
+              for everything you read, display only for names and numbers,
+              mono only for labels and links. */}
           <div className="ws-body">
-            <p className="ws-summary">{product.summary}</p>
-            <span className="ws-label">Problem</span>
-            <p className="ws-problem">{product.problem}</p>
-            <span className="ws-label">The bet</span>
-            <p>{product.bet}</p>
-            <span className="ws-label">Proof</span>
+            <div className="ws-zone">
+              <p className="ws-summary">{product.summary}</p>
+              <div className="ws-block">
+                <span className="ws-label">Problem</span>
+                <p>{product.problem}</p>
+              </div>
+              <div className="ws-block">
+                <span className="ws-label">The bet</span>
+                <p>{product.bet}</p>
+              </div>
+            </div>
             {product.outcomes.length > 0 && (
-              <dl className="ws-outcomes">
-                {product.outcomes.map((o) => (
-                  <div key={o.n}>
-                    <dt>{o.n}</dt>
-                    <dd>{o.label}</dd>
-                  </div>
-                ))}
-              </dl>
+              <div className="ws-zone ws-block">
+                <span className="ws-label">Proof</span>
+                <dl className="ws-outcomes">
+                  {product.outcomes.map((o) => (
+                    <div key={o.n}>
+                      <dt>{o.n}</dt>
+                      <dd>{o.label}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
             )}
-            <span className="ws-label">How</span>
-            <ul className="ws-points">
-              {product.how.map((pt) => (
-                <li key={pt}>{pt}</li>
-              ))}
-            </ul>
-            {product.lesson && (
-              <p className="product-lesson">
-                <span>What we learned</span>
-                {product.lesson}
-              </p>
-            )}
+            <div className="ws-zone">
+              <div className="ws-block">
+                <span className="ws-label">How</span>
+                <ul className="ws-points">
+                  {product.how.map((pt) => (
+                    <li key={pt}>{pt}</li>
+                  ))}
+                </ul>
+              </div>
+              {product.lesson && (
+                <div className="ws-block">
+                  <span className="ws-label">What we learned</span>
+                  <p>{product.lesson}</p>
+                </div>
+              )}
+            </div>
             {!product.image && foot}
           </div>
           {product.image && (

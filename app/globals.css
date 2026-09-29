@@ -6333,10 +6333,7 @@ h2.mai-kick + p.muted,
   margin-right: 6px;
 }
 
-.ws-body .ws-summary {
-  color: var(--muted);
-  margin-bottom: 18px;
-}
+
 
 .ws-proof {
   font-family: var(--mono);
@@ -6416,12 +6413,46 @@ h2.mai-kick + p.muted,
   }
 }
 
+.ws-body {
+  display: flex;
+  flex-direction: column;
+}
+
 .ws-body p {
-  margin: 0 0 12px;
+  margin: 0;
   font-size: 15px;
   line-height: 1.6;
   color: var(--ink-2);
   max-width: none;
+}
+
+/* One rhythm for the whole card: 22px between zones, a dashed rule between
+   them, 18px between blocks in a zone, 6px from a label to its content. */
+.ws-zone {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 22px 0;
+  border-top: 1px dashed var(--line-2);
+}
+
+.ws-zone:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.ws-zone:last-child {
+  padding-bottom: 0;
+}
+
+.ws-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ws-body .ws-summary {
+  color: var(--muted);
 }
 
 .ws-role {
@@ -6439,15 +6470,7 @@ h2.mai-kick + p.muted,
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-ink);
-  margin-bottom: 6px;
-}
-
-.ws-body .ws-problem {
-  font-family: var(--serif);
-  font-size: 18px;
-  line-height: 1.45;
-  color: var(--ink);
-  margin-bottom: 18px;
+  margin: 0;
 }
 
 .ws-body .case-spec-proof {
@@ -7184,7 +7207,7 @@ a.bento-card {
 }
 
 .ws-points {
-  margin: 0 0 12px;
+  margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
@@ -7194,6 +7217,7 @@ a.bento-card {
 
 .ws-points li {
   position: relative;
+  margin: 0;
   padding-left: 18px;
   font-size: 15px;
   line-height: 1.5;
@@ -7216,9 +7240,7 @@ a.bento-card {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 18px 24px;
-  margin: 4px 0 26px;
-  padding-bottom: 22px;
-  border-bottom: 1px dashed var(--line-2);
+  margin: 4px 0 0;
 }
 
 /* Beside a screenshot the column is too narrow for four across; a 2×2
@@ -7227,11 +7249,6 @@ a.bento-card {
   .ws-panel-in:has(.ws-shot) .ws-outcomes {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-}
-
-/* Problem, bet and proof each get a little air above their label. */
-.ws-body p + .ws-label {
-  margin-top: 10px;
 }
 
 .ws-outcomes div {
@@ -7257,28 +7274,28 @@ a.bento-card {
 
 /* Elliot's part reads as a sentence in the body face; only the links
    stay in mono, like every other link row on the site. */
-.ws-foot {
-  margin: 18px 0 0;
-}
-
+/* Under a screenshot the footer needs no rule; the image separates it. */
 .ws-side .ws-foot {
-  margin-top: 16px;
+  padding: 18px 0 0;
+  border-top: none;
 }
 
 .ws-foot .ws-role-text {
-  margin: 0 0 8px;
+  margin: 0;
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.6;
   color: var(--ink-2);
 }
 
-.ws-links {
+/* .ws-foot scoping beats .ws-body p, which was setting the links to 15px. */
+.ws-foot .ws-links {
   display: flex;
   flex-wrap: wrap;
   gap: 6px 16px;
-  margin: 0;
+  margin: 4px 0 0;
   font-family: var(--mono);
   font-size: 12px;
+  line-height: 1.5;
 }
 
 .ws-links a {
