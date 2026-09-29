@@ -5789,64 +5789,108 @@ h2.mai-kick + p.muted,
   }
 }
 
-/* The reference's pull line, as the Career section's standfirst. Same
-   serif and caption as the card quote, one size up, no box. */
-.career-pull {
-  margin: 0 0 28px;
+/* The proof as bullets. Each lights as the rail draws level with it: a
+   hollow marker fills and the line comes up from faint. */
+.cr-points {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.career-pull blockquote {
+.cr-points li {
+  position: relative;
+  margin: 0;
+  padding-left: 20px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  transition: opacity 0.5s var(--rv-ease), transform 0.5s var(--rv-ease);
+}
+
+.cr-points li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.55em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent-ink);
+  background: var(--accent-ink);
+  box-sizing: border-box;
+  transition: background 0.4s ease-out;
+}
+
+.js .cr-points li:not([data-reached]) {
+  opacity: 0.18;
+  transform: translateX(-6px);
+}
+
+.js .cr-points li:not([data-reached])::before {
+  background: transparent;
+}
+
+/* The reference as its own panel across the foot of the card: a tinted
+   inset, a large opening mark, the words in the serif, the name in mono. */
+.cr-quote {
+  grid-column: 1 / -1;
+  position: relative;
+  margin: 0 22px 22px;
+  padding: 24px 28px 22px 64px;
+  background: var(--bg-2);
+  border-radius: 18px;
+}
+
+.cr-quote-mark {
+  position: absolute;
+  left: 22px;
+  top: 14px;
+  font-family: var(--display);
+  font-size: 64px;
+  line-height: 1;
+  color: var(--accent-ink);
+}
+
+.cr-quote blockquote {
+  margin: 0 0 14px;
+}
+
+.cr-quote blockquote p {
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
   margin: 0 0 10px;
 }
 
-.career-pull blockquote p {
-  font-family: var(--serif);
-  font-size: clamp(18px, 1.9vw, 21px);
-  line-height: 1.45;
-  color: var(--ink);
-  margin: 0;
-  text-wrap: pretty;
+.cr-quote blockquote p:last-child {
+  margin-bottom: 0;
 }
 
-.career-pull figcaption {
+.cr-quote figcaption {
   font-family: var(--mono);
   font-size: 12px;
   color: var(--muted);
 }
 
-.career-pull figcaption strong {
+.cr-quote figcaption strong {
   font-weight: 500;
   color: var(--ink-2);
 }
 
-/* The reference, verbatim, under the description. */
-.cr-ref {
-  margin: 18px 0 0;
-  padding-top: 16px;
-  border-top: 1px dashed var(--line-2);
-}
+@media (max-width: 560px) {
+  .cr-quote {
+    margin: 0 16px 16px;
+    padding: 52px 20px 20px;
+  }
 
-.cr-ref blockquote {
-  margin: 0;
-}
-
-.cr-ref blockquote p {
-  font-family: var(--serif);
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--ink-2);
-  margin: 0 0 8px;
-}
-
-.cr-ref figcaption {
-  font-family: var(--mono);
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.cr-ref figcaption strong {
-  font-weight: 500;
-  color: var(--ink-2);
+  .cr-quote-mark {
+    left: 18px;
+    top: 10px;
+  }
 }
 
 /* Cards slide in from the rail side, once; logos light as the line

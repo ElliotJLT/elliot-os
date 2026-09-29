@@ -7,7 +7,8 @@ export type Role = {
   url?: string;
   role?: string;
   dates?: string;
-  outcome: string;
+  /** The proof, one line each, drawn in as the rail reaches them. */
+  bullets: string[];
   /** A team photo shown across the top of the role's card. */
   photo?: string;
   photoAlt?: string;

@@ -9,9 +9,10 @@ const basePath = process.env.BASE_PATH || "";
 /**
  * Career as a timeline of panels, Zero Gravity first and Flash Pack last.
  * The rail draws down as the section is read; each logo lights as the line
- * reaches it and its card slides in from the rail side, once. The words
- * lead each card; a team photo sits beside them. Reduced motion shows the
- * rail drawn and everything in place.
+ * reaches it and its card slides in from the rail side, once. Each bullet
+ * lights the same way, as the line draws level with it. A reference sits
+ * under its role as a quote panel. Reduced motion shows the rail drawn and
+ * everything in place.
  */
 export default function Career({ roles }: { roles: Role[] }) {
   const listRef = useRef<HTMLOListElement>(null);
@@ -20,9 +21,10 @@ export default function Career({ roles }: { roles: Role[] }) {
     const list = listRef.current;
     if (!list) return;
     const items = [...list.querySelectorAll<HTMLElement>(".cr-item")];
+    const points = [...list.querySelectorAll<HTMLElement>(".cr-points li")];
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       list.style.setProperty("--draw", "1");
-      items.forEach((it) => it.setAttribute("data-reached", ""));
+      [...items, ...points].forEach((it) => it.setAttribute("data-reached", ""));
       return;
     }
     let frame = 0;
@@ -37,6 +39,10 @@ export default function Career({ roles }: { roles: Role[] }) {
       const tip = draw * r.height;
       items.forEach((it) => {
         if (it.offsetTop + 40 <= tip) it.setAttribute("data-reached", "");
+      });
+      // Bullets light as the tip draws level with them, and stay lit.
+      points.forEach((pt) => {
+        if (pt.getBoundingClientRect().top - r.top + 10 <= tip) pt.setAttribute("data-reached", "");
       });
     };
     const queue = () => {
@@ -77,19 +83,11 @@ export default function Career({ roles }: { roles: Role[] }) {
                       {[r.role, r.dates].filter(Boolean).join(" · ")}
                     </span>
                   )}
-                  <p>{r.outcome}</p>
-                  {r.quote && (
-                    <figure className="cr-ref">
-                      <blockquote>
-                        {r.quote.paras.map((q) => (
-                          <p key={q}>{q}</p>
-                        ))}
-                      </blockquote>
-                      <figcaption>
-                        <strong>{r.quote.name}</strong> · {r.quote.role}
-                      </figcaption>
-                    </figure>
-                  )}
+                  <ul className="cr-points">
+                    {r.bullets.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
                 </div>
                 {r.photo && (
                   <figure className="cr-photo rv-develop">
@@ -99,6 +97,21 @@ export default function Career({ roles }: { roles: Role[] }) {
                       alt={r.photoAlt || ""}
                       loading="lazy"
                     />
+                  </figure>
+                )}
+                {r.quote && (
+                  <figure className="cr-quote">
+                    <span className="cr-quote-mark" aria-hidden="true">
+                      &ldquo;
+                    </span>
+                    <blockquote>
+                      {r.quote.paras.map((q) => (
+                        <p key={q}>{q}</p>
+                      ))}
+                    </blockquote>
+                    <figcaption>
+                      <strong>{r.quote.name}</strong> · {r.quote.role}
+                    </figcaption>
                   </figure>
                 )}
               </article>
