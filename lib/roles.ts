@@ -7,8 +7,8 @@ export type Role = {
   url?: string;
   role?: string;
   dates?: string;
-  /** The proof, one line each, drawn in as the rail reaches them. */
-  bullets: string[];
+  /** The proof: a skill, then what it delivered. Lit as the rail reaches it. */
+  bullets: { k?: string; t: string }[];
   /** A team photo shown across the top of the role's card. */
   photo?: string;
   photoAlt?: string;
@@ -22,6 +22,8 @@ export type CareerRecord = {
   linkedin: string;
   note?: string;
   roles: Role[];
+  /** Mentoring, drawn on the same kind of rail as the roles. */
+  mentoring: Role[];
 };
 
 export function getRoles(): CareerRecord {

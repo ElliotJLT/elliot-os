@@ -7,7 +7,6 @@ import { Pill, Slot } from "./components/Frame";
 import Values from "./components/Values";
 import HeroBricks from "./components/HeroBricks";
 import TrackingPortrait from "./components/TrackingPortrait";
-import MentoringCards from "./components/Mentoring";
 import StackField from "./components/StackField";
 import Career from "./components/Career";
 import StackExplorer from "./components/StackExplorer";
@@ -44,7 +43,7 @@ function Row({
 }
 
 export default async function Home() {
-  const { roles } = getRoles();
+  const { roles, mentoring } = getRoles();
   const media = getMedia();
   const posts = (await getPosts(20)).filter((x) => !isDemoted(x.title)).slice(0, 3);
 
@@ -128,10 +127,8 @@ export default async function Home() {
           professionals at Zero Gravity, and product peers through Lenny&apos;s
           community.
         </p>
-        <div className="rv-settle">
-          <MentoringCards />
-        </div>
       </Reveal>
+      <Career roles={mentoring} id="mentoring" />
 
       {/* Desktop gets the pinned fly-out field; phones and reduced motion get
           the original explorer. CSS picks one. */}
