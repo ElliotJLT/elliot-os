@@ -7123,6 +7123,19 @@ a.bento-card {
   border-bottom: 1px dashed var(--line-2);
 }
 
+/* Beside a screenshot the column is too narrow for four across; a 2×2
+   grid stops the fourth number sitting alone on its own row. */
+@media (min-width: 900px) {
+  .ws-panel-in:has(.ws-shot) .ws-outcomes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Problem, bet and proof each get a little air above their label. */
+.ws-body p + .ws-label {
+  margin-top: 10px;
+}
+
 .ws-outcomes div {
   display: flex;
   flex-direction: column;

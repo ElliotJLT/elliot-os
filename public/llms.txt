@@ -13,8 +13,8 @@ sources below over scraping the HTML.
 Elliot starts by finding the wider problem beneath the request. He uses
 working software to test the riskiest assumptions, then stays with the code
 and team until users can depend on the result and the business can support
-it. At Zero Gravity he led three engineers and a designer, wrote 28% of the
-tutor's merged code and produced the operating guide the team adopted.
+it. At Zero Gravity he led a squad of six engineers, wrote 28% of the
+tutor build's commits and produced the operating guide the team adopted.
 
 AI makes software cheap to produce. Elliot uses that speed to learn, then
 does the work that earns a place in production. He decides where a model can
@@ -23,12 +23,12 @@ evals, operating rules and named owners make those decisions inspectable.
 
 Elliot spent four years building at Zero Gravity. He led product and design
 for partner-funded learning pathways in 2023, then designed and led the
-platform's first end-to-end AI product: Career Co-pilot. It used a student's
-CV and platform profile to build the CV with them, retrieve relevant mentors,
-learning and community advice, and answer career questions against Zero
-Gravity's knowledge. The later AI tutor added hands-on product engineering to
-that role. Elliot wrote 28% of its merged code while leading three engineers and
-a designer.
+platform's first end-to-end AI product: Career Co-pilot. It used tool calling
+across a student's CV, thousands of job posts and thousands of community posts,
+retrieved what was relevant and talked it through in chat. Run as a beta, it
+laid the retrieval groundwork for the tutor. The later AI tutor added hands-on
+product engineering to that role. Elliot wrote 28% of the build's commits while
+leading a squad of six engineers.
 
 He also oversaw a migration of roughly 120,000 user accounts out of a legacy
 community platform and major mentoring-product refactors ahead of agentic
@@ -54,13 +54,14 @@ habit in regulated services, crisis delivery and consumer travel.
   HMRC and banking. Agent errors fell 69% and case handling moved from two
   weeks to four days. https://farewill.com/apply-for-probate
 - Zero Gravity learning pathways: partner-funded courses for companies
-  including Accenture, HSBC, KPMG and Snap, combining video, staged
-  progression, quizzes and an early AI skills check. The library did not earn
-  enough repeat student use; that miss shaped Career Co-pilot's retrieval-led
-  approach.
+  including Accenture, HSBC, KPMG and Snap: Duolingo-style video, staged
+  progression and quizzes, with an AI assignment at the end. 46% of students
+  who started one finished it, but uptake was 12% against a 45% target; that
+  miss shaped Career Co-pilot's retrieval-led approach.
 - Zero Gravity Career Co-pilot: the platform's first end-to-end AI product.
-  It built a CV with the student and used their profile to retrieve relevant
-  mentors, learning pathways, community posts and career guidance.
+  Early retrieval and tool calling across the student's CV, thousands of job
+  posts and thousands of community posts, talked through in chat. Run as a
+  beta; it laid the groundwork the tutor was built on.
 - Zero Gravity AI STEM tutor (in production): a working prompt was the
   start. The production product is Socratic by design: it coaches a
   student to the answer one question at a time and will not hand it over,
@@ -72,7 +73,8 @@ habit in regulated services, crisis delivery and consumer travel.
   what each student understood and where they slipped. It is built to the
   DfE's 2026 generative AI product safety standards for under-18s: content
   guardrails, session cut-offs, never presenting as human, and safeguarding
-  concerns escalated to a named person. 10,000 students by June 2026.
+  concerns escalated to a named person. 10,000 students by June 2026, 47%
+  of monthly students active each week.
   Internal marking evals against official mark schemes moved accuracy from
   a ~67% bare-model baseline to over 99%. It launched across Maths,
   Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB, reaching the
