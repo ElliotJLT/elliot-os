@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-09-29, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 23 commits across 2 repos.*
+*Shipping log for the 7 days to 2026-09-30, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 21 commits across 2 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 22 commits. "/built: "Design at both ends" joins how the work runs" (981f6a8), "/built cards: one type system and one spacing rhythm" (efba8d1), "Headlines wrap pretty, not balanced, so lines run the full width" (1cefdb5) and 19 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 20 commits. "Principles marks: smoother strokes" (7b7d87e), "Principles: a pen mark draws in as each one lights" (5ae146b), "Career photos: a marker loop round Elliot's face" (6097871) and 17 more
 - **[ElliotJLT](https://github.com/ElliotJLT/ElliotJLT)**: 1 commit. "Profile: point at /loops instead of argus; add dog-years" (a6840b8)
 <!-- agent:end -->
 
