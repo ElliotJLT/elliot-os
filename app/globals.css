@@ -2935,7 +2935,7 @@ main:has(> .band) {
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #ffe9dc;
+  color: var(--band-kick, #ffe9dc);
   margin-bottom: 18px;
 }
 
@@ -2944,7 +2944,7 @@ main:has(> .band) {
   font-size: clamp(36px, 5.7vw, 70px);
   line-height: 1.1;
   letter-spacing: -0.02em;
-  color: #faf3e8;
+  color: var(--band-fg, #faf3e8);
   margin: 0 auto 28px;
   max-width: 26ch;
   text-wrap: balance;
@@ -2972,12 +2972,12 @@ main:has(> .band) {
   object-fit: cover;
   /* A ring rather than an outline: against a saturated band the photo needs
      separating from the colour, and white does it without a shadow. */
-  border: 3px solid #faf3e8;
+  border: 3px solid var(--band-portrait, #faf3e8);
   margin: 0;
   display: block;
   /* An eleven-frame sprite (see TrackingPortrait); frame 4 is the one
      looking out, so it is also what shows before JS or with reduced motion. */
-  background-color: #faf3e8;
+  background-color: var(--band-portrait, #faf3e8);
   background-repeat: no-repeat;
   background-size: 1100% 100%;
   background-position: 40% 0;
@@ -2989,7 +2989,7 @@ main:has(> .band) {
   font-family: var(--serif);
   font-size: clamp(18px, 1.45vw, 19px);
   line-height: 1.5;
-  color: #fff6ed;
+  color: var(--band-sub, #fff6ed);
   max-width: none;
   margin: 0;
   text-wrap: pretty;
@@ -2997,11 +2997,11 @@ main:has(> .band) {
 
 .band-sub a {
   color: inherit;
-  text-decoration-color: rgba(255, 246, 237, 0.5);
+  text-decoration-color: color-mix(in srgb, var(--band-sub, #fff6ed) 50%, transparent);
 }
 
 .band-sub a:hover {
-  text-decoration-color: #fff6ed;
+  text-decoration-color: var(--band-sub, #fff6ed);
 }
 
 .band-profile .band-cta {
@@ -3049,7 +3049,7 @@ main:has(> .band) {
   place-items: center;
   width: 40px;
   height: 40px;
-  color: #f4d9c9;
+  color: var(--band-muted, #f4d9c9);
   opacity: calc(0.85 - var(--band-exit-opacity));
   animation: band-scroll-bob 2.2s ease-in-out infinite;
   transition: color 0.18s ease-out,
@@ -3057,7 +3057,7 @@ main:has(> .band) {
 }
 
 .band-scroll:hover {
-  color: #faf3e8;
+  color: var(--band-fg, #faf3e8);
   opacity: calc(1 - var(--band-exit-opacity));
 }
 
@@ -3085,7 +3085,7 @@ main:has(> .band) {
 }
 
 .pill-cream {
-  background: #faf3e8;
+  background: var(--band-pill-bg, #faf3e8);
   color: var(--band-pill-ink, #8a3c26);
 }
 
@@ -3095,12 +3095,12 @@ main:has(> .band) {
 
 .pill-ghost {
   background: transparent;
-  color: #faf3e8;
-  border-color: rgba(250, 243, 232, 0.45);
+  color: var(--band-fg, #faf3e8);
+  border-color: color-mix(in srgb, var(--band-fg, #faf3e8) 45%, transparent);
 }
 
 .pill-ghost:hover {
-  border-color: #faf3e8;
+  border-color: var(--band-fg, #faf3e8);
 }
 
 /* The band runs to the viewport edge and clears the fixed nav with padding. */
@@ -3208,7 +3208,7 @@ main:has(> .band) {
 .js main:has(> .band) .vals-list li {
   color: color-mix(
     in srgb,
-    #faf3e8 calc(100% - var(--band-copy-percent)),
+    var(--band-fg, #faf3e8) calc(100% - var(--band-copy-percent)),
     var(--vals-dim)
   );
 }
@@ -3216,7 +3216,7 @@ main:has(> .band) {
 .js main:has(> .band) .vals-list li[data-on] {
   color: color-mix(
     in srgb,
-    #faf3e8 calc(100% - var(--band-copy-percent)),
+    var(--band-fg, #faf3e8) calc(100% - var(--band-copy-percent)),
     var(--ink)
   );
 }
@@ -3244,7 +3244,7 @@ main:has(> .band) {
 .js main:has(> .band) .vals-said p {
   color: color-mix(
     in srgb,
-    #faf3e8 calc(100% - var(--band-copy-percent)),
+    var(--band-fg, #faf3e8) calc(100% - var(--band-copy-percent)),
     var(--ink)
   );
 }
@@ -7603,13 +7603,26 @@ a.bento-card {
   --line-2: #cfcbc0;
   --rule: #1b1b19;
   --flag: #e9e7e0;
-  --band-bg: #1d1d1b;
-  --band-pill-ink: #1d1d1b;
+  /* A paper hero: the first screen is light, set in ink like the rest. */
+  --band-bg: #e8e5dc;
+  --band-fg: #1b1b19;
+  --band-kick: #1b1b19;
+  --band-sub: #33322f;
+  --band-muted: #56544f;
+  --band-portrait: #fbfaf6;
+  --band-pill-bg: #1b1b19;
+  --band-pill-ink: #f4f2ec;
   --lift: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
     0 1px 2px rgba(27, 27, 25, 0.06), 0 14px 32px -14px rgba(27, 27, 25, 0.2);
 }
 
 :root[data-palette^="pen"][data-theme="dark"] {
+  --band-fg: #faf3e8;
+  --band-kick: #dfe8f3;
+  --band-sub: #f1f3f6;
+  --band-muted: #c9d3df;
+  --band-portrait: #faf3e8;
+  --band-pill-bg: #faf3e8;
   --bg: #121211;
   --bg-2: #1a1a18;
   --paper: #1d1d1b;
@@ -7640,6 +7653,30 @@ a.bento-card {
   --accent-2: #8fb3e0;
   --chart: #8fb3e0;
   --band-bg-dark: #16202c;
+}
+
+:root[data-palette="pen-blue-ink"] {
+  --band-bg: #1f3a5f;
+  --band-fg: #f6f4ee;
+  --band-kick: #dfe8f3;
+  --band-sub: #f1f3f6;
+  --band-muted: #c9d3df;
+  --band-portrait: #f6f4ee;
+  --band-pill-bg: #f6f4ee;
+  --band-pill-ink: #1f3a5f;
+  --accent: #2b5a8a;
+  --accent-ink: #1f3a5f;
+  --accent-2: #1f3a5f;
+  --chart: #1f3a5f;
+}
+
+:root[data-palette="pen-blue-ink"][data-theme="dark"] {
+  --accent: #8fb3e0;
+  --accent-ink: #9fc0ea;
+  --accent-2: #8fb3e0;
+  --chart: #8fb3e0;
+  --band-bg-dark: #16202c;
+  --band-pill-ink: #16202c;
 }
 
 :root[data-palette="pen-rust"] {
@@ -7725,6 +7762,12 @@ a.bento-card {
   color: var(--ink-2);
   background: none;
   cursor: pointer;
+}
+
+.palette-switch-sep {
+  width: 1px;
+  margin: 4px 4px;
+  background: var(--line-2);
 }
 
 .palette-switch button[aria-pressed="true"] {

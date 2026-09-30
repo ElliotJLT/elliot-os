@@ -8,14 +8,24 @@ import { useEffect, useState } from "react";
  */
 const OPTIONS = [
   ["current", "Current"],
-  ["pen-blue", "Pen · blue-black"],
-  ["pen-rust", "Pen · rust"],
+  ["pen-blue", "Blue · paper hero"],
+  ["pen-blue-ink", "Blue · ink hero"],
+  ["pen-rust", "Rust · paper hero"],
   ["moss", "Moss"],
 ] as const;
 
 export default function PaletteSwitch() {
   const [on, setOn] = useState("current");
-  useEffect(() => setOn(document.documentElement.dataset.palette ?? "current"), []);
+  const [theme, setTheme] = useState("light");
+  useEffect(() => {
+    setOn(document.documentElement.dataset.palette ?? "current");
+    setTheme(document.documentElement.dataset.theme ?? "light");
+  }, []);
+  const mode = (t: string) => {
+    document.documentElement.dataset.theme = t;
+    localStorage.setItem("theme", t);
+    setTheme(t);
+  };
   const pick = (id: string) => {
     const root = document.documentElement;
     if (id === "current") {
@@ -32,6 +42,12 @@ export default function PaletteSwitch() {
       {OPTIONS.map(([id, label]) => (
         <button key={id} type="button" aria-pressed={on === id} onClick={() => pick(id)}>
           {label}
+        </button>
+      ))}
+      <span className="palette-switch-sep" aria-hidden="true" />
+      {["light", "dark"].map((t) => (
+        <button key={t} type="button" aria-pressed={theme === t} onClick={() => mode(t)}>
+          {t === "light" ? "Light" : "Dark"}
         </button>
       ))}
     </div>
