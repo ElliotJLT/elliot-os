@@ -47,16 +47,18 @@
   --c2: #9a7a2e;
   --c3: #9a7a2e;
   --c4: #9a7a2e;
-  --band-bg: #22543a;
+  /* The hero is the ochre gold from the reference: the one colour that
+     carried over from the case-file palette. Dark type, a navy button. */
+  --band-bg: #d4b46c;
   --thread: #a8873a;
   --thread-ink: #85691f;
-  --band-fg: #f3eee2;
-  --band-kick: #f3df98;
-  --band-sub: #ece8dc;
-  --band-muted: #c6d3c8;
-  --band-portrait: #f3eee2;
-  --band-pill-bg: #f3df98;
-  --band-pill-ink: #22543a;
+  --band-fg: #1d2420;
+  --band-kick: #1d2420;
+  --band-sub: #262b24;
+  --band-muted: #4a4630;
+  --band-portrait: #1d2420;
+  --band-pill-bg: #1b3a6c;
+  --band-pill-ink: #f3eee2;
   --shadow: 0 1px 1px rgba(27, 24, 17, 0.03);
   --shadow-lift: 0 10px 30px rgba(27, 24, 17, 0.07);
   --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
