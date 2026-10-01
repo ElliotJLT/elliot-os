@@ -34,6 +34,8 @@
      terracotta (burnt orange, hue 20), kept 40 degrees apart so they read
      as two colours, both 4.5:1 or better on the card panels. Selection
      in butter, and a navy footer to answer the green hero. */
+  --cta-bg: #1d2420;
+  --cta-fg: #f3eee2;
   --kick: #8e2f4f;
   --label: #9c4011;
   --select: #f3df98;
@@ -48,7 +50,8 @@
   --c3: #9a7a2e;
   --c4: #9a7a2e;
   /* The hero is the ochre gold from the reference: the one colour that
-     carried over from the case-file palette. Dark type, a navy button. */
+     carried over from the case-file palette. Dark type and a button in the
+     same near-black, so the hero is two colours; navy waits for the footer. */
   --band-bg: #d4b46c;
   --thread: #a8873a;
   --thread-ink: #85691f;
@@ -57,8 +60,6 @@
   --band-sub: #262b24;
   --band-muted: #4a4630;
   --band-portrait: #1d2420;
-  --band-pill-bg: #1b3a6c;
-  --band-pill-ink: #f3eee2;
   --shadow: 0 1px 1px rgba(27, 24, 17, 0.03);
   --shadow-lift: 0 10px 30px rgba(27, 24, 17, 0.07);
   --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
@@ -89,6 +90,8 @@
   --accent-2: #e27d89;
   --chart: #ead28a;
   --flag: #1b221d;
+  --cta-bg: #f3df98;
+  --cta-fg: #131915;
   --kick: #e8849a;
   --label: #e8a070;
   --select: #22543a;
@@ -109,8 +112,6 @@
   --band-sub: #e8ecf2;
   --band-muted: #c2cbda;
   --band-portrait: #f3eee2;
-  --band-pill-bg: #f3df98;
-  --band-pill-ink: #1b3a6c;
   --shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   --shadow-lift: 0 10px 30px rgba(0, 0, 0, 0.4);
   color-scheme: dark;
@@ -2599,23 +2600,33 @@ h2[id] {
   height: 18px;
 }
 
-.pill-soft {
-  background: var(--bg-2);
-  color: var(--ink);
-  border-color: var(--line);
+/* One button system. Primary (solid) is the opposite of the surface it
+   sits on: near-black on light surfaces, butter on dark ones. Secondary
+   (soft, ghost) is an outline in the surrounding text colour. Hover never
+   changes the hue: primary shifts a step towards its own text colour,
+   secondary fills faintly. */
+.pill-soft,
+.pill-ghost {
+  background: transparent;
+  color: inherit;
+  border-color: color-mix(in srgb, currentColor 38%, transparent);
 }
 
-.pill-soft:hover {
-  background: var(--line);
+.pill-soft:hover,
+.pill-ghost:hover {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  border-color: currentColor;
 }
 
-.pill-solid {
-  background: var(--ink);
-  color: var(--bg);
+.pill-solid,
+.pill-cream {
+  background: var(--cta-bg);
+  color: var(--cta-fg);
 }
 
-.pill-solid:hover {
-  background: var(--accent);
+.pill-solid:hover,
+.pill-cream:hover {
+  background: color-mix(in srgb, var(--cta-bg) 84%, var(--cta-fg));
 }
 
 .pill:active {
@@ -3135,23 +3146,10 @@ main:has(> .band) {
   justify-content: center;
 }
 
-.pill-cream {
-  background: var(--band-pill-bg, #faf3e8);
-  color: var(--band-pill-ink, #8a3c26);
-}
-
-.pill-cream:hover {
-  background: #fff;
-}
-
-.pill-ghost {
-  background: transparent;
+/* Hero buttons follow the button system above; the ghost icons take the
+   hero's text colour. */
+.band .pill-ghost {
   color: var(--band-fg, #faf3e8);
-  border-color: color-mix(in srgb, var(--band-fg, #faf3e8) 45%, transparent);
-}
-
-.pill-ghost:hover {
-  border-color: var(--band-fg, #faf3e8);
 }
 
 /* The band runs to the viewport edge and clears the fixed nav with padding. */
@@ -7678,6 +7676,9 @@ footer {
   background: var(--foot-bg, var(--bg));
   color: var(--foot-fg, var(--ink));
   border-top: none;
+  /* The footer is a dark surface in both modes, so its primary is butter. */
+  --cta-bg: #f3df98;
+  --cta-fg: #1d2420;
 }
 
 footer .foot-h {
