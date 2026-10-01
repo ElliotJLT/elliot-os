@@ -11,39 +11,52 @@
    ======================================================================== */
 
 :root {
-  /* Light is a case file: cartridge paper, graphite type and pencil marks,
-     a manila folder for the hero. Dark is letterpress (below). */
-  --bg: #f2efe6;
-  --bg-2: #eae6da;
-  --paper: #f8f6ef;
-  --ink: #232323;
-  --ink-2: #383836;
-  --muted: #5a5955;
-  --faint: #6e6d68;
+  /* Light: stone paper, a bottle-green hero, and one ochre gold for every
+     hand-drawn mark. Dark (below) is navy, with the marks in turn. */
+  --bg: #e4e2dd;
+  --bg-2: #dbd9d3;
+  --paper: #ecebe7;
+  --ink: #1d2420;
+  --ink-2: #313934;
+  --muted: #59605a;
+  --faint: #6b726b;
   /* Unlit principles: dim, but still 3:1 at display size. */
-  --vals-dim: #9f9c93;
-  --line: #dfdbcf;
-  --line-2: #cbc6b7;
-  --rule: #232323;
-  --accent: #5c5c58;
-  --accent-ink: #3e3e3b;
-  --accent-2: #3e3e3b;
-  --chart: #3e3e3b;
-  --flag: #e8e3d6;
-  --band-bg: #d8b873;
-  /* The thread: every hand-drawn mark (the career rail, the circles round
-     faces, the principles' pen marks) in the hero's manila, deepened so a
-     2px line still clears 3:1 on the paper, and darker again where it sets
-     text (the year stops). */
-  --thread: #a67f22;
-  --thread-ink: #85661a;
-  --band-fg: #232323;
-  --band-kick: #232323;
-  --band-sub: #2e2b25;
-  --band-muted: #4a4232;
-  --band-portrait: #232323;
-  --band-pill-bg: #232323;
-  --band-pill-ink: #e6cc8f;
+  --vals-dim: #9fa39c;
+  --line: #d0cdc6;
+  --line-2: #bdb9b1;
+  --rule: #1d2420;
+  --accent: #22543a;
+  --accent-ink: #22543a;
+  --accent-2: #993743;
+  --chart: #22543a;
+  --flag: #d8d5ce;
+  /* Section kickers in claret (wine, hue 340) and small labels in
+     terracotta (burnt orange, hue 20), kept 40 degrees apart so they read
+     as two colours, both 4.5:1 or better on the card panels. Selection
+     in butter, and a navy footer to answer the green hero. */
+  --kick: #8e2f4f;
+  --label: #9c4011;
+  --select: #f3df98;
+  --foot-bg: #1b3a6c;
+  --foot-fg: #e8ecf2;
+  --foot-muted: #b6c2d6;
+  --foot-h: #f3df98;
+  --foot-line: rgba(232, 236, 242, 0.18);
+  /* In light, every hand-drawn mark is one ochre gold. */
+  --c1: #9a7a2e;
+  --c2: #9a7a2e;
+  --c3: #9a7a2e;
+  --c4: #9a7a2e;
+  --band-bg: #22543a;
+  --thread: #a8873a;
+  --thread-ink: #85691f;
+  --band-fg: #f3eee2;
+  --band-kick: #f3df98;
+  --band-sub: #ece8dc;
+  --band-muted: #c6d3c8;
+  --band-portrait: #f3eee2;
+  --band-pill-bg: #f3df98;
+  --band-pill-ink: #22543a;
   --shadow: 0 1px 1px rgba(27, 24, 17, 0.03);
   --shadow-lift: 0 10px 30px rgba(27, 24, 17, 0.07);
   --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
@@ -56,34 +69,46 @@
 }
 
 :root[data-theme="dark"] {
-  /* Letterpress at night: dark cotton stock, warm off-white type, one
-     brick-red ink for every mark and lit state, and an oxblood hero. */
-  --bg: #171513;
-  --bg-2: #1e1b18;
-  --paper: #221f1b;
-  --ink: #ede7dc;
-  --ink-2: #d4cdc1;
-  --muted: #a49c90;
-  --faint: #90897e;
-  --vals-dim: #615a52;
-  --line: #2b2723;
-  --line-2: #3b3530;
-  --rule: #3b3530;
-  --accent: #e0765a;
-  --accent-ink: #e8876c;
-  --accent-2: #e0765a;
-  --chart: #e0765a;
-  --flag: #211e1a;
-  --band-bg-dark: #5e1f12;
-  --thread: #e8876c;
-  --thread-ink: #e8876c;
-  --band-fg: #f3ece0;
-  --band-kick: #f2b39f;
-  --band-sub: #f0e7da;
-  --band-muted: #d6b3a6;
-  --band-portrait: #f3ece0;
-  --band-pill-bg: #f3ece0;
-  --band-pill-ink: #5e1f12;
+  /* Dark: deep green-black, stone type, the same colours lifted, and a
+     navy hero. */
+  --bg: #131915;
+  --bg-2: #19201b;
+  --paper: #1d241f;
+  --ink: #e6e3dc;
+  --ink-2: #cfcbc2;
+  --muted: #a2a59c;
+  --faint: #8e9289;
+  --vals-dim: #5c625a;
+  --line: #252d27;
+  --line-2: #333c35;
+  --rule: #333c35;
+  --accent: #f3df98;
+  --accent-ink: #ead28a;
+  --accent-2: #e27d89;
+  --chart: #ead28a;
+  --flag: #1b221d;
+  --kick: #e8849a;
+  --label: #e8a070;
+  --select: #22543a;
+  --foot-bg: #22543a;
+  --foot-fg: #ecefe8;
+  --foot-muted: #bccdc1;
+  --foot-h: #f3df98;
+  --foot-line: rgba(236, 239, 232, 0.18);
+  --c1: #7fbb94;
+  --c2: #e27d89;
+  --c3: #e59b85;
+  --c4: #ead28a;
+  --band-bg-dark: #1b3a6c;
+  --thread: #ead28a;
+  --thread-ink: #ead28a;
+  --band-fg: #f3eee2;
+  --band-kick: #f3df98;
+  --band-sub: #e8ecf2;
+  --band-muted: #c2cbda;
+  --band-portrait: #f3eee2;
+  --band-pill-bg: #f3df98;
+  --band-pill-ink: #1b3a6c;
   --shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   --shadow-lift: 0 10px 30px rgba(0, 0, 0, 0.4);
   color-scheme: dark;
@@ -134,8 +159,8 @@ a:hover {
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--paper);
+  background: var(--select, var(--accent));
+  color: var(--ink);
 }
 
 :focus-visible {
@@ -2635,7 +2660,7 @@ h2[id] {
   font-size: 12px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--kick, var(--accent-ink));
   margin-bottom: 22px;
 }
 
@@ -2806,7 +2831,7 @@ h2.mai-kick {
   font-size: 12px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--kick, var(--accent-ink));
 }
 
 h2.mai-kick::before,
@@ -5168,12 +5193,12 @@ main:has(> .band) {
    outline, larger radius, dashed dividers, plain ink icons. Type is left to
    the rules above. */
 :root {
-  --panel: #ebe7dc;
+  --panel: #dcdad4;
   --lift: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
     0 1px 2px rgba(35, 35, 35, 0.06), 0 14px 32px -14px rgba(35, 35, 35, 0.2);
 }
 :root[data-theme="dark"] {
-  --panel: #201d1a;
+  --panel: #1b221d;
   --lift: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
     0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 32px -14px rgba(0, 0, 0, 0.6);
 }
@@ -6014,7 +6039,7 @@ h2.mai-kick + p.muted,
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--label, var(--accent-ink));
   line-height: 1.55;
   padding-top: 3px;
 }
@@ -6762,7 +6787,7 @@ h2.mai-kick + p.muted,
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--label, var(--accent-ink));
   margin: 0;
 }
 
@@ -7632,4 +7657,46 @@ body::after {
 :root[data-theme="dark"] body::after {
   opacity: 0.12;
   mix-blend-mode: screen;
+}
+
+/* Each principle draws in its own colour; each era on /built is headed in
+   one. */
+.vals-ink path[data-k="0"] { stroke: var(--c1); }
+.vals-ink path[data-k="1"] { stroke: var(--c2); }
+.vals-ink path[data-k="2"] { stroke: var(--c3); }
+.vals-ink path[data-k="3"] { stroke: var(--c4); }
+
+.ws-group:nth-of-type(1) .ws-group-h span { color: var(--kick); }
+.ws-group:nth-of-type(2) .ws-group-h span { color: var(--label); }
+.ws-group:nth-of-type(3) .ws-group-h span { color: var(--thread-ink); }
+
+/* The footer as a band in its own colour: navy under the green hero by
+   day, green under the navy hero at night. */
+footer {
+  background: var(--foot-bg, var(--bg));
+  color: var(--foot-fg, var(--ink));
+  border-top: none;
+}
+
+footer .foot-h {
+  color: var(--foot-h, var(--faint));
+}
+
+footer .foot-col a,
+footer .foot-col span:not(.foot-h),
+footer .foot-brand {
+  color: var(--foot-fg, var(--ink-2));
+}
+
+footer .foot-col a:hover {
+  color: var(--foot-h, var(--accent-ink));
+}
+
+footer .foot-base {
+  border-top-color: var(--foot-line, var(--line));
+}
+
+footer .foot-base,
+footer .foot-base a {
+  color: var(--foot-muted, var(--faint));
 }

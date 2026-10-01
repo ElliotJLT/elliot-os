@@ -125,7 +125,7 @@ export default function Values({
               aria-hidden="true"
             >
               {/* Keyed on the principle, so each one draws in fresh. */}
-              <path key={i} d={mark.d} pathLength={1} />
+              <path key={i} data-k={i % 4} d={mark.d} pathLength={1} />
             </svg>
           )}
 
