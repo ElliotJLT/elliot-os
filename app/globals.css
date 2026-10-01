@@ -11,23 +11,33 @@
    ======================================================================== */
 
 :root {
-  --bg: #fef9ed;
-  --bg-2: #faf3e2;
-  --paper: #fffcf4;
-  --ink: #342e29;
-  --ink-2: #4a423b;
-  --muted: #5d524b;
-  --faint: #71665e;
+  /* Light is a case file: cartridge paper, graphite type and pencil marks,
+     a manila folder for the hero. Dark is letterpress (below). */
+  --bg: #f2efe6;
+  --bg-2: #eae6da;
+  --paper: #f8f6ef;
+  --ink: #232323;
+  --ink-2: #383836;
+  --muted: #5a5955;
+  --faint: #6e6d68;
   /* Unlit principles: dim, but still 3:1 at display size. */
-  --vals-dim: #94897b;
-  --line: #e9e0ca;
-  --line-2: #d8cdb4;
-  --rule: #342e29;
-  --accent: #cc5600;
-  --accent-ink: #a84600;
-  --accent-2: #3f6b47;
-  --chart: #3f6b47;
-  --flag: #f0ead9;
+  --vals-dim: #9f9c93;
+  --line: #dfdbcf;
+  --line-2: #cbc6b7;
+  --rule: #232323;
+  --accent: #5c5c58;
+  --accent-ink: #3e3e3b;
+  --accent-2: #3e3e3b;
+  --chart: #3e3e3b;
+  --flag: #e8e3d6;
+  --band-bg: #d8b873;
+  --band-fg: #232323;
+  --band-kick: #232323;
+  --band-sub: #2e2b25;
+  --band-muted: #4a4232;
+  --band-portrait: #232323;
+  --band-pill-bg: #232323;
+  --band-pill-ink: #e6cc8f;
   --shadow: 0 1px 1px rgba(27, 24, 17, 0.03);
   --shadow-lift: 0 10px 30px rgba(27, 24, 17, 0.07);
   --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
@@ -40,26 +50,32 @@
 }
 
 :root[data-theme="dark"] {
-  /* Pen on paper, at night: warm black paper, off-white type, and one
-     colour, a fountain-pen blue, for every mark, link and lit state. */
-  --bg: #121211;
-  --bg-2: #1a1a18;
-  --paper: #1d1d1b;
-  --ink: #edebe5;
-  --ink-2: #d4d1ca;
-  --muted: #a09d96;
-  --faint: #8d8a83;
-  --vals-dim: #5f5d58;
-  --line: #2a2a27;
-  --line-2: #3a3a36;
-  --rule: #3a3a36;
-  --accent: #8fb3e0;
-  --accent-ink: #9fc0ea;
-  --accent-2: #8fb3e0;
-  --chart: #8fb3e0;
-  --flag: #1f1f1d;
-  --band-bg-dark: #16202c;
-  --band-pill-ink: #16202c;
+  /* Letterpress at night: dark cotton stock, warm off-white type, one
+     brick-red ink for every mark and lit state, and an oxblood hero. */
+  --bg: #171513;
+  --bg-2: #1e1b18;
+  --paper: #221f1b;
+  --ink: #ede7dc;
+  --ink-2: #d4cdc1;
+  --muted: #a49c90;
+  --faint: #90897e;
+  --vals-dim: #615a52;
+  --line: #2b2723;
+  --line-2: #3b3530;
+  --rule: #3b3530;
+  --accent: #e0765a;
+  --accent-ink: #e8876c;
+  --accent-2: #e0765a;
+  --chart: #e0765a;
+  --flag: #211e1a;
+  --band-bg-dark: #5e1f12;
+  --band-fg: #f3ece0;
+  --band-kick: #f2b39f;
+  --band-sub: #f0e7da;
+  --band-muted: #d6b3a6;
+  --band-portrait: #f3ece0;
+  --band-pill-bg: #f3ece0;
+  --band-pill-ink: #5e1f12;
   --shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   --shadow-lift: 0 10px 30px rgba(0, 0, 0, 0.4);
   color-scheme: dark;
@@ -5144,12 +5160,12 @@ main:has(> .band) {
    outline, larger radius, dashed dividers, plain ink icons. Type is left to
    the rules above. */
 :root {
-  --panel: #f4eee2;
+  --panel: #ebe7dc;
   --lift: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
-    0 1px 2px rgba(52, 46, 41, 0.06), 0 14px 32px -14px rgba(52, 46, 41, 0.22);
+    0 1px 2px rgba(35, 35, 35, 0.06), 0 14px 32px -14px rgba(35, 35, 35, 0.2);
 }
 :root[data-theme="dark"] {
-  --panel: #1c1c1a;
+  --panel: #201d1a;
   --lift: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
     0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 32px -14px rgba(0, 0, 0, 0.6);
 }
@@ -5790,6 +5806,10 @@ h2.mai-kick + p.muted,
   opacity: 0;
   transition: opacity 0.3s ease-out;
   will-change: transform;
+  /* The outline is drawn here in the pen colour, so it follows the theme:
+     graphite on the case file, brick red at night. */
+  filter: drop-shadow(1.2px 0 0 var(--accent-ink)) drop-shadow(-1.2px 0 0 var(--accent-ink))
+    drop-shadow(0 1.2px 0 var(--accent-ink)) drop-shadow(0 -1.2px 0 var(--accent-ink));
   /* The rail ignores the pointer; he doesn't, once he's showing. */
   pointer-events: none;
   cursor: grab;
@@ -5808,11 +5828,14 @@ h2.mai-kick + p.muted,
   cursor: grabbing;
   pointer-events: none;
   user-select: none;
-  filter: drop-shadow(0 10px 14px rgba(52, 46, 41, 0.25));
+  filter: drop-shadow(1.2px 0 0 var(--accent-ink)) drop-shadow(-1.2px 0 0 var(--accent-ink))
+    drop-shadow(0 1.2px 0 var(--accent-ink)) drop-shadow(0 -1.2px 0 var(--accent-ink))
+    drop-shadow(0 10px 14px rgba(35, 35, 35, 0.25));
 }
 
 .cr-flung.is-thrown {
-  filter: none;
+  filter: drop-shadow(1.2px 0 0 var(--accent-ink)) drop-shadow(-1.2px 0 0 var(--accent-ink))
+    drop-shadow(0 1.2px 0 var(--accent-ink)) drop-shadow(0 -1.2px 0 var(--accent-ink));
 }
 
 .cr-line[data-drawing] .cr-tip {
@@ -7585,192 +7608,20 @@ a.bento-card {
   border-bottom: none;
 }
 
-/* ============================================================ palettes
-   Candidate palettes under review, switched with data-palette on <html>
-   (?palette= on localhost). Each sets light and dark. The pen palettes are
-   paper and ink with one colour, the pen; moss is warm paper and green. */
-:root[data-palette^="pen"] {
-  --bg: #f4f2ec;
-  --bg-2: #eceae3;
-  --paper: #fbfaf6;
-  --panel: #efede6;
-  --ink: #1b1b19;
-  --ink-2: #33322f;
-  --muted: #56544f;
-  --faint: #6b6963;
-  --vals-dim: #a3a09a;
-  --line: #e2dfd6;
-  --line-2: #cfcbc0;
-  --rule: #1b1b19;
-  --flag: #e9e7e0;
-  /* A paper hero: the first screen is light, set in ink like the rest. */
-  --band-bg: #e8e5dc;
-  --band-fg: #1b1b19;
-  --band-kick: #1b1b19;
-  --band-sub: #33322f;
-  --band-muted: #56544f;
-  --band-portrait: #fbfaf6;
-  --band-pill-bg: #1b1b19;
-  --band-pill-ink: #f4f2ec;
-  --lift: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
-    0 1px 2px rgba(27, 27, 25, 0.06), 0 14px 32px -14px rgba(27, 27, 25, 0.2);
-}
-
-:root[data-palette^="pen"][data-theme="dark"] {
-  --band-fg: #faf3e8;
-  --band-kick: #dfe8f3;
-  --band-sub: #f1f3f6;
-  --band-muted: #c9d3df;
-  --band-portrait: #faf3e8;
-  --band-pill-bg: #faf3e8;
-  --bg: #121211;
-  --bg-2: #1a1a18;
-  --paper: #1d1d1b;
-  --panel: #1c1c1a;
-  --ink: #edebe5;
-  --ink-2: #d4d1ca;
-  --muted: #a09d96;
-  --faint: #8d8a83;
-  --vals-dim: #5f5d58;
-  --line: #2a2a27;
-  --line-2: #3a3a36;
-  --rule: #3a3a36;
-  --flag: #1f1f1d;
-  --lift: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
-    0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 32px -14px rgba(0, 0, 0, 0.6);
-}
-
-:root[data-palette="pen-blue"] {
-  --accent: #2b5a8a;
-  --accent-ink: #1f3a5f;
-  --accent-2: #1f3a5f;
-  --chart: #1f3a5f;
-}
-
-:root[data-palette="pen-blue"][data-theme="dark"] {
-  --accent: #8fb3e0;
-  --accent-ink: #9fc0ea;
-  --accent-2: #8fb3e0;
-  --chart: #8fb3e0;
-  --band-bg-dark: #16202c;
-}
-
-:root[data-palette="pen-blue-ink"] {
-  --band-bg: #1f3a5f;
-  --band-fg: #f6f4ee;
-  --band-kick: #dfe8f3;
-  --band-sub: #f1f3f6;
-  --band-muted: #c9d3df;
-  --band-portrait: #f6f4ee;
-  --band-pill-bg: #f6f4ee;
-  --band-pill-ink: #1f3a5f;
-  --accent: #2b5a8a;
-  --accent-ink: #1f3a5f;
-  --accent-2: #1f3a5f;
-  --chart: #1f3a5f;
-}
-
-:root[data-palette="pen-blue-ink"][data-theme="dark"] {
-  --accent: #8fb3e0;
-  --accent-ink: #9fc0ea;
-  --accent-2: #8fb3e0;
-  --chart: #8fb3e0;
-  --band-bg-dark: #16202c;
-  --band-pill-ink: #16202c;
-}
-
-:root[data-palette="pen-rust"] {
-  --accent: #b8520d;
-  --accent-ink: #a84600;
-  --accent-2: #a84600;
-  --chart: #a84600;
-}
-
-:root[data-palette="pen-rust"][data-theme="dark"] {
-  --accent: #e08a4f;
-  --accent-ink: #e89a62;
-  --accent-2: #e08a4f;
-  --chart: #e08a4f;
-  --band-bg-dark: #1f1813;
-}
-
-:root[data-palette="moss"] {
-  --bg: #f3f1e8;
-  --bg-2: #ebe8dc;
-  --paper: #faf8f0;
-  --panel: #eeebe0;
-  --ink: #1e211b;
-  --ink-2: #363a31;
-  --muted: #555a4e;
-  --faint: #6a6f62;
-  --vals-dim: #a2a597;
-  --line: #e0ddd0;
-  --line-2: #ccc8b8;
-  --rule: #1e211b;
-  --accent: #5b7d44;
-  --accent-ink: #4e6b3a;
-  --accent-2: #8a5a2b;
-  --chart: #4e6b3a;
-  --flag: #e7e4d8;
-  --band-bg: #3f5a30;
-  --band-pill-ink: #3f5a30;
-}
-
-:root[data-palette="moss"][data-theme="dark"] {
-  --bg: #111410;
-  --bg-2: #171b15;
-  --paper: #1b1f18;
-  --panel: #1a1e17;
-  --ink: #ecebe4;
-  --ink-2: #d2d2c8;
-  --muted: #9da094;
-  --faint: #8b8e82;
-  --vals-dim: #5d6056;
-  --line: #262b22;
-  --line-2: #353b30;
-  --rule: #353b30;
-  --accent: #9dbb86;
-  --accent-ink: #a9c692;
-  --accent-2: #c9a27a;
-  --chart: #9dbb86;
-  --flag: #1d2119;
-  --band-bg-dark: #1c2618;
-}
-
-/* The local-only switcher. */
-.palette-switch {
+/* Grain: a fixed film of noise over every page, so the paper reads as
+   paper rather than a flat fill. Multiply in light, screen in dark. */
+body::after {
+  content: "";
   position: fixed;
-  z-index: 2000;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 4px;
-  padding: 5px;
-  border-radius: 999px;
-  background: var(--paper);
-  border: 1px solid var(--line-2);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  inset: 0;
+  z-index: 3000;
+  pointer-events: none;
+  opacity: 0.32;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.45  0 0 0 0 0.4  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
-.palette-switch button {
-  appearance: none;
-  border: 0;
-  border-radius: 999px;
-  padding: 7px 13px;
-  font: 12px var(--mono);
-  color: var(--ink-2);
-  background: none;
-  cursor: pointer;
-}
-
-.palette-switch-sep {
-  width: 1px;
-  margin: 4px 4px;
-  background: var(--line-2);
-}
-
-.palette-switch button[aria-pressed="true"] {
-  background: var(--ink);
-  color: var(--bg);
+:root[data-theme="dark"] body::after {
+  opacity: 0.12;
+  mix-blend-mode: screen;
 }

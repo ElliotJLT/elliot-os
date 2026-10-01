@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Newsreader, Archivo, Instrument_Serif } from "next/font/google";
-import PaletteSwitch from "./components/PaletteSwitch";
 import NavLinks from "./components/NavLinks";
 import ThemeToggle from "./components/ThemeToggle";
 import MobileMenu from "./components/MobileMenu";
@@ -59,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 // Runs before paint so the stored theme never flashes.
-const themeInit = `(function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}e.dataset.theme=t;var q=new URLSearchParams(location.search).get("palette");if(q!==null){q==="current"?localStorage.removeItem("palette"):localStorage.setItem("palette",q)}var p=localStorage.getItem("palette");if(p)e.dataset.palette=p}catch(_){}})()`;
+const themeInit = `(function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}e.dataset.theme=t;localStorage.removeItem("palette")}catch(_){}})()`;
 
 export default function RootLayout({
   children,
@@ -91,7 +90,6 @@ export default function RootLayout({
           </div>
         </header>
         {children}
-        {process.env.NODE_ENV !== "production" && <PaletteSwitch />}
         {/* The footer is the last thing anyone reads and the place they decide
             whether to write, so it carries every way to reach him. */}
         <footer>
