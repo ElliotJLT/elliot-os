@@ -54,6 +54,13 @@ export default async function Home() {
           a rust that clears 5.42 so the subline is readable too. */}
       <section className="band">
         <HeroBricks />
+        {/* Arcs rising off the hero's foot, one per colour in the palette. */}
+        <svg className="band-arcs" viewBox="0 0 200 100" aria-hidden="true">
+          <path d="M0 100 A100 100 0 0 1 200 100 Z" />
+          <path d="M0 100 A82 82 0 0 1 164 100 Z" />
+          <path d="M0 100 A64 64 0 0 1 128 100 Z" />
+          <path d="M0 100 A46 46 0 0 1 92 100 Z" />
+        </svg>
         <Reveal immediate>
           <div className="band-in">
             <span className="band-kick rv-settle">

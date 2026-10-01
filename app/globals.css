@@ -11,39 +11,43 @@
    ======================================================================== */
 
 :root {
-  /* Light is a case file: cartridge paper, graphite type and pencil marks,
-     a manila folder for the hero. Dark is letterpress (below). */
-  --bg: #f2efe6;
-  --bg-2: #eae6da;
-  --paper: #f8f6ef;
-  --ink: #232323;
-  --ink-2: #383836;
-  --muted: #5a5955;
-  --faint: #6e6d68;
+  /* Light: stone paper and one family of colours used in turn: bottle
+     green, claret, terracotta, ochre and butter, with navy held back. */
+  --bg: #e4e2dd;
+  --bg-2: #dbd9d3;
+  --paper: #ecebe7;
+  --ink: #1d2420;
+  --ink-2: #313934;
+  --muted: #59605a;
+  --faint: #6b726b;
   /* Unlit principles: dim, but still 3:1 at display size. */
-  --vals-dim: #9f9c93;
-  --line: #dfdbcf;
-  --line-2: #cbc6b7;
-  --rule: #232323;
-  --accent: #5c5c58;
-  --accent-ink: #3e3e3b;
-  --accent-2: #3e3e3b;
-  --chart: #3e3e3b;
-  --flag: #e8e3d6;
-  --band-bg: #d8b873;
-  /* The thread: every hand-drawn mark (the career rail, the circles round
-     faces, the principles' pen marks) in the hero's manila, deepened so a
-     2px line still clears 3:1 on the paper, and darker again where it sets
-     text (the year stops). */
-  --thread: #a67f22;
-  --thread-ink: #85661a;
-  --band-fg: #232323;
-  --band-kick: #232323;
-  --band-sub: #2e2b25;
-  --band-muted: #4a4232;
-  --band-portrait: #232323;
-  --band-pill-bg: #232323;
-  --band-pill-ink: #e6cc8f;
+  --vals-dim: #9fa39c;
+  --line: #d0cdc6;
+  --line-2: #bdb9b1;
+  --rule: #1d2420;
+  --accent: #22543a;
+  --accent-ink: #22543a;
+  --accent-2: #993743;
+  --chart: #22543a;
+  --flag: #d8d5ce;
+  --c1: #22543a;
+  --c2: #993743;
+  --c3: #a8583f;
+  --c4: #a8873a;
+  --arc1: #993743;
+  --arc2: #b06250;
+  --arc3: #cdaf68;
+  --arc4: #f3df98;
+  --band-bg: #22543a;
+  --thread: #993743;
+  --thread-ink: #993743;
+  --band-fg: #f3eee2;
+  --band-kick: #f3df98;
+  --band-sub: #ece8dc;
+  --band-muted: #c6d3c8;
+  --band-portrait: #f3eee2;
+  --band-pill-bg: #f3df98;
+  --band-pill-ink: #22543a;
   --shadow: 0 1px 1px rgba(27, 24, 17, 0.03);
   --shadow-lift: 0 10px 30px rgba(27, 24, 17, 0.07);
   --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
@@ -56,34 +60,42 @@
 }
 
 :root[data-theme="dark"] {
-  /* Letterpress at night: dark cotton stock, warm off-white type, one
-     brick-red ink for every mark and lit state, and an oxblood hero. */
-  --bg: #171513;
-  --bg-2: #1e1b18;
-  --paper: #221f1b;
-  --ink: #ede7dc;
-  --ink-2: #d4cdc1;
-  --muted: #a49c90;
-  --faint: #90897e;
-  --vals-dim: #615a52;
-  --line: #2b2723;
-  --line-2: #3b3530;
-  --rule: #3b3530;
-  --accent: #e0765a;
-  --accent-ink: #e8876c;
-  --accent-2: #e0765a;
-  --chart: #e0765a;
-  --flag: #211e1a;
-  --band-bg-dark: #5e1f12;
-  --thread: #e8876c;
-  --thread-ink: #e8876c;
-  --band-fg: #f3ece0;
-  --band-kick: #f2b39f;
-  --band-sub: #f0e7da;
-  --band-muted: #d6b3a6;
-  --band-portrait: #f3ece0;
-  --band-pill-bg: #f3ece0;
-  --band-pill-ink: #5e1f12;
+  /* Dark: deep green-black, stone type, the same colours lifted, and a
+     navy hero. */
+  --bg: #131915;
+  --bg-2: #19201b;
+  --paper: #1d241f;
+  --ink: #e6e3dc;
+  --ink-2: #cfcbc2;
+  --muted: #a2a59c;
+  --faint: #8e9289;
+  --vals-dim: #5c625a;
+  --line: #252d27;
+  --line-2: #333c35;
+  --rule: #333c35;
+  --accent: #f3df98;
+  --accent-ink: #ead28a;
+  --accent-2: #e27d89;
+  --chart: #ead28a;
+  --flag: #1b221d;
+  --c1: #7fbb94;
+  --c2: #e27d89;
+  --c3: #e59b85;
+  --c4: #ead28a;
+  --arc1: #22543a;
+  --arc2: #993743;
+  --arc3: #b06250;
+  --arc4: #cdaf68;
+  --band-bg-dark: #1b3a6c;
+  --thread: #ead28a;
+  --thread-ink: #ead28a;
+  --band-fg: #f3eee2;
+  --band-kick: #f3df98;
+  --band-sub: #e8ecf2;
+  --band-muted: #c2cbda;
+  --band-portrait: #f3eee2;
+  --band-pill-bg: #f3df98;
+  --band-pill-ink: #1b3a6c;
   --shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   --shadow-lift: 0 10px 30px rgba(0, 0, 0, 0.4);
   color-scheme: dark;
@@ -5168,12 +5180,12 @@ main:has(> .band) {
    outline, larger radius, dashed dividers, plain ink icons. Type is left to
    the rules above. */
 :root {
-  --panel: #ebe7dc;
+  --panel: #dcdad4;
   --lift: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
     0 1px 2px rgba(35, 35, 35, 0.06), 0 14px 32px -14px rgba(35, 35, 35, 0.2);
 }
 :root[data-theme="dark"] {
-  --panel: #201d1a;
+  --panel: #1b221d;
   --lift: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
     0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 32px -14px rgba(0, 0, 0, 0.6);
 }
@@ -7633,3 +7645,35 @@ body::after {
   opacity: 0.12;
   mix-blend-mode: screen;
 }
+
+/* The arcs on the hero, largest first. */
+.band-arcs {
+  position: absolute;
+  z-index: 0;
+  right: -4vw;
+  bottom: 0;
+  width: 40vw;
+  height: auto;
+  pointer-events: none;
+}
+
+.js .band-arcs {
+  opacity: calc(1 - var(--band-exit-opacity));
+  transition: opacity 0.32s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.band-arcs path:nth-child(1) { fill: var(--arc1); }
+.band-arcs path:nth-child(2) { fill: var(--arc2); }
+.band-arcs path:nth-child(3) { fill: var(--arc3); }
+.band-arcs path:nth-child(4) { fill: var(--arc4); }
+
+/* Each principle draws in its own colour; each era on /built is headed in
+   one. */
+.vals-ink path[data-k="0"] { stroke: var(--c1); }
+.vals-ink path[data-k="1"] { stroke: var(--c2); }
+.vals-ink path[data-k="2"] { stroke: var(--c3); }
+.vals-ink path[data-k="3"] { stroke: var(--c4); }
+
+.ws-group:nth-of-type(1) .ws-group-h span { color: var(--c1); }
+.ws-group:nth-of-type(2) .ws-group-h span { color: var(--c2); }
+.ws-group:nth-of-type(3) .ws-group-h span { color: var(--c3); }
