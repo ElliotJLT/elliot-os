@@ -58,7 +58,7 @@ export const metadata: Metadata = {
 };
 
 // Runs before paint so the stored theme never flashes.
-const themeInit = `(function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}e.dataset.theme=t}catch(_){}})()`;
+const themeInit = `(function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}e.dataset.theme=t;localStorage.removeItem("palette")}catch(_){}})()`;
 
 export default function RootLayout({
   children,

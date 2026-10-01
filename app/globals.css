@@ -11,23 +11,37 @@
    ======================================================================== */
 
 :root {
-  --bg: #fef9ed;
-  --bg-2: #faf3e2;
-  --paper: #fffcf4;
-  --ink: #342e29;
-  --ink-2: #4a423b;
-  --muted: #5d524b;
-  --faint: #71665e;
+  /* Light is a case file: cartridge paper, graphite type and pencil marks,
+     a manila folder for the hero. Dark is letterpress (below). */
+  --bg: #f2efe6;
+  --bg-2: #eae6da;
+  --paper: #f8f6ef;
+  --ink: #232323;
+  --ink-2: #383836;
+  --muted: #5a5955;
+  --faint: #6e6d68;
   /* Unlit principles: dim, but still 3:1 at display size. */
-  --vals-dim: #94897b;
-  --line: #e9e0ca;
-  --line-2: #d8cdb4;
-  --rule: #342e29;
-  --accent: #cc5600;
-  --accent-ink: #a84600;
-  --accent-2: #3f6b47;
-  --chart: #3f6b47;
-  --flag: #f0ead9;
+  --vals-dim: #9f9c93;
+  --line: #dfdbcf;
+  --line-2: #cbc6b7;
+  --rule: #232323;
+  --accent: #5c5c58;
+  --accent-ink: #3e3e3b;
+  --accent-2: #3e3e3b;
+  --chart: #3e3e3b;
+  --flag: #e8e3d6;
+  --band-bg: #d8b873;
+  /* The career thread: the manila, deepened so a 2px line still clears 3:1
+     on the paper, and darker again where it sets text (the year stops). */
+  --thread: #a67f22;
+  --thread-ink: #85661a;
+  --band-fg: #232323;
+  --band-kick: #232323;
+  --band-sub: #2e2b25;
+  --band-muted: #4a4232;
+  --band-portrait: #232323;
+  --band-pill-bg: #232323;
+  --band-pill-ink: #e6cc8f;
   --shadow: 0 1px 1px rgba(27, 24, 17, 0.03);
   --shadow-lift: 0 10px 30px rgba(27, 24, 17, 0.07);
   --mono: "SF Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
@@ -40,26 +54,34 @@
 }
 
 :root[data-theme="dark"] {
-  --bg: #08100f;
-  --bg-2: #0d1716;
-  --paper: #0f1918;
-  --ink: #f4f1eb;
-  --ink-2: #d6d2ca;
-  --muted: #9b978e;
-  --faint: #8e8a81;
-  --vals-dim: #636660;
-  --line: #1b2523;
-  --line-2: #2b3735;
-  --rule: #2e3a38;
-  /* Amber rather than the light-mode coral carried over: the dark palette
-     already leans sage-green (--accent-2 below), and amber pairs with that
-     instead of fighting it. Also clears contrast better against the dark
-     bg (8.56:1 / 10.50:1 vs 5.74:1 for the coral it replaces). */
-  --accent: #d9a441;
-  --accent-ink: #e6b95c;
-  --accent-2: #7bb389;
-  --chart: #6ba877;
-  --flag: #211d15;
+  /* Letterpress at night: dark cotton stock, warm off-white type, one
+     brick-red ink for every mark and lit state, and an oxblood hero. */
+  --bg: #171513;
+  --bg-2: #1e1b18;
+  --paper: #221f1b;
+  --ink: #ede7dc;
+  --ink-2: #d4cdc1;
+  --muted: #a49c90;
+  --faint: #90897e;
+  --vals-dim: #615a52;
+  --line: #2b2723;
+  --line-2: #3b3530;
+  --rule: #3b3530;
+  --accent: #e0765a;
+  --accent-ink: #e8876c;
+  --accent-2: #e0765a;
+  --chart: #e0765a;
+  --flag: #211e1a;
+  --band-bg-dark: #5e1f12;
+  --thread: #e8876c;
+  --thread-ink: #e8876c;
+  --band-fg: #f3ece0;
+  --band-kick: #f2b39f;
+  --band-sub: #f0e7da;
+  --band-muted: #d6b3a6;
+  --band-portrait: #f3ece0;
+  --band-pill-bg: #f3ece0;
+  --band-pill-ink: #5e1f12;
   --shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   --shadow-lift: 0 10px 30px rgba(0, 0, 0, 0.4);
   color-scheme: dark;
@@ -2856,7 +2878,7 @@ main:has(> .band) {
   inset: 0 0 auto;
   height: 100%;
   display: block;
-  background: #ad5035;
+  background: var(--band-bg, #ad5035);
   opacity: 1;
   pointer-events: none;
 }
@@ -2871,7 +2893,7 @@ main:has(> .band) {
    same identity, but dark enough that switching themes changes the mood rather
    than merely recolouring the page around an unchanged hero. */
 :root[data-theme="dark"] .band-wash {
-  background: #2d1d30;
+  background: var(--band-bg-dark, #2d1d30);
 }
 
 /* A fixed stretcher-bond wall sits almost invisibly in the colour field.
@@ -2935,7 +2957,7 @@ main:has(> .band) {
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #ffe9dc;
+  color: var(--band-kick, #ffe9dc);
   margin-bottom: 18px;
 }
 
@@ -2944,7 +2966,7 @@ main:has(> .band) {
   font-size: clamp(36px, 5.7vw, 70px);
   line-height: 1.1;
   letter-spacing: -0.02em;
-  color: #faf3e8;
+  color: var(--band-fg, #faf3e8);
   margin: 0 auto 28px;
   max-width: 26ch;
   text-wrap: balance;
@@ -2972,12 +2994,12 @@ main:has(> .band) {
   object-fit: cover;
   /* A ring rather than an outline: against a saturated band the photo needs
      separating from the colour, and white does it without a shadow. */
-  border: 3px solid #faf3e8;
+  border: 3px solid var(--band-portrait, #faf3e8);
   margin: 0;
   display: block;
   /* An eleven-frame sprite (see TrackingPortrait); frame 4 is the one
      looking out, so it is also what shows before JS or with reduced motion. */
-  background-color: #faf3e8;
+  background-color: var(--band-portrait, #faf3e8);
   background-repeat: no-repeat;
   background-size: 1100% 100%;
   background-position: 40% 0;
@@ -2989,7 +3011,7 @@ main:has(> .band) {
   font-family: var(--serif);
   font-size: clamp(18px, 1.45vw, 19px);
   line-height: 1.5;
-  color: #fff6ed;
+  color: var(--band-sub, #fff6ed);
   max-width: none;
   margin: 0;
   text-wrap: pretty;
@@ -2997,11 +3019,11 @@ main:has(> .band) {
 
 .band-sub a {
   color: inherit;
-  text-decoration-color: rgba(255, 246, 237, 0.5);
+  text-decoration-color: color-mix(in srgb, var(--band-sub, #fff6ed) 50%, transparent);
 }
 
 .band-sub a:hover {
-  text-decoration-color: #fff6ed;
+  text-decoration-color: var(--band-sub, #fff6ed);
 }
 
 .band-profile .band-cta {
@@ -3049,7 +3071,7 @@ main:has(> .band) {
   place-items: center;
   width: 40px;
   height: 40px;
-  color: #f4d9c9;
+  color: var(--band-muted, #f4d9c9);
   opacity: calc(0.85 - var(--band-exit-opacity));
   animation: band-scroll-bob 2.2s ease-in-out infinite;
   transition: color 0.18s ease-out,
@@ -3057,7 +3079,7 @@ main:has(> .band) {
 }
 
 .band-scroll:hover {
-  color: #faf3e8;
+  color: var(--band-fg, #faf3e8);
   opacity: calc(1 - var(--band-exit-opacity));
 }
 
@@ -3085,8 +3107,8 @@ main:has(> .band) {
 }
 
 .pill-cream {
-  background: #faf3e8;
-  color: #8a3c26;
+  background: var(--band-pill-bg, #faf3e8);
+  color: var(--band-pill-ink, #8a3c26);
 }
 
 .pill-cream:hover {
@@ -3095,12 +3117,12 @@ main:has(> .band) {
 
 .pill-ghost {
   background: transparent;
-  color: #faf3e8;
-  border-color: rgba(250, 243, 232, 0.45);
+  color: var(--band-fg, #faf3e8);
+  border-color: color-mix(in srgb, var(--band-fg, #faf3e8) 45%, transparent);
 }
 
 .pill-ghost:hover {
-  border-color: #faf3e8;
+  border-color: var(--band-fg, #faf3e8);
 }
 
 /* The band runs to the viewport edge and clears the fixed nav with padding. */
@@ -3208,7 +3230,7 @@ main:has(> .band) {
 .js main:has(> .band) .vals-list li {
   color: color-mix(
     in srgb,
-    #faf3e8 calc(100% - var(--band-copy-percent)),
+    var(--band-fg, #faf3e8) calc(100% - var(--band-copy-percent)),
     var(--vals-dim)
   );
 }
@@ -3216,7 +3238,7 @@ main:has(> .band) {
 .js main:has(> .band) .vals-list li[data-on] {
   color: color-mix(
     in srgb,
-    #faf3e8 calc(100% - var(--band-copy-percent)),
+    var(--band-fg, #faf3e8) calc(100% - var(--band-copy-percent)),
     var(--ink)
   );
 }
@@ -3244,7 +3266,7 @@ main:has(> .band) {
 .js main:has(> .band) .vals-said p {
   color: color-mix(
     in srgb,
-    #faf3e8 calc(100% - var(--band-copy-percent)),
+    var(--band-fg, #faf3e8) calc(100% - var(--band-copy-percent)),
     var(--ink)
   );
 }
@@ -5144,12 +5166,12 @@ main:has(> .band) {
    outline, larger radius, dashed dividers, plain ink icons. Type is left to
    the rules above. */
 :root {
-  --panel: #f4eee2;
+  --panel: #ebe7dc;
   --lift: 0 1px 0 rgba(255, 255, 255, 0.7) inset,
-    0 1px 2px rgba(52, 46, 41, 0.06), 0 14px 32px -14px rgba(52, 46, 41, 0.22);
+    0 1px 2px rgba(35, 35, 35, 0.06), 0 14px 32px -14px rgba(35, 35, 35, 0.2);
 }
 :root[data-theme="dark"] {
-  --panel: #131e1d;
+  --panel: #201d1a;
   --lift: 0 1px 0 rgba(255, 255, 255, 0.04) inset,
     0 1px 2px rgba(0, 0, 0, 0.4), 0 14px 32px -14px rgba(0, 0, 0, 0.6);
 }
@@ -5768,7 +5790,7 @@ h2.mai-kick + p.muted,
 }
 
 .cr-rail-drawn {
-  stroke: var(--accent-ink);
+  stroke: var(--thread);
   stroke-width: 2;
   stroke-dasharray: 0 99999;
 }
@@ -5790,6 +5812,10 @@ h2.mai-kick + p.muted,
   opacity: 0;
   transition: opacity 0.3s ease-out;
   will-change: transform;
+  /* The outline is drawn here in the pen colour, so it follows the theme:
+     graphite on the case file, brick red at night. */
+  filter: drop-shadow(1.2px 0 0 var(--accent-ink)) drop-shadow(-1.2px 0 0 var(--accent-ink))
+    drop-shadow(0 1.2px 0 var(--accent-ink)) drop-shadow(0 -1.2px 0 var(--accent-ink));
   /* The rail ignores the pointer; he doesn't, once he's showing. */
   pointer-events: none;
   cursor: grab;
@@ -5808,11 +5834,14 @@ h2.mai-kick + p.muted,
   cursor: grabbing;
   pointer-events: none;
   user-select: none;
-  filter: drop-shadow(0 10px 14px rgba(52, 46, 41, 0.25));
+  filter: drop-shadow(1.2px 0 0 var(--accent-ink)) drop-shadow(-1.2px 0 0 var(--accent-ink))
+    drop-shadow(0 1.2px 0 var(--accent-ink)) drop-shadow(0 -1.2px 0 var(--accent-ink))
+    drop-shadow(0 10px 14px rgba(35, 35, 35, 0.25));
 }
 
 .cr-flung.is-thrown {
-  filter: none;
+  filter: drop-shadow(1.2px 0 0 var(--accent-ink)) drop-shadow(-1.2px 0 0 var(--accent-ink))
+    drop-shadow(0 1.2px 0 var(--accent-ink)) drop-shadow(0 -1.2px 0 var(--accent-ink));
 }
 
 .cr-line[data-drawing] .cr-tip {
@@ -5841,8 +5870,8 @@ h2.mai-kick + p.muted,
 }
 
 .cr-item[data-passed] .cr-year {
-  color: var(--accent-ink);
-  border-color: var(--accent-ink);
+  color: var(--thread-ink);
+  border-color: var(--thread);
 }
 
 /* The year sits over the line, which runs behind it. Hidden until the tip
@@ -7583,4 +7612,22 @@ a.bento-card {
 
 .loop-ledger-panel .failure-log li:last-child {
   border-bottom: none;
+}
+
+/* Grain: a fixed film of noise over every page, so the paper reads as
+   paper rather than a flat fill. Multiply in light, screen in dark. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  pointer-events: none;
+  opacity: 0.32;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.45  0 0 0 0 0.4  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+:root[data-theme="dark"] body::after {
+  opacity: 0.12;
+  mix-blend-mode: screen;
 }
