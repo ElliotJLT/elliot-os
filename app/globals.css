@@ -31,8 +31,10 @@
   --chart: #3e3e3b;
   --flag: #e8e3d6;
   --band-bg: #d8b873;
-  /* The career thread: the manila, deepened so a 2px line still clears 3:1
-     on the paper, and darker again where it sets text (the year stops). */
+  /* The thread: every hand-drawn mark (the career rail, the circles round
+     faces, the principles' pen marks) in the hero's manila, deepened so a
+     2px line still clears 3:1 on the paper, and darker again where it sets
+     text (the year stops). */
   --thread: #a67f22;
   --thread-ink: #85661a;
   --band-fg: #232323;
@@ -3192,7 +3194,7 @@ main:has(> .band) {
 
 .vals-ink path {
   fill: none;
-  stroke: var(--accent-ink);
+  stroke: var(--thread);
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -5951,7 +5953,7 @@ h2.mai-kick + p.muted,
 
 .cr-mark path {
   fill: none;
-  stroke: var(--accent-ink);
+  stroke: var(--thread);
   stroke-width: 3.2;
   stroke-linecap: round;
   stroke-linejoin: round;
