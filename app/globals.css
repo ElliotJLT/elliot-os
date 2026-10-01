@@ -30,10 +30,12 @@
   --accent-2: #993743;
   --chart: #22543a;
   --flag: #d8d5ce;
-  /* Section kickers in claret, small labels in terracotta, selection in
-     butter, and a navy footer to answer the green hero. */
-  --kick: #993743;
-  --label: #9c4f3a;
+  /* Section kickers in claret (wine, hue 340) and small labels in
+     terracotta (burnt orange, hue 20), kept 40 degrees apart so they read
+     as two colours, both 4.5:1 or better on the card panels. Selection
+     in butter, and a navy footer to answer the green hero. */
+  --kick: #8e2f4f;
+  --label: #9c4011;
   --select: #f3df98;
   --foot-bg: #1b3a6c;
   --foot-fg: #e8ecf2;
@@ -85,8 +87,8 @@
   --accent-2: #e27d89;
   --chart: #ead28a;
   --flag: #1b221d;
-  --kick: #e27d89;
-  --label: #e59b85;
+  --kick: #e8849a;
+  --label: #e8a070;
   --select: #22543a;
   --foot-bg: #22543a;
   --foot-fg: #ecefe8;
