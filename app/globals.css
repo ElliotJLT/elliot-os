@@ -11,8 +11,8 @@
    ======================================================================== */
 
 :root {
-  /* Light: stone paper and one family of colours used in turn: bottle
-     green, claret, terracotta, ochre and butter, with navy held back. */
+  /* Light: stone paper, a bottle-green hero, and one ochre gold for every
+     hand-drawn mark. Dark (below) is navy, with the marks in turn. */
   --bg: #e4e2dd;
   --bg-2: #dbd9d3;
   --paper: #ecebe7;
@@ -30,17 +30,14 @@
   --accent-2: #993743;
   --chart: #22543a;
   --flag: #d8d5ce;
-  --c1: #22543a;
-  --c2: #993743;
-  --c3: #a8583f;
-  --c4: #a8873a;
-  --arc1: #993743;
-  --arc2: #b06250;
-  --arc3: #cdaf68;
-  --arc4: #f3df98;
+  /* In light, every hand-drawn mark is one ochre gold. */
+  --c1: #9a7a2e;
+  --c2: #9a7a2e;
+  --c3: #9a7a2e;
+  --c4: #9a7a2e;
   --band-bg: #22543a;
-  --thread: #993743;
-  --thread-ink: #993743;
+  --thread: #a8873a;
+  --thread-ink: #85691f;
   --band-fg: #f3eee2;
   --band-kick: #f3df98;
   --band-sub: #ece8dc;
@@ -82,10 +79,6 @@
   --c2: #e27d89;
   --c3: #e59b85;
   --c4: #ead28a;
-  --arc1: #22543a;
-  --arc2: #993743;
-  --arc3: #b06250;
-  --arc4: #cdaf68;
   --band-bg-dark: #1b3a6c;
   --thread: #ead28a;
   --thread-ink: #ead28a;
@@ -7645,27 +7638,6 @@ body::after {
   opacity: 0.12;
   mix-blend-mode: screen;
 }
-
-/* The arcs on the hero, largest first. */
-.band-arcs {
-  position: absolute;
-  z-index: 0;
-  right: -4vw;
-  bottom: 0;
-  width: 40vw;
-  height: auto;
-  pointer-events: none;
-}
-
-.js .band-arcs {
-  opacity: calc(1 - var(--band-exit-opacity));
-  transition: opacity 0.32s cubic-bezier(0.2, 0, 0, 1);
-}
-
-.band-arcs path:nth-child(1) { fill: var(--arc1); }
-.band-arcs path:nth-child(2) { fill: var(--arc2); }
-.band-arcs path:nth-child(3) { fill: var(--arc3); }
-.band-arcs path:nth-child(4) { fill: var(--arc4); }
 
 /* Each principle draws in its own colour; each era on /built is headed in
    one. */
