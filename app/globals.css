@@ -31,6 +31,10 @@
   --chart: #3e3e3b;
   --flag: #e8e3d6;
   --band-bg: #d8b873;
+  /* The career thread: the manila, deepened so a 2px line still clears 3:1
+     on the paper, and darker again where it sets text (the year stops). */
+  --thread: #a67f22;
+  --thread-ink: #85661a;
   --band-fg: #232323;
   --band-kick: #232323;
   --band-sub: #2e2b25;
@@ -69,6 +73,8 @@
   --chart: #e0765a;
   --flag: #211e1a;
   --band-bg-dark: #5e1f12;
+  --thread: #e8876c;
+  --thread-ink: #e8876c;
   --band-fg: #f3ece0;
   --band-kick: #f2b39f;
   --band-sub: #f0e7da;
@@ -5784,7 +5790,7 @@ h2.mai-kick + p.muted,
 }
 
 .cr-rail-drawn {
-  stroke: var(--accent-ink);
+  stroke: var(--thread);
   stroke-width: 2;
   stroke-dasharray: 0 99999;
 }
@@ -5864,8 +5870,8 @@ h2.mai-kick + p.muted,
 }
 
 .cr-item[data-passed] .cr-year {
-  color: var(--accent-ink);
-  border-color: var(--accent-ink);
+  color: var(--thread-ink);
+  border-color: var(--thread);
 }
 
 /* The year sits over the line, which runs behind it. Hidden until the tip
