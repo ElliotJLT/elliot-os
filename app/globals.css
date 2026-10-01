@@ -30,6 +30,16 @@
   --accent-2: #993743;
   --chart: #22543a;
   --flag: #d8d5ce;
+  /* Section kickers in claret, small labels in terracotta, selection in
+     butter, and a navy footer to answer the green hero. */
+  --kick: #993743;
+  --label: #9c4f3a;
+  --select: #f3df98;
+  --foot-bg: #1b3a6c;
+  --foot-fg: #e8ecf2;
+  --foot-muted: #b6c2d6;
+  --foot-h: #f3df98;
+  --foot-line: rgba(232, 236, 242, 0.18);
   /* In light, every hand-drawn mark is one ochre gold. */
   --c1: #9a7a2e;
   --c2: #9a7a2e;
@@ -75,6 +85,14 @@
   --accent-2: #e27d89;
   --chart: #ead28a;
   --flag: #1b221d;
+  --kick: #e27d89;
+  --label: #e59b85;
+  --select: #22543a;
+  --foot-bg: #22543a;
+  --foot-fg: #ecefe8;
+  --foot-muted: #bccdc1;
+  --foot-h: #f3df98;
+  --foot-line: rgba(236, 239, 232, 0.18);
   --c1: #7fbb94;
   --c2: #e27d89;
   --c3: #e59b85;
@@ -139,8 +157,8 @@ a:hover {
 }
 
 ::selection {
-  background: var(--accent);
-  color: var(--paper);
+  background: var(--select, var(--accent));
+  color: var(--ink);
 }
 
 :focus-visible {
@@ -2640,7 +2658,7 @@ h2[id] {
   font-size: 12px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--kick, var(--accent-ink));
   margin-bottom: 22px;
 }
 
@@ -2811,7 +2829,7 @@ h2.mai-kick {
   font-size: 12px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--kick, var(--accent-ink));
 }
 
 h2.mai-kick::before,
@@ -6019,7 +6037,7 @@ h2.mai-kick + p.muted,
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--label, var(--accent-ink));
   line-height: 1.55;
   padding-top: 3px;
 }
@@ -6767,7 +6785,7 @@ h2.mai-kick + p.muted,
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent-ink);
+  color: var(--label, var(--accent-ink));
   margin: 0;
 }
 
@@ -7646,6 +7664,37 @@ body::after {
 .vals-ink path[data-k="2"] { stroke: var(--c3); }
 .vals-ink path[data-k="3"] { stroke: var(--c4); }
 
-.ws-group:nth-of-type(1) .ws-group-h span { color: var(--c1); }
-.ws-group:nth-of-type(2) .ws-group-h span { color: var(--c2); }
-.ws-group:nth-of-type(3) .ws-group-h span { color: var(--c3); }
+.ws-group:nth-of-type(1) .ws-group-h span { color: var(--kick); }
+.ws-group:nth-of-type(2) .ws-group-h span { color: var(--label); }
+.ws-group:nth-of-type(3) .ws-group-h span { color: var(--thread-ink); }
+
+/* The footer as a band in its own colour: navy under the green hero by
+   day, green under the navy hero at night. */
+footer {
+  background: var(--foot-bg, var(--bg));
+  color: var(--foot-fg, var(--ink));
+  border-top: none;
+}
+
+footer .foot-h {
+  color: var(--foot-h, var(--faint));
+}
+
+footer .foot-col a,
+footer .foot-col span:not(.foot-h),
+footer .foot-brand {
+  color: var(--foot-fg, var(--ink-2));
+}
+
+footer .foot-col a:hover {
+  color: var(--foot-h, var(--accent-ink));
+}
+
+footer .foot-base {
+  border-top-color: var(--foot-line, var(--line));
+}
+
+footer .foot-base,
+footer .foot-base a {
+  color: var(--foot-muted, var(--faint));
+}
