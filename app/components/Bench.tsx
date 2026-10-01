@@ -80,7 +80,7 @@ export default function Bench({
         { k: "ok", t: "every flagged mark became an eval case" },
         { k: "warn", t: "production came in 4.6x over the cost plan" },
         { k: "info", t: "a model 14x cheaper couldn't hold its tool calls" },
-        { k: "ok", t: "caching + routing by mode · $0.09 a session, 80%+ margin" },
+        { k: "ok", t: "kept the model, fixed the cost: caching + routing by mode" },
         { k: "ok", t: "ISO 27001 and 9001 solo as DPO · built to DfE standards" },
       ],
     },
