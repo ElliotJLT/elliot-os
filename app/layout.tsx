@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Newsreader, Archivo, Instrument_Serif } from "next/font/google";
 import NavLinks from "./components/NavLinks";
+import { EvalsWord, LoopsWord } from "./components/WordMarks";
 import ThemeToggle from "./components/ThemeToggle";
 import MobileMenu from "./components/MobileMenu";
 import NavAutoHide from "./components/NavAutoHide";
@@ -123,7 +124,20 @@ export default function RootLayout({
                 <span className="foot-h">Sections</span>
                 <Link href="/built">Built</Link>
                 <Link href="/writing">Writing</Link>
-                <Link href="/loops">Loops</Link>
+                <Link
+                  href="/evals"
+                  className="nav-evals-link"
+                  aria-label="Evals"
+                >
+                  <EvalsWord first="E" />
+                </Link>
+                <Link
+                  href="/loops"
+                  className="nav-loops-link"
+                  aria-label="Loops"
+                >
+                  <LoopsWord first="L" />
+                </Link>
               </nav>
               <div className="foot-col">
                 <span className="foot-h">The desk</span>

@@ -1853,7 +1853,7 @@ h2::before {
 }
 
 .foot-col a,
-.foot-col span:not(.foot-h) {
+.foot-col > span:not(.foot-h) {
   font-family: var(--mono);
   font-size: 16px;
   color: var(--ink-2);
