@@ -1,8 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-09-30, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 21 commits across 2 repos.*
+*Shipping log for the 7 days to 2026-10-02, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 21 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 20 commits. "Principles marks: smoother strokes" (7b7d87e), "Principles: a pen mark draws in as each one lights" (5ae146b), "Career photos: a marker loop round Elliot's face" (6097871) and 17 more
-- **[ElliotJLT](https://github.com/ElliotJLT/ElliotJLT)**: 1 commit. "Profile: point at /loops instead of argus; add dog-years" (a6840b8)
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 21 commits. "Footer: add Evals, and both hover marks" (1e086f3), "Evals nav: the v becomes a tick on hover" (ca9a06f), "One button system across light and dark" (4c052a0) and 18 more
 <!-- agent:end -->
 
 ## by hand
