@@ -6,8 +6,15 @@
       "week_of": "2026-09-28",
       "closed": 2,
       "captured": 3,
-      "briefs": 8,
+      "briefs": 9,
       "fallbacks": 1
+    },
+    {
+      "week_of": "2026-10-05",
+      "closed": 0,
+      "captured": 0,
+      "briefs": 0,
+      "fallbacks": 0
     }
   ],
   "broke": [
