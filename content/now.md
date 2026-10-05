@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-10-02, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 21 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-10-05, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 21 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 21 commits. "Footer: add Evals, and both hover marks" (1e086f3), "Evals nav: the v becomes a tick on hover" (ca9a06f), "One button system across light and dark" (4c052a0) and 18 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 21 commits. "ledger: 2026-10-05" (89b7a2b), "ledger: 2026-10-04" (8206298), "Footer: add Evals, and both hover marks" (1e086f3) and 18 more
 <!-- agent:end -->
 
 ## by hand
