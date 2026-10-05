@@ -11,9 +11,9 @@
     },
     {
       "week_of": "2026-10-05",
-      "closed": 0,
+      "closed": 1,
       "captured": 0,
-      "briefs": 0,
+      "briefs": 1,
       "fallbacks": 0
     }
   ],
