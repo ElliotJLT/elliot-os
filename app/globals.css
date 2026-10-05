@@ -3109,6 +3109,59 @@ main:has(> .band) {
   justify-content: flex-start;
 }
 
+/* Under the buttons, across the full profile width: one colour, small and
+   quiet, so the row reads as a fact rather than a banner. */
+.band-profile {
+  grid-template-areas:
+    "face copy"
+    "face actions"
+    "logos logos";
+}
+
+.logo-row {
+  grid-area: logos;
+  list-style: none;
+  margin: 34px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 26px;
+}
+
+.logo-row li {
+  display: flex;
+  align-items: center;
+  opacity: 0.82;
+}
+
+.logo-mark {
+  display: block;
+  flex: none;
+  background-color: var(--band-sub, #fff6ed);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.logo-dfe {
+  gap: 7px;
+}
+
+.logo-dfe > span:last-child {
+  padding-left: 7px;
+  border-left: 1px solid var(--band-sub, #fff6ed);
+  font-family: var(--sans);
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--band-sub, #fff6ed);
+}
+
 @media (max-width: 680px) {
   .band-h {
     margin-bottom: 28px;
@@ -3134,6 +3187,11 @@ main:has(> .band) {
   .band-profile .band-cta {
     align-self: stretch;
     justify-content: center;
+  }
+
+  .logo-row {
+    justify-content: center;
+    gap: 18px 24px;
   }
 }
 
