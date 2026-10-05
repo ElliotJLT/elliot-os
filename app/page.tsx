@@ -10,6 +10,7 @@ import TrackingPortrait from "./components/TrackingPortrait";
 import StackField from "./components/StackField";
 import Career from "./components/Career";
 import StackExplorer from "./components/StackExplorer";
+import LogoRow from "./components/LogoRow";
 
 /** One row shape for a piece of writing: image, date, title, CTA and note. */
 function Row({
@@ -60,19 +61,18 @@ export default async function Home() {
               Hands-on AI product leader
             </span>
             <h1 className="band-h">
-              <Words text="I build AI products and lead the teams shipping them." />
+              <Words text="I build AI that has to be right." />
             </h1>
             <div className="band-profile">
               <TrackingPortrait className="band-face rv-develop" />
               <p className="band-sub rv-settle">
-                Eight years building early-stage products and the operations
-                behind them. At Zero Gravity I led product and the team that
-                took our AI STEM tutor from first commit to the App Store in
-                under a month, then into the{" "}
+                At Zero Gravity I led the team that took an AI tutor from first
+                commit to the App Store in under a month, got it marking real
+                A-level past papers at over 99%, and won it a place in the{" "}
                 <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
                   UK government&apos;s AI Tutoring Tools Pioneers Programme
-                </a>
-                .
+                </a>{" "}
+                alongside Pearson and ElevenLabs.
               </p>
               <div className="band-cta rv-settle">
                 <Pill href="/built" tone="cream" arrow>
@@ -95,6 +95,7 @@ export default async function Home() {
                   Book a coffee
                 </Pill>
               </div>
+              <LogoRow className="rv-settle" />
             </div>
           </div>
         </Reveal>
