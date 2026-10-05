@@ -6505,6 +6505,10 @@ h2.mai-kick + p.muted,
   .cr-award-drawer > ul {
     grid-template-columns: 1fr 1fr;
   }
+
+  .cr-award-drawer li {
+    margin-top: 8px;
+  }
 }
 
 .cr-card .career-meta {
