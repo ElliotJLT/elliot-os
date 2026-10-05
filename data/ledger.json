@@ -7,14 +7,28 @@
       "closed": 2,
       "captured": 3,
       "briefs": 9,
-      "fallbacks": 1
+      "fallbacks": 1,
+      "ticks": 8,
+      "quiet": 1,
+      "facts_kept": 0,
+      "facts_thrown": 0,
+      "closes": 0,
+      "closes_withheld": 0,
+      "incidents": 1
     },
     {
       "week_of": "2026-10-05",
       "closed": 1,
       "captured": 0,
       "briefs": 1,
-      "fallbacks": 0
+      "fallbacks": 0,
+      "ticks": 49,
+      "quiet": 39,
+      "facts_kept": 134,
+      "facts_thrown": 30,
+      "closes": 0,
+      "closes_withheld": 0,
+      "incidents": 1
     }
   ],
   "broke": [
