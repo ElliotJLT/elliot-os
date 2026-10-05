@@ -8,6 +8,31 @@
       "url": "https://www.zerogravity.co.uk/tutor",
       "role": "Head of Product (joined as employee #4)",
       "dates": "Feb 2022 – Aug 2026",
+      "awards": [
+        {
+          "name": "Bett Award",
+          "note": "Transformative Impact",
+          "year": "2024"
+        },
+        {
+          "name": "Startups 100",
+          "note": "Ranked 6th",
+          "year": "2024",
+          "href": "https://startups.co.uk/startups-100/2024/zero-gravity"
+        },
+        {
+          "name": "Digital Technology Leaders Award",
+          "note": "Diversity Initiative of the Year, with HSBC",
+          "year": "2024",
+          "href": "https://event.computing.co.uk/digitaltechnologyleadersawards/en/page/2024-winners"
+        },
+        {
+          "name": "Sifted 100",
+          "note": "36th fastest-growing UK startup",
+          "year": "2025",
+          "href": "https://sifted.eu/intelligence/reports/sifted-100-uk-and-ireland-2025"
+        }
+      ],
       "bullets": [
         {
           "k": "AI product",
@@ -61,6 +86,18 @@
       "url": "https://farewill.com/apply-for-probate",
       "role": "Product & Operations Lead",
       "dates": "Jan 2021 – Feb 2022",
+      "awards": [
+        {
+          "name": "Probate Provider of the Year",
+          "note": "British Wills and Probate Awards, under 75 staff",
+          "year": "2021"
+        },
+        {
+          "name": "Will Writing Firm of the Year",
+          "note": "British Wills and Probate Awards, national",
+          "year": "2021"
+        }
+      ],
       "bullets": [
         {
           "k": "Product and ops",

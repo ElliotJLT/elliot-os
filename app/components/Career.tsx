@@ -109,6 +109,66 @@ function FaceMark({ face }: { face: { x: number; y: number; r: number } }) {
   );
 }
 
+/** Six sparks thrown out from the trophy when the awards open. */
+const SPARKS = [0, 60, 120, 180, 240, 300];
+
+/**
+ * The company's awards from Elliot's time there, folded into one trophy and
+ * a count. A click opens them inside the card: the trophy hops, sparks fly
+ * off it, a row opens under the heading and the awards drop in one after
+ * another, pushing the bullets down rather than covering them.
+ */
+function Awards({ org, awards }: { org: string; awards: NonNullable<Role["awards"]> }) {
+  const [open, setOpen] = useState(false);
+  const id = `awards-${org.toLowerCase().replace(/\W+/g, "-")}`;
+  useEffect(() => {
+    if (!open) return;
+    const escape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", escape);
+    return () => document.removeEventListener("keydown", escape);
+  }, [open]);
+  return (
+    <>
+      <button
+        type="button"
+        className="cr-trophy"
+        aria-expanded={open}
+        aria-controls={id}
+        aria-label={`${awards.length} awards ${org} won while I was there`}
+        onClick={() => setOpen((o) => !o)}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+        </svg>
+        <span>×{awards.length}</span>
+        {SPARKS.map((a) => (
+          <i key={a} className="cr-spark" style={{ "--a": `${a}deg` } as React.CSSProperties} aria-hidden="true" />
+        ))}
+      </button>
+      <div className="cr-award-drawer" id={id} inert={!open}>
+        <ul>
+          {awards.map((a, i) => {
+            const body = (
+              <>
+                <span className="cr-award-year">{a.year}</span>
+                <strong>{a.name}</strong>
+                <small>{a.note}</small>
+              </>
+            );
+            return (
+              <li key={a.name} style={{ "--i": i } as React.CSSProperties}>
+                {a.href ? <a href={a.href}>{body}</a> : <span>{body}</span>}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </>
+  );
+}
+
 export default function Career({ roles, id = "career" }: { roles: Role[]; id?: string }) {
   const listRef = useRef<HTMLOListElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -315,12 +375,17 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
             <Reveal>
               <article className="cr-card cr-slide">
                 <div className="cr-body">
-                  <h3>{r.url ? <a href={r.url}>{r.org}</a> : r.org}</h3>
-                  {(r.role || r.dates) && (
-                    <span className="career-meta">
-                      {[r.role, r.dates].filter(Boolean).join(" · ")}
-                    </span>
-                  )}
+                  <div className="cr-head">
+                    <div>
+                      <h3>{r.url ? <a href={r.url}>{r.org}</a> : r.org}</h3>
+                      {(r.role || r.dates) && (
+                        <span className="career-meta">
+                          {[r.role, r.dates].filter(Boolean).join(" · ")}
+                        </span>
+                      )}
+                    </div>
+                    {r.awards && <Awards org={r.org} awards={r.awards} />}
+                  </div>
                   <ul className="cr-points" id={`${id}-${r.org}`}>
                     {r.bullets.map((b, i) =>
                       i < SHOWN || expanded[r.org] ? (
