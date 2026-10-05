@@ -10,6 +10,12 @@
       "dates": "Feb 2022 – Aug 2026",
       "awards": [
         {
+          "name": "DfE AI Tutoring Pioneers",
+          "note": "Placed 2nd of eight picked from 53 bids",
+          "year": "2026",
+          "href": "https://www.computerweekly.com/news/366645141/Six-companies-selected-as-AI-Tutoring-development-partners"
+        },
+        {
           "name": "Bett Award",
           "note": "Transformative Impact",
           "year": "2024"
@@ -25,12 +31,6 @@
           "note": "Diversity Initiative of the Year, with HSBC",
           "year": "2024",
           "href": "https://event.computing.co.uk/digitaltechnologyleadersawards/en/page/2024-winners"
-        },
-        {
-          "name": "Sifted 100",
-          "note": "36th fastest-growing UK startup",
-          "year": "2025",
-          "href": "https://sifted.eu/intelligence/reports/sifted-100-uk-and-ireland-2025"
         }
       ],
       "bullets": [
