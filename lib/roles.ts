@@ -7,6 +7,8 @@ export type Role = {
   url?: string;
   role?: string;
   dates?: string;
+  /** Awards the company won while Elliot was there, shown as badges. */
+  awards?: { name: string; note: string; year: string; href?: string }[];
   /** The proof: a skill, then what it delivered. Lit as the rail reaches it. */
   bullets: { k?: string; t: string }[];
   /** A team photo shown across the top of the role's card. */

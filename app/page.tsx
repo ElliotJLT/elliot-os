@@ -61,7 +61,7 @@ export default async function Home() {
               Hands-on AI product leader
             </span>
             <h1 className="band-h">
-              <Words text="I build AI that has to be right." />
+              <Words text="I ship AI for people who can’t afford it to be wrong." />
             </h1>
             <div className="band-profile">
               <TrackingPortrait className="band-face rv-develop" />
