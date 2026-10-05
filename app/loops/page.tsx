@@ -174,6 +174,44 @@ export default function Loops() {
                 ))}
               </tbody>
             </table>
+            {ledger.weeks.some((w) => w.ticks !== undefined) && (
+              <>
+                <p className="loop-ledger-test">
+                  And what it refused. A fact only goes in if the sentence it
+                  came from is really in the source; everything else is thrown
+                  out and counted here. A nightly call that quotes something I
+                  never said is held back and counted too.
+                </p>
+                <table className="loop-ledger">
+                  <thead>
+                    <tr>
+                      <th>week of</th>
+                      <th>checks run</th>
+                      <th>facts kept</th>
+                      <th>facts thrown out</th>
+                      <th>nightly calls</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {ledger.weeks.filter((w) => w.ticks !== undefined).map((w) => (
+                      <tr key={w.week_of + "-refused"}>
+                        <th scope="row">{formatDate(w.week_of)}</th>
+                        <td>
+                          {w.ticks}
+                          {(w.quiet ?? 0) > 0 && <span className="loop-note">{w.quiet} found nothing to do</span>}
+                        </td>
+                        <td>{w.facts_kept}</td>
+                        <td>{w.facts_thrown}</td>
+                        <td>
+                          {w.closes ?? 0}
+                          {(w.closes_withheld ?? 0) > 0 && <span className="loop-note">{w.closes_withheld} withheld</span>}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </>
+            )}
             <p className="loop-ledger-test">
               What would make it wrong: captures climbing while closed loops
               stay flat. That would be a tidier way of not doing things. On 12
