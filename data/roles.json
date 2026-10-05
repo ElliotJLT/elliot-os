@@ -150,6 +150,19 @@
       "url": "",
       "role": "Founding Operator (#10)",
       "dates": "Oct 2018 – Sep 2020",
+      "awards": [
+        {
+          "name": "Feefo Trusted Service Award",
+          "note": "Earned on customer review scores",
+          "year": "2020",
+          "href": "https://www.linkedin.com/feed/update/urn:li:activity:6631219194547449856"
+        },
+        {
+          "name": "Best Young Company",
+          "note": "Amazon Growth Business Awards",
+          "year": "2018"
+        }
+      ],
       "bullets": [
         {
           "k": "Operations",
