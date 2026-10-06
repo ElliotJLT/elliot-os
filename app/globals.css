@@ -5042,14 +5042,18 @@ main:has(> .band) {
   }
 }
 
-/* /loops "how it runs": boxes and thin arrows in the page's own ink, held
-   in the same panel as every other component on the site. */
-.loop-flow {
+/* /loops "how it runs": the day as a 24-hour dial, with a one-line key
+   beside it, held in the same panel as every other component on the site. */
+.loop-dial {
   margin: 4px 0 28px;
-  padding: 28px 34px 30px;
+  padding: 30px 40px;
   background: var(--panel);
   border-radius: 26px;
   box-shadow: var(--lift);
+  display: grid;
+  grid-template-columns: minmax(0, 520px) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
 }
 
 /* /loops ledger: table, falsification test and failure log in one panel. */
@@ -5078,12 +5082,25 @@ main:has(> .band) {
   color: var(--muted);
 }
 
+.loop-ledger-line {
+  margin: 0 0 4px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.loop-not-yet {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--faint);
+}
+
 .loop-ledger-panel .failure-log {
   margin: 0;
   border-top: 1px dashed var(--line-2);
 }
 
-.loop-flow svg {
+.loop-dial svg {
   display: block;
   width: 100%;
   height: auto;
@@ -5091,81 +5108,152 @@ main:has(> .band) {
   overflow: visible;
 }
 
-.lf-lane {
-  font-family: var(--display);
-  font-size: 24px;
-  fill: var(--muted);
+.ld-ring {
+  fill: var(--paper);
+  stroke: var(--ink-2);
+  stroke-width: 1.5;
 }
 
-.lf-box {
-  fill: var(--paper);
+.ld-tick {
+  stroke: var(--faint);
+  stroke-width: 1.2;
+}
+
+.ld-hour {
+  font-family: var(--mono);
+  font-size: 13px;
+  fill: var(--faint);
+}
+
+.ld-night {
+  fill: none;
   stroke: var(--line-2);
+  stroke-width: 12;
+  stroke-linecap: round;
+}
+
+.ld-spoke {
+  stroke: var(--faint);
   stroke-width: 1.4;
 }
 
-.lf-key {
-  fill: var(--bg-2);
-  stroke: var(--accent-ink);
-}
-
-.lf-title {
-  font-family: var(--sans);
-  font-size: 19px;
-  font-weight: 600;
+.ld-hub {
   fill: var(--ink);
 }
 
-.lf-when {
+.ld-hub-name {
+  font-family: var(--display);
+  font-size: 21px;
+  fill: var(--paper);
+}
+
+.ld-mark circle {
+  fill: var(--paper);
+  stroke: var(--ink-2);
+  stroke-width: 1.4;
+}
+
+.ld-mark text {
   font-family: var(--mono);
   font-size: 13px;
-  letter-spacing: 0.06em;
-  fill: var(--accent-ink);
+  fill: var(--ink);
 }
 
-.lf-body {
-  font-family: var(--sans);
-  font-size: 15.5px;
-  fill: var(--muted);
+.ld-solid circle {
+  fill: var(--ink);
+  stroke: var(--ink);
 }
 
-.lf-line {
-  fill: none;
-  stroke: var(--faint);
-  stroke-width: 1.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.lf-return {
-  stroke-dasharray: 5 6;
-}
-
-.lf-node {
-  fill: var(--bg);
-  stroke: var(--faint);
-  stroke-width: 1.4;
-}
-
-.lf-chip {
+.ld-solid text {
   fill: var(--paper);
+}
+
+.ld-accent circle {
+  fill: var(--accent-ink);
+  stroke: var(--accent-ink);
+}
+
+.ld-accent text {
+  fill: var(--paper);
+}
+
+.ld-week {
   stroke: var(--line-2);
   stroke-width: 1.2;
 }
 
-.lf-news {
-  stroke-dasharray: 4 4;
+.ld-day {
+  fill: var(--faint);
 }
 
-.lf-chip-text {
+.ld-key {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 18px;
+}
+
+.ld-key li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  column-gap: 12px;
+  align-items: baseline;
+}
+
+.ld-key-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.ld-key-n {
   font-family: var(--mono);
-  font-size: 12.5px;
-  fill: var(--ink-2);
+  font-size: 12px;
+  color: var(--faint);
 }
 
-/* Below this the labels would drop under the 11px floor; the numbered
-   steps underneath say the same thing. */
+.ld-key-name {
+  font-family: var(--display);
+  font-size: 23px;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.ld-key-when {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--faint);
+  white-space: nowrap;
+}
+
+.ld-key-line {
+  grid-column: 2;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.ld-key-accent .ld-key-n,
+.ld-key-accent .ld-key-name,
+.ld-key-accent .ld-key-when {
+  color: var(--accent-ink);
+}
+
+/* Narrow: the dial stays, square and centred; the step cards underneath
+   take over from the key. */
 @media (max-width: 900px) {
-  .loop-flow {
+  .loop-dial {
+    grid-template-columns: 1fr;
+    padding: 22px 18px;
+  }
+
+  .loop-dial svg {
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .ld-key {
     display: none;
   }
 }

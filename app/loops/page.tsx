@@ -1,4 +1,4 @@
-import { getLedger } from "@/lib/ledger";
+import { getLedger, type LedgerWeek } from "@/lib/ledger";
 import Link from "next/link";
 import Reveal from "../components/Reveal";
 import LoopFigure from "../components/LoopFigure";
@@ -18,15 +18,43 @@ function formatDate(value: string | null) {
 
 const STEPS = [
   { n: "01", name: "Capture", when: "any time", body: "I text a bot, or type /capture in any Claude Code session. It's kept word for word." },
-  { n: "02", name: "Sort", when: "when I run a sweep", body: "Claude turns each line into a next action, a project, someone to chase, or nothing." },
-  { n: "03", name: "One board", when: "every run", body: "Plain Python, no model, renders one list from my loops, my job tracker and our household list, reading each where it lives." },
+  { n: "02", name: "Read", when: "every hour", body: "Reads my mail, my calendar and what I type in my working sessions, and turns them into facts. Every fact has to carry the exact sentence it came from, or it isn't kept. It can look; it can't send, delete or change anything." },
+  { n: "03", name: "One board", when: "every run", body: "Plain Python, no model, renders one list from my loops, my job tracker and our household list, and checks it against what the mail says, so a rejected application drops off on its own." },
   { n: "04", name: "Night pass", when: "before 07:30", body: "Looks across what I've said, my written positions and three days of news for one connection worth waking me for. Most nights, nothing." },
-  { n: "05", name: "Morning", when: "07:30", body: "One Telegram message: one move for the day, anything due, and the night pass if it found something." },
-  { n: "06", name: "Review", when: "Fridays, 16:00", body: "Three questions: what closed, what's stuck, what to drop." },
+  { n: "05", name: "Morning", when: "07:30", body: "One Telegram message: one move for the day, anything due, today's meetings with what it knows about each, and the night pass if it found something." },
+  { n: "06", name: "Nine o'clock call", when: "21:00", body: "Reads everything I typed that day, everything that changed in my mail and calendar, and how I worked, then makes one call: what happened, the one thing for tomorrow, and what can wait. Quotes are checked against what I actually said. It's waiting at the top of every session the next morning, and it records whether I followed the last one." },
+  { n: "07", name: "Review", when: "Fridays, 16:00", body: "Three questions: what closed, what's stuck, what to drop." },
 ];
+
+const RULES = [
+  "Nothing sends as me. The worst it can do is draft something and hand it to me.",
+  "Every fact carries the sentence it came from. If the source doesn't back it, it's thrown out and counted.",
+  "No agent gets all three of: my private data, text written by strangers, and a way to send things out. That's the combination that turns one cleverly worded email into a leak.",
+];
+
+// The refusal counts started on 5 Oct 2026. Earlier weeks say so rather than
+// showing zeros, which would read as "it did nothing".
+const REFUSALS_FROM = "2026-10-05";
+
+function plural(n: number, one: string, many = `${one}s`) {
+  return `${n} ${n === 1 ? one : many}`;
+}
+
+// One sentence from the latest week's counts, or nothing if any are missing.
+function weekInWords(w: LedgerWeek | undefined) {
+  if (!w || w.week_of < REFUSALS_FROM) return null;
+  const { ticks, quiet, facts_kept, facts_thrown, closes } = w;
+  if ([ticks, quiet, facts_kept, facts_thrown, closes].some((v) => typeof v !== "number")) return null;
+  return (
+    `In the week of ${formatDate(w.week_of)} it woke up ${plural(ticks!, "time")} and found nothing to do on ${quiet}; ` +
+    `it kept ${plural(facts_kept!, "fact")} and threw out ${facts_thrown} it couldn't back up; ` +
+    `it made ${closes === 0 ? "no nightly calls" : plural(closes!, "nightly call")}.`
+  );
+}
 
 export default function Loops() {
   const ledger = getLedger();
+  const lastWeek = weekInWords(ledger.weeks.at(-1));
 
   return (
     <main>
@@ -47,7 +75,7 @@ export default function Loops() {
         <Reveal>
           <LoopFigure
             name="hero"
-            alt="The loop at a glance: capture, sort, one board, the night pass, the morning message and the weekly review, arranged as a cycle around a person."
+            alt="The loop at a glance: capture, read, one board, the night pass, the morning message, the nine o'clock call and the weekly review, arranged as a cycle around a person."
           />
         </Reveal>
 
@@ -91,7 +119,7 @@ export default function Loops() {
             how it runs
           </h2>
           <p className="sec-title rv-settle">
-            Six steps on three clocks: day, overnight and weekly.
+            Seven steps on three clocks: day, overnight and weekly.
           </p>
         </Reveal>
         <Reveal>
@@ -108,6 +136,23 @@ export default function Loops() {
                 </div>
                 <p>{s.body}</p>
               </li>
+            ))}
+          </ol>
+        </Reveal>
+
+        {/* ------------------------------------------------------- three rules */}
+        <Reveal>
+          <h2 id="rules" className="mai-kick rv-settle">
+            three rules
+          </h2>
+          <p className="sec-title rv-settle">
+            Each one is enforced in code, whatever the model says.
+          </p>
+        </Reveal>
+        <Reveal>
+          <ol className="loop-rules rv-settle">
+            {RULES.map((r) => (
+              <li key={r}>{r}</li>
             ))}
           </ol>
         </Reveal>
@@ -174,38 +219,48 @@ export default function Loops() {
                 ))}
               </tbody>
             </table>
-            {ledger.weeks.some((w) => w.ticks !== undefined) && (
+            {ledger.weeks.some((w) => w.week_of >= REFUSALS_FROM && w.ticks !== undefined) && (
               <>
                 <p className="loop-ledger-test">
-                  And what it refused. A fact only goes in if the sentence it
-                  came from is really in the source; everything else is thrown
-                  out and counted here. A nightly call that quotes something I
-                  never said is held back and counted too.
+                  Every ten minutes it wakes up, and most of the time it should
+                  find nothing to do. When it learns something from my mail or
+                  my sessions it has to show the sentence it came from; if it
+                  can&rsquo;t, the fact is thrown out. A thrown-out fact is the
+                  check working, not the system failing. A nightly call that
+                  quotes something I never said, or uses a number I never gave
+                  it, is held back.
                 </p>
+                {lastWeek && <p className="loop-ledger-line">{lastWeek}</p>}
                 <table className="loop-ledger">
                   <thead>
                     <tr>
                       <th>week of</th>
-                      <th>checks run</th>
+                      <th>times it woke up</th>
                       <th>facts kept</th>
                       <th>facts thrown out</th>
-                      <th>nightly calls</th>
+                      <th>nightly calls made</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {ledger.weeks.filter((w) => w.ticks !== undefined).map((w) => (
+                    {ledger.weeks.map((w) => (
                       <tr key={w.week_of + "-refused"}>
                         <th scope="row">{formatDate(w.week_of)}</th>
-                        <td>
-                          {w.ticks}
-                          {(w.quiet ?? 0) > 0 && <span className="loop-note">{w.quiet} found nothing to do</span>}
-                        </td>
-                        <td>{w.facts_kept}</td>
-                        <td>{w.facts_thrown}</td>
-                        <td>
-                          {w.closes ?? 0}
-                          {(w.closes_withheld ?? 0) > 0 && <span className="loop-note">{w.closes_withheld} withheld</span>}
-                        </td>
+                        {w.week_of < REFUSALS_FROM || w.ticks === undefined ? (
+                          <td colSpan={4} className="loop-not-yet">not running yet</td>
+                        ) : (
+                          <>
+                            <td>
+                              {w.ticks}
+                              {(w.quiet ?? 0) > 0 && <span className="loop-note">{w.quiet} with nothing to do</span>}
+                            </td>
+                            <td>{w.facts_kept}</td>
+                            <td>{w.facts_thrown}</td>
+                            <td>
+                              {w.closes ?? 0}
+                              {(w.closes_withheld ?? 0) > 0 && <span className="loop-note">{w.closes_withheld} held back</span>}
+                            </td>
+                          </>
+                        )}
                       </tr>
                     ))}
                   </tbody>
