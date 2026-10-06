@@ -5078,6 +5078,19 @@ main:has(> .band) {
   color: var(--muted);
 }
 
+.loop-ledger-line {
+  margin: 0 0 4px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.loop-not-yet {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--faint);
+}
+
 .loop-ledger-panel .failure-log {
   margin: 0;
   border-top: 1px dashed var(--line-2);

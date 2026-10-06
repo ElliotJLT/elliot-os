@@ -7,7 +7,7 @@ House style for every prompt below: flat editorial illustration, off-white paper
 ## hero
 Save as `public/loops/hero.png`.
 
-> A calm circular diagram of a personal work system, drawn like a page from a field notebook. Six small labelled stations around a loop: "capture", "sort", "one board", "night pass", "morning", "review". In the middle, a simple outline of one person at a desk. Arrows run clockwise between the stations. The "night pass" station sits in a faint dark band, as if it happens overnight. Style: [house style].
+> A calm circular diagram of a personal work system, drawn like a page from a field notebook. Seven small labelled stations around a loop: "capture", "read", "one board", "night pass", "morning", "nine o'clock call", "review". In the middle, a simple outline of one person at a desk. Arrows run clockwise between the stations. The "night pass" station sits in a faint dark band, as if it happens overnight. Style: [house style].
 
 ## flow
 Built in code now (`app/components/LoopFlow.tsx`), not a generated image: exact labels, follows the theme. Edit the component, not a PNG.
