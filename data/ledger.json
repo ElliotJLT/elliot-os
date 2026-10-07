@@ -20,15 +20,15 @@
       "week_of": "2026-10-05",
       "closed": 1,
       "captured": 0,
-      "briefs": 1,
+      "briefs": 2,
       "fallbacks": 0,
-      "ticks": 54,
-      "quiet": 43,
-      "facts_kept": 134,
-      "facts_thrown": 30,
-      "closes": 0,
+      "ticks": 124,
+      "quiet": 95,
+      "facts_kept": 268,
+      "facts_thrown": 98,
+      "closes": 1,
       "closes_withheld": 0,
-      "incidents": 1
+      "incidents": 4
     }
   ],
   "broke": [
