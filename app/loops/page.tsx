@@ -85,8 +85,7 @@ export default function Loops() {
             the idea
           </h2>
           <p className="sec-title rv-settle">
-            I start more than I finish, so the machine holds the list and I
-            keep the calls.
+            I start more than I finish, so I built a system that counts both.
           </p>
           <p className="muted rv-settle section-line">
             David Allen&rsquo;s point, picked up by Ben Thompson in{" "}
