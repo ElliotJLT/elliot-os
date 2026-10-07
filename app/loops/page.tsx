@@ -66,8 +66,8 @@ export default function Loops() {
               What I hand to machines, and what I keep.
             </h1>
             <p className="mai-sub rv-settle">
-              The system I run my own work on, how each part works, and a
-              public ledger that would show it failing.
+              The system I run my own work on, and a public ledger that would
+              show it failing.
             </p>
           </header>
         </Reveal>
@@ -85,7 +85,8 @@ export default function Loops() {
             the idea
           </h2>
           <p className="sec-title rv-settle">
-            The machine holds the list. I keep the calls.
+            A machine keeps my list and suggests one move a day; I decide
+            whether to make it.
           </p>
           <p className="muted rv-settle section-line">
             David Allen&rsquo;s point, picked up by Ben Thompson in{" "}
@@ -98,15 +99,16 @@ export default function Loops() {
             <div>
               <span className="loop-label">the machine holds</span>
               <p>
-                Capture. The list. Dates, reminders and who to chase. What I
-                said three weeks ago and what&rsquo;s changed since.
+                Everything I capture, the list itself, dates and who to chase,
+                and what I said three weeks ago next to what&rsquo;s changed
+                since.
               </p>
             </div>
             <div>
               <span className="loop-label">I keep</span>
               <p>
-                Which move matters today. What to kill. What to ship. Anything
-                that goes out with my name on it.
+                Which move matters today, what gets killed and what ships, and
+                anything that goes out with my name on it.
               </p>
             </div>
           </div>
@@ -145,7 +147,8 @@ export default function Loops() {
             three rules
           </h2>
           <p className="sec-title rv-settle">
-            Each one is enforced in code, whatever the model says.
+            They live in the code, so a model can&rsquo;t argue its way past
+            them.
           </p>
         </Reveal>
         <Reveal>
@@ -224,8 +227,8 @@ export default function Loops() {
                   Every ten minutes it wakes up, and most of the time it should
                   find nothing to do. When it learns something from my mail or
                   my sessions it has to show the sentence it came from; if it
-                  can&rsquo;t, the fact is thrown out. A thrown-out fact is the
-                  check working, not the system failing. A nightly call that
+                  can&rsquo;t, the fact is thrown out. A thrown-out fact means the
+                  check caught something. A nightly call that
                   quotes something I never said, or uses a number I never gave
                   it, is held back.
                 </p>
