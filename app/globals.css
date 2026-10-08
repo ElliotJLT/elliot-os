@@ -8120,18 +8120,19 @@ footer .foot-base a {
   color: var(--ink);
 }
 
-/* Prototypes (Prototypes.tsx): two cards, the screen first, then what was
-   checked, what was rejected and who decides. */
+/* Prototypes (Prototypes.tsx): one wide card each. The screen on the left,
+   the problem and what was built on the right, then what was checked, what
+   was rejected and who decides across the foot. */
 .protos-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
 
 .proto {
-  display: flex;
-  flex-direction: column;
-  padding: 14px 14px 22px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 18px 28px;
+  padding: 14px 14px 20px;
   border-radius: 20px;
   border: 1px solid var(--line);
   background: var(--paper);
@@ -8139,6 +8140,7 @@ footer .foot-base a {
 
 .proto-shot {
   position: relative;
+  align-self: start;
   margin: 0;
   aspect-ratio: 16 / 10;
   overflow: hidden;
@@ -8147,17 +8149,17 @@ footer .foot-base a {
   background: var(--bg-2);
 }
 
+.proto-shot a {
+  display: block;
+  height: 100%;
+}
+
 .proto-shot img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top left;
-}
-
-.proto-shot a {
-  display: block;
-  height: 100%;
 }
 
 .proto-tabs {
@@ -8192,8 +8194,14 @@ footer .foot-base a {
   box-shadow: var(--shadow);
 }
 
+.proto-text {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 8px 0 0;
+}
+
 .proto-eyebrow {
-  margin: 18px 6px 0;
+  margin: 0;
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -8202,45 +8210,25 @@ footer .foot-base a {
 }
 
 .proto-title {
-  margin: 6px 6px 0;
+  margin: 8px 0 0;
   font-family: var(--display);
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.08;
   color: var(--ink);
 }
 
-.proto-blurb {
-  margin: 10px 6px 0;
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--ink-2);
-}
-
-.proto-calls {
-  margin: 16px 6px 0;
-  border-top: 1px solid var(--line);
-}
-
-.proto-calls div {
-  display: grid;
-  grid-template-columns: 84px minmax(0, 1fr);
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.proto-calls dt {
-  padding-top: 2px;
+.proto-label {
+  margin: 18px 0 0;
   font-family: var(--mono);
   font-size: 12px;
   color: var(--accent-2);
 }
 
-.proto-calls dd {
-  margin: 0;
-  font-size: 14.5px;
-  line-height: 1.45;
+.proto-body {
+  margin: 4px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
   color: var(--ink-2);
 }
 
@@ -8248,8 +8236,8 @@ footer .foot-base a {
   display: flex;
   flex-wrap: wrap;
   gap: 6px 18px;
-  margin: auto 6px 0;
-  padding-top: 16px;
+  margin: auto 0 0;
+  padding-top: 18px;
   font-family: var(--mono);
   font-size: 12.5px;
 }
@@ -8258,13 +8246,45 @@ footer .foot-base a {
   color: var(--accent-ink);
 }
 
+.proto-calls {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0 6px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.proto-calls dt {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--accent-ink);
+}
+
+.proto-calls dd {
+  margin: 4px 0 0;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
 @media (max-width: 899px) {
-  .protos-grid {
+  .proto {
     grid-template-columns: 1fr;
+  }
+
+  .proto-text {
+    padding: 0 6px;
   }
 
   .proto-title {
     font-size: 25px;
+  }
+
+  .proto-calls {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .proto-tabs {

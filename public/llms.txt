@@ -133,16 +133,22 @@ habit in regulated services, crisis delivery and consumer travel.
   ideas. Code handles acquisition, deduplication, filing and validation. A
   small model call decides whether the source is worth keeping and which
   existing view it changes.
-- two prototypes for people who can't afford a wrong answer (no users;
-  each built in under a week). Legal AI, August 2026: replaced a "sources
-  cited" badge that was a regex over the model's own reply with citations
-  the server must locate word for word in the lease before they render,
-  and a "not located" state when the model stitches a quote. Code,
-  decisions and audit: https://github.com/ElliotJLT/lease-citations
-  Community nursing, September 2026: a district nursing afternoon where a
-  visit overruns; code checks competency, care windows and shift time
-  before a move reaches a nurse, and a named clinician records every
-  clinical change.
+- three prototypes for people who can't afford a wrong answer (no users;
+  each built in under a week). Same rule in each: code checks, a named
+  person decides.
+  Legal AI, August 2026: a document Q&A app showed "3 sources cited" under
+  an answer about asbestos in a lease that never mentions it, because the
+  count was a regex over the model's reply. Rebuilt so every claim's quote
+  is located word for word in the lease before it renders, with a dashed
+  "not located" state. https://github.com/ElliotJLT/lease-citations
+  Synthetic research, July 2026: interviews with AI survey respondents
+  where each claim is marked as grounded in the respondent's data or as
+  the model reasoning past it, and the persona declines questions its data
+  can't answer. https://github.com/ElliotJLT/persona-interviews
+  Community nursing, September 2026: when a visit overruns, code checks
+  competency, care windows and shift time before a move reaches a nurse,
+  a named clinician records every change, and deferred visits carry an
+  owner into tomorrow's list.
 - the system he runs his own work on — capture by Telegram or any Claude
   Code session, one board that reads his job tracker and household list
   without copying them, a nightly pass over his own words and fresh news,

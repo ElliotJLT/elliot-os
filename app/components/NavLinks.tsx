@@ -49,7 +49,7 @@ const MENUS: Menu[] = [
       },
       {
         eyebrow: `03 · ${WRONG.short}`,
-        title: "Prototyped AI for lawyers and nurses",
+        title: "Prototyped AI for lawyers, researchers and nurses",
         href: "/built#prototypes",
       },
       {

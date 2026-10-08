@@ -5,11 +5,13 @@ import { useState } from "react";
 type Shot = { label: string; src: string; alt: string };
 
 type Prototype = {
-  /** Who set it, what kind of task, and when. */
+  /** Domain, that it's a prototype, and when. */
   eyebrow: string;
   title: string;
-  /** The problem and what I built, in one or two plain sentences. */
-  blurb: string;
+  /** What was wrong, specifically enough to picture. */
+  problem: string;
+  /** What I built in answer to it. */
+  built: string;
   checked: string;
   rejected: string;
   decides: string;
@@ -21,8 +23,10 @@ const PROTOTYPES: Prototype[] = [
   {
     eyebrow: "Legal AI · prototype · Aug 2026",
     title: "Citations a lawyer can check in one click",
-    blurb:
-      "I took a document Q&A app for property lawyers whose \"sources cited\" badge was a regex over the model's own reply, and replaced it with citations the server has to find in the lease before they show.",
+    problem:
+      "A document Q&A app for property lawyers showed \"3 sources cited\" under an answer about asbestos, in a lease that never mentions asbestos. The count was a regex over the model's own reply, checked against nothing.",
+    built:
+      "Every claim carries an inline marker naming its quote, and code locates that quote word for word in the lease. A match jumps to the highlighted passage in one click. A quote it can't find is drawn dashed, against the claim it weakens.",
     checked: "Every quoted passage, located word for word in the document before it renders as evidence.",
     rejected: "Confidence scores and \"stated vs inferred\" labels. Both are the model grading itself.",
     decides: "The lawyer, on whether the wording supports the point.",
@@ -44,10 +48,39 @@ const PROTOTYPES: Prototype[] = [
     ],
   },
   {
+    eyebrow: "Synthetic research · prototype · Jul 2026",
+    title: "Persona interviews you can audit",
+    problem:
+      "Teams survey a population of AI personas, then interview one to find out why they answered as they did. A plain chat renders fluent invention and grounded fact identically, so nobody can tell which replies to trust.",
+    built:
+      "An interview screen where each claim is marked solid if it traces to the respondent's survey answer or profile, and dashed if the model is reasoning past them. Asked to speak for people who weren't surveyed, the persona says it would be guessing.",
+    checked: "Every claim, traced to the respondent's own answer or profile, or marked as reasoning past them.",
+    rejected: "A blanket \"all views are fictional\" notice. It concedes the problem and manages none of it.",
+    decides: "The researcher, who sees how much of a conversation rested on data before quoting it in a deck.",
+    shots: [
+      {
+        label: "Interview",
+        src: "work/persona-interview.jpg",
+        alt: "An interview with a simulated respondent: claims in the reply carry solid numbered markers, one carries a dashed marker, and a later reply says the question is a guess rather than data",
+      },
+      {
+        label: "Population",
+        src: "work/persona-society.jpg",
+        alt: "A simulated survey result beside a graph of 251 respondents, coloured by the season they chose and clustered with others who answered alike",
+      },
+    ],
+    links: [
+      { label: "Code and reasoning", href: "https://github.com/ElliotJLT/persona-interviews" },
+      { label: "Decisions", href: "https://github.com/ElliotJLT/persona-interviews/blob/main/docs/decisions.md" },
+    ],
+  },
+  {
     eyebrow: "Community nursing · prototype · Sep 2026",
     title: "When a district nurse's afternoon stops fitting",
-    blurb:
-      "A service blueprint and a working walkthrough for a district nursing team: a visit overruns, the assistant shows the shortfall, and a named nurse decides who waits.",
+    problem:
+      "A home visit runs 40 minutes over, and the rest of a district nurse's list no longer fits her shift. Someone has to decide who is seen, who waits, and who owns the ones who wait.",
+    built:
+      "A service blueprint and a working walkthrough. The assistant shows the shortfall and checks each proposed move, a named nurse records the decision with a reason, and any visit that waits lands on tomorrow's list with an owner and a deadline.",
     checked: "Competency, care windows and shift time, in code, before a move reaches a nurse's screen.",
     rejected: "Letting the assistant propose that a patient waits. It flags what it can't place instead.",
     decides: "A named clinician, who records every clinical change with a reason.",
@@ -105,9 +138,23 @@ function ProtoCard({ proto, basePath }: { proto: Prototype; basePath: string }) 
           </div>
         )}
       </figure>
-      <p className="proto-eyebrow">{proto.eyebrow}</p>
-      <h3 className="proto-title">{proto.title}</h3>
-      <p className="proto-blurb">{proto.blurb}</p>
+      <div className="proto-text">
+        <p className="proto-eyebrow">{proto.eyebrow}</p>
+        <h3 className="proto-title">{proto.title}</h3>
+        <p className="proto-label">Problem</p>
+        <p className="proto-body">{proto.problem}</p>
+        <p className="proto-label">What I built</p>
+        <p className="proto-body">{proto.built}</p>
+        {proto.links.length > 0 && (
+          <p className="proto-links">
+            {proto.links.map((link) => (
+              <a key={link.href} href={link.href}>
+                {link.label} ↗
+              </a>
+            ))}
+          </p>
+        )}
+      </div>
       <dl className="proto-calls">
         <div>
           <dt>Checked</dt>
@@ -122,15 +169,6 @@ function ProtoCard({ proto, basePath }: { proto: Prototype; basePath: string }) 
           <dd>{proto.decides}</dd>
         </div>
       </dl>
-      {proto.links.length > 0 && (
-        <p className="proto-links">
-          {proto.links.map((link) => (
-            <a key={link.href} href={link.href}>
-              {link.label} ↗
-            </a>
-          ))}
-        </p>
-      )}
     </article>
   );
 }

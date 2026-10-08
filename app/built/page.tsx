@@ -129,9 +129,9 @@ export default async function Built() {
           <h2 id="prototypes" className="mai-kick rv-settle">
             03 · prototypes
           </h2>
-          <p className="sec-title rv-settle">Two prototypes for people who can&apos;t afford a wrong answer.</p>
+          <p className="sec-title rv-settle">Three prototypes for people who can&apos;t afford a wrong answer.</p>
           <p className="muted rv-settle section-line">
-            A lawyer relying on a citation, and a nurse whose afternoon has run over. Each built in under a week, with the checks in code.
+            A lawyer relying on a citation, a researcher quoting a synthetic respondent, a nurse whose afternoon has run over. Same rule in each: code checks, a named person decides.
           </p>
         </Reveal>
         <Reveal>
