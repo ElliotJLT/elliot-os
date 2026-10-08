@@ -8123,9 +8123,60 @@ footer .foot-base a {
 /* Prototypes (Prototypes.tsx): one wide card each. The screen on the left,
    the problem and what was built on the right, then what was checked, what
    was rejected and who decides across the foot. */
-.protos-grid {
+.proto-tablist {
   display: grid;
-  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.proto-tablist button {
+  appearance: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 16px 14px;
+  border-radius: 16px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.proto-tablist button:hover {
+  background: color-mix(in srgb, var(--paper) 50%, transparent);
+}
+
+.proto-tablist button[aria-selected="true"] {
+  border-color: var(--line);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.proto-tab-kick {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+
+.proto-tablist button[aria-selected="true"] .proto-tab-kick {
+  color: var(--label);
+}
+
+.proto-tab-title {
+  font-family: var(--display);
+  font-size: 20px;
+  line-height: 1.15;
+  color: var(--muted);
+}
+
+.proto-tablist button[aria-selected="true"] .proto-tab-title {
+  color: var(--ink);
 }
 
 .proto {
@@ -8219,7 +8270,7 @@ footer .foot-base a {
 }
 
 .proto-label {
-  margin: 18px 0 0;
+  margin: 14px 0 0;
   font-family: var(--mono);
   font-size: 12px;
   color: var(--accent-2);
@@ -8276,6 +8327,19 @@ footer .foot-base a {
 
   .proto-text {
     padding: 0 6px;
+  }
+
+  .proto-tablist {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .proto-tablist button {
+    padding: 9px 14px 10px;
+  }
+
+  .proto-tab-title {
+    font-size: 17px;
   }
 
   .proto-title {

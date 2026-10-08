@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 type Shot = { label: string; src: string; alt: string };
 
@@ -21,7 +21,7 @@ type Prototype = {
 
 const PROTOTYPES: Prototype[] = [
   {
-    eyebrow: "Legal AI · prototype · Aug 2026",
+    eyebrow: "Prototype · Aug 2026",
     title: "Citations a lawyer can check in one click",
     problem:
       "A document Q&A app for property lawyers showed \"3 sources cited\" under an answer about asbestos, in a lease that never mentions asbestos. The count was a regex over the model's own reply, checked against nothing.",
@@ -48,7 +48,7 @@ const PROTOTYPES: Prototype[] = [
     ],
   },
   {
-    eyebrow: "Synthetic research · prototype · Jul 2026",
+    eyebrow: "Prototype · Jul 2026",
     title: "Persona interviews you can audit",
     problem:
       "Teams survey a population of AI personas, then interview one to find out why they answered as they did. A plain chat renders fluent invention and grounded fact identically, so nobody can tell which replies to trust.",
@@ -75,7 +75,7 @@ const PROTOTYPES: Prototype[] = [
     ],
   },
   {
-    eyebrow: "Community nursing · prototype · Sep 2026",
+    eyebrow: "Prototype · Sep 2026",
     title: "When a district nurse's afternoon stops fitting",
     problem:
       "A home visit runs 40 minutes over, and the rest of a district nurse's list no longer fits her shift. Someone has to decide who is seen, who waits, and who owns the ones who wait.",
@@ -95,19 +95,64 @@ const PROTOTYPES: Prototype[] = [
   },
 ];
 
+/** Short tab labels, in the same order as PROTOTYPES. */
+const TABS = ["Legal AI", "Synthetic research", "Community nursing"];
+
 /**
- * Prototypes in domains where a wrong answer costs someone. Each card leads
- * with the screen, then the site's own question: what the code checks, what
- * was ruled out, and who decides.
+ * Prototypes in domains where a wrong answer costs someone, as one panel
+ * with a tab per prototype. Three tall cards in a row made this the heaviest
+ * block on the page; the labels keep all three in view while only one is
+ * read at a time, which is how they get read anyway. Each panel leads with
+ * the screen, then the problem and what was built, then what the code
+ * checks, what was ruled out, and who decides.
  */
 export default function Prototypes({ basePath = "" }: { basePath?: string }) {
+  const [active, setActive] = useState(0);
+  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const select = (i: number) => {
+    const next = (i + PROTOTYPES.length) % PROTOTYPES.length;
+    setActive(next);
+    tabs.current[next]?.focus();
+  };
+
   return (
     <div className="bento protos">
-      <div className="protos-grid">
-        {PROTOTYPES.map((proto) => (
-          <ProtoCard key={proto.title} proto={proto} basePath={basePath} />
+      <div className="proto-tablist" role="tablist" aria-label="Prototypes">
+        {PROTOTYPES.map((proto, i) => (
+          <button
+            key={proto.title}
+            ref={(el) => {
+              tabs.current[i] = el;
+            }}
+            type="button"
+            role="tab"
+            id={`proto-tab-${i}`}
+            aria-selected={i === active}
+            aria-controls={`proto-panel-${i}`}
+            tabIndex={i === active ? 0 : -1}
+            onClick={() => setActive(i)}
+            onKeyDown={(e) => {
+              if (e.key === "ArrowRight") select(i + 1);
+              if (e.key === "ArrowLeft") select(i - 1);
+            }}
+          >
+            <span className="proto-tab-kick">{TABS[i]}</span>
+            <span className="proto-tab-title">{proto.title}</span>
+          </button>
         ))}
       </div>
+      {PROTOTYPES.map((proto, i) => (
+        <div
+          key={proto.title}
+          role="tabpanel"
+          id={`proto-panel-${i}`}
+          aria-labelledby={`proto-tab-${i}`}
+          hidden={i !== active}
+        >
+          <ProtoCard proto={proto} basePath={basePath} />
+        </div>
+      ))}
     </div>
   );
 }
@@ -140,7 +185,6 @@ function ProtoCard({ proto, basePath }: { proto: Prototype; basePath: string }) 
       </figure>
       <div className="proto-text">
         <p className="proto-eyebrow">{proto.eyebrow}</p>
-        <h3 className="proto-title">{proto.title}</h3>
         <p className="proto-label">Problem</p>
         <p className="proto-body">{proto.problem}</p>
         <p className="proto-label">What I built</p>

@@ -61,8 +61,8 @@ const BLURBS: Record<string, { title: string; short?: string; blurb: string }> =
 
 const SECTIONS = [
   { id: "production", n: "01", label: "What I shipped" },
-  { id: "systems", n: "02", label: "How the work runs" },
-  { id: "prototypes", n: "03", label: "Prototypes" },
+  { id: "prototypes", n: "02", label: "Prototypes" },
+  { id: "systems", n: "03", label: "How the work runs" },
   { id: "research", n: "04", label: "In the open" },
 ];
 
@@ -109,8 +109,23 @@ export default async function Built() {
 
 
         <Reveal>
+          <h2 id="prototypes" className="mai-kick rv-settle">
+            02 · prototypes
+          </h2>
+          <p className="sec-title rv-settle">Three prototypes for people who can&apos;t afford a wrong answer.</p>
+          <p className="muted rv-settle section-line">
+            A lawyer relying on a citation, a researcher quoting a synthetic respondent, a nurse whose afternoon has run over. Same rule in each: code checks, a named person decides.
+          </p>
+        </Reveal>
+        <Reveal>
+          <div className="rv-settle">
+            <Prototypes basePath={basePath} />
+          </div>
+        </Reveal>
+
+        <Reveal>
           <h2 id="systems" className="mai-kick rv-settle">
-            02 · how the work runs
+            03 · how the work runs
           </h2>
           <p className="sec-title rv-settle">
             The harness around the agents, and the team around the harness.
@@ -122,21 +137,6 @@ export default async function Built() {
         <Reveal>
           <div className="rv-settle">
             <Bench firstRun={firstRun} latestRun={latestRun} />
-          </div>
-        </Reveal>
-
-        <Reveal>
-          <h2 id="prototypes" className="mai-kick rv-settle">
-            03 · prototypes
-          </h2>
-          <p className="sec-title rv-settle">Three prototypes for people who can&apos;t afford a wrong answer.</p>
-          <p className="muted rv-settle section-line">
-            A lawyer relying on a citation, a researcher quoting a synthetic respondent, a nurse whose afternoon has run over. Same rule in each: code checks, a named person decides.
-          </p>
-        </Reveal>
-        <Reveal>
-          <div className="rv-settle">
-            <Prototypes basePath={basePath} />
           </div>
         </Reveal>
 
