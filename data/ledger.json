@@ -18,17 +18,17 @@
     },
     {
       "week_of": "2026-10-05",
-      "closed": 1,
+      "closed": 2,
       "captured": 0,
-      "briefs": 2,
+      "briefs": 4,
       "fallbacks": 0,
-      "ticks": 124,
-      "quiet": 95,
-      "facts_kept": 268,
-      "facts_thrown": 98,
+      "ticks": 180,
+      "quiet": 127,
+      "facts_kept": 382,
+      "facts_thrown": 123,
       "closes": 1,
       "closes_withheld": 0,
-      "incidents": 4
+      "incidents": 6
     }
   ],
   "broke": [
