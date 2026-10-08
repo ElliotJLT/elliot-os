@@ -2,6 +2,7 @@ import { getRepos, FEATURED } from "@/lib/github";
 import Reveal from "../components/Reveal";
 import ProductPortfolio from "../components/ProductPortfolio";
 import Bench from "../components/Bench";
+import Prototypes from "../components/Prototypes";
 import FoldHero from "../components/FoldHero";
 import { getEvals } from "@/lib/evals";
 
@@ -58,6 +59,13 @@ const BLURBS: Record<string, { title: string; short?: string; blurb: string }> =
   },
 };
 
+const SECTIONS = [
+  { id: "production", n: "01", label: "What I shipped" },
+  { id: "systems", n: "02", label: "How the work runs" },
+  { id: "prototypes", n: "03", label: "Prototypes" },
+  { id: "research", n: "04", label: "In the open" },
+];
+
 export default async function Built() {
   const evalRuns = getEvals().runs;
   const latestRun = evalRuns[0];
@@ -76,6 +84,13 @@ export default async function Built() {
         standfirst="Find the wider problem beneath the request, then stay close to the code and the team until users can depend on it."
       />
       <div className="mai built-body">
+        <nav className="built-index" aria-label="On this page">
+          {SECTIONS.map((s) => (
+            <a key={s.id} href={`#${s.id}`}>
+              <span>{s.n}</span> {s.label}
+            </a>
+          ))}
+        </nav>
 
         <Reveal>
           <h2 id="production" className="mai-kick rv-settle">
@@ -110,10 +125,25 @@ export default async function Built() {
           </div>
         </Reveal>
 
+        <Reveal>
+          <h2 id="prototypes" className="mai-kick rv-settle">
+            03 · prototypes
+          </h2>
+          <p className="sec-title rv-settle">Two prototypes for people who can&apos;t afford a wrong answer.</p>
+          <p className="muted rv-settle section-line">
+            A lawyer relying on a citation, and a nurse whose afternoon has run over. Each built in under a week, with the checks in code.
+          </p>
+        </Reveal>
+        <Reveal>
+          <div className="rv-settle">
+            <Prototypes basePath={basePath} />
+          </div>
+        </Reveal>
+
         <div id="independent-work" className="anchor-target" />
         <Reveal>
           <h2 id="research" className="mai-kick rv-settle">
-            03 · in the open
+            04 · in the open
           </h2>
           <p className="sec-title rv-settle">What I&apos;m building now, where you can check it.</p>
         </Reveal>
@@ -172,7 +202,7 @@ export default async function Built() {
                 <span className="bento-open" aria-hidden="true">github.com/ElliotJLT ↗</span>
               </a>
 
-              <div className="bento-card open-tools">
+              <div id="agent-tools" className="bento-card open-tools">
                 <span className="bento-title">Agent tools</span>
                 <ul>
                   {FEATURED.map((name) => {

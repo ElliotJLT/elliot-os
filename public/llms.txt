@@ -133,6 +133,16 @@ habit in regulated services, crisis delivery and consumer travel.
   ideas. Code handles acquisition, deduplication, filing and validation. A
   small model call decides whether the source is worth keeping and which
   existing view it changes.
+- two prototypes for people who can't afford a wrong answer (no users;
+  each built in under a week). Legal AI, August 2026: replaced a "sources
+  cited" badge that was a regex over the model's own reply with citations
+  the server must locate word for word in the lease before they render,
+  and a "not located" state when the model stitches a quote. Code,
+  decisions and audit: https://github.com/ElliotJLT/lease-citations
+  Community nursing, September 2026: a district nursing afternoon where a
+  visit overruns; code checks competency, care windows and shift time
+  before a move reaches a nurse, and a named clinician records every
+  clinical change.
 - the system he runs his own work on — capture by Telegram or any Claude
   Code session, one board that reads his job tracker and household list
   without copying them, a nightly pass over his own words and fresh news,
