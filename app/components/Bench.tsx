@@ -45,8 +45,8 @@ export default function Bench({ children }: { children?: React.ReactNode }) {
         { k: "cmd", t: "open ways-of-working" },
         { k: "info", t: "product engineers, no requirements layer" },
         { k: "info", t: "82 days to launch · 240 PRs before it" },
-        { k: "ok", t: "median PR 120 lines · 1.8h to merge" },
-        { k: "ok", t: "5.2 merged PRs per engineer per week" },
+        { k: "ok", t: "5.2 merged PRs per engineer per week · 1.8h to merge" },
+        { k: "info", t: "LinearB 2026, 8.1M PRs: elite is above 2.0 a week, cycle time under 25h" },
         { k: "info", t: "every review finding lands in .claude/rules" },
       ],
     },
@@ -203,11 +203,11 @@ export default function Bench({ children }: { children?: React.ReactNode }) {
           "ways-of-working",
           "",
           "Ways of working",
-          "Six product engineers, no requirements layer. The prototype is the spec.",
+          "Six product engineers, no requirements layer, PRs merged in under two hours. The prototype is the spec.",
           <span className="v-stat">
             <b>5.2</b>
             <em>merged PRs per engineer, per week</em>
-            <em>median 120 lines · 1.8h to merge</em>
+            <em className="v-bench">elite teams: 2.0 · LinearB, 8.1M PRs</em>
           </span>,
         )}
         {card(

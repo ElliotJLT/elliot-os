@@ -8400,3 +8400,11 @@ footer .foot-base a {
   vertical-align: 0.5em;
   color: var(--c1);
 }
+
+/* A benchmark under a stat: the comparison that makes the number mean
+   something, quieter than the number's own label. */
+.v-stat em.v-bench {
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--faint);
+}
