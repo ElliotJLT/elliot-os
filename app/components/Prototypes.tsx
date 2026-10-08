@@ -1,8 +1,14 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-type Shot = { label: string; src: string; alt: string };
+/** A recording of the prototype in use, with the moments worth jumping to. */
+type Clip = {
+  src: string;
+  poster: string;
+  label: string;
+  chapters: { label: string; t: number }[];
+};
 
 type Prototype = {
   /** Domain, that it's a prototype, and when. */
@@ -15,7 +21,7 @@ type Prototype = {
   checked: string;
   rejected: string;
   decides: string;
-  shots: Shot[];
+  clip: Clip;
   links: { label: string; href: string }[];
 };
 
@@ -30,18 +36,17 @@ const PROTOTYPES: Prototype[] = [
     checked: "Every quoted passage, located word for word in the document before it renders as evidence.",
     rejected: "Confidence scores and \"stated vs inferred\" labels. Both are the model grading itself.",
     decides: "The lawyer, on whether the wording supports the point.",
-    shots: [
-      {
-        label: "Wording matched",
-        src: "work/lease-citations.jpg",
-        alt: "An answer about rent review with numbered citation markers inline, and the lease open beside it with the cited Review Dates definition highlighted",
-      },
-      {
-        label: "Not located",
-        src: "work/lease-not-located.jpg",
-        alt: "An answer about contamination where one citation is drawn as a dashed marker, and the inspector says its quoted wording could not be matched in the document",
-      },
-    ],
+    clip: {
+      src: "work/video/lease.mp4",
+      poster: "work/video/lease.jpg",
+      label: "A lawyer asks about rent review. The answer streams in with a marker after each claim; opening one jumps the lease to the highlighted clause, the inspector steps through every source, and one marked not located says its quote could not be found.",
+      chapters: [
+        { label: "Ask", t: 0 },
+        { label: "Answer", t: 5.5 },
+        { label: "Open a source", t: 18.3 },
+        { label: "Not located", t: 28.7 },
+      ],
+    },
     links: [
       { label: "Code and decisions", href: "https://github.com/ElliotJLT/lease-citations/blob/main/DECISIONS.md" },
       { label: "The audit", href: "https://github.com/ElliotJLT/lease-citations/blob/main/docs/audit.md" },
@@ -57,18 +62,17 @@ const PROTOTYPES: Prototype[] = [
     checked: "Every claim, traced to the respondent's own answer or profile, or marked as reasoning past them.",
     rejected: "A blanket \"all views are fictional\" notice. It concedes the problem and manages none of it.",
     decides: "The researcher, who sees how much of a conversation rested on data before quoting it in a deck.",
-    shots: [
-      {
-        label: "Interview",
-        src: "work/persona-interview.jpg",
-        alt: "An interview with a simulated respondent: claims in the reply carry solid numbered markers, one carries a dashed marker, and a later reply says the question is a guess rather than data",
-      },
-      {
-        label: "Population",
-        src: "work/persona-society.jpg",
-        alt: "A simulated survey result beside a graph of 251 respondents, coloured by the season they chose and clustered with others who answered alike",
-      },
-    ],
+    clip: {
+      src: "work/video/persona.mp4",
+      poster: "work/video/persona.jpg",
+      label: "A researcher browses a population of simulated respondents, opens one record and interviews her. Her answer carries numbered markers back to her survey response; asked to speak for her whole team, she says it would be a guess.",
+      chapters: [
+        { label: "Population", t: 0 },
+        { label: "Record", t: 8.6 },
+        { label: "Interview", t: 12 },
+        { label: "Refusal", t: 21 },
+      ],
+    },
     links: [
       { label: "Code and reasoning", href: "https://github.com/ElliotJLT/persona-interviews" },
       { label: "Decisions", href: "https://github.com/ElliotJLT/persona-interviews/blob/main/docs/decisions.md" },
@@ -84,13 +88,16 @@ const PROTOTYPES: Prototype[] = [
     checked: "Competency, care windows and shift time, in code, before a move reaches a nurse's screen.",
     rejected: "Letting the assistant propose that a patient waits. It flags what it can't place instead.",
     decides: "A named clinician, who records every clinical change with a reason.",
-    shots: [
-      {
-        label: "Walkthrough",
-        src: "work/nursing-walkthrough.jpg",
-        alt: "Step one of the walkthrough: a nurse's phone shows a visit that took 65 minutes against 25 planned, and the assistant saying her remaining visits need more time than her shift has left",
-      },
-    ],
+    clip: {
+      src: "work/video/nursing.mp4",
+      poster: "work/video/nursing.jpg",
+      label: "A walkthrough of one afternoon: a nurse's visit overruns and the assistant shows the shortfall, the senior nurse records a conditional decision, and the next morning the deferred visit sits on the register with an owner and a deadline.",
+      chapters: [
+        { label: "The signal", t: 0 },
+        { label: "The decision", t: 14.1 },
+        { label: "The follow-up", t: 26.8 },
+      ],
+    },
     links: [],
   },
 ];
@@ -150,45 +157,27 @@ export default function Prototypes({ basePath = "" }: { basePath?: string }) {
           aria-labelledby={`proto-tab-${i}`}
           hidden={i !== active}
         >
-          <ProtoCard proto={proto} basePath={basePath} />
+          <ProtoCard proto={proto} basePath={basePath} active={i === active} />
         </div>
       ))}
     </div>
   );
 }
 
-function ProtoCard({ proto, basePath }: { proto: Prototype; basePath: string }) {
-  const [shown, setShown] = useState(0);
-  const shot = proto.shots[shown];
-
+function ProtoCard({ proto, basePath, active }: { proto: Prototype; basePath: string; active: boolean }) {
   return (
     <article className="proto">
-      <figure className="proto-shot">
-        <a href={`${basePath}/${shot.src}`} aria-label={`${shot.label}, full size`}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={`${basePath}/${shot.src}`} alt={shot.alt} width={1600} height={1000} loading="lazy" />
-        </a>
-        {proto.shots.length > 1 && (
-          <div className="proto-tabs" role="group" aria-label="Screens">
-            {proto.shots.map((s, i) => (
-              <button
-                key={s.label}
-                type="button"
-                aria-pressed={i === shown}
-                onClick={() => setShown(i)}
-              >
-                {s.label}
-              </button>
-            ))}
-          </div>
-        )}
-      </figure>
+      <ProtoClip clip={proto.clip} basePath={basePath} active={active} />
       <div className="proto-text">
         <p className="proto-eyebrow">{proto.eyebrow}</p>
-        <p className="proto-label">Problem</p>
-        <p className="proto-body">{proto.problem}</p>
-        <p className="proto-label">What I built</p>
-        <p className="proto-body">{proto.built}</p>
+        <div>
+          <p className="proto-label">Problem</p>
+          <p className="proto-body">{proto.problem}</p>
+        </div>
+        <div>
+          <p className="proto-label">What I built</p>
+          <p className="proto-body">{proto.built}</p>
+        </div>
         {proto.links.length > 0 && (
           <p className="proto-links">
             {proto.links.map((link) => (
@@ -214,5 +203,102 @@ function ProtoCard({ proto, basePath }: { proto: Prototype; basePath: string }) 
         </div>
       </dl>
     </article>
+  );
+}
+
+/**
+ * The recording plays muted and on a loop while it is on screen, and stops
+ * when it scrolls away or its tab is hidden. Chapters jump to the moments
+ * worth seeing and light up as the video passes them. Reduced motion means
+ * no autoplay: the poster shows and the play button starts it.
+ */
+function ProtoClip({ clip, basePath, active }: { clip: Clip; basePath: string; active: boolean }) {
+  const video = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [chapter, setChapter] = useState(0);
+
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const v = video.current;
+    if (!v) return;
+    const io = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), {
+      threshold: 0.35,
+    });
+    io.observe(v);
+    return () => io.disconnect();
+  }, []);
+
+  // Plays only while its tab is the open one and it is on screen.
+  useEffect(() => {
+    const v = video.current;
+    if (!v) return;
+    if (!active || !inView) {
+      v.pause();
+      return;
+    }
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) v.play().catch(() => {});
+  }, [active, inView]);
+
+  const onTime = () => {
+    const t = video.current?.currentTime ?? 0;
+    let i = 0;
+    clip.chapters.forEach((c, k) => {
+      if (t >= c.t) i = k;
+    });
+    setChapter(i);
+  };
+
+  const seek = (t: number) => {
+    const v = video.current;
+    if (!v) return;
+    v.currentTime = t;
+    v.play().catch(() => {});
+  };
+
+  const toggle = () => {
+    const v = video.current;
+    if (!v) return;
+    if (v.paused) v.play().catch(() => {});
+    else v.pause();
+  };
+
+  return (
+    <figure className="proto-clip">
+      <video
+        ref={video}
+        src={`${basePath}/${clip.src}`}
+        poster={`${basePath}/${clip.poster}`}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-label={clip.label}
+        onTimeUpdate={onTime}
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+        width={1440}
+        height={900}
+      />
+      <figcaption className="proto-chapters">
+        <button type="button" className="proto-play" onClick={toggle} aria-label={playing ? "Pause" : "Play"}>
+          {playing ? (
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2h2v8H3zM7 2h2v8H7z" /></svg>
+          ) : (
+            <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5v9l7.5-4.5z" /></svg>
+          )}
+        </button>
+        {clip.chapters.map((c, i) => (
+          <button
+            key={c.label}
+            type="button"
+            aria-pressed={i === chapter}
+            onClick={() => seek(c.t)}
+          >
+            {c.label}
+          </button>
+        ))}
+      </figcaption>
+    </figure>
   );
 }

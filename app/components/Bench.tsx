@@ -15,75 +15,14 @@ type Track = {
 };
 
 /**
- * The systems behind the products, as a bento: every system on one screen
- * as a card with a small drawn visual. Open one and it fills the whole
- * bubble with its flow, its rules and its run log. Every line in a log is
- * something that happened; nothing here is sample data.
+ * How the work runs, as one bento: the three systems with a number worth
+ * opening, then whatever link cards the page passes in (research, the
+ * commit graph, the tools people use). Open a system and it fills the
+ * whole bubble with its flow, its rules and its run log. Every line in a
+ * log is something that happened; nothing here is sample data.
  */
-export default function Bench({
-  firstRun,
-  latestRun,
-}: {
-  firstRun: { passed: number; total: number };
-  latestRun: { passed: number; total: number };
-}) {
+export default function Bench({ children }: { children?: React.ReactNode }) {
   const TRACKS: Track[] = [
-    {
-      id: "harness",
-      name: "The harness",
-      meta: "Zero Gravity · this site",
-      where: "their pattern → mine",
-      steps: [
-        { name: "Progress file", note: "Linear umbrellas and a daily ledger" },
-        { name: "Feature list", note: "eval cases, each pass or fail" },
-        { name: "Clean state", note: "small PRs, merged the same day" },
-        { name: "Init script", note: "a guide every agent reads first" },
-        { name: "Worktrees", note: "one isolated checkout per task" },
-        { name: "Checker", note: "a separate agent reviews the work" },
-      ],
-      notes: [
-        "The agent forgets. The board doesn't.",
-        "Verification stays human.",
-      ],
-      tags: ["Claude Code", "MCP", "Conductor", "Linear"],
-      log: [
-        { k: "cmd", t: "open harness" },
-        { k: "info", t: "contributing guide v3.6: read by every engineer and agent" },
-        { k: "info", t: "connectors: Linear, Metabase, GitHub, Slack over MCP" },
-        { k: "info", t: "every review finding lands in .claude/rules" },
-        { k: "ok", t: "error triage spawns a fix PR · a review agent checks it" },
-        { k: "warn", t: "“the loop runs itself” must never mean nobody has an opinion" },
-        { k: "ok", t: "designed once, inherited by the whole team" },
-      ],
-    },
-    {
-      id: "operating-model",
-      name: "Operating model",
-      meta: "Zero Gravity · tutor",
-      where: "people · process · cost",
-      steps: [
-        { name: "Platform", note: "a tech lead owns the loops" },
-        { name: "Domain", note: "engineers own a metric and named users" },
-        { name: "Experts", note: "teachers flag marks; flags become cases" },
-        { name: "Eval loop", note: "from trace to fix in days" },
-        { name: "Governance", note: "DfE safety standards, ISO 27001" },
-        { name: "Cost", note: "routing and caching, per mode" },
-      ],
-      notes: [
-        "Engineers alone can't say what a good mark is. Teachers can.",
-        "Cost is a product call: the cheap model couldn't hold its tool calls.",
-      ],
-      tags: ["Langfuse", "Claude", "Linear"],
-      log: [
-        { k: "cmd", t: "open operating-model" },
-        { k: "info", t: "three rings: platform, domain, subject experts" },
-        { k: "ok", t: "every flagged mark became an eval case" },
-        { k: "warn", t: "production came in 4.6x over the cost plan" },
-        { k: "info", t: "a model 14x cheaper couldn't hold its tool calls" },
-        { k: "ok", t: "kept the model, fixed the cost: caching + routing by mode" },
-        { k: "ok", t: "ISO 27001 and 9001 solo as DPO · built to DfE standards" },
-      ],
-    },
     {
       id: "ways-of-working",
       name: "Ways of working",
@@ -109,33 +48,6 @@ export default function Bench({
         { k: "ok", t: "median PR 120 lines · 1.8h to merge" },
         { k: "ok", t: "5.2 merged PRs per engineer per week" },
         { k: "info", t: "every review finding lands in .claude/rules" },
-      ],
-    },
-    {
-      id: "design",
-      name: "Design at both ends",
-      meta: "Zero Gravity · tutor",
-      where: "vision · build · polish",
-      steps: [
-        { name: "Vision", note: "the designer sets the direction" },
-        { name: "Prototype", note: "anyone builds rough, to learn" },
-        { name: "System", note: "one design system from day one" },
-        { name: "Build", note: "the founder, engineers and me, on the system" },
-        { name: "Polish", note: "design craft on what users see" },
-        { name: "Ship", note: "every screen on the same foundations" },
-      ],
-      notes: [
-        "The designer owns the vision up front and the polish at the end.",
-        "The system is how a designer's taste reaches the screens they never touch.",
-      ],
-      tags: ["Claude Code", "GitHub"],
-      log: [
-        { k: "cmd", t: "open design" },
-        { k: "warn", t: "design happened after the fact: polishing decisions already made" },
-        { k: "info", t: "split prototyping from polish" },
-        { k: "warn", t: "everyone building in their own style" },
-        { k: "warn", t: "design PRs waited 5.6 days · gave design a cadence" },
-        { k: "ok", t: "one design system from day one, shared by the founder, engineers and me" },
       ],
     },
     {
@@ -187,40 +99,12 @@ export default function Bench({
       log: [
         { k: "cmd", t: "open evals" },
         { k: "info", t: "real past papers · official mark schemes" },
+        { k: "ok", t: "marking accuracy 67% → 99%+ against the schemes" },
         { k: "info", t: "every session graded against the Socratic spec" },
         { k: "warn", t: "confident marking the scheme didn't back up" },
         { k: "ok", t: "caught · now a case in the suite" },
         { k: "ok", t: "teacher flag → new case" },
         { k: "info", t: "safeguarding: detection first, then the noise cut" },
-      ],
-    },
-    {
-      id: "this-site",
-      name: "This site",
-      meta: "elliot-os · daily",
-      where: "this site",
-      steps: [
-        { name: "Read", note: "public GitHub events" },
-        { name: "Draft", note: "the shipping digest" },
-        { name: "Review gate", note: "is every claim grounded?" },
-        { name: "Evals", note: `${latestRun.total} held-out cases` },
-        { name: "Publish", note: "only if CI is green" },
-      ],
-      notes: [
-        "No model in the eval loop: free, and the same every run.",
-        "A gate that can't reject anything is decoration.",
-      ],
-      tags: ["GitHub Actions", "Claude"],
-      log: [
-        { k: "cmd", t: "open this-site" },
-        { k: "info", t: "reading public GitHub events" },
-        { k: "info", t: "drafting the shipping digest" },
-        { k: "warn", t: `first eval run: ${firstRun.passed}/${firstRun.total}` },
-        { k: "warn", t: "review gate passed a repo that doesn't exist" },
-        {
-          k: "ok",
-          t: `gate fixed · ${latestRun.passed}/${latestRun.total} · CI blocks regressions`,
-        },
       ],
     },
   ];
@@ -295,113 +179,49 @@ export default function Bench({
     </button>
   );
 
-  const harness = byId["harness"];
-  const site = byId["this-site"];
 
   return (
     <div className="bento" ref={bubbleRef}>
       <div className="bento-grid" hidden={!!track}>
         <div className="bento-intro">
           <p className="bento-kick">
-            <strong>Build</strong> the harness
+            <strong>Run</strong> it, and keep it honest
           </p>
-          <p>Rules, state and checks the agents work inside, written once and inherited by the team.</p>
+          <p>Checks that gate every change, agents that run before anyone is up, and the research anyone can read.</p>
         </div>
         {card(
-          "harness",
+          "evals",
           "",
-          "The harness",
-          "Anthropic's long-running agent patterns, and where each one already ran at Zero Gravity.",
-          <span className="v-map">
-            {harness.steps.slice(0, 3).map((s) => (
-              <span key={s.name}>
-                <em>{s.name}</em>
-                <i>→</i>
-                <b>{s.note}</b>
-              </span>
-            ))}
-          </span>,
-        )}
-        {card(
-          "design",
-          "",
-          "Design at both ends",
-          "The designer owns the vision and the polish; everyone builds the middle on one design system.",
-          <span className="v-log">
-            <span>◆ vision · designer</span>
-            <span>· build · everyone, on the system</span>
-            <span>◆ polish · designer</span>
+          "Evals",
+          "Marked against the exam board's own schemes. Every teacher flag becomes a test case.",
+          <span className="v-stat">
+            <b>99%+</b>
+            <em>marking accuracy, up from 67%</em>
           </span>,
         )}
         {card(
           "ways-of-working",
           "",
           "Ways of working",
-          "Product engineers, no requirements layer. The prototype is the spec.",
+          "Six product engineers, no requirements layer. The prototype is the spec.",
           <span className="v-stat">
-            <b>120</b>
-            <em>lines in the median PR</em>
-            <em>1.8h to merge</em>
+            <b>5.2</b>
+            <em>merged PRs per engineer, per week</em>
+            <em>median 120 lines · 1.8h to merge</em>
           </span>,
         )}
         {card(
           "agent-fleet",
           "",
           "Agent fleet",
-          "Monitoring, triage and fixes done by 06:00. Agents route; people decide.",
+          "Monitoring, triage and fix PRs done by 06:00. Agents route; a person ships or bins it.",
           <span className="v-log">
             <span>✓ error triage → fix PR</span>
             <span>✓ review agent verified it</span>
             <span>· pulse posted for Friday</span>
           </span>,
         )}
-        {card(
-          "operating-model",
-          "",
-          "Operating model",
-          "Platform, domain and subject-expert rings, with governance and cost built in.",
-          <span className="v-rings">
-            <i>experts</i>
-            <i>domain</i>
-            <i>platform</i>
-          </span>,
-        )}
-
-        <div className="bento-intro bento-intro-run">
-          <p className="bento-kick">
-            <strong>Run</strong> it, and keep it honest
-          </p>
-          <p>Checks that gate every change, and a record of what they caught.</p>
-        </div>
-        {card(
-          "evals",
-          "",
-          "Evals",
-          "Marked against the exam board's own mark schemes. Teacher flags become cases.",
-          <span className="v-checks">
-            <span><b>✓</b> mark scheme</span>
-            <span><b>✓</b> Socratic spec</span>
-            <span><b>!</b> teacher flag → new case</span>
-          </span>,
-        )}
-        {card(
-          "this-site",
-          "",
-          "This site",
-          "The agent that keeps this site current, gated by its own eval suite in CI.",
-          <span className="v-bars">
-            <span>
-              <em>first run</em>
-              <i style={{ "--w": `${(firstRun.passed / firstRun.total) * 100}%` } as React.CSSProperties} />
-              <b>{firstRun.passed}/{firstRun.total}</b>
-            </span>
-            <span>
-              <em>now</em>
-              <i style={{ "--w": `${(latestRun.passed / latestRun.total) * 100}%` } as React.CSSProperties} />
-              <b>{latestRun.passed}/{latestRun.total}</b>
-            </span>
-          </span>,
-        )}
+        {children}
       </div>
 
       {track && (

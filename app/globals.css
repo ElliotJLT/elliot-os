@@ -6293,7 +6293,8 @@ h2.mai-kick + p.muted,
   position: relative;
   margin: 0 22px 22px;
   padding: 24px 28px 22px 64px;
-  background: var(--bg-2);
+  background: var(--paper);
+  border: 1px solid var(--line);
   border-radius: 18px;
 }
 
@@ -8181,17 +8182,17 @@ footer .foot-base a {
 
 .proto {
   display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-  gap: 18px 28px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px 32px;
   padding: 14px 14px 20px;
   border-radius: 20px;
   border: 1px solid var(--line);
   background: var(--paper);
 }
 
-.proto-shot {
+.proto-clip {
+  grid-column: 1 / -1;
   position: relative;
-  align-self: start;
   margin: 0;
   aspect-ratio: 16 / 10;
   overflow: hidden;
@@ -8200,24 +8201,20 @@ footer .foot-base a {
   background: var(--bg-2);
 }
 
-.proto-shot a {
-  display: block;
-  height: 100%;
-}
-
-.proto-shot img {
+.proto-clip video {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top left;
+  object-position: top center;
 }
 
-.proto-tabs {
+.proto-chapters {
   position: absolute;
-  left: 10px;
-  bottom: 10px;
+  left: 12px;
+  bottom: 12px;
   display: inline-flex;
+  flex-wrap: wrap;
   gap: 2px;
   padding: 3px;
   border-radius: 999px;
@@ -8226,7 +8223,7 @@ footer .foot-base a {
   box-shadow: var(--shadow-lift);
 }
 
-.proto-tabs button {
+.proto-chapters button {
   appearance: none;
   border: 0;
   border-radius: 999px;
@@ -8239,17 +8236,39 @@ footer .foot-base a {
   transition: background 0.2s, color 0.2s;
 }
 
-.proto-tabs button[aria-pressed="true"] {
+.proto-chapters button[aria-pressed="true"] {
   background: var(--paper);
   color: var(--ink);
   box-shadow: var(--shadow);
 }
 
-.proto-text {
-  display: flex;
-  flex-direction: column;
-  padding: 6px 8px 0 0;
+.proto-chapters .proto-play {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  padding: 0;
+  color: var(--ink);
 }
+
+.proto-play svg {
+  width: 11px;
+  height: 11px;
+  fill: currentColor;
+}
+
+.proto-text {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 32px;
+  padding: 4px 6px 0;
+}
+
+.proto-text > .proto-eyebrow,
+.proto-text > .proto-links {
+  grid-column: 1 / -1;
+}
+
 
 .proto-eyebrow {
   margin: 0;
@@ -8351,13 +8370,33 @@ footer .foot-base a {
     gap: 12px;
   }
 
-  .proto-tabs {
-    left: 6px;
-    bottom: 6px;
-  }
+    }
 
-  .proto-tabs button {
-    padding: 3px 9px;
-    font-size: 11px;
-  }
+/* The commit graph, cropped to its last 26 weeks: the year before them is
+   empty, and the progress bar under the grid says nothing. The SVG's own
+   viewBox is (-16, -32, 880, 192); the window shown is x 430 to 852 and
+   y -12 to 116, starting on a column edge, so the image is scaled and
+   shifted to put that window in the frame. */
+.snake-crop {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 422 / 128;
+  overflow: hidden;
+}
+
+.open-snake .snake-crop img {
+  position: absolute;
+  left: -105.7%;
+  top: -15.6%;
+  width: 208.5%;
+  max-width: none;
+  height: auto;
+}
+
+.v-stat b .v-star {
+  margin-left: 4px;
+  font-size: 0.55em;
+  vertical-align: 0.5em;
+  color: var(--c1);
 }
