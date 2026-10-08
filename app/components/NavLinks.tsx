@@ -48,17 +48,22 @@ const MENUS: Menu[] = [
         href: "/built#independent-work",
       },
       {
-        eyebrow: `03 · ${AGENTS.short}`,
+        eyebrow: `03 · ${WRONG.short}`,
+        title: "Prototyped AI for lawyers, researchers and nurses",
+        href: "/built#prototypes",
+      },
+      {
+        eyebrow: `04 · ${AGENTS.short}`,
         title: "Built the system I run my work on",
         href: "/loops",
       },
       {
-        eyebrow: `04 · ${AGENTS.short}`,
+        eyebrow: `05 · ${AGENTS.short}`,
         title: "Measured the human in the loop",
         href: "/built#research",
       },
       {
-        eyebrow: `05 · ${AGENTS.short}`,
+        eyebrow: `06 · ${AGENTS.short}`,
         title: "Open-sourced tools for agent work",
         href: "/built#agent-tools",
       },
