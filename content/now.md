@@ -1,7 +1,8 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-10-07, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 19 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-10-08, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 36 commits across 2 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 19 commits. "ledger: 2026-10-07" (84ba2b1), "/loops: redraw how it runs as a 24-hour dial" (b863740), "/loops: seven steps, the nine o'clock call, three rules, a readable refusal table" (f6e7885) and 16 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 20 commits. "/built: prototypes as chaptered recordings, one bento, section index (#74)" (5bc6aa5), "ledger: 2026-10-08" (df7db60), "ledger: 2026-10-07" (84ba2b1) and 17 more
+- **[duty-desk](https://github.com/ElliotJLT/duty-desk)**: 16 commits. "Update the site" (c6c2158), "Update the site" (7ab8725), "Update the site" (8ea648a) and 13 more
 <!-- agent:end -->
 
 ## by hand
