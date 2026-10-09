@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-10-08, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 36 commits across 2 repos.*
+*Shipping log for the 7 days to 2026-10-09, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 33 commits across 2 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 20 commits. "/built: prototypes as chaptered recordings, one bento, section index (#74)" (5bc6aa5), "ledger: 2026-10-08" (df7db60), "ledger: 2026-10-07" (84ba2b1) and 17 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 17 commits. "ledger: 2026-10-08" (1f77dae), "/built: prototypes as chaptered recordings, one bento, section index (#74)" (5bc6aa5), "ledger: 2026-10-08" (df7db60) and 14 more
 - **[duty-desk](https://github.com/ElliotJLT/duty-desk)**: 16 commits. "Update the site" (c6c2158), "Update the site" (7ab8725), "Update the site" (8ea648a) and 13 more
 <!-- agent:end -->
 
