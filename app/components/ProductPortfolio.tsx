@@ -60,7 +60,7 @@ const COMPANIES: Company[] = [
           "Intercom, response templates, supplier onboarding and a crisis protocol, set up from scratch.",
           "ATOL compliance, safety standards and insurance, with a 100% safety record through the Sri Lanka attacks and COVID closures.",
         ],
-        role: "Founding operator, hire #10",
+        role: "Operations manager, founding hire #10",
         image: {
           src: "work/flash-pack.jpg",
           alt: "A Flash Pack trip page for Borneo: Into the Jungle, with photos of rainforest, orangutans and a reef",
@@ -91,8 +91,8 @@ const COMPANIES: Company[] = [
           { n: "97%", label: "of deliveries on time" },
         ],
         how: [
-          "A four-sided marketplace on Airtable: hospitals, restaurants, drivers and donors.",
-          "Automated dispatch and routing, which halved delivery errors.",
+          "A four-sided marketplace on Airtable for hospitals, restaurants, drivers and donors, with automated dispatch that halved delivery errors.",
+          "NHS data-sharing agreements across the 146 hospitals, set up under crisis conditions.",
           "A hiring playbook that took the volunteer team from 6 to 120.",
         ],
         role: "Co-founder",
@@ -143,6 +143,28 @@ const COMPANIES: Company[] = [
     logo: "career/zero-gravity.jpeg",
     products: [
       {
+        order: "12",
+        name: "Enterprise partnerships",
+        summary:
+          "Paid programmes run inside the early-careers hiring of HSBC, Morgan Stanley, KPMG, Ashurst, Accenture and Snap.",
+        headline: { n: "2×", label: "the size of our partner accounts" },
+        problem:
+          "A seed-stage startup selling into banks and law firms had to get through their due diligence before any programme could start.",
+        bet:
+          "Build each programme into the partner's early-careers hiring, and get ISO 27001 and 9001 done in-house so due diligence stopped being the blocker.",
+        outcomes: [
+          { n: "2×", label: "the size of those accounts" },
+          { n: "30%", label: "shorter sales cycles" },
+          { n: "< 6 months", label: "to ISO 27001 and 9001, done solo as DPO" },
+        ],
+        how: [
+          "Scoped, sold and delivered the programmes, and owned milestones and renewals.",
+          "Took us through due diligence with HSBC, Morgan Stanley, KPMG and Mercedes-AMG F1.",
+        ],
+        role: "Head of Operations & Enterprise Partnerships",
+        links: [],
+      },
+      {
         order: "11",
         name: "Safeguarding",
         summary:
@@ -154,7 +176,6 @@ const COMPANIES: Company[] = [
           "Move from keyword rules to AI flags, image recognition and hash matching, with one named person accountable for every case.",
         outcomes: [
           { n: "0", label: "missed safeguarding cases" },
-          { n: "86%", label: "fewer false alarms" },
           { n: "~20", label: "cases a month, 1 in 10 at the highest severity" },
           { n: "2.3h", label: "average response to schools" },
         ],
@@ -180,7 +201,6 @@ const COMPANIES: Company[] = [
           { n: "£1.5m", label: "ARR, tracked and billed through the revenue ops" },
           { n: "4 → 1", label: "SaaS platforms, replaced by one system with an MCP layer" },
           { n: "2 weeks → 3 days", label: "to onboard a new hire" },
-          { n: "ISO 27001 + 9001", label: "done solo as DPO, which unlocked our first FTSE 100 contracts" },
         ],
         how: [
           "Hiring, onboarding, culture and a SaaS budget, run from one place.",
@@ -202,7 +222,6 @@ const COMPANIES: Company[] = [
           "Turn mentees into mentors, so students helped at school stayed on to help the next group.",
         outcomes: [
           { n: "6% → 40%", label: "of mentees going on to mentor" },
-          { n: "120,000", label: "students through the journey" },
         ],
         how: [
           "Growth work across the sign-up funnel and first-week activation.",
@@ -248,14 +267,13 @@ const COMPANIES: Company[] = [
         name: "Learning pathways",
         summary:
           "Short, Duolingo-style courses funded by partners, with an AI assignment at the end.",
-        headline: { n: "12% vs 45%", label: "uptake against target: the miss that shaped Co-pilot" },
+        headline: { n: "46%", label: "of students who started a pathway finished it" },
         problem:
           "Students had nothing useful to do on the platform between mentoring sessions.",
         bet:
           "Bite-size, partner-funded courses would bring them back between sessions.",
         outcomes: [
           { n: "46%", label: "of students who started a pathway finished it" },
-          { n: "12%", label: "uptake, against a 45% target" },
         ],
         how: [
           "Built with partners including Accenture, HSBC, KPMG and Snap.",
@@ -263,7 +281,7 @@ const COMPANIES: Company[] = [
         ],
         role: "Led product and design",
         lesson:
-          "Completion held up; uptake never did. Students didn't come back to browse, and that miss shaped Career Co-pilot: bring the next useful thing to the student.",
+          "Students who started a pathway finished it, but they didn't come back to browse for the next one. That shaped Career Co-pilot: bring the next useful thing to the student.",
         links: [
           { label: "see learning at Zero Gravity", href: "https://www.zerogravity.co.uk/" },
         ],
@@ -297,18 +315,19 @@ const COMPANIES: Company[] = [
         name: "School hub",
         summary:
           "The teacher's side of the tutor: one homework for the class, help at each student's level, and the teacher sees who's stuck the same day.",
-        headline: { n: "91% vs 23%", label: "activation, teacher-led against self-signup" },
+        headline: { n: "98.7%", label: "activation in teacher-led schools, over 6× self-signup" },
         problem:
           "Teachers set one homework for a whole class and only find out who was stuck when they mark it.",
         bet:
           "Roll out through teachers, class by class, rather than asking students to sign up on their own.",
         outcomes: [
           { n: "850+", label: "UK schools" },
-          { n: "91%", label: "of students activate when a teacher rolls it out, against 23% on self-signup" },
+          { n: "98.7%", label: "activation in teacher-led schools, more than six times the self-signup rate" },
         ],
         how: [
           "Homework built from the teacher's own material.",
           "A weekly summary per class: who to nudge, who to stretch.",
+          "A rollout pattern taken from the schools that worked: classes built in advance and a weekly call with the teacher.",
           "Data-protection paperwork ready before a school asks for it.",
         ],
         role: "Led product and design",
@@ -322,23 +341,27 @@ const COMPANIES: Company[] = [
         name: "AI STEM tutor",
         summary:
           "An AI tutor for GCSE and A-level students that coaches them to the answer instead of handing it over.",
-        headline: { n: "47%", label: "of monthly students active each week, across 10,000" },
+        headline: { n: "30 → 850+", label: "schools, from the beta to the national programme" },
         problem:
           "Students without a tutor at home get stuck alone, and a general chatbot just gives them the answer.",
         bet:
           "A tutor that never hands over the answer would still keep students coming back.",
         outcomes: [
+          { n: "30 → 850+", label: "schools: a 30-school beta, then the full launch" },
+          { n: "2nd of 8", label: "in the DfE's AI Tutoring Tools Pioneers Programme, picked from 53 bids" },
+          { n: "67% → 99%+", label: "on the golden set: bare model 67%, retrieval 79%, our covered content 99%+" },
+          { n: "33% → 65%", label: "Socratic pass rate in two weeks, graded by a pass/fail judge" },
           { n: "10,000", label: "students by June 2026" },
           { n: "47%", label: "of monthly students active each week" },
-          { n: "67% → 99%+", label: "marking accuracy against official mark schemes" },
-          { n: "Under a month", label: "from first commit to the App Store" },
         ],
         how: [
           "Coaching, practice, marking and assignments run as separate agents, each graded by its own evaluator.",
+          "Open-coded production traces into failure modes (sycophancy on \"I don't know\", inconsistency across modes, hallucinated marks), then a pass/fail LLM judge on every session.",
           "Built to the Department for Education's safety standards for under-18s: false safeguarding alarms down 97%, none missed.",
-          "Selected for the UK government's AI Tutoring Tools Pioneers Programme.",
         ],
-        role: "Led product and a squad of six engineers, and wrote 28% of the build's commits",
+        lesson:
+          "Production came in at 4.6x the planned cost, and one model was taking 44.5% of spend. We routed by task, kept Opus on marking, and pulled a model 14x cheaper after 7 of 8 complaints traced to it.",
+        role: "Led product, a designer and six product engineers, each owning a problem from prototype to production, and wrote 28% of the commits",
         image: {
           src: "work/tutor.jpg",
           alt: "Two screens of the Zero Gravity tutor app: the home screen asking what you want to learn today, and the subject picker",
@@ -364,7 +387,7 @@ const GROUPS = [
   {
     title: "Built the operation",
     when: "Zero Gravity · 2022–24",
-    names: ["Safeguarding", "Customer support", "School to university journey", "Company operating system"],
+    names: ["Enterprise partnerships", "Safeguarding", "Customer support", "School to university journey", "Company operating system"],
   },
   {
     title: "Before Zero Gravity",

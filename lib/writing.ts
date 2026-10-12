@@ -33,6 +33,23 @@ export function isDemoted(title: string): boolean {
   return DEMOTED.some((k) => title.includes(k));
 }
 
+/**
+ * The home page shows three pieces: the two newest, so new writing still
+ * surfaces on its own, and one pinned piece that carries the hero's claim.
+ * Anything in OFF_HOME stays on /writing but never takes a home slot.
+ */
+const HOME_PIN = "Bad Advice";
+const OFF_HOME = ["Same Mistakes"];
+
+export function homePosts(posts: Post[]): Post[] {
+  const live = posts.filter((p) => !isDemoted(p.title));
+  const pin = live.find((p) => p.title.includes(HOME_PIN));
+  const rest = live.filter(
+    (p) => p !== pin && !OFF_HOME.some((k) => p.title.includes(k)),
+  );
+  return pin ? [...rest.slice(0, 2), pin] : rest.slice(0, 3);
+}
+
 // Why a given piece is worth someone's time. Keyed by a distinctive substring
 // of the title so a renamed post degrades to "no note" rather than a wrong one.
 const NOTES: [string, string][] = [
