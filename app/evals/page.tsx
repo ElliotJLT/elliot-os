@@ -7,18 +7,17 @@ export const metadata = { title: "Evals · Elliot Little" };
 // and a few lines go further than the record I had to hand. Check before
 // leaning on them in an interview:
 // - "I read sessions every week" (the reading habit is real; the cadence is a guess)
-// - "Nobody had guessed it" about the tutor's marking failure
-// - "owned the bar" at Zero Gravity
 // - the Socratic evaluator being "checked against teachers' judgement first"
-// Headline numbers are deliberately off this page: without the denominators
-// (how many cases, held out or not, who marked them) an eval person picks
-// them apart. They belong in the conversation, not the page.
+// Headline numbers were kept off this page until 2026-10-12, when the tutor
+// lines took the CV's terms and figures (golden set, open-coded traces, the
+// pass/fail judge, 33% → 65%) so the page and the CV say the same thing.
+// Have the denominators ready: how many cases, held out or not, who marked.
 const HOW = [
   {
     icon: "bar" as const,
     call: "Borrow the bar from whoever would know",
     why: "If the team writes the rubric, the model gets marked on our opinions. Examiners and regulators have spent years arguing about what good looks like, so I take theirs. A good case is one two experts would mark the same way without talking to each other.",
-    where: "Tutor: the exam boards' mark schemes. ward: KCSIE. Farewill: the regulator's rules, turned into error types.",
+    where: "Tutor: a golden set of real past papers marked against the exam boards' mark schemes, gating every release. ward: KCSIE. Farewill: the regulator's rules, turned into error types.",
   },
   {
     icon: "balance" as const,
@@ -30,13 +29,13 @@ const HOW = [
     icon: "conversation" as const,
     call: "Mark the conversation, not just the answer",
     why: "A tutor can get every answer right and still be useless if it hands them over. What made it a tutor was refusing to, however nicely a student asked, so the conversation itself got marked. That takes a model as the marker, and a model marker has to agree with a teacher before I trust a word it says.",
-    where: "Tutor: an evaluator grading every session against the Socratic spec, checked against teachers' judgement first.",
+    where: "Tutor: a pass/fail LLM judge on every session against the Socratic spec, checked against teachers' judgement first. The pass rate went from 33% to 65% in two weeks.",
   },
   {
     icon: "transcript" as const,
     call: "Read the transcripts yourself",
     why: "Evals catch it before launch, monitoring catches it in production, and reading transcripts catches what both of them missed. No layer's enough on its own. I read sessions every week, and the failures that mattered were never on anyone's list.",
-    where: "Tutor: the worst failure was confident marking the mark scheme didn't back up. Nobody had guessed it.",
+    where: "Tutor: I open-coded hundreds of production traces into failure modes: sycophancy when a student said \"I don't know\", inconsistency across modes, and hallucinated marks the mark scheme never gave.",
   },
   {
     icon: "flag" as const,
@@ -57,7 +56,7 @@ const PLACES = [
     id: "tutor",
     name: "Zero Gravity AI STEM tutor",
     href: "https://www.zerogravity.co.uk/tutor",
-    line: "An AI tutor for GCSE and A-level STEM, used in UK schools. I built the eval pipeline and owned the bar.",
+    line: "An AI tutor for GCSE and A-level STEM, used in UK schools. I set the release gate on a golden set of past papers: bare model 67%, retrieval 79%, our covered content 99%+. The gap was coverage, so we fixed the content.",
   },
   {
     id: "ward",

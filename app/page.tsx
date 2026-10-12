@@ -1,5 +1,5 @@
 const basePath = process.env.BASE_PATH || "";
-import { getPosts, noteFor, isDemoted } from "@/lib/writing";
+import { getPosts, noteFor, homePosts } from "@/lib/writing";
 import { getMedia } from "@/lib/writing";
 import { getRoles } from "@/lib/roles";
 import Reveal, { Words, RiseWords } from "./components/Reveal";
@@ -46,7 +46,7 @@ function Row({
 export default async function Home() {
   const { roles, mentoring } = getRoles();
   const media = getMedia();
-  const posts = (await getPosts(20)).filter((x) => !isDemoted(x.title)).slice(0, 3);
+  const posts = homePosts(await getPosts(20));
 
   return (
     <main>
@@ -66,13 +66,13 @@ export default async function Home() {
             <div className="band-profile">
               <TrackingPortrait className="band-face rv-develop" />
               <p className="band-sub rv-settle">
-                At Zero Gravity I led the team that took an AI tutor from first
-                commit to the App Store in under a month, got it marking real
-                A-level past papers at over 99%, and won it a place in the{" "}
+                At Zero Gravity I led the team that took an AI tutor from a
+                30-school beta into 850+ UK schools, marking real A-level past
+                papers at over 99%. The government picked it for its{" "}
                 <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
-                  UK government&apos;s AI Tutoring Tools Pioneers Programme
-                </a>{" "}
-                alongside Pearson and ElevenLabs.
+                  AI Tutoring Tools Pioneers Programme
+                </a>
+                , alongside Pearson and ElevenLabs.
               </p>
               <div className="band-cta rv-settle">
                 <Pill href="/built" tone="cream" arrow>

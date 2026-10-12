@@ -21,9 +21,11 @@ does the work that earns a place in production. He decides where a model can
 improvise, where the product needs certainty and who owns a failure. His
 evals, operating rules and named owners make those decisions inspectable.
 
-Elliot spent four years building at Zero Gravity. From 2022 to 2024 he built
-the company's operations: the operating system, support and the student
-journey. From 2024 he led product: partner-funded learning pathways, then
+Elliot spent four years building at Zero Gravity. From 2022 to 2024, as Head
+of Operations & Enterprise Partnerships, he built the company's operations
+and its enterprise accounts: the operating system, partnerships, support and
+the student journey. In January 2024 he was promoted to Head of AI Product &
+Deployment and led product: partner-funded learning pathways, then
 Career Co-pilot, the platform's first end-to-end AI product. It used tool calling
 across a student's CV, thousands of job posts and thousands of community posts,
 retrieved what was relevant and talked it through in chat. Run as a beta, it
@@ -36,12 +38,11 @@ community platform and major mentoring-product refactors ahead of agentic
 tooling. He mentored low-opportunity students and professionals alongside the
 build.
 
-Eleven weeks after the AI tutor reached the App Store, the UK government
-selected Zero Gravity for its AI Tutoring Tools Pioneers Programme: eight
-companies chosen nationally to test safe AI tutoring tools in schools. Zero
-Gravity placed 2nd, scoring ahead of frontier US labs and the largest UK
-curriculum incumbents. The programme could support up to 450,000
-disadvantaged pupils a year.
+The tutor went from a 30-school beta into 850+ UK schools. In June 2026 the
+UK government picked it for its AI Tutoring Tools Pioneers Programme: eight
+companies chosen from 53 bids to test safe AI tutoring tools in schools.
+Zero Gravity placed 2nd of the eight. The programme could support up to
+450,000 disadvantaged pupils a year.
 
 His recent work asks one ordinary question in several places: what got
 checked, what got rejected, and who decided? The answer might be an eval, a
@@ -54,12 +55,17 @@ habit in regulated services, crisis delivery and consumer travel.
   workflow automation, audit logs, case tracking and integrations with HMCTS,
   HMRC and banking. Agent errors fell 69% and case handling moved from two
   weeks to four days. https://farewill.com/apply-for-probate
-- Zero Gravity operations (2022–24):
+- Zero Gravity operations and partnerships (2022–24):
+  - Enterprise partnerships: scoped, sold and delivered paid programmes
+    inside the early-careers hiring of HSBC, Morgan Stanley, KPMG, Ashurst,
+    Accenture and Snap, owned milestones and renewals, and doubled the size
+    of those accounts. ISO 27001 and 9001 in under six months as sole DPO
+    carried the company through due diligence with HSBC, Morgan Stanley,
+    KPMG and Mercedes-AMG F1, with sales cycles 30% shorter.
   - Company operating system: hiring, budgets, revenue ops in HubSpot and
     Zapier behind £1.5m ARR, and a Notion company brain that became Zero
     Gravity OS, whose MCP layer replaced four SaaS platforms and cut
-    onboarding from two weeks to three days. ISO 27001 and 9001 done solo as
-    DPO, which unlocked the first FTSE 100 contracts.
+    onboarding from two weeks to three days.
   - Customer support: an AI assistant on the team's knowledge base resolved
     91% of conversations and halved weekly support time from 8 to 4 hours,
     so no dedicated hire was needed. CSAT 84%, NPS 80+, first response under
@@ -68,15 +74,15 @@ habit in regulated services, crisis delivery and consumer travel.
     from regex rules to AI flags, Unitary image recognition and hash
     matching, with a case kanban, automated outreach to schools and the
     policy. About 20 cases a month, 1 in 10 at the highest severity; none
-    missed; false alarms down 86%; average response to schools 2.3 hours;
-    reported to the board monthly.
+    missed; average response to schools 2.3 hours; reported to the board
+    monthly.
   - School-to-university journey: mentee-to-mentor conversion rose from 6%
-    to 40%, keeping students on one platform; 120,000 students through it.
+    to 40%, keeping students on one platform from school to university.
 - Zero Gravity learning pathways: partner-funded courses for companies
   including Accenture, HSBC, KPMG and Snap: Duolingo-style video, staged
   progression and quizzes, with an AI assignment at the end. 46% of students
-  who started one finished it, but uptake was 12% against a 45% target; that
-  miss shaped Career Co-pilot's retrieval-led approach.
+  who started one finished it, but they didn't come back to browse for the
+  next; that shaped Career Co-pilot's retrieval-led approach.
 - Zero Gravity Career Co-pilot: the platform's first end-to-end AI product.
   Early retrieval and tool calling across the student's CV, thousands of job
   posts and thousands of community posts, talked through in chat. Run as a
@@ -92,15 +98,31 @@ habit in regulated services, crisis delivery and consumer travel.
   what each student understood and where they slipped. It is built to the
   DfE's 2026 generative AI product safety standards for under-18s: content
   guardrails, session cut-offs, never presenting as human, and safeguarding
-  concerns escalated to a named person. 10,000 students by June 2026, 47%
-  of monthly students active each week.
-  Internal marking evals against official mark schemes moved accuracy from
-  a ~67% bare-model baseline to over 99%. It launched across Maths,
-  Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB, reaching the
-  App Store less than a month after the first commit. The UK government later
-  selected Zero Gravity for its AI Tutoring Tools Pioneers Programme, where
-  it placed 2nd nationally among the eight companies chosen to test safe AI
-  tutoring tools for disadvantaged pupils. Zero Gravity, September 2026:
+  concerns escalated to a named person. Safeguarding shipped first, then
+  false alarms to designated leads fell 97% with zero missed disclosures,
+  the condition a trust set before adoption. 10,000 students by June 2026,
+  47% of monthly students active each week.
+  Evals: every release passed a golden set of past papers and official mark
+  schemes (bare model 67%, retrieval 79%, covered content 99%+), which
+  showed the gap was coverage, so the team fixed the content. Hundreds of
+  production traces were open-coded into failure modes (sycophancy on "I
+  don't know", inconsistency across modes, hallucinated marks) and turned
+  into a pass/fail LLM judge on every session; the Socratic pass rate went
+  from 33% to 65% in two weeks.
+  Cost: with production at 4.6x planned cost, one model was taking 44.5% of
+  spend. Elliot routed by task, kept Opus on marking, and pulled a model
+  14x cheaper after 7 of 8 complaints traced to it. A four-agent monitoring
+  fleet read every production trace overnight, replaced a planned ops hire
+  and produced half the evidence in the company retro.
+  Team: six product engineers and a designer, each engineer owning a
+  problem from prototype to production, with engineers in the room with
+  schools during the beta.
+  It launched across Maths, Physics, Chemistry and Biology for AQA,
+  Edexcel, OCR and IB: a 30-school beta, then the full schools launch,
+  then the UK government picked it for its AI Tutoring Tools Pioneers
+  Programme, where it placed 2nd of the eight companies chosen from 53 bids
+  to test safe AI tutoring tools for disadvantaged pupils. Zero Gravity,
+  September 2026:
   850+ partner schools, 50,000+ tutoring sessions, +0.5 grades for its
   most active students in summer 2026 exams.
 - Zero Gravity school hub (the B2B layer on the tutor): teachers build
@@ -111,8 +133,9 @@ habit in regulated services, crisis delivery and consumer travel.
   department see which topics drag a class or a school. Role-scoped access,
   safeguarding flags to named staff only, and the DPIA pack and DfE 2026
   standards mapping written before a data lead asks. Deployed teachers
-  first, class by class: 850+ UK schools, and 91% of students activate
-  when referred through their school.
+  first, class by class: 850+ UK schools. Teacher-led schools hit 98.7%
+  activation, more than six times the self-signup rate, and the cause
+  (pre-built classes, a weekly teacher call) became the rollout pattern.
 - ward (safeguarding, under-18s) — decides which messages from a child
   are genuine safeguarding disclosures and routes them to a named human on
   a clock, grounded in KCSIE rather than keyword matching. Built around
@@ -160,18 +183,22 @@ habit in regulated services, crisis delivery and consumer travel.
 - Hands-on product lead with roots in operations. He works from the problem
   through the prototype and into production, then fixes the operating model
   around it. Languages BA (Birmingham/Fudan): French and English native,
-  Spanish fluent, Chinese intermediate. BlueDot Impact AI Governance &
+  Spanish intermediate, Mandarin intermediate (HSK 5). BlueDot Impact AI Governance &
   Alignment graduate.
-- Track record: Zero Gravity (led partner learning pathways, Career Co-pilot,
+- Track record: Zero Gravity, Feb 2022 – Jul 2026 (Head of Operations &
+  Enterprise Partnerships, then Head of AI Product & Deployment from Jan
+  2024; paid programmes with HSBC, Morgan Stanley, KPMG, Ashurst, Accenture
+  and Snap, accounts doubled; led partner learning pathways, Career Co-pilot,
   a production multi-agent AI STEM tutor for GCSE, A-Level and IB students
-  and the school hub teachers run it through; first commit to App Store in
-  under a month; internal marking evals
-  moved accuracy from a ~67% bare-model baseline to over 99% against official
-  mark schemes; the UK government selected Zero Gravity for its AI Tutoring
-  Tools Pioneers Programme, where it placed 2nd nationally among the eight
-  companies chosen to test safe AI tutoring tools for disadvantaged pupils),
-  Flash Pack (pre-seed to Series A), MealsForTheNHS
-  (co-founder, £1.8m raised, 303k meals delivered), Farewill (led the probate
+  and the school hub teachers run it through; a 30-school beta into 850+
+  schools; a golden-set release gate took marking from a 67% bare-model
+  baseline to over 99% against official mark schemes; the UK government
+  picked the tutor for its AI Tutoring Tools Pioneers Programme, where it
+  placed 2nd of eight picked from 53 bids),
+  Flash Pack, Oct 2018 – Dec 2020 (operations manager, founding hire #10,
+  pre-seed to Series A), MealsForTheNHS (co-founder, £1.8m raised, 303k
+  meals delivered, NHS data-sharing agreements across 146 hospitals),
+  Farewill, Jan 2021 – Jan 2022 (led the probate
   product inside SRA/FCA-regulated operations; agent errors down 69%, case
   handling from two weeks to four days).
 - Podcast: "Building a Career Co-pilot for Disadvantaged Students: How

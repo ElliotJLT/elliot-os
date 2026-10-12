@@ -1,13 +1,13 @@
 {
   "linkedin": "https://www.linkedin.com/in/hireelliot/",
-  "note": "Roles, dates and titles match LinkedIn. Bullets are the proof, newest work first; each number is Elliot's own and cross-checked with /built. Each row renders whatever fields are filled; dates and titles are optional.",
+  "note": "Roles, dates and titles match the CVs. Bullets are the proof, newest work first; each number is Elliot's own and cross-checked with /built. Each row renders whatever fields are filled; dates and titles are optional.",
   "roles": [
     {
       "org": "Zero Gravity",
       "logo": "career/zero-gravity.jpeg",
       "url": "https://www.zerogravity.co.uk/tutor",
-      "role": "Head of Product (joined as employee #4)",
-      "dates": "Feb 2022 – Aug 2026",
+      "role": "Head of AI Product & Deployment (promoted from Head of Operations)",
+      "dates": "Jan 2024 – Jul 2026",
       "awards": [
         {
           "name": "DfE AI Tutoring Pioneers",
@@ -42,31 +42,31 @@
       "bullets": [
         {
           "k": "AI product",
-          "t": "Led product and six engineers, and wrote 28% of the build's commits. The AI tutor went from first commit to the App Store in under a month and reached 10,000 students, with 47% of monthly users back every week."
+          "t": "Led six product engineers and a designer on an agentic Socratic tutor on Claude, each engineer owning a problem from prototype to production, and wrote 28% of the commits myself. It went from a 30-school beta into 850+ UK schools, with 47% of monthly users back every week."
         },
         {
           "k": "Evals",
-          "t": "Marking accuracy from a 67% bare-model baseline to over 99% against official mark schemes. The DfE picked the tutor for its AI Tutoring Tools Pioneers Programme, with a £300k grant."
+          "t": "Every release passed a golden set of past papers and official mark schemes: bare model 67%, retrieval 79%, our covered content 99%+. The gap was coverage, so we fixed the content. The DfE picked the tutor for its AI Tutoring Tools Pioneers Programme."
+        },
+        {
+          "k": "Traces",
+          "t": "Open-coded hundreds of production traces into failure modes (sycophancy on \"I don't know\", inconsistency across modes, hallucinated marks) and turned them into a pass/fail LLM judge on every session. The Socratic pass rate went from 33% to 65% in two weeks."
         },
         {
           "k": "Distribution",
-          "t": "The school hub reached 850+ UK schools. 91% of students activate when a teacher rolls it out, against 23% on their own."
+          "t": "Teacher-led schools hit 98.7% activation, more than six times the self-signup rate. Pre-built classes and a weekly teacher call became our rollout pattern."
         },
         {
           "k": "Trust and safety",
-          "t": "Designated safeguarding lead. Built message flagging from regex to AI flags, image recognition and hash matching: about 20 cases a month, none missed, false alarms down 86%, schools answered in 2.3 hours on average."
+          "t": "Designated safeguarding lead. Shipped detection first, then cut false alarms to designated leads by 97% with zero missed disclosures, the condition a trust set before adoption."
         },
         {
-          "k": "Operations",
-          "t": "Employee #4. ISO 27001 and 9001 done solo as DPO, which unlocked our first FTSE 100 contracts, and the revenue ops behind £1.5m ARR."
+          "k": "Cost",
+          "t": "With costs at 4.6x plan, found one model taking 44.5% of spend, routed by task, and pulled a 14x cheaper model after 7 of 8 complaints traced to it."
         },
         {
-          "k": "Support",
-          "t": "An AI assistant resolved 91% of conversations, so a dedicated support hire was no longer needed. CSAT 84%, NPS 80+."
-        },
-        {
-          "k": "Growth",
-          "t": "Mentee-to-mentor conversion from 6% to 40%, keeping 120,000 students on one platform from school to university."
+          "k": "Agents",
+          "t": "A four-agent monitoring fleet read every production trace overnight, replaced a planned ops hire and produced half the evidence in our company retro."
         }
       ],
       "photo": "career/team-zero-gravity.jpg",
@@ -87,11 +87,40 @@
       }
     },
     {
+      "org": "Zero Gravity",
+      "logo": "career/zero-gravity.jpeg",
+      "url": "https://www.zerogravity.co.uk/",
+      "role": "Head of Operations & Enterprise Partnerships (founding hire #4)",
+      "dates": "Feb 2022 – Jan 2024",
+      "bullets": [
+        {
+          "k": "Partnerships",
+          "t": "Scoped, sold and delivered paid programmes inside the early-careers hiring of HSBC, Morgan Stanley, KPMG, Ashurst, Accenture and Snap, owned the milestones and renewals, and doubled the size of those accounts."
+        },
+        {
+          "k": "Compliance",
+          "t": "ISO 27001 and 9001 in under six months as sole DPO, then through due diligence with HSBC, Morgan Stanley, KPMG and Mercedes-AMG F1, with sales cycles 30% shorter."
+        },
+        {
+          "k": "Operations",
+          "t": "Grew the company from 4 people to around 30, and ran the revenue ops behind £1.5m ARR."
+        },
+        {
+          "k": "Support",
+          "t": "An AI assistant resolved 91% of conversations, so a dedicated support hire was no longer needed. CSAT 84%, NPS 80+."
+        },
+        {
+          "k": "Growth",
+          "t": "Mentee-to-mentor conversion from 6% to 40%, keeping students on one platform from school to university."
+        }
+      ]
+    },
+    {
       "org": "Farewill",
       "logo": "career/farewill.jpeg",
       "url": "https://farewill.com/apply-for-probate",
       "role": "Product & Operations Lead",
-      "dates": "Jan 2021 – Feb 2022",
+      "dates": "Jan 2021 – Jan 2022",
       "awards": [
         {
           "name": "Probate Provider of the Year",
@@ -139,6 +168,10 @@
           "t": "303,000 meals in 100 days to 146 hospitals from 223 restaurants, 97% on time."
         },
         {
+          "k": "Governance",
+          "t": "Set up NHS data-sharing agreements across 146 hospitals, under crisis conditions."
+        },
+        {
           "k": "Team and money",
           "t": "£1.8m raised, and a volunteer team grown from 6 to 120 with a hiring playbook other leads could run."
         }
@@ -148,8 +181,8 @@
       "org": "Flash Pack",
       "logo": "career/flash-pack.jpeg",
       "url": "",
-      "role": "Founding Operator (#10)",
-      "dates": "Oct 2018 – Sep 2020",
+      "role": "Operations Manager (founding hire #10)",
+      "dates": "Oct 2018 – Dec 2020",
       "awards": [
         {
           "name": "Feefo Trusted Service Award",

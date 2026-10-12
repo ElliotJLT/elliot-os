@@ -12,8 +12,11 @@ const SHOWN = 4;
 /** Fired when he's thrown, so the other rail on the page loses him too. */
 const GONE = "elliot-flung";
 
-/** The year a role started, from "Feb 2022 – Aug 2026". */
+/** The year a role started, from "Feb 2022 – Jan 2024". */
 const startYear = (dates?: string) => dates?.match(/\d{4}/)?.[0];
+
+/** One key per role: the same company can hold two roles after a promotion. */
+const roleKey = (r: Role) => `${r.org} ${r.dates ?? ""}`.toLowerCase().replace(/\W+/g, "-");
 
 // The rail's x inside the list, and how far the line stands off a logo as it
 // goes round it.
@@ -118,9 +121,9 @@ const SPARKS = [0, 60, 120, 180, 240, 300];
  * off it, a row opens under the heading and the awards drop in one after
  * another, pushing the bullets down rather than covering them.
  */
-function Awards({ org, awards }: { org: string; awards: NonNullable<Role["awards"]> }) {
+function Awards({ org, uid, awards }: { org: string; uid: string; awards: NonNullable<Role["awards"]> }) {
   const [open, setOpen] = useState(false);
-  const id = `awards-${org.toLowerCase().replace(/\W+/g, "-")}`;
+  const id = `awards-${uid}`;
   useEffect(() => {
     if (!open) return;
     const escape = (e: KeyboardEvent) => {
@@ -354,8 +357,10 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
             height={44}
           />
         </li>
-        {roles.map((r) => (
-          <li key={r.org} className="cr-item">
+        {roles.map((r) => {
+          const k = roleKey(r);
+          return (
+          <li key={k} className="cr-item">
             {startYear(r.dates) && (
               <span className="cr-year" aria-hidden="true">
                 {startYear(r.dates)}
@@ -384,11 +389,11 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
                         </span>
                       )}
                     </div>
-                    {r.awards && <Awards org={r.org} awards={r.awards} />}
+                    {r.awards && <Awards org={r.org} uid={k} awards={r.awards} />}
                   </div>
-                  <ul className="cr-points" id={`${id}-${r.org}`}>
+                  <ul className="cr-points" id={`${id}-${k}`}>
                     {r.bullets.map((b, i) =>
-                      i < SHOWN || expanded[r.org] ? (
+                      i < SHOWN || expanded[k] ? (
                         // Bullets opened by the reader are lit straight away.
                         <li key={b.t} className={i >= SHOWN ? "cr-extra" : undefined}>
                           {b.k && <span className="cr-skill">{b.k}</span>}
@@ -401,11 +406,11 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
                     <button
                       type="button"
                       className="cr-more"
-                      aria-expanded={!!expanded[r.org]}
-                      aria-controls={`${id}-${r.org}`}
-                      onClick={() => setExpanded((e) => ({ ...e, [r.org]: !e[r.org] }))}
+                      aria-expanded={!!expanded[k]}
+                      aria-controls={`${id}-${k}`}
+                      onClick={() => setExpanded((e) => ({ ...e, [k]: !e[k] }))}
                     >
-                      {expanded[r.org]
+                      {expanded[k]
                         ? "Show less ↑"
                         : `${r.bullets.length - SHOWN} more from ${r.org} ↓`}
                     </button>
@@ -441,7 +446,8 @@ export default function Career({ roles, id = "career" }: { roles: Role[]; id?: s
               </article>
             </Reveal>
           </li>
-        ))}
+          );
+        })}
       </ol>
     </div>
   );
