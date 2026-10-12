@@ -20,15 +20,29 @@
       "week_of": "2026-10-05",
       "closed": 2,
       "captured": 0,
-      "briefs": 5,
+      "briefs": 7,
       "fallbacks": 0,
-      "ticks": 253,
-      "quiet": 158,
-      "facts_kept": 598,
-      "facts_thrown": 190,
-      "closes": 1,
+      "ticks": 290,
+      "quiet": 181,
+      "facts_kept": 603,
+      "facts_thrown": 197,
+      "closes": 3,
       "closes_withheld": 0,
-      "incidents": 8
+      "incidents": 11
+    },
+    {
+      "week_of": "2026-10-12",
+      "closed": 0,
+      "captured": 0,
+      "briefs": 0,
+      "fallbacks": 0,
+      "ticks": 0,
+      "quiet": 0,
+      "facts_kept": 0,
+      "facts_thrown": 0,
+      "closes": 0,
+      "closes_withheld": 0,
+      "incidents": 0
     }
   ],
   "broke": [
