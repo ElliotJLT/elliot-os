@@ -31,7 +31,7 @@ const KEY = [
   { n: "1", name: "Capture", when: "any time", line: "a bot or /capture, kept word for word" },
   { n: "2", name: "Read", when: "every hour", line: "mail, calendar, sessions: the ticks on the dial" },
   { n: "3", name: "One board", when: "every run", line: "one list, plain Python, no model" },
-  { n: "4", name: "Night pass", when: "overnight", line: "one link worth waking me for, or nothing" },
+  { n: "4", name: "Night pass", when: "overnight", line: "three days of news against what I've said" },
   { n: "5", name: "Morning", when: "07:30", line: "one Telegram message, one move" },
   { n: "6", name: "Nine o'clock call", when: "21:00", line: "one call, waiting in tomorrow's sessions", accent: true },
   { n: "7", name: "Review", when: "Fridays 16:00", line: "what closed, what's stuck, what to drop" },
