@@ -8,8 +8,7 @@ type Logo = { name: string; file: string; ratio: number; height: number };
 const LOGOS: Logo[] = [
   { name: "HSBC", file: "hsbc.svg", ratio: 315.9 / 85, height: 21 },
   { name: "KPMG", file: "kpmg.svg", ratio: 80.58 / 32.08, height: 22 },
-  { name: "Accenture", file: "accenture.svg", ratio: 163.4 / 43, height: 21 },
-  { name: "Snap Inc.", file: "snap.svg", ratio: 89 / 22, height: 18 },
+  { name: "Rolls-Royce", file: "rolls-royce.png", ratio: 271 / 440, height: 32 },
   { name: "Mercedes-AMG Petronas F1 Team", file: "amg-f1.svg", ratio: 358 / 112, height: 27 },
   { name: "NHS", file: "nhs.svg", ratio: 370.61 / 150, height: 19 },
 ];
