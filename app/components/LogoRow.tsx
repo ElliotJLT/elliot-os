@@ -6,8 +6,6 @@ const basePath = process.env.BASE_PATH || "";
 type Logo = { name: string; file: string; ratio: number; height: number };
 
 const LOGOS: Logo[] = [
-  { name: "McKinsey & Company", file: "mckinsey.svg", ratio: 360 / 45, height: 18 },
-  { name: "Morgan Stanley", file: "morgan-stanley.svg", ratio: 1331.95 / 191.23, height: 16 },
   { name: "HSBC", file: "hsbc.svg", ratio: 315.9 / 85, height: 21 },
   { name: "KPMG", file: "kpmg.svg", ratio: 80.58 / 32.08, height: 22 },
   { name: "Rolls-Royce", file: "rolls-royce.png", ratio: 271 / 440, height: 32 },
