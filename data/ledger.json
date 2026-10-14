@@ -34,13 +34,13 @@
       "week_of": "2026-10-12",
       "closed": 0,
       "captured": 0,
-      "briefs": 2,
+      "briefs": 3,
       "fallbacks": 0,
-      "ticks": 114,
+      "ticks": 170,
       "quiet": 0,
-      "facts_kept": 26,
-      "facts_thrown": 19,
-      "closes": 1,
+      "facts_kept": 43,
+      "facts_thrown": 24,
+      "closes": 2,
       "closes_withheld": 0,
       "incidents": 0
     }
