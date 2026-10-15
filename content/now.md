@@ -1,11 +1,10 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-10-14, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 29 commits across 5 repos.*
+*Shipping log for the 7 days to 2026-10-15, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 12 commits across 4 repos.*
 
-- **[duty-desk](https://github.com/ElliotJLT/duty-desk)**: 16 commits. "Update the site" (c6c2158), "Update the site" (7ab8725), "Update the site" (8ea648a) and 13 more
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 9 commits. "ledger: 2026-10-14" (47a3e61), "Home: Rolls-Royce in the logo row (#76)" (6a6b5e8), "ledger: 2026-10-13" (5d9c3f6) and 6 more
-- **[persona-interviews](https://github.com/ElliotJLT/persona-interviews)**: 2 commits. "Stop the interview header repeating the respondent" (c15ed53), "Persona interviews you can audit" (03f7c34)
-- **[ElliotJLT](https://github.com/ElliotJLT/ElliotJLT)**: 1 commit. "Update README" (cced4fd)
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 9 commits. "ledger: 2026-10-14" (3707463), "ledger: 2026-10-14" (47a3e61), "Home: Rolls-Royce in the logo row (#76)" (6a6b5e8) and 6 more
 - **[lease-citations](https://github.com/ElliotJLT/lease-citations)**: 1 commit. "Update README" (d872062)
+- **[ElliotJLT](https://github.com/ElliotJLT/ElliotJLT)**: 1 commit. "Update README" (cced4fd)
+- **[persona-interviews](https://github.com/ElliotJLT/persona-interviews)**: 1 commit. "Stop the interview header repeating the respondent" (c15ed53)
 <!-- agent:end -->
 
 ## by hand
