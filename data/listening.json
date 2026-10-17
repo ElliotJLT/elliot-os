@@ -1,0 +1,421 @@
+{
+  "from": "2011-10-28",
+  "to": "2025-12-01",
+  "hours": 10902,
+  "plays": 409787,
+  "artists": 22131,
+  "skipShare": 33,
+  "first": {
+    "artist": "Radiohead",
+    "track": "Just",
+    "date": "2011-10-28"
+  },
+  "firstStillTop": "2025",
+  "topTrack": {
+    "artist": "Frank Ocean",
+    "track": "White",
+    "plays": 193
+  },
+  "topArtists": [
+    {
+      "artist": "Radiohead",
+      "hours": 101
+    },
+    {
+      "artist": "The War On Drugs",
+      "hours": 98
+    },
+    {
+      "artist": "David Bowie",
+      "hours": 80
+    },
+    {
+      "artist": "Foals",
+      "hours": 75
+    },
+    {
+      "artist": "Big Thief",
+      "hours": 71
+    },
+    {
+      "artist": "The Rolling Stones",
+      "hours": 71
+    },
+    {
+      "artist": "The Maine",
+      "hours": 68
+    },
+    {
+      "artist": "James Blake",
+      "hours": 66
+    },
+    {
+      "artist": "Future Islands",
+      "hours": 64
+    },
+    {
+      "artist": "Bon Iver",
+      "hours": 57
+    }
+  ],
+  "shelf": [
+    {
+      "slug": "palace-so-long-forever",
+      "artist": "Palace",
+      "title": "So Long Forever",
+      "throughs": 10,
+      "hours": 24,
+      "first": "2017-12-16",
+      "track": "Have Faith",
+      "trackId": "23uCHFc7xcQWgXh2oelMOe",
+      "trackPlays": 80,
+      "cover": "listening/palace-so-long-forever.jpg"
+    },
+    {
+      "slug": "the-war-on-drugs-a-deeper-understanding",
+      "artist": "The War On Drugs",
+      "title": "A Deeper Understanding",
+      "throughs": 9,
+      "hours": 39,
+      "first": "2017-09-02",
+      "track": "Pain",
+      "trackId": "59P1nrdEImkAKa1nyW9X2e",
+      "trackPlays": 97,
+      "cover": "listening/the-war-on-drugs-a-deeper-understanding.jpg"
+    },
+    {
+      "slug": "phoebe-bridgers-punisher",
+      "artist": "Phoebe Bridgers",
+      "title": "Punisher",
+      "throughs": 9,
+      "hours": 15,
+      "first": "2020-06-18",
+      "track": "Chinese Satellite",
+      "trackId": "60zlkOrTCHjpRTd1g6PI5y",
+      "trackPlays": 31,
+      "cover": "listening/phoebe-bridgers-punisher.jpg"
+    },
+    {
+      "slug": "amber-run-for-a-moment-i-was-lost",
+      "artist": "Amber Run",
+      "title": "For A Moment, I Was Lost",
+      "throughs": 8,
+      "hours": 10,
+      "first": "2017-02-26",
+      "track": "Island",
+      "trackId": "6eAeObc7xljRYsJMd22QRn",
+      "trackPlays": 23,
+      "cover": "listening/amber-run-for-a-moment-i-was-lost.jpg"
+    },
+    {
+      "slug": "kings-of-leon-mechanical-bull",
+      "artist": "Kings of Leon",
+      "title": "Mechanical Bull",
+      "throughs": 7,
+      "hours": 14,
+      "first": "2013-10-20",
+      "track": "Don't Matter",
+      "trackId": "48Jhybk2ZpPrnFb3oXdh6Z",
+      "trackPlays": 28,
+      "cover": "listening/kings-of-leon-mechanical-bull.jpg"
+    },
+    {
+      "slug": "the-maine-american-candy",
+      "artist": "The Maine",
+      "title": "American Candy",
+      "throughs": 7,
+      "hours": 12,
+      "first": "2015-03-31",
+      "track": "Miles Away",
+      "trackId": "5yX82cb5SMJ1N6uCKSWvD2",
+      "trackPlays": 29,
+      "cover": "listening/the-maine-american-candy.jpg"
+    },
+    {
+      "slug": "frank-ocean-blonde",
+      "artist": "Frank Ocean",
+      "title": "Blonde",
+      "throughs": 7,
+      "hours": 24,
+      "first": "2016-09-18",
+      "track": "Pink + White",
+      "trackId": "3xKsf9qdS1CyvXSMEid6g8",
+      "trackPlays": 87,
+      "cover": "listening/frank-ocean-blonde.jpg"
+    },
+    {
+      "slug": "angie-mcmahon-salt",
+      "artist": "Angie McMahon",
+      "title": "Salt",
+      "throughs": 7,
+      "hours": 14,
+      "first": "2019-07-26",
+      "track": "Standout",
+      "trackId": "6TkXJj9Ds61nQZSbTUd5bW",
+      "trackPlays": 43,
+      "cover": "listening/angie-mcmahon-salt.jpg"
+    },
+    {
+      "slug": "djo-the-crux",
+      "artist": "Djo",
+      "title": "The Crux",
+      "throughs": 7,
+      "hours": 8,
+      "first": "2025-04-04",
+      "track": "Back On You",
+      "trackId": "50xPaSwYLoKZrLhPyuHwvC",
+      "trackPlays": 18,
+      "cover": "listening/djo-the-crux.jpg"
+    },
+    {
+      "slug": "catfish-and-the-bottlemen-the-balcony",
+      "artist": "Catfish and the Bottlemen",
+      "title": "The Balcony",
+      "throughs": 6,
+      "hours": 27,
+      "first": "2014-09-17",
+      "track": "Cocoon",
+      "trackId": "1B241LRKmK6qDDTZfUajmm",
+      "trackPlays": 68,
+      "cover": "listening/catfish-and-the-bottlemen-the-balcony.jpg"
+    },
+    {
+      "slug": "fink-perfect-darkness",
+      "artist": "Fink",
+      "title": "Perfect Darkness",
+      "throughs": 6,
+      "hours": 12,
+      "first": "2013-03-12",
+      "track": "Warm Shadow",
+      "trackId": "3jWwXvWrJ1eFPCUrXJdR3E",
+      "trackPlays": 52,
+      "cover": "listening/fink-perfect-darkness.jpg"
+    },
+    {
+      "slug": "deaf-havana-all-these-countless-nights",
+      "artist": "Deaf Havana",
+      "title": "All These Countless Nights",
+      "throughs": 6,
+      "hours": 9,
+      "first": "2017-02-01",
+      "track": "England",
+      "trackId": "10kRggu6Ft97AP2fuUFjoj",
+      "trackPlays": 28,
+      "cover": "listening/deaf-havana-all-these-countless-nights.jpg"
+    }
+  ],
+  "years": [
+    {
+      "year": "2011",
+      "hours": 18,
+      "artist": "Radiohead",
+      "artistHours": 3
+    },
+    {
+      "year": "2012",
+      "hours": 116,
+      "artist": "Futures",
+      "artistHours": 3
+    },
+    {
+      "year": "2013",
+      "hours": 82,
+      "artist": "Justin Timberlake",
+      "artistHours": 2
+    },
+    {
+      "year": "2014",
+      "hours": 241,
+      "artist": "Jamie T",
+      "artistHours": 7
+    },
+    {
+      "year": "2015",
+      "hours": 357,
+      "artist": "The Beach",
+      "artistHours": 6
+    },
+    {
+      "year": "2016",
+      "hours": 645,
+      "artist": "David Bowie",
+      "artistHours": 13
+    },
+    {
+      "year": "2017",
+      "hours": 1497,
+      "artist": "David Bowie",
+      "artistHours": 19
+    },
+    {
+      "year": "2018",
+      "hours": 1122,
+      "artist": "Ben Howard",
+      "artistHours": 18
+    },
+    {
+      "year": "2019",
+      "hours": 1572,
+      "artist": "Foals",
+      "artistHours": 25
+    },
+    {
+      "year": "2020",
+      "hours": 1206,
+      "artist": "The War On Drugs",
+      "artistHours": 24
+    },
+    {
+      "year": "2021",
+      "hours": 1109,
+      "artist": "The War On Drugs",
+      "artistHours": 18
+    },
+    {
+      "year": "2022",
+      "hours": 1081,
+      "artist": "Fontaines D.C.",
+      "artistHours": 16
+    },
+    {
+      "year": "2023",
+      "hours": 825,
+      "artist": "Pinegrove",
+      "artistHours": 12
+    },
+    {
+      "year": "2024",
+      "hours": 572,
+      "artist": "Big Thief",
+      "artistHours": 20
+    },
+    {
+      "year": "2025",
+      "hours": 460,
+      "artist": "Geese",
+      "artistHours": 12
+    }
+  ],
+  "hourly": [
+    {
+      "hour": 0,
+      "hours": 183,
+      "artist": "The Maine"
+    },
+    {
+      "hour": 1,
+      "hours": 96,
+      "artist": "Jeremy Soule"
+    },
+    {
+      "hour": 2,
+      "hours": 65,
+      "artist": "Frank Ocean"
+    },
+    {
+      "hour": 3,
+      "hours": 52,
+      "artist": "Erik Eriksson"
+    },
+    {
+      "hour": 4,
+      "hours": 44,
+      "artist": "Max Richter"
+    },
+    {
+      "hour": 5,
+      "hours": 49,
+      "artist": "Invention of Light"
+    },
+    {
+      "hour": 6,
+      "hours": 53,
+      "artist": "Invention of Light"
+    },
+    {
+      "hour": 7,
+      "hours": 71,
+      "artist": "Invention of Light"
+    },
+    {
+      "hour": 8,
+      "hours": 330,
+      "artist": "Big Thief"
+    },
+    {
+      "hour": 9,
+      "hours": 514,
+      "artist": "The War On Drugs"
+    },
+    {
+      "hour": 10,
+      "hours": 674,
+      "artist": "The War On Drugs"
+    },
+    {
+      "hour": 11,
+      "hours": 864,
+      "artist": "David Bowie"
+    },
+    {
+      "hour": 12,
+      "hours": 805,
+      "artist": "David Bowie"
+    },
+    {
+      "hour": 13,
+      "hours": 755,
+      "artist": "The War On Drugs"
+    },
+    {
+      "hour": 14,
+      "hours": 856,
+      "artist": "The War On Drugs"
+    },
+    {
+      "hour": 15,
+      "hours": 887,
+      "artist": "The War On Drugs"
+    },
+    {
+      "hour": 16,
+      "hours": 894,
+      "artist": "The War On Drugs"
+    },
+    {
+      "hour": 17,
+      "hours": 857,
+      "artist": "Radiohead"
+    },
+    {
+      "hour": 18,
+      "hours": 747,
+      "artist": "Radiohead"
+    },
+    {
+      "hour": 19,
+      "hours": 543,
+      "artist": "Radiohead"
+    },
+    {
+      "hour": 20,
+      "hours": 436,
+      "artist": "Radiohead"
+    },
+    {
+      "hour": 21,
+      "hours": 422,
+      "artist": "Radiohead"
+    },
+    {
+      "hour": 22,
+      "hours": 403,
+      "artist": "The Maine"
+    },
+    {
+      "hour": 23,
+      "hours": 303,
+      "artist": "The Maine"
+    }
+  ]
+}
