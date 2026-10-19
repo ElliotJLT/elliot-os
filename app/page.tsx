@@ -68,8 +68,7 @@ export default async function Home() {
               <p className="band-sub rv-settle">
                 At Zero Gravity I led the team that took an AI tutor from a
                 30-school beta into 850+ UK schools, marking real A-level past
-                papers at over 99%. The government picked it, alongside
-                Pearson and ElevenLabs, for{" "}
+                papers at over 99%. The DfE picked it for{" "}
                 <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
                   a programme built to reach up to 450,000 disadvantaged
                   pupils a year
