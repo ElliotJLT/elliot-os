@@ -2,7 +2,6 @@ import { getLedger, type LedgerWeek } from "@/lib/ledger";
 import Link from "next/link";
 import Reveal from "../components/Reveal";
 import LoopFigure from "../components/LoopFigure";
-import LoopFlow from "../components/LoopFlow";
 
 export const metadata = { title: "Loops · Elliot Little" };
 
@@ -16,21 +15,27 @@ function formatDate(value: string | null) {
   }).format(new Date(`${value}T00:00:00Z`));
 }
 
+// Two clocks: the day (capture, read, the list, the 9pm call) and the week
+// (the Sunday read and the note). The clocks are the grouping on the page.
 const STEPS = [
-  { n: "01", name: "Capture", when: "any time", body: "I text a bot, or type /capture in any Claude Code session. It's kept word for word." },
-  { n: "02", name: "Read", when: "every hour", body: "Reads my mail, my calendar and what I type in my working sessions, and turns them into facts. Every fact has to carry the exact sentence it came from, or it isn't kept. It can look; it can't send, delete or change anything." },
-  { n: "03", name: "One board", when: "every run", body: "Plain Python, no model, renders one list from my loops, my job tracker and our household list, and checks it against what the mail says, so a rejected application drops off on its own." },
-  { n: "04", name: "Night pass", when: "before 07:30", body: "Looks across what I've said, my written positions and three days of news for one connection worth waking me for. Most nights, nothing." },
-  { n: "05", name: "Morning", when: "07:30", body: "One Telegram message: one move for the day, anything due, today's meetings with what it knows about each, and the night pass if it found something." },
-  { n: "06", name: "Nine o'clock call", when: "21:00", body: "Reads everything I typed that day, everything that changed in my mail and calendar, and how I worked, then makes one call: what happened, the one thing for tomorrow, and what can wait. Quotes are checked against what I actually said. It's waiting at the top of every session the next morning, and it records whether I followed the last one." },
-  { n: "07", name: "Review", when: "Fridays, 16:00", body: "Three questions: what closed, what's stuck, what to drop." },
+  { n: "01", clock: "day", name: "Capture", when: "any time", body: "When something comes to me, I text it to a bot or type /capture in whichever Claude Code session I have open, so I don't have to hold it in my head. It's kept word for word." },
+  { n: "02", clock: "day", name: "Read", when: "every hour", body: "It reads my email, my calendar and what I type in my working sessions, so I don't have to remember who said what. It only keeps a fact if it can show the exact sentence the fact came from. It can look, but it can't send, delete or change anything." },
+  { n: "03", clock: "day", name: "One list", when: "every run", body: "My open loops, my job applications and our household list end up on one list. Plain code builds it, with no AI involved, and anything my email says is already over drops off by itself." },
+  { n: "04", name: "The 9pm call", when: "21:00", clock: "day", body: "It reads the day's work and makes one call: what happened, the one thing for tomorrow, and what can wait. The call is waiting at the top of every work session the next morning, and every quote in it is checked against what I actually said." },
+  { n: "05", clock: "week", name: "The Sunday read", when: "Sundays", body: "It tells me what I worked across that week and what it thinks about how I'm working, with each point backed by my own words. I answer each one with yes, no, or a sentence of my own. A no is kept as a test the system is checked against every week, so it can't make the same mistake twice. It never asks for my opinion; it gives its read and I correct it." },
+  { n: "06", clock: "week", name: "A note at the top", when: "weekly", body: "Once a week it writes five to seven lines on how to work with me, drawn from how my sessions with AI have actually gone. Every new Claude Code session starts with that note, so the AI I'm working with already knows how I work. If a line is wrong, I say so and it's corrected." },
 ];
 
 const RULES = [
-  "Nothing sends as me. The worst it can do is draft something and hand it to me.",
+  "Nothing sends anything as me. The worst it can do is draft something and hand it to me.",
   "Every fact carries the sentence it came from. If the source doesn't back it, it's thrown out and counted.",
-  "No agent gets all three of: my private data, text written by strangers, and a way to send things out. That's the combination that turns one cleverly worded email into a leak.",
+  "No part of it gets all three of: my private data, text written by strangers, and a way to send things out. That's the combination that turns one cleverly worded email into a leak.",
+  "What I say outranks anything the AI inferred. My corrections are kept and checked again every week.",
 ];
+
+// The morning message was switched off on 16 Oct 2026. Weeks that start after
+// that say "off" rather than a zero, which would read as a dead system.
+const MORNING_OFF = "2026-10-16";
 
 // The refusal counts started on 5 Oct 2026. Earlier weeks say so rather than
 // showing zeros, which would read as "it did nothing".
@@ -46,15 +51,22 @@ function weekInWords(w: LedgerWeek | undefined) {
   const { ticks, quiet, facts_kept, facts_thrown, closes } = w;
   if ([ticks, quiet, facts_kept, facts_thrown, closes].some((v) => typeof v !== "number")) return null;
   return (
-    `In the week of ${formatDate(w.week_of)} it woke up ${plural(ticks!, "time")} and found nothing to do on ${quiet}; ` +
+    `In the week of ${formatDate(w.week_of)} it woke up ${plural(ticks!, "time")}` +
+    (quiet! > 0 ? ` and found nothing to do on ${quiet}; ` : "; ") +
     `it kept ${plural(facts_kept!, "fact")} and threw out ${facts_thrown} it couldn't back up; ` +
     `it made ${closes === 0 ? "no nightly calls" : plural(closes!, "nightly call")}.`
   );
 }
 
+// A week still in progress reads as zeros, so the sentence describes the last
+// week that has finished.
+function finished(w: LedgerWeek) {
+  return Date.parse(`${w.week_of}T00:00:00Z`) + 7 * 86_400_000 <= Date.now();
+}
+
 export default function Loops() {
   const ledger = getLedger();
-  const lastWeek = weekInWords(ledger.weeks.at(-1));
+  const lastWeek = weekInWords(ledger.weeks.filter(finished).at(-1));
 
   return (
     <main>
@@ -75,7 +87,7 @@ export default function Loops() {
         <Reveal>
           <LoopFigure
             name="hero"
-            alt="The loop at a glance: capture, read, one board, the night pass, the morning message, the nine o'clock call and the weekly review, arranged as a cycle around a person."
+            alt="The loop at a glance: capture, read, one list, the 9pm call, the Sunday read and the note at the top of every session, arranged as a cycle around a person."
           />
         </Reveal>
 
@@ -119,34 +131,48 @@ export default function Loops() {
             how it runs
           </h2>
           <p className="sec-title rv-settle">
-            Seven steps on three clocks: day, overnight and weekly.
+            Six steps on two clocks: the day and the week.
           </p>
         </Reveal>
+        {(
+          [
+            ["day", "every day"],
+            ["week", "every week"],
+          ] as const
+        ).map(([clock, label]) => (
+          <Reveal key={clock}>
+            <h3 className="loop-clock rv-settle">{label}</h3>
+            <ol className="loop-steps loop-steps-2 rv-settle">
+              {STEPS.filter((s) => s.clock === clock).map((s) => (
+                <li key={s.n}>
+                  <div className="loop-step-head">
+                    <span className="loop-step-n">{s.n}</span>
+                    <h3>{s.name}</h3>
+                    <span className="loop-step-when">{s.when}</span>
+                  </div>
+                  <p>{s.body}</p>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+        ))}
         <Reveal>
-          <LoopFlow />
-        </Reveal>
-        <Reveal>
-          <ol className="loop-steps rv-settle">
-            {STEPS.map((s) => (
-              <li key={s.n}>
-                <div className="loop-step-head">
-                  <span className="loop-step-n">{s.n}</span>
-                  <h3>{s.name}</h3>
-                  <span className="loop-step-when">{s.when}</span>
-                </div>
-                <p>{s.body}</p>
-              </li>
-            ))}
-          </ol>
+          <p id="cut" className="muted rv-settle section-line">
+            I switched off the 07:30 morning message on Telegram (a messaging
+            app) on 16 October. After a clean-up it sent 8 messages and got 0
+            replies, and its one useful part, the call for the day, already
+            reached me at the top of every session. The overnight pass and the
+            Friday review now live in the Sunday read.
+          </p>
         </Reveal>
 
-        {/* ------------------------------------------------------- three rules */}
+        {/* -------------------------------------------------------- four rules */}
         <Reveal>
           <h2 id="rules" className="mai-kick rv-settle">
-            three rules
+            four rules
           </h2>
           <p className="sec-title rv-settle">
-            Each one is enforced in code, whatever the model says.
+            Each one is enforced in code, whatever the AI says.
           </p>
         </Reveal>
         <Reveal>
@@ -155,29 +181,6 @@ export default function Loops() {
               <li key={r}>{r}</li>
             ))}
           </ol>
-        </Reveal>
-
-        {/* ---------------------------------------------------- the night pass */}
-        <Reveal>
-          <h2 id="night" className="mai-kick rv-settle">
-            the night pass
-          </h2>
-          <p className="sec-title rv-settle">
-            One link worth waking me for, or nothing.
-          </p>
-          <p className="muted rv-settle section-line">
-            Overnight it looks for one link between something I&rsquo;ve said
-            and something new worth reading, and quotes my own words back to
-            me. Most nights it finds nothing, and says so. It&rsquo;s a
-            rebuild of Sleep On It, which I made with three others at the
-            Claude Communities Impact Lab in July.
-          </p>
-        </Reveal>
-        <Reveal>
-          <LoopFigure
-            name="night"
-            alt="Three inputs flowing into one output: my captured words, stated versus revealed priorities, and three days of new writing on my threads, producing at most one collision or nothing."
-          />
         </Reveal>
 
         {/* ------------------------------------------------------------ ledger */}
@@ -208,25 +211,35 @@ export default function Loops() {
               <tbody>
                 {ledger.weeks.map((w) => (
                   <tr key={w.week_of}>
-                    <th scope="row">{formatDate(w.week_of)}</th>
+                    <th scope="row">{formatDate(w.week_of)}{!finished(w) && <span className="loop-note">so far</span>}</th>
                     <td>{w.closed}</td>
                     <td>{w.captured}</td>
                     <td>
-                      {w.briefs}
-                      {w.fallbacks > 0 && <span className="loop-note">{w.fallbacks} fell back to plain text</span>}
+                      {w.week_of > MORNING_OFF ? (
+                        <span className="loop-not-yet">off</span>
+                      ) : (
+                        <>
+                          {w.briefs}
+                          {w.fallbacks > 0 && <span className="loop-note">{w.fallbacks} fell back to plain text</span>}
+                        </>
+                      )}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            <p className="loop-ledger-line">
+              The morning message was switched off on 16 Oct; see{" "}
+              <a href="#cut">above</a>.
+            </p>
             {ledger.weeks.some((w) => w.week_of >= REFUSALS_FROM && w.ticks !== undefined) && (
               <>
                 <p className="loop-ledger-test">
-                  Every ten minutes it wakes up, and most of the time it should
-                  find nothing to do. When it learns something from my mail or
-                  my sessions it has to show the sentence it came from; if it
-                  can&rsquo;t, the fact is thrown out. A thrown-out fact is the
-                  check working, not the system failing. A nightly call that
+                  It wakes up through the day, and most of the time it should
+                  find nothing to do. When it learns something from my email or
+                  my sessions, it has to show the sentence it came from. If it
+                  can&rsquo;t, the fact is thrown out, and a thrown-out fact
+                  means the check worked. A nightly call that
                   quotes something I never said, or uses a number I never gave
                   it, is held back.
                 </p>
@@ -244,7 +257,7 @@ export default function Loops() {
                   <tbody>
                     {ledger.weeks.map((w) => (
                       <tr key={w.week_of + "-refused"}>
-                        <th scope="row">{formatDate(w.week_of)}</th>
+                        <th scope="row">{formatDate(w.week_of)}{!finished(w) && <span className="loop-note">so far</span>}</th>
                         {w.week_of < REFUSALS_FROM || w.ticks === undefined ? (
                           <td colSpan={4} className="loop-not-yet">not running yet</td>
                         ) : (
@@ -269,9 +282,8 @@ export default function Loops() {
             )}
             <p className="loop-ledger-test">
               What would make it wrong: captures climbing while closed loops
-              stay flat. That would be a tidier way of not doing things. On 12
-              October I check for exactly that, and cut the system back if I
-              find it.
+              stay flat. That would be a tidier way of not doing things, and if
+              the numbers show it, I cut the system back.
             </p>
             {ledger.broke.length > 0 && (
               <ol className="failure-log">

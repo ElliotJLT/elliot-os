@@ -35,7 +35,7 @@ const MENUS: Menu[] = [
     href: "/built",
     label: "built",
     listLabel: "Explore the work",
-    intro: "The judgement before something ships.",
+    intro: "What I've shipped, prototyped and open-sourced.",
     items: [
       {
         eyebrow: `01 · ${WRONG.short}`,
@@ -70,8 +70,8 @@ const MENUS: Menu[] = [
     ],
     feature: {
       eyebrow: "Selected work",
-      title: "Judgement before output.",
-      copy: "Built for the point where plausible is not yet safe to ship.",
+      title: "From a 30-school beta to 850+ UK schools.",
+      copy: "An AI tutor marking real A-level past papers at over 99%.",
       cta: "See everything built",
     },
   },
@@ -110,7 +110,7 @@ const MENUS: Menu[] = [
     feature: {
       eyebrow: "Notes from the field",
       title: "Where wrong answers carry real cost.",
-      copy: "Shipping AI, and the judgement the loop cannot automate.",
+      copy: "Essays on Medium, and a podcast with Teresa Torres.",
       cta: "Read all writing",
     },
   },

@@ -172,10 +172,11 @@ habit in regulated services, crisis delivery and consumer travel.
   competency, care windows and shift time before a move reaches a nurse,
   a named clinician records every change, and deferred visits carry an
   owner into tomorrow's list.
-- the system he runs his own work on — capture by Telegram or any Claude
-  Code session, one board that reads his job tracker and household list
-  without copying them, a nightly pass over his own words and fresh news,
-  one message at 07:30, a Friday review. Aggregate weekly ledger published:
+- the system he runs his own work on — capture by a bot or any Claude
+  Code session, an hourly read of his email, calendar and sessions that keeps
+  only facts it can quote, one list built by plain code, a 9pm call waiting
+  in the next morning's sessions, and a Sunday read he answers yes, no or in
+  his own words. Nothing sends as him. Aggregate weekly ledger published:
   https://elliotjlt.github.io/elliot-os/loops/
 
 ## Who

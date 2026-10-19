@@ -34,7 +34,7 @@ export type Loop = {
   surface: string;
   cadence: string;
   gate: string;
-  status: "healthy" | "dormant" | "paused";
+  status: "healthy" | "dormant" | "paused" | "retired";
   stop_rule: string;
   last_run: string | null;
   runs: number;
