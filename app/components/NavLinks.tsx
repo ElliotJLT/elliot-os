@@ -71,7 +71,7 @@ const MENUS: Menu[] = [
     feature: {
       eyebrow: "Selected work",
       title: "From a 30-school beta to 850+ UK schools.",
-      copy: "An AI tutor marking real A-level past papers at over 99%.",
+      copy: "Marking accuracy from 67% to over 99% on covered papers.",
       cta: "See everything built",
     },
   },
