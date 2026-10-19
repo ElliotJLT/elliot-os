@@ -2,7 +2,6 @@ import { getLedger, type LedgerWeek } from "@/lib/ledger";
 import Link from "next/link";
 import Reveal from "../components/Reveal";
 import LoopFigure from "../components/LoopFigure";
-import LoopFlow from "../components/LoopFlow";
 
 export const metadata = { title: "Loops · Elliot Little" };
 
@@ -17,14 +16,14 @@ function formatDate(value: string | null) {
 }
 
 // Two clocks: the day (capture, read, the list, the 9pm call) and the week
-// (the Sunday read and the note). LoopFlow draws the same six.
+// (the Sunday read and the note). The clocks are the grouping on the page.
 const STEPS = [
-  { n: "01", name: "Capture", when: "any time", body: "When something comes to me, I text it to a bot or type /capture in whichever Claude Code session I have open, so I don't have to hold it in my head. It's kept word for word." },
-  { n: "02", name: "Read", when: "every hour", body: "It reads my email, my calendar and what I type in my working sessions, so I don't have to remember who said what. It only keeps a fact if it can show the exact sentence the fact came from. It can look, but it can't send, delete or change anything." },
-  { n: "03", name: "One list", when: "every run", body: "My open loops, my job applications and our household list end up on one list. Plain code builds it, with no AI involved, and anything my email says is already over drops off by itself." },
-  { n: "04", name: "The 9pm call", when: "21:00", body: "It reads the day's work and makes one call: what happened, the one thing for tomorrow, and what can wait. The call is waiting at the top of every work session the next morning, and every quote in it is checked against what I actually said." },
-  { n: "05", name: "The Sunday read", when: "Sundays", body: "It tells me what I worked across that week and what it thinks about how I'm working, with each point backed by my own words. I answer each one with yes, no, or a sentence of my own. A no is kept as a test the system is checked against every week, so it can't make the same mistake twice. It never asks for my opinion; it gives its read and I correct it." },
-  { n: "06", name: "A note at the top", when: "weekly", body: "Once a week it writes five to seven lines on how to work with me, drawn from how my sessions with AI have actually gone. Every new Claude Code session starts with that note, so the AI I'm working with already knows how I work. If a line is wrong, I say so and it's corrected." },
+  { n: "01", clock: "day", name: "Capture", when: "any time", body: "When something comes to me, I text it to a bot or type /capture in whichever Claude Code session I have open, so I don't have to hold it in my head. It's kept word for word." },
+  { n: "02", clock: "day", name: "Read", when: "every hour", body: "It reads my email, my calendar and what I type in my working sessions, so I don't have to remember who said what. It only keeps a fact if it can show the exact sentence the fact came from. It can look, but it can't send, delete or change anything." },
+  { n: "03", clock: "day", name: "One list", when: "every run", body: "My open loops, my job applications and our household list end up on one list. Plain code builds it, with no AI involved, and anything my email says is already over drops off by itself." },
+  { n: "04", name: "The 9pm call", when: "21:00", clock: "day", body: "It reads the day's work and makes one call: what happened, the one thing for tomorrow, and what can wait. The call is waiting at the top of every work session the next morning, and every quote in it is checked against what I actually said." },
+  { n: "05", clock: "week", name: "The Sunday read", when: "Sundays", body: "It tells me what I worked across that week and what it thinks about how I'm working, with each point backed by my own words. I answer each one with yes, no, or a sentence of my own. A no is kept as a test the system is checked against every week, so it can't make the same mistake twice. It never asks for my opinion; it gives its read and I correct it." },
+  { n: "06", clock: "week", name: "A note at the top", when: "weekly", body: "Once a week it writes five to seven lines on how to work with me, drawn from how my sessions with AI have actually gone. Every new Claude Code session starts with that note, so the AI I'm working with already knows how I work. If a line is wrong, I say so and it's corrected." },
 ];
 
 const RULES = [
@@ -135,23 +134,28 @@ export default function Loops() {
             Six steps on two clocks: the day and the week.
           </p>
         </Reveal>
-        <Reveal>
-          <LoopFlow />
-        </Reveal>
-        <Reveal>
-          <ol className="loop-steps rv-settle">
-            {STEPS.map((s) => (
-              <li key={s.n}>
-                <div className="loop-step-head">
-                  <span className="loop-step-n">{s.n}</span>
-                  <h3>{s.name}</h3>
-                  <span className="loop-step-when">{s.when}</span>
-                </div>
-                <p>{s.body}</p>
-              </li>
-            ))}
-          </ol>
-        </Reveal>
+        {(
+          [
+            ["day", "every day"],
+            ["week", "every week"],
+          ] as const
+        ).map(([clock, label]) => (
+          <Reveal key={clock}>
+            <h3 className="loop-clock rv-settle">{label}</h3>
+            <ol className="loop-steps loop-steps-2 rv-settle">
+              {STEPS.filter((s) => s.clock === clock).map((s) => (
+                <li key={s.n}>
+                  <div className="loop-step-head">
+                    <span className="loop-step-n">{s.n}</span>
+                    <h3>{s.name}</h3>
+                    <span className="loop-step-when">{s.when}</span>
+                  </div>
+                  <p>{s.body}</p>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+        ))}
         <Reveal>
           <p id="cut" className="muted rv-settle section-line">
             I switched off the 07:30 morning message on Telegram (a messaging
