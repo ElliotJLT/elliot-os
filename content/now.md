@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-10-17, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 10 commits across 3 repos.*
+*Shipping log for the 7 days to 2026-10-19, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 11 commits across 3 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 8 commits. "ledger: 2026-10-16" (895e394), "ledger: 2026-10-15" (d2aa073), "ledger: 2026-10-14" (3707463) and 5 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 9 commits. "Bring /loops up to date, in plain English (#79)" (faf2059), "ledger: 2026-10-19" (0a200c9), "ledger: 2026-10-16" (895e394) and 6 more
 - **[lease-citations](https://github.com/ElliotJLT/lease-citations)**: 1 commit. "Update README" (d872062)
 - **[ElliotJLT](https://github.com/ElliotJLT/ElliotJLT)**: 1 commit. "Update README" (cced4fd)
 <!-- agent:end -->
