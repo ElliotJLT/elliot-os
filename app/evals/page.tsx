@@ -2,6 +2,7 @@ import { getLedger, type LedgerWeek } from "@/lib/ledger";
 import { THEMES } from "@/lib/themes";
 import Reveal from "../components/Reveal";
 import HabitIcon from "../components/HabitIcon";
+import PaintReveal from "../components/PaintReveal";
 
 export const metadata = { title: "How I check · Elliot Little" };
 
@@ -18,8 +19,6 @@ type Check = {
   call: string;
   why: string;
   where: string;
-  /** Who makes the call this check feeds. Shown as a stamp on the card. */
-  decides: string;
 };
 
 const MODEL: Check[] = [
@@ -28,28 +27,24 @@ const MODEL: Check[] = [
     call: "Borrow the bar from whoever would know",
     why: "If the team writes the rubric, the model gets marked on our opinions. Examiners and regulators have spent years arguing about what good looks like, so I start from theirs.",
     where: "Tutor: the exam boards' mark schemes. ward: KCSIE. Farewill: the regulator's rules.",
-    decides: "the standard",
   },
   {
     icon: "conversation",
     call: "Mark the conversation, not just the answer",
     why: "A tutor that gets the answer right and hands it over has still failed. So the whole conversation gets marked, and the model doing the marking has to agree with a teacher before I trust it.",
     where: "Tutor: a judge on every session, against the Socratic spec.",
-    decides: "a teacher, first",
   },
   {
     icon: "transcript",
     call: "Read the transcripts yourself",
     why: "Evals catch what you thought to test. Reading real sessions catches the rest, and the failures that mattered were rarely on anyone's list.",
     where: "Tutor: production sessions sorted into failure modes, and every mark a teacher flagged turned into a test.",
-    decides: "me",
   },
   {
     icon: "failing",
     call: "Keep one suite you're failing",
     why: "A regression suite should stay green. A second one you mostly fail shows where to go next. If everything passes, you've stopped learning.",
     where: "This site: its agent's suite failed half its cases on the first run, and CI now blocks any change that breaks it.",
-    decides: "CI",
   },
 ];
 
@@ -59,21 +54,18 @@ const REVIEWER: Check[] = [
     call: "Decide which way it's allowed to fail",
     why: "Every model gets something wrong, so the product call is which kind of wrong you design for. In safeguarding that meant catching everything first, then cutting the noise.",
     where: "Tutor and ward: recall first, then precision.",
-    decides: "safeguarding lead",
   },
   {
     icon: "flag",
     call: "Budget the reviewer's attention",
     why: "The right to overrule a model is worth little to someone paged all day. So the false-alarm rate is a product number, and someone owns it.",
     where: "Tutor: conduct flags split from disclosures, so the designated lead is paged for the ones that need them.",
-    decides: "a named owner",
   },
   {
     icon: "conversation",
     call: "Put a name on every call",
     why: "Code can check a rule, but it can't own the outcome. Every decision that reaches a person carries their name and a reason.",
     where: "Nursing prototype: a named clinician records each change. Lease prototype: the lawyer decides whether the wording holds.",
-    decides: "a named person",
   },
 ];
 
@@ -110,22 +102,37 @@ function finished(w: LedgerWeek) {
 
 const basePath = process.env.BASE_PATH || "";
 
-// Painted vignettes, one per section, generated in the style of two
-// reference paintings Elliot picked. They sit behind the cards and the cards
-// overlap their lower edge, so the page reads as one surface.
+// Painted vignettes in the brand palette, one per section, which paint
+// themselves in as you scroll (components/PaintReveal). Sizes are the
+// exported webp dimensions.
+const PAINTINGS = {
+  watch: { w: 997, h: 714, seed: 11 },
+  marking: { w: 916, h: 812, seed: 23 },
+  lifeguard: { w: 1061, h: 767, seed: 37 },
+  hives: { w: 1051, h: 743, seed: 41 },
+  pond: { w: 983, h: 768, seed: 53 },
+};
+
 function Painting({
   name,
   side,
   alt,
 }: {
-  name: string;
-  side: "left" | "right" | "hero" | "aside";
+  name: keyof typeof PAINTINGS;
+  side: "left" | "right" | "right-low" | "hero";
   alt: string;
 }) {
+  const p = PAINTINGS[name];
   return (
-    <figure className={`ev-paint ev-paint-${side} rv-develop`}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={`${basePath}/evals/${name}.webp`} alt={alt} loading="lazy" />
+    <figure className={`ev-paint ev-paint-${side}`}>
+      <PaintReveal
+        src={`${basePath}/evals/${name}.webp`}
+        alt={alt}
+        w={p.w}
+        h={p.h}
+        seed={p.seed}
+        immediate={side === "hero"}
+      />
     </figure>
   );
 }
@@ -134,14 +141,13 @@ function Cards({ items }: { items: Check[] }) {
   // Three cards sit three across; two-across would leave one alone.
   const across = items.length === 3 ? "ev-three" : "ev-calls";
   return (
-    <ol className={`ev-steps ${across} rv-settle`}>
+    <ol className={`ev-steps ev-airy ${across} rv-settle`}>
       {items.map((c) => (
         <li key={c.call} className="ev-step">
           <div className="ev-step-head">
             <span className="ev-step-icon">
               <HabitIcon name={c.icon} />
             </span>
-            <span className="ev-stamp">decides · {c.decides}</span>
           </div>
           <h3>{c.call}</h3>
           <p>{c.why}</p>
@@ -160,7 +166,7 @@ export default function Evals() {
 
   return (
     <main>
-      <div className="mai">
+      <div className="mai evals-page loops-on-evals">
         <Reveal immediate>
           <header className="wr-head">
             <div className="wr-head-main">
@@ -235,7 +241,7 @@ export default function Evals() {
           </p>
           <Painting
             name="hives"
-            side="aside"
+            side="right-low"
             alt="A painted beekeeper lifting a frame from one hive in a fenced row of hives."
           />
         </Reveal>
