@@ -22,13 +22,13 @@ const HOW = [
   {
     icon: "balance" as const,
     call: "Decide which way it's allowed to fail",
-    why: "Every model gets something wrong, so the product call is which kind of wrong you design for. In safeguarding, an alert nobody trusts is as dangerous as no alert: bury the safeguarding lead in false alarms and the real one gets skimmed past. So catch everything first, then earn their trust by cutting the noise.",
+    why: "Every model gets something wrong, so the product call is which kind of wrong you design for. In safeguarding, an alert nobody trusts is as dangerous as no alert: bury the safeguarding lead in false alarms and the real one gets skimmed past. So catch everything first, then earn their trust by cutting the noise. Trust in a machine doesn't come back at the rate it goes: a lead will forgive a colleague's bad call long before an alert that's cried wolf.",
     where: "Tutor: detection shipped first, then we cut the false alarms without missing a single disclosure. ward: precision first, and the method says why.",
   },
   {
     icon: "conversation" as const,
     call: "Mark the conversation, not just the answer",
-    why: "A tutor can get every answer right and still be useless if it hands them over. What made it a tutor was refusing to, however nicely a student asked, so the conversation itself got marked. That takes a model as the marker, and a model marker has to agree with a teacher before I trust a word it says.",
+    why: "A tutor can get every answer right and still be useless if it hands them over. What made it a tutor was refusing to, however nicely a student asked, so the conversation itself got marked. That takes a model as the marker, and a model marker has to agree with a teacher before I trust a word it says. A model can explain a rule perfectly and break it in the next sentence, so knowing the rubric proves nothing about following it.",
     where: "Tutor: a pass/fail LLM judge on every session against the Socratic spec, checked against teachers' judgement first. The pass rate went from 33% to 65% in two weeks.",
   },
   {

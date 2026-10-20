@@ -30,7 +30,7 @@ const PROTOTYPES: Prototype[] = [
     eyebrow: "Prototype · Aug 2026",
     title: "Citations a lawyer can check in one click",
     problem:
-      "A document Q&A app for property lawyers showed \"3 sources cited\" under an answer about asbestos, in a lease that never mentions asbestos. The count was a regex over the model's own reply, checked against nothing.",
+      "A document Q&A app for property lawyers showed \"3 sources cited\" under an answer about asbestos, in a lease that never mentions asbestos. The count was a regex over the model's own reply, checked against nothing. A citation count is a trust signal, and this one was spending trust the answer hadn't earned.",
     built:
       "Every claim carries an inline marker naming its quote, and code locates that quote word for word in the lease. A match jumps to the highlighted passage in one click. A quote it can't find is drawn dashed, against the claim it weakens.",
     checked: "Every quoted passage, located word for word in the document before it renders as evidence.",
