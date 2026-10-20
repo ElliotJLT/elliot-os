@@ -12,7 +12,8 @@ import { useEffect, useMemo, useRef } from "react";
  * strokes' edges so they read as paint rather than lines. The last few
  * percent fade a full rect in, so the finished state is the whole image.
  *
- * Progress follows the scroll both ways: scroll back up and it unpaints.
+ * Progress follows the scroll down and stays painted: scrolling back up
+ * leaves it finished.
  * The first painting on the page (`immediate`) lays a first wash on load,
  * then follows the scroll. With reduced motion, or if the script never
  * runs, the image is simply shown.
@@ -110,7 +111,7 @@ export default function PaintReveal({ src, alt, w, h, seed, immediate }: Props) 
         // under halfway: about a screen of scrolling, one stroke at a time.
         p = (vh * 0.94 - r.top) / (vh * 0.49 + r.height);
       }
-      target = Math.min(1, Math.max(0, p));
+      target = Math.max(target, Math.min(1, Math.max(0, p)));
     };
 
     // Follow the scroll closely, with a short ease so strokes glide rather
