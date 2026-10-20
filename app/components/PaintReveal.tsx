@@ -5,16 +5,18 @@ import { useEffect, useMemo, useRef } from "react";
 /**
  * A painting that paints itself in as you scroll.
  *
- * The image sits under an SVG mask made of broad brush strokes. Each stroke
- * draws along its own length (stroke-dashoffset), a few at a time, so the
- * picture is blocked in the way a painter would: sweep after sweep, roughly
- * top to bottom, alternating direction. A turbulence filter tears the
- * strokes' edges so they read as paint rather than lines. The last few
- * percent fade a full rect in, so the finished state is the whole image.
+ * The image sits under an SVG mask made of brush strokes. Each stroke draws
+ * along its own length (stroke-dashoffset), a few at a time, so the picture
+ * is blocked in the way a painter would: row by row, top to bottom. A
+ * filter makes each stroke dry-brush: streaky noise along the stroke cuts
+ * bristle gaps into it, and a little displacement roughs the edges and
+ * ends. The last few percent fade a full rect in, so the finished state is
+ * the whole image.
  *
- * Progress follows scroll and never goes backwards. The first painting on
- * the page (`immediate`) lays a first wash on load, then follows the scroll. With reduced motion, or before the
- * script runs on a phone that blocks it, the image is simply shown.
+ * Progress follows the scroll both ways: scroll back up and it unpaints.
+ * The first painting on the page (`immediate`) lays a first wash on load,
+ * then follows the scroll. With reduced motion, or if the script never
+ * runs, the image is simply shown.
  */
 
 type Props = {
@@ -28,7 +30,7 @@ type Props = {
   immediate?: boolean;
 };
 
-const STROKES = 16;
+const ROWS = 14;
 
 function rng(seed: number) {
   let s = seed >>> 0;
@@ -38,31 +40,47 @@ function rng(seed: number) {
   };
 }
 
+/**
+ * The strokes a painter would block the picture in with: rows worked top to
+ * bottom, each row two to four overlapping strokes of 35-65% of the width,
+ * nearly level with a slight tilt and sag, alternating direction. Narrow
+ * enough to read as single loaded-brush passes, not blobs.
+ */
 function strokes(w: number, h: number, seed: number) {
   const r = rng(seed);
   const out: { d: string; width: number; start: number }[] = [];
-  for (let i = 0; i < STROKES; i++) {
-    // Rows from top to bottom with some jitter; alternate direction.
-    const y = ((i + 0.5) / STROKES) * h + (r() - 0.5) * h * 0.08;
-    const ltr = i % 2 === 0;
-    const x0 = ltr ? -w * 0.05 : w * 1.05;
-    const x1 = ltr ? w * 1.05 : -w * 0.05;
-    const tilt = (r() - 0.5) * h * 0.22;
-    const c1x = x0 + (x1 - x0) * 0.33;
-    const c2x = x0 + (x1 - x0) * 0.66;
-    const c1y = y - tilt + (r() - 0.5) * h * 0.12;
-    const c2y = y + tilt + (r() - 0.5) * h * 0.12;
-    out.push({
-      d: `M${x0.toFixed(1)} ${(y - tilt / 2).toFixed(1)} C${c1x.toFixed(1)} ${c1y.toFixed(1)} ${c2x.toFixed(1)} ${c2y.toFixed(1)} ${x1.toFixed(1)} ${(y + tilt / 2).toFixed(1)}`,
-      width: h * (0.13 + r() * 0.07),
-      // Staggered starts, slightly shuffled so rows overlap in time.
-      start: Math.max(0, Math.min(0.78, (i / STROKES) * 0.78 + (r() - 0.5) * 0.06)),
-    });
+  const rowH = h / ROWS;
+  let n = 0;
+  for (let row = 0; row < ROWS; row++) {
+    const per = 2 + Math.floor(r() * 3);
+    for (let k = 0; k < per; k++) {
+      const len = w * (0.35 + r() * 0.3);
+      const ltr = (row + k) % 2 === 0;
+      const xa = -w * 0.08 + r() * (w * 1.16 - len);
+      const x0 = ltr ? xa : xa + len;
+      const x1 = ltr ? xa + len : xa;
+      const y = (row + 0.5) * rowH + (r() - 0.5) * rowH * 0.9;
+      const tilt = (r() - 0.5) * rowH * 3.2;
+      const sag = (r() - 0.5) * rowH * 1.2;
+      const y0 = y - tilt / 2;
+      const y1 = y + tilt / 2;
+      out.push({
+        d: `M${x0.toFixed(1)} ${y0.toFixed(1)} Q${((x0 + x1) / 2).toFixed(1)} ${(y + sag).toFixed(1)} ${x1.toFixed(1)} ${y1.toFixed(1)}`,
+        width: rowH * (1.1 + r() * 0.7),
+        start: 0,
+      });
+      n++;
+    }
   }
+  // Spread the starts over the first 85% of progress, in order, with a
+  // little shuffle so neighbouring strokes overlap in time.
+  out.forEach((s, i) => {
+    s.start = Math.max(0, Math.min(0.85, (i / n) * 0.85 + (r() - 0.5) * 0.04));
+  });
   return out;
 }
 
-const DUR = 0.22;
+const DUR = 0.12;
 
 export default function PaintReveal({ src, alt, w, h, seed, immediate }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -109,7 +127,7 @@ export default function PaintReveal({ src, alt, w, h, seed, immediate }: Props) 
         // under halfway: about a screen of scrolling, one stroke at a time.
         p = (vh * 0.94 - r.top) / (vh * 0.49 + r.height);
       }
-      target = Math.max(target, Math.min(1, Math.max(0, p)));
+      target = Math.min(1, Math.max(0, p));
     };
 
     // Follow the scroll closely, with a short ease so strokes glide rather
@@ -119,15 +137,15 @@ export default function PaintReveal({ src, alt, w, h, seed, immediate }: Props) 
       const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60;
       last = now;
       shown += (target - shown) * Math.min(1, dt * 7);
-      if (target - shown < 0.001) shown = target;
+      if (Math.abs(target - shown) < 0.001) shown = target;
       paint(shown);
-      if (shown < target) frame = requestAnimationFrame(tick);
+      if (shown !== target) frame = requestAnimationFrame(tick);
       else last = 0;
     };
 
     const onScroll = () => {
       measure();
-      if (!frame && shown < target) frame = requestAnimationFrame(tick);
+      if (!frame && shown !== target) frame = requestAnimationFrame(tick);
     };
 
     paint(0);
@@ -151,9 +169,19 @@ export default function PaintReveal({ src, alt, w, h, seed, immediate }: Props) 
       aria-label={alt}
     >
       <defs>
-        <filter id={`${id}-rough`} x="-10%" y="-10%" width="120%" height="120%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.018 0.045" numOctaves={3} seed={seed} />
-          <feDisplacementMap in="SourceGraphic" scale={w * 0.05} />
+        <filter id={`${id}-rough`} x="-5%" y="-5%" width="110%" height="110%">
+          {/* Streaks running along the (near level) strokes: the bristles. */}
+          <feTurbulence type="fractalNoise" baseFrequency="0.004 0.16" numOctaves={1} seed={seed} result="streak" />
+          <feColorMatrix
+            in="streak"
+            type="matrix"
+            values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 14 -4.5"
+            result="bristles"
+          />
+          <feComposite in="SourceGraphic" in2="bristles" operator="in" result="dry" />
+          {/* Rough edges and ragged ends. */}
+          <feTurbulence type="fractalNoise" baseFrequency="0.09" numOctaves={2} seed={seed + 7} result="edge" />
+          <feDisplacementMap in="dry" in2="edge" scale={w * 0.009} xChannelSelector="R" yChannelSelector="G" />
         </filter>
         <mask id={`${id}-mask`} maskUnits="userSpaceOnUse" x="0" y="0" width={w} height={h}>
           <g filter={`url(#${id}-rough)`}>
