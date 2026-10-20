@@ -8195,3 +8195,24 @@ footer .foot-base a {
   font-size: 11px;
   color: var(--faint);
 }
+
+/* /evals: who makes the call each check feeds, set like a rubber stamp in
+   the card's corner. Mono, dashed, a degree off square so it reads as
+   marked on rather than printed. */
+.ev-stamp {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  border: 1px dashed currentColor;
+  border-radius: 6px;
+  padding: 4px 8px;
+  transform: rotate(-2deg);
+  white-space: nowrap;
+}
+@media (min-width: 1000px) {
+  .ev-three {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -11,7 +11,6 @@ const LINKS = [
   { href: "/built", label: "Built" },
   { href: "/writing", label: "Writing" },
   { href: "/evals", label: "Evals" },
-  { href: "/loops", label: "Loops" },
 ];
 
 export default function MobileMenu() {

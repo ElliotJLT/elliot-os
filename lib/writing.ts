@@ -59,7 +59,7 @@ const NOTES: [string, string][] = [
   ],
   [
     "Loop Was Never",
-    "The agent loop is the easy part; knowing when to stop it is the work. The thinking underneath this site's /loops page.",
+    "The agent loop is the easy part; knowing when to stop it is the work. The thinking underneath the agent rules on this site's /evals page.",
   ],
   [
     "Same Mistakes",
