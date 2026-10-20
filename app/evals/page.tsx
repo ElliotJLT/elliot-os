@@ -3,6 +3,7 @@ import { THEMES } from "@/lib/themes";
 import Reveal from "../components/Reveal";
 import HabitIcon from "../components/HabitIcon";
 import PaintReveal from "../components/PaintReveal";
+import WrapTidy from "../components/WrapTidy";
 import { PAINT_SHAPES } from "@/lib/paintShapes";
 
 export const metadata = { title: "How I check · Elliot Little" };
@@ -360,6 +361,7 @@ export default function Evals() {
           </div>
         </Reveal>
       </div>
+      <WrapTidy />
     </main>
   );
 }
