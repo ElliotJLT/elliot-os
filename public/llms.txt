@@ -176,8 +176,8 @@ habit in regulated services, crisis delivery and consumer travel.
   Code session, an hourly read of his email, calendar and sessions that keeps
   only facts it can quote, one list built by plain code, a 9pm call waiting
   in the next morning's sessions, and a Sunday read he answers yes, no or in
-  his own words. Nothing sends as him. Aggregate weekly ledger published:
-  https://elliotjlt.github.io/elliot-os/loops/
+  his own words. Nothing sends as him. Its rules and an aggregate weekly
+  ledger are published: https://elliotjlt.github.io/elliot-os/evals/#agents
 
 ## Who
 
@@ -236,23 +236,26 @@ habit in regulated services, crisis delivery and consumer travel.
 
 ## Current status
 
-- /loops is the control panel for the agents that maintain this site:
-  cadence, cost, the human approval gate and stopping rule on each, the
-  shipping log the inner loop last wrote, and the open commitments:
-  https://elliotjlt.github.io/elliot-os/loops/
+- /evals#agents sets out the rules the agents run under, enforced in
+  code, with a weekly ledger of what they kept and threw out:
+  https://elliotjlt.github.io/elliot-os/evals/#agents
 - What he is shipping this week (raw markdown, the agent's own output):
   https://raw.githubusercontent.com/ElliotJLT/elliot-os/main/content/now.md
 - Site changelog: https://github.com/ElliotJLT/elliot-os/commits/main
-- Note: /now and /next were folded into /loops on 2026-07-25 and now
-  redirect there. The markdown sources above are unchanged.
+- Note: /now and /next were folded into /loops on 2026-07-25, and /loops
+  into /evals on 2026-10-20. All three redirect to /evals#agents. The
+  markdown sources above are unchanged.
 
-## Evals
+## How he checks (/evals)
 
-How I do evals, and why: borrow the bar from whoever would know (exam
-boards' mark schemes, KCSIE, the regulator), decide which mistake you can
-live with, mark behaviour as well as answers, read the transcripts yourself,
-let the people closest to it add cases, and treat the eval as the spec.
-Where: the Zero Gravity tutor, ward, Farewill probate and this site's agent:
+One page, four places a check sits. The model: borrow the bar from whoever
+would know (exam boards' mark schemes, KCSIE, the regulator), mark the
+conversation as well as the answer, read the transcripts yourself, keep one
+suite you're failing. The reviewer: decide which way it's allowed to fail,
+budget the reviewer's attention, put a name on every call. The agents: rules
+enforced in code and a weekly ledger. Himself: crux and a weekly note he
+corrects. Where: the Zero Gravity tutor, ward, Farewill probate, the
+prototypes and this site's agent:
 https://elliotjlt.github.io/elliot-os/evals/
 
 ## Writing
@@ -291,9 +294,10 @@ marking and assignment agents, each with its own evaluator; argus's
 five-agent pipeline; this site's scheduled loops), tool use (an MCP server
 on this site and homebuyer-mcp, Claude Code skills and hooks), retrieval
 (Career Co-pilot and argus), memory (argus's append-only corpus and the
-essay on making corrections survive a session), human oversight (every
-/loops sets out what the machine holds and what he keeps, with a weekly
-ledger that can show the system failing; ward routes to a named human), and evaluation (/evals). Planning is the weakest of these:
+essay on making corrections survive a session), human oversight (/evals
+covers the reviewer as well as the model: false-alarm budgets, a named
+person on every call, and a weekly ledger that can show his own system
+failing; ward routes to a named human), and evaluation (/evals). Planning is the weakest of these:
 he has designed stopping rules, not planners.
 
 ## Contact for humans

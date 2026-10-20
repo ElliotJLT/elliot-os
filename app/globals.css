@@ -8195,3 +8195,145 @@ footer .foot-base a {
   font-size: 11px;
   color: var(--faint);
 }
+
+/* ============================================================ /evals paint
+   Each section is one surface: a painting floated to one side, and the
+   words flowing round the painted shape (shape-outside on a traced
+   polygon, lib/paintShapes.ts). No panels, no grid of cards. */
+.ev-wrap {
+  display: flow-root;
+}
+/* No margins on the float: the traced shape is laid over the margin box,
+   so a margin would shift the wrap off the paint. shape-margin does the
+   spacing instead. */
+.ev-paint {
+  margin: 0;
+  width: min(54%, 640px);
+  shape-margin: 24px;
+}
+.ev-paint-right {
+  float: right;
+}
+.ev-paint-left {
+  float: left;
+}
+.wr-head.ev-wrap .ev-paint {
+  width: min(56%, 700px);
+}
+.paint-reveal {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+/* Hidden until the script takes over, so it doesn't flash finished and then
+   vanish. If the script never runs, it appears anyway after a beat. */
+.paint-reveal:not([data-ready]) {
+  opacity: 0;
+  animation: paint-fallback 0s 2.5s forwards;
+}
+@keyframes paint-fallback {
+  to {
+    opacity: 1;
+  }
+}
+
+.ev-index {
+  margin-top: 36px;
+}
+.evals-page h2.mai-kick {
+  margin-top: 96px;
+  scroll-margin-top: 96px;
+}
+
+.ev-flow {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+}
+.ev-flow > li {
+  margin: 0 0 34px;
+}
+.ev-flow h3 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+.ev-flow h3 a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+.ev-flow-icon {
+  display: inline-block;
+  vertical-align: -4px;
+  margin-right: 10px;
+  color: var(--accent-ink);
+}
+.ev-flow-icon .habit-icon {
+  width: 22px;
+  height: 22px;
+}
+.ev-flow p {
+  margin: 0;
+  max-width: none;
+  font-size: 16px;
+  line-height: 1.62;
+  color: var(--muted);
+}
+.ev-flow .ev-flow-where {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--label);
+}
+.ev-flow-lede {
+  margin: 4px 0 22px;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: none;
+}
+.ev-rules {
+  counter-reset: rule;
+}
+.ev-rules > li {
+  counter-increment: rule;
+  margin-bottom: 18px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.ev-rules > li::before {
+  content: counter(rule, decimal-leading-zero);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--label);
+  margin-right: 12px;
+  vertical-align: 1px;
+}
+
+/* The ledger loses its panel so nothing on this page competes with the
+   paint. */
+.loops-on-evals .loop-ledger-panel {
+  background: none;
+  box-shadow: none;
+  padding-inline: 0;
+}
+
+@media (max-width: 760px) {
+  .ev-paint,
+  .ev-paint-right,
+  .ev-paint-left,
+  .wr-head.ev-wrap .ev-paint {
+    float: none;
+    width: 100%;
+    margin: 12px 0 24px;
+  }
+  .evals-page h2.mai-kick {
+    margin-top: 64px;
+  }
+}

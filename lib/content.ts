@@ -13,9 +13,8 @@ const END = "<!-- agent:end -->";
 /**
  * content/now.md has two authors. The agent owns the block between the
  * markers (rewritten weekly by scripts/agent-now.mjs); everything after it is
- * hand-written. The two render in different places — the agent's output under
- * its loop on /loops, the hand-written part on the home page — so they are
- * split here rather than duplicating the file.
+ * hand-written. The hand-written part is served by the MCP server's get_now,
+ * so the two are split here rather than duplicating the file.
  */
 export function getAgentLog(): string {
   const raw = readFileSync(join(process.cwd(), "content", "now.md"), "utf-8");

@@ -73,7 +73,9 @@ and who decided?
 
 ## Layout
 
-- `app/` routes: `/`, `/built`, `/writing`, `/evals`, `/loops`
+- `app/` routes: `/`, `/built`, `/writing`, `/evals` (how I check: the
+  model, the reviewer, the agents, me). `/loops`, `/now` and `/next` are
+  static redirects in `public/` to `/evals#agents`
 - `lib/` build-time readers (GitHub API, content, loops, evals)
 - `scripts/` the two agents plus `fetch-media.mjs`; `evals/` their cases
 - `mcp/` zero-dependency MCP server over stdio exposing the site's data
