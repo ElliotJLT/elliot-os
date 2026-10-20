@@ -330,6 +330,8 @@ const COMPANIES: Company[] = [
           "A rollout pattern taken from the schools that worked: classes built in advance and a weekly call with the teacher.",
           "Data-protection paperwork ready before a school asks for it.",
         ],
+        lesson:
+          "Help a student has to go and find mostly goes unused. So the tutor turns up inside homework their teacher has already set.",
         role: "Led product and design",
         links: [
           { label: "for teachers", href: "https://www.zerogravity.co.uk/tutor/teachers" },
