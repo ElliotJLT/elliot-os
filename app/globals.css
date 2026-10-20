@@ -8195,3 +8195,397 @@ footer .foot-base a {
   font-size: 11px;
   color: var(--faint);
 }
+
+/* ------------------------------------------------------------ /listening
+   Off the clock. A day strip, a crate of records and a year ledger, all in
+   the site's own inks: the data carries it, not a new palette. */
+.ls-gap {
+  margin-top: 72px;
+}
+
+.ls-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* The day: 24 thin columns, the current London hour in claret. */
+.ls-day {
+  display: grid;
+  grid-template-columns: repeat(24, 1fr);
+  gap: 2px;
+  align-items: end;
+  height: 120px;
+  margin-top: 8px;
+  border-bottom: 1px solid var(--line-2);
+}
+
+.ls-day-bar {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  outline: none;
+  cursor: default;
+}
+
+.ls-day-fill {
+  display: block;
+  width: 100%;
+  background: var(--chart);
+  border-radius: 4px 4px 0 0;
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
+}
+
+.ls-day-bar:hover .ls-day-fill,
+.ls-day-bar:focus-visible .ls-day-fill {
+  opacity: 1;
+}
+
+.ls-day-bar.is-now .ls-day-fill {
+  background: var(--kick);
+  opacity: 1;
+}
+
+.ls-tip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 150px;
+  padding: 8px 10px;
+  background: var(--paper);
+  border: 1px solid var(--line-2);
+  border-radius: var(--r);
+  box-shadow: var(--shadow-lift);
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--ink-2);
+  white-space: nowrap;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.ls-tip b {
+  font-family: var(--mono);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.ls-tip span {
+  color: var(--muted);
+}
+
+.ls-day-bar:hover .ls-tip,
+.ls-day-bar:focus-visible .ls-tip {
+  display: flex;
+}
+
+.ls-day-bar:nth-child(-n + 4) .ls-tip {
+  left: 0;
+  transform: none;
+}
+
+.ls-day-bar:nth-last-child(-n + 4) .ls-tip {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+.ls-day-axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--faint);
+}
+
+/* The crate: covers overlap in a row; the picked one rises and its disc
+   slides half out of the sleeve. */
+.ls-crate {
+  margin-top: 28px;
+}
+
+.ls-row {
+  display: flex;
+  padding: 64px 0 18px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 6px solid var(--ink);
+}
+
+.ls-row::-webkit-scrollbar {
+  display: none;
+}
+
+.ls-rec {
+  position: relative;
+  flex: 0 0 auto;
+  width: clamp(96px, 11vw, 132px);
+  aspect-ratio: 1;
+  margin-right: clamp(-44px, -3.4vw, -24px);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.ls-rec:last-child {
+  margin-right: 0;
+}
+
+.ls-rec img,
+.ls-nocover {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+  outline: 1px solid rgba(0, 0, 0, 0.12);
+  outline-offset: -1px;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.18);
+  z-index: 1;
+}
+
+.ls-nocover {
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  background: var(--paper);
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.ls-disc {
+  position: absolute;
+  inset: 4%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, var(--kick) 0 14%, #111 14.5% 16%, transparent 16.5%),
+    repeating-radial-gradient(circle, #151515 0 2px, #222 2px 3px);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 0;
+}
+
+.ls-rec:hover {
+  transform: translateY(-10px);
+}
+
+.ls-rec.is-on {
+  transform: translateY(-22px);
+}
+
+.ls-rec.is-on .ls-disc {
+  transform: translateY(-46%) rotate(40deg);
+}
+
+/* Black vinyl vanishes on the dark page; a lifted groove and a rim keep it. */
+:root[data-theme="dark"] .ls-disc {
+  background:
+    radial-gradient(circle, var(--kick) 0 14%, #111 14.5% 16%, transparent 16.5%),
+    repeating-radial-gradient(circle, #2c302d 0 2px, #3a3f3b 2px 3px);
+  box-shadow: 0 0 0 1px var(--line-2);
+}
+
+.ls-rec:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* The card under the crate reads the picked record back. */
+.ls-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  padding: 28px 0 8px;
+}
+
+@media (min-width: 760px) {
+  .ls-card {
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+  }
+}
+
+.ls-card-cover img {
+  display: block;
+  width: 100%;
+  max-width: min(280px, 60vw);
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 2px;
+  outline: 1px solid rgba(0, 0, 0, 0.1);
+  outline-offset: -1px;
+}
+
+.ls-card-kick {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.ls-card-title {
+  font-family: var(--display);
+  font-size: clamp(30px, 3.4vw, 46px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 10px 0 4px;
+}
+
+.ls-card-artist {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-style: italic;
+  color: var(--muted);
+  margin: 0 0 22px;
+}
+
+.ls-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 28px;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.ls-facts > div {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.ls-facts dt {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 4px;
+}
+
+.ls-facts dd {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.ls-card-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 22px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ls-card-nav button,
+.ls-card-nav a {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.ls-card-nav a {
+  color: var(--accent-ink);
+}
+
+.ls-card-nav button:hover,
+.ls-card-nav a:hover {
+  color: var(--ink);
+}
+
+/* Year by year: a ledger with the bar inside the row, so every value is
+   printed and nothing hides behind a hover. */
+.ls-years {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.ls-years li {
+  display: grid;
+  grid-template-columns: 48px 1fr 64px;
+  grid-template-areas: "y a h" ". bar bar";
+  gap: 2px 14px;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 760px) {
+  .ls-years li {
+    grid-template-columns: 56px 1fr 72px 240px;
+    grid-template-areas: "y bar h a";
+  }
+}
+
+.ls-y {
+  grid-area: y;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.ls-ybar {
+  grid-area: bar;
+  height: 10px;
+}
+
+.ls-ybar span {
+  display: block;
+  height: 100%;
+  background: var(--chart);
+  border-radius: 0 4px 4px 0;
+}
+
+.ls-yh {
+  grid-area: h;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-2);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.ls-ya {
+  grid-area: a;
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.ls-source {
+  margin: 22px 0 96px;
+  font-size: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-rec,
+  .ls-disc {
+    transition: none;
+  }
+}

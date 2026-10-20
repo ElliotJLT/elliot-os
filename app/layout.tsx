@@ -138,6 +138,7 @@ export default function RootLayout({
                 >
                   <LoopsWord first="L" />
                 </Link>
+                <Link href="/listening">Listening</Link>
               </nav>
               <div className="foot-col">
                 <span className="foot-h">The desk</span>
