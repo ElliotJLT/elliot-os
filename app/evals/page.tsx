@@ -3,6 +3,7 @@ import { THEMES } from "@/lib/themes";
 import Reveal from "../components/Reveal";
 import HabitIcon from "../components/HabitIcon";
 import PaintReveal from "../components/PaintReveal";
+import { PAINT_SHAPES } from "@/lib/paintShapes";
 
 export const metadata = { title: "How I check · Elliot Little" };
 
@@ -113,45 +114,46 @@ const PAINTINGS = {
   pond: { w: 983, h: 768, seed: 53 },
 };
 
+// Each painting floats beside its section and the words wrap around the
+// painted shape itself, so text and paint share the page instead of taking
+// turns. The outline is a traced polygon (lib/paintShapes.ts), which scales
+// with the painting.
 function Painting({
   name,
   side,
   alt,
+  first,
 }: {
   name: keyof typeof PAINTINGS;
-  side: "left" | "right" | "right-low" | "hero";
+  side: "left" | "right";
   alt: string;
+  first?: boolean;
 }) {
   const p = PAINTINGS[name];
+  const src = `${basePath}/evals/${name}.webp`;
   return (
-    <figure className={`ev-paint ev-paint-${side}`}>
-      <PaintReveal
-        src={`${basePath}/evals/${name}.webp`}
-        alt={alt}
-        w={p.w}
-        h={p.h}
-        seed={p.seed}
-        immediate={side === "hero"}
-      />
+    <figure
+      className={`ev-paint ev-paint-${side}`}
+      style={{ shapeOutside: PAINT_SHAPES[name][side] }}
+    >
+      <PaintReveal src={src} alt={alt} w={p.w} h={p.h} seed={p.seed} immediate={first} />
     </figure>
   );
 }
 
-function Cards({ items }: { items: Check[] }) {
-  // Three cards sit three across; two-across would leave one alone.
-  const across = items.length === 3 ? "ev-three" : "ev-calls";
+function Checks({ items }: { items: Check[] }) {
   return (
-    <ol className={`ev-steps ev-airy ${across} rv-settle`}>
+    <ol className="ev-flow rv-settle">
       {items.map((c) => (
-        <li key={c.call} className="ev-step">
-          <div className="ev-step-head">
-            <span className="ev-step-icon">
+        <li key={c.call}>
+          <h3>
+            <span className="ev-flow-icon">
               <HabitIcon name={c.icon} />
             </span>
-          </div>
-          <h3>{c.call}</h3>
+            {c.call}
+          </h3>
           <p>{c.why}</p>
-          <p className="ev-step-where">{c.where}</p>
+          <p className="ev-flow-where">{c.where}</p>
         </li>
       ))}
     </ol>
@@ -168,49 +170,46 @@ export default function Evals() {
     <main>
       <div className="mai evals-page loops-on-evals">
         <Reveal immediate>
-          <header className="wr-head">
-            <div className="wr-head-main">
-              <span className="mai-kick rv-settle">How I check</span>
-              <h1 className="wr-title rv-settle">
-                What gets checked, and who decides.
-              </h1>
-            </div>
+          <header className="wr-head ev-wrap">
+            <Painting
+              name="watch"
+              side="right"
+              first
+              alt="A painted fire lookout tower above a pine forest, one person at the rail looking out through binoculars."
+            />
+            <span className="mai-kick rv-settle">How I check</span>
+            <h1 className="wr-title rv-settle">
+              What gets checked, and who decides.
+            </h1>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
               Evals for the models I ship, limits for the agents I run, and a
               record of my own calls.
             </p>
+            <nav className="built-index ev-index" aria-label="On this page">
+              {SECTIONS.map((s) => (
+                <a key={s.id} href={`#${s.id}`}>
+                  <span>{s.n}</span> {s.label}
+                </a>
+              ))}
+            </nav>
           </header>
         </Reveal>
-
-        <Reveal>
-          <Painting
-            name="watch"
-            side="hero"
-            alt="A painted fire lookout tower above a pine forest, one person at the rail looking out through binoculars."
-          />
-        </Reveal>
-
-        <nav className="built-index" aria-label="On this page">
-          {SECTIONS.map((s) => (
-            <a key={s.id} href={`#${s.id}`}>
-              <span>{s.n}</span> {s.label}
-            </a>
-          ))}
-        </nav>
 
         <Reveal>
           <h2 id="model" className="mai-kick rv-settle">
             01 · {WRONG.short}
           </h2>
           <p className="sec-title rv-settle">Checking the model.</p>
-          <Painting
-            name="marking"
-            side="right"
-            alt="A painted teacher at a wooden table under a tree, marking a tall stack of exam papers by hand."
-          />
         </Reveal>
         <Reveal>
-          <Cards items={MODEL} />
+          <div className="ev-wrap">
+            <Painting
+              name="marking"
+              side="right"
+              alt="A painted teacher at a wooden table under a tree, marking a tall stack of exam papers by hand."
+            />
+            <Checks items={MODEL} />
+          </div>
         </Reveal>
 
         <Reveal>
@@ -220,14 +219,16 @@ export default function Evals() {
           <p className="sec-title rv-settle">
             Checking the person who checks it.
           </p>
-          <Painting
-            name="lifeguard"
-            side="left"
-            alt="A painted lifeguard on a tall white chair at the edge of a lake, watching a few swimmers."
-          />
         </Reveal>
         <Reveal>
-          <Cards items={REVIEWER} />
+          <div className="ev-wrap">
+            <Painting
+              name="lifeguard"
+              side="left"
+              alt="A painted lifeguard on a tall white chair at the edge of a lake, watching a few swimmers."
+            />
+            <Checks items={REVIEWER} />
+          </div>
         </Reveal>
 
         <Reveal>
@@ -235,22 +236,24 @@ export default function Evals() {
             03 · {AGENTS.short}
           </h2>
           <p className="sec-title rv-settle">Checking the agents I run.</p>
-          <p className="muted rv-settle section-line">
-            Agents keep this site current and run my own work. These rules
-            hold whatever the model says, and code enforces them.
-          </p>
-          <Painting
-            name="hives"
-            side="right-low"
-            alt="A painted beekeeper lifting a frame from one hive in a fenced row of hives."
-          />
         </Reveal>
         <Reveal>
-          <ol className="loop-rules rv-settle">
-            {RULES.map((r) => (
-              <li key={r}>{r}</li>
-            ))}
-          </ol>
+          <div className="ev-wrap">
+            <Painting
+              name="hives"
+              side="right"
+              alt="A painted beekeeper lifting a frame from one hive in a fenced row of hives."
+            />
+            <p className="ev-flow-lede rv-settle">
+              Agents keep this site current and run my own work. These rules
+              hold whatever the model says, and code enforces them.
+            </p>
+            <ol className="ev-flow ev-rules rv-settle">
+              {RULES.map((r) => (
+                <li key={r}>{r}</li>
+              ))}
+            </ol>
+          </div>
         </Reveal>
         {weeks.length > 0 && (
           <Reveal>
@@ -323,34 +326,38 @@ export default function Evals() {
             04 · {AGENTS.short}
           </h2>
           <p className="sec-title rv-settle">Checking myself.</p>
-          <Painting
-            name="pond"
-            side="left"
-            alt="A painted figure crouched at the edge of a still pond, looking at their own reflection."
-          />
         </Reveal>
         <Reveal>
-          <ul className="ev-places rv-settle">
-            <li>
-              <a href="https://elliotjlt.github.io/crux/research.html">crux</a>
-              <p>
-                I built crux to record the calls I make while a model types:
-                what I pushed back on, what I redirected, what I let through.
-                Run on my own sessions, the record came out thinner than
-                I&apos;d assumed, and thinnest on the moves that are hard to
-                undo.
-              </p>
-            </li>
-            <li>
-              <span className="ev-places-name">The weekly note</span>
-              <p>
-                Once a week my system writes a short note on how I&apos;ve
-                actually been working with AI, drawn from my sessions, and
-                every new session starts with it. When a line&apos;s wrong I
-                correct it, and the correction is kept.
-              </p>
-            </li>
-          </ul>
+          <div className="ev-wrap">
+            <Painting
+              name="pond"
+              side="left"
+              alt="A painted figure crouched at the edge of a still pond, looking at their own reflection."
+            />
+            <ol className="ev-flow rv-settle">
+              <li>
+                <h3>
+                  <a href="https://elliotjlt.github.io/crux/research.html">crux</a>
+                </h3>
+                <p>
+                  I built crux to record the calls I make while a model types:
+                  what I pushed back on, what I redirected, what I let through.
+                  Run on my own sessions, the record came out thinner than
+                  I&apos;d assumed, and thinnest on the moves that are hard to
+                  undo.
+                </p>
+              </li>
+              <li>
+                <h3>The weekly note</h3>
+                <p>
+                  Once a week my system writes a short note on how I&apos;ve
+                  actually been working with AI, drawn from my sessions, and
+                  every new session starts with it. When a line&apos;s wrong I
+                  correct it, and the correction is kept.
+                </p>
+              </li>
+            </ol>
+          </div>
         </Reveal>
       </div>
     </main>

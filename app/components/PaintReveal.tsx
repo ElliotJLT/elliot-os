@@ -13,7 +13,7 @@ import { useEffect, useMemo, useRef } from "react";
  * percent fade a full rect in, so the finished state is the whole image.
  *
  * Progress follows scroll and never goes backwards. The first painting on
- * the page (`immediate`) paints on load. With reduced motion, or before the
+ * the page (`immediate`) lays a first wash on load, then follows the scroll. With reduced motion, or before the
  * script runs on a phone that blocks it, the image is simply shown.
  */
 
@@ -98,21 +98,28 @@ export default function PaintReveal({ src, alt, w, h, seed, immediate }: Props) 
     const measure = () => {
       const r = svg.getBoundingClientRect();
       const vh = window.innerHeight;
-      // Starts as the painting's top clears the bottom of the screen and
-      // finishes once it has climbed to about a third of the way down.
-      const p = (vh * 0.98 - r.top) / (vh * 0.62);
+      let p: number;
+      if (immediate) {
+        // Already on screen at load: a first wash paints in straight away,
+        // and the rest follows the scroll.
+        p = 0.5 + window.scrollY / (vh * 0.8);
+      } else {
+        // Starts as the painting's top comes up past the bottom of the
+        // screen, and finishes only when its bottom edge has climbed to just
+        // under halfway: about a screen of scrolling, one stroke at a time.
+        p = (vh * 0.94 - r.top) / (vh * 0.49 + r.height);
+      }
       target = Math.max(target, Math.min(1, Math.max(0, p)));
     };
 
-    // A whole painting takes at least this long, however fast the scroll,
-    // so every stroke is seen going down.
-    const PER_SECOND = 0.65;
-
+    // Follow the scroll closely, with a short ease so strokes glide rather
+    // than jump between scroll events.
     const tick = (now: number) => {
       frame = 0;
       const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60;
       last = now;
-      shown = Math.min(target, shown + Math.max(dt * 0.08, Math.min(dt * PER_SECOND, (target - shown) * 0.12)));
+      shown += (target - shown) * Math.min(1, dt * 7);
+      if (target - shown < 0.001) shown = target;
       paint(shown);
       if (shown < target) frame = requestAnimationFrame(tick);
       else last = 0;
@@ -125,7 +132,6 @@ export default function PaintReveal({ src, alt, w, h, seed, immediate }: Props) 
 
     paint(0);
     svg.dataset.ready = "";
-    if (immediate) target = 1;
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
