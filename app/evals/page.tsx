@@ -108,6 +108,28 @@ function finished(w: LedgerWeek) {
   return Date.parse(`${w.week_of}T00:00:00Z`) + 7 * 86_400_000 <= Date.now();
 }
 
+const basePath = process.env.BASE_PATH || "";
+
+// Painted vignettes, one per section, generated in the style of two
+// reference paintings Elliot picked. They sit behind the cards and the cards
+// overlap their lower edge, so the page reads as one surface.
+function Painting({
+  name,
+  side,
+  alt,
+}: {
+  name: string;
+  side: "left" | "right" | "hero" | "aside";
+  alt: string;
+}) {
+  return (
+    <figure className={`ev-paint ev-paint-${side} rv-develop`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={`${basePath}/evals/${name}.webp`} alt={alt} loading="lazy" />
+    </figure>
+  );
+}
+
 function Cards({ items }: { items: Check[] }) {
   // Three cards sit three across; two-across would leave one alone.
   const across = items.length === 3 ? "ev-three" : "ev-calls";
@@ -154,6 +176,14 @@ export default function Evals() {
           </header>
         </Reveal>
 
+        <Reveal>
+          <Painting
+            name="watch"
+            side="hero"
+            alt="A painted fire lookout tower above a pine forest, one person at the rail looking out through binoculars."
+          />
+        </Reveal>
+
         <nav className="built-index" aria-label="On this page">
           {SECTIONS.map((s) => (
             <a key={s.id} href={`#${s.id}`}>
@@ -167,6 +197,11 @@ export default function Evals() {
             01 · {WRONG.short}
           </h2>
           <p className="sec-title rv-settle">Checking the model.</p>
+          <Painting
+            name="marking"
+            side="right"
+            alt="A painted teacher at a wooden table under a tree, marking a tall stack of exam papers by hand."
+          />
         </Reveal>
         <Reveal>
           <Cards items={MODEL} />
@@ -179,6 +214,11 @@ export default function Evals() {
           <p className="sec-title rv-settle">
             Checking the person who checks it.
           </p>
+          <Painting
+            name="lifeguard"
+            side="left"
+            alt="A painted lifeguard on a tall white chair at the edge of a lake, watching a few swimmers."
+          />
         </Reveal>
         <Reveal>
           <Cards items={REVIEWER} />
@@ -193,6 +233,11 @@ export default function Evals() {
             Agents keep this site current and run my own work. These rules
             hold whatever the model says, and code enforces them.
           </p>
+          <Painting
+            name="hives"
+            side="aside"
+            alt="A painted beekeeper lifting a frame from one hive in a fenced row of hives."
+          />
         </Reveal>
         <Reveal>
           <ol className="loop-rules rv-settle">
@@ -272,6 +317,11 @@ export default function Evals() {
             04 · {AGENTS.short}
           </h2>
           <p className="sec-title rv-settle">Checking myself.</p>
+          <Painting
+            name="pond"
+            side="left"
+            alt="A painted figure crouched at the edge of a still pond, looking at their own reflection."
+          />
         </Reveal>
         <Reveal>
           <ul className="ev-places rv-settle">

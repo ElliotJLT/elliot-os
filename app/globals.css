@@ -8216,3 +8216,64 @@ footer .foot-base a {
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* /evals paintings. Each sits behind its section and the cards overlap its
+   lower edge; right-hand ones also rise beside the short section title. */
+.ev-paint {
+  margin: 0 0 -72px;
+  position: relative;
+  z-index: 0;
+  pointer-events: none;
+}
+.ev-paint img {
+  display: block;
+  width: min(500px, 78%);
+  height: auto;
+}
+.ev-paint-right img {
+  margin-left: auto;
+}
+.ev-paint-right {
+  margin-top: -120px;
+}
+.ev-paint-left {
+  margin-top: 4px;
+}
+.ev-paint-hero {
+  margin: -96px 0 -56px;
+}
+.ev-paint-hero img {
+  width: min(620px, 86%);
+  margin-left: auto;
+}
+.mai .ev-steps,
+.mai .loop-rules,
+.mai .ev-places,
+.mai .built-index,
+.mai .loop-ledger-panel {
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 720px) {
+  .ev-paint,
+  .ev-paint-right,
+  .ev-paint-left {
+    margin: 8px 0 -36px;
+  }
+  .ev-paint img,
+  .ev-paint-hero img {
+    width: 100%;
+  }
+  .ev-paint-hero {
+    margin: 0 0 -24px;
+  }
+}
+/* A painting followed by plain text (no card behind it) must not run under
+   the words, so it keeps its own space. */
+.ev-paint-aside {
+  margin: -8px 0 12px;
+}
+.ev-paint-aside img {
+  margin-left: auto;
+  width: min(440px, 70%);
+}
