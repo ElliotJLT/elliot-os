@@ -8254,6 +8254,12 @@ footer .foot-base a {
 .ev-flow > li {
   margin: 0 0 34px;
 }
+/* Set by WrapTidy on a check that would run past the painting's bottom:
+   it stays a column beside the painting instead of finishing at the left
+   margin mid-sentence. */
+.ev-flow > li.ev-straddle {
+  display: flow-root;
+}
 .ev-flow h3 {
   font-family: var(--serif);
   font-size: 22px;
