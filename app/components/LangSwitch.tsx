@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { LANGS, apply, collect, type Lang } from "@/lib/i18n";
+import { LANGS, animating, apply, collect, type Lang } from "@/lib/i18n";
 import { INTROS } from "@/lib/intros";
 
 const basePath = process.env.BASE_PATH || "";
@@ -42,28 +42,42 @@ export default function LangSwitch() {
     ob?.takeRecords();
   }, []);
 
+  // A language picked by hand plays the Matrix switch; the stored language
+  // on load, and anything React renders later, just switches.
+  const runAnimated = useCallback(() => {
+    const ob = observer.current;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    apply(current.current, {
+      animate: !reduce,
+      // Catch anything React rendered while the words were moving.
+      onDone: () => run(),
+    });
+    ob?.takeRecords();
+  }, [run]);
+
   const choose = useCallback(
-    async (l: Lang) => {
+    async (l: Lang, animate = false) => {
       const meta = LANGS.find((x) => x.code === l)!;
       const dict = await load(l);
       current.current = dict;
       document.documentElement.lang = meta.tag;
       document.documentElement.dataset.lang = l;
-      document.documentElement.classList.add("lang-swap");
-      run();
-      window.setTimeout(() => document.documentElement.classList.remove("lang-swap"), 260);
+      if (animate) runAnimated();
+      else run();
       setLang(l);
       try {
         localStorage.setItem("lang", l);
       } catch {}
     },
-    [load, run],
+    [load, run, runAnimated],
   );
 
   // Keep the page in the chosen language as React renders new content.
   useEffect(() => {
     let frame = 0;
     const ob = new MutationObserver(() => {
+      // The scramble writes to text nodes every frame; those aren't news.
+      if (animating()) return;
       if (!Object.keys(current.current).length) return;
       if (frame) return;
       frame = requestAnimationFrame(() => {
@@ -167,8 +181,8 @@ export default function LangSwitch() {
                 className="lang-pick"
                 lang={l.tag}
                 onClick={() => {
-                  choose(l.code);
                   setOpen(false);
+                  if (l.code !== lang) choose(l.code, true);
                 }}
               >
                 <span className="lang-native">{l.native}</span>

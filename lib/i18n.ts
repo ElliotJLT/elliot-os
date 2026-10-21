@@ -50,9 +50,12 @@ const TAG = /(<\/?\d+>)/;
 // Each text node we write to remembers its English (o) and what we set (s).
 // If React has since written new English over it, the value no longer
 // matches s, and that new value becomes the original.
-type Tracked = Text & { __o?: string; __s?: string };
+// While a node is mid-animation (a, see scramble below) its visible value is
+// neither, so it answers with its English.
+type Tracked = Text & { __o?: string; __s?: string; __a?: boolean };
 
 function orig(t: Tracked): string {
+  if (t.__a) return t.__o ?? "";
   const v = t.nodeValue ?? "";
   if (t.__s !== undefined && v === t.__s) return t.__o ?? v;
   t.__o = v;
@@ -200,7 +203,15 @@ function titleOriginal(): string {
 
 const touched = new Set<Tracked>();
 
+// While a switch is animated, every text node we change records what it
+// showed before, so the animation can run from the old words to the new.
+let journal: Map<Tracked, string> | null = null;
+const note = (node: Tracked) => {
+  if (journal && !journal.has(node)) journal.set(node, node.nodeValue ?? "");
+};
+
 function set(node: Tracked, v: string) {
+  note(node);
   if (node.__o === undefined) node.__o = node.nodeValue ?? "";
   node.nodeValue = v;
   node.__s = v;
@@ -273,7 +284,24 @@ function writeUnit(u: Unit, t: string): boolean {
 }
 
 /** Puts the page into `dict`'s language. An empty dict restores English. */
-export function apply(dict: Record<string, string>, root: Element = document.body) {
+export function apply(
+  dict: Record<string, string>,
+  opts: { animate?: boolean; onDone?: () => void } = {},
+  root: Element = document.body,
+) {
+  finish();
+  if (opts.animate) journal = new Map();
+  try {
+    write(dict, root);
+  } finally {
+    const j = journal;
+    journal = null;
+    if (j && j.size) scramble(j, opts.onDone);
+    else opts.onDone?.();
+  }
+}
+
+function write(dict: Record<string, string>, root: Element) {
   // Back to English first, so every key is read from the original.
   restore();
   if (!Object.keys(dict).length) return;
@@ -305,7 +333,10 @@ export function apply(dict: Record<string, string>, root: Element = document.bod
 /** Puts every text node and attribute we changed back to its English. */
 export function restore() {
   for (const node of touched) {
-    if (node.__s !== undefined && node.nodeValue === node.__s) node.nodeValue = node.__o ?? "";
+    if (node.__s !== undefined && node.nodeValue === node.__s) {
+      note(node);
+      node.nodeValue = node.__o ?? "";
+    }
     node.__s = undefined;
   }
   touched.clear();
@@ -320,4 +351,107 @@ export function restore() {
   });
   if (docTitle?.s !== undefined && document.title === docTitle.s) document.title = docTitle.o;
   if (docTitle) docTitle.s = undefined;
+}
+
+// ---------------------------------------------------------------- scramble
+// The switch, Matrix-style: each visible word flickers through random glyphs
+// and resolves into its new spelling, letters settling left to right, lines
+// settling top to bottom. Text off screen just changes. Bookkeeping is done
+// before this runs; it only plays the visible value from old to new and
+// always ends on the real one.
+
+const LATIN = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎ";
+const HAN = "的一是不了人我在有他这中大来上国个到说们为子和你地出道也时年得就那要下以生会自着去过家学对可里后小心多天能好都然没日起发成事只作想看文开手用主行方又如前所本见经头面公同";
+const CJK = /[\u3400-\u9fff\uf900-\ufaff]/;
+
+let running: { nodes: { node: Tracked; final: string }[]; frame: number; done?: () => void } | null =
+  null;
+
+export const animating = () => running !== null;
+
+function finish() {
+  if (!running) return;
+  cancelAnimationFrame(running.frame);
+  for (const { node, final } of running.nodes) {
+    node.__a = false;
+    node.nodeValue = final;
+  }
+  const done = running.done;
+  running = null;
+  done?.();
+}
+
+function scramble(journal: Map<Tracked, string>, done?: () => void) {
+  const vh = window.innerHeight;
+  type Job = {
+    node: Tracked;
+    from: string;
+    final: string;
+    delay: number;
+    resolve: number[];
+    end: number;
+  };
+  const jobs: Job[] = [];
+  for (const [node, from] of journal) {
+    const final = node.nodeValue ?? "";
+    if (from === final || !node.isConnected || !/\S/.test(final + from)) continue;
+    const box = node.parentElement?.getBoundingClientRect();
+    if (!box || box.height === 0 || box.bottom < 0 || box.top > vh) continue;
+    const delay = Math.min(1, Math.max(0, box.top / vh)) * 320;
+    const dur = 380 + Math.min(final.length, 120) * 4;
+    const resolve = Array.from(final, (_, i) => {
+      const at = final.length > 1 ? i / (final.length - 1) : 0;
+      return delay + at * dur * 0.65 + Math.random() * dur * 0.35;
+    });
+    jobs.push({ node, from, final, delay, resolve, end: Math.max(delay, ...resolve) });
+  }
+  if (!jobs.length) {
+    done?.();
+    return;
+  }
+  for (const j of jobs) j.node.__a = true;
+  const start = performance.now();
+  let tick = 0;
+  const frame = (now: number) => {
+    const t = now - start;
+    // New glyphs every other frame: fast enough to read as rain, slow
+    // enough to see.
+    const shuffle = tick++ % 2 === 0;
+    let live = false;
+    for (const j of jobs) {
+      if (t < j.delay) {
+        live = true;
+        continue;
+      }
+      if (t >= j.end) {
+        if (j.node.nodeValue !== j.final) j.node.nodeValue = j.final;
+        j.node.__a = false;
+        continue;
+      }
+      live = true;
+      if (!shuffle) continue;
+      let out = "";
+      const chars = Array.from(j.final);
+      for (let i = 0; i < chars.length; i++) {
+        const c = chars[i];
+        if (t >= j.resolve[i] || /\s/.test(c)) out += c;
+        else {
+          const pool = CJK.test(c) ? HAN : LATIN;
+          out += pool[Math.floor(Math.random() * pool.length)];
+        }
+      }
+      j.node.nodeValue = out;
+    }
+    if (live && running) running.frame = requestAnimationFrame(frame);
+    else {
+      const d = running?.done;
+      running = null;
+      d?.();
+    }
+  };
+  running = {
+    nodes: jobs.map((j) => ({ node: j.node, final: j.final })),
+    frame: requestAnimationFrame(frame),
+    done,
+  };
 }

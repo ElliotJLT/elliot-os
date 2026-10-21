@@ -8539,17 +8539,6 @@ footer .foot-base a {
   color: var(--faint);
 }
 
-/* While the page swaps language, a quick dip so the change reads as one
-   move rather than words flickering one by one. */
-html.lang-swap main,
-html.lang-swap footer {
-  animation: lang-dip 0.26s ease-out;
-}
-@keyframes lang-dip {
-  40% {
-    opacity: 0.35;
-  }
-}
 /* Hidden until the stored language is applied; shown after a beat if the
    script never runs. */
 html.i18n-pending main,
@@ -8574,9 +8563,7 @@ html[data-lang="zh"] li {
 }
 @media (prefers-reduced-motion: reduce) {
   .lang-code,
-  .lang-panel,
-  html.lang-swap main,
-  html.lang-swap footer {
+  .lang-panel {
     animation: none;
   }
 }
