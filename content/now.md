@@ -1,9 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-10-20, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 10 commits across 3 repos.*
+*Shipping log for the 7 days to 2026-10-21, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 10 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 8 commits. "ledger: 2026-10-19" (5a7f8e2), "Bring /loops up to date, in plain English (#79)" (faf2059), "ledger: 2026-10-19" (0a200c9) and 5 more
-- **[lease-citations](https://github.com/ElliotJLT/lease-citations)**: 1 commit. "Update README" (d872062)
-- **[ElliotJLT](https://github.com/ElliotJLT/ElliotJLT)**: 1 commit. "Update README" (cced4fd)
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 10 commits. "/evals: keep each check in one piece beside its painting (#83)" (427a8c4), "/evals: paintings stay painted when you scroll back up (#82)" (3ea1187), "Fold /loops into /evals, with paintings that paint in on scroll (#81)" (6c65690) and 7 more
 <!-- agent:end -->
 
 ## by hand
