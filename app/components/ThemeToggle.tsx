@@ -42,7 +42,9 @@ export default function ThemeToggle() {
       aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
       title={dark ? "light the candle" : "blow it out"}
     >
-      <svg viewBox="0 0 20 30" aria-hidden="true">
+      {/* The box is the candle body; the flame and smoke spill out above it, so
+          the body lines up with the nav text whether it is lit or not. */}
+      <svg viewBox="0 14 20 14" aria-hidden="true">
         <g className="candle-smoke">
           <path d="M10 12 C8.4 10 11.6 8.4 10 6 C9 4.4 10.6 3 9.6 1.2" pathLength={1} />
           <path d="M10.3 12 C12.1 10.2 9.5 8 11.7 5.8 C12.7 4.7 11.7 3.4 12.6 2.2" pathLength={1} />
