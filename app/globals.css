@@ -8574,7 +8574,8 @@ html[data-lang="zh"] li {
 }
 
 /* ================================================================ candle
-   The theme toggle (ThemeToggle.tsx). Lit in light mode, out in dark. */
+   The theme toggle (ThemeToggle.tsx). Lit in dark mode, like lighting a
+   candle as the room dims; out in light. */
 .theme-toggle.candle:hover {
   transform: none;
 }
@@ -8598,8 +8599,12 @@ html[data-lang="zh"] li {
   transform-box: fill-box;
   transform-origin: 50% 100%;
 }
-.candle[data-state="dark"] .candle-flame {
+.candle[data-state="light"] .candle-flame {
   transform: scale(0);
+}
+/* A little warmth around the flame once the room is dark. */
+.candle[data-state="dark"] .candle-flame {
+  filter: drop-shadow(0 0 3px rgba(234, 210, 138, 0.55));
 }
 .candle-smoke path {
   stroke: var(--faint);
@@ -8609,7 +8614,7 @@ html[data-lang="zh"] li {
   opacity: 0;
 }
 
-/* Going dark: the flame shrinks into the wick, then the smoke rises. */
+/* Going light: the flame shrinks into the wick, then the smoke rises. */
 .candle[data-anim="out"] .candle-flame {
   animation: candle-out 150ms ease-in forwards;
 }
@@ -8653,7 +8658,7 @@ html[data-lang="zh"] li {
   }
 }
 
-/* Going light: the flame pops back and flickers. */
+/* Going dark: the flame flickers to life. */
 .candle[data-anim="in"] .candle-flame {
   animation: candle-in 460ms ease-out;
 }

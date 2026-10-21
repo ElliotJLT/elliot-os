@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Light and dark as a candle. Light mode: the candle is lit. Going dark,
- * the flame shrinks into the wick (150ms), then three thin wisps of smoke
- * draw upward (stroke-dashoffset, 400ms), drift and fade. Going light, the
- * flame pops back with a flicker (1.0 → 1.1 → 0.95 → 1.0). The animation
- * only plays on a click; on load it just shows the current state.
+ * Light and dark as a candle, lit as the room goes dark. Going dark, the
+ * flame flickers to life (1.0 → 1.1 → 0.95 → 1.0). Going light, it shrinks
+ * into the wick (150ms), then three thin wisps of smoke draw upward
+ * (stroke-dashoffset, 400ms), drift and fade. The animation only plays on a
+ * click; on load it just shows the current state.
  */
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<string | null>(null);
@@ -26,7 +26,7 @@ export default function ThemeToggle() {
       localStorage.setItem("theme", next);
     } catch {}
     setTheme(next);
-    setAnim(next === "dark" ? "out" : "in");
+    setAnim(next === "dark" ? "in" : "out");
     window.clearTimeout(timer.current);
     timer.current = window.setTimeout(() => setAnim(null), 1400);
   }
@@ -40,7 +40,7 @@ export default function ThemeToggle() {
       data-state={theme ?? "light"}
       data-anim={anim ?? undefined}
       aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-      title={dark ? "light the candle" : "blow it out"}
+      title={dark ? "blow it out" : "light the candle"}
     >
       {/* The box is the candle body; the flame and smoke spill out above it, so
           the body lines up with the nav text whether it is lit or not. */}
