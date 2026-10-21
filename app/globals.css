@@ -8685,3 +8685,35 @@ html[data-lang="zh"] li {
     animation: none;
   }
 }
+
+/* ======================================================== nav + footer fit
+   Nav: the items sit 22px apart (the flex gap), but the language button and
+   the candle carry their own padding for a bigger hit area, which made the
+   visible gaps 30, 35 and 29px. Negative margins take that padding back out
+   of the spacing without shrinking what you can click. */
+.mai-nav-inner .lang {
+  margin-left: -8px;
+  margin-right: -6px;
+}
+.mai-nav-inner .theme-toggle {
+  margin-left: -7px;
+  margin-right: -7px;
+}
+
+/* Footer: on wide screens it ran 48px from each edge while the page above
+   sits in the 1120px column, so nothing lined up. Same column now. */
+@media (min-width: 1200px) {
+  footer > .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 26px;
+  }
+}
+/* Elsewhere: the icon row is taller than a text row, which put llms.txt
+   between the other columns' lines. Top-aligned with the first row, and
+   llms.txt on the third (26px rows, 9px apart: 70px to the third row). */
+@media (min-width: 700px) {
+  footer .foot-col .icorow {
+    margin: 0 0 21px;
+  }
+}
