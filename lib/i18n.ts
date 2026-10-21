@@ -360,7 +360,9 @@ export function restore() {
 // before this runs; it only plays the visible value from old to new and
 // always ends on the real one.
 
-const LATIN = "ABCDEFGHJKLMNPQRSTUVWXYZ0123456789ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎ";
+// The rain is drawn from the switcher's own scripts: Latin with the accents
+// French and Spanish use, digits, and Chinese characters for Chinese.
+const LATIN = "ABCDEFGHJKLMNPQRSTUVWXYZabdefghkmnpqrstuyzÉÈÀÇÑéèêàçñüô0123456789";
 const HAN = "的一是不了人我在有他这中大来上国个到说们为子和你地出道也时年得就那要下以生会自着去过家学对可里后小心多天能好都然没日起发成事只作想看文开手用主行方又如前所本见经头面公同";
 const CJK = /[\u3400-\u9fff\uf900-\ufaff]/;
 
