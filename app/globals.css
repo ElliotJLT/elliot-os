@@ -8343,3 +8343,245 @@ footer .foot-base a {
     margin-top: 64px;
   }
 }
+
+/* ============================================================ languages
+   The switch in the nav pill: a small globe and the current language's
+   code, opening a short list. Each language has a play button for Elliot's
+   spoken introduction when the recording exists. */
+.lang {
+  position: relative;
+  display: inline-flex;
+}
+.lang-trigger {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--faint);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 4px 6px;
+  border-radius: 999px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  transition: color 0.2s, background 0.2s;
+}
+.lang-trigger:hover,
+.lang-trigger[aria-expanded="true"] {
+  color: var(--ink);
+  background: var(--bg-2);
+}
+.lang-globe {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.lang-trigger:hover .lang-globe {
+  transform: rotate(-24deg);
+}
+/* Keyed on the language, so each change rolls the new code in. */
+.lang-code {
+  display: inline-block;
+  min-width: 2ch;
+  animation: lang-roll 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes lang-roll {
+  from {
+    opacity: 0;
+    transform: translateY(70%);
+  }
+}
+
+.lang-panel {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: -8px;
+  z-index: 40;
+  width: 236px;
+  padding: 8px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(52, 46, 41, 0.04),
+    0 20px 50px rgba(52, 46, 41, 0.14);
+  animation: lang-open 0.18s ease-out;
+  transform-origin: top right;
+}
+@keyframes lang-open {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+}
+.lang-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.lang-row:hover,
+.lang-row[data-on] {
+  background: var(--bg-2);
+}
+.lang-pick {
+  flex: 1;
+  appearance: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 10px 12px;
+  color: var(--ink);
+}
+.lang-native {
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.1;
+}
+.lang-english {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--faint);
+}
+.lang-row[data-on] .lang-native::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 8px;
+  vertical-align: 3px;
+  border-radius: 50%;
+  background: var(--accent-ink);
+}
+
+/* The play button: a disc that fills like a clock as the recording plays,
+   with three little bars bouncing while it talks. */
+.lang-play {
+  --p: 0;
+  appearance: none;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  margin-right: 6px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: conic-gradient(var(--accent-ink) calc(var(--p) * 1turn), var(--line) 0);
+  position: relative;
+  transition: transform 0.18s ease-out;
+}
+.lang-play::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: var(--paper);
+}
+.lang-play > * {
+  position: relative;
+}
+.lang-play:hover {
+  transform: scale(1.06);
+}
+.lang-play svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+.lang-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+.lang-bars i {
+  width: 3px;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent-ink);
+  animation: lang-bar 0.9s ease-in-out infinite;
+  transform-origin: bottom;
+}
+.lang-bars i:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lang-bars i:nth-child(3) {
+  animation-delay: -0.6s;
+}
+@keyframes lang-bar {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.lang-note {
+  margin: 6px 12px 4px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  color: var(--faint);
+}
+
+/* While the page swaps language, a quick dip so the change reads as one
+   move rather than words flickering one by one. */
+html.lang-swap main,
+html.lang-swap footer {
+  animation: lang-dip 0.26s ease-out;
+}
+@keyframes lang-dip {
+  40% {
+    opacity: 0.35;
+  }
+}
+/* Hidden until the stored language is applied; shown after a beat if the
+   script never runs. */
+html.i18n-pending main,
+html.i18n-pending footer,
+html.i18n-pending .mai-links {
+  opacity: 0;
+  animation: i18n-reveal 0s 1.2s forwards;
+}
+@keyframes i18n-reveal {
+  to {
+    opacity: 1;
+  }
+}
+/* Chinese reads better a touch looser and in a CJK face. */
+html[data-lang="zh"] body {
+  font-family: var(--sans, inherit), "PingFang SC", "Hiragino Sans GB",
+    "Noto Sans SC", "Microsoft YaHei", sans-serif;
+}
+html[data-lang="zh"] p,
+html[data-lang="zh"] li {
+  line-height: 1.75;
+}
+@media (prefers-reduced-motion: reduce) {
+  .lang-code,
+  .lang-panel,
+  html.lang-swap main,
+  html.lang-swap footer {
+    animation: none;
+  }
+}
+@media (max-width: 720px) {
+  .lang-panel {
+    right: -64px;
+  }
+}

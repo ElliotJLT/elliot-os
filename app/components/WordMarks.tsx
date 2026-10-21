@@ -5,7 +5,7 @@
 // The v is already a tick: on hover it becomes one and draws once.
 export function EvalsWord({ first = "e" }: { first?: string }) {
   return (
-    <span className="nav-loops-label">
+    <span className="nav-loops-label" data-i18n-skip="">
       <span aria-hidden="true">{first}</span>
       <span className="nav-loops-core" aria-hidden="true">
         <span className="nav-loops-plain">v</span>

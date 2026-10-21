@@ -5,6 +5,7 @@ import NavLinks from "./components/NavLinks";
 import { EvalsWord } from "./components/WordMarks";
 import ThemeToggle from "./components/ThemeToggle";
 import MobileMenu from "./components/MobileMenu";
+import LangSwitch from "./components/LangSwitch";
 import NavAutoHide from "./components/NavAutoHide";
 import { IconLink } from "./components/Icons";
 import { Pill } from "./components/Frame";
@@ -59,7 +60,10 @@ export const metadata: Metadata = {
 };
 
 // Runs before paint so the stored theme never flashes.
-const themeInit = `(function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}e.dataset.theme=t;localStorage.removeItem("palette")}catch(_){}})()`;
+// Also: if a language other than English was chosen, hide the page until
+// the switch has translated it (LangSwitch removes i18n-pending), so English
+// doesn't flash first. A timeout in CSS shows it anyway if that never runs.
+const themeInit = `(function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}e.dataset.theme=t;localStorage.removeItem("palette");var l=localStorage.getItem("lang");if(l&&l!=="en"){e.classList.add("i18n-pending")}}catch(_){}})()`;
 
 export default function RootLayout({
   children,
@@ -82,6 +86,7 @@ export default function RootLayout({
             <nav className="mai-links">
               <NavLinks basePath={basePath} />
             </nav>
+            <LangSwitch />
             <ThemeToggle />
             <MobileMenu />
             <NavAutoHide />
