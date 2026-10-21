@@ -67,6 +67,13 @@ and who decided?
   Elliot's. Do not soften, inflate, or reword numbers without asking.
 - `lib/github.ts` and `mcp/server.mjs` each carry a featured-repo list.
   Keep them in sync, and check a repo exists before adding it.
+- The site is translated in the browser (lib/i18n.ts, the globe in the
+  nav) from `public/i18n/{fr,es,zh}.json`. After changing copy, run
+  `npm run build && npm run i18n` (needs ANTHROPIC_API_KEY; only new
+  strings are sent, so it costs pennies). Untranslated strings show in
+  English, so nothing breaks if you forget, it just goes half-translated.
+  Hand edits to the JSON are kept on later runs. Mark anything that must
+  never be translated with `data-i18n-skip`.
 - Main has no branch protection and the agent pushes to it daily. Rebase
   onto `origin/main` before merging anything that touches `content/now.md`
   or `data/*.json`.
@@ -80,3 +87,6 @@ and who decided?
 - `scripts/` the two agents plus `fetch-media.mjs`; `evals/` their cases
 - `mcp/` zero-dependency MCP server over stdio exposing the site's data
 - `public/llms.txt` the machine-readable profile agents read first
+- `i18n/source.json` every string the site renders (from
+  `scripts/i18n-collect.mjs`); `public/i18n/` the translations;
+  `docs/intro-scripts.md` the spoken intros, wired up in `lib/intros.ts`

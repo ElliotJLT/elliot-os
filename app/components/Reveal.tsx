@@ -103,7 +103,7 @@ export default function Reveal({
  */
 export function Words({ text, className }: { text: string; className?: string }) {
   return (
-    <span className={className}>
+    <span className={className} data-i18n-words="">
       {text.split(" ").map((w, i) => (
         <span
           key={`${w}-${i}`}
@@ -126,7 +126,7 @@ export function Words({ text, className }: { text: string; className?: string })
 export function RiseWords({ text }: { text: string }) {
   const words = text.split(" ");
   return (
-    <span aria-hidden="true">
+    <span aria-hidden="true" data-i18n-words="">
       {words.map((w, i) => (
         <span key={`${w}-${i}`}>
           <span className="rise-clip">
