@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-10-21, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 10 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-10-22, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 15 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 10 commits. "/evals: keep each check in one piece beside its painting (#83)" (427a8c4), "/evals: paintings stay painted when you scroll back up (#82)" (3ea1187), "Fold /loops into /evals, with paintings that paint in on scroll (#81)" (6c65690) and 7 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 15 commits. "Footer: built with Claude, not by (#87)" (3b21e86), "Nav and footer: even gaps, one column, built by Claude (#86)" (a4fa443), "ledger: 2026-10-22" (880966f) and 12 more
 <!-- agent:end -->
 
 ## by hand
