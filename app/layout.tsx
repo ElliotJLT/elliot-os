@@ -169,7 +169,7 @@ export default function RootLayout({
                 </a>
                 <a className="foot-built" href="https://claude.com/claude-code">
                   <ClaudeBuilder />
-                  built by Claude
+                  built with Claude
                 </a>
               </span>
             </div>

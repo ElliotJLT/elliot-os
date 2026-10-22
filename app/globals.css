@@ -8718,7 +8718,7 @@ html[data-lang="zh"] li {
   }
 }
 
-/* Footer credit: "built by Claude" beside the source link, with a little
+/* Footer credit: "built with Claude" beside the source link, with a little
    pixel builder (ClaudeBuilder.tsx) bobbing and tapping its tools. */
 .foot-base-links {
   display: inline-flex;
