@@ -6,6 +6,7 @@ import { EvalsWord } from "./components/WordMarks";
 import ThemeToggle from "./components/ThemeToggle";
 import MobileMenu from "./components/MobileMenu";
 import LangSwitch from "./components/LangSwitch";
+import ClaudeBuilder from "./components/ClaudeBuilder";
 import NavAutoHide from "./components/NavAutoHide";
 import { IconLink } from "./components/Icons";
 import { Pill } from "./components/Frame";
@@ -162,9 +163,15 @@ export default function RootLayout({
               </nav>
             </div>
             <div className="foot-base">
-              <a href="https://github.com/ElliotJLT/elliot-os">
-                source for this site
-              </a>
+              <span className="foot-base-links">
+                <a href="https://github.com/ElliotJLT/elliot-os">
+                  source for this site
+                </a>
+                <a className="foot-built" href="https://claude.com/claude-code">
+                  <ClaudeBuilder />
+                  built by Claude
+                </a>
+              </span>
             </div>
           </div>
         </footer>

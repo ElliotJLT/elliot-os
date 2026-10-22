@@ -8717,3 +8717,68 @@ html[data-lang="zh"] li {
     margin: 0 0 21px;
   }
 }
+
+/* Footer credit: "built by Claude" beside the source link, with a little
+   pixel builder (ClaudeBuilder.tsx) bobbing and tapping its tools. */
+.foot-base-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 22px;
+}
+.foot-built {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.claude-builder {
+  width: 27px;
+  height: 18px;
+  overflow: visible;
+}
+.cb-all {
+  animation: cb-bob 0.9s steps(1) infinite;
+}
+.cb-wrench {
+  animation: cb-tap 0.9s steps(1) infinite;
+}
+.cb-driver {
+  animation: cb-tap 0.9s steps(1) infinite 0.45s;
+}
+.cb-eyes {
+  animation: cb-blink 4.2s steps(1) infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+/* Hover: it works faster. */
+.foot-built:hover .cb-all,
+.foot-built:hover .cb-wrench,
+.foot-built:hover .cb-driver {
+  animation-duration: 0.4s;
+}
+.foot-built:hover .cb-driver {
+  animation-delay: 0.2s;
+}
+@keyframes cb-bob {
+  50% {
+    transform: translateY(-0.6px);
+  }
+}
+@keyframes cb-tap {
+  50% {
+    transform: translateY(-1px);
+  }
+}
+@keyframes cb-blink {
+  94% {
+    transform: scaleY(0.2);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cb-all,
+  .cb-wrench,
+  .cb-driver,
+  .cb-eyes {
+    animation: none;
+  }
+}
