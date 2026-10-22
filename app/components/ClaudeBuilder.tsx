@@ -1,4 +1,4 @@
-// A small pixel builder for the footer credit: an orange critter in a hard
+// A small pixel builder for the footer credit ("built with Claude"): an orange critter in a hard
 // hat with a wrench and a screwdriver. Drawn here as an SVG grid (not the
 // stock image it was modelled on), one rect per pixel run, so it stays crisp
 // at any size. CSS gives it a two-step bob, alternating tool taps and an
