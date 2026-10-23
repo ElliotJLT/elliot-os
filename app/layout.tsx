@@ -167,10 +167,7 @@ export default function RootLayout({
                 <a href="https://github.com/ElliotJLT/elliot-os">
                   source for this site
                 </a>
-                <a className="foot-built" href="https://claude.com/claude-code">
-                  <ClaudeBuilder />
-                  built with Claude
-                </a>
+                <ClaudeBuilder />
               </span>
             </div>
           </div>

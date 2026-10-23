@@ -8718,46 +8718,65 @@ html[data-lang="zh"] li {
   }
 }
 
-/* Footer credit: "built with Claude" beside the source link, with a little
-   pixel builder (ClaudeBuilder.tsx) bobbing and tapping its tools. */
+/* Footer: a little pixel character beside the source link that changes
+   outfit when clicked (ClaudeBuilder.tsx). */
 .foot-base-links {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px 22px;
 }
-.foot-built {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+.cb {
+  appearance: none;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-grid;
+  place-items: center;
+  /* A bigger target than the sprite. */
+  min-width: 36px;
+  min-height: 32px;
 }
-.claude-builder {
-  width: 27px;
-  height: 18px;
+.cb svg {
+  width: 30px;
+  height: 23px;
   overflow: visible;
 }
-.cb-all {
+.cb:focus-visible {
+  outline: 1px dashed var(--foot-h, currentColor);
+  outline-offset: 2px;
+}
+.cb-eyes,
+.cb-all,
+.cb-outfit {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+.cb-eyes {
+  transform-origin: 50% 50%;
+}
+.cb-cloud {
+  opacity: 0;
+}
+
+/* Idle: a two-step bob, tools tapping in turn, a blink now and then. */
+.cb[data-phase="idle"] .cb-all {
   animation: cb-bob 0.9s steps(1) infinite;
 }
-.cb-wrench {
+.cb[data-phase="idle"] .cb-left {
   animation: cb-tap 0.9s steps(1) infinite;
 }
-.cb-driver {
+.cb[data-phase="idle"] .cb-right {
   animation: cb-tap 0.9s steps(1) infinite 0.45s;
 }
 .cb-eyes {
   animation: cb-blink 4.2s steps(1) infinite;
-  transform-box: fill-box;
-  transform-origin: 50% 50%;
 }
-/* Hover: it works faster. */
-.foot-built:hover .cb-all,
-.foot-built:hover .cb-wrench,
-.foot-built:hover .cb-driver {
-  animation-duration: 0.4s;
-}
-.foot-built:hover .cb-driver {
-  animation-delay: 0.2s;
+.cb:hover .cb-all,
+.cb:hover .cb-left,
+.cb:hover .cb-right {
+  animation-duration: 0.45s;
 }
 @keyframes cb-bob {
   50% {
@@ -8774,11 +8793,99 @@ html[data-lang="zh"] li {
     transform: scaleY(0.2);
   }
 }
+
+/* The change. Out: a puff of cloud grows over it while it spins round.
+   In: the cloud thins away, the new outfit drops onto its head and it
+   gives a little hop. */
+.cb[data-phase="out"] .cb-all {
+  animation: cb-spin 170ms steps(1) forwards;
+}
+.cb[data-phase="out"] .cb-cloud-s {
+  animation: cb-show 170ms steps(1) forwards;
+}
+.cb[data-phase="out"] .cb-cloud-b {
+  animation: cb-show-late 170ms steps(1) forwards;
+}
+.cb[data-phase="in"] .cb-cloud-b {
+  animation: cb-hide-mid 260ms steps(1) forwards;
+}
+.cb[data-phase="in"] .cb-cloud-s {
+  animation: cb-show-mid 260ms steps(1) forwards;
+}
+.cb[data-phase="in"] .cb-outfit {
+  animation: cb-drop 260ms steps(4) both;
+}
+.cb[data-phase="in"] .cb-all {
+  animation: cb-hop 260ms steps(1);
+}
+@keyframes cb-spin {
+  0% {
+    transform: scaleX(1);
+  }
+  33% {
+    transform: scaleX(-1);
+  }
+  66% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(-1);
+  }
+}
+@keyframes cb-show {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+@keyframes cb-show-late {
+  0% {
+    opacity: 0;
+  }
+  50%,
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes cb-hide-mid {
+  0% {
+    opacity: 1;
+  }
+  35%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes cb-show-mid {
+  0% {
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  70%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes cb-drop {
+  from {
+    transform: translateY(-5px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes cb-hop {
+  60% {
+    transform: translateY(-1.2px);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
-  .cb-all,
-  .cb-wrench,
-  .cb-driver,
-  .cb-eyes {
-    animation: none;
+  .cb *,
+  .cb[data-phase] .cb-all {
+    animation: none !important;
   }
 }
