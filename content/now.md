@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-10-22, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 15 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-10-23, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 16 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 15 commits. "Footer: built with Claude, not by (#87)" (3b21e86), "Nav and footer: even gaps, one column, built by Claude (#86)" (a4fa443), "ledger: 2026-10-22" (880966f) and 12 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 16 commits. "Footer: the pixel character changes outfit on click (#88)" (fb255b7), "ledger: 2026-10-23" (cc47b26), "Footer: built with Claude, not by (#87)" (3b21e86) and 13 more
 <!-- agent:end -->
 
 ## by hand
