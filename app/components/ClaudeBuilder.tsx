@@ -192,7 +192,6 @@ export default function ClaudeBuilder() {
   }
 
   const o = OUTFITS[i];
-  const next = OUTFITS[(i + 1) % OUTFITS.length];
 
   return (
     <button
@@ -200,10 +199,11 @@ export default function ClaudeBuilder() {
       className="cb"
       data-phase={phase}
       onClick={change}
-      aria-label={`Change outfit (now: ${o.name}, next: ${next.name})`}
-      title={`${o.name} · click for ${next.name}`}
-      data-i18n-skip=""
+      aria-label="This site was built with Claude. Click to change its outfit."
     >
+      <span className="cb-tip" aria-hidden="true">
+        This site was built with Claude
+      </span>
       <svg viewBox="0 0 18 14" shapeRendering="crispEdges" aria-hidden="true">
         <g className="cb-all">
           <g className="cb-body">{rects(BODY, 0, 7, (c) => c !== "K")}</g>

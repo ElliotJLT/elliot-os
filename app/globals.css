@@ -8747,6 +8747,32 @@ html[data-lang="zh"] li {
   outline: 1px dashed var(--foot-h, currentColor);
   outline-offset: 2px;
 }
+/* Hover or focus: a small label above it. */
+.cb {
+  position: relative;
+}
+.cb-tip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  translate: -50% 4px;
+  white-space: nowrap;
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: var(--foot-h, #f3df98);
+  color: #1d2420;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.16s ease-out, translate 0.16s ease-out;
+}
+.cb:hover .cb-tip,
+.cb:focus-visible .cb-tip {
+  opacity: 1;
+  translate: -50% 0;
+}
 .cb-eyes,
 .cb-all,
 .cb-outfit {
