@@ -50,11 +50,11 @@
       "captured": 0,
       "briefs": 0,
       "fallbacks": 0,
-      "ticks": 127,
+      "ticks": 167,
       "quiet": 0,
-      "facts_kept": 36,
-      "facts_thrown": 6,
-      "closes": 3,
+      "facts_kept": 42,
+      "facts_thrown": 7,
+      "closes": 5,
       "closes_withheld": 0,
       "incidents": 0
     }
