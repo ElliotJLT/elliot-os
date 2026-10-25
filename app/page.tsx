@@ -67,12 +67,13 @@ export default async function Home() {
               <TrackingPortrait className="band-face rv-develop" />
               <p className="band-sub rv-settle">
                 At Zero Gravity I led the team that took an AI tutor from a
-                30-school beta into 850+ UK schools, marking real A-level past
-                papers at over 99%. The government picked it for its{" "}
+                30-school beta into 850+ UK schools, and its marking accuracy
+                from 67% to over 99% on covered papers. The DfE picked it for{" "}
                 <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
-                  AI Tutoring Tools Pioneers Programme
+                  a programme to reach up to 450,000 disadvantaged pupils a
+                  year
                 </a>
-                , alongside Pearson and ElevenLabs.
+                .
               </p>
               <div className="band-cta rv-settle">
                 <Pill href="/built" tone="cream" arrow>
