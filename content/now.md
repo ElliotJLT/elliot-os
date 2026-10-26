@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-10-25, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 17 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-10-26, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 16 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 17 commits. "ledger: 2026-10-25" (a8e878c), "ledger: 2026-10-23" (4db733d), "Footer: the pixel character changes outfit on click (#88)" (fb255b7) and 14 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 16 commits. "ledger: 2026-10-25" (5775d66), "ledger: 2026-10-25" (a8e878c), "ledger: 2026-10-23" (4db733d) and 13 more
 <!-- agent:end -->
 
 ## by hand
