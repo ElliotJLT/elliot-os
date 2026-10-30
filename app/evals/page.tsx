@@ -193,9 +193,9 @@ export default function Evals() {
               What gets checked, and who decides.
             </h1>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              A safety claim you need a glossary to read isn&apos;t finished.
-              So here&apos;s mine in plain English: evals for the models I
-              ship, limits for the agents I run, and a record of my own calls.
+              Safety claims shouldn&apos;t need a glossary. Here&apos;s how I
+              check my work: the models I ship, the agents I run, and my own
+              decisions.
             </p>
             <nav className="built-index ev-index" aria-label="On this page">
               {SECTIONS.map((s) => (
