@@ -32,6 +32,36 @@ and who decided?
   background, what was built and for whom, how it was validated, and the
   team. First person, plain, no hero lines.
 
+## Design system
+
+One set of roles, used the same way on every page. Check new UI against it
+before shipping.
+
+- Type. Display serif (Instrument Serif, `--display`) for headlines and
+  numbers, always sentence case, never all caps or italic for emphasis.
+  Grotesque (Archivo, `--sans`) for running text. Serif (Newsreader,
+  `--serif`) for standfirsts and summaries. Mono (`--mono`) only for
+  kickers, labels and links, in small caps-tracked uppercase.
+- Section pattern: claret mono kicker (`--kick`), display headline in the
+  `.sec-title` size, muted standfirst, then the content.
+- Colour. Only the tokens in `:root`: stone paper, ink, bottle green
+  `#22543a`, ochre `#d4b46c`, butter `#f3df98`, claret `#8e2f4f`, navy
+  `#1b3a6c`, terracotta `#9c4011`. Small labels in terracotta (`--label`),
+  hand-drawn marks in `--c1`. No new hues.
+- Marks. Pen marks come from `app/components/inkMarks.ts`, drawn in with
+  one stroke-dashoffset. Don't hand-draw new ones in SVG.
+- Rules, not boxes: hairlines (`--rule`, `--line-2`) separate things; a card
+  only when the box means something.
+- Discs (/built). Each story is a disc printed in two palette colours, or
+  a cover made by `scripts/gen-covers.mjs` (Gemini) in the visual language
+  of a classic album from Elliot's own listening, credited on the open
+  story. Covers never copy the original, carry no text and no real people.
+  The disc shows the headline number with what it counts (on a cover, as a
+  round shop sticker). Discs float, tilt to the pointer, spin when dragged,
+  and never spin on scroll. Every story reads problem, what we explored,
+  outcome, and fits one screen when opened. The stories live in
+  `app/components/work.ts`; the numbers there are Elliot's.
+
 ## Layout rules
 
 - One column, top to bottom: kicker, headline, standfirst under it, then
@@ -83,6 +113,7 @@ and who decided?
 - `app/` routes: `/`, `/built`, `/writing`, `/evals` (how I check: the
   model, the reviewer, the agents, me). `/loops`, `/now` and `/next` are
   static redirects in `public/` to `/evals#agents`
+- `app/components/work.ts` every story on /built, read by `DiscGallery.tsx`
 - `lib/` build-time readers (GitHub API, content, loops, evals)
 - `scripts/` the two agents plus `fetch-media.mjs`; `evals/` their cases
 - `mcp/` zero-dependency MCP server over stdio exposing the site's data

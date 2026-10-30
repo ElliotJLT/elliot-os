@@ -45,7 +45,7 @@ const MENUS: Menu[] = [
       {
         eyebrow: `02 · ${WRONG.short}`,
         title: "Built safeguarding and career tools",
-        href: "/built#independent-work",
+        href: "/built#safety",
       },
       {
         eyebrow: `03 · ${WRONG.short}`,

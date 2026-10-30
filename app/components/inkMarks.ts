@@ -123,3 +123,21 @@ export function circle(word: Box): string {
   }
   return through(pts);
 }
+
+/**
+ * A loose ring round a disc, drawn in the disc's own plane so it stays
+ * round it whichever way the disc tilts: a little over one and a quarter
+ * turns, the second pass sitting just inside the first.
+ */
+export function ring(cx: number, cy: number, r: number): string {
+  const pts: Pt[] = [];
+  const start = -0.62 * Math.PI;
+  const sweep = 2.32 * Math.PI;
+  const n = 52;
+  for (let k = 0; k <= n; k++) {
+    const t = start + (sweep * k) / n;
+    const rr = r * (1 + 0.018 * Math.sin(3 * t + 0.5) + 0.01 * Math.cos(5 * t) - (k / n) * 0.05);
+    pts.push([cx + Math.cos(t) * rr, cy + Math.sin(t) * rr]);
+  }
+  return through(pts);
+}
