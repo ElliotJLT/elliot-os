@@ -81,7 +81,7 @@ const RULES = [
   "Nothing sends anything as me. The worst it can do is draft something and hand it to me.",
   "Every fact carries the sentence it came from. If the source doesn't back it, it's thrown out and counted.",
   "Code does the counting. The model is never asked for a number.",
-  "No part of it gets all three of: my private data, text written by strangers, and a way to send things out.",
+  "No part of it gets all three of the lethal trifecta: my private data, text written by strangers, and a way to send things out.",
   "What I say outranks anything the AI inferred. My corrections are kept and checked again every week.",
 ];
 
@@ -172,8 +172,10 @@ export default function Evals() {
   const weeks = ledger.weeks.filter(
     (w) => w.week_of >= COUNTED_FROM && w.ticks !== undefined,
   );
-  const kept = weeks.reduce((n, w) => n + (w.facts_kept ?? 0), 0);
-  const thrown = weeks.reduce((n, w) => n + (w.facts_thrown ?? 0), 0);
+  const sum = (k: keyof LedgerWeek) =>
+    weeks.reduce((n, w) => n + (Number(w[k]) || 0), 0);
+  const kept = sum("facts_kept");
+  const thrown = sum("facts_thrown");
 
   return (
     <main>
@@ -254,8 +256,10 @@ export default function Evals() {
               alt="A painted beekeeper lifting a frame from one hive in a fenced row of hives."
             />
             <p className="ev-flow-lede rv-settle">
-              Agents keep this site current and run my own work. These rules
-              hold whatever the model says, and code enforces them.
+              An experiment: I gave an agent my email, calendar and work
+              sessions, under the rules I&apos;d put on any product that
+              touches someone&apos;s data. Code enforces them, whatever the
+              model says.
             </p>
             <ol className="ev-flow ev-rules rv-settle">
               {RULES.map((r) => (
@@ -267,15 +271,40 @@ export default function Evals() {
         {weeks.length > 0 && (
           <Reveal>
             <h3 className="loop-clock rv-settle">
-              the ledger, counted by the system each week
+              what it refused, counted by code
             </h3>
             <div className="loop-ledger-panel rv-settle">
               <p className="loop-ledger-lede">
-                Through the day it reads my email, calendar and work sessions, and
-                keeps a fact only if it can quote the sentence it came from.
-                Since {formatDate(weeks[0].week_of)} it has kept {kept} and
-                thrown out {thrown} that the source didn&apos;t back.
+                A system that only reports what it did can&apos;t show it
+                checks anything. So this counts what it refused, since{" "}
+                {formatDate(weeks[0].week_of)}.
               </p>
+              <ul className="ledger-tiles">
+                <li>
+                  <b>{kept}</b>
+                  <span>facts kept, each with the sentence it came from</span>
+                </li>
+                <li>
+                  <b>{Math.round((thrown / (kept + thrown)) * 100)}%</b>
+                  <span>
+                    of the facts it found, thrown out: {thrown} of{" "}
+                    {kept + thrown}, because the quote wasn&apos;t in the source
+                  </span>
+                </li>
+                <li>
+                  <b>0</b>
+                  <span>
+                    messages sent as me. The worst it can do is draft one
+                  </span>
+                </li>
+                <li>
+                  <b>8 → off</b>
+                  <span>
+                    morning messages with no reply, so I switched them off on
+                    16 October
+                  </span>
+                </li>
+              </ul>
               <table className="loop-ledger">
                 <thead>
                   <tr>
@@ -312,12 +341,10 @@ export default function Evals() {
                 </tbody>
               </table>
               <p className="loop-ledger-test">
-                The first week was its first read of everything already there.
-                Since then it only keeps what&apos;s new, so the counts drop.
-                What would make it wrong: hundreds of checks and nothing kept,
-                or the thrown-out share climbing. If the numbers show either, I
-                cut it back. I switched off the morning message on 16 October
-                after it sent 8 and got no replies.
+                Week one was its first read of everything already there, so the
+                counts drop after it. What would make it wrong: hundreds of
+                checks and nothing kept, or the thrown-out share climbing. If
+                the numbers show either, I cut it back.
               </p>
               {ledger.broke.length > 0 && (
                 <ol className="failure-log">

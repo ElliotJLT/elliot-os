@@ -66,19 +66,13 @@ export default async function Home() {
             <div className="band-profile">
               <TrackingPortrait className="band-face rv-develop" />
               <p className="band-sub rv-settle">
-                At Zero Gravity I led the team that took an AI tutor from a
-                30-school beta into 850+ UK schools, marking real A-level past
-                papers at over 99% on the syllabus it covers. The government
-                picked it for its{" "}
+                At Zero Gravity I led the team that took an AI tutor into 850+
+                UK schools, marking real A-level past papers at over 99% on the
+                syllabus it covers. The government picked it for its{" "}
                 <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
                   AI Tutoring Tools Pioneers Programme
                 </a>
-                , alongside Pearson and ElevenLabs. Now I&apos;m building
-                agentic AI ventures with{" "}
-                <a href="https://www.nesta.org.uk/mission-studio/">
-                  Nesta&apos;s Mission Studio
-                </a>
-                .
+                , alongside Pearson and ElevenLabs.
               </p>
               <div className="band-cta rv-settle">
                 <Pill href="/built" tone="cream" arrow>
