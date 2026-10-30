@@ -193,10 +193,9 @@ export default function Evals() {
               What gets checked, and who decides.
             </h1>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              Anyone should be able to check an AI, including the people
-              it&apos;s sold to. So here&apos;s mine, with
-              &ldquo;guardrails&rdquo; banned: evals for the models I ship, limits
-              for the agents I run, and my own calls, dodgy ones too.
+              A safety claim you need a glossary to read isn&apos;t finished.
+              So here&apos;s mine in plain English: evals for the models I
+              ship, limits for the agents I run, and a record of my own calls.
             </p>
             <nav className="built-index ev-index" aria-label="On this page">
               {SECTIONS.map((s) => (
