@@ -194,7 +194,7 @@ export default function Evals() {
             </h1>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
               Safety claims shouldn&apos;t need a glossary. I check the models I
-              ship, the agents I run, and my own decisions.
+              ship, the agents I run, and the hardest one to mark: me.
             </p>
             <nav className="built-index ev-index" aria-label="On this page">
               {SECTIONS.map((s) => (
