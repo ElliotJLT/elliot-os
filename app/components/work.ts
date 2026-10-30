@@ -30,6 +30,8 @@ export type Look = {
    *  the album it borrows from, credited on the open story. */
   cover?: string;
   after?: string;
+  /** Hours of that artist in Elliot's Spotify history, 2011 to 2025. */
+  hours?: number;
 };
 
 export type Story = {
@@ -68,24 +70,24 @@ const STORIES: Omit<Story, "slug">[] = [
     problem:
       "Students without a tutor at home get stuck alone, and a general chatbot just gives them the answer.",
     explored: [
-      "Coaching, practice, marking and assignments as separate agents, each graded by its own evaluator.",
-      "Production traces open-coded into failure modes (giving in on \"I don't know\", contradicting itself across modes, inventing marks), then a pass/fail judge on every session.",
-      "Red-teamed the failure that matters most: a student talking the tutor into handing over the answer.",
+      "Coaching, practice, marking and assignments as separate agents, each graded by its own evaluator, across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB.",
+      "Red-teamed the failure that matters most: a student talking the tutor into handing over the answer. Then a pass/fail judge on every session.",
+      "A four-agent fleet read every production trace overnight, replaced a planned ops hire and produced half the evidence in the company retro.",
     ],
     outcomes: [
       { n: "30 → 850+", label: "schools, from the beta to the national programme" },
       { n: "67% → 99%+", label: "marking on the golden set: bare model, then the syllabus we covered" },
       { n: "33% → 65%", label: "Socratic pass rate, doubled in two weeks, graded on every session" },
-      { n: "47%", label: "of monthly students active each week" },
+      { n: "50,000+", label: "tutoring sessions" },
     ],
     learned:
-      "What it doesn't prove yet is learning. We measured use and marking accuracy, not grades. The Pioneers pilot ends with an impact report on pupils, and that's the real test. Production also came in at 4.6x the planned cost; we routed by task, kept Opus on marking, and pulled a model 14x cheaper after 7 of 8 complaints traced to it.",
+      "When production ran 4.6x over the cost plan, we cut it without touching quality: prompt caching, a model per task, and Opus kept on marking. Next, the Pioneers pilot measures what it does for pupils' grades.",
     role: "Led product, a designer and six product engineers, each owning a problem from prototype to production, and wrote 28% of the commits",
     links: [
       { label: "view the product", href: "https://www.zerogravity.co.uk/tutor" },
       { label: "App Store", href: "https://apps.apple.com/gb/app/zero-gravity-tutor/id6760364095" },
     ],
-    look: { bg: "#f3df98", fg: "#22543a", art: "work/tutor.jpg", cover: "work/covers/ai-stem-tutor.jpg", after: "OK Computer, Radiohead" },
+    look: { bg: "#f3df98", fg: "#22543a", art: "work/tutor.jpg", cover: "work/covers/ai-stem-tutor.jpg", after: "OK Computer, Radiohead", hours: 101 },
   },
   {
     kind: "Shipped",
@@ -99,16 +101,17 @@ const STORIES: Omit<Story, "slug">[] = [
       "Harris Federation's AI lead told us admin visibility and safeguarding were gate conditions, not features. Until both were met, the question was whether a school would let the tutor near students at all.",
     explored: [
       "Safeguarding detection shipped as the first feature, tuned to over-flag, with the designated safeguarding lead holding every judgement.",
-      "Ten weeks in, nearly every escalation was a false alarm, so we split conduct from safeguarding without weakening disclosure detection.",
+      "Tuned it loud on purpose, then split conduct from safeguarding so the lead only gets paged for what matters.",
       "Built to the DfE's generative AI product safety standards for under-18s: session cut-offs, never presenting as human, and concerns escalated to a named person.",
     ],
     outcomes: [
       { n: "97%", label: "fewer false safeguarding alarms, with no disclosure missed" },
       { n: "2nd of 8", label: "in the DfE's AI Tutoring Tools Pioneers Programme, picked from 53 bids" },
+      { n: "450,000", label: "disadvantaged pupils a year the programme can reach" },
     ],
     role: "Led product, including the safety work",
     links: [{ label: "trust and safeguarding", href: "https://www.zerogravity.co.uk/tutor/trust" }],
-    look: { bg: "#8e2f4f", fg: "#ecebe7", cover: "work/covers/tutor-safety.jpg", after: "A Deeper Understanding, The War On Drugs" },
+    look: { bg: "#8e2f4f", fg: "#ecebe7", cover: "work/covers/tutor-safety.jpg", after: "A Deeper Understanding, The War On Drugs", hours: 98 },
   },
   {
     kind: "Shipped",
@@ -117,16 +120,16 @@ const STORIES: Omit<Story, "slug">[] = [
     at: "Zero Gravity",
     when: "2026",
     areas: ["gtm", "ai"],
-    headline: { n: "98.7%", label: "activation, teacher-led" },
+    headline: { n: "91%", label: "activation, teacher-led" },
     problem:
       "Teachers set one homework for a whole class and only find out who was stuck when they mark it. Help a student has to go and find mostly goes unused.",
     explored: [
       "Harris told us that to enter the curriculum we had to build for teachers, so the teacher became the way in.",
       "Homework built from the teacher's own material, after a head of maths said typing mark schemes was too slow.",
-      "A weekly summary per class, and data-protection paperwork ready before a school asks for it.",
+      "A weekly summary per class, safeguarding flags to named staff only, and the DPIA written before a data lead asks for it.",
     ],
     outcomes: [
-      { n: "98.7%", label: "activation in teacher-led schools, over 6× self-signup" },
+      { n: "91% vs 23%", label: "activation when teachers lead it, against students signing up alone" },
       { n: "850+", label: "UK schools" },
     ],
     learned:
@@ -136,7 +139,7 @@ const STORIES: Omit<Story, "slug">[] = [
       { label: "for teachers", href: "https://www.zerogravity.co.uk/tutor/teachers" },
       { label: "for school leaders", href: "https://www.zerogravity.co.uk/tutor/school-leaders" },
     ],
-    look: { bg: "#22543a", fg: "#f3df98", cover: "work/covers/school-hub.jpg", after: "Abbey Road, The Beatles" },
+    look: { bg: "#22543a", fg: "#f3df98", cover: "work/covers/school-hub.jpg", after: "Abbey Road, The Beatles", hours: 33 },
   },
   {
     kind: "Prototype",
@@ -162,7 +165,7 @@ const STORIES: Omit<Story, "slug">[] = [
       { label: "code and decisions", href: "https://github.com/ElliotJLT/lease-citations/blob/main/DECISIONS.md" },
       { label: "the audit", href: "https://github.com/ElliotJLT/lease-citations/blob/main/docs/audit.md" },
     ],
-    look: { bg: "#e4e2dd", fg: "#1b3a6c", art: "work/video/lease.jpg", cover: "work/covers/lease-citations.jpg", after: "The Velvet Underground & Nico" },
+    look: { bg: "#e4e2dd", fg: "#1b3a6c", art: "work/video/lease.jpg", cover: "work/covers/lease-citations.jpg", after: "The Velvet Underground & Nico", hours: 30 },
     clip: {
       src: "work/video/lease.mp4",
       poster: "work/video/lease.jpg",
@@ -197,7 +200,7 @@ const STORIES: Omit<Story, "slug">[] = [
     links: [
       { label: "code and reasoning", href: "https://github.com/ElliotJLT/persona-interviews" },
     ],
-    look: { bg: "#f3df98", fg: "#8e2f4f", art: "work/video/persona.jpg", cover: "work/covers/persona-interviews.jpg", after: "Blonde, Frank Ocean" },
+    look: { bg: "#f3df98", fg: "#8e2f4f", art: "work/video/persona.jpg", cover: "work/covers/persona-interviews.jpg", after: "Blonde, Frank Ocean", hours: 56 },
     clip: {
       src: "work/video/persona.mp4",
       poster: "work/video/persona.jpg",
@@ -230,7 +233,7 @@ const STORIES: Omit<Story, "slug">[] = [
     ],
     role: "Designed the service blueprint and built the walkthrough",
     links: [],
-    look: { bg: "#e4e2dd", fg: "#22543a", art: "work/video/nursing.jpg", cover: "work/covers/district-nursing.jpg", after: "For Emma, Forever Ago, Bon Iver" },
+    look: { bg: "#e4e2dd", fg: "#22543a", art: "work/video/nursing.jpg", cover: "work/covers/district-nursing.jpg", after: "For Emma, Forever Ago, Bon Iver", hours: 57 },
     clip: {
       src: "work/video/nursing.mp4",
       poster: "work/video/nursing.jpg",
@@ -252,17 +255,18 @@ const STORIES: Omit<Story, "slug">[] = [
     problem:
       "Selling into banks and law firms meant passing their due diligence before any programme could start.",
     explored: [
-      "Built each programme into the partner's early-careers hiring, with HSBC, Morgan Stanley, KPMG, Ashurst, Accenture and Snap.",
+      "Built each programme into the partner's early-careers hiring, with HSBC, Morgan Stanley, KPMG, Ashurst, Accenture and Snap, and ran 100+ of them.",
       "Did ISO 27001 and 9001 in-house, as data protection officer, so due diligence stopped being the blocker.",
     ],
     outcomes: [
-      { n: "2×", label: "the size of those accounts" },
+      { n: "2×", label: "account size at renewal" },
+      { n: "1%", label: "logo churn across strategic accounts" },
       { n: "30%", label: "shorter sales cycles" },
       { n: "< 6 months", label: "to ISO 27001 and 9001, done solo" },
     ],
     role: "Head of Operations & Enterprise Partnerships",
     links: [],
-    look: { bg: "#1d2420", fg: "#d4b46c", cover: "work/covers/enterprise-partnerships.jpg", after: "Rumours, Fleetwood Mac" },
+    look: { bg: "#1d2420", fg: "#d4b46c", cover: "work/covers/enterprise-partnerships.jpg", after: "Rumours, Fleetwood Mac", hours: 36 },
   },
   {
     kind: "Shipped",
@@ -286,7 +290,7 @@ const STORIES: Omit<Story, "slug">[] = [
     ],
     role: "Designated safeguarding lead; built the system",
     links: [],
-    look: { bg: "#ecebe7", fg: "#8e2f4f", cover: "work/covers/safeguarding.jpg", after: "Kid A, Radiohead" },
+    look: { bg: "#ecebe7", fg: "#8e2f4f", cover: "work/covers/safeguarding.jpg", after: "Kid A, Radiohead", hours: 101 },
   },
   {
     kind: "Shipped",
@@ -306,7 +310,7 @@ const STORIES: Omit<Story, "slug">[] = [
     outcomes: [{ n: "6% → 40%", label: "of mentees going on to mentor" }],
     role: "Led growth and operations",
     links: [],
-    look: { bg: "#9c4011", fg: "#f3df98", cover: "work/covers/mentee-to-mentor.jpg", after: "Punisher, Phoebe Bridgers" },
+    look: { bg: "#9c4011", fg: "#f3df98", cover: "work/covers/mentee-to-mentor.jpg", after: "Punisher, Phoebe Bridgers", hours: 30 },
   },
   {
     kind: "Shipped",
@@ -325,13 +329,13 @@ const STORIES: Omit<Story, "slug">[] = [
     ],
     outcomes: [
       { n: "91%", label: "of support conversations resolved by the AI assistant" },
-      { n: "8h → 4h", label: "of support time a week, so no dedicated hire" },
+      { n: "4 → 30", label: "people, without a dedicated support hire" },
       { n: "2 weeks → 3 days", label: "to onboard a new hire" },
       { n: "£1.5m", label: "ARR, tracked and billed through the revenue ops" },
     ],
     role: "Built it as employee #4",
     links: [],
-    look: { bg: "#f3df98", fg: "#1b3a6c", cover: "work/covers/company-operating-system.jpg", after: "Aerial, Kate Bush" },
+    look: { bg: "#f3df98", fg: "#1b3a6c", cover: "work/covers/company-operating-system.jpg", after: "Aerial, Kate Bush", hours: 12 },
   },
   {
     kind: "Shipped",
@@ -354,9 +358,11 @@ const STORIES: Omit<Story, "slug">[] = [
       { n: "2 weeks → 4 days", label: "to handle a case" },
       { n: "20 → 80+", label: "NPS" },
     ],
+    learned:
+      "A capacity model called the need for two more paralegals three weeks before anyone felt it, while the probate team grew from 2 to 12.",
     role: "Led product and operations",
     links: [{ label: "view the service", href: "https://farewill.com/apply-for-probate" }],
-    look: { bg: "#e4e2dd", fg: "#8e2f4f", art: "work/farewill.jpg", cover: "work/covers/probate-operations.jpg", after: "All Things Must Pass, George Harrison" },
+    look: { bg: "#e4e2dd", fg: "#8e2f4f", art: "work/farewill.jpg", cover: "work/covers/probate-operations.jpg", after: "All Things Must Pass, George Harrison", hours: 20 },
   },
   {
     kind: "Shipped",
@@ -381,7 +387,7 @@ const STORIES: Omit<Story, "slug">[] = [
     ],
     role: "Co-founder",
     links: [],
-    look: { bg: "#1b3a6c", fg: "#ecebe7", cover: "work/covers/mealsforthenhs.jpg", after: "Let It Bleed, The Rolling Stones" },
+    look: { bg: "#1b3a6c", fg: "#ecebe7", cover: "work/covers/mealsforthenhs.jpg", after: "Let It Bleed, The Rolling Stones", hours: 71 },
   },
   {
     kind: "Shipped",
@@ -392,7 +398,7 @@ const STORIES: Omit<Story, "slug">[] = [
     areas: ["ops"],
     headline: { n: "90+", label: "NPS through the US launch" },
     problem:
-      "When I joined, operations was the founders answering emails: no CRM, no ticketing, no supplier contracts.",
+      "When I joined, operations was the founders answering emails: no CRM, no ticketing, no supplier contracts. Then the company grew 400% in a year.",
     explored: [
       "Marketing didn't go live in a market until support coverage was confirmed.",
       "Intercom, response templates, supplier onboarding and a crisis protocol, set up from scratch.",
@@ -405,7 +411,7 @@ const STORIES: Omit<Story, "slug">[] = [
     ],
     role: "Operations manager, founding hire #10",
     links: [],
-    look: { bg: "#e4e2dd", fg: "#22543a", art: "work/flash-pack.jpg", cover: "work/covers/flash-pack-operations.jpg", after: "Houses of the Holy, Led Zeppelin" },
+    look: { bg: "#e4e2dd", fg: "#22543a", art: "work/flash-pack.jpg", cover: "work/covers/flash-pack-operations.jpg", after: "Houses of the Holy, Led Zeppelin", hours: 42 },
   },
 ];
 

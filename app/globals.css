@@ -8647,14 +8647,24 @@ html:not(.js) .dg-disc:first-child {
 .dd-after {
   position: absolute;
   left: 50%;
-  bottom: -2%;
+  bottom: -4%;
   translate: -50% 0;
   white-space: nowrap;
+  text-align: center;
   font-family: var(--mono);
   font-size: 10.5px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+.dd-after em {
+  display: block;
+  margin-top: 4px;
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  color: var(--faint);
 }
 
 .disc[data-art] .disc-name {

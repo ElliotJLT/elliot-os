@@ -24,10 +24,10 @@ export default async function Built() {
       <FoldHero
         src={`${basePath}/building-with-the-team.jpg`}
         alt="Elliot leaning over a laptop while working with another person"
-        caption="Working through the prototype with the person at the keyboard."
+        caption="Working through a prototype. The person at the keyboard is doing the hard part."
         kicker="Built"
         title="I build the product and the operation around it."
-        standfirst="Find the wider problem beneath the request, then stay close to the code and the team until users can depend on it."
+        standfirst="Thirteen things I've built, pressed as discs after the albums I've played most. Fourteen years of Spotify had to be good for something."
       />
       <div className="mai built-body">
         <nav className="built-index" aria-label="On this page">

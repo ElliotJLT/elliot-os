@@ -148,8 +148,8 @@ habit in regulated services, crisis delivery and consumer travel.
   department see which topics drag a class or a school. Role-scoped access,
   safeguarding flags to named staff only, and the DPIA pack and DfE 2026
   standards mapping written before a data lead asks. Deployed teachers
-  first, class by class: 850+ UK schools. Teacher-led schools hit 98.7%
-  activation, more than six times the self-signup rate, and the cause
+  first, class by class: 850+ UK schools. Teacher-led schools hit 91%
+  activation against 23% for self-signup, and the cause
   (pre-built classes, a weekly teacher call) became the rollout pattern.
 - ward (safeguarding, under-18s) — decides which messages from a child
   are genuine safeguarding disclosures and routes them to a named human on

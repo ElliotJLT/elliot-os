@@ -20,7 +20,7 @@ const STOPS: Stop[] = [
   [0.2, 0.76, 0.64, 1],
   [0.5, 0.52, 1, 1],
   [0.84, 0.17, 1.1, 1],
-  [1.14, -0.2, 1.22, 1],
+  [1.14, -0.2, 1.22, 0],
 ];
 const STOPS_PHONE: Stop[] = [
   [-1.1, 0.6, 0.86, 0],
@@ -879,7 +879,12 @@ function Detail({ story, basePath, active, enter }: { story: Story; basePath: st
               ▶
             </span>
           )}
-          {story.look.after && <span className="dd-after">Cover after {story.look.after}</span>}
+          {story.look.after && (
+            <span className="dd-after">
+              Cover after {story.look.after}
+              {story.look.hours && <em>{story.look.hours} hours of them on my Spotify. No regrets.</em>}
+            </span>
+          )}
         </div>
       )}
       {active && playing && story.clip && (
