@@ -197,8 +197,8 @@ export default async function Home() {
           </div>
           <figcaption>
             I bring rough prototypes into the room while people can still
-            change them. That Clawd is the best-received thing I&apos;ve ever
-            brought to a meeting, and I didn&apos;t build it.
+            change them. We won that Clawd. I&apos;ve never seen a room this
+            happy about anything I&apos;ve actually built.
           </figcaption>
         </figure>
       </Reveal>
