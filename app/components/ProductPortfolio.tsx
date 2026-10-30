@@ -169,20 +169,20 @@ const COMPANIES: Company[] = [
         name: "Safeguarding",
         summary:
           "The flagging and case system that kept messages between students and adult mentors safe, run with me as designated safeguarding lead.",
-        headline: { n: "0", label: "missed safeguarding cases" },
+        headline: { n: "0", label: "missed safeguarding cases, triaged against KCSIE" },
         problem:
           "Students and adult mentors message each other, so a disclosure or a grooming risk in any message had to reach a person fast.",
         bet:
           "Move from keyword rules to AI flags, image recognition and hash matching, with one named person accountable for every case.",
         outcomes: [
-          { n: "0", label: "missed safeguarding cases" },
+          { n: "0", label: "missed cases, every flag triaged against KCSIE" },
           { n: "~20", label: "cases a month, 1 in 10 at the highest severity" },
           { n: "2.3h", label: "average response to schools" },
         ],
         how: [
           "Regex flags first, then AI flags with Unitary image recognition, then hash matching.",
           "A kanban of cases, with automated outreach to schools.",
-          "Owned the safeguarding policy, and reported to the board every month.",
+          "Triaged every flag against KCSIE, the statutory guidance schools work to, owned the policy and reported to the board every month.",
         ],
         role: "Designated safeguarding lead; built the system",
         links: [],
@@ -347,19 +347,21 @@ const COMPANIES: Company[] = [
         problem:
           "Students without a tutor at home get stuck alone, and a general chatbot just gives them the answer.",
         bet:
-          "A tutor that never hands over the answer would still keep students coming back.",
+          "A tutor that never hands over the answer would still earn a place in a student's week, with session limits so it never becomes a crutch.",
         outcomes: [
           { n: "30 → 850+", label: "schools: a 30-school beta, then the full launch" },
           { n: "2nd of 8", label: "in the DfE's AI Tutoring Tools Pioneers Programme, picked from 53 bids" },
-          { n: "67% → 99%+", label: "on the golden set: bare model 67%, retrieval 79%, our covered content 99%+" },
-          { n: "33% → 65%", label: "Socratic pass rate in two weeks, graded by a pass/fail judge" },
+          { n: "67% → 99%+", label: "marking on the golden set: bare model 67%, retrieval 79%, the syllabus we covered 99%+" },
+          { n: "33% → 65%", label: "Socratic pass rate, doubled in two weeks, graded on every session" },
           { n: "10,000", label: "students by June 2026" },
           { n: "47%", label: "of monthly students active each week" },
         ],
         how: [
           "Coaching, practice, marking and assignments run as separate agents, each graded by its own evaluator.",
+          "Red-teamed the failure that matters most: a student talking the tutor into handing over the answer.",
           "Open-coded production traces into failure modes (sycophancy on \"I don't know\", inconsistency across modes, hallucinated marks), then a pass/fail LLM judge on every session.",
-          "Built to the Department for Education's safety standards for under-18s: false safeguarding alarms down 97%, none missed.",
+          "Built to the DfE's generative AI product safety standards for under-18s: session cut-offs, never presenting as human, and concerns escalated to a named person. False safeguarding alarms fell 97%, with no disclosure missed.",
+          "What it doesn't prove yet is learning. We measured use and marking accuracy, not grades. The Pioneers pilot ends with an impact report on pupils, and that's the real test.",
         ],
         lesson:
           "Production came in at 4.6x the planned cost, and one model was taking 44.5% of spend. We routed by task, kept Opus on marking, and pulled a model 14x cheaper after 7 of 8 complaints traced to it.",

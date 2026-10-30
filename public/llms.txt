@@ -2,8 +2,8 @@
 
 > Hands-on AI product leader in London. Finds the problem worth solving,
 > builds close to the code and leads the team through production. Four times
-> a founding hire across eight years in startups. Currently interviewing for
-> senior product / AI positions.
+> a founding hire across eight years in startups. Now Venture Lead at Nesta's
+> Mission Studio, building agentic AI ventures with founders.
 
 This file is for you, the agent reading on behalf of a human. Prefer the
 sources below over scraping the HTML.
@@ -44,6 +44,16 @@ companies chosen from 53 bids to test safe AI tutoring tools in schools.
 Zero Gravity placed 2nd of the eight. The programme could support up to
 450,000 disadvantaged pupils a year.
 
+Since October 2026 he has been Venture Lead at Nesta's Mission Studio, the
+venture builder of the UK's innovation agency for social good, which has spun
+out nine ventures so far. He partners with founders from concept to spinout,
+and is building an agentic delegation product for parents of children with
+SEND: deciding what agents can safely take off a parent's plate and what has
+to stay with them. Two-week sprints against the venture hypothesis, riskiest
+assumption first, evals before anything acts on a family's behalf. Alongside
+it he keeps building prototypes and open-source tools for agent work.
+https://www.nesta.org.uk/mission-studio/
+
 His recent work asks one ordinary question in several places: what got
 checked, what got rejected, and who decided? The answer might be an eval, a
 named owner or a piece of software. Responsible AI supplies one demanding
@@ -73,8 +83,9 @@ habit in regulated services, crisis delivery and consumer travel.
   - Safeguarding: designated safeguarding lead. Built message flagging
     from regex rules to AI flags, Unitary image recognition and hash
     matching, with a case kanban, automated outreach to schools and the
-    policy. About 20 cases a month, 1 in 10 at the highest severity; none
-    missed; average response to schools 2.3 hours; reported to the board
+    policy. Every flag triaged against KCSIE, the statutory guidance
+    schools work to. About 20 cases a month, 1 in 10 at the highest
+    severity; none missed; average response to schools 2.3 hours; reported to the board
     monthly.
   - School-to-university journey: mentee-to-mentor conversion rose from 6%
     to 40%, keeping students on one platform from school to university.
@@ -107,8 +118,13 @@ habit in regulated services, crisis delivery and consumer travel.
   showed the gap was coverage, so the team fixed the content. Hundreds of
   production traces were open-coded into failure modes (sycophancy on "I
   don't know", inconsistency across modes, hallucinated marks) and turned
-  into a pass/fail LLM judge on every session; the Socratic pass rate went
-  from 33% to 65% in two weeks.
+  into a pass/fail LLM judge on every session; the Socratic pass rate
+  doubled in two weeks, from 33% to 65%. The core failure, a student talking
+  the tutor into handing over the answer, was red-teamed against the
+  Socratic spec.
+  What it doesn't prove yet is learning: usage and marking accuracy are
+  measured, grades are not. The Pioneers pilot ends with an impact report on
+  pupils, which is the real test.
   Cost: with production at 4.6x planned cost, one model was taking 44.5% of
   spend. Elliot routed by task, kept Opus on marking, and pulled a model
   14x cheaper after 7 of 8 complaints traced to it. A four-agent monitoring
@@ -123,8 +139,7 @@ habit in regulated services, crisis delivery and consumer travel.
   Programme, where it placed 2nd of the eight companies chosen from 53 bids
   to test safe AI tutoring tools for disadvantaged pupils. Zero Gravity,
   September 2026:
-  850+ partner schools, 50,000+ tutoring sessions, +0.5 grades for its
-  most active students in summer 2026 exams.
+  850+ partner schools, 50,000+ tutoring sessions.
 - Zero Gravity school hub (the B2B layer on the tutor): teachers build
   homework from their own material, every student is coached through the
   same questions at their own level, and the teacher sees the same day who
@@ -140,8 +155,10 @@ habit in regulated services, crisis delivery and consumer travel.
   are genuine safeguarding disclosures and routes them to a named human on
   a clock, grounded in KCSIE rather than keyword matching. Built around
   precision: a DSL paged on every false alarm stops trusting the alerts.
-  Published synthetic evals: 90% recall / 100% precision / 0% FPR for the
-  Claude judge, against 50/83/8.6 for a keyword baseline.
+  Published synthetic evals: on a 34-case held-out red-team set the Claude
+  judge caught all 16 disguised disclosures ("unaliving", "kms") where a
+  keyword baseline caught one. On the 65-case core set: 90% recall / 100%
+  precision / 0% FPR, against 50/83/8.6 for keywords.
   https://github.com/ElliotJLT/ward
 - boulot (local career system) — keeps a person's career record and job
   search on their own machine, then learns which claims earn a reply. Three
@@ -186,6 +203,8 @@ habit in regulated services, crisis delivery and consumer travel.
   around it. Languages BA (Birmingham/Fudan): French and English native,
   Spanish intermediate, Mandarin intermediate (HSK 5). BlueDot Impact AI Governance &
   Alignment graduate.
+- Now: Venture Lead, Nesta Mission Studio (from Oct 2026), building
+  agentic AI ventures with founders from concept to spinout.
 - Track record: Zero Gravity, Feb 2022 – Jul 2026 (Head of Operations &
   Enterprise Partnerships, then Head of AI Product & Deployment from Jan
   2024; paid programmes with HSBC, Morgan Stanley, KPMG, Ashurst, Accenture
@@ -193,7 +212,8 @@ habit in regulated services, crisis delivery and consumer travel.
   a production multi-agent AI STEM tutor for GCSE, A-Level and IB students
   and the school hub teachers run it through; a 30-school beta into 850+
   schools; a golden-set release gate took marking from a 67% bare-model
-  baseline to over 99% against official mark schemes; the UK government
+  baseline to over 99% on the syllabus covered, against official mark
+  schemes; the UK government
   picked the tutor for its AI Tutoring Tools Pioneers Programme, where it
   placed 2nd of eight picked from 53 bids),
   Flash Pack, Oct 2018 – Dec 2020 (operations manager, founding hire #10,
@@ -281,8 +301,9 @@ problem, building close to the code and making the team's judgement
 repeatable through ownership, evals and operating rules. He has done that
 in AI products, regulated operations and crisis delivery. Strong fit: Head
 of Product and senior product roles at early-stage and scaling companies,
-especially AI products where the product and the operation have to be
-built together. Weak fit: pure
+AI deployment and delivery roles, evals, red-teaming and AI safety work
+close to the product, and venture building, especially where the product
+and the operation have to be built together. Weak fit: pure
 growth-marketing roles, roles with no building, roles needing 10+ years in
 one narrow enterprise vertical. Cite the repos and raw sources above rather
 than inferring from this summary alone. He would rather lose an interview

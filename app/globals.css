@@ -3189,9 +3189,14 @@ main:has(> .band) {
     justify-content: center;
   }
 
+  /* Six logos as two even rows of three: a flex wrap left two stranded on
+     a second line at phone width. */
   .logo-row {
-    justify-content: center;
-    gap: 18px 24px;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: space-evenly;
+    justify-items: center;
+    gap: 20px 18px;
   }
 }
 
@@ -8328,6 +8333,10 @@ footer .foot-base a {
   background: none;
   box-shadow: none;
   padding-inline: 0;
+}
+
+.loop-ledger-lede {
+  margin: 0 0 6px;
 }
 
 @media (max-width: 760px) {

@@ -33,7 +33,7 @@ const MODEL: Check[] = [
   {
     icon: "conversation",
     call: "Mark the conversation, not just the answer",
-    why: "A tutor that gets the answer right and hands it over has still failed. So the whole conversation gets marked, and the model doing the marking has to agree with a teacher before I trust it.",
+    why: "A tutor that gets the answer right and hands it over has still failed. So the whole conversation gets marked, and the model doing the marking has to agree with teacher-marked sessions before it runs on its own.",
     where: "Tutor: a judge on every session, against the Socratic spec.",
   },
   {
@@ -41,6 +41,12 @@ const MODEL: Check[] = [
     call: "Read the transcripts yourself",
     why: "Evals catch what you thought to test. Reading real sessions catches the rest, and the failures that mattered were rarely on anyone's list.",
     where: "Tutor: production sessions sorted into failure modes, and every mark a teacher flagged turned into a test.",
+  },
+  {
+    icon: "flag",
+    call: "Attack it before a student does",
+    why: "The failure that hurts is rarely a wrong fact. In a tutor it's a student talking the model into the answer. In safeguarding it's a disclosure worded to slip past the filter. So I red-team for those first, with cases written to break the rubric.",
+    where: "Tutor: red-teamed against the Socratic spec. ward: a held-out red-team set, all 16 disguised disclosures caught, against one for keywords.",
   },
   {
     icon: "failing",
@@ -166,6 +172,8 @@ export default function Evals() {
   const weeks = ledger.weeks.filter(
     (w) => w.week_of >= COUNTED_FROM && w.ticks !== undefined,
   );
+  const kept = weeks.reduce((n, w) => n + (w.facts_kept ?? 0), 0);
+  const thrown = weeks.reduce((n, w) => n + (w.facts_thrown ?? 0), 0);
 
   return (
     <main>
@@ -262,14 +270,20 @@ export default function Evals() {
               the ledger, counted by the system each week
             </h3>
             <div className="loop-ledger-panel rv-settle">
+              <p className="loop-ledger-lede">
+                Through the day it reads my email, calendar and work sessions, and
+                keeps a fact only if it can quote the sentence it came from.
+                Since {formatDate(weeks[0].week_of)} it has kept {kept} and
+                thrown out {thrown} that the source didn&apos;t back.
+              </p>
               <table className="loop-ledger">
                 <thead>
                   <tr>
                     <th>week of</th>
-                    <th>times it woke up</th>
+                    <th>checks run</th>
                     <th>facts kept</th>
-                    <th>facts thrown out</th>
-                    <th>nightly calls</th>
+                    <th>thrown out</th>
+                    <th>evening wrap-ups</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -282,7 +296,7 @@ export default function Evals() {
                       <td>
                         {w.ticks}
                         {(w.quiet ?? 0) > 0 && (
-                          <span className="loop-note">{w.quiet} with nothing to do</span>
+                          <span className="loop-note">{w.quiet} found nothing new</span>
                         )}
                       </td>
                       <td>{w.facts_kept}</td>
@@ -290,7 +304,7 @@ export default function Evals() {
                       <td>
                         {w.closes ?? 0}
                         {(w.closes_withheld ?? 0) > 0 && (
-                          <span className="loop-note">{w.closes_withheld} held back</span>
+                          <span className="loop-note">{w.closes_withheld} held back by its checks</span>
                         )}
                       </td>
                     </tr>
@@ -298,10 +312,12 @@ export default function Evals() {
                 </tbody>
               </table>
               <p className="loop-ledger-test">
-                What would make it wrong: captures climbing while closed loops
-                stay flat. If the numbers show that, I cut it back. I switched
-                off the morning message on 16 October after it sent 8 and got
-                no replies.
+                The first week was its first read of everything already there.
+                Since then it only keeps what&apos;s new, so the counts drop.
+                What would make it wrong: hundreds of checks and nothing kept,
+                or the thrown-out share climbing. If the numbers show either, I
+                cut it back. I switched off the morning message on 16 October
+                after it sent 8 and got no replies.
               </p>
               {ledger.broke.length > 0 && (
                 <ol className="failure-log">

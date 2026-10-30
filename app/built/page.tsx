@@ -103,7 +103,7 @@ export default async function Built() {
                   </span>
                 </span>
                 <span className="bento-title">ward · research</span>
-                <span className="bento-blurb">Safeguarding for apps children use. Recall on the published synthetic sets: 90% at 100% precision, against 50% at 83% for keyword matching.</span>
+                <span className="bento-blurb">Safeguarding for apps children use. On a held-out red-team set it caught all 16 disguised disclosures; keyword matching caught one. Core set of 65: 90% recall at 100% precision.</span>
                 <span className="bento-open" aria-hidden="true">Method and evals ↗</span>
               </a>
 

@@ -68,11 +68,17 @@ export default async function Home() {
               <p className="band-sub rv-settle">
                 At Zero Gravity I led the team that took an AI tutor from a
                 30-school beta into 850+ UK schools, marking real A-level past
-                papers at over 99%. The government picked it for its{" "}
+                papers at over 99% on the syllabus it covers. The government
+                picked it for its{" "}
                 <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
                   AI Tutoring Tools Pioneers Programme
                 </a>
-                , alongside Pearson and ElevenLabs.
+                , alongside Pearson and ElevenLabs. Now I&apos;m building
+                agentic AI ventures with{" "}
+                <a href="https://www.nesta.org.uk/mission-studio/">
+                  Nesta&apos;s Mission Studio
+                </a>
+                .
               </p>
               <div className="band-cta rv-settle">
                 <Pill href="/built" tone="cream" arrow>
@@ -111,7 +117,7 @@ export default async function Home() {
         items={[
           { name: "Own", said: "I am drawn to dauntingly large missions: make death less bureaucratic for families, feed NHS staff through a pandemic, give a student the tutor their family cannot buy. I find the practical problem inside that scale, then turn it into something a team can ship." },
           { name: "Build", said: "At MealsForTheNHS, day one was a WhatsApp group and day ten was a marketplace serving 146 hospitals. At Zero Gravity I wrote 28% of the tutor build's commits while leading product." },
-          { name: "Check", said: "At Farewill, agent errors fell 69% and case handling moved from two weeks to four days. At Zero Gravity, our internal tutor evals moved marking accuracy from a 67% baseline to over 99% against real past papers and official mark schemes." },
+          { name: "Check", said: "At Farewill, agent errors fell 69% and case handling moved from two weeks to four days. At Zero Gravity, our tutor evals moved marking accuracy from a 67% bare-model baseline to over 99% on the syllabus we covered, against real past papers and official mark schemes." },
           { name: "Remember", said: "I write things down so they outlast me. At Zero Gravity that was the operating guide the whole team worked from. Now it's a system that tracks everything I've started, so nothing gets dropped." },
         ]}
       />

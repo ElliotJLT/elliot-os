@@ -3,6 +3,31 @@
   "note": "Roles, dates and titles match the CVs. Bullets are the proof, newest work first; each number is Elliot's own and cross-checked with /built. Each row renders whatever fields are filled; dates and titles are optional.",
   "roles": [
     {
+      "org": "Nesta",
+      "logo": "career/nesta.jpeg",
+      "url": "https://www.nesta.org.uk/mission-studio/",
+      "role": "Venture Lead, Mission Studio",
+      "dates": "Oct 2026 – present",
+      "bullets": [
+        {
+          "k": "Venture building",
+          "t": "Partnering with founders to take mission-led ventures from concept to spinout, at the studio that has spun out nine so far."
+        },
+        {
+          "k": "Agentic AI",
+          "t": "Building an agentic delegation product for parents of children with SEND: deciding what agents can safely take off a parent's plate, and what has to stay with them."
+        },
+        {
+          "k": "Method",
+          "t": "Two-week sprints against the venture hypothesis, riskiest assumption first, prototypes in front of families early, and evals before anything acts on a family's behalf."
+        },
+        {
+          "k": "Alongside",
+          "t": "I keep building: prototypes for lawyers, researchers and nurses, and open-source tools for agent work."
+        }
+      ]
+    },
+    {
       "org": "Zero Gravity",
       "logo": "career/zero-gravity.jpeg",
       "url": "https://www.zerogravity.co.uk/tutor",
@@ -50,7 +75,7 @@
         },
         {
           "k": "Traces",
-          "t": "Open-coded hundreds of production traces into failure modes (sycophancy on \"I don't know\", inconsistency across modes, hallucinated marks) and turned them into a pass/fail LLM judge on every session. The Socratic pass rate went from 33% to 65% in two weeks."
+          "t": "Red-teamed the core failure, a student talking the tutor into the answer, and open-coded hundreds of production traces into failure modes (sycophancy on \"I don't know\", inconsistency across modes, hallucinated marks). Both became a pass/fail LLM judge on every session, and the Socratic pass rate doubled in two weeks, from 33% to 65%."
         },
         {
           "k": "Distribution",
