@@ -1,8 +1,7 @@
 import { getRepos } from "@/lib/github";
 import Reveal from "../components/Reveal";
-import ProductPortfolio from "../components/ProductPortfolio";
+import DiscGallery from "../components/DiscGallery";
 import Bench from "../components/Bench";
-import Prototypes from "../components/Prototypes";
 import FoldHero from "../components/FoldHero";
 
 export const metadata = { title: "Built · Elliot Little" };
@@ -11,9 +10,8 @@ const basePath = process.env.BASE_PATH || "";
 
 
 const SECTIONS = [
-  { id: "production", n: "01", label: "What I shipped" },
-  { id: "prototypes", n: "02", label: "Prototypes" },
-  { id: "systems", n: "03", label: "How the work runs" },
+  { id: "production", n: "01", label: "What I built" },
+  { id: "systems", n: "02", label: "How the work runs" },
 ];
 
 export default async function Built() {
@@ -39,43 +37,18 @@ export default async function Built() {
             </a>
           ))}
         </nav>
+      </div>
 
-        <Reveal>
-          <h2 id="production" className="mai-kick rv-settle">
-            01 · what I shipped
-          </h2>
-          <p className="sec-title rv-settle">Twelve things I&apos;ve built, newest first.</p>
-          <p className="muted rv-settle section-line">
-            Open one for the problem, the bet and the proof.
-          </p>
-        </Reveal>
-        <Reveal>
-          <div className="rv-settle">
-            <ProductPortfolio basePath={basePath} />
-          </div>
-        </Reveal>
+      {/* Full-bleed: the discs run corner to corner, under the masthead. */}
+      <DiscGallery basePath={basePath} />
 
-
-        <Reveal>
-          <h2 id="prototypes" className="mai-kick rv-settle">
-            02 · prototypes
-          </h2>
-          <p className="sec-title rv-settle">Three prototypes for people who can&apos;t afford a wrong answer.</p>
-          <p className="muted rv-settle section-line">
-            A lawyer relying on a citation, a researcher quoting a synthetic respondent, a nurse whose afternoon has run over. Same rule in each: code checks, a named person decides.
-          </p>
-        </Reveal>
-        <Reveal>
-          <div className="rv-settle">
-            <Prototypes basePath={basePath} />
-          </div>
-        </Reveal>
+      <div className="mai built-body">
 
         <div id="independent-work" className="anchor-target" />
         <div id="research" className="anchor-target" />
         <Reveal>
           <h2 id="systems" className="mai-kick rv-settle">
-            03 · how the work runs
+            02 · how the work runs
           </h2>
           <p className="sec-title rv-settle">
             The checks, the agents, and the code you can read.
