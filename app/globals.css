@@ -8392,6 +8392,9 @@ html[data-lang="zh"] li {
   position: relative;
   height: calc(100svh + (var(--tracks) - 1) * var(--step));
   margin-top: 8px;
+  /* Discs waiting off the right edge must not widen the page. clip, not
+     hidden, so the stage inside can still stick. */
+  overflow-x: clip;
 }
 
 /* Clipped at the sides, but the disc waiting top right may hang over the
