@@ -190,14 +190,15 @@ export default async function Home() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`${basePath}/building-together.jpg`}
-              alt="Elliot smiling with a group as they compare rough orange block prototypes around a table"
+              alt="Elliot smiling with a group as they pass round tiny orange Clawd figures across a table"
               width={1920}
               height={1280}
             />
           </div>
           <figcaption>
             I bring rough prototypes into the room while people can still
-            change them.
+            change them. This time it was a tiny orange Clawd. Adoption was
+            instant.
           </figcaption>
         </figure>
       </Reveal>
