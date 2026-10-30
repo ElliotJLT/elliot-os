@@ -3189,9 +3189,14 @@ main:has(> .band) {
     justify-content: center;
   }
 
+  /* Six logos as two even rows of three: a flex wrap left two stranded on
+     a second line at phone width. */
   .logo-row {
-    justify-content: center;
-    gap: 18px 24px;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: space-evenly;
+    justify-items: center;
+    gap: 20px 18px;
   }
 }
 
@@ -8330,6 +8335,10 @@ footer .foot-base a {
   padding-inline: 0;
 }
 
+.loop-ledger-lede {
+  margin: 0 0 6px;
+}
+
 @media (max-width: 760px) {
   .ev-paint,
   .ev-paint-right,
@@ -8926,5 +8935,39 @@ html[data-lang="zh"] li {
   .cb:hover .cb-tip,
   .cb:focus-visible .cb-tip {
     translate: -50% 0;
+  }
+}
+
+/* What the agent refused, as four figures above the weekly table. */
+.ledger-tiles {
+  list-style: none;
+  margin: 14px 0 22px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.ledger-tiles li {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+}
+.ledger-tiles b {
+  display: block;
+  font-family: var(--display);
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.05;
+  margin-bottom: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.ledger-tiles span {
+  display: block;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+@media (max-width: 760px) {
+  .ledger-tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

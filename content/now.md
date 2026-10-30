@@ -8,13 +8,13 @@
 
 *The section above is the agent's. This one is mine.*
 
-- Looking for the next thing in one of two shapes: founding product or
-  ops lead at an early-stage company, or a tour inside government building
-  a public service. Email works:
+- Venture Lead at Nesta's
+  [Mission Studio](https://www.nesta.org.uk/mission-studio/), building
+  agentic AI ventures with founders, from concept to spinout. Email works:
   [elliotjlittle@gmail.com](mailto:elliotjlittle@gmail.com).
-- Built this site over two days in public. How I split my own work
-  between me and machines, and the ledger that checks it, is on
-  [/loops](/loops).
+- Alongside it, I keep building in public. How I split my own work between
+  me and machines, and the ledger that checks it, is on
+  [/evals](/evals#agents).
 - [boulot](https://github.com/ElliotJLT/boulot-os), my open-source
   career-ops system, went public in June. My partner and my sister both
   use it.

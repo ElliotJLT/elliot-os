@@ -108,8 +108,9 @@ export default function Bench({ children }: { children?: React.ReactNode }) {
         { k: "info", t: "open-coded traces: sycophancy · inconsistency across modes" },
         { k: "warn", t: "hallucinated marks: confident marking the scheme didn't back up" },
         { k: "ok", t: "caught · now a case in the suite" },
+        { k: "warn", t: "red team: a student talking the tutor into the answer" },
         { k: "ok", t: "teacher flag → new case" },
-        { k: "ok", t: "pass/fail judge on every session · Socratic pass rate 33% → 65% in two weeks" },
+        { k: "ok", t: "pass/fail judge on every session · Socratic pass rate doubled, 33% → 65%, in two weeks" },
         { k: "info", t: "safeguarding: detection first, then the noise cut" },
       ],
     },
@@ -202,14 +203,14 @@ export default function Bench({ children }: { children?: React.ReactNode }) {
           "Marked against the exam board's own schemes. Every teacher flag becomes a test case.",
           <span className="v-stat">
             <b>99%+</b>
-            <em>marking accuracy, up from 67%</em>
+            <em>marking accuracy on the syllabus covered, up from 67%</em>
           </span>,
         )}
         {card(
           "ways-of-working",
           "",
           "Ways of working",
-          "Six product engineers, no requirements layer, PRs merged in under two hours. The prototype is the spec.",
+          "Six product engineers, PRs merged in under two hours, every release gated on the evals. The prototype is the spec.",
           <span className="v-stat">
             <b>5.2</b>
             <em>merged PRs per engineer, per week</em>
