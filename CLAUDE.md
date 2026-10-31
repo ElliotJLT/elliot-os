@@ -9,6 +9,7 @@ Pages, plain CSS, no analytics. Live: https://elliotjlt.github.io/elliot-os/
 npm run dev            # local, served from /
 npm run build          # static export to out/ (prebuild fetches Medium media)
 npm run eval:check     # golden set over both agents; gates CI on scripts/ and evals/
+npm run design:check   # type and colour against the design system; gates CI on CSS
 npx tsc --noEmit       # typecheck
 ```
 
@@ -42,6 +43,12 @@ before shipping.
   Grotesque (Archivo, `--sans`) for running text. Serif (Newsreader,
   `--serif`) for standfirsts and summaries. Mono (`--mono`) only for
   kickers, labels and links, in small caps-tracked uppercase.
+- Sizes. Headings and the lead use the role tokens in `:root`
+  (`--fs-display`, `--fs-h1` to `--fs-h4`, `--fs-lead`); everything else
+  sits on 11 12 13 14 15 16 17 20 24 32px, no half pixels. Mono labels are
+  11px tracked 0.12em, mono links and pills 12px. Line heights: 1.05
+  display, 1.12 headings, 1.25 tight UI, 1.4 small text, 1.55 reading.
+  Pick from these; don't add a new size for one element.
 - Section pattern: claret mono kicker (`--kick`), display headline in the
   `.sec-title` size, muted standfirst, then the content.
 - Colour. Only the tokens in `:root`: stone paper, ink, bottle green
@@ -82,6 +89,13 @@ before shipping.
   Do not go back to pure `:hover`.
 
 ## Rules that are easy to break
+
+- New pages and components use the design system above, not their own
+  values. `npm run design:check` fails on any font size, line height,
+  letter-spacing, weight or hex colour outside it, and CI runs it on every
+  change to the CSS. If something genuinely needs an exception (a display
+  numeral, disc art), add `/* design-ok: why */` on that line; never widen
+  the scale or the colour list in the script to make a check pass.
 
 - `content/now.md` has two authors. The block between `agent:begin` and
   `agent:end` belongs to `scripts/agent-now.mjs`; never hand-edit it. The

@@ -23,11 +23,11 @@ const STOPS: Stop[] = [
   [1.14, -0.2, 1.22, 0],
 ];
 const STOPS_PHONE: Stop[] = [
-  [-1.1, 0.6, 0.86, 0],
-  [-0.22, 0.6, 0.86, 1],
-  [0.5, 0.6, 1, 1],
-  [1.22, 0.6, 0.86, 1],
-  [2.1, 0.6, 0.86, 0],
+  [-1.1, 0.5, 0.86, 0],
+  [-0.22, 0.5, 0.86, 1],
+  [0.5, 0.5, 1, 1],
+  [1.22, 0.5, 0.86, 1],
+  [2.1, 0.5, 0.86, 0],
 ];
 
 const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
@@ -183,7 +183,6 @@ export default function DiscGallery({ basePath = "" }: { basePath?: string }) {
   const handles = useRef<Map<string, Handle>>(new Map());
   const dd = useRef<HTMLDivElement>(null);
   const runway = useRef<HTMLDivElement>(null);
-  const closeBtn = useRef<HTMLButtonElement>(null);
   const atRef = useRef(0);
   const workRef = useRef(work);
   workRef.current = work;
@@ -324,7 +323,9 @@ export default function DiscGallery({ basePath = "" }: { basePath?: string }) {
     setEnter("open");
     setOpen(slug);
     setIndex(false);
-    requestAnimationFrame(() => closeBtn.current?.focus({ preventScroll: true }));
+    requestAnimationFrame(() =>
+      dd.current?.querySelector<HTMLButtonElement>(".dd-art[data-active] .dd-back")?.focus({ preventScroll: true }),
+    );
   }, []);
 
   // Nav links and shared links: #prototypes, #safety, or a story's slug.
@@ -607,13 +608,8 @@ export default function DiscGallery({ basePath = "" }: { basePath?: string }) {
           data-open={open !== null || undefined}
           onScroll={onDetailScroll}
         >
-          {shown && (
-            <button ref={closeBtn} type="button" className="dd-close" onClick={close}>
-              Close <span aria-hidden="true">✕</span>
-            </button>
-          )}
           {WORK.map((s) => (
-            <Detail key={s.slug} story={s} basePath={basePath} active={s.slug === open} enter={enter} />
+            <Detail key={s.slug} story={s} basePath={basePath} active={s.slug === open} enter={enter} onClose={close} />
           ))}
           {shown && (
             <>
@@ -725,7 +721,19 @@ function Disc({
  * up as it loads, can be handled, and a prototype's disc plays its
  * recording.
  */
-function Detail({ story, basePath, active, enter }: { story: Story; basePath: string; active: boolean; enter: "open" | "next" }) {
+function Detail({
+  story,
+  basePath,
+  active,
+  enter,
+  onClose,
+}: {
+  story: Story;
+  basePath: string;
+  active: boolean;
+  enter: "open" | "next";
+  onClose: () => void;
+}) {
   const tilt = useRef<HTMLSpanElement | null>(null);
   const body = useRef<HTMLSpanElement | null>(null);
   const h = useRef<Handle>(newHandle());
@@ -775,6 +783,12 @@ function Detail({ story, basePath, active, enter }: { story: Story; basePath: st
 
   return (
     <article className="dd-art" data-active={active || undefined} aria-label={story.title}>
+      {/* Back to the gallery, in the page's flow rather than floating. */}
+      {active && (
+        <button type="button" className="dd-back" onClick={onClose}>
+          <span aria-hidden="true">←</span> All work
+        </button>
+      )}
       <div className="dd-text">
         <p className="dd-kick">
           {story.kind} · {story.at} · {story.when}
@@ -833,6 +847,7 @@ function Detail({ story, basePath, active, enter }: { story: Story; basePath: st
         <div
           className="dd-disc"
           data-enter={enter}
+          title={story.look.after ? `Cover after ${story.look.after}` : undefined}
           data-plays={story.clip ? "" : undefined}
           onPointerDown={(e) => {
             if (e.button !== 0) return;
@@ -877,12 +892,6 @@ function Detail({ story, basePath, active, enter }: { story: Story; basePath: st
           {story.clip && (
             <span className="dd-disc-play" aria-hidden="true">
               ▶
-            </span>
-          )}
-          {story.look.after && (
-            <span className="dd-after">
-              Cover after {story.look.after}
-              {story.look.hours && <em>{story.look.hours} hours of them on my Spotify. No regrets.</em>}
             </span>
           )}
         </div>
