@@ -10,6 +10,7 @@
     "eval": "node scripts/eval-agents.mjs",
     "eval:check": "node scripts/eval-agents.mjs --check",
     "eval:record": "node scripts/eval-agents.mjs --record",
+    "design:check": "node scripts/check-design.mjs",
     "i18n:collect": "node scripts/i18n-collect.mjs",
     "i18n:translate": "node --env-file-if-exists=.env scripts/i18n-translate.mjs",
     "i18n": "npm run i18n:collect && npm run i18n:translate"

@@ -581,7 +581,7 @@ li {
   text-decoration: none;
   display: inline-block;
   min-height: 24px;
-  line-height: 24px;
+  line-height: 24px; /* design-ok: fixed row height for the hash column */
 }
 
 .entry .hash:hover {
@@ -4565,8 +4565,8 @@ main:has(> .band) {
 .eval-rate strong {
   display: block;
   font-family: var(--display);
-  font-size: 54px;
-  line-height: 0.9;
+  font-size: 54px; /* design-ok: display numeral */
+  line-height: 0.9; /* design-ok: display numeral */
   letter-spacing: -0.02em;
   color: var(--ink);
   font-variant-numeric: tabular-nums;
@@ -4687,7 +4687,7 @@ main:has(> .band) {
   padding: 18px 26px;
   border-top: 1px solid var(--line);
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 1.55;
   color: var(--muted);
 }
 
@@ -6119,7 +6119,7 @@ h2.mai-kick + p.muted,
   left: 22px;
   top: 14px;
   font-family: var(--display);
-  font-size: 64px;
+  font-size: 64px; /* design-ok: decorative quote mark */
   line-height: 1;
   color: var(--accent-ink);
 }
@@ -6625,7 +6625,7 @@ h2.mai-kick + p.muted,
   background: var(--bg);
   font-family: var(--mono);
   font-size: 13px;
-  line-height: 1.9;
+  line-height: 1.9; /* design-ok: log rows read as lines */
   color: var(--ink-2);
 }
 
@@ -6896,7 +6896,7 @@ h2.mai-kick + p.muted,
 .v-stat b {
   font-family: var(--display);
   font-weight: 400;
-  font-size: 72px;
+  font-size: 72px; /* design-ok: display numeral */
   line-height: 1;
   color: var(--ink);
 }
@@ -7941,7 +7941,7 @@ html[data-lang="zh"] body {
 }
 html[data-lang="zh"] p,
 html[data-lang="zh"] li {
-  line-height: 1.75;
+  line-height: 1.75; /* design-ok: Chinese glyphs need more leading */
 }
 @media (prefers-reduced-motion: reduce) {
   .lang-code,
@@ -8579,7 +8579,7 @@ html:not(.js) .dg-disc:first-child {
   z-index: 2;
   text-align: center;
   font-family: var(--display);
-  font-size: min(22cqi, calc(150cqi / var(--len)));
+  font-size: min(22cqi, calc(150cqi / var(--len))); /* design-ok: disc art, sized to the disc */
   line-height: 1;
   letter-spacing: -0.02em;
   white-space: nowrap;
@@ -8604,7 +8604,7 @@ html:not(.js) .dg-disc:first-child {
   font-family: var(--sans);
   font-weight: 700;
   font-size: 5.6cqi;
-  line-height: 0.98;
+  line-height: 0.98; /* design-ok: disc art */
   letter-spacing: -0.01em;
   text-transform: uppercase;
   text-wrap: balance;
@@ -8691,8 +8691,8 @@ html:not(.js) .dg-disc:first-child {
   overflow: visible;
   fill: currentColor;
   font-family: var(--mono);
-  font-size: 2.4px;
-  letter-spacing: 0.3px;
+  font-size: 2.4px; /* design-ok: SVG text in viewBox units */
+  letter-spacing: 0.3px; /* design-ok: SVG text in viewBox units */
 }
 
 .disc-rim-band {
@@ -9272,7 +9272,7 @@ html:not(.js) .dg-disc:first-child {
   border-radius: 50%;
   background: var(--ink);
   color: var(--bg);
-  font-size: clamp(14px, 1.4vw, 20px);
+  font-size: clamp(14px, 1.4vw, 20px); /* design-ok: play glyph on the disc */
   padding-left: 0.15em;
   box-sizing: border-box;
   opacity: 0.82;
@@ -9302,7 +9302,7 @@ html:not(.js) .dg-disc:first-child {
 }
 
 .dd-play span {
-  font-size: 10px;
+  font-size: 10px; /* design-ok: play glyph */
 }
 
 .dd-play:focus-visible,

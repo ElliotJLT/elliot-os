@@ -1,0 +1,29 @@
+name: Design system
+
+# Fails any change that adds a type size, line height, tracking, weight or
+# colour outside the design system in CLAUDE.md. A genuine exception carries
+# /* design-ok: why */ on the same line. Zero dependencies and no network,
+# so it runs in seconds on every change to the styles.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "app/**/*.css"
+      - "scripts/check-design.mjs"
+  pull_request:
+    paths:
+      - "app/**/*.css"
+      - "scripts/check-design.mjs"
+  workflow_dispatch:
+
+jobs:
+  design:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check the design system
+        run: node scripts/check-design.mjs
