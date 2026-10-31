@@ -9,6 +9,7 @@ import { getQuotes } from "@/lib/quotes";
 import Reveal from "../components/Reveal";
 import HoverLabel from "../components/HoverLabel";
 import ReaderQuotes from "../components/ReaderQuotes";
+import PodcastVideo from "../components/PodcastVideo";
 
 export const metadata = { title: "Writing · Elliot Little" };
 
@@ -49,25 +50,47 @@ export default async function Writing() {
         {media.podcast && (
           <Reveal>
             <div id="podcast" className="anchor-target" />
-            <a className="pod rv-settle" href={media.podcast.url}>
-              {media.podcast.image && (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img src={`${basePath}/${media.podcast.image}`} alt="" />
-              )}
-              <div>
-                <span className="wr-date">Podcast · Just Now Possible</span>
-                <h2 className="wr-h">{media.podcast.title}</h2>
-                <p className="wr-note">
-                  With Teresa Torres, on building AI that closes the gap
-                  between knowing what to do and actually doing it, for
-                  students without the network that usually supplies the
-                  answer.
-                </p>
-                <span className="wr-go">
-                  Listen <span aria-hidden="true">→</span>
-                </span>
+            {media.podcast.video ? (
+              <div className="rv-settle">
+                <PodcastVideo
+                  id={media.podcast.video.id}
+                  still={`${basePath}/${media.podcast.video.image}`}
+                  title={media.podcast.title}
+                >
+                  <span className="wr-date">Podcast · Just Now Possible</span>
+                  <h2 className="wr-h">{media.podcast.title}</h2>
+                  <p className="wr-note">
+                    Teresa Torres asked Dan, the engineer I built it with, and
+                    me how we made an AI career co-pilot for students from 16
+                    up who don&apos;t have the network that usually supplies
+                    the answer.
+                  </p>
+                  <a className="wr-go" href={media.podcast.url}>
+                    Or listen on Spotify <span aria-hidden="true">→</span>
+                  </a>
+                </PodcastVideo>
               </div>
-            </a>
+            ) : (
+              <a className="pod rv-settle" href={media.podcast.url}>
+                {media.podcast.image && (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img src={`${basePath}/${media.podcast.image}`} alt="" />
+                )}
+                <div>
+                  <span className="wr-date">Podcast · Just Now Possible</span>
+                  <h2 className="wr-h">{media.podcast.title}</h2>
+                  <p className="wr-note">
+                    With Teresa Torres, on building AI that closes the gap
+                    between knowing what to do and actually doing it, for
+                    students without the network that usually supplies the
+                    answer.
+                  </p>
+                  <span className="wr-go">
+                    Listen <span aria-hidden="true">→</span>
+                  </span>
+                </div>
+              </a>
+            )}
           </Reveal>
         )}
 

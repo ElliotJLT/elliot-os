@@ -183,7 +183,13 @@ export async function getPosts(limit = 4): Promise<Post[]> {
 
 export type Media = {
   posts: Record<string, string>;
-  podcast: { title: string; url: string; image: string | null } | null;
+  podcast: {
+    title: string;
+    url: string;
+    image: string | null;
+    /** The YouTube upload of the same episode, if its still was fetched. */
+    video?: { id: string; image: string } | null;
+  } | null;
 };
 
 /**
