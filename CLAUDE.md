@@ -9,6 +9,7 @@ Pages, plain CSS, no analytics. Live: https://elliotjlt.github.io/elliot-os/
 npm run dev            # local, served from /
 npm run build          # static export to out/ (prebuild fetches Medium media)
 npm run eval:check     # golden set over both agents; gates CI on scripts/ and evals/
+npm run design:check   # type and colour against the design system; gates CI on CSS
 npx tsc --noEmit       # typecheck
 ```
 
@@ -88,6 +89,13 @@ before shipping.
   Do not go back to pure `:hover`.
 
 ## Rules that are easy to break
+
+- New pages and components use the design system above, not their own
+  values. `npm run design:check` fails on any font size, line height,
+  letter-spacing, weight or hex colour outside it, and CI runs it on every
+  change to the CSS. If something genuinely needs an exception (a display
+  numeral, disc art), add `/* design-ok: why */` on that line; never widen
+  the scale or the colour list in the script to make a check pass.
 
 - `content/now.md` has two authors. The block between `agent:begin` and
   `agent:end` belongs to `scripts/agent-now.mjs`; never hand-edit it. The
