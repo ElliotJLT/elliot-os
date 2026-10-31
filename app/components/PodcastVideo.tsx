@@ -68,9 +68,7 @@ export default function PodcastVideo({
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={still} alt="" />
             <span className="pod-v-btn">
-              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
-              </svg>
+              <span aria-hidden="true">▶</span>
               <span className="pod-v-len">Watch the episode</span>
             </span>
           </button>

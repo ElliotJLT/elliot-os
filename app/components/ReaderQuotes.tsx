@@ -1,9 +1,21 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { Reader } from "@/lib/quotes";
+import { underline } from "./inkMarks";
 
-const AUTOPLAY_DELAY = 6000;
+/** The quote with its marked phrase wrapped, so the pen can find it. */
+function marked(quote: string, mark?: string) {
+  const at = mark ? quote.indexOf(mark) : -1;
+  if (!mark || at < 0) return quote;
+  return (
+    <>
+      {quote.slice(0, at)}
+      <span className="reader-mark">{mark}</span>
+      {quote.slice(at + mark.length)}
+    </>
+  );
+}
 
 export default function ReaderQuotes({
   readers,
@@ -17,6 +29,38 @@ export default function ReaderQuotes({
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const slideRefs = useRef<Array<HTMLElement | null>>([]);
   const scrollTimerRef = useRef<number | null>(null);
+  // One pen underline per quote, built from where its phrase actually sets,
+  // and drawn in when that quote is the one showing.
+  const [marks, setMarks] = useState<Array<{ d: string; w: number; h: number } | null>>([]);
+
+  useLayoutEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return;
+    const build = () =>
+      setMarks(
+        slideRefs.current.map((slide) => {
+          const quote = slide?.querySelector("blockquote");
+          const word = quote?.querySelector(".reader-mark");
+          if (!quote || !word) return null;
+          const o = quote.getBoundingClientRect();
+          const r = word.getBoundingClientRect();
+          return {
+            d: underline({
+              left: r.left - o.left,
+              top: r.top - o.top,
+              right: r.right - o.left,
+              bottom: r.bottom - o.top,
+            }),
+            w: o.width,
+            h: o.height,
+          };
+        }),
+      );
+    build();
+    const resized = new ResizeObserver(build);
+    resized.observe(viewport);
+    return () => resized.disconnect();
+  }, [readers]);
 
   const scrollToSlide = useCallback((index: number, behavior: ScrollBehavior) => {
     const viewport = viewportRef.current;
@@ -39,14 +83,6 @@ export default function ReaderQuotes({
     },
     [readers.length, scrollToSlide],
   );
-
-  useEffect(() => {
-    if (paused || readers.length < 2) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const timer = window.setTimeout(() => select(active + 1), AUTOPLAY_DELAY);
-    return () => window.clearTimeout(timer);
-  }, [active, paused, readers.length, select]);
 
   useEffect(
     () => () => {
@@ -85,6 +121,7 @@ export default function ReaderQuotes({
   return (
     <section
       className="reader-carousel"
+      data-paused={paused || undefined}
       aria-label="What readers have said"
       aria-roledescription="carousel"
       onPointerEnter={() => setPaused(true)}
@@ -127,7 +164,20 @@ export default function ReaderQuotes({
                 />
               </div>
               <div className="reader-slide-copy">
-                <blockquote>“{reader.quote}”</blockquote>
+                <blockquote>
+                  “{marked(reader.quote, reader.mark)}”
+                  {marks[index] && (
+                    <svg
+                      className="reader-ink"
+                      width={marks[index]!.w}
+                      height={marks[index]!.h}
+                      viewBox={`0 0 ${marks[index]!.w} ${marks[index]!.h}`}
+                      aria-hidden="true"
+                    >
+                      <path d={marks[index]!.d} pathLength={1} />
+                    </svg>
+                  )}
+                </blockquote>
                 <figcaption>{reader.who}</figcaption>
               </div>
             </figure>
@@ -154,6 +204,13 @@ export default function ReaderQuotes({
               aria-label={`Show quote from ${reader.who}`}
               aria-pressed={active === index}
               onClick={() => select(index)}
+              // Autoplay is the active tab's fill (6s in globals.css): when
+              // it completes, the next quote comes in. Pausing the fill on
+              // hover or focus pauses the carousel with it, and with reduced
+              // motion there's no fill, so no autoplay.
+              onAnimationEnd={() => {
+                if (active === index && readers.length > 1) select(index + 1);
+              }}
             />
           ))}
         </div>

@@ -15,23 +15,27 @@
     {
       "quote": "Perfect if you're currently navigating the messy, magical reality of AI implementation",
       "who": "AI Summit London",
-      "logo": "quotes/ai-summit-london.png"
+      "logo": "quotes/ai-summit-london.png",
+      "mark": "messy, magical reality"
     },
     {
       "quote": "This is a sensational write-up",
       "who": "Australian Institute for Machine Learning",
-      "logo": "quotes/adelaide-university.svg"
+      "logo": "quotes/adelaide-university.svg",
+      "mark": "sensational"
     },
     {
       "quote": "Such a sharp, clear-eyed analysis of the challenges we're all grappling with.",
       "who": "Medium subscriber",
-      "logo": "quotes/medium.svg"
+      "logo": "quotes/medium.svg",
+      "mark": "clear-eyed"
     },
     {
       "quote": "One of the few AI articles that I felt was worth reading in recent times.",
       "who": "Uplevyl",
       "logo": "quotes/uplevyl.png",
-      "logoTone": "dark"
+      "logoTone": "dark",
+      "mark": "worth reading"
     }
   ]
 }
