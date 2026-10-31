@@ -71,7 +71,7 @@ export default function PodcastVideo({
               <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                 <path d="M8 5.5v13l11-6.5z" fill="currentColor" />
               </svg>
-              <span className="pod-v-len">Watch · 70 min</span>
+              <span className="pod-v-len">Watch the episode</span>
             </span>
           </button>
         ) : (
