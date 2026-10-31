@@ -15,6 +15,8 @@ export type Reader = {
   who: string;
   logo: string;
   logoTone?: "light" | "dark";
+  /** The phrase in `quote` that gets the pen underline. */
+  mark?: string;
 };
 
 export function getQuotes(): { reference: Reference; readers: Reader[] } {

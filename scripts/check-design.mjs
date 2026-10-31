@@ -8,6 +8,8 @@
 //   line-height     1, 1.05, 1.12, 1.25, 1.4, 1.55
 //   letter-spacing  0, 0.04em, 0.12em, -0.01em, -0.015em, -0.02em
 //   font-weight     400, 500, 600, 700
+//   border-radius   a corner token (var(--r), --r-tight, --r-inner, --r-card,
+//                   --r-pill), 50% for a circle, or 0
 //   colour          a hex outside :root that isn't a palette token
 //
 // A real exception carries `/* design-ok: why */` on the same line, so the
@@ -21,6 +23,7 @@ const LINE_HEIGHTS = ["1", "1.05", "1.12", "1.25", "1.4", "1.55"];
 const TRACKING = ["0", "normal", "0.04em", "0.12em", "-0.01em", "-0.015em", "-0.02em"];
 const WEIGHTS = ["400", "500", "600", "700", "normal", "inherit"];
 const KEYWORDS = ["inherit", "initial", "unset", "normal"];
+const RADII = ["var(--r)", "var(--r-tight)", "var(--r-inner)", "var(--r-card)", "var(--r-pill)", "50%", "0"];
 
 // Colours already outside the palette when this check landed. Don't add to
 // this list: use a token from :root, or mark the line design-ok with a reason.
@@ -78,6 +81,12 @@ for (const file of cssFiles("app")) {
         : WEIGHTS.includes(v);
       if (!ok) problems.push(`${at}  ${prop}: ${v}  is off the scale`);
     }
+    const radius = line.match(/^\s*border(?:-[a-z]+)?-radius\s*:\s*([^;]+);/);
+    if (radius) {
+      const parts = radius[1].replace(/\s*!important\s*$/, "").trim().split(/\s+(?![^(]*\))/);
+      if (!parts.every((v) => RADII.includes(v) || KEYWORDS.includes(v)))
+        problems.push(`${at}  border-radius: ${radius[1].trim()}  is not a corner token`);
+    }
     for (const hex of line.matchAll(/#[0-9a-f]{3,8}\b/gi)) {
       const h = hex[0].toLowerCase();
       if (!palette.has(h) && !LEGACY_HEX.has(h)) problems.push(`${at}  ${h}  is not a palette colour`);
@@ -94,4 +103,4 @@ if (problems.length) {
   );
   process.exit(1);
 }
-console.log("Design check: every size, line height, tracking, weight and colour is on the system.");
+console.log("Design check: every size, line height, tracking, weight, corner and colour is on the system.");

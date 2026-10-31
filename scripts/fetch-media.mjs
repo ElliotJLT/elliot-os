@@ -42,8 +42,8 @@ function slug(s) {
     .slice(0, 48);
 }
 
-async function save(url, name) {
-  const ext = (url.match(/\.(png|jpe?g|webp|gif)(?:\?|$)/i)?.[1] || "jpg")
+async function save(url, name, forceExt) {
+  const ext = forceExt || (url.match(/\.(png|jpe?g|webp|gif)(?:\?|$)/i)?.[1] || "jpg")
     .toLowerCase()
     .replace("jpeg", "jpg");
   const file = `${name}.${ext}`;
@@ -72,12 +72,13 @@ try {
       /https:\/\/cdn-images-\d+\.medium\.com\/max\/[^"<)\s]+/,
     )?.[0];
     if (!link || !full) continue;
-    // Ask the CDN for a uniform 16:9 crop rather than the full-width header:
-    // consistent shape for the list, and roughly a seventh of the bytes
-    // (~130KB instead of ~900KB) on a site that should stay light.
-    const img = full.replace(/\/max\/\d+\//, "/fit/c/320/180/");
+    // Ask the CDN for a uniform 16:9 crop as WebP: the shape the panels on
+    // /writing use, wide enough for the lead piece on a retina screen, and
+    // ~120KB a piece on a site that should stay light.
+    const id = full.split("/").pop();
+    const img = `https://miro.medium.com/v2/resize:fill:960:540/format:webp/${id}`;
     try {
-      media.posts[link] = await save(img, slug(title) || "post");
+      media.posts[link] = await save(img, slug(title) || "post", "webp");
     } catch (e) {
       console.warn(`  skipped image for "${title}": ${e.message}`);
     }
