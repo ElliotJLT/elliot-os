@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-10-30, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 8 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-10-31, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 13 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 8 commits. "Site: qualify the 99%, add red-teaming and Nesta, make the ledger readable (#89)" (60300aa), "ledger: 2026-10-29" (29edf13), "ledger: 2026-10-28" (47f31ee) and 5 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 13 commits. "ledger: 2026-10-30" (effe608), "/evals: an intro with a point of view (#94)" (facf2d8), "Home: a line for the tiny Clawd (#93)" (7ffb7ac) and 10 more
 <!-- agent:end -->
 
 ## by hand
