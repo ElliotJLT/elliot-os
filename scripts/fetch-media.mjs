@@ -21,6 +21,9 @@ const OUT_DIR = join(ROOT, "public", "media");
 const MAP_PATH = join(ROOT, "data", "media.json");
 
 const PODCAST_EPISODE = "3D8quBCXrMNgIF87czhux3";
+// The same episode on YouTube. Only its thumbnail is fetched here; the player
+// itself loads from youtube-nocookie.com when a visitor presses play.
+const PODCAST_VIDEO = "yK_y4gG5sv8";
 
 /** Fetch with a browser UA; Medium's CDN rejects some default agents. */
 async function get(url, asBuffer = false) {
@@ -95,10 +98,31 @@ try {
     title: meta.title,
     url: `https://open.spotify.com/episode/${PODCAST_EPISODE}`,
     image: meta.thumbnail_url ? await save(meta.thumbnail_url, "podcast") : null,
+    video: null,
   };
   console.log(`media: podcast cover + title ("${meta.title.slice(0, 40)}…")`);
 } catch (e) {
   console.warn(`media: podcast metadata unavailable (${e.message})`);
+}
+
+// ---- Podcast video still ---------------------------------------------------
+// maxresdefault is missing on some uploads; hqdefault always exists.
+if (media.podcast) {
+  for (const size of ["maxresdefault", "hqdefault"]) {
+    try {
+      media.podcast.video = {
+        id: PODCAST_VIDEO,
+        image: await save(
+          `https://i.ytimg.com/vi/${PODCAST_VIDEO}/${size}.jpg`,
+          "podcast-video",
+        ),
+      };
+      console.log(`media: podcast video still (${size})`);
+      break;
+    } catch (e) {
+      console.warn(`media: podcast video ${size} unavailable (${e.message})`);
+    }
+  }
 }
 
 writeFileSync(MAP_PATH, JSON.stringify(media, null, 2) + "\n");
