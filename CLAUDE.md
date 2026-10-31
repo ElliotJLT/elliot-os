@@ -42,6 +42,12 @@ before shipping.
   Grotesque (Archivo, `--sans`) for running text. Serif (Newsreader,
   `--serif`) for standfirsts and summaries. Mono (`--mono`) only for
   kickers, labels and links, in small caps-tracked uppercase.
+- Sizes. Headings and the lead use the role tokens in `:root`
+  (`--fs-display`, `--fs-h1` to `--fs-h4`, `--fs-lead`); everything else
+  sits on 11 12 13 14 15 16 17 20 24 32px, no half pixels. Mono labels are
+  11px tracked 0.12em, mono links and pills 12px. Line heights: 1.05
+  display, 1.12 headings, 1.25 tight UI, 1.4 small text, 1.55 reading.
+  Pick from these; don't add a new size for one element.
 - Section pattern: claret mono kicker (`--kick`), display headline in the
   `.sec-title` size, muted standfirst, then the content.
 - Colour. Only the tokens in `:root`: stone paper, ink, bottle green
