@@ -59,6 +59,21 @@ before shipping.
   one stroke-dashoffset. Don't hand-draw new ones in SVG.
 - Rules, not boxes: hairlines (`--rule`, `--line-2`) separate things; a card
   only when the box means something.
+- Corners. Five tokens, nothing else: `--r` (2px: code, bars, hairline
+  bits), `--r-tight` (8px: rows and tooltips inside a menu), `--r-inner`
+  (14px: anything set inside a card, including a card in a card, images,
+  logo tiles, popovers), `--r-card` (26px: the panel itself), `--r-pill`
+  (every button, chip and tag). Circles are 50%. `design:check` fails on
+  any other radius.
+- Buttons are pills, two sizes. The CTA is `.pill` (mono 13px, 13px 22px).
+  Every smaller pill is mono 12px, tracking 0.04em, sentence case, padding
+  8px 14px, or 8px 14px 8px 12px when it leads with a glyph (▶ ← ×). Filled
+  pills use `--cta-bg`/`--cta-fg`; outlined ones `--paper` with a `--line`
+  border. Close is always "Close ×". Never uppercase a pill: uppercase mono
+  is for labels, not things you press.
+- Media panels share one anatomy (the podcast and every /writing thread):
+  panel, 16:9 image left at 1.15fr, mono kicker, display headline, serif
+  standfirst, mono link, then a `--label` mono row label over ruled rows.
 - Discs (/built). Each story is a disc printed in two palette colours, or
   a cover made by `scripts/gen-covers.mjs` (Gemini) in the visual language
   of a classic album from Elliot's own listening, credited on the open
