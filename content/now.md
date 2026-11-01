@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-10-31, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 13 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-11-01, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 15 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 13 commits. "ledger: 2026-10-30" (effe608), "/evals: an intro with a point of view (#94)" (facf2d8), "Home: a line for the tiny Clawd (#93)" (7ffb7ac) and 10 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 15 commits. "ledger: 2026-10-31" (2415c8e), "/writing: the podcast as video, with four clips (#97)" (32407e1), "/built: Close home, phone gutters, type tidy, design check (#95)" (a9b69e6) and 12 more
 <!-- agent:end -->
 
 ## by hand
