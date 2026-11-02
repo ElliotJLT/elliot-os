@@ -64,13 +64,27 @@
       "captured": 0,
       "briefs": 0,
       "fallbacks": 0,
-      "ticks": 175,
+      "ticks": 229,
       "quiet": 0,
-      "facts_kept": 51,
-      "facts_thrown": 12,
-      "closes": 3,
+      "facts_kept": 53,
+      "facts_thrown": 13,
+      "closes": 5,
       "closes_withheld": 1,
-      "incidents": 12
+      "incidents": 16
+    },
+    {
+      "week_of": "2026-11-02",
+      "closed": 0,
+      "captured": 0,
+      "briefs": 0,
+      "fallbacks": 0,
+      "ticks": 0,
+      "quiet": 0,
+      "facts_kept": 1,
+      "facts_thrown": 2,
+      "closes": 0,
+      "closes_withheld": 0,
+      "incidents": 0
     }
   ],
   "broke": [
