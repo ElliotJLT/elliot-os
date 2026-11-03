@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-11-02, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 15 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-11-03, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 15 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 15 commits. "ledger: 2026-11-02" (b3d232d), "ledger: 2026-10-31" (2415c8e), "/writing: the podcast as video, with four clips (#97)" (32407e1) and 12 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 15 commits. "ledger: 2026-11-02" (58fed9b), "ledger: 2026-11-02" (b3d232d), "ledger: 2026-10-31" (2415c8e) and 12 more
 <!-- agent:end -->
 
 ## by hand
