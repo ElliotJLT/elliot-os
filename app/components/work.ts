@@ -56,6 +56,8 @@ export type Story = {
   look: Look;
   /** A recording of it running, with the moments worth jumping to. */
   clip?: { src: string; poster: string; chapters: { label: string; t: number }[] };
+  /** Screens from the shipped app, in the order a student meets them. */
+  shots?: { src: string; label: string }[];
 };
 
 const STORIES: Omit<Story, "slug">[] = [
@@ -88,6 +90,12 @@ const STORIES: Omit<Story, "slug">[] = [
       { label: "App Store", href: "https://apps.apple.com/gb/app/zero-gravity-tutor/id6760364095" },
     ],
     look: { bg: "#f3df98", fg: "#22543a", art: "work/tutor.jpg", cover: "work/covers/ai-stem-tutor.jpg", after: "OK Computer, Radiohead", hours: 101 },
+    shots: [
+      { src: "work/tutor/01.webp", label: "Ask anything" },
+      { src: "work/tutor/02.webp", label: "Jump back in" },
+      { src: "work/tutor/03.webp", label: "The lesson" },
+      { src: "work/tutor/04.webp", label: "The quiz" },
+    ],
   },
   {
     kind: "Shipped",

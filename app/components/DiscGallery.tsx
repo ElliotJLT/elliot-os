@@ -740,6 +740,7 @@ function Detail({
   const frame = useRef(0);
   const last = useRef(0);
   const [playing, setPlaying] = useState(false);
+  const [looking, setLooking] = useState(false);
   const [copied, setCopied] = useState(false);
 
   const run = useCallback(() => {
@@ -762,6 +763,7 @@ function Detail({
   useEffect(() => {
     if (!active) {
       setPlaying(false);
+      setLooking(false);
       return;
     }
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -797,6 +799,11 @@ function Detail({
         {story.clip && (
           <button type="button" className="dd-play" onClick={() => setPlaying(true)}>
             <span aria-hidden="true">▶</span> Play the walkthrough
+          </button>
+        )}
+        {story.shots && (
+          <button type="button" className="dd-play" data-plain="" onClick={() => setLooking(true)}>
+            See the app
           </button>
         )}
         <div className="dd-cols">
@@ -899,6 +906,9 @@ function Detail({
       {active && playing && story.clip && (
         <Lightbox clip={story.clip} title={story.title} basePath={basePath} onClose={() => setPlaying(false)} />
       )}
+      {active && looking && story.shots && (
+        <Screens shots={story.shots} title={story.title} basePath={basePath} onClose={() => setLooking(false)} />
+      )}
     </article>
   );
 }
@@ -978,6 +988,87 @@ function Lightbox({
               }}
             >
               <span>{String(i + 1).padStart(2, "0")}</span> {c.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
+/**
+ * The shipped app, over everything like the walkthroughs: its screens in a
+ * row that scrolls sideways, each named underneath. A name jumps to its
+ * screen; Escape or Close puts you back on the story.
+ */
+function Screens({
+  shots,
+  title,
+  basePath,
+  onClose,
+}: {
+  shots: NonNullable<Story["shots"]>;
+  title: string;
+  basePath: string;
+  onClose: () => void;
+}) {
+  const row = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const [shot, setShot] = useState(0);
+
+  useEffect(() => {
+    closeRef.current?.focus({ preventScroll: true });
+    const key = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      e.stopImmediatePropagation();
+      onClose();
+    };
+    window.addEventListener("keydown", key, true);
+    return () => window.removeEventListener("keydown", key, true);
+  }, [onClose]);
+
+  // The screen nearest the row's left edge is the one named.
+  const onScroll = () => {
+    const el = row.current;
+    if (!el) return;
+    let k = 0;
+    Array.from(el.children).forEach((c, i) => {
+      if ((c as HTMLElement).offsetLeft - el.offsetLeft <= el.scrollLeft + 8) k = i;
+    });
+    if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 8) k = shots.length - 1;
+    setShot(k);
+  };
+
+  return createPortal(
+    <div className="dd-lightbox" role="dialog" aria-modal="true" aria-label={`The app: ${title}`} onClick={onClose}>
+      <div className="dd-lightbox-in" onClick={(e) => e.stopPropagation()}>
+        <div className="dd-lightbox-top">
+          <p>{title}</p>
+          <button ref={closeRef} type="button" onClick={onClose}>
+            Close <span aria-hidden="true">✕</span>
+          </button>
+        </div>
+        <div ref={row} className="dd-shots" onScroll={onScroll}>
+          {shots.map((s) => (
+            <img key={s.src} src={`${basePath}/${s.src}`} alt={s.label} draggable={false} />
+          ))}
+        </div>
+        <div className="dd-chapters">
+          {shots.map((s, i) => (
+            <button
+              key={s.src}
+              type="button"
+              aria-pressed={i === shot}
+              onClick={() => {
+                const el = row.current;
+                const img = el?.children[i] as HTMLElement | undefined;
+                if (!el || !img) return;
+                el.scrollTo({ left: img.offsetLeft - el.offsetLeft, behavior: "smooth" });
+                setShot(i);
+              }}
+            >
+              <span>{String(i + 1).padStart(2, "0")}</span> {s.label}
             </button>
           ))}
         </div>
