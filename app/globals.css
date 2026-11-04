@@ -9745,6 +9745,7 @@ html:not(.js) .dg-disc:first-child {
   inset: 0;
   z-index: 4000;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   place-items: center;
   padding: 24px;
   background: rgba(19, 25, 21, 0.94);
@@ -9788,6 +9789,7 @@ html:not(.js) .dg-disc:first-child {
 }
 
 .dd-lightbox-top button {
+  flex: none;
   padding: 8px 14px;
   border: 1px solid rgba(243, 238, 226, 0.35);
   border-radius: var(--r-pill);
@@ -9802,6 +9804,34 @@ html:not(.js) .dg-disc:first-child {
   aspect-ratio: 16 / 10;
   border-radius: var(--r-inner);
   background: #000;
+}
+
+/* The app's screens, one row, each the height the window allows. */
+.dd-shots {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.dd-shots::-webkit-scrollbar {
+  display: none;
+}
+
+.dd-shots img {
+  flex: none;
+  height: min(720px, calc(100svh - 160px));
+  aspect-ratio: 646 / 1400;
+  border-radius: 12px;
+  scroll-snap-align: start;
+}
+
+/* On a phone the title wraps and the names wrap, so the screen gives way. */
+@media (max-width: 640px) {
+  .dd-shots img {
+    height: calc(100svh - 260px);
+  }
 }
 
 .dd-chapters {
