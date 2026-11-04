@@ -78,13 +78,13 @@
       "captured": 0,
       "briefs": 0,
       "fallbacks": 0,
-      "ticks": 92,
+      "ticks": 162,
       "quiet": 0,
-      "facts_kept": 6,
-      "facts_thrown": 9,
-      "closes": 1,
+      "facts_kept": 10,
+      "facts_thrown": 10,
+      "closes": 3,
       "closes_withheld": 0,
-      "incidents": 4
+      "incidents": 7
     }
   ],
   "broke": [
