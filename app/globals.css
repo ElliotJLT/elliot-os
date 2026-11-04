@@ -1623,6 +1623,7 @@ h2::before {
    cards or list follow. */
 .section-line {
   margin: -8px 0 22px;
+  font-family: var(--serif);
   font-size: 16px;
   line-height: 1.55;
 }
@@ -3835,7 +3836,7 @@ main:has(> .band) {
   line-height: 1.55;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .reader-carousel-controls {
@@ -4161,7 +4162,13 @@ main:has(> .band) {
 }
 
 .wr-more {
-  margin-top: 8px;
+  margin-top: 20px;
+}
+
+/* A panel sits 22px under a standfirst; with no standfirst it would sit
+   18px under the headline. The margins collapse, so this evens it out. */
+.sec-title + .wr-panel {
+  margin-top: 22px;
 }
 
 .wr-more ol {
@@ -4191,6 +4198,7 @@ main:has(> .band) {
   font-size: 20px;
   font-weight: 400;
   line-height: 1.12;
+  letter-spacing: -0.01em;
   color: var(--ink);
 }
 
@@ -4231,7 +4239,7 @@ main:has(> .band) {
   .pod.pod-v {
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     column-gap: 32px;
-    row-gap: 8px;
+    row-gap: 20px;
   }
 
   .pod-v-clips {
@@ -4283,6 +4291,9 @@ main:has(> .band) {
   border-radius: var(--r-pill);
   background: var(--cta-bg);
   color: var(--cta-fg);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.25;
   white-space: nowrap;
   box-shadow: var(--shadow-lift);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
@@ -4305,7 +4316,15 @@ main:has(> .band) {
   border: 0;
 }
 
-.pod-v-side .wr-note {
+.pod-v-side,
+.wr-lead-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.pod-v-side .wr-note,
+.wr-lead-meta .wr-note {
   margin-bottom: 8px;
 }
 
@@ -4316,7 +4335,7 @@ main:has(> .band) {
 
 .pod-v-label {
   display: block;
-  margin-top: 12px;
+  margin-top: 0;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--line-2);
   font-family: var(--mono);
@@ -4376,6 +4395,7 @@ main:has(> .band) {
 .pod-v-topic {
   font-family: var(--mono);
   font-size: 11px;
+  line-height: 1.4;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--faint);
