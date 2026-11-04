@@ -802,7 +802,7 @@ function Detail({
           </button>
         )}
         {story.shots && (
-          <button type="button" className="dd-play" onClick={() => setLooking(true)}>
+          <button type="button" className="dd-play" data-plain="" onClick={() => setLooking(true)}>
             See the app
           </button>
         )}

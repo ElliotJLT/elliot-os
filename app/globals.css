@@ -9718,6 +9718,11 @@ html:not(.js) .dg-disc:first-child {
   letter-spacing: 0.04em;
 }
 
+/* No glyph to lead with, so the even padding. */
+.dd-play[data-plain] {
+  padding: 8px 14px;
+}
+
 .dd-play span {
   font-size: 10px; /* design-ok: play glyph */
 }
@@ -9774,6 +9779,7 @@ html:not(.js) .dg-disc:first-child {
   margin: 0;
   font-family: var(--display);
   font-size: var(--fs-h4);
+  line-height: 1.12;
   color: #f3eee2;
 }
 
@@ -9823,7 +9829,7 @@ html:not(.js) .dg-disc:first-child {
   flex: none;
   height: min(720px, calc(100svh - 160px));
   aspect-ratio: 646 / 1400;
-  border-radius: 12px;
+  border-radius: var(--r-inner);
   scroll-snap-align: start;
 }
 
