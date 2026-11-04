@@ -39,14 +39,6 @@ export default async function Writing() {
           </header>
         </Reveal>
 
-        {readers?.length > 0 && (
-          <Reveal>
-            <div className="rv-settle">
-              <ReaderQuotes readers={readers} basePath={basePath} />
-            </div>
-          </Reveal>
-        )}
-
         {media.podcast && (
           <Reveal>
             <div id="podcast" className="anchor-target" />
@@ -94,6 +86,14 @@ export default async function Writing() {
           </Reveal>
         )}
 
+        {readers?.length > 0 && (
+          <Reveal>
+            <div className="rv-settle">
+              <ReaderQuotes readers={readers} basePath={basePath} />
+            </div>
+          </Reveal>
+        )}
+
         <div id="essays" className="anchor-target" />
 
         {FEATURED && (
@@ -133,45 +133,69 @@ export default async function Writing() {
                     )}
                   </>
                 )}
-                {/* Two or four posts sit two across, so a row never ends on an
-                    empty third column. */}
-                <div
-                  className="wr-grid"
-                  data-cols={g.posts.length % 3 === 0 ? 3 : 2}
-                >
-                  {g.posts.map((p, idx) => (
-                    <HoverLabel label="Read it →" key={p.link}>
-                      <a
-                        className="wr-card rv-settle"
-                        href={p.link}
-                        style={
-                          { "--rv-delay": `${idx * 90}ms` } as React.CSSProperties
-                        }
-                      >
-                        <div className="wr-shot rv-develop">
-                          {media.posts[p.link] ? (
-                            /* eslint-disable-next-line @next/next/no-img-element */
-                            <img
-                              src={`${basePath}/${media.posts[p.link]}`}
-                              alt=""
-                            />
-                          ) : (
-                            <span className="wr-noshot">No image</span>
-                          )}
-                        </div>
-                        <div className="wr-meta">
-                          <span className="wr-date">{p.date}</span>
-                          <h3 className="wr-h">{p.title}</h3>
-                          {noteFor(p.title) && (
-                            <p className="wr-note">{noteFor(p.title)}</p>
-                          )}
-                          <span className="wr-go">
-                            Read it <span aria-hidden="true">→</span>
-                          </span>
-                        </div>
-                      </a>
-                    </HoverLabel>
-                  ))}
+                {/* The podcast card's anatomy, so the page reads as one
+                    system: the newest piece leads with its art beside it,
+                    and the rest sit in ruled rows underneath. */}
+                <div className="wr-panel rv-settle">
+                  {(() => {
+                    const [lead, ...rest] = g.posts;
+                    const shot = media.posts[lead.link];
+                    return (
+                      <>
+                        <a className="wr-lead" href={lead.link}>
+                          <div className="wr-lead-shot">
+                            {shot ? (
+                              /* eslint-disable-next-line @next/next/no-img-element */
+                              <img src={`${basePath}/${shot}`} alt="" />
+                            ) : (
+                              <span className="wr-noshot">No image</span>
+                            )}
+                          </div>
+                          <div className="wr-lead-meta">
+                            <span className="wr-date">{lead.date}</span>
+                            <h3 className="wr-h">{lead.title}</h3>
+                            {noteFor(lead.title) && (
+                              <p className="wr-note">{noteFor(lead.title)}</p>
+                            )}
+                            <span className="wr-go">
+                              Read it <span aria-hidden="true">→</span>
+                            </span>
+                          </div>
+                        </a>
+                        {rest.length > 0 && (
+                          <div className="wr-more">
+                            <span className="pod-v-label">More on this</span>
+                            <ol>
+                              {rest.map((p) => (
+                                <li key={p.link}>
+                                  <a className="wr-row" href={p.link}>
+                                    <div className="wr-row-shot">
+                                      {media.posts[p.link] && (
+                                        /* eslint-disable-next-line @next/next/no-img-element */
+                                        <img
+                                          src={`${basePath}/${media.posts[p.link]}`}
+                                          alt=""
+                                        />
+                                      )}
+                                    </div>
+                                    <div>
+                                      <span className="wr-date">{p.date}</span>
+                                      <span className="wr-row-h">{p.title}</span>
+                                      {noteFor(p.title) && (
+                                        <span className="wr-row-note">
+                                          {noteFor(p.title)}
+                                        </span>
+                                      )}
+                                    </div>
+                                  </a>
+                                </li>
+                              ))}
+                            </ol>
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
                 </div>
               </Reveal>
             ),

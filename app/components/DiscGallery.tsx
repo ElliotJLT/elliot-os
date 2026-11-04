@@ -951,7 +951,7 @@ function Lightbox({
         <div className="dd-lightbox-top">
           <p>{title}</p>
           <button ref={closeRef} type="button" onClick={onClose}>
-            Close <span aria-hidden="true">✕</span>
+            Close <span aria-hidden="true">×</span>
           </button>
         </div>
         <video
