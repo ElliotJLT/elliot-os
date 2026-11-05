@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-11-04, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 15 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-11-05, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 17 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 15 commits. "ledger: 2026-11-03" (7c546cc), "ledger: 2026-11-02" (58fed9b), "ledger: 2026-11-02" (b3d232d) and 12 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 17 commits. "ledger: 2026-11-04" (2c6a2b4), "built: the tutor's App Store screens in its open story (#99)" (6d2144e), "/writing on the podcast's anatomy, a livelier reader carousel, strict corners and pills (#98)" (e7131aa) and 14 more
 <!-- agent:end -->
 
 ## by hand
