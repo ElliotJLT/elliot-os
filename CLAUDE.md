@@ -59,6 +59,19 @@ before shipping.
   one stroke-dashoffset. Don't hand-draw new ones in SVG.
 - Rules, not boxes: hairlines (`--rule`, `--line-2`) separate things; a card
   only when the box means something.
+- Panels. The one card, after Stripe's and x.ai's: `.panel`, or the shared
+  surface `--panel` + `--lift`. Paper on a 1px hairline ring, no shadow,
+  `--r-card` corners, `--pad-panel` inside (32px, 24px under 720, 20px
+  under 560), `--gap-panel` (16px) between panels. Text sits top-left;
+  images, quotes and stages inside take the same inset and `--r-inner`.
+  A panel holds one thing that stands on its own: a story, a role, an
+  article thread, a system. Never a panel in a panel, never a box round a
+  grid of panels, never a panel for illustrated prose (/evals stays bare)
+  or a page head. Hover on a linked panel lifts it; nothing else moves.
+- Stages. Media inside a panel sits on `.stage`: a landscape painted from
+  the palette, the story's cover blurred into it (`--stage-art`), and film
+  grain over both. The product goes on top, crisp, low on the stage and
+  running off its bottom edge.
 - Corners. Five tokens, nothing else: `--r` (2px: code, bars, hairline
   bits), `--r-tight` (8px: rows and tooltips inside a menu), `--r-inner`
   (14px: anything set inside a card, including a card in a card, images,
@@ -81,7 +94,9 @@ before shipping.
   The disc shows the headline number with what it counts (on a cover, as a
   round shop sticker). Discs float, tilt to the pointer, spin when dragged,
   and never spin on scroll. Every story reads problem, what we explored,
-  outcome, and fits one screen when opened. The stories live in
+  outcome, on one panel, and fits one screen when opened. A story with a
+  recording or app screens shows them on a stage under the problem; that
+  stage replaces the old play pill; a tap on the disc still plays. The stories live in
   `app/components/work.ts`; the numbers there are Elliot's.
 
 ## Layout rules
