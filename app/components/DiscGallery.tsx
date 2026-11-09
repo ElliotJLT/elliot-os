@@ -796,20 +796,13 @@ function Detail({
           {story.kind} · {story.at} · {story.when}
         </p>
         <h3 className="dd-title">{story.title}</h3>
-        {story.clip && (
-          <button type="button" className="dd-play" onClick={() => setPlaying(true)}>
-            <span aria-hidden="true">▶</span> Play the walkthrough
-          </button>
-        )}
-        {story.shots && (
-          <button type="button" className="dd-play" data-plain="" onClick={() => setLooking(true)}>
-            See the app
-          </button>
-        )}
-        <div className="dd-cols">
+        <div className="dd-cols panel">
           <div>
             <span className="ws-label">Problem</span>
             <p>{story.problem}</p>
+            {(story.clip || story.shots) && (
+              <Build story={story} basePath={basePath} onOpen={() => (story.clip ? setPlaying(true) : setLooking(true))} />
+            )}
           </div>
           <div>
             <span className="ws-label">What we explored</span>
@@ -910,6 +903,38 @@ function Detail({
         <Screens shots={story.shots} title={story.title} basePath={basePath} onClose={() => setLooking(false)} />
       )}
     </article>
+  );
+}
+
+/**
+ * The build, on a stage made from the story's own cover: the recording's
+ * first frame in a window, or the app's last two screens, where the tutor works. A click
+ * opens it full screen.
+ */
+function Build({ story, basePath, onOpen }: { story: Story; basePath: string; onOpen: () => void }) {
+  const art = story.look.cover ?? story.look.art;
+  const label = story.clip ? "Play the walkthrough" : "See the app";
+  return (
+    <button
+      type="button"
+      className="stage dd-build"
+      style={art ? ({ "--stage-art": `url(${basePath}/${art})` } as React.CSSProperties) : undefined}
+      onClick={onOpen}
+      aria-label={label}
+    >
+      <span className="dd-build-go" aria-hidden="true">
+        <span>▶</span> {label}
+      </span>
+      {story.clip ? (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img className="dd-build-shot" data-kind="window" src={`${basePath}/${story.clip.poster}`} alt="" draggable={false} />
+      ) : (
+        story.shots?.slice(-2).map((s) => (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img key={s.src} className="dd-build-shot" data-kind="phone" src={`${basePath}/${s.src}`} alt="" draggable={false} />
+        ))
+      )}
+    </button>
   );
 }
 
