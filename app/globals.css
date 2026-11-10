@@ -8097,6 +8097,7 @@ footer .foot-base a {
 }
 .ev-rules {
   counter-reset: rule;
+  margin-bottom: 32px;
 }
 .ev-rules > li {
   counter-increment: rule;
@@ -10287,5 +10288,18 @@ html:not(.js) .dg-disc:first-child {
 @media (max-width: 899px) {
   .dg-info {
     width: auto;
+  }
+
+  /* --disc-band is the gap between the caption and the numbers. */
+  .dg-disc {
+    width: min(68vw, calc(var(--disc-band, 100svh) - 24px));
+  }
+}
+
+/* A short phone keeps the title and gives the rest to the disc; the open
+   story still has where and when. */
+@media (max-width: 899px) and (max-height: 700px) {
+  .dg-info .dg-rows {
+    display: none;
   }
 }
