@@ -177,6 +177,8 @@ export default function DiscGallery({ basePath = "" }: { basePath?: string }) {
 
   const sec = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
+  const info = useRef<HTMLDivElement>(null);
+  const proof = useRef<HTMLDivElement>(null);
   const discs = useRef<(HTMLButtonElement | null)[]>([]);
   const tilts = useRef<(HTMLSpanElement | null)[]>([]);
   const bodies = useRef<(HTMLSpanElement | null)[]>([]);
@@ -245,7 +247,19 @@ export default function DiscGallery({ basePath = "" }: { basePath?: string }) {
 
       const w = st.clientWidth;
       const h = st.clientHeight;
-      const stops = w < 900 ? STOPS_PHONE : STOPS;
+      const phone = w < 900;
+      const stops = phone ? STOPS_PHONE : STOPS;
+      // On a phone the caption panel sits over the top of the stage and the
+      // numbers under it, so the row centres in the gap between them, and
+      // the disc shrinks to fit a short screen instead of running under.
+      let mid = h / 2;
+      if (phone && info.current && proof.current) {
+        const top = info.current.offsetTop + info.current.offsetHeight;
+        const bottom = proof.current.offsetTop;
+        mid = (top + bottom) / 2;
+        const band = `${Math.max(0, bottom - top)}px`;
+        if (st.style.getPropertyValue("--disc-band") !== band) st.style.setProperty("--disc-band", band);
+      }
       const pos = dwell(cur);
       list.forEach((story, i) => {
         const el = discs.current[i];
@@ -258,7 +272,7 @@ export default function DiscGallery({ basePath = "" }: { basePath?: string }) {
         const D = el.offsetWidth;
         const [x, y, sc, o] = place(d, stops);
         el.style.visibility = "visible";
-        el.style.transform = `translate3d(${(x * w - D / 2).toFixed(1)}px, ${(y * h - D / 2).toFixed(1)}px, 0) scale(${sc.toFixed(4)})`;
+        el.style.transform = `translate3d(${(x * w - D / 2).toFixed(1)}px, ${(mid + (y - 0.5) * h - D / 2).toFixed(1)}px, 0) scale(${sc.toFixed(4)})`;
         el.style.opacity = o.toFixed(3);
         el.style.zIndex = String(50 - Math.round(Math.abs(d) * 10));
         const hd = handleFor(story.slug);
@@ -463,7 +477,7 @@ export default function DiscGallery({ basePath = "" }: { basePath?: string }) {
         </h2>
         <div ref={stage} className="dg-stage" onKeyDown={onStageKey} inert={open !== null}>
           {chips}
-          <div className="dg-info" aria-live="polite">
+          <div ref={info} className="dg-info" aria-live="polite">
             {work.map((s, i) => (
               <div key={s.slug} className="dg-card" data-state={i === at ? "on" : i < at ? "past" : "next"} aria-hidden={i !== at}>
                 <p className="dg-m dg-kick">
@@ -553,7 +567,7 @@ export default function DiscGallery({ basePath = "" }: { basePath?: string }) {
             ))}
           </div>
 
-          <div className="dg-proof">
+          <div ref={proof} className="dg-proof">
             {work.map((s, i) => (
               <dl key={s.slug} className="dg-proof-set" data-state={i === at ? "on" : i < at ? "past" : "next"} aria-hidden={i !== at}>
                 {s.outcomes.slice(0, 2).map((o) => (

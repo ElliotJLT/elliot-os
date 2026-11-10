@@ -77,12 +77,37 @@ const REVIEWER: Check[] = [
   },
 ];
 
+// Cervo, the system the agents section describes: four jobs, then the
+// rules every one of them runs under.
+const CERVO = [
+  {
+    name: "Memory",
+    when: "Runs hourly",
+    does: "Reads mail, calendar, applications and session transcripts, and keeps each fact with the sentence it came from. What I say outranks anything a model inferred.",
+  },
+  {
+    name: "Observer",
+    when: "Runs after each session",
+    does: "Scores how the work was done: where I used my own judgement and where I handed it to the model.",
+  },
+  {
+    name: "World",
+    when: "Runs weekly, in the cloud",
+    does: "Reads two dozen sources against my eight written positions and opens a pull request with the evidence. CI merges it only if it touched evidence alone and everything still validates.",
+  },
+  {
+    name: "Synthesis",
+    when: "Runs on Sundays",
+    does: "Reads the other three and writes up patterns, positions and opportunities, each with a quote of mine and a source.",
+  },
+];
+
 const RULES = [
   "Nothing sends anything as me. The worst it can do is draft something and hand it to me.",
-  "Every fact carries the sentence it came from. If the source doesn't back it, it's thrown out and counted.",
-  "Code does the counting. The model is never asked for a number.",
-  "No part of it gets all three of the lethal trifecta: my private data, text written by strangers, and a way to send things out.",
-  "What I say outranks anything the AI inferred. My corrections are kept and checked again every week.",
+  "Every quote and number is checked against its source before it's written. If the source doesn't back it, it's thrown out and counted.",
+  "A model that reads text from strangers gets no tool that writes, sends or fetches.",
+  "My corrections are stored as tests and replayed against the current model every week.",
+  "Each job has a pinned model and a daily spend cap. Haiku gates, Sonnet extracts, Opus synthesises.",
 ];
 
 const SECTIONS = [
@@ -256,17 +281,28 @@ export default function Evals() {
               alt="A painted beekeeper lifting a frame from one hive in a fenced row of hives."
             />
             <p className="ev-flow-lede rv-settle">
-              An experiment: I gave an agent my email, calendar and work
-              sessions, under the rules I&apos;d put on any product that
-              touches someone&apos;s data. Code enforces them, whatever the
-              model says.
+              Cervo is four agents that keep track of my work, so every Claude
+              Code session I open starts already knowing what I&apos;m in the
+              middle of.
             </p>
-            <ol className="ev-flow ev-rules rv-settle">
-              {RULES.map((r) => (
-                <li key={r}>{r}</li>
+            <ol className="ev-flow rv-settle">
+              {CERVO.map((a) => (
+                <li key={a.name}>
+                  <h3>{a.name}</h3>
+                  <p>{a.does}</p>
+                  <p className="ev-flow-where">{a.when}</p>
+                </li>
               ))}
             </ol>
           </div>
+        </Reveal>
+        <Reveal>
+          <h3 className="loop-clock rv-settle">the rules it runs under, in code</h3>
+          <ol className="ev-flow ev-rules rv-settle">
+            {RULES.map((r) => (
+              <li key={r}>{r}</li>
+            ))}
+          </ol>
         </Reveal>
         {weeks.length > 0 && (
           <Reveal>
