@@ -64,7 +64,7 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "AI STEM tutor",
-    title: "Took an AI tutor from a 30-school beta to 850+ UK schools",
+    title: "Scaled an AI tutor from 30 schools to 850+",
     at: "Zero Gravity",
     when: "2026",
     areas: ["ai"],
@@ -100,7 +100,7 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "Tutor safety",
-    title: "Cut false safeguarding alarms by 97% without missing a disclosure",
+    title: "Cut false safeguarding alarms 97% with no disclosure missed",
     at: "Zero Gravity",
     when: "2026",
     areas: ["safety", "ai"],
@@ -124,7 +124,7 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "School hub",
-    title: "Got 91% activation by rolling the tutor out through teachers",
+    title: "Hit 91% activation by launching through teachers",
     at: "Zero Gravity",
     when: "2026",
     areas: ["gtm", "ai"],
@@ -152,7 +152,7 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Prototype",
     product: "Lease citations",
-    title: "Made a legal AI prove every citation against the lease",
+    title: "Built a legal AI that proves every citation",
     at: "Independent",
     when: "Aug 2026",
     areas: ["prototype", "safety", "ai"],
@@ -188,7 +188,7 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Prototype",
     product: "District nursing",
-    title: "Designed a scheduler that leaves every clinical call to the nurse",
+    title: "Built a nurse scheduler that never decides who waits",
     at: "Independent",
     when: "Sep 2026",
     areas: ["prototype", "safety", "ai"],
@@ -220,7 +220,7 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "Enterprise partnerships",
-    title: "Doubled account size at renewal with HSBC, Morgan Stanley and KPMG",
+    title: "Doubled account size at renewal with HSBC and KPMG",
     at: "Zero Gravity",
     when: "2022–24",
     areas: ["gtm", "ops"],
@@ -244,7 +244,7 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "Safeguarding",
-    title: "Ran safeguarding for student–mentor messaging with zero missed cases",
+    title: "Ran student–mentor safeguarding with zero missed cases",
     at: "Zero Gravity",
     when: "2022–24",
     areas: ["safety", "ops"],
@@ -267,28 +267,8 @@ const STORIES: Omit<Story, "slug">[] = [
   },
   {
     kind: "Shipped",
-    product: "Mentee to mentor",
-    title: "Turned 40% of mentees into mentors, up from 6%",
-    at: "Zero Gravity",
-    when: "2022–24",
-    areas: ["gtm"],
-    headline: { n: "6% → 40%", label: "of mentees went on to mentor" },
-    problem:
-      "Students joined at school. The platform needed a reason for them to stay once they got to university.",
-    explored: [
-      "Worked on the sign-up funnel and first-week activation.",
-      "Made becoming a mentor the step from school to university, so students who had been helped stayed to help the next group.",
-      "Automated it with AI once the manual version worked.",
-    ],
-    outcomes: [{ n: "6% → 40%", label: "of mentees going on to mentor" }],
-    role: "Led growth and operations",
-    links: [],
-    look: { bg: "#9c4011", fg: "#f3df98", cover: "work/covers/mentee-to-mentor.jpg", after: "Punisher, Phoebe Bridgers", hours: 30 },
-  },
-  {
-    kind: "Shipped",
     product: "Company operating system",
-    title: "Grew the company from 4 to 30 people without hiring for support",
+    title: "Automated 91% of support as we grew from 4 to 30",
     at: "Zero Gravity",
     when: "2022–24",
     areas: ["ops", "ai"],
@@ -340,7 +320,7 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "MealsForTheNHS",
-    title: "Co-founded a marketplace that fed NHS staff in 146 hospitals",
+    title: "Delivered 303,000 meals to 146 hospitals in 100 days",
     at: "MealsForTheNHS",
     when: "2020",
     areas: ["ops", "gtm"],
@@ -365,7 +345,7 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "Flash Pack operations",
-    title: "Built Flash Pack's operations from scratch through 400% growth",
+    title: "Held 90+ NPS through Flash Pack's 400% growth",
     at: "Flash Pack",
     when: "2018–20",
     areas: ["ops"],
