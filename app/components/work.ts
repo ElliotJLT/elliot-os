@@ -1,7 +1,7 @@
 /**
  * Everything on /built as discs (DiscGallery.tsx). Each disc is one story:
- * the problem, what we explored, and the outcome. Shipped work first, then
- * the prototypes, then the operations it grew out of.
+ * the problem, what we explored, and the outcome. Ordered by how impressive
+ * the outcome is, strongest first; the prototypes go last.
  *
  * Every number here is Elliot's and on the public site already, or from his
  * own retro in Boulot. Don't add, round or reword one without asking him.
@@ -123,6 +123,58 @@ const STORIES: Omit<Story, "slug">[] = [
   },
   {
     kind: "Shipped",
+    product: "MealsForTheNHS",
+    title: "Delivered 303,000 meals to 146 hospitals in 100 days",
+    at: "MealsForTheNHS",
+    when: "2020",
+    areas: ["ops", "gtm"],
+    headline: { n: "303,000", label: "meals in 100 days" },
+    problem:
+      "Hospital staff needed feeding through the first COVID wave, and restaurants had closed.",
+    explored: [
+      "Ran it by hand on a WhatsApp group from day one and had a working marketplace by day ten.",
+      "A four-sided marketplace on Airtable for hospitals, restaurants, drivers and donors, with automated dispatch that halved delivery errors.",
+      "A hiring playbook that took the volunteer team from 6 to 120.",
+    ],
+    outcomes: [
+      { n: "303,000", label: "meals in 100 days" },
+      { n: "146", label: "hospitals, served by 223 restaurants" },
+      { n: "£1.8m", label: "raised" },
+      { n: "97%", label: "of deliveries on time" },
+    ],
+    role: "Co-founder",
+    links: [],
+    look: { bg: "#1b3a6c", fg: "#ecebe7", cover: "work/covers/mealsforthenhs.jpg", after: "Let It Bleed, The Rolling Stones", hours: 71 },
+  },
+  {
+    kind: "Shipped",
+    product: "Probate operations",
+    title: "Fixed probate intake so two solicitors did the work of five",
+    at: "Farewill",
+    when: "2021–22",
+    areas: ["ops"],
+    headline: { n: "5 → 2", label: "solicitors needed" },
+    problem:
+      "About 30% of solicitor time went on fixing input errors, and the plan was to hire more solicitors.",
+    explored: [
+      "Timed every step and gave each of a case's 23 stages its own deadline.",
+      "A guided intake, plus integrations with the courts (HMCTS), HMRC and the banks.",
+      "A framework for vulnerable customers that the whole company adopted.",
+    ],
+    outcomes: [
+      { n: "5 → 2", label: "solicitors needed" },
+      { n: "69%", label: "fewer errors by case agents" },
+      { n: "2 weeks → 4 days", label: "to handle a case" },
+      { n: "20 → 80+", label: "NPS" },
+    ],
+    learned:
+      "A capacity model flagged the need for two more paralegals three weeks before anyone felt it, while the probate team grew from 2 to 12.",
+    role: "Led product and operations",
+    links: [{ label: "view the service", href: "https://farewill.com/apply-for-probate" }],
+    look: { bg: "#e4e2dd", fg: "#8e2f4f", art: "work/farewill.jpg", cover: "work/covers/probate-operations.jpg", after: "All Things Must Pass, George Harrison", hours: 20 },
+  },
+  {
+    kind: "Shipped",
     product: "School hub",
     title: "Hit 91% activation by launching through teachers",
     at: "Zero Gravity",
@@ -148,6 +200,103 @@ const STORIES: Omit<Story, "slug">[] = [
       { label: "for school leaders", href: "https://www.zerogravity.co.uk/tutor/school-leaders" },
     ],
     look: { bg: "#22543a", fg: "#f3df98", cover: "work/covers/school-hub.jpg", after: "Abbey Road, The Beatles", hours: 33 },
+  },
+  {
+    kind: "Shipped",
+    product: "Company operating system",
+    title: "Automated 91% of support as we grew from 4 to 30",
+    at: "Zero Gravity",
+    when: "2022–24",
+    areas: ["ops", "ai"],
+    headline: { n: "91%", label: "of support resolved by AI" },
+    problem:
+      "As Zero Gravity grew from four people, hiring, budgets, revenue and support all ran by hand, and every new tool meant more copying between systems.",
+    explored: [
+      "One source of truth in Notion, with the other tools connected through HubSpot and Zapier.",
+      "Every support answer written down once and every conversation tagged, so an AI assistant could handle the repeat questions.",
+      "The tags went to the product team and later shaped the roadmap.",
+    ],
+    outcomes: [
+      { n: "91%", label: "of support conversations resolved by the AI assistant" },
+      { n: "4 → 30", label: "people, without a dedicated support hire" },
+      { n: "2 weeks → 3 days", label: "to onboard a new hire" },
+      { n: "£1.5m", label: "ARR, tracked and billed through the revenue ops" },
+    ],
+    role: "Built it as employee #4",
+    links: [],
+    look: { bg: "#f3df98", fg: "#1b3a6c", cover: "work/covers/company-operating-system.jpg", after: "Aerial, Kate Bush", hours: 12 },
+  },
+  {
+    kind: "Shipped",
+    product: "Enterprise partnerships",
+    title: "Doubled account size at renewal with HSBC and KPMG",
+    at: "Zero Gravity",
+    when: "2022–24",
+    areas: ["gtm", "ops"],
+    headline: { n: "2×", label: "partner account size" },
+    problem:
+      "Banks and law firms wouldn't start a programme until we'd passed their due diligence, and we were a seed-stage startup.",
+    explored: [
+      "Built each programme into the partner's early-careers hiring, with HSBC, Morgan Stanley, KPMG, Ashurst, Accenture and Snap, and ran 100+ of them.",
+      "Got ISO 27001 and 9001 in-house as data protection officer, so due diligence stopped holding deals up.",
+    ],
+    outcomes: [
+      { n: "2×", label: "account size at renewal" },
+      { n: "1%", label: "logo churn across strategic accounts" },
+      { n: "30%", label: "shorter sales cycles" },
+      { n: "< 6 months", label: "to ISO 27001 and 9001, done solo" },
+    ],
+    role: "Head of Operations & Enterprise Partnerships",
+    links: [],
+    look: { bg: "#1d2420", fg: "#d4b46c", cover: "work/covers/enterprise-partnerships.jpg", after: "Rumours, Fleetwood Mac", hours: 36 },
+  },
+  {
+    kind: "Shipped",
+    product: "Safeguarding",
+    title: "Ran student–mentor safeguarding with zero missed cases",
+    at: "Zero Gravity",
+    when: "2022–24",
+    areas: ["safety", "ops"],
+    headline: { n: "0", label: "missed cases" },
+    problem:
+      "Students and adult mentors message each other on the platform. Any disclosure or grooming risk had to reach a person fast.",
+    explored: [
+      "Replaced keyword rules with AI flags, Unitary image recognition and hash matching.",
+      "One named person accountable for every case, tracked on a case board with automated outreach to schools.",
+      "Every flag triaged against KCSIE, the statutory guidance schools follow. I owned the policy and reported to the board monthly.",
+    ],
+    outcomes: [
+      { n: "0", label: "missed cases, every flag triaged against KCSIE" },
+      { n: "~20", label: "cases a month, 1 in 10 at the highest severity" },
+      { n: "2.3h", label: "average response to schools" },
+    ],
+    role: "Designated safeguarding lead; built the system",
+    links: [],
+    look: { bg: "#ecebe7", fg: "#8e2f4f", cover: "work/covers/safeguarding.jpg", after: "Kid A, Radiohead", hours: 101 },
+  },
+  {
+    kind: "Shipped",
+    product: "Flash Pack operations",
+    title: "Held 90+ NPS through Flash Pack's 400% growth",
+    at: "Flash Pack",
+    when: "2018–20",
+    areas: ["ops"],
+    headline: { n: "90+", label: "NPS through the US launch" },
+    problem:
+      "When I joined, operations was the founders answering emails, with no CRM, ticketing or supplier contracts. Then the company grew 400% in a year.",
+    explored: [
+      "Marketing didn't launch in a new market until support was in place.",
+      "Set up Intercom, response templates, supplier onboarding and a crisis protocol from scratch.",
+      "Handled ATOL compliance, safety standards and insurance, with a 100% safety record through the Sri Lanka attacks and COVID closures.",
+    ],
+    outcomes: [
+      { n: "90+", label: "NPS, held through the US launch" },
+      { n: "12 weeks", label: "US launch plan, hit on the date" },
+      { n: "15", label: "first ops hires, hired and trained" },
+    ],
+    role: "Operations manager, founding hire #10",
+    links: [],
+    look: { bg: "#e4e2dd", fg: "#22543a", art: "work/flash-pack.jpg", cover: "work/covers/flash-pack-operations.jpg", after: "Houses of the Holy, Led Zeppelin", hours: 42 },
   },
   {
     kind: "Prototype",
@@ -216,155 +365,6 @@ const STORIES: Omit<Story, "slug">[] = [
         { label: "The follow-up", t: 26.8 },
       ],
     },
-  },
-  {
-    kind: "Shipped",
-    product: "Enterprise partnerships",
-    title: "Doubled account size at renewal with HSBC and KPMG",
-    at: "Zero Gravity",
-    when: "2022–24",
-    areas: ["gtm", "ops"],
-    headline: { n: "2×", label: "partner account size" },
-    problem:
-      "Banks and law firms wouldn't start a programme until we'd passed their due diligence, and we were a seed-stage startup.",
-    explored: [
-      "Built each programme into the partner's early-careers hiring, with HSBC, Morgan Stanley, KPMG, Ashurst, Accenture and Snap, and ran 100+ of them.",
-      "Got ISO 27001 and 9001 in-house as data protection officer, so due diligence stopped holding deals up.",
-    ],
-    outcomes: [
-      { n: "2×", label: "account size at renewal" },
-      { n: "1%", label: "logo churn across strategic accounts" },
-      { n: "30%", label: "shorter sales cycles" },
-      { n: "< 6 months", label: "to ISO 27001 and 9001, done solo" },
-    ],
-    role: "Head of Operations & Enterprise Partnerships",
-    links: [],
-    look: { bg: "#1d2420", fg: "#d4b46c", cover: "work/covers/enterprise-partnerships.jpg", after: "Rumours, Fleetwood Mac", hours: 36 },
-  },
-  {
-    kind: "Shipped",
-    product: "Safeguarding",
-    title: "Ran student–mentor safeguarding with zero missed cases",
-    at: "Zero Gravity",
-    when: "2022–24",
-    areas: ["safety", "ops"],
-    headline: { n: "0", label: "missed cases" },
-    problem:
-      "Students and adult mentors message each other on the platform. Any disclosure or grooming risk had to reach a person fast.",
-    explored: [
-      "Replaced keyword rules with AI flags, Unitary image recognition and hash matching.",
-      "One named person accountable for every case, tracked on a case board with automated outreach to schools.",
-      "Every flag triaged against KCSIE, the statutory guidance schools follow. I owned the policy and reported to the board monthly.",
-    ],
-    outcomes: [
-      { n: "0", label: "missed cases, every flag triaged against KCSIE" },
-      { n: "~20", label: "cases a month, 1 in 10 at the highest severity" },
-      { n: "2.3h", label: "average response to schools" },
-    ],
-    role: "Designated safeguarding lead; built the system",
-    links: [],
-    look: { bg: "#ecebe7", fg: "#8e2f4f", cover: "work/covers/safeguarding.jpg", after: "Kid A, Radiohead", hours: 101 },
-  },
-  {
-    kind: "Shipped",
-    product: "Company operating system",
-    title: "Automated 91% of support as we grew from 4 to 30",
-    at: "Zero Gravity",
-    when: "2022–24",
-    areas: ["ops", "ai"],
-    headline: { n: "91%", label: "of support resolved by AI" },
-    problem:
-      "As Zero Gravity grew from four people, hiring, budgets, revenue and support all ran by hand, and every new tool meant more copying between systems.",
-    explored: [
-      "One source of truth in Notion, with the other tools connected through HubSpot and Zapier.",
-      "Every support answer written down once and every conversation tagged, so an AI assistant could handle the repeat questions.",
-      "The tags went to the product team and later shaped the roadmap.",
-    ],
-    outcomes: [
-      { n: "91%", label: "of support conversations resolved by the AI assistant" },
-      { n: "4 → 30", label: "people, without a dedicated support hire" },
-      { n: "2 weeks → 3 days", label: "to onboard a new hire" },
-      { n: "£1.5m", label: "ARR, tracked and billed through the revenue ops" },
-    ],
-    role: "Built it as employee #4",
-    links: [],
-    look: { bg: "#f3df98", fg: "#1b3a6c", cover: "work/covers/company-operating-system.jpg", after: "Aerial, Kate Bush", hours: 12 },
-  },
-  {
-    kind: "Shipped",
-    product: "Probate operations",
-    title: "Fixed probate intake so two solicitors did the work of five",
-    at: "Farewill",
-    when: "2021–22",
-    areas: ["ops"],
-    headline: { n: "5 → 2", label: "solicitors needed" },
-    problem:
-      "About 30% of solicitor time went on fixing input errors, and the plan was to hire more solicitors.",
-    explored: [
-      "Timed every step and gave each of a case's 23 stages its own deadline.",
-      "A guided intake, plus integrations with the courts (HMCTS), HMRC and the banks.",
-      "A framework for vulnerable customers that the whole company adopted.",
-    ],
-    outcomes: [
-      { n: "5 → 2", label: "solicitors needed" },
-      { n: "69%", label: "fewer errors by case agents" },
-      { n: "2 weeks → 4 days", label: "to handle a case" },
-      { n: "20 → 80+", label: "NPS" },
-    ],
-    learned:
-      "A capacity model flagged the need for two more paralegals three weeks before anyone felt it, while the probate team grew from 2 to 12.",
-    role: "Led product and operations",
-    links: [{ label: "view the service", href: "https://farewill.com/apply-for-probate" }],
-    look: { bg: "#e4e2dd", fg: "#8e2f4f", art: "work/farewill.jpg", cover: "work/covers/probate-operations.jpg", after: "All Things Must Pass, George Harrison", hours: 20 },
-  },
-  {
-    kind: "Shipped",
-    product: "MealsForTheNHS",
-    title: "Delivered 303,000 meals to 146 hospitals in 100 days",
-    at: "MealsForTheNHS",
-    when: "2020",
-    areas: ["ops", "gtm"],
-    headline: { n: "303,000", label: "meals in 100 days" },
-    problem:
-      "Hospital staff needed feeding through the first COVID wave, and restaurants had closed.",
-    explored: [
-      "Ran it by hand on a WhatsApp group from day one and had a working marketplace by day ten.",
-      "A four-sided marketplace on Airtable for hospitals, restaurants, drivers and donors, with automated dispatch that halved delivery errors.",
-      "A hiring playbook that took the volunteer team from 6 to 120.",
-    ],
-    outcomes: [
-      { n: "303,000", label: "meals in 100 days" },
-      { n: "146", label: "hospitals, served by 223 restaurants" },
-      { n: "£1.8m", label: "raised" },
-      { n: "97%", label: "of deliveries on time" },
-    ],
-    role: "Co-founder",
-    links: [],
-    look: { bg: "#1b3a6c", fg: "#ecebe7", cover: "work/covers/mealsforthenhs.jpg", after: "Let It Bleed, The Rolling Stones", hours: 71 },
-  },
-  {
-    kind: "Shipped",
-    product: "Flash Pack operations",
-    title: "Held 90+ NPS through Flash Pack's 400% growth",
-    at: "Flash Pack",
-    when: "2018–20",
-    areas: ["ops"],
-    headline: { n: "90+", label: "NPS through the US launch" },
-    problem:
-      "When I joined, operations was the founders answering emails, with no CRM, ticketing or supplier contracts. Then the company grew 400% in a year.",
-    explored: [
-      "Marketing didn't launch in a new market until support was in place.",
-      "Set up Intercom, response templates, supplier onboarding and a crisis protocol from scratch.",
-      "Handled ATOL compliance, safety standards and insurance, with a 100% safety record through the Sri Lanka attacks and COVID closures.",
-    ],
-    outcomes: [
-      { n: "90+", label: "NPS, held through the US launch" },
-      { n: "12 weeks", label: "US launch plan, hit on the date" },
-      { n: "15", label: "first ops hires, hired and trained" },
-    ],
-    role: "Operations manager, founding hire #10",
-    links: [],
-    look: { bg: "#e4e2dd", fg: "#22543a", art: "work/flash-pack.jpg", cover: "work/covers/flash-pack-operations.jpg", after: "Houses of the Holy, Led Zeppelin", hours: 42 },
   },
 ];
 
