@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/meta";
 import { getLedger, type LedgerWeek } from "@/lib/ledger";
 import { THEMES } from "@/lib/themes";
 import Reveal from "../components/Reveal";
@@ -6,7 +7,12 @@ import PaintReveal from "../components/PaintReveal";
 import WrapTidy from "../components/WrapTidy";
 import { PAINT_SHAPES } from "@/lib/paintShapes";
 
-export const metadata = { title: "How I check · Elliot Little" };
+export const metadata = pageMeta({
+  title: "How I check · Elliot Little",
+  description:
+    "How I check the AI I ship, the agents that run this site, and my own decisions: real mark schemes, red-teaming, and a named person on every call.",
+  path: "/evals/",
+});
 
 // /evals and /loops were one idea on two pages, so they became one page on
 // 2026-10-20: the checks on the model, on the person reviewing it, on the

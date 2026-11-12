@@ -2383,28 +2383,6 @@ h2::before {
   transform: translateX(3px);
 }
 
-.mai-links .nav-menu-all {
-  align-self: flex-start;
-  margin-top: 12px;
-  padding: 3px 0;
-  font-family: var(--display);
-  font-size: 16px;
-  color: var(--ink);
-}
-
-.nav-menu-all span {
-  display: inline-block;
-  margin-left: 4px;
-  font-family: var(--mono);
-  font-size: 12px;
-  transition: transform 0.14s ease-out;
-}
-
-.nav-menu-all:hover span,
-.nav-menu-all:focus-visible span {
-  transform: translateX(3px);
-}
-
 .mai-links .nav-menu-feature {
   display: flex;
   flex-direction: column;
@@ -6142,7 +6120,9 @@ h2.mai-kick + p.muted,
 
   footer .foot-cols {
     grid-area: cols;
-    grid-template-columns: minmax(160px, 1fr) minmax(0, 0.7fr) minmax(0, 1.3fr) minmax(0, 1fr);
+    /* min-content, not 0: the email address can't wrap, and a 0 floor let it
+       run into the icons beside it. */
+    grid-template-columns: minmax(160px, 1fr) minmax(min-content, 0.7fr) minmax(min-content, 1.3fr) minmax(min-content, 1fr);
     padding-bottom: 72px;
   }
 
@@ -9496,6 +9476,8 @@ html:not(.js) .dg-disc:first-child {
   inset: 0;
   z-index: 25;
   overflow-y: auto;
+  /* The disc bleeds off the right edge; that must not become a sideways scroll. */
+  overflow-x: hidden;
   overscroll-behavior: contain;
   background: var(--bg);
   animation: dd-fade 0.35s ease both;

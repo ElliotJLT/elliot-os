@@ -1,3 +1,4 @@
+import { pageMeta } from "@/lib/meta";
 import {
   getPosts,
   noteFor,
@@ -11,7 +12,12 @@ import HoverLabel from "../components/HoverLabel";
 import ReaderQuotes from "../components/ReaderQuotes";
 import PodcastVideo from "../components/PodcastVideo";
 
-export const metadata = { title: "Writing · Elliot Little" };
+export const metadata = pageMeta({
+  title: "Writing · Elliot Little",
+  description:
+    "Writing on shipping AI to people it can hurt if it's wrong, and on leading a team while doing the building.",
+  path: "/writing/",
+});
 
 const basePath = process.env.BASE_PATH || "";
 

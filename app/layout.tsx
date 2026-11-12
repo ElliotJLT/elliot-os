@@ -10,6 +10,7 @@ import ClaudeBuilder from "./components/ClaudeBuilder";
 import NavAutoHide from "./components/NavAutoHide";
 import { IconLink } from "./components/Icons";
 import { Pill } from "./components/Frame";
+import { ORIGIN, pageMeta } from "@/lib/meta";
 import "./globals.css";
 
 const basePath = process.env.BASE_PATH || "";
@@ -45,7 +46,13 @@ const archivo = Archivo({
 });
 
 export const metadata: Metadata = {
-  title: "Elliot Little",
+  metadataBase: new URL(ORIGIN),
+  ...pageMeta({
+    title: "Elliot Little",
+    description:
+      "Hands-on AI product leader who finds the problem, builds close to the code and leads teams through production. Four times a founding hire.",
+    path: "/",
+  }),
   // Explicit paths rather than app/icon.png: a static export under a basePath
   // does not rewrite metadata icon URLs, so they are prefixed here.
   icons: {
@@ -56,8 +63,6 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: `${basePath}/icon-180.png`, sizes: "180x180" }],
   },
-  description:
-    "Hands-on AI product leader who finds the problem, builds close to the code and leads teams through production. Four times a founding hire.",
 };
 
 // Runs before paint so the stored theme never flashes.

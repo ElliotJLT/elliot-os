@@ -1,10 +1,16 @@
+import { pageMeta } from "@/lib/meta";
 import { getRepos } from "@/lib/github";
 import Reveal from "../components/Reveal";
 import DiscGallery from "../components/DiscGallery";
 import Bench from "../components/Bench";
 import FoldHero from "../components/FoldHero";
 
-export const metadata = { title: "Built · Elliot Little" };
+export const metadata = pageMeta({
+  title: "Built · Elliot Little",
+  description:
+    "Twelve things I've built: an AI tutor in 850+ UK schools and its safeguarding, prototypes for lawyers and nurses, and the operations behind Farewill, Flash Pack and MealsForTheNHS.",
+  path: "/built/",
+});
 
 const basePath = process.env.BASE_PATH || "";
 
@@ -27,7 +33,7 @@ export default async function Built() {
         caption="Working through a prototype. The person at the keyboard is doing the hard part."
         kicker="Built"
         title="I build the product and the operation around it."
-        standfirst="Thirteen things I've built, pressed as discs after the albums I've played most. Because, why not?"
+        standfirst="Twelve things I've built, from an AI tutor in 850+ schools to a marketplace that fed NHS staff through COVID. Each disc borrows its look from an album I've played most."
       />
       <div className="mai built-body">
         <nav className="built-index" aria-label="On this page">

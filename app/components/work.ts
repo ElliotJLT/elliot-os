@@ -64,17 +64,17 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "AI STEM tutor",
-    title: "Built an AI tutor that coaches instead of answering",
+    title: "Took an AI tutor from a 30-school beta to 850+ UK schools",
     at: "Zero Gravity",
     when: "2026",
     areas: ["ai"],
     headline: { n: "30 → 850+", label: "schools" },
     problem:
-      "Students without a tutor at home get stuck alone, and a general chatbot just gives them the answer.",
+      "Students without a tutor at home get stuck on their own. A general chatbot just hands them the answer.",
     explored: [
-      "Coaching, practice, marking and assignments as separate agents, each graded by its own evaluator, across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB.",
-      "Red-teamed the failure that matters most: a student talking the tutor into handing over the answer. Then a pass/fail judge on every session.",
-      "A four-agent fleet read every production trace overnight, replaced a planned ops hire and produced half the evidence in the company retro.",
+      "Separate agents for coaching, practice, marking and assignments, each checked by its own evaluator, across Maths, Physics, Chemistry and Biology for AQA, Edexcel, OCR and IB.",
+      "Red-teamed the biggest risk, a student talking the tutor into giving the answer away, then put a pass/fail judge on every session.",
+      "Four agents read every production trace overnight. That replaced a planned ops hire and produced half the evidence for the company retro.",
     ],
     outcomes: [
       { n: "30 → 850+", label: "schools, from the beta to the national programme" },
@@ -83,7 +83,7 @@ const STORIES: Omit<Story, "slug">[] = [
       { n: "50,000+", label: "tutoring sessions" },
     ],
     learned:
-      "When production ran 4.6x over the cost plan, we cut it without touching quality: prompt caching, a model per task, and Opus kept on marking. Next, the Pioneers pilot measures what it does for pupils' grades.",
+      "Production ran 4.6x over the cost plan. We cut it without losing quality: prompt caching, the right model for each task, and Opus kept for marking. Next, the Pioneers pilot measures what it does for pupils' grades.",
     role: "Led product, a designer and six product engineers, each owning a problem from prototype to production, and wrote 28% of the commits",
     links: [
       { label: "view the product", href: "https://www.zerogravity.co.uk/tutor" },
@@ -100,17 +100,17 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "Tutor safety",
-    title: "Got schools to trust an AI tutor with their students",
+    title: "Cut false safeguarding alarms by 97% without missing a disclosure",
     at: "Zero Gravity",
     when: "2026",
     areas: ["safety", "ai"],
     headline: { n: "2nd of 8", label: "in the DfE programme" },
     problem:
-      "Harris Federation's AI lead told us admin visibility and safeguarding were gate conditions, not features. Until both were met, the question was whether a school would let the tutor near students at all.",
+      "Harris Federation's AI lead was clear: no school would put the tutor in front of students until staff could see what was happening and safeguarding was built in.",
     explored: [
-      "Safeguarding detection shipped as the first feature, tuned to over-flag, with the designated safeguarding lead holding every judgement.",
-      "Tuned it loud on purpose, then split conduct from safeguarding so the lead only gets paged for what matters.",
-      "Built to the DfE's generative AI product safety standards for under-18s: session cut-offs, never presenting as human, and concerns escalated to a named person.",
+      "Shipped safeguarding detection first, set to over-flag, with the school's designated safeguarding lead making every call.",
+      "Then split misbehaviour from real safeguarding concerns, so the lead is only alerted when it matters.",
+      "Built to the DfE's safety standards for AI used by under-18s: session limits, never posing as a human, and concerns sent to a named person.",
     ],
     outcomes: [
       { n: "97%", label: "fewer false safeguarding alarms, with no disclosure missed" },
@@ -124,24 +124,24 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "School hub",
-    title: "Rolled the tutor out through teachers, class by class",
+    title: "Got 91% activation by rolling the tutor out through teachers",
     at: "Zero Gravity",
     when: "2026",
     areas: ["gtm", "ai"],
     headline: { n: "91%", label: "activation, teacher-led" },
     problem:
-      "Teachers set one homework for a whole class and only find out who was stuck when they mark it. Help a student has to go and find mostly goes unused.",
+      "Teachers set one piece of homework for a whole class and only find out who was stuck when they mark it. Students rarely go looking for help on their own.",
     explored: [
-      "Harris told us that to enter the curriculum we had to build for teachers, so the teacher became the way in.",
-      "Homework built from the teacher's own material, after a head of maths said typing mark schemes was too slow.",
-      "A weekly summary per class, safeguarding flags to named staff only, and the DPIA written before a data lead asks for it.",
+      "Harris told us the way into the curriculum was through teachers, so we built for them first.",
+      "Homework generated from the teacher's own material, after a head of maths told us typing in mark schemes took too long.",
+      "A weekly summary for each class, safeguarding flags that go only to named staff, and a DPIA written before any data lead asks for one.",
     ],
     outcomes: [
       { n: "91% vs 23%", label: "activation when teachers lead it, against students signing up alone" },
       { n: "850+", label: "UK schools" },
     ],
     learned:
-      "The rollout copies the schools that worked: classes built in advance and a weekly call with the teacher.",
+      "The rollout now copies what worked in the best schools: classes set up in advance and a weekly call with the teacher.",
     role: "Led product and design",
     links: [
       { label: "for teachers", href: "https://www.zerogravity.co.uk/tutor/teachers" },
@@ -152,17 +152,17 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Prototype",
     product: "Lease citations",
-    title: "Made every citation in a legal answer checkable",
+    title: "Made a legal AI prove every citation against the lease",
     at: "Independent",
     when: "Aug 2026",
     areas: ["prototype", "safety", "ai"],
     headline: { n: "1 click", label: "from claim to clause" },
     problem:
-      "A document Q&A app for property lawyers showed \"3 sources cited\" under an answer about asbestos, in a lease that never mentions asbestos. The count was a regex over the model's own reply.",
+      "A document Q&A app for property lawyers showed \"3 sources cited\" under an answer about asbestos, in a lease that never mentions asbestos. The count came from a regex over the model's own reply.",
     explored: [
-      "Every claim carries a marker naming its quote, and code finds that quote word for word in the lease before it counts as evidence.",
-      "A match jumps to the highlighted clause. A quote it can't find is drawn dashed, against the claim it weakens.",
-      "Ruled out confidence scores and \"stated vs inferred\" labels: both are the model grading itself.",
+      "Every claim points to a quote, and code finds that quote word for word in the lease before it counts as evidence.",
+      "Clicking a citation jumps to the highlighted clause. A quote that can't be found is shown dashed, next to the claim it weakens.",
+      "Ruled out confidence scores and \"stated vs inferred\" labels, because both are the model marking its own work.",
     ],
     outcomes: [
       { n: "Code checks", label: "every quoted passage, found word for word in the lease" },
@@ -187,53 +187,18 @@ const STORIES: Omit<Story, "slug">[] = [
   },
   {
     kind: "Prototype",
-    product: "Persona interviews",
-    title: "Showed which synthetic answers rest on real data",
-    at: "Independent",
-    when: "Jul 2026",
-    areas: ["prototype", "safety", "ai"],
-    headline: { n: "Solid", label: "or dashed" },
-    problem:
-      "Teams survey AI personas, then interview one to find out why it answered as it did. A plain chat renders fluent invention and grounded fact the same way.",
-    explored: [
-      "Each claim is solid if it traces to the respondent's survey answer or profile, and dashed if the model is reasoning past them.",
-      "Asked to speak for people who weren't surveyed, the persona says it would be guessing.",
-      "Ruled out a blanket \"all views are fictional\" notice. It concedes the problem and manages none of it.",
-    ],
-    outcomes: [
-      { n: "Code checks", label: "every claim against the respondent's own answer or profile" },
-      { n: "Researcher decides", label: "what to quote, seeing how much rested on data" },
-    ],
-    role: "Designed and built it",
-    links: [
-      { label: "code and reasoning", href: "https://github.com/ElliotJLT/persona-interviews" },
-    ],
-    look: { bg: "#f3df98", fg: "#8e2f4f", art: "work/video/persona.jpg", cover: "work/covers/persona-interviews.jpg", after: "Blonde, Frank Ocean", hours: 56 },
-    clip: {
-      src: "work/video/persona.mp4",
-      poster: "work/video/persona.jpg",
-      chapters: [
-        { label: "Population", t: 0 },
-        { label: "Record", t: 8.6 },
-        { label: "Interview", t: 12 },
-        { label: "Refusal", t: 21 },
-      ],
-    },
-  },
-  {
-    kind: "Prototype",
     product: "District nursing",
-    title: "Kept a named nurse in charge when the day overruns",
+    title: "Designed a scheduler that leaves every clinical call to the nurse",
     at: "Independent",
     when: "Sep 2026",
     areas: ["prototype", "safety", "ai"],
     headline: { n: "40 min", label: "over, and the list no longer fits" },
     problem:
-      "A home visit runs 40 minutes over, and the rest of a district nurse's list no longer fits her shift. Someone has to decide who is seen, who waits, and who owns the ones who wait.",
+      "A home visit runs 40 minutes over and the rest of a district nurse's list no longer fits her shift. Someone has to decide who is seen today, who waits, and who follows up.",
     explored: [
-      "The assistant shows the shortfall and checks competency, care windows and shift time before a move reaches a nurse's screen.",
-      "Ruled out letting the assistant propose that a patient waits. It flags what it can't place instead.",
-      "Any visit that waits lands on tomorrow's list with an owner and a deadline.",
+      "It shows how far over the day is, and checks competency, care windows and shift time before suggesting a move.",
+      "It never suggests a patient waits. It flags visits it can't fit and leaves that call to the nurse.",
+      "Any visit that waits goes on tomorrow's list with an owner and a deadline.",
     ],
     outcomes: [
       { n: "Code checks", label: "competency, care windows and shift time" },
@@ -255,16 +220,16 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "Enterprise partnerships",
-    title: "Got a seed-stage startup through bank due diligence",
+    title: "Doubled account size at renewal with HSBC, Morgan Stanley and KPMG",
     at: "Zero Gravity",
     when: "2022–24",
     areas: ["gtm", "ops"],
     headline: { n: "2×", label: "partner account size" },
     problem:
-      "Selling into banks and law firms meant passing their due diligence before any programme could start.",
+      "Banks and law firms wouldn't start a programme until we'd passed their due diligence, and we were a seed-stage startup.",
     explored: [
       "Built each programme into the partner's early-careers hiring, with HSBC, Morgan Stanley, KPMG, Ashurst, Accenture and Snap, and ran 100+ of them.",
-      "Did ISO 27001 and 9001 in-house, as data protection officer, so due diligence stopped being the blocker.",
+      "Got ISO 27001 and 9001 in-house as data protection officer, so due diligence stopped holding deals up.",
     ],
     outcomes: [
       { n: "2×", label: "account size at renewal" },
@@ -279,17 +244,17 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "Safeguarding",
-    title: "Kept messages between students and adult mentors safe",
+    title: "Ran safeguarding for student–mentor messaging with zero missed cases",
     at: "Zero Gravity",
     when: "2022–24",
     areas: ["safety", "ops"],
     headline: { n: "0", label: "missed cases" },
     problem:
-      "Students and adult mentors message each other, so a disclosure or a grooming risk in any message had to reach a person fast.",
+      "Students and adult mentors message each other on the platform. Any disclosure or grooming risk had to reach a person fast.",
     explored: [
-      "Moved from keyword rules to AI flags, Unitary image recognition and hash matching.",
-      "One named person accountable for every case, on a case board with automated outreach to schools.",
-      "Triaged every flag against KCSIE, the statutory guidance schools work to, owned the policy and reported to the board every month.",
+      "Replaced keyword rules with AI flags, Unitary image recognition and hash matching.",
+      "One named person accountable for every case, tracked on a case board with automated outreach to schools.",
+      "Every flag triaged against KCSIE, the statutory guidance schools follow. I owned the policy and reported to the board monthly.",
     ],
     outcomes: [
       { n: "0", label: "missed cases, every flag triaged against KCSIE" },
@@ -303,17 +268,17 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "Mentee to mentor",
-    title: "Turned students we mentored into mentors",
+    title: "Turned 40% of mentees into mentors, up from 6%",
     at: "Zero Gravity",
     when: "2022–24",
     areas: ["gtm"],
     headline: { n: "6% → 40%", label: "of mentees went on to mentor" },
     problem:
-      "Students joined at school, and the platform needed a reason for them to stay once they reached university.",
+      "Students joined at school. The platform needed a reason for them to stay once they got to university.",
     explored: [
-      "Growth work across the sign-up funnel and first-week activation.",
-      "Mentee-to-mentor conversion as the bridge from school to university, so students helped at school stayed to help the next group.",
-      "Automated with AI once the manual version worked.",
+      "Worked on the sign-up funnel and first-week activation.",
+      "Made becoming a mentor the step from school to university, so students who had been helped stayed to help the next group.",
+      "Automated it with AI once the manual version worked.",
     ],
     outcomes: [{ n: "6% → 40%", label: "of mentees going on to mentor" }],
     role: "Led growth and operations",
@@ -323,17 +288,17 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "Company operating system",
-    title: "Built the operation so headcount didn't grow with it",
+    title: "Grew the company from 4 to 30 people without hiring for support",
     at: "Zero Gravity",
     when: "2022–24",
     areas: ["ops", "ai"],
     headline: { n: "91%", label: "of support resolved by AI" },
     problem:
-      "As Zero Gravity grew from four people, hiring, budgets, revenue and support ran by hand, and each new tool added more re-keying.",
+      "As Zero Gravity grew from four people, hiring, budgets, revenue and support all ran by hand, and every new tool meant more copying between systems.",
     explored: [
-      "One company brain in Notion, with the tools wired together through HubSpot and Zapier.",
-      "Every support answer written down once and every conversation tagged, so an AI assistant could take the repeat questions.",
-      "The tags went to the product team, and later shaped the roadmap.",
+      "One source of truth in Notion, with the other tools connected through HubSpot and Zapier.",
+      "Every support answer written down once and every conversation tagged, so an AI assistant could handle the repeat questions.",
+      "The tags went to the product team and later shaped the roadmap.",
     ],
     outcomes: [
       { n: "91%", label: "of support conversations resolved by the AI assistant" },
@@ -348,17 +313,17 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "Probate operations",
-    title: "Fixed probate's inputs instead of hiring more solicitors",
+    title: "Fixed probate intake so two solicitors did the work of five",
     at: "Farewill",
     when: "2021–22",
     areas: ["ops"],
     headline: { n: "5 → 2", label: "solicitors needed" },
     problem:
-      "About 30% of solicitor time went on fixing input errors, and the plan on the table was to hire more solicitors.",
+      "About 30% of solicitor time went on fixing input errors, and the plan was to hire more solicitors.",
     explored: [
-      "Timed every step, and gave each of a case's 23 stages its own deadline.",
-      "A guided intake, and integrations with the courts (HMCTS), HMRC and the banks.",
-      "A framework for vulnerable customers, adopted company-wide.",
+      "Timed every step and gave each of a case's 23 stages its own deadline.",
+      "A guided intake, plus integrations with the courts (HMCTS), HMRC and the banks.",
+      "A framework for vulnerable customers that the whole company adopted.",
     ],
     outcomes: [
       { n: "5 → 2", label: "solicitors needed" },
@@ -367,7 +332,7 @@ const STORIES: Omit<Story, "slug">[] = [
       { n: "20 → 80+", label: "NPS" },
     ],
     learned:
-      "A capacity model called the need for two more paralegals three weeks before anyone felt it, while the probate team grew from 2 to 12.",
+      "A capacity model flagged the need for two more paralegals three weeks before anyone felt it, while the probate team grew from 2 to 12.",
     role: "Led product and operations",
     links: [{ label: "view the service", href: "https://farewill.com/apply-for-probate" }],
     look: { bg: "#e4e2dd", fg: "#8e2f4f", art: "work/farewill.jpg", cover: "work/covers/probate-operations.jpg", after: "All Things Must Pass, George Harrison", hours: 20 },
@@ -375,15 +340,15 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "MealsForTheNHS",
-    title: "Got restaurant meals to NHS staff through the first wave",
+    title: "Co-founded a marketplace that fed NHS staff in 146 hospitals",
     at: "MealsForTheNHS",
     when: "2020",
     areas: ["ops", "gtm"],
     headline: { n: "303,000", label: "meals in 100 days" },
     problem:
-      "Hospitals needed to feed their staff through the first COVID wave, and restaurants had closed.",
+      "Hospital staff needed feeding through the first COVID wave, and restaurants had closed.",
     explored: [
-      "Ran it by hand on a WhatsApp group from day one, and had a working marketplace by day ten.",
+      "Ran it by hand on a WhatsApp group from day one and had a working marketplace by day ten.",
       "A four-sided marketplace on Airtable for hospitals, restaurants, drivers and donors, with automated dispatch that halved delivery errors.",
       "A hiring playbook that took the volunteer team from 6 to 120.",
     ],
@@ -400,17 +365,17 @@ const STORIES: Omit<Story, "slug">[] = [
   {
     kind: "Shipped",
     product: "Flash Pack operations",
-    title: "Built Flash Pack's operation ahead of each new market",
+    title: "Built Flash Pack's operations from scratch through 400% growth",
     at: "Flash Pack",
     when: "2018–20",
     areas: ["ops"],
     headline: { n: "90+", label: "NPS through the US launch" },
     problem:
-      "When I joined, operations was the founders answering emails: no CRM, no ticketing, no supplier contracts. Then the company grew 400% in a year.",
+      "When I joined, operations was the founders answering emails, with no CRM, ticketing or supplier contracts. Then the company grew 400% in a year.",
     explored: [
-      "Marketing didn't go live in a market until support coverage was confirmed.",
-      "Intercom, response templates, supplier onboarding and a crisis protocol, set up from scratch.",
-      "ATOL compliance, safety standards and insurance, with a 100% safety record through the Sri Lanka attacks and COVID closures.",
+      "Marketing didn't launch in a new market until support was in place.",
+      "Set up Intercom, response templates, supplier onboarding and a crisis protocol from scratch.",
+      "Handled ATOL compliance, safety standards and insurance, with a 100% safety record through the Sri Lanka attacks and COVID closures.",
     ],
     outcomes: [
       { n: "90+", label: "NPS, held through the US launch" },

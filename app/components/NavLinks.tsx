@@ -49,7 +49,7 @@ const MENUS: Menu[] = [
       },
       {
         eyebrow: `03 · ${WRONG.short}`,
-        title: "Prototyped AI for lawyers, researchers and nurses",
+        title: "Prototyped AI for lawyers and nurses",
         href: "/built#prototypes",
       },
       {
@@ -218,9 +218,6 @@ function NavMenu({
                 </Link>
               ))}
             </div>
-            <Link className="nav-menu-all" href={menu.href}>
-              All {menu.label} <span aria-hidden="true">→</span>
-            </Link>
           </div>
 
           <Link className="nav-menu-feature" href={menu.href}>
