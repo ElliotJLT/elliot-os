@@ -92,11 +92,11 @@
       "captured": 0,
       "briefs": 0,
       "fallbacks": 0,
-      "ticks": 165,
-      "quiet": 71,
-      "facts_kept": 9,
+      "ticks": 231,
+      "quiet": 123,
+      "facts_kept": 16,
       "facts_thrown": 2,
-      "closes": 2,
+      "closes": 4,
       "closes_withheld": 0,
       "incidents": 3
     }
