@@ -154,8 +154,8 @@ before shipping.
 
 ## Layout
 
-- `app/` routes: `/`, `/built`, `/writing`, `/evals` ("how I check" in
-  the nav: the model, the reviewer, then my own agents and me). `/loops`, `/now` and `/next` are
+- `app/` routes: `/`, `/built`, `/writing`, `/evals` (how I check: the
+  model, the reviewer, then my own agents and me). `/loops`, `/now` and `/next` are
   static redirects in `public/` to `/evals#agents`
 - `app/components/work.ts` every story on /built, read by `DiscGallery.tsx`
 - `lib/` build-time readers (GitHub API, content, loops, evals)

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { THEMES } from "@/lib/themes";
-import { CheckWord } from "./WordMarks";
+import { EvalsWord } from "./WordMarks";
 
 // Menu rows say what Elliot did, not which category it sits in, and each
 // eyebrow names the site theme it belongs to (lib/themes.ts).
@@ -258,9 +258,9 @@ export default function NavLinks({ basePath = "" }: { basePath?: string }) {
         href="/evals"
         className="nav-evals-link"
         data-active={pathname.startsWith("/evals") || undefined}
-        aria-label="How I check"
+        aria-label="Evals"
       >
-        <CheckWord />
+        <EvalsWord />
       </Link>
     </>
   );

@@ -1,14 +1,14 @@
-// The nav and footer label for /evals, with a tick that draws itself in on
-// hover. The link around it carries .nav-evals-link plus an aria-label;
-// everything here is decorative. `first` lets the footer capitalise.
+// The letters that turn into a mark on hover, shared by the nav and the
+// footer. The link around it carries .nav-evals-link plus an aria-label; everything here is decorative.
+// `first` lets the footer capitalise without a second copy of the SVG.
 
-// The tick sits in a cell reserved after the words, so the nav never shifts
-// when it appears.
-export function CheckWord({ first = "h" }: { first?: string }) {
+// The v is already a tick: on hover it becomes one and draws once.
+export function EvalsWord({ first = "e" }: { first?: string }) {
   return (
     <span className="nav-loops-label" data-i18n-skip="">
-      <span aria-hidden="true">{first}ow I check</span>
-      <span className="nav-loops-core nav-check-core" aria-hidden="true">
+      <span aria-hidden="true">{first}</span>
+      <span className="nav-loops-core" aria-hidden="true">
+        <span className="nav-loops-plain">v</span>
         <span className="nav-loops-mark">
           <span className="nav-evals-tick">
             <svg viewBox="0 0 36 48" focusable="false">
@@ -21,6 +21,7 @@ export function CheckWord({ first = "h" }: { first?: string }) {
           </span>
         </span>
       </span>
+      <span aria-hidden="true">als</span>
     </span>
   );
 }
