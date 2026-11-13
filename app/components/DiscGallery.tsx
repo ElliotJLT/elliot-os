@@ -215,6 +215,7 @@ export default function DiscGallery({ basePath = "" }: { basePath?: string }) {
     if (!s || !st) return;
     const root = document.documentElement;
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const row = st.querySelector<HTMLElement>(".dg-discs");
     let frame = 0;
     let last = 0;
     let sway = 0;
@@ -290,7 +291,21 @@ export default function DiscGallery({ basePath = "" }: { basePath?: string }) {
         setAt(active);
       }
       const r = s.getBoundingClientRect();
-      root.classList.toggle("dg-pinned", r.top <= 1 && r.bottom >= window.innerHeight * 0.6);
+      const vh = window.innerHeight;
+      root.classList.toggle("dg-pinned", r.top <= 1 && r.bottom >= vh * 0.6);
+      // On the way in, the row slides in from the right as the stage rises
+      // to pin, so the first disc isn't crowding the photo above. Scroll-
+      // linked, desktop only; phones and reduced motion start in place.
+      if (row) {
+        const e = phone || still ? 1 : clamp(1 - r.top / (vh * 0.9), 0, 1);
+        const ease = e * e * (3 - 2 * e);
+        const shift = `translate3d(${((1 - ease) * w * 0.5).toFixed(1)}px, 0, 0)`;
+        if (row.style.transform !== shift) row.style.transform = shift;
+        row.style.opacity = (0.15 + 0.85 * ease).toFixed(3);
+      }
+      // On the way out, past the last story, the tracklist lifts away
+      // instead of riding up beside the next section.
+      s.classList.toggle("dg-leaving", r.bottom < vh - 2);
       if (moving) frame = requestAnimationFrame(paint);
       else last = 0;
     };
@@ -473,7 +488,7 @@ export default function DiscGallery({ basePath = "" }: { basePath?: string }) {
         style={{ "--tracks": N, "--step": `${STEP * 100}svh` } as React.CSSProperties}
       >
         <h2 id="production" className="sr-only">
-          What I built: ten things I shipped and three I prototyped
+          What I built: nine things I shipped and two I prototyped
         </h2>
         <div ref={stage} className="dg-stage" onKeyDown={onStageKey} inert={open !== null}>
           {chips}

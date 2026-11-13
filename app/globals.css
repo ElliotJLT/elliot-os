@@ -9170,6 +9170,17 @@ html:not(.js) .dg-disc:first-child {
   z-index: 70;
   right: 32px;
   bottom: 4svh;
+  transition-property: opacity, translate;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Past the last story the stage unpins and scrolls away; the tracklist
+   lifts off first rather than riding up beside the next section. */
+.dg-leaving .dg-index {
+  opacity: 0;
+  translate: 0 -16px;
+  pointer-events: none;
 }
 
 .dg-index-btn {
