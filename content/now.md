@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-11-12, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 8 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-11-13, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 13 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 8 commits. "ledger: 2026-11-11" (9ad3e0b), "ledger: 2026-11-10" (378f435), "evals: Cervo in plain terms; phones keep the disc clear of the caption (#101)" (c366503) and 5 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 13 commits. "/writing: drop the "off the clock" section" (b381809), "ledger: 2026-11-13" (71dfbf8), "ledger: 2026-11-12" (0f56398) and 10 more
 <!-- agent:end -->
 
 ## by hand
