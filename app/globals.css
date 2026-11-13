@@ -1495,24 +1495,6 @@ h2::before {
   color: var(--ink);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ======================================================== product portfolio */
 /* The page reads as a product record, not four landing pages. Each row keeps
    its own compact control so comparing one problem with its bet never
@@ -1957,16 +1939,6 @@ h2::before {
 .ico:active {
   scale: 0.96;
 }
-
-
-
-
-
-
-
-
-
-
 
 .career-meta {
   display: block;
@@ -2861,19 +2833,6 @@ a.mai-rowname:hover {
   color: var(--muted);
   margin: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* ----------------------------------------------------------------- proof */
 .vouch-col {
@@ -4481,8 +4440,7 @@ main:has(> .band) {
 .authority-table th:nth-child(6) { width: 9%; }
 
 .system-health,
-.decision-outcome,
-.failure-status {
+.decision-outcome {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -4495,8 +4453,7 @@ main:has(> .band) {
   font-weight: 500;
 }
 
-.system-health::before,
-.failure-status::before {
+.system-health::before {
   content: "";
   width: 6px;
   height: 6px;
@@ -4504,13 +4461,11 @@ main:has(> .band) {
   background: currentColor;
 }
 
-.system-health.healthy,
-.failure-status.repaired {
+.system-health.healthy {
   color: var(--accent-2);
 }
 
-.system-health.dormant,
-.failure-status.open {
+.system-health.dormant {
   color: var(--accent-ink);
 }
 
@@ -4538,7 +4493,6 @@ main:has(> .band) {
 }
 
 .decision-list,
-.failure-log,
 .agent-anatomy {
   list-style: none;
   margin: 0;
@@ -4553,8 +4507,7 @@ main:has(> .band) {
   align-items: start;
 }
 
-.decision-list time,
-.failure-meta time {
+.decision-list time {
   font-family: var(--mono);
   font-size: 12px;
   color: var(--faint);
@@ -4575,7 +4528,6 @@ main:has(> .band) {
 }
 
 .decision-list h3,
-.failure-log h3,
 .system-history h3 {
   margin: 0 0 6px;
   font-family: var(--display);
@@ -4585,7 +4537,6 @@ main:has(> .band) {
 }
 
 .decision-list p,
-.failure-log p,
 .system-history p {
   margin: 0;
   color: var(--muted);
@@ -4593,8 +4544,7 @@ main:has(> .band) {
   line-height: 1.55;
 }
 
-.decision-list a,
-.failure-log a {
+.decision-list a {
   display: inline-block;
   margin-top: 8px;
   font-family: var(--mono);
@@ -4694,25 +4644,6 @@ main:has(> .band) {
   color: var(--muted);
   font-size: 13px;
   line-height: 1.55;
-}
-
-.failure-log {
-  border-top: 1px solid var(--line);
-}
-
-.failure-log li {
-  display: grid;
-  grid-template-columns: 150px minmax(0, 1fr);
-  gap: 30px;
-  padding: 24px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.failure-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
 }
 
 .failure-change {
@@ -4917,16 +4848,6 @@ main:has(> .band) {
   .evidence-gap span {
     display: block;
     margin-bottom: 7px;
-  }
-
-  .failure-log li {
-    display: block;
-  }
-
-  .failure-meta {
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 12px;
   }
 
   .system-history {
@@ -5317,10 +5238,6 @@ main:has(> .band) {
 .loop-steps p { margin: 0; line-height: 1.55; color: var(--ink-2); font-size: 15px; }
 .loop-rules { padding-left: 18px; margin: 8px 0 48px; }
 .loop-rules li { margin-bottom: 10px; line-height: 1.55; color: var(--ink-2); }
-.loop-ledger { width: 100%; border-collapse: collapse; margin: 8px 0 14px; font-size: 15px; }
-.loop-ledger th, .loop-ledger td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
-.loop-ledger thead th { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--faint); font-weight: 500; }
-.loop-note { display: block; font-family: var(--mono); font-size: 12px; color: var(--faint); }
 .loop-fig { margin: 8px 0 36px; }
 .loop-fig img { width: 100%; height: auto; border-radius: var(--r); border: 1px solid var(--line); }
 .loop-fig figcaption { font-size: 13px; color: var(--faint); margin-top: 8px; }
@@ -5653,18 +5570,6 @@ h2.mai-kick,
   letter-spacing: 0.12em;
 }
 
-
-@media (max-width: 420px) {
-  .loop-ledger th,
-  .loop-ledger td {
-    padding: 10px 6px;
-  }
-
-  .loop-ledger thead th {
-    letter-spacing: 0.04em;
-  }
-}
-
 h1,
 .wr-title,
 .band-h,
@@ -5859,10 +5764,6 @@ h2.mai-kick + p.muted,
   font-size: 12px;
   color: var(--accent-ink);
 }
-
-
-
-
 
 @media (max-width: 760px) {
   .stack-tabs {
@@ -6124,7 +6025,6 @@ h2.mai-kick + p.muted,
   margin-bottom: 24px;
 }
 
-
 .cr-line {
   --draw: 0;
   list-style: none;
@@ -6262,7 +6162,6 @@ h2.mai-kick + p.muted,
     transition: none;
   }
 }
-
 
 /* 32px: room for a year stop between roles, clear of the loop round the
    next logo. */
@@ -6796,7 +6695,6 @@ h2.mai-kick + p.muted,
   }
 }
 
-
 .built-snake {
   max-width: 760px;
 }
@@ -6805,23 +6703,7 @@ h2.mai-kick + p.muted,
    The systems behind the products (Bench.tsx): a rust bar, a track list,
    a dotted canvas with the flow and two notes, and a mono log. */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Phones: the track list becomes a row of tabs. */
-
 
 .bench-canvas {
   position: relative;
@@ -7004,7 +6886,6 @@ h2.mai-kick + p.muted,
   color: var(--ink);
 }
 
-
 @keyframes bench-in {
   from {
     opacity: 0;
@@ -7023,8 +6904,6 @@ h2.mai-kick + p.muted,
     content: none;
   }
 }
-
-
 
 @media (prefers-reduced-motion: reduce) {
   .bench-flow li {
@@ -7784,15 +7663,6 @@ a.bento-card {
   margin: 8px 0 48px;
 }
 
-.loop-ledger-panel .failure-log li {
-  padding: 18px 0;
-  border-bottom: 1px dashed var(--line-2);
-}
-
-.loop-ledger-panel .failure-log li:last-child {
-  border-bottom: none;
-}
-
 /* Grain: a fixed film of noise over every page, so the paper reads as
    paper rather than a flat fill. Multiply in light, screen in dark. */
 body::after {
@@ -8056,18 +7926,6 @@ footer .foot-base a {
   color: var(--label);
   margin-right: 12px;
   vertical-align: 1px;
-}
-
-/* The ledger loses its panel so nothing on this page competes with the
-   paint. */
-.loops-on-evals .loop-ledger-panel {
-  background: none;
-  box-shadow: none;
-  padding-inline: 0;
-}
-
-.loop-ledger-lede {
-  margin: 0 0 6px;
 }
 
 @media (max-width: 760px) {
@@ -8669,38 +8527,13 @@ html[data-lang="zh"] li {
   }
 }
 
-/* What the agent refused, as four figures above the weekly table. */
-.ledger-tiles {
+/* What the agent refused {
   list-style: none;
   margin: 14px 0 22px;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
-}
-.ledger-tiles li {
-  border-top: 1px solid var(--line);
-  padding-top: 12px;
-}
-.ledger-tiles b {
-  display: block;
-  font-family: var(--display);
-  font-size: 40px;
-  font-weight: 400;
-  line-height: 1.05;
-  margin-bottom: 6px;
-  font-variant-numeric: tabular-nums;
-}
-.ledger-tiles span {
-  display: block;
-  font-size: 14px;
-  line-height: 1.4;
-  color: var(--ink-2);
-}
-@media (max-width: 760px) {
-  .ledger-tiles {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 /* ============================================================ /built discs
@@ -9645,9 +9478,6 @@ html:not(.js) .dg-disc:first-child {
   scale: 1.08;
 }
 
-
-
-
 .dd-copy:focus-visible {
   outline: 2px solid var(--accent-ink);
   outline-offset: 2px;
@@ -9987,7 +9817,6 @@ html:not(.js) .dg-disc:first-child {
     display: inline-block;
     margin: 6px 16px 0 0;
   }
-
 
   .dd-next {
     padding: 22px 26px 0;

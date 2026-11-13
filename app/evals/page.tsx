@@ -84,9 +84,13 @@ const REVIEWER: Check[] = [
   },
 ];
 
-const RULES = [
+// Rule 02 carries its own evidence: the running count of facts the checks
+// threw out, read from the ledger at build time so it stays current.
+const rules = (thrown: number, found: number) => [
   "Nothing sends anything as me. The worst it can do is draft something and hand it to me.",
-  "Every quote and number is checked against its source before it's written. If the source doesn't back it, it's thrown out and counted.",
+  found > 0
+    ? `Every quote and number is checked against its source before it's written. If the source doesn't back it, it's thrown out: ${thrown.toLocaleString("en-GB")} of ${found.toLocaleString("en-GB")} so far.`
+    : "Every quote and number is checked against its source before it's written. If the source doesn't back it, it's thrown out and counted.",
   "A model that reads text from strangers gets no tool that writes, sends or fetches.",
   "My corrections are stored as tests and replayed against the current model every week.",
   "Each job has a pinned model and a daily spend cap. Haiku gates, Sonnet extracts, Opus synthesises.",
@@ -100,19 +104,6 @@ const SECTIONS = [
 
 // The fact checks started on 5 Oct 2026; earlier weeks didn't count them.
 const COUNTED_FROM = "2026-10-05";
-
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat("en-GB", {
-    day: "numeric",
-    month: "short",
-    timeZone: "UTC",
-  }).format(new Date(`${value}T00:00:00Z`));
-}
-
-// A week still in progress reads as zeros, so it's labelled "so far".
-function finished(w: LedgerWeek) {
-  return Date.parse(`${w.week_of}T00:00:00Z`) + 7 * 86_400_000 <= Date.now();
-}
 
 const basePath = process.env.BASE_PATH || "";
 
@@ -173,8 +164,7 @@ function Checks({ items }: { items: Check[] }) {
 }
 
 export default function Evals() {
-  const ledger = getLedger();
-  const weeks = ledger.weeks.filter(
+  const weeks = getLedger().weeks.filter(
     (w) => w.week_of >= COUNTED_FROM && w.ticks !== undefined,
   );
   const sum = (k: keyof LedgerWeek) =>
@@ -269,109 +259,12 @@ export default function Evals() {
             </p>
             <h3 className="loop-clock rv-settle">the rules they run under, in code</h3>
             <ol className="ev-flow ev-rules rv-settle">
-              {RULES.map((r) => (
+              {rules(thrown, kept + thrown).map((r) => (
                 <li key={r}>{r}</li>
               ))}
             </ol>
           </div>
         </Reveal>
-        {weeks.length > 0 && (
-          <Reveal>
-            <h3 className="loop-clock rv-settle">
-              what it refused, counted by code
-            </h3>
-            <div className="loop-ledger-panel rv-settle">
-              <p className="loop-ledger-lede">
-                A system that only reports what it did can&apos;t show it
-                checks anything. So this counts what it refused, since{" "}
-                {formatDate(weeks[0].week_of)}.
-              </p>
-              <ul className="ledger-tiles">
-                <li>
-                  <b>{kept}</b>
-                  <span>facts kept, each with the sentence it came from</span>
-                </li>
-                <li>
-                  <b>{Math.round((thrown / (kept + thrown)) * 100)}%</b>
-                  <span>
-                    of the facts it found, thrown out: {thrown} of{" "}
-                    {kept + thrown}, because the quote wasn&apos;t in the source
-                  </span>
-                </li>
-                <li>
-                  <b>0</b>
-                  <span>
-                    messages sent as me. The worst it can do is draft one
-                  </span>
-                </li>
-                <li>
-                  <b>8 → off</b>
-                  <span>
-                    morning messages with no reply, so I switched them off on
-                    16 October
-                  </span>
-                </li>
-              </ul>
-              <table className="loop-ledger">
-                <thead>
-                  <tr>
-                    <th>week of</th>
-                    <th>checks run</th>
-                    <th>facts kept</th>
-                    <th>thrown out</th>
-                    <th>evening wrap-ups</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {weeks.map((w) => (
-                    <tr key={w.week_of}>
-                      <th scope="row">
-                        {formatDate(w.week_of)}
-                        {!finished(w) && <span className="loop-note">so far</span>}
-                      </th>
-                      <td>
-                        {w.ticks}
-                        {(w.quiet ?? 0) > 0 && (
-                          <span className="loop-note">{w.quiet} found nothing new</span>
-                        )}
-                      </td>
-                      <td>{w.facts_kept}</td>
-                      <td>{w.facts_thrown}</td>
-                      <td>
-                        {w.closes ?? 0}
-                        {(w.closes_withheld ?? 0) > 0 && (
-                          <span className="loop-note">{w.closes_withheld} held back by its checks</span>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p className="loop-ledger-test">
-                Week one was its first read of everything already there, so the
-                counts drop after it. What would make it wrong: hundreds of
-                checks and nothing kept, or the thrown-out share climbing. If
-                the numbers show either, I cut it back.
-              </p>
-              {ledger.broke.length > 0 && (
-                <ol className="failure-log">
-                  {ledger.broke.map((b) => (
-                    <li key={b.date + b.what}>
-                      <div className="failure-meta">
-                        <time dateTime={b.date}>{formatDate(b.date)}</time>
-                        <span className="failure-status repaired">fixed</span>
-                      </div>
-                      <div>
-                        <p>{b.what}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </div>
-          </Reveal>
-        )}
-
         <Reveal>
           <h3 className="loop-clock rv-settle">and the checks on me</h3>
           <div>
