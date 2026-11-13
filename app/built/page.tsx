@@ -34,8 +34,7 @@ export default async function Built() {
         kicker="Built"
         title="I build the product and the operation around it."
         standfirst="Eleven things I've built, from an AI tutor in 850+ schools to a marketplace that fed NHS staff through COVID. Each disc borrows its look from an album I've played most."
-      />
-      <div className="mai built-body">
+      >
         <nav className="built-index" aria-label="On this page">
           {SECTIONS.map((s) => (
             <a key={s.id} href={`#${s.id}`}>
@@ -43,7 +42,7 @@ export default async function Built() {
             </a>
           ))}
         </nav>
-      </div>
+      </FoldHero>
 
       {/* Full-bleed: the discs run corner to corner, under the masthead. */}
       <DiscGallery basePath={basePath} />

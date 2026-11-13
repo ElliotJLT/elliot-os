@@ -34,13 +34,13 @@ export default async function Writing() {
             <div className="wr-head-main">
               <span className="mai-kick rv-settle">Writing</span>
               <h1 className="wr-title rv-settle">
-                The bit between the strategy deck and the pull request.
+                What I&apos;ve learned shipping AI that people rely on.
               </h1>
             </div>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              I write about shipping AI to people the model can hurt if it&apos;s
-              wrong, and about leading the team while doing the building.
-              Newest first inside each section, from Medium.
+              Essays on building AI for people it can hurt when it&apos;s wrong,
+              and on leading a team while doing the building. Newest first in
+              each section, from Medium.
             </p>
           </header>
         </Reveal>

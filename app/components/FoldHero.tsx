@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 /**
  * A page that opens on a photograph. It starts full-bleed with the title on
@@ -15,6 +15,7 @@ export default function FoldHero({
   kicker,
   title,
   standfirst,
+  children,
 }: {
   src: string;
   alt: string;
@@ -22,6 +23,8 @@ export default function FoldHero({
   kicker: string;
   title: string;
   standfirst: string;
+  /** Under the standfirst: a page's jump links, as on /evals. */
+  children?: ReactNode;
 }) {
   const ref = useRef<HTMLElement>(null);
 
@@ -69,6 +72,7 @@ export default function FoldHero({
           <span className="fold-kick">{kicker}</span>
           <h1 className="fold-title">{title}</h1>
           <p className="fold-sub">{standfirst}</p>
+          {children}
         </div>
       </div>
     </section>

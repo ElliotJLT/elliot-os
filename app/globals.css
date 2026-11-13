@@ -36,6 +36,7 @@
      in butter, and a navy footer to answer the green hero. */
   --cta-bg: #1d2420;
   --cta-fg: #f3eee2;
+  --cta-hover: #22543a;
   --kick: #8e2f4f;
   --label: #9c4011;
   --select: #f3df98;
@@ -111,6 +112,7 @@
   --flag: #1b221d;
   --cta-bg: #f3df98;
   --cta-fg: #131915;
+  --cta-hover: #d4b46c;
   --kick: #e8849a;
   --label: #e8a070;
   --select: #22543a;
@@ -2626,7 +2628,7 @@ h2[id] {
   text-decoration: none;
   border: 1px solid transparent;
   transition-property: background-color, color, border-color, scale;
-  transition-duration: 150ms;
+  transition-duration: 200ms;
   transition-timing-function: ease-out;
 }
 
@@ -2650,9 +2652,11 @@ h2[id] {
 
 /* One button system. Primary (solid) is the opposite of the surface it
    sits on: near-black on light surfaces, butter on dark ones. Secondary
-   (soft, ghost) is an outline in the surrounding text colour. Hover never
-   changes the hue: primary shifts a step towards its own text colour,
-   secondary fills faintly. */
+   (soft, ghost) is an outline in the surrounding text colour. Hover is a
+   clear colour change, eased: primary steps to the next palette colour
+   (--cta-hover: green on light, ochre on dark), secondary fills with its
+   own ink and its text turns the colour of the surface (--pill-fill,
+   --pill-surface, set by the band and the footer). */
 .pill-soft,
 .pill-ghost {
   background: transparent;
@@ -2662,8 +2666,9 @@ h2[id] {
 
 .pill-soft:hover,
 .pill-ghost:hover {
-  background: color-mix(in srgb, currentColor 8%, transparent);
-  border-color: currentColor;
+  background: var(--pill-fill, var(--ink));
+  border-color: var(--pill-fill, var(--ink));
+  color: var(--pill-surface, var(--bg));
 }
 
 .pill-solid,
@@ -2674,7 +2679,7 @@ h2[id] {
 
 .pill-solid:hover,
 .pill-cream:hover {
-  background: color-mix(in srgb, var(--cta-bg) 84%, var(--cta-fg));
+  background: var(--cta-hover);
 }
 
 .pill:active {
@@ -3261,6 +3266,16 @@ main:has(> .band) {
    hero's text colour. */
 .band .pill-ghost {
   color: var(--band-fg, #faf3e8);
+  --pill-fill: var(--band-fg, #faf3e8);
+  --pill-surface: var(--band-bg, #d4b46c);
+}
+
+:root[data-theme="dark"] .band .pill-ghost {
+  --pill-surface: var(--band-bg-dark, #1b3a6c);
+}
+
+.band .pill-ghost:hover {
+  color: var(--pill-surface);
 }
 
 /* The band runs to the viewport edge and clears the fixed nav with padding. */
@@ -7811,6 +7826,9 @@ footer {
   /* The footer is a dark surface in both modes, so its primary is butter. */
   --cta-bg: #f3df98;
   --cta-fg: #1d2420;
+  --cta-hover: #d4b46c;
+  --pill-fill: var(--foot-fg, var(--ink));
+  --pill-surface: var(--foot-bg, var(--bg));
 }
 
 footer .foot-h {
@@ -7857,6 +7875,12 @@ footer .foot-base a {
   text-decoration: none;
   transition: border-color 0.2s, color 0.2s;
   letter-spacing: 0.04em;
+}
+
+/* In the /built hero, under the standfirst, the way /evals carries its
+   jump links. */
+.fold-copy .built-index {
+  margin-top: 24px;
 }
 
 .built-index a span {

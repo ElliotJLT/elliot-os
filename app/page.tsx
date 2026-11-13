@@ -66,9 +66,9 @@ export default async function Home() {
             <div className="band-profile">
               <TrackingPortrait className="band-face rv-develop" />
               <p className="band-sub rv-settle">
-                I led the team that took an AI tutor from a 30-school beta into
-                850+ UK schools, marking real A-level past papers at over 99% on
-                the syllabus it covers. The government picked it for its{" "}
+                I led the team that took an AI tutor from 30 schools to 850+,
+                marking real A-level past papers at 99%+ on the syllabus it
+                covers. The government picked it for its{" "}
                 <a href="https://www.gov.uk/government/news/edtech-and-ai-companies-invited-to-help-build-safe-ai-tutoring-tools-for-disadvantaged-pupils">
                   AI Tutoring Tools Pioneers Programme
                 </a>
