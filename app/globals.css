@@ -5414,46 +5414,6 @@ main:has(> .band) {
   }
 }
 
-.ev-places {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.ev-places li {
-  scroll-margin-top: 104px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 4px 28px;
-  padding: 16px 0;
-  border-top: 1px solid var(--line);
-}
-
-.ev-places li:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-@media (min-width: 760px) {
-  .ev-places li {
-    grid-template-columns: 240px 1fr;
-    align-items: baseline;
-  }
-}
-
-.ev-places a,
-.ev-places-name {
-  font-family: var(--serif);
-  font-size: 20px;
-  color: var(--ink);
-}
-
-.ev-places p {
-  margin: 0;
-  font-size: 15px;
-  color: var(--muted);
-  max-width: none;
-}
-
 /* The face reacts to a click, so say it's clickable; with reduced motion it
    stays still and the hint would be a lie. */
 @media (prefers-reduced-motion: no-preference) {
@@ -5616,25 +5576,6 @@ main:has(> .band) {
   border-top: 1px dashed var(--line-2);
   padding-top: 14px;
 }
-.ev-places {
-  background: var(--panel);
-  border-radius: var(--r-card);
-  box-shadow: var(--lift);
-  padding: 8px 30px;
-}
-.ev-places li {
-  border-top: 1px dashed var(--line-2);
-}
-.ev-places li:first-child,
-.ev-places li:last-child {
-  border-bottom: none;
-}
-.ev-places li:first-child {
-  border-top: none;
-}
-.ev-places a:hover {
-  text-decoration: underline;
-}
 .research-card,
 .case-card,
 .mentor-card,
@@ -5736,9 +5677,7 @@ h1,
 .cr-card h3,
 .cr-card h3 a,
 .wr-h,
-.toolrow h3,
-.ev-places a,
-.ev-places-name {
+.toolrow h3 {
   font-family: var(--display);
   font-weight: 400;
   font-size: 24px;
@@ -10083,10 +10022,6 @@ html:not(.js) .dg-disc:first-child {
 .ev-step,
 .cr-body {
   padding: var(--pad-panel);
-}
-
-.ev-places {
-  padding: 8px var(--pad-panel);
 }
 
 /* The bench on /built: cards straight on the page, Stripe's bento, not a
