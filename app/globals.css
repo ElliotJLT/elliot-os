@@ -2526,6 +2526,11 @@ h2[id] {
 
 /* Exactly one monospace cell wide, so evals never shifts the nav; the long
    stroke rises past x-height. */
+/* "how I check": the tick takes a small cell after the words. */
+.nav-check-core {
+  margin-left: 0.2em;
+}
+
 .nav-evals-tick {
   display: inline-block;
   height: 0.8em;

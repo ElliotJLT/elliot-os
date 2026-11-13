@@ -10,13 +10,14 @@ import { PAINT_SHAPES } from "@/lib/paintShapes";
 export const metadata = pageMeta({
   title: "How I check · Elliot Little",
   description:
-    "How I check the AI I ship, the agents that run this site, and my own decisions: real mark schemes, red-teaming, and a named person on every call.",
+    "How I know the AI I ship works: the exam boards' own mark schemes, red-teaming before students do, and a named person on every call.",
   path: "/evals/",
 });
 
-// /evals and /loops were one idea on two pages, so they became one page on
-// 2026-10-20: the checks on the model, on the person reviewing it, on the
-// agents I run, and on me. /loops redirects to #agents.
+// One question: how do I know the AI I ship works? The checks on the model
+// and on the person reviewing it lead; a short closing section applies the
+// same checks to the agents I run and to me. /loops and /now redirect to
+// #agents, and #me still lands on that section.
 //
 // Kept high level on purpose. The numbers live on /built, where each one has
 // its context; this page says how the work is done and who decides.
@@ -83,31 +84,6 @@ const REVIEWER: Check[] = [
   },
 ];
 
-// Cervo, the system the agents section describes: four jobs, then the
-// rules every one of them runs under.
-const CERVO = [
-  {
-    name: "Memory",
-    when: "Runs hourly",
-    does: "Reads mail, calendar, applications and session transcripts, and keeps each fact with the sentence it came from. What I say outranks anything a model inferred.",
-  },
-  {
-    name: "Observer",
-    when: "Runs after each session",
-    does: "Scores how the work was done: where I used my own judgement and where I handed it to the model.",
-  },
-  {
-    name: "World",
-    when: "Runs weekly, in the cloud",
-    does: "Reads two dozen sources against my eight written positions and opens a pull request with the evidence. CI merges it only if it touched evidence alone and everything still validates.",
-  },
-  {
-    name: "Synthesis",
-    when: "Runs on Sundays",
-    does: "Reads the other three and writes up patterns, positions and opportunities, each with a quote of mine and a source.",
-  },
-];
-
 const RULES = [
   "Nothing sends anything as me. The worst it can do is draft something and hand it to me.",
   "Every quote and number is checked against its source before it's written. If the source doesn't back it, it's thrown out and counted.",
@@ -119,8 +95,7 @@ const RULES = [
 const SECTIONS = [
   { id: "model", n: "01", label: "The model" },
   { id: "reviewer", n: "02", label: "The reviewer" },
-  { id: "agents", n: "03", label: "The agents" },
-  { id: "me", n: "04", label: "Me" },
+  { id: "agents", n: "03", label: "My own agents" },
 ];
 
 // The fact checks started on 5 Oct 2026; earlier weeks didn't count them.
@@ -148,7 +123,6 @@ const PAINTINGS = {
   watch: { w: 997, h: 714, seed: 11 },
   marking: { w: 916, h: 812, seed: 23 },
   lifeguard: { w: 1061, h: 767, seed: 37 },
-  hives: { w: 1051, h: 743, seed: 41 },
   pond: { w: 983, h: 768, seed: 53 },
 };
 
@@ -221,11 +195,11 @@ export default function Evals() {
             />
             <span className="mai-kick rv-settle">How I check</span>
             <h1 className="wr-title rv-settle">
-              What gets checked, and who decides.
+              How I know the AI I ship works.
             </h1>
             <p className="mai-sub rv-settle" style={{ marginInline: 0 }}>
-              Safety claims shouldn&apos;t need a glossary. I check the models I
-              ship, the agents I run, and, less comfortably, my own decisions.
+              Marked against the exam boards&apos; own standards, attacked before
+              a student can, and a named person on every call that matters.
             </p>
             <nav className="built-index ev-index" aria-label="On this page">
               {SECTIONS.map((s) => (
@@ -274,41 +248,32 @@ export default function Evals() {
         </Reveal>
 
         <Reveal>
+          <div id="me" className="anchor-target" />
           <h2 id="agents" className="mai-kick rv-settle">
             03 · {AGENTS.short}
           </h2>
-          <p className="sec-title rv-settle">Checking the agents I run.</p>
+          <p className="sec-title rv-settle">
+            The same checks, on my own agents and on me.
+          </p>
         </Reveal>
         <Reveal>
           <div className="ev-wrap">
             <Painting
-              name="hives"
-              side="right"
-              alt="A painted beekeeper lifting a frame from one hive in a fenced row of hives."
+              name="pond"
+              side="left"
+              alt="A painted figure crouched at the edge of a still pond, looking at their own reflection."
             />
             <p className="ev-flow-lede rv-settle">
-              Cervo is four agents that keep track of my work, so every Claude
-              Code session I open starts already knowing what I&apos;m in the
-              middle of.
+              I run four agents, called Cervo, that keep track of my work. They
+              read my mail and sessions, so they get the strictest rules.
             </p>
-            <ol className="ev-flow rv-settle">
-              {CERVO.map((a) => (
-                <li key={a.name}>
-                  <h3>{a.name}</h3>
-                  <p>{a.does}</p>
-                  <p className="ev-flow-where">{a.when}</p>
-                </li>
+            <h3 className="loop-clock rv-settle">the rules they run under, in code</h3>
+            <ol className="ev-flow ev-rules rv-settle">
+              {RULES.map((r) => (
+                <li key={r}>{r}</li>
               ))}
             </ol>
           </div>
-        </Reveal>
-        <Reveal>
-          <h3 className="loop-clock rv-settle">the rules it runs under, in code</h3>
-          <ol className="ev-flow ev-rules rv-settle">
-            {RULES.map((r) => (
-              <li key={r}>{r}</li>
-            ))}
-          </ol>
         </Reveal>
         {weeks.length > 0 && (
           <Reveal>
@@ -408,18 +373,8 @@ export default function Evals() {
         )}
 
         <Reveal>
-          <h2 id="me" className="mai-kick rv-settle">
-            04 · {AGENTS.short}
-          </h2>
-          <p className="sec-title rv-settle">Checking myself.</p>
-        </Reveal>
-        <Reveal>
-          <div className="ev-wrap">
-            <Painting
-              name="pond"
-              side="left"
-              alt="A painted figure crouched at the edge of a still pond, looking at their own reflection."
-            />
+          <h3 className="loop-clock rv-settle">and the checks on me</h3>
+          <div>
             <ol className="ev-flow rv-settle">
               <li>
                 <h3>

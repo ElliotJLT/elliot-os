@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 const LINKS = [
   { href: "/built", label: "Built" },
   { href: "/writing", label: "Writing" },
-  { href: "/evals", label: "Evals" },
+  { href: "/evals", label: "How I check" },
 ];
 
 export default function MobileMenu() {

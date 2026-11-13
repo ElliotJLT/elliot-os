@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Newsreader, Archivo, Instrument_Serif } from "next/font/google";
 import NavLinks from "./components/NavLinks";
-import { EvalsWord } from "./components/WordMarks";
+import { CheckWord } from "./components/WordMarks";
 import ThemeToggle from "./components/ThemeToggle";
 import MobileMenu from "./components/MobileMenu";
 import LangSwitch from "./components/LangSwitch";
@@ -138,9 +138,9 @@ export default function RootLayout({
                 <Link
                   href="/evals"
                   className="nav-evals-link"
-                  aria-label="Evals"
+                  aria-label="How I check"
                 >
-                  <EvalsWord first="E" />
+                  <CheckWord first="H" />
                 </Link>
               </nav>
               <div className="foot-col">
