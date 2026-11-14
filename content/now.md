@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-11-13, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 13 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-11-14, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 19 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 13 commits. "/writing: drop the "off the clock" section" (b381809), "ledger: 2026-11-13" (71dfbf8), "ledger: 2026-11-12" (0f56398) and 10 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 19 commits. "ledger: 2026-11-13" (6b0e4bd), "/built: discs slide in from the right; tracklist lifts away at the end" (5a91aa5), "/evals: drop the refusal dashboard; the count lives in rule 02" (e009b89) and 16 more
 <!-- agent:end -->
 
 ## by hand
