@@ -5403,12 +5403,73 @@ main:has(> .band) {
   stroke: currentColor;
   stroke-width: 1.8;
   stroke-linecap: round;
+  overflow: visible;
 }
 
 .mob-menu-btn[aria-expanded="true"] {
   background: var(--bg-2);
 }
 
+/* Burger to X. Each line is drawn full width at the centre, then scaled
+   about the centre and nudged left so the burger reads as three lines of
+   falling length (16, 12, 8) hung from the same left edge. Open, the outer
+   two straighten to full length and cross; the middle one runs out to the
+   left. Every state uses the same translate/rotate/scaleX list so the
+   browser can tween between them. Hover lines them up: a small tell that
+   the lines "come into line" before they cross. */
+.mob-line {
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+  transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 160ms ease, stroke 200ms ease;
+}
+
+.mob-line-1 { transform: translate(0, -5px) rotate(0) scaleX(1); }
+.mob-line-2 { transform: translate(-2px, 0) rotate(0) scaleX(0.75); }
+.mob-line-3 { transform: translate(-4px, 5px) rotate(0) scaleX(0.5); }
+
+@media (hover: hover) {
+  .mob-menu-btn:hover .mob-line-2 { transform: translate(0, 0) rotate(0) scaleX(1); }
+  .mob-menu-btn:hover .mob-line-3 { transform: translate(0, 5px) rotate(0) scaleX(1); }
+}
+
+/* Closing: the X uncrosses first, then the middle line slides back in. */
+.mob-line-2 { transition-delay: 0ms, 120ms, 0ms; }
+.mob-line-2 { transition-duration: 360ms, 160ms, 200ms; }
+
+.mob-menu-btn[aria-expanded="true"] .mob-line {
+  stroke: var(--accent-2);
+}
+
+.mob-menu-btn[aria-expanded="true"] .mob-line-1 {
+  transform: translate(0, 0) rotate(45deg) scaleX(1.05);
+  transition-delay: 70ms;
+}
+
+.mob-menu-btn[aria-expanded="true"] .mob-line-2 {
+  transform: translate(-8px, 0) rotate(0) scaleX(0);
+  opacity: 0;
+  transition-duration: 220ms, 140ms, 200ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 1, 1), ease, ease;
+  transition-delay: 0ms;
+}
+
+.mob-menu-btn[aria-expanded="true"] .mob-line-3 {
+  transform: translate(0, 0) rotate(-45deg) scaleX(1.05);
+  transition-delay: 110ms;
+}
+
+.mob-menu-btn:active {
+  transform: scale(0.94);
+}
+
+.mob-menu-btn {
+  transition: transform 120ms ease, background-color 200ms ease;
+}
+
+/* The panel opens out from the button's corner rather than popping in,
+   and the links follow in a short stagger. Kept mounted; visibility flips
+   after the close animation so it can play out. */
 .mob-menu-panel {
   position: absolute;
   top: calc(100% + 8px);
@@ -5422,6 +5483,19 @@ main:has(> .band) {
   border-radius: var(--r-card);
   box-shadow: 0 1px 2px rgba(52, 46, 41, 0.04),
     0 12px 32px rgba(52, 46, 41, 0.1);
+  clip-path: inset(0 0 100% 70% round var(--r-card));
+  opacity: 0;
+  visibility: hidden;
+  transition: clip-path 300ms cubic-bezier(0.4, 0, 1, 1),
+    opacity 200ms ease 80ms, visibility 0s linear 300ms;
+}
+
+.mob-menu-panel[data-open] {
+  clip-path: inset(0 0 0 0 round var(--r-card));
+  opacity: 1;
+  visibility: visible;
+  transition: clip-path 460ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 160ms ease, visibility 0s;
 }
 
 .mob-menu-panel a {
@@ -5432,6 +5506,16 @@ main:has(> .band) {
   text-decoration: none;
   padding: 12px 14px;
   border-radius: var(--r-inner);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 140ms ease, transform 140ms ease;
+}
+
+.mob-menu-panel[data-open] a {
+  opacity: 1;
+  transform: none;
+  transition: opacity 260ms ease, transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(90ms + var(--i, 0) * 45ms);
 }
 
 .mob-menu-panel a[data-active] {
@@ -5446,6 +5530,27 @@ main:has(> .band) {
   margin-top: 4px;
   border-top: 1px solid var(--line);
   border-radius: 0 0 var(--r-inner) var(--r-inner);
+}
+
+/* Reduced motion: no crossing, no reveal, just a quick fade between states. */
+@media (prefers-reduced-motion: reduce) {
+  .mob-line,
+  .mob-menu-btn,
+  .mob-menu-panel,
+  .mob-menu-panel[data-open],
+  .mob-menu-panel a,
+  .mob-menu-panel[data-open] a {
+    transition-duration: 120ms !important;
+    transition-delay: 0ms !important;
+    transition-timing-function: ease !important;
+  }
+  .mob-menu-panel,
+  .mob-menu-panel[data-open] {
+    clip-path: none;
+  }
+  .mob-menu-panel a {
+    transform: none;
+  }
 }
 
 /* A section's point, set as a headline under its kicker. Mono kickers were
