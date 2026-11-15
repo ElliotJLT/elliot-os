@@ -118,7 +118,7 @@ const STORIES: Omit<Story, "slug">[] = [
       { n: "450,000", label: "disadvantaged pupils a year the programme can reach" },
     ],
     role: "Led product, including the safety work",
-    links: [{ label: "trust and safeguarding", href: "https://www.zerogravity.co.uk/tutor/trust" }],
+    links: [{ label: "trust and safeguarding", href: "https://www.zerogravity.co.uk/security" }],
     look: { bg: "#8e2f4f", fg: "#ecebe7", cover: "work/covers/tutor-safety.jpg", after: "A Deeper Understanding, The War On Drugs", hours: 98 },
   },
   {
@@ -196,8 +196,8 @@ const STORIES: Omit<Story, "slug">[] = [
       "The rollout now copies what worked in the best schools: classes set up in advance and a weekly call with the teacher.",
     role: "Led product and design",
     links: [
-      { label: "for teachers", href: "https://www.zerogravity.co.uk/tutor/teachers" },
-      { label: "for school leaders", href: "https://www.zerogravity.co.uk/tutor/school-leaders" },
+      { label: "for teachers", href: "https://www.zerogravity.co.uk/teachers" },
+      { label: "for school leaders", href: "https://www.zerogravity.co.uk/slt" },
     ],
     look: { bg: "#22543a", fg: "#f3df98", cover: "work/covers/school-hub.jpg", after: "Abbey Road, The Beatles", hours: 33 },
   },

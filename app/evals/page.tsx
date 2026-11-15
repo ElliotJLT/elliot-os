@@ -1,6 +1,5 @@
 import { pageMeta } from "@/lib/meta";
 import { getLedger, type LedgerWeek } from "@/lib/ledger";
-import { THEMES } from "@/lib/themes";
 import Reveal from "../components/Reveal";
 import HabitIcon from "../components/HabitIcon";
 import PaintReveal from "../components/PaintReveal";
@@ -21,7 +20,6 @@ export const metadata = pageMeta({
 //
 // Kept high level on purpose. The numbers live on /built, where each one has
 // its context; this page says how the work is done and who decides.
-const [WRONG, , AGENTS] = THEMES;
 
 type Check = {
   icon: "bar" | "balance" | "conversation" | "transcript" | "flag" | "failing";
@@ -203,7 +201,7 @@ export default function Evals() {
 
         <Reveal>
           <h2 id="model" className="mai-kick rv-settle">
-            01 · {WRONG.short}
+            {SECTIONS[0].n} · {SECTIONS[0].label.toLowerCase()}
           </h2>
           <p className="sec-title rv-settle">Checking the model.</p>
         </Reveal>
@@ -220,7 +218,7 @@ export default function Evals() {
 
         <Reveal>
           <h2 id="reviewer" className="mai-kick rv-settle">
-            02 · {WRONG.short}
+            {SECTIONS[1].n} · {SECTIONS[1].label.toLowerCase()}
           </h2>
           <p className="sec-title rv-settle">
             Checking the person who checks it.
@@ -240,7 +238,7 @@ export default function Evals() {
         <Reveal>
           <div id="me" className="anchor-target" />
           <h2 id="agents" className="mai-kick rv-settle">
-            03 · {AGENTS.short}
+            {SECTIONS[2].n} · {SECTIONS[2].label.toLowerCase()}
           </h2>
           <p className="sec-title rv-settle">
             The same checks, on my own agents and on me.
