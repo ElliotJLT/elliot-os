@@ -8083,10 +8083,40 @@ footer .foot-base a {
   fill: none;
   stroke: currentColor;
   stroke-width: 1.4;
-  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: visible;
 }
-.lang-trigger:hover .lang-globe {
-  transform: rotate(-24deg);
+.lang-globe path {
+  opacity: 0.55;
+}
+/* One keyframe pass is half a turn: width runs 1 to -1 on a sine ease,
+   which is cos(angle), and alternate carries it on round. Delays of a
+   third and two thirds put the three meridians 60° apart. Paused at rest,
+   so the globe holds wherever it stopped; it turns on hover, on keyboard
+   focus and while the menu is open. */
+.lang-meridian {
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+  /* Non-scaling so an edge-on meridian stays a visible line instead of
+     thinning to nothing. That measures in screen pixels, so match the
+     outline: 1.4 units at 16px on a 24 viewBox is about 0.93px. */
+  vector-effect: non-scaling-stroke;
+  stroke-width: 0.93px;
+  animation: lang-spin 1.5s cubic-bezier(0.37, 0, 0.63, 1) infinite alternate paused;
+}
+.lang-meridian:nth-of-type(2) {
+  animation-delay: -0.5s;
+}
+.lang-meridian:nth-of-type(3) {
+  animation-delay: -1s;
+}
+@keyframes lang-spin {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(-1); }
+}
+.lang-trigger:hover .lang-meridian,
+.lang-trigger:focus-visible .lang-meridian,
+.lang-trigger[aria-expanded="true"] .lang-meridian {
+  animation-play-state: running;
 }
 /* Keyed on the language, so each change rolls the new code in. */
 .lang-code {
@@ -8266,9 +8296,12 @@ html[data-lang="zh"] li {
 }
 @media (prefers-reduced-motion: reduce) {
   .lang-code,
-  .lang-panel {
+  .lang-panel,
+  .lang-meridian {
     animation: none;
   }
+  .lang-meridian:nth-of-type(2) { transform: scaleX(0.5); }
+  .lang-meridian:nth-of-type(3) { transform: scaleX(-0.5); }
 }
 @media (max-width: 720px) {
   .lang-panel {

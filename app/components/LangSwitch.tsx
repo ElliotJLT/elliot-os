@@ -162,9 +162,16 @@ export default function LangSwitch() {
         aria-label={`Language: ${meta.english}`}
         onClick={() => setOpen((o) => !o)}
       >
+        {/* A wireframe globe that turns on its axis. Each meridian is a full
+            great circle, which seen side-on is an ellipse whose width
+            follows a sine as the globe turns, so scaling three ellipses 60°
+            out of phase is an honest spin, not a tilt. */}
         <svg className="lang-globe" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="12" cy="12" r="8.5" />
-          <path d="M3.5 12h17M12 3.5c2.6 2.4 3.9 5.2 3.9 8.5s-1.3 6.1-3.9 8.5M12 3.5c-2.6 2.4-3.9 5.2-3.9 8.5s1.3 6.1 3.9 8.5" />
+          <path d="M3.5 12h17M5.2 7.5h13.6M5.2 16.5h13.6" />
+          <ellipse className="lang-meridian" cx="12" cy="12" rx="8.5" ry="8.5" />
+          <ellipse className="lang-meridian" cx="12" cy="12" rx="8.5" ry="8.5" />
+          <ellipse className="lang-meridian" cx="12" cy="12" rx="8.5" ry="8.5" />
         </svg>
         <span className="lang-code" key={lang}>
           {meta.short}
