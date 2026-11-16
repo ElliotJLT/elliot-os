@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-11-15, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 19 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-11-16, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 22 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 19 commits. "ledger: 2026-11-14" (04420cc), "ledger: 2026-11-13" (6b0e4bd), "/built: discs slide in from the right; tracklist lifts away at the end" (5a91aa5) and 16 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 22 commits. "ledger: 2026-11-16" (4236f70), "Spin the language globe on its axis instead of tilting it (#104)" (78b1112), "Animate the mobile menu: lines that cross into an X, panel that opens from the button (#103)" (8a01316) and 19 more
 <!-- agent:end -->
 
 ## by hand
