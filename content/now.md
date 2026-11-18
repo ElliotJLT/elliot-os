@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-11-17, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 21 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-11-18, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 20 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 21 commits. "ledger: 2026-11-16" (a33de3e), "ledger: 2026-11-16" (4236f70), "Spin the language globe on its axis instead of tilting it (#104)" (78b1112) and 18 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 20 commits. "ledger: 2026-11-17" (0204c17), "ledger: 2026-11-16" (a33de3e), "ledger: 2026-11-16" (4236f70) and 17 more
 <!-- agent:end -->
 
 ## by hand
