@@ -195,10 +195,13 @@ function vanish(face: HTMLElement, frame: number, still: boolean) {
     const cv = document.createElement("canvas");
     cv.width = W * dpr;
     cv.height = H * dpr;
+    // Fixed, not absolute: a fixed layer can't widen the page, where an
+    // absolute one hanging off a phone's edge stretched the page and the
+    // nav with it. The tick moves it with the face if the page scrolls.
     Object.assign(cv.style, {
-      position: "absolute",
-      left: `${rect.left + window.scrollX - pad}px`,
-      top: `${rect.top + window.scrollY - pad * 1.6}px`,
+      position: "fixed",
+      left: `${rect.left - pad}px`,
+      top: `${rect.top - pad * 1.6}px`,
       width: `${W}px`,
       height: `${H}px`,
       pointerEvents: "none",
@@ -267,6 +270,8 @@ function vanish(face: HTMLElement, frame: number, still: boolean) {
     const t0 = performance.now();
     const tick = (now: number) => {
       const t = now - t0;
+      const at = face.getBoundingClientRect();
+      cv.style.transform = `translate3d(${(at.left - rect.left).toFixed(1)}px, ${(at.top - rect.top).toFixed(1)}px, 0)`;
       ctx.clearRect(0, 0, W, H);
       if (t < HANDOVER_MS) {
         ctx.save();

@@ -150,7 +150,7 @@ function Awards({ org, uid, awards }: { org: string; uid: string; awards: NonNul
           <i key={a} className="cr-spark" style={{ "--a": `${a}deg` } as React.CSSProperties} aria-hidden="true" />
         ))}
       </button>
-      <div className="cr-award-drawer" id={id} inert={!open}>
+      <div className="cr-award-drawer" id={id} inert={!open} data-open={open || undefined}>
         <ul>
           {awards.map((a, i) => {
             const body = (
