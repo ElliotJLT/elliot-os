@@ -1,7 +1,7 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-11-19, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 20 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-11-20, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 16 commits across 1 repos.*
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 20 commits. "ledger: 2026-11-18" (694066c), "ledger: 2026-11-17" (0204c17), "ledger: 2026-11-16" (a33de3e) and 17 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 16 commits. "Phone fixes: smoke no longer widens the page; awards open without :has()" (f91ff04), "ledger: 2026-11-20" (e91a277), "ledger: 2026-11-18" (694066c) and 13 more
 <!-- agent:end -->
 
 ## by hand
