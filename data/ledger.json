@@ -106,13 +106,27 @@
       "captured": 0,
       "briefs": 0,
       "fallbacks": 0,
-      "ticks": 216,
+      "ticks": 257,
       "quiet": 0,
-      "facts_kept": 22,
+      "facts_kept": 29,
       "facts_thrown": 9,
       "closes": 0,
       "closes_withheld": 0,
       "incidents": 1
+    },
+    {
+      "week_of": "2026-11-23",
+      "closed": 0,
+      "captured": 0,
+      "briefs": 0,
+      "fallbacks": 0,
+      "ticks": 1,
+      "quiet": 0,
+      "facts_kept": 0,
+      "facts_thrown": 0,
+      "closes": 0,
+      "closes_withheld": 0,
+      "incidents": 0
     }
   ],
   "broke": [
