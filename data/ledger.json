@@ -120,10 +120,10 @@
       "captured": 0,
       "briefs": 0,
       "fallbacks": 0,
-      "ticks": 59,
+      "ticks": 89,
       "quiet": 0,
-      "facts_kept": 0,
-      "facts_thrown": 0,
+      "facts_kept": 2,
+      "facts_thrown": 2,
       "closes": 0,
       "closes_withheld": 0,
       "incidents": 0
