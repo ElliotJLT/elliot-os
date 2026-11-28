@@ -1,5 +1,5 @@
 <!-- agent:begin -->
-*Shipping log for the 7 days to 2026-11-27, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 6 commits across 1 repos.*
+*Shipping log for the 7 days to 2026-11-28, derived from the [public GitHub events API](https://api.github.com/users/ElliotJLT/events/public). 6 commits across 1 repos.*
 
 **Other people's projects**
 
@@ -7,7 +7,7 @@
 
 **My own**
 
-- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 6 commits. "ledger: 2026-11-27" (d96d31f), "ledger: 2026-11-24" (3da2363), "ledger: 2026-11-24" (3c8849d) and 3 more
+- **[elliot-os](https://github.com/ElliotJLT/elliot-os)**: 6 commits. "ledger: 2026-11-27" (008b37c), "ledger: 2026-11-27" (d96d31f), "ledger: 2026-11-24" (3da2363) and 3 more
 <!-- agent:end -->
 
 ## by hand
